@@ -1,0 +1,117 @@
+{
+  "name": "AI信息源订阅中心",
+  "description": "AI大模型每日资讯采集配置",
+  "news_sources": {
+    "国际大厂": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com/blog",
+        "type": "rss",
+        "tags": ["GPT", "ChatGPT", "API"]
+      },
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com/news",
+        "type": "rss",
+        "tags": ["Claude", "AI安全"]
+      },
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/discover/blog/",
+        "type": "rss",
+        "tags": ["Gemini", "AlphaFold"]
+      },
+      {
+        "name": "Meta AI",
+        "url": "https://ai.meta.com/blog/",
+        "type": "rss",
+        "tags": ["Llama", "开源"]
+      },
+      {
+        "name": "Microsoft AI",
+        "url": "https://blogs.microsoft.com/ai/",
+        "type": "rss",
+        "tags": ["Copilot", "Azure"]
+      },
+      {
+        "name": "xAI",
+        "url": "https://x.ai/blog",
+        "type": "rss",
+        "tags": ["Grok"]
+      }
+    ],
+    "国内大厂": [
+      {
+        "name": "阿里通义",
+        "url": "https://qwenlm.github.io/blog/",
+        "type": "rss",
+        "tags": ["Qwen", "通义千问"]
+      },
+      {
+        "name": "百度智能云",
+        "url": "https://cloud.baidu.com/scence/ai.html",
+        "type": "rss",
+        "tags": ["文心一言", "ERNIE"]
+      },
+      {
+        "name": "字节豆包",
+        "url": "https://www.volcengine.com/docs/82379/1263482",
+        "type": "rss",
+        "tags": ["豆包", "云雀"]
+      },
+      {
+        "name": "月之暗面Kimi",
+        "url": "https://platform.moonshot.cn/docs",
+        "type": "rss",
+        "tags": ["Kimi", "长上下文"]
+      },
+      {
+        "name": "智谱AI",
+        "url": "https://www.zhipuai.cn/",
+        "type": "rss",
+        "tags": ["GLM", "ChatGLM"]
+      },
+      {
+        "name": "MiniMax",
+        "url": "https://www.minimax.io/news",
+        "type": "rss",
+        "tags": ["海螺", "AI助手"]
+      }
+    ],
+    "科技媒体": [
+      {
+        "name": "量子位",
+        "url": "https://www.qbitai.com/",
+        "type": "rss",
+        "tags": ["AI", "大模型"]
+      },
+      {
+        "name": "机器之心",
+        "url": "https://jiqizhixin.com/",
+        "type": "rss",
+        "tags": ["AI", "深度学习"]
+      },
+      {
+        "name": "36氪",
+        "url": "https://36kr.com/",
+        "type": "rss",
+        "tags": ["科技", "创业"]
+      },
+      {
+        "name": "虎嗅",
+        "url": "https://www.huxiu.com/",
+        "type": "rss",
+        "tags": ["科技", "商业"]
+      }
+    ]
+  },
+  "report_template": {
+    "include_links": true,
+    "default_language": "zh-CN",
+    "style": "dark_gradient"
+  },
+  "output": {
+    "directory": "reports",
+    "filename_pattern": "{date}-with-links.html"
+  }
+}

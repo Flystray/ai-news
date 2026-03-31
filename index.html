@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 信息源订阅中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card .label {
+            color: #888;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Filter */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: #aaa;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        /* Company Cards */
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .company-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .company-flag {
+            font-size: 1.5rem;
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .company-products {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .company-channels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .channel-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .channel-tag:hover {
+            background: rgba(124, 58, 237, 0.3);
+            color: #fff;
+        }
+
+        .channel-tag.proxy {
+            border: 1px dashed rgba(255,200,0,0.3);
+        }
+
+        /* Creator Cards */
+        .creators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .creator-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .creator-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(5px);
+        }
+
+        .creator-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .creator-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .creator-name {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .creator-desc {
+            font-size: 0.8rem;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .creator-platform {
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* Website List */
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .website-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .website-card:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .website-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .website-icon {
+            font-size: 1.3rem;
+        }
+
+        .website-name {
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .website-category {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .access-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .access-badge.normal {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .access-badge.proxy {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Platform Colors */
+        .bilibili { background: linear-gradient(135deg, #00a1d6, #fb7299); }
+        .zhihu { background: linear-gradient(135deg, #0066ff, #00a1d6); }
+        .youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        .twitter { background: linear-gradient(135deg, #1da1f2, #0d8ed9); }
+        .github { background: linear-gradient(135deg, #333, #24292e); }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .stat-card {
+                padding: 15px 20px;
+            }
+
+            .stat-card .number {
+                font-size: 1.8rem;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .creators-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🤖 AI 信息源订阅中心</h1>
+            <p>覆盖全球主流AI公司、技术博主、资讯平台的完整订阅清单</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number">20+</div>
+                    <div class="label">AI大厂</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">19</div>
+                    <div class="label">B站UP主</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">15</div>
+                    <div class="label">YouTube频道</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">34</div>
+                    <div class="label">X博主</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100+</div>
+                    <div class="label">总信息源</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter -->
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="companies">🏢 AI大厂</button>
+            <button class="filter-btn" data-filter="bilibili">📺 B站</button>
+            <button class="filter-btn" data-filter="youtube">▶️ YouTube</button>
+            <button class="filter-btn" data-filter="twitter">🐦 X(Twitter)</button>
+            <button class="filter-btn" data-filter="zhihu">💬 知乎</button>
+            <button class="filter-btn" data-filter="websites">🌐 资讯网站</button>
+        </div>
+
+        <!-- AI Companies -->
+        <div class="section" id="companies">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">🏢</div>
+                <h2 class="section-title">AI大厂官方渠道</h2>
+            </div>
+
+            <div class="companies-grid">
+                <!-- 国外 -->
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">OpenAI</span>
+                    </div>
+                    <div class="company-products">ChatGPT, GPT-4, DALL-E, API</div>
+                    <div class="company-channels">
+                        <a href="https://openai.com/blog" target="_blank" class="channel-tag">官方博客</a>
+                        <a href="https://platform.openai.com/docs/changelog" target="_blank" class="channel-tag">API更新</a>
+                        <a href="https://openai.com/research" target="_blank" class="channel-tag">研究论文</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">Anthropic</span>
+                    </div>
+                    <div class="company-products">Claude, Claude API</div>
+                    <div class="company-channels">
+                        <a href="https://www.anthropic.com/news" target="_blank" class="channel-tag">官方新闻</a>
+                        <a href="https://claude.com/blog" target="_blank" class="channel-tag">Claude博客</a>
+                        <a href="https://docs.anthropic.com" target="_blank" class="channel-tag">API文档</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">Google DeepMind</span>
+                    </div>
+                    <div class="company-products">Gemini, AlphaFold, Gemma</div>
+                    <div class="company-channels">
+                        <a href="https://deepmind.google/blog" target="_blank" class="channel-tag">官方博客</a>
+                        <a href="https://deepmind.google/research" target="_blank" class="channel-tag">研究论文</a>
+                        <a href="https://blog.google/technology/ai" target="_blank" class="channel-tag">Google AI</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">Meta AI</span>
+                    </div>
+                    <div class="company-products">Llama, ImageBind, SAM</div>
+                    <div class="company-channels">
+                        <a href="https://ai.meta.com/blog" target="_blank" class="channel-tag">AI博客</a>
+                        <a href="https://ai.meta.com/research" target="_blank" class="channel-tag">研究论文</a>
+                        <a href="https://llama.meta.com" target="_blank" class="channel-tag">Llama官网</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">Microsoft AI</span>
+                    </div>
+                    <div class="company-products">Copilot, Azure AI, Phi</div>
+                    <div class="company-channels">
+                        <a href="https://blogs.microsoft.com/ai" target="_blank" class="channel-tag">AI博客</a>
+                        <a href="https://azure.microsoft.com/en-us/updates" target="_blank" class="channel-tag">Azure更新</a>
+                        <a href="https://github.blog/category/ai" target="_blank" class="channel-tag">GitHub Copilot</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">xAI (Grok)</span>
+                    </div>
+                    <div class="company-products">Grok</div>
+                    <div class="company-channels">
+                        <a href="https://x.ai" target="_blank" class="channel-tag">官方网站</a>
+                        <a href="https://x.ai/grok" target="_blank" class="channel-tag">Grok更新</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">Stability AI</span>
+                    </div>
+                    <div class="company-products">Stable Diffusion, Stable Audio</div>
+                    <div class="company-channels">
+                        <a href="https://stability.ai/news" target="_blank" class="channel-tag">官方新闻</a>
+                        <a href="https://stability.ai/stable-diffusion" target="_blank" class="channel-tag">SD官网</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇺🇸</span>
+                        <span class="company-name">Perplexity</span>
+                    </div>
+                    <div class="company-products">AI搜索</div>
+                    <div class="company-channels">
+                        <a href="https://perplexity.ai/blog" target="_blank" class="channel-tag">官方博客</a>
+                        <a href="https://perplexity.ai/changelog" target="_blank" class="channel-tag">更新日志</a>
+                    </div>
+                </div>
+
+                <!-- 国内 -->
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">DeepSeek</span>
+                    </div>
+                    <div class="company-products">DeepSeek V3, DeepSeek Coder</div>
+                    <div class="company-channels">
+                        <a href="https://www.deepseek.com" target="_blank" class="channel-tag">官方网站</a>
+                        <a href="https://github.com/deepseek-ai" target="_blank" class="channel-tag">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">百度</span>
+                    </div>
+                    <div class="company-products">文心一言, ERNIE, 文心一格</div>
+                    <div class="company-channels">
+                        <a href="https://yiyan.baidu.com" target="_blank" class="channel-tag">文心官网</a>
+                        <a href="https://www.paddlepaddle.org.cn" target="_blank" class="channel-tag">飞桨</a>
+                        <span class="channel-tag">📱 微信公众号</span>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">阿里巴巴</span>
+                    </div>
+                    <div class="company-products">通义千问, 通义万相, Qwen</div>
+                    <div class="company-channels">
+                        <a href="https://tongyi.aliyun.com" target="_blank" class="channel-tag">通义官网</a>
+                        <a href="https://github.com/QwenLM" target="_blank" class="channel-tag">Qwen GitHub</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">腾讯</span>
+                    </div>
+                    <div class="company-products">混元大模型, 腾讯元宝</div>
+                    <div class="company-channels">
+                        <a href="https://hunyuan.tencent.com" target="_blank" class="channel-tag">混元官网</a>
+                        <a href="https://cloud.tencent.com/product/ai" target="_blank" class="channel-tag">腾讯云AI</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">字节跳动</span>
+                    </div>
+                    <div class="company-products">豆包, 云雀</div>
+                    <div class="company-channels">
+                        <a href="https://www.doubao.com" target="_blank" class="channel-tag">豆包官网</a>
+                        <a href="https://www.volcengine.com/product/doubao" target="_blank" class="channel-tag">火山引擎</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">华为</span>
+                    </div>
+                    <div class="company-products">盘古大模型, 昇腾AI</div>
+                    <div class="company-channels">
+                        <a href="https://www.huaweicloud.com/product/pangu.html" target="_blank" class="channel-tag">盘古官网</a>
+                        <a href="https://www.mindspore.cn" target="_blank" class="channel-tag">MindSpore</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">智谱AI</span>
+                    </div>
+                    <div class="company-products">GLM, ChatGLM, CodeGeeX</div>
+                    <div class="company-channels">
+                        <a href="https://www.zhipuai.cn" target="_blank" class="channel-tag">官方网站</a>
+                        <a href="https://github.com/THUDM" target="_blank" class="channel-tag">GLM GitHub</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">月之暗面 (Kimi)</span>
+                    </div>
+                    <div class="company-products">Kimi, Moonshot</div>
+                    <div class="company-channels">
+                        <a href="https://kimi.moonshot.cn" target="_blank" class="channel-tag">Kimi官网</a>
+                        <span class="channel-tag">📱 微信公众号</span>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">零一万物</span>
+                    </div>
+                    <div class="company-products">Yi系列大模型</div>
+                    <div class="company-channels">
+                        <a href="https://www.01.ai" target="_blank" class="channel-tag">官方网站</a>
+                        <a href="https://github.com/01-ai" target="_blank" class="channel-tag">Yi GitHub</a>
+                    </div>
+                </div>
+
+                <div class="company-card" data-platform="companies">
+                    <div class="company-header">
+                        <span class="company-flag">🇨🇳</span>
+                        <span class="company-name">MiniMax</span>
+                    </div>
+                    <div class="company-products">海螺AI, MiniMax-01</div>
+                    <div class="company-channels">
+                        <a href="https://hailuoai.video" target="_blank" class="channel-tag">海螺AI</a>
+                        <span class="channel-tag">📱 微信公众号</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B站 -->
+        <div class="section" id="bilibili">
+            <div class="section-header">
+                <div class="section-icon bilibili">📺</div>
+                <h2 class="section-title">B站优质UP主</h2>
+            </div>
+
+            <div class="creators-grid">
+                <a href="https://space.bilibili.com/1567748478" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🤖</div>
+                    <div class="creator-info">
+                        <div class="creator-name">跟李沐学AI</div>
+                        <div class="creator-desc">亚马逊首席科学家，论文精读</div>
+                    </div>
+                    <span class="creator-platform">机器学习</span>
+                </a>
+
+                <a href="https://space.bilibili.com/371846699" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🐱</div>
+                    <div class="creator-info">
+                        <div class="creator-name">图灵的猫</div>
+                        <div class="creator-desc">AI趣味应用，用AI预测高考</div>
+                    </div>
+                    <span class="creator-platform">AI应用</span>
+                </a>
+
+                <a href="https://space.bilibili.com/12566101" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🎨</div>
+                    <div class="creator-info">
+                        <div class="creator-name">秋葉aaaki</div>
+                        <div class="creator-desc">国内SD第一人，整合包教程</div>
+                    </div>
+                    <span class="creator-platform">AI绘画</span>
+                </a>
+
+                <a href="https://space.bilibili.com/491266931" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">⚡</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Genji是真想教会你</div>
+                        <div class="creator-desc">AI工具使用教程</div>
+                    </div>
+                    <span class="creator-platform">AI工具</span>
+                </a>
+
+                <a href="https://space.bilibili.com/325864133" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🚀</div>
+                    <div class="creator-info">
+                        <div class="creator-name">飞天闪客</div>
+                        <div class="creator-desc">AI工具与教程</div>
+                    </div>
+                    <span class="creator-platform">AI工具</span>
+                </a>
+
+                <a href="https://space.bilibili.com/486989780" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🔧</div>
+                    <div class="creator-info">
+                        <div class="creator-name">老麦的工具库</div>
+                        <div class="creator-desc">全球最新AI工具测评</div>
+                    </div>
+                    <span class="creator-platform">AI工具</span>
+                </a>
+
+                <a href="https://space.bilibili.com/525438321" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">📝</div>
+                    <div class="creator-info">
+                        <div class="creator-name">代码随想录</div>
+                        <div class="creator-desc">LeetCode刷题，清晰易懂</div>
+                    </div>
+                    <span class="creator-platform">算法</span>
+                </a>
+
+                <a href="https://space.bilibili.com/12890453" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🐟</div>
+                    <div class="creator-info">
+                        <div class="creator-name">程序员鱼皮</div>
+                        <div class="creator-desc">全栈开发，项目驱动教学</div>
+                    </div>
+                    <span class="creator-platform">全栈</span>
+                </a>
+
+                <a href="https://space.bilibili.com/24014925" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🏮</div>
+                    <div class="creator-info">
+                        <div class="creator-name">正月点灯笼</div>
+                        <div class="creator-desc">图解TCP/IP，底层原理</div>
+                    </div>
+                    <span class="creator-platform">操作系统</span>
+                </a>
+
+                <a href="https://space.bilibili.com/243821484" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🎓</div>
+                    <div class="creator-info">
+                        <div class="creator-name">莫烦Python</div>
+                        <div class="creator-desc">TensorFlow/PyTorch入门</div>
+                    </div>
+                    <span class="creator-platform">机器学习</span>
+                </a>
+
+                <a href="https://space.bilibili.com/512313464" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🎮</div>
+                    <div class="creator-info">
+                        <div class="creator-name">GAMES-Webinar</div>
+                        <div class="creator-desc">GAMES101/202图形学课程</div>
+                    </div>
+                    <span class="creator-platform">图形学</span>
+                </a>
+
+                <a href="https://space.bilibili.com/95256449" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">⚛️</div>
+                    <div class="creator-info">
+                        <div class="creator-name">遇见狂神说</div>
+                        <div class="creator-desc">Java/SpringBoot/Docker入门</div>
+                    </div>
+                    <span class="creator-platform">后端</span>
+                </a>
+
+                <a href="https://space.bilibili.com/327247876" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🥚</div>
+                    <div class="creator-info">
+                        <div class="creator-name">技术蛋老师</div>
+                        <div class="creator-desc">前端开发，计算机网络</div>
+                    </div>
+                    <span class="creator-platform">前端</span>
+                </a>
+
+                <a href="https://space.bilibili.com/1921388479" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🧪</div>
+                    <div class="creator-info">
+                        <div class="creator-name">梗直哥丶</div>
+                        <div class="creator-desc">深度学习，理论讲解</div>
+                    </div>
+                    <span class="creator-platform">机器学习</span>
+                </a>
+
+                <a href="https://space.bilibili.com/202224425" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🌿</div>
+                    <div class="creator-info">
+                        <div class="creator-name">绿导师原谅你了</div>
+                        <div class="creator-desc">操作系统Linux内核</div>
+                    </div>
+                    <span class="creator-platform">操作系统</span>
+                </a>
+
+                <a href="https://space.bilibili.com/360996402" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🏛️</div>
+                    <div class="creator-info">
+                        <div class="creator-name">湖科大教书匠</div>
+                        <div class="creator-desc">计算机网络，考研408</div>
+                    </div>
+                    <span class="creator-platform">计算机网络</span>
+                </a>
+
+                <a href="https://space.bilibili.com/504069720" target="_blank" class="creator-card" data-platform="bilibili">
+                    <div class="creator-avatar bilibili">🎓</div>
+                    <div class="creator-info">
+                        <div class="creator-name">清华邓博士</div>
+                        <div class="creator-desc">AI技术科普</div>
+                    </div>
+                    <span class="creator-platform">AI科普</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- YouTube -->
+        <div class="section" id="youtube">
+            <div class="section-header">
+                <div class="section-icon youtube">▶️</div>
+                <h2 class="section-title">YouTube 优质频道</h2>
+            </div>
+
+            <div class="creators-grid">
+                <a href="https://www.youtube.com/@AndrejKarpathy" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">AK</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Andrej Karpathy</div>
+                        <div class="creator-desc">深度学习大神，前特斯拉AI总监</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@LexFridman" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">LF</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Lex Fridman</div>
+                        <div class="creator-desc">MIT博士，科技访谈顶流</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@OpenAI" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">🤖</div>
+                    <div class="creator-info">
+                        <div class="creator-name">OpenAI</div>
+                        <div class="creator-desc">官方频道</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@3blue1brown" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">3B1B</div>
+                    <div class="creator-info">
+                        <div class="creator-name">3Blue1Brown</div>
+                        <div class="creator-desc">数学可视化，神经网络直观理解</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@sentdex" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">SD</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Sentdex</div>
+                        <div class="creator-desc">Python机器学习教程</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@TwoMinutePapers" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">2MP</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Two Minute Papers</div>
+                        <div class="creator-desc">AI论文速读</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@YannicKilcher" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">YK</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Yannic Kilcher</div>
+                        <div class="creator-desc">AI论文深度解读</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@DwarkeshPatel" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">DP</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Dwarkesh Podcast</div>
+                        <div class="creator-desc">AI播客访谈</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@LatentSpacePod" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">LS</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Latent Space</div>
+                        <div class="creator-desc">AI播客</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@SirajRaval" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">SR</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Siraj Raval</div>
+                        <div class="creator-desc">AI教程娱乐性强</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@RileyBrownAI" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">RB</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Riley Brown</div>
+                        <div class="creator-desc">AI工具教程</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@MckayWrigley" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">MW</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Mckay Wrigley</div>
+                        <div class="creator-desc">AI开发工具</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@Lenny rachitsky" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">LR</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Lenny's Podcast</div>
+                        <div class="creator-desc">产品增长访谈</div>
+                    </div>
+                    <span class="creator-platform">需代理</span>
+                </a>
+
+                <a href="https://www.youtube.com/@HotRain_vlog" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">🔥</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Y酱与AI</div>
+                        <div class="creator-desc">中文AI资讯搬运</div>
+                    </div>
+                    <span class="creator-platform">中文</span>
+                </a>
+
+                <a href="https://www.youtube.com/@Aituber_K" target="_blank" class="creator-card" data-platform="youtube">
+                    <div class="creator-avatar youtube">AK</div>
+                    <div class="creator-info">
+                        <div class="creator-name">AI Tuber Kit</div>
+                        <div class="creator-desc">AI虚拟主播工具</div>
+                    </div>
+                    <span class="creator-platform">工具</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- X(Twitter) -->
+        <div class="section" id="twitter">
+            <div class="section-header">
+                <div class="section-icon twitter">🐦</div>
+                <h2 class="section-title">X(Twitter) 优质博主</h2>
+            </div>
+
+            <div class="creators-grid">
+                <!-- 创始人/高层 -->
+                <a href="https://x.com/sama" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">SA</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Sam Altman</div>
+                        <div class="creator-desc">OpenAI CEO</div>
+                    </div>
+                    <span class="creator-platform">创始人</span>
+                </a>
+
+                <a href="https://x.com/elonmusk" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">EM</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Elon Musk</div>
+                        <div class="creator-desc">xAI创始人</div>
+                    </div>
+                    <span class="creator-platform">创始人</span>
+                </a>
+
+                <a href="https://x.com/demishassabis" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">DH</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Demis Hassabis</div>
+                        <div class="creator-desc">Google DeepMind CEO</div>
+                    </div>
+                    <span class="creator-platform">创始人</span>
+                </a>
+
+                <!-- 首席科学家 -->
+                <a href="https://x.com/ylecun" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">YL</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Yann LeCun</div>
+                        <div class="creator-desc">Meta首席科学家</div>
+                    </div>
+                    <span class="creator-platform">首席科学家</span>
+                </a>
+
+                <a href="https://x.com/geoffreyHinton" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">GH</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Geoffrey Hinton</div>
+                        <div class="creator-desc">图灵奖得主，AI教父</div>
+                    </div>
+                    <span class="creator-platform">首席科学家</span>
+                </a>
+
+                <a href="https://x.com/JeffDean" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">JD</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Jeff Dean</div>
+                        <div class="creator-desc">Google研究总监</div>
+                    </div>
+                    <span class="creator-platform">首席科学家</span>
+                </a>
+
+                <!-- 研究大牛 -->
+                <a href="https://x.com/kaboris" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">AK</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Andrej Karpathy</div>
+                        <div class="creator-desc">前特斯拉AI总监</div>
+                    </div>
+                    <span class="creator-platform">研究员</span>
+                </a>
+
+                <a href="https://x.com/DrJimFan" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">JF</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Jim Fan</div>
+                        <div class="creator-desc">NVIDIA AI科学家</div>
+                    </div>
+                    <span class="creator-platform">研究员</span>
+                </a>
+
+                <a href="https://x.com/AndrewYNg" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">AN</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Andrew Ng</div>
+                        <div class="creator-desc">吴恩达，AI教育先驱</div>
+                    </div>
+                    <span class="creator-platform">研究员</span>
+                </a>
+
+                <!-- 产品/投资 -->
+                <a href="https://x.com/kaboris" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">KW</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Kevin Weil</div>
+                        <div class="creator-desc">OpenAI产品负责人</div>
+                    </div>
+                    <span class="creator-platform">产品</span>
+                </a>
+
+                <a href="https://x.com/pmarca" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">MA</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Marc Andreessen</div>
+                        <div class="creator-desc">a16z创始人</div>
+                    </div>
+                    <span class="creator-platform">投资</span>
+                </a>
+
+                <a href="https://x.com/paulg" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">PG</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Paul Graham</div>
+                        <div class="creator-desc">YC创始人</div>
+                    </div>
+                    <span class="creator-platform">投资</span>
+                </a>
+
+                <!-- 工具/开源 -->
+                <a href="https://x.com/hwchase17" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">HC</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Harrison Chase</div>
+                        <div class="creator-desc">LangChain创始人</div>
+                    </div>
+                    <span class="creator-platform">工具</span>
+                </a>
+
+                <a href="https://x.com/julien_c" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">GC</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Guillaume</div>
+                        <div class="creator-desc">HuggingFace CEO</div>
+                    </div>
+                    <span class="creator-platform">工具</span>
+                </a>
+
+                <a href="https://x.com/_akhaliq" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">AK</div>
+                    <div class="creator-info">
+                        <div class="creator-name">@_akhaliq</div>
+                        <div class="creator-desc">AI论文日更</div>
+                    </div>
+                    <span class="creator-platform">资讯</span>
+                </a>
+
+                <!-- 更多 -->
+                <a href="https://x.com/kaboris" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">CM</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Chris McKay</div>
+                        <div class="creator-desc">AI研究员</div>
+                    </div>
+                    <span class="creator-platform">研究员</span>
+                </a>
+
+                <a href="https://x.com/sama" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">GM</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Greg Brockman</div>
+                        <div class="creator-desc">OpenAI总裁</div>
+                    </div>
+                    <span class="creator-platform">创始人</span>
+                </a>
+
+                <a href="https://x.com/sama" target="_blank" class="creator-card" data-platform="twitter">
+                    <div class="creator-avatar twitter">IB</div>
+                    <div class="creator-info">
+                        <div class="creator-name">Ilya Sutskever</div>
+                        <div class="creator-desc">AI研究员</div>
+                    </div>
+                    <span class="creator-platform">研究员</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 知乎 -->
+        <div class="section" id="zhihu">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">💬</div>
+                <h2 class="section-title">知乎优质博主</h2>
+            </div>
+
+            <div class="creators-grid">
+                <a href="https://www.zhihu.com/search?type=people&q=NLP实战派+林骁" target="_blank" class="creator-card" data-platform="zhihu">
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">林</div>
+                    <div class="creator-info">
+                        <div class="creator-name">林骁 (@NLP实战派)</div>
+                        <div class="creator-desc">中科院博士，大模型算法总监</div>
+                    </div>
+                    <span class="creator-platform">NLP</span>
+                </a>
+
+                <a href="https://www.zhihu.com/search?type=people&q=边缘智能观察+赵明哲" target="_blank" class="creator-card" data-platform="zhihu">
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">赵</div>
+                    <div class="creator-info">
+                        <div class="creator-name">赵明哲 (@边缘智能观察)</div>
+                        <div class="creator-desc">哈工大博士，端侧AI开源10k+ stars</div>
+                    </div>
+                    <span class="creator-platform">端侧AI</span>
+                </a>
+
+                <a href="https://www.zhihu.com/search?type=people&q=AI产品经理手记+黄雅婷" target="_blank" class="creator-card" data-platform="zhihu">
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">黄</div>
+                    <div class="creator-info">
+                        <div class="creator-name">黄雅婷 (@AI产品经理手记)</div>
+                        <div class="creator-desc">前阿里达摩院产品经理</div>
+                    </div>
+                    <span class="creator-platform">AI产品</span>
+                </a>
+
+                <a href="https://www.zhihu.com/search?type=people&q=强化学习实验室+周昊" target="_blank" class="creator-card" data-platform="zhihu">
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">周</div>
+                    <div class="creator-info">
+                        <div class="creator-name">周昊 (@强化学习实验室)</div>
+                        <div class="creator-desc">上海交大博士，强化学习课程百万播放</div>
+                    </div>
+                    <span class="creator-platform">强化学习</span>
+                </a>
+
+                <a href="https://www.zhihu.com/search?type=people&q=CV工程师笔记+陈思远" target="_blank" class="creator-card" data-platform="zhihu">
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">陈</div>
+                    <div class="creator-info">
+                        <div class="creator-name">陈思远 (@CV工程师笔记)</div>
+                        <div class="creator-desc">计算机视觉工程师</div>
+                    </div>
+                    <span class="creator-platform">CV</span>
+                </a>
+
+                <a href="https://www.zhihu.com/search?type=people&q=联邦学习前沿+吴帆" target="_blank" class="creator-card" data-platform="zhihu">
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #0066ff, #00a1d6);">吴</div>
+                    <div class="creator-info">
+                        <div class="creator-name">吴帆 (@联邦学习前沿)</div>
+                        <div class="creator-desc">联邦学习前沿</div>
+                    </div>
+                    <span class="creator-platform">隐私计算</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Websites -->
+        <div class="section" id="websites">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, #10b981, #059669);">🌐</div>
+                <h2 class="section-title">优质资讯网站</h2>
+            </div>
+
+            <div class="websites-grid">
+                <a href="https://huggingface.co/blog" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">🤗</span>
+                        <div>
+                            <div class="website-name">HuggingFace Blog</div>
+                            <div class="website-category">AI模型库</div>
+                        </div>
+                    </div>
+                    <span class="access-badge normal">直接访问</span>
+                </a>
+
+                <a href="https://ar5iv.org" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">📄</span>
+                        <div>
+                            <div class="website-name">ar5iv</div>
+                            <div class="website-category">论文(中文版)</div>
+                        </div>
+                    </div>
+                    <span class="access-badge normal">直接访问</span>
+                </a>
+
+                <a href="https://github.com/trending" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">🐙</span>
+                        <div>
+                            <div class="website-name">GitHub Trending</div>
+                            <div class="website-category">开源项目热榜</div>
+                        </div>
+                    </div>
+                    <span class="access-badge normal">直接访问</span>
+                </a>
+
+                <a href="https://news.ycombinator.com" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">📰</span>
+                        <div>
+                            <div class="website-name">Hacker News</div>
+                            <div class="website-category">科技资讯</div>
+                        </div>
+                    </div>
+                    <span class="access-badge proxy">需代理</span>
+                </a>
+
+                <a href="https://36kr.com/information/AI" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">📊</span>
+                        <div>
+                            <div class="website-name">36氪 AI</div>
+                            <div class="website-category">中文科技媒体</div>
+                        </div>
+                    </div>
+                    <span class="access-badge normal">直接访问</span>
+                </a>
+
+                <a href="https://jiqizhixin.com" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">🧠</span>
+                        <div>
+                            <div class="website-name">机器之心</div>
+                            <div class="website-category">AI专业媒体</div>
+                        </div>
+                    </div>
+                    <span class="access-badge normal">直接访问</span>
+                </a>
+
+                <a href="https://techcrunch.com" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">📰</span>
+                        <div>
+                            <div class="website-name">TechCrunch</div>
+                            <div class="website-category">科技媒体</div>
+                        </div>
+                    </div>
+                    <span class="access-badge proxy">需代理</span>
+                </a>
+
+                <a href="https://theverge.com" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">📱</span>
+                        <div>
+                            <div class="website-name">The Verge</div>
+                            <div class="website-category">科技媒体</div>
+                        </div>
+                    </div>
+                    <span class="access-badge proxy">需代理</span>
+                </a>
+
+                <a href="https://technologyreview.com" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">🔬</span>
+                        <div>
+                            <div class="website-name">MIT Tech Review</div>
+                            <div class="website-category">科技评论</div>
+                        </div>
+                    </div>
+                    <span class="access-badge proxy">需代理</span>
+                </a>
+
+                <a href="https://therundown.ai" target="_blank" class="website-card" data-platform="websites">
+                    <div class="website-info">
+                        <span class="website-icon">📋</span>
+                        <div>
+                            <div class="website-name">The Rundown AI</div>
+                            <div class="website-category">每日AI摘要</div>
+                        </div>
+                    </div>
+                    <span class="access-badge normal">直接访问</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>📅 最后更新: 2026-03-31 | 🤖 AI 信息源订阅中心</p>
+            <p style="margin-top: 10px; color: #555;">⚠️ 部分网站需要代理访问，遇到障碍时请开启 v2rayN</p>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const sections = document.querySelectorAll('.section');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                // Filter sections
+                sections.forEach(section => {
+                    if (filter === 'all') {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.toggle('hidden', section.id !== filter);
+                    }
+                });
+
+                // Also filter individual cards
+                const cards = document.querySelectorAll('[data-platform]');
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.toggle('hidden', card.dataset.platform !== filter);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-03-31 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 22px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-grid { display: grid; gap: 20px; }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px; padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 18px; font-weight: 700; color: #fff;
+            margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 3px 10px;
+            border-radius: 10px; font-weight: 500; white-space: nowrap; margin-top: 3px;
+        }
+        .news-card h3 .tag.red { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+        .news-card h3 .tag.orange { background: linear-gradient(135deg, #ffa500, #ff8c00); }
+        .news-card h3 .tag.green { background: linear-gradient(135deg, #2ed573, #26a65b); }
+        .news-card h3 .tag.blue { background: linear-gradient(135deg, #00a1ff, #0080ff); }
+        .news-card p { color: #aaa; margin-bottom: 12px; font-size: 14px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.08);
+            border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #c0c0e0; margin-bottom: 6px; padding-left: 18px; position: relative; font-size: 13px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 5px;
+            color: #667eea; text-decoration: none; font-size: 13px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 16px 20px;
+            display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;
+        }
+        .insight-item .num {
+            width: 28px; height: 28px; border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 13px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 14px; }
+        .stats-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 30px;
+        }
+        .stat-card {
+            background: rgba(102,126,234,0.1);
+            border: 1px solid rgba(102,126,234,0.2);
+            border-radius: 14px; padding: 20px; text-align: center;
+        }
+        .stat-card .value { font-size: 28px; font-weight: 900; color: #667eea; }
+        .stat-card .label { color: #888; font-size: 13px; margin-top: 4px; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026年3月31日 · 周一</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 每条均带原文链接 🔗</p>
+        </div>
+        
+        <!-- 核心数据 -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="value">140万亿</div>
+                <div class="label">📊 中国日均Token调用量</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">215项</div>
+                <div class="label">🏆 Qwen3.5-Omni SOTA</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">180亿美元</div>
+                <div class="label">💰 Kimi估值</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">6倍</div>
+                <div class="label">⚡ TurboQuant内存压缩</div>
+            </div>
+        </div>
+        
+        <!-- 今日重磅 -->
+        <div class="section">
+            <h2 class="section-title">🔥 今日重磅发布</h2>
+            <div class="news-grid">
+                
+                <div class="news-card">
+                    <h3>阿里发布通义 Qwen3.5-Omni 全模态大模型<span class="tag red">重磅</span></h3>
+                    <ul>
+                        <li>支持文本、图片、音频、音视频原生理解与生成</li>
+                        <li>215项任务超越Gemini 3.1 Pro，涌现"Vibe Coding"能力</li>
+                        <li>Hybrid-Attention MoE架构，256K超长上下文</li>
+                        <li>可处理10小时音频或1小时视频</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://www.oschina.net/news/416053" target="_blank" class="link">📌 OSCHINA →</a>
+                        <a href="https://aisharenet.com/qwen35-omni/" target="_blank" class="link">📌 AI分享圈 →</a>
+                        <a href="https://www.sohu.com/a/1003166801_121123928" target="_blank" class="link">📌 搜狐科技 →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>谷歌发布 TurboQuant 极端压缩算法<span class="tag orange">效率革命</span></h3>
+                    <ul>
+                        <li>KV Cache内存占用降低6倍</li>
+                        <li>英伟达H100上推理加速8倍</li>
+                        <li>3bit量化技术，精度几乎无损</li>
+                        <li>论文将发表在ICLR 2026和AISTATS 2026顶会</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://cloud.tencent.com/developer/article/2646517" target="_blank" class="link">📌 腾讯云详解 →</a>
+                        <a href="https://zhuanlan.zhihu.com/p/2020573926426723271" target="_blank" class="link">📌 知乎专栏 →</a>
+                        <a href="https://baike.baidu.com/item/TurboQuant/67537637" target="_blank" class="link">📌 百度百科 →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>微软推出多模协作智能体：GPT+Claude 联手干活<span class="tag">新功能</span></h3>
+                    <ul>
+                        <li>365 Copilot新增Critique功能</li>
+                        <li>GPT负责草拟，Claude负责评审</li>
+                        <li>解决AI幻觉问题，提升研究质量</li>
+                        <li>多模型协作成为AI应用新范式</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://www.chinaz.com/ainews/26670.shtml" target="_blank" class="link">📌 中文aze →</a>
+                        <a href="https://baijiahao.baidu.com/s?id=1861135416607355495" target="_blank" class="link">📌 百度百家 →</a>
+                        <a href="https://blog.csdn.net/internetear/article/details/159674936" target="_blank" class="link">📌 CSDN →</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- 商业动态 -->
+        <div class="section">
+            <h2 class="section-title">💰 商业动态</h2>
+            <div class="news-grid">
+                
+                <div class="news-card">
+                    <h3>百度再获11亿AI大单<span class="tag green">商业落地</span></h3>
+                    <p>中标山东联通260台智算一体机服务项目，2026年开年中国AI领域最大订单之一</p>
+                    <div class="links">
+                        <a href="https://www.163.com/dy/article/KPBU3CI3051180F7.html" target="_blank" class="link">📌 网易订阅 →</a>
+                        <a href="https://baijiahao.baidu.com/s?id=1858876110740517324" target="_blank" class="link">📌 百家号 →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>月之暗面Kimi考虑赴港IPO<span class="tag blue">融资上市</span></h3>
+                    <p>已与中金、高盛接触，估值约180亿美元，正在推进规模最高10亿美元融资</p>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260331A027CT00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                        <a href="https://finance.china.com/TMT/13004688/20260326/49360029.html" target="_blank" class="link">📌 中华网财经 →</a>
+                        <a href="https://www.donews.com/article/detail/6885/98825.html" target="_blank" class="link">📌 DoNews →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>支付宝发布国内首个「支付集成Skill」<span class="tag">AI商业化</span></h3>
+                    <p>Vibe Coding模式下，3步完成支付接入，同步上线魔搭社区Skills中心</p>
+                    <div class="links">
+                        <a href="https://opendocs.alipay.com/common/0j01km" target="_blank" class="link">📌 支付宝文档 →</a>
+                        <a href="https://www.nbd.com.cn/articles/2026-03-31/4317952.html" target="_blank" class="link">📌 每日经济新闻 →</a>
+                        <a href="https://news.aibase.com/zh/news/26701" target="_blank" class="link">📌 AIBase →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>腾讯挖角字节Seed团队核心成员<span class="tag orange">人才流动</span></h3>
+                    <p>消息称腾讯从字节Seed团队挖来多位技术骨干，向姚顺雨汇报</p>
+                    <div class="links">
+                        <a href="https://www.infoq.cn/article/q4fu9Y9KU9MsKtIA1QKv" target="_blank" class="link">📌 InfoQ →</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- 技术突破 -->
+        <div class="section">
+            <h2 class="section-title">🔬 技术突破</h2>
+            <div class="news-grid">
+                
+                <div class="news-card">
+                    <h3>高德全量开源具身操作基座模型ABot-M0<span class="tag">开源</span></h3>
+                    <p>全球首个统一架构的机器人「通用大脑」，可适配多种形态的具身机器人</p>
+                    <div class="links">
+                        <a href="https://www.sohu.com/a/1003388906_104421" target="_blank" class="link">📌 搜狐科技 →</a>
+                        <a href="https://cloud.tencent.com/developer/news/3771052" target="_blank" class="link">📌 腾讯云 →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>知乎上线「求职数据通」AI工具<span class="tag">应用</span></h3>
+                    <p>以AI和大数据助力1270万毕业生精准择业，解决信息过载痛点</p>
+                    <div class="links">
+                        <a href="https://www.pingwest.com/w/312598" target="_blank" class="link">📌 PingWest →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>中国AI Token调用量连续三周超越美国<span class="tag green">行业里程碑</span></h3>
+                    <p>OpenRouter数据显示中国周调用量突破7.359万亿Token，智能体AI从工具升级为「数字伙伴」</p>
+                    <div class="links">
+                        <a href="https://cloud.tencent.cn/developer/article/2648260" target="_blank" class="link">📌 腾讯云 →</a>
+                        <a href="https://finance.people.com.cn/n1/2026/0324/c1004-40687798.html" target="_blank" class="link">📌 人民网 →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>2026年AI工具排行榜发布<span class="tag">年度榜单</span></h3>
+                    <p>Claude Opus 4.6夺冠，Gemini 3.1 Pro多模态强劲，国产豆包Seed表现亮眼</p>
+                    <div class="links">
+                        <a href="https://www.pconline.com.cn/ai/article/1553786.html" target="_blank" class="link">📌 太平洋科技 →</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>AI大模型六大维度深度测评<span class="tag">评测</span></h3>
+                    <p>Gemini 3以94.6分领先，ChatGPT创作能力强，Claude 4长文本处理出色</p>
+                    <div class="links">
+                        <a href="https://www.pconline.com.cn/ai/article/1549619.html" target="_blank" class="link">📌 太平洋科技 →</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- 行业洞察 -->
+        <div class="section">
+            <h2 class="section-title">💡 核心洞察</h2>
+            
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>效率竞争时代</strong> — 从追求参数量 → 追求效率/实用性。TurboQuant等压缩技术成为新焦点。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>具身智能爆发</strong> — 机器人产业链从单点突破转向系统工程，ABot-M0代表「通用大脑」新范式。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>Agent主战场</strong> — 2026年最大看点，多模型协作（GPT+Claude互审）解决AI幻觉问题。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>国产崛起</strong> — 中国AI Token调用量连续超越美国，阿里、高德等在多项任务上接近国际水平。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>资本活跃</strong> — Kimi IPO传闻、百度连续获大单，AI商业化路径愈发清晰。</p>
+            </div>
+            
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>📡 数据来源：OSCHINA · 腾讯新闻 · 知乎 · 百度百科 · 每日经济新闻 · CSDN · InfoQ · 人民网</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文</p>
+        </div>
+    </div>
+</body>
+</html>
