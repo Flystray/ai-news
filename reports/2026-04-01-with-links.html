@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-01 AI 每日资讯</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 38px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 15px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 22px; font-weight: 700; margin-bottom: 25px; color: #fff;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; padding: 24px; margin-bottom: 18px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 18px; font-weight: 700; color: #fff;
+            margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 3px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 3px;
+        }
+        .tag.red { background: linear-gradient(135deg, #e05252, #c0392b); }
+        .tag.green { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .tag.orange { background: linear-gradient(135deg, #e67e22, #f39c12); }
+        .news-card p { color: #aaa; margin-bottom: 12px; font-size: 14px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.08);
+            border-radius: 10px; padding: 14px 18px; margin-bottom: 14px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 6px; padding-left: 18px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .link {
+            display: inline-flex; align-items: center; gap: 5px;
+            color: #667eea; text-decoration: none; font-size: 13px; font-weight: 500;
+            padding: 4px 12px; border: 1px solid rgba(102,126,234,0.3); border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .link:hover { color: #fff; background: rgba(102,126,234,0.2); border-color: #667eea; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 18px 22px;
+            display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px;
+        }
+        .insight-item .num {
+            width: 30px; height: 30px; border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 13px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 14px; margin-top: 3px; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #555; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .stats-bar {
+            display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 40px;
+        }
+        .stat-item {
+            flex: 1; min-width: 150px;
+            background: rgba(102,126,234,0.1);
+            border: 1px solid rgba(102,126,234,0.2);
+            border-radius: 12px; padding: 16px 20px; text-align: center;
+        }
+        .stat-item .num { font-size: 24px; font-weight: 900; color: #a0a0ff; margin-bottom: 4px; }
+        .stat-item .label { font-size: 12px; color: #888; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 页头 -->
+        <div class="header">
+            <div class="date">📅 2026年4月1日 · 星期三</div>
+            <h1>🤖 AI 每日资讯</h1>
+            <p class="subtitle">精选 AI / 大模型最新动态 · 覆盖国内外 · 所有新闻均含原文链接</p>
+        </div>
+
+        <!-- 数据亮点 -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="num">140万亿</div>
+                <div class="label">中国AI日均Token调用量</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">3800亿</div>
+                <div class="label">Anthropic估值（美元）</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">10000台</div>
+                <div class="label">智元机器人累计量产</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">180亿</div>
+                <div class="label">腾讯2025年AI投入（元）</div>
+            </div>
+        </div>
+
+        <!-- 今日重磅 -->
+        <div class="section">
+            <h2 class="section-title">🔥 今日重大动态</h2>
+
+            <div class="news-card">
+                <h3>DeepSeek 疑似 V3 升级，引发史上最长宕机 <span class="tag red">DeepSeek</span></h3>
+                <p>3月29日升级后 DeepSeek 出现长达 11-12 小时的大规模宕机，知识截止日期更新至2026年1月，被分析人士普遍判断为 V3 版本重大迭代上线。</p>
+                <ul>
+                    <li>11-12 小时大规模宕机，波及全球用户</li>
+                    <li>知识截止升级至 2026 年 1 月，能力全面提升</li>
+                    <li>中信证券：下一代模型有望延续高性价比开源路线</li>
+                    <li>DeepSeek V4 消息在硅谷工程师圈流传，或对 OpenAI 形成挑战</li>
+                </ul>
+                <div class="links">
+                    <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 CSDN AI日报</a>
+                    <a href="https://juejin.cn/post/7620362836402847782" target="_blank" class="link">📌 DeepSeek V4 分析</a>
+                    <a href="https://wap.cj.sina.cn/pc/7x24/4788148" target="_blank" class="link">📌 中信证券研报</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>Anthropic Claude Mythos 内部文件泄露 <span class="tag red">Anthropic</span></h3>
+                <p>内部文件曝光代号 "Mythos" 的新一代 Claude 模型，网络安全能力据称已超越现有防御水平，引发行业和安全研究者高度关注。与此同时，Anthropic 正在考虑于 2026 年 10 月 IPO，估值达 3800 亿美元。</p>
+                <ul>
+                    <li>Claude Mythos 网络安全能力远超现有模型</li>
+                    <li>2026 年 10 月 IPO 计划，估值 3800 亿美元</li>
+                    <li>企业用户选择 Anthropic 比例是 OpenAI 的 3 倍（Ramp 支付数据）</li>
+                </ul>
+                <div class="links">
+                    <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 详细报道</a>
+                    <a href="https://duoke360.com/post/46116" target="_blank" class="link">📌 AI日报 3月26日</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>OpenAI 宣布停止 Sora 服务，转向企业工具 <span class="tag orange">OpenAI</span></h3>
+                <p>OpenAI 宣布停止 Sora 视频生成服务，战略转向企业级工具和 Agent 能力。GPT-5 研发据报道成本高昂、进度落后于预期。</p>
+                <ul>
+                    <li>Sora 服务停止，标志着视频生成产品路线调整</li>
+                    <li>GPT-5 研发遇阻，成本远超预期</li>
+                    <li>战略重心转向 Agent 和企业级工具</li>
+                </ul>
+                <div class="links">
+                    <a href="https://aigcdaily.cn/news/list/" target="_blank" class="link">📌 AIGC日报</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 国内大模型 -->
+        <div class="section">
+            <h2 class="section-title">🇨🇳 国内大模型动态</h2>
+            <div class="grid">
+                <div class="news-card">
+                    <h3>智谱 GLM-5.1 发布 <span class="tag green">智谱AI</span></h3>
+                    <p>编程能力接近 Claude Opus 4.6，全程基于华为昇腾芯片训练，是国产算力路线的重要里程碑。</p>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 详情</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <h3>腾讯混元 3.0 即将发布 <span class="tag">腾讯</span></h3>
+                    <p>聚焦 Agent 能力提升，腾讯2026年AI投入将比2025年（180亿元）至少翻倍。WorkBuddy、QClaw 等智能体产品已进入 2000 名员工内测。</p>
+                    <div class="links">
+                        <a href="https://cloud.tencent.cn/developer/article/2648260" target="_blank" class="link">📌 腾讯AI月报</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <h3>讯飞医疗星火大模型 <span class="tag green">科大讯飞</span></h3>
+                    <p>星火医疗大模型已与超过 600 家医院完成合作，垂直行业落地提速。</p>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 详情</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <h3>xAI 创始团队全员离职 <span class="tag red">xAI</span></h3>
+                    <p>最后一位联合创始人离职，xAI 创始团队成员已全部离任，公司内部动荡引发外界关注。</p>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术前沿 -->
+        <div class="section">
+            <h2 class="section-title">⚗️ 技术前沿</h2>
+
+            <div class="news-card">
+                <h3>微软开源 VibeVoice 语音 AI 家族 <span class="tag">微软</span></h3>
+                <p>涵盖 ASR（语音识别）、TTS（语音合成）和实时语音生成三大方向，完整开源。</p>
+                <ul>
+                    <li>ASR：自动语音识别模块</li>
+                    <li>TTS：高质量语音合成模块</li>
+                    <li>实时语音生成：低延迟流式输出</li>
+                </ul>
+                <div class="links">
+                    <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 VibeVoice 报道</a>
+                    <a href="https://github.com/trending" target="_blank" class="link">📌 GitHub Trending</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>斯坦福 / 英伟达：InfoTok 视频分词器 <span class="tag">学术</span></h3>
+                <p>自适应视频分词技术，实现 2.3 倍压缩率，大幅降低视频理解和生成的计算成本，有望显著提升多模态模型效率。</p>
+                <div class="links">
+                    <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 技术报道</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>极佳视界 GigaWorld-1 登顶全球榜首 <span class="tag green">世界模型</span></h3>
+                <p>物理遵循能力提升 16%，半月内 HuggingFace 下载量突破 16000 次，成为最受关注的世界模型新秀。</p>
+                <div class="links">
+                    <a href="https://gigaai-research.github.io/GigaBrain-Challenge-2026/" target="_blank" class="link">📌 官方页面</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 机器人 -->
+        <div class="section">
+            <h2 class="section-title">🤖 具身智能 / 机器人</h2>
+            <div class="grid">
+                <div class="news-card">
+                    <h3>智元机器人 <span class="tag green">量产里程碑</span></h3>
+                    <p>第 10000 台远征 A3 量产下线，从 1000 台到 10000 台仅用 15 个月，速度创行业纪录。</p>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 报道</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <h3>宇树科技 H2 即将发布 <span class="tag">宇树</span></h3>
+                    <p>新一代人形机器人 H2 宣布即将发布，已在米兰大教堂进行公开表演展示。</p>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/ld326/article/details/159659377" target="_blank" class="link">📌 报道</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <h3>北京揭牌全国最大机器人训练基地 <span class="tag orange">政策</span></h3>
+                    <p>设立千亿政府基金，全力押注人形机器人赛道，成为具身智能的国家级战略支点。</p>
+                    <div class="links">
+                        <a href="https://cloud.tencent.cn/developer/article/2648260" target="_blank" class="link">📌 腾讯云月报</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <h2 class="section-title">💡 核心洞察</h2>
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p>AI 正从「对话工具」向「自主 Agent」范式转变，腾讯、百度、火山引擎等国内大厂均在加速 Agent 平台落地。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p>中国 AI Token 日均调用量突破 140 万亿，连续三周超越美国，国产模型进入集群式崛起阶段。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p>具身智能成为资本新风口：智元量产破万台、宇树海外表演、北京设立千亿基金，硬件落地提速。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p>Anthropic IPO 估值 3800 亿美元、Meta 强制 75% 代码 AI 生成——AI 正在深入改变软件研发模式和资本市场格局。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p>安全风险凸显：Claude Mythos 泄露事件表明超级模型的安全边界正在被重新讨论，算力基础设施脆弱性问题亟需重视。</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>📡 数据来源：CSDN AI日报 · 量子位 · 机器之心 · 腾讯云开发者社区 · AIGC Daily</p>
+            <p style="margin-top:10px;">
+                🔗 所有链接均可点击跳转原文 · 生成时间：2026-04-01 09:25
+                &nbsp;·&nbsp;
+                <a href="../index.html">← 返回订阅中心</a>
+                &nbsp;·&nbsp;
+                <a href="https://Flystray.github.io/ai-news/reports/" target="_blank">查看历史报告</a>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>
