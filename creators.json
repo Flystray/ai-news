@@ -1,0 +1,276 @@
+{
+  "description": "优质创作者订阅配置 - 用于监控更新并生成解读版本",
+  "platforms": {
+    "youtube": {
+      "label": "YouTube频道",
+      "icon": "▶️",
+      "creators": [
+        {
+          "id": "ak",
+          "name": "Andrej Karpathy",
+          "handle": "@AndrejKarpathy",
+          "channel_id": "UCXUPKJO5MZQN11PqgIvyuvQ",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXUPKJO5MZQN11PqgIvyuvQ",
+          "profile": "前特斯拉AI总监，AI教育顶流",
+          "tags": ["AI", "机器学习", "教育"],
+          "priority": "high"
+        },
+        {
+          "id": "lex",
+          "name": "Lex Fridman",
+          "handle": "@LexFridman",
+          "channel_id": "UCSHZKyawb77ixDdsGog4iWA",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCSHZKyawb77ixDdsGog4iWA",
+          "profile": "MIT研究员，AI播客访谈",
+          "tags": ["AI", "深度学习", "访谈"],
+          "priority": "high"
+        },
+        {
+          "id": "openai-yt",
+          "name": "OpenAI",
+          "handle": "@OpenAI",
+          "channel_id": "UCXZCJLdBC09xxGZ6gcdrc6A",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A",
+          "profile": "OpenAI官方频道",
+          "tags": ["OpenAI", "GPT", "官方"],
+          "priority": "high"
+        },
+        {
+          "id": "3b1b",
+          "name": "3Blue1Brown",
+          "handle": "@3blue1brown",
+          "channel_id": "UCYO_jab_esuFRV4b17AJtAw",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw",
+          "profile": "数学可视化大师",
+          "tags": ["数学", "机器学习", "可视化"],
+          "priority": "medium"
+        },
+        {
+          "id": "sentdex",
+          "name": "sentdex",
+          "handle": "@sentdex",
+          "channel_id": "UCfzlCWGWYyIQ0aLC5w48gBQ",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCfzlCWGWYyIQ0aLC5w48gBQ",
+          "profile": "Python/ML教程",
+          "tags": ["Python", "ML", "教程"],
+          "priority": "medium"
+        },
+        {
+          "id": "twominute",
+          "name": "Two Minute Papers",
+          "handle": "@TwoMinutePapers",
+          "channel_id": "UCbfYPyITQ-7l4upoX8nvctg",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg",
+          "profile": "论文速读",
+          "tags": ["论文", "科研"],
+          "priority": "medium"
+        },
+        {
+          "id": "yannic",
+          "name": "Yannic Kilcher",
+          "handle": "@YannicKilcher",
+          "channel_id": "UCZHmQk67mSJgfCCTn7xBfew",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZHmQk67mSJgfCCTn7xBfew",
+          "profile": "AI播客/论文解读",
+          "tags": ["AI", "论文", "播客"],
+          "priority": "high"
+        },
+        {
+          "id": "dwar",
+          "name": "Dwarkesh Patel",
+          "handle": "@DwarkeshPatel",
+          "channel_id": "UCXl4i9dYBrFOabk0xGmbkRA",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXl4i9dYBrFOabk0xGmbkRA",
+          "profile": "AI播客新人王",
+          "tags": ["AI", "播客", "访谈"],
+          "priority": "high"
+        },
+        {
+          "id": "latentspace",
+          "name": "The Latent Space",
+          "handle": "@LatentSpacePod",
+          "channel_id": "UCxBcwypKK-W3GHd_RZ9FZrQ",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCxBcwypKK-W3GHd_RZ9FZrQ",
+          "profile": "AI技术播客",
+          "tags": ["AI", "播客", "技术"],
+          "priority": "medium"
+        },
+        {
+          "id": "riley",
+          "name": "Riley Brown",
+          "handle": "@RileyBrownAI",
+          "channel_id": "UCMcoud_ZW7cfxeIugBflSBw",
+          "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMcoud_ZW7cfxeIugBflSBw",
+          "profile": "AI开发教程",
+          "tags": ["AI", "开发", "教程"],
+          "priority": "medium"
+        }
+      ]
+    },
+    "bilibili": {
+      "label": "B站UP主",
+      "icon": "📺",
+      "creators": [
+        {
+          "id": "limu",
+          "name": "跟李沐学AI",
+          "uid": "1567748478",
+          "rss": "https://rsshub.app/bilibili/user/video/1567748478",
+          "profile": "亚马逊首席科学家，论文精读",
+          "tags": ["机器学习", "论文精读"],
+          "priority": "high"
+        },
+        {
+          "id": "turingcat",
+          "name": "图灵的猫",
+          "uid": "371846699",
+          "rss": "https://rsshub.app/bilibili/user/video/371846699",
+          "profile": "AI趣味应用，用AI预测高考",
+          "tags": ["AI应用", "趣味"],
+          "priority": "medium"
+        },
+        {
+          "id": "akiii",
+          "name": "秋葉aaaki",
+          "uid": "12566101",
+          "rss": "https://rsshub.app/bilibili/user/video/12566101",
+          "profile": "国内SD第一人，整合包教程",
+          "tags": ["AI绘画", "Stable Diffusion"],
+          "priority": "medium"
+        },
+        {
+          "id": "genji",
+          "name": "Genji是真想教会你",
+          "uid": "491266931",
+          "rss": "https://rsshub.app/bilibili/user/video/491266931",
+          "profile": "AI工具使用教程",
+          "tags": ["AI工具", "教程"],
+          "priority": "medium"
+        },
+        {
+          "id": "feitian",
+          "name": "飞天闪客",
+          "uid": "325864133",
+          "rss": "https://rsshub.app/bilibili/user/video/325864133",
+          "profile": "AI工具与教程",
+          "tags": ["AI工具", "教程"],
+          "priority": "low"
+        },
+        {
+          "id": "laomai",
+          "name": "老麦的工具库",
+          "uid": "486989780",
+          "rss": "https://rsshub.app/bilibili/user/video/486989780",
+          "profile": "全球最新AI工具测评",
+          "tags": ["AI工具", "测评"],
+          "priority": "medium"
+        },
+        {
+          "id": "codemao",
+          "name": "代码随想录",
+          "uid": "525438321",
+          "rss": "https://rsshub.app/bilibili/user/video/525438321",
+          "profile": "LeetCode刷题，清晰易懂",
+          "tags": ["算法", "面试"],
+          "priority": "low"
+        },
+        {
+          "id": "yup",
+          "name": "程序员鱼皮",
+          "uid": "12890453",
+          "rss": "https://rsshub.app/bilibili/user/video/12890453",
+          "profile": "全栈开发，项目驱动教学",
+          "tags": ["全栈", "开发"],
+          "priority": "medium"
+        },
+        {
+          "id": "zhengyue",
+          "name": "正月点灯笼",
+          "uid": "24014925",
+          "rss": "https://rsshub.app/bilibili/user/video/24014925",
+          "profile": "图解TCP/IP，底层原理",
+          "tags": ["底层", "原理"],
+          "priority": "low"
+        },
+        {
+          "id": "mofan",
+          "name": "莫烦Python",
+          "uid": "243821484",
+          "rss": "https://rsshub.app/bilibili/user/video/243821484",
+          "profile": "TensorFlow/PyTorch入门",
+          "tags": ["机器学习", "入门"],
+          "priority": "low"
+        }
+      ]
+    },
+    "twitter": {
+      "label": "X(Twitter)大V",
+      "icon": "🐦",
+      "creators": [
+        {
+          "id": "sama",
+          "name": "Sam Altman",
+          "handle": "@sama",
+          "rss": "https://rsshub.app/twitter/user/sama",
+          "profile": "OpenAI CEO",
+          "tags": ["OpenAI", "创始人"],
+          "priority": "high"
+        },
+        {
+          "id": "ylecun",
+          "name": "Yann LeCun",
+          "handle": "@ylecun",
+          "rss": "https://rsshub.app/twitter/user/ylecun",
+          "profile": "Meta首席科学家",
+          "tags": ["Meta", "首席科学家"],
+          "priority": "high"
+        },
+        {
+          "id": "karpathy",
+          "name": "Andrej Karpathy",
+          "handle": "@kaboris",
+          "rss": "https://rsshub.app/twitter/user/kaboris",
+          "profile": "前特斯拉AI总监",
+          "tags": ["AI", "教育"],
+          "priority": "high"
+        },
+        {
+          "id": "jimfan",
+          "name": "Jim Fan",
+          "handle": "@DrJimFan",
+          "rss": "https://rsshub.app/twitter/user/DrJimFan",
+          "profile": "NVIDIA AI科学家",
+          "tags": ["NVIDIA", "AI"],
+          "priority": "medium"
+        },
+        {
+          "id": "hwchase",
+          "name": "Harrison Chase",
+          "handle": "@hwchase17",
+          "rss": "https://rsshub.app/twitter/user/hwchase17",
+          "profile": "LangChain作者",
+          "tags": ["开源", "LangChain"],
+          "priority": "high"
+        },
+        {
+          "id": "simonw",
+          "name": "Simon Willison",
+          "handle": "@simonw",
+          "rss": "https://rsshub.app/twitter/user/simonw",
+          "profile": "Django联合创始人，AI工具",
+          "tags": ["AI工具", "开源"],
+          "priority": "medium"
+        },
+        {
+          "id": "swyx",
+          "name": "swyx",
+          "handle": "@swyx",
+          "rss": "https://rsshub.app/twitter/user/swyx",
+          "profile": "AI工程化专家",
+          "tags": ["AI", "工程"],
+          "priority": "medium"
+        }
+      ]
+    }
+  }
+}

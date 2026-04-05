@@ -1,12 +1,80 @@
+# -*- coding: utf-8 -*-
+import sys, io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 """
 AI新闻采集与报告生成工具
 使用方法: python collect_news.py
+自动生成双语版报告（原文 + 中文翻译版）
 """
 
 import requests
 import json
 import os
+import re
+import hashlib
+import time
 from datetime import datetime
+
+# ============ 翻译支持 ============
+try:
+    from deep_translator import GoogleTranslator
+    TRANSLATOR = GoogleTranslator(source='en', target='zh-CN')
+    HAS_TRANSLATOR = True
+except Exception:
+    HAS_TRANSLATOR = False
+    print("[注意] 翻译功能不可用，将保留英文原文")
+
+_trans_cache = {}
+
+
+def is_foreign_text(text):
+    """判断文本是否主要是外文（需要翻译）"""
+    if not text or len(text.strip()) < 10:
+        return False
+    chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', text))
+    total_chars = len(text.strip())
+    if total_chars == 0:
+        return False
+    return chinese_chars / total_chars < 0.3
+
+
+def translate_text(text, cache=_trans_cache):
+    """翻译外文文本为中文，带缓存"""
+    if not HAS_TRANSLATOR or not text:
+        return text
+    key = hashlib.md5(text.encode()).hexdigest()[:16]
+    if key in cache:
+        return cache[key]
+    try:
+        chunk = text[:500].strip()
+        result = TRANSLATOR.translate(chunk)
+        cache[key] = result
+        time.sleep(0.3)
+        return result
+    except Exception as e:
+        print(f"    [翻译 ERR] {str(e)[:60]}")
+        return text
+
+
+def translate_news_items(news_items):
+    """翻译新闻条目中的英文内容"""
+    translated = json.loads(json.dumps(news_items))  # 深拷贝
+    for key in ["breaking_news", "industry_news", "insights"]:
+        for item in translated.get(key, []):
+            title = item.get("title", "")
+            if is_foreign_text(title):
+                t = translate_text(title)
+                print(f"    [翻译] {title[:50]} → {t[:50]}")
+                item["title"] = t
+                item["title_en"] = title  # 保留原文
+            summary = item.get("summary", "")
+            if is_foreign_text(summary):
+                t = translate_text(summary)
+                item["summary"] = t
+                item["summary_en"] = summary
+    return translated
 
 # ============ 新闻源配置 ============
 NEWS_SOURCES = {
@@ -301,37 +369,50 @@ def generate_report_template(news_items, date_str):
 def main():
     print("🤖 AI新闻采集工具")
     print("=" * 50)
-    
+
     date_str = datetime.now().strftime("%Y-%m-%d")
-    output_dir = r"c:\Users\Administrator\Desktop\yf-data\reports"
-    
-    # 确保输出目录存在
+
+    # 输出到 skill 目录（GitHub Pages 可访问）
+    skill_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(skill_dir, "reports")
     os.makedirs(output_dir, exist_ok=True)
-    
+
     print(f"\n📅 当前日期: {date_str}")
+    print(f"📁 输出目录: {output_dir}")
     print("\n🔍 开始采集新闻...")
-    
+
     # 采集各平台新闻
     all_news = {"breaking_news": [], "industry_news": [], "insights": [], "sources": []}
-    
+
     for source_name, config in NEWS_SOURCES.items():
         print(f"  • 采集 {source_name}...")
         results = search_news(config["search"])
         for r in results:
             if r.get("url"):
                 all_news["sources"].append(r.get("source", source_name))
-    
+
     print(f"\n✅ 采集完成，共获取 {len(all_news['sources'])} 个来源")
-    
-    # 生成报告
-    output_file = os.path.join(output_dir, f"{date_str}-with-links.html")
+
+    # 生成原文版报告
+    output_file = os.path.join(output_dir, f"{date_str}.html")
     report_html = generate_report_template(all_news, date_str)
-    
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(report_html)
-    
-    print(f"\n📄 报告已生成: {output_file}")
-    print("\n💡 请打开文件查看新闻报道")
+    print(f"\n📄 原文版: {output_file}")
+
+    # 生成中文翻译版
+    if HAS_TRANSLATOR:
+        print("\n🌐 翻译英文内容...")
+        translated_news = translate_news_items(all_news)
+        output_cn = os.path.join(output_dir, f"{date_str}-cn.html")
+        report_cn = generate_report_template(translated_news, date_str)
+        with open(output_cn, 'w', encoding='utf-8') as f:
+            f.write(report_cn)
+        print(f"📄 翻译版: {output_cn}")
+    else:
+        print("\n⚠️ 翻译功能不可用，仅生成原文版")
+
+    print("\n💡 报告已保存，将在下次 GitHub 同步时推送到 Pages")
 
 if __name__ == "__main__":
     main()

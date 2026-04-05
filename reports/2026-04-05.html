@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-05 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; border: none; padding: 14px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102,126,234,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-04-05</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+        
+        <div id="news-content">
+            <!-- 新闻内容将通过JavaScript动态加载 -->
+            <div style="text-align:center;padding:50px;color:#888;">
+                正在加载新闻...
+            </div>
+        </div>
+        
+        <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+    </div>
+    
+    <script>
+        const newsData = {
+  "breaking_news": [],
+  "industry_news": [],
+  "insights": [],
+  "sources": [
+    "Google News",
+    "Google News",
+    "Google News",
+    "Google News",
+    "Google News",
+    "Google News"
+  ]
+};
+        
+        function renderNews() {
+            const container = document.getElementById('news-content');
+            
+            let html = `
+                <div class="section">
+                    <h2 class="section-title"><span>🔥</span> 今日重大突破</h2>
+            `;
+            
+            // 渲染新闻卡片
+            newsData.breaking_news.forEach(news => {
+                html += `
+                    <div class="news-card">
+                        <h3>${news.title} <span class="tag">${news.tag}</span></h3>
+                        <ul>
+                            ${news.highlights.map(h => `<li>${h}</li>`).join('')}
+                        </ul>
+                        <div class="links">
+                            ${news.links.map(l => `<a href="${l.url}" target="_blank" class="link">📌 ${l.source} →</a>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            
+            // 渲染行业动态
+            if (newsData.industry_news && newsData.industry_news.length > 0) {
+                html += `
+                    <div class="section">
+                        <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+                `;
+                
+                newsData.industry_news.forEach(item => {
+                    html += `
+                        <div class="news-card">
+                            <h3>${item.company} <span class="tag">${item.tag}</span></h3>
+                            <p>${item.description}</p>
+                            <div class="links">
+                                ${item.links.map(l => `<a href="${l.url}" target="_blank" class="link">📌 ${l.source}</a>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div></div>`;
+            }
+            
+            // 渲染核心洞察
+            if (newsData.insights && newsData.insights.length > 0) {
+                html += `
+                    <div class="section">
+                        <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+                `;
+                
+                newsData.insights.forEach((insight, i) => {
+                    html += `
+                        <div class="insight-item">
+                            <div class="num">${i + 1}</div>
+                            <p>${insight}</p>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            }
+            
+            // 页脚
+            html += `
+                <div class="footer">
+                    <p>📡 数据来源：${newsData.sources ? newsData.sources.join(' · ') : '多方采集'}</p>
+                    <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: ${newsData.updated}</p>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        renderNews();
+    </script>
+</body>
+</html>
