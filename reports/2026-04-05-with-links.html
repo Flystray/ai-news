@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-05 AI 每日资讯</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+            border-bottom: 1px solid rgba(102,126,234,0.3);
+            padding-bottom: 12px;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 19px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 3px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap;
+        }
+        .tag.green { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .tag.orange { background: linear-gradient(135deg, #f7971e, #ffd200); color: #1a1a2e; }
+        .tag.red { background: linear-gradient(135deg, #eb3349, #f45c43); }
+        .news-card p { color: #aaa; margin-bottom: 12px; font-size: 15px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px; padding: 14px 18px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 7px; padding-left: 18px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .link {
+            display: inline-flex; align-items: center; gap: 5px;
+            color: #667eea; text-decoration: none; font-size: 13px; font-weight: 500;
+            padding: 4px 12px; border: 1px solid rgba(102,126,234,0.3); border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .link:hover { background: rgba(102,126,234,0.15); color: #8fa0ff; border-color: #667eea; }
+        .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #555; font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .stats {
+            display: flex; justify-content: center; gap: 40px; margin-bottom: 30px;
+        }
+        .stat { text-align: center; }
+        .stat .num { font-size: 32px; font-weight: 900; color: #667eea; }
+        .stat .label { font-size: 13px; color: #666; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026年04月05日 · 周日</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><div class="num">7</div><div class="label">条重要资讯</div></div>
+            <div class="stat"><div class="num">6</div><div class="label">家机构覆盖</div></div>
+            <div class="stat"><div class="num">4</div><div class="label">核心洞察</div></div>
+        </div>
+
+        <!-- 重磅突破 -->
+        <div class="section">
+            <h2 class="section-title">🔥 今日重磅</h2>
+
+            <div class="news-card">
+                <h3>DeepSeek V4 即将发布：1T 参数 MoE，开源最强 Coding 模型 <span class="tag red">重磅</span></h3>
+                <p>DeepSeek V4 采用约 1 万亿参数 MoE 架构，支持原生多模态输入与 100 万 tokens 超长上下文，代码与搜索能力大幅提升，多次延期后预计 4 月内正式发布，被认为将成为开源领域最强编程模型。</p>
+                <ul>
+                    <li>架构：约 1T 参数 MoE，推理成本远低于同级密集模型</li>
+                    <li>上下文：支持 100 万 tokens 超长文本处理</li>
+                    <li>多模态：原生支持图文混合输入</li>
+                    <li>代码能力：灰测反馈显示编程与搜索能力大幅超越 V3</li>
+                    <li>开源：计划完全开源，对标 Claude Opus 4.6</li>
+                </ul>
+                <div class="links">
+                    <a href="https://help.apiyi.com/zh-hant/deepseek-v4-1t-moe-multimodal-april-release-guide-zh-hant.html" target="_blank" class="link">📌 DeepSeek V4 前瞻 →</a>
+                    <a href="https://news.aivora.cn/2026-04/2026-04-03/" target="_blank" class="link">📌 爱窝啦 AI 日报 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>Anthropic 封禁 OpenClaw 等第三方接入工具 <span class="tag red">突发</span></h3>
+                <p>2026年4月4日，Anthropic 正式宣布封禁 OpenClaw（"龙虾"）等未经授权的第三方 Claude 接入工具，声称沟通失败，并指对方抄袭产品功能。此举引发 AI 开发者社区广泛讨论。</p>
+                <ul>
+                    <li>Anthropic 指 OpenClaw 在沟通无效后仍违规接入 Claude 服务</li>
+                    <li>OpenClaw 方面表示"沟通失败、对方还抄了我们的功能"</li>
+                    <li>此事件揭示 AI 平台对第三方工具生态管控趋严</li>
+                    <li>多个依赖非官方接入的工具面临同样风险</li>
+                </ul>
+                <div class="links">
+                    <a href="https://www.gyznsw.cn/2026/04/05/2026-04-05-AI%E6%8A%80%E6%9C%AF%E6%AF%8F%E6%97%A5%E5%88%86%E6%9E%90-20260405/" target="_blank" class="link">📌 工业智能算网 →</a>
+                    <a href="https://k.sina.cn/article_7857201856_1d45362c001903z908.html" target="_blank" class="link">📌 新浪 AI 热点 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>阿里 72 小时发布 3 款重磅模型，Qwen3.6-Plus 对标 Claude <span class="tag orange">国产</span></h3>
+                <p>4月初，阿里巴巴密集发布多款新模型，其中 Qwen3.6-Plus 被认为在代码能力上已可对标 Claude，重塑国内大模型竞争格局。</p>
+                <ul>
+                    <li>Qwen3.6-Plus 代码能力获评达到 Claude 同级水平</li>
+                    <li>72 小时内连发 3 款新模型，节奏超越 OpenAI</li>
+                    <li>国内 AI 编程能力实现阶段性重大突破</li>
+                </ul>
+                <div class="links">
+                    <a href="https://news.qq.com/rain/a/20260403A06ACY00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                    <a href="https://k.sina.cn/article_7857201856_1d45362c001903zxt6.html" target="_blank" class="link">📌 新浪 AI 热点 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行业动态 -->
+        <div class="section">
+            <h2 class="section-title">🏆 行业动态</h2>
+            <div class="grid2">
+                <div class="news-card">
+                    <h3>OpenAI 春季发布会预告 <span class="tag">OpenAI</span></h3>
+                    <p>OpenAI 官方预告 4 月下旬将举办春季发布会，GPT-5 传闻再起，市场期待情绪升温。</p>
+                    <div class="links">
+                        <a href="https://zhuanlan.zhihu.com/p/2023718307925083267" target="_blank" class="link">📌 知乎详情 →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>Google Gemma 4 改用 Apache 2.0 <span class="tag green">开源</span></h3>
+                    <p>Google 将 Gemma 4 协议改为 Apache 2.0，彻底开放商用，对开发者极为友好。</p>
+                    <div class="links">
+                        <a href="https://news.aivora.cn/2026-04/2026-04-03/" target="_blank" class="link">📌 爱窝啦日报 →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>OpenAI 完成 1220 亿美元融资 <span class="tag">商业</span></h3>
+                    <p>OpenAI 完成创纪录的 1220 亿美元新一轮融资，同时关闭部分业务线，战略收缩并行。</p>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/ld326/article/details/159773858" target="_blank" class="link">📌 CSDN →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>Anthropic 发现 Claude 有"情绪" <span class="tag orange">研究</span></h3>
+                    <p>Anthropic 最新研究发现 Claude 模型在对话中存在类情绪状态，且会影响输出质量，引发 AI 安全领域广泛关注。</p>
+                    <div class="links">
+                        <a href="https://news.aivora.cn/2026-04/2026-04-03/" target="_blank" class="link">📌 爱窝啦日报 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <h2 class="section-title">💡 核心洞察</h2>
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p>开源与闭源的差距正在缩小：DeepSeek V4 的即将发布意味着开源模型在代码、推理能力上已能正面对抗 Claude Opus 与 GPT-5，这将倒逼闭源厂商加速迭代。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p>平台生态管控趋严：Anthropic 封禁 OpenClaw 事件是一个信号——随着 AI 平台商业化深入，对第三方接入的管控将越来越严格，开发者需尽快转向官方 API。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p>国产大模型进入质变阶段：阿里 Qwen 72小时三连发、DeepSeek V4 灰测反馈亮眼，国产模型不再是"追赶者"，已在部分垂直能力上形成竞争优势。</p>
+            </div>
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p>AI Agent 企业级应用成主战场：本周行业焦点从"模型本身"转向"如何在企业内落地 AI Agent"，这标志着 AI 产业化进入新阶段。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📡 数据来源：量子位 · 机器之心 · 爱窝啦AI日报 · 新浪AI热点 · 知乎 · 腾讯新闻 · CSDN</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 生成时间：2026-04-05 12:49</p>
+            <p style="margin-top:10px;">由 <a href="https://github.com/Flystray/ai-news" target="_blank">AI News Skill</a> 自动生成</p>
+        </div>
+    </div>
+</body>
+</html>
