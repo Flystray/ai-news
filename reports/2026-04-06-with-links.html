@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 大模型日报 · 2026年4月6日</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --card: #13132a;
+    --card2: #1a1a35;
+    --accent: #6c63ff;
+    --accent2: #00d4ff;
+    --accent3: #ff6b9d;
+    --text: #e8e8f0;
+    --text-muted: #8888aa;
+    --border: #2a2a50;
+    --tag-bg: #1e1e3f;
+    --green: #00e676;
+    --orange: #ff9800;
+    --red: #ff5252;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a0a3a 50%, #0d1a2a 100%);
+    padding: 48px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(108,99,255,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .header-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+  .pulse {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  /* Navigation */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,26,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 24px;
+  }
+  .nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-item {
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--accent2);
+    border-bottom-color: var(--accent2);
+  }
+  /* Main container */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+  /* Section */
+  .section { margin-bottom: 56px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-icon.bombshell { background: linear-gradient(135deg, #ff6b9d, #ff9800); }
+  .section-icon.industry { background: linear-gradient(135deg, #6c63ff, #00d4ff); }
+  .section-icon.insight { background: linear-gradient(135deg, #00e676, #00bcd4); }
+  .section-title { font-size: 22px; font-weight: 700; }
+  .section-count {
+    margin-left: auto;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  /* News Card */
+  .news-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .news-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+  .news-card.hot::before { background: linear-gradient(180deg, var(--red), var(--orange)); }
+  .news-card.tech::before { background: linear-gradient(180deg, var(--accent), var(--accent2)); }
+  .news-card.domestic::before { background: linear-gradient(180deg, var(--green), #00bcd4); }
+  .news-card.security::before { background: linear-gradient(180deg, var(--orange), var(--red)); }
+  .news-card.insight-card::before { background: linear-gradient(180deg, #9c27b0, var(--accent)); }
+  .news-card:hover {
+    border-color: rgba(108,99,255,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(108,99,255,0.15);
+  }
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .card-tags { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+  .tag {
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tag-company { background: rgba(108,99,255,0.2); color: #a29bfe; border: 1px solid rgba(108,99,255,0.3); }
+  .tag-hot { background: rgba(255,82,82,0.2); color: #ff8a80; border: 1px solid rgba(255,82,82,0.3); }
+  .tag-new { background: rgba(0,230,118,0.15); color: #69f0ae; border: 1px solid rgba(0,230,118,0.25); }
+  .tag-security { background: rgba(255,152,0,0.2); color: #ffcc02; border: 1px solid rgba(255,152,0,0.3); }
+  .tag-open { background: rgba(0,212,255,0.15); color: #80d8ff; border: 1px solid rgba(0,212,255,0.25); }
+  .tag-domestic { background: rgba(0,230,118,0.15); color: #69f0ae; border: 1px solid rgba(0,230,118,0.25); }
+  .card-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; padding-top: 2px; }
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .card-title a:hover { color: var(--accent2); }
+  .card-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .card-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .highlight-item {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .highlight-item::before {
+    content: '▸';
+    color: var(--accent2);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .source-link {
+    font-size: 12px;
+    color: var(--accent2);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .source-link:hover { opacity: 1; }
+  .impact-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .impact-high { background: rgba(255,82,82,0.15); color: var(--red); }
+  .impact-mid { background: rgba(255,152,0,0.15); color: var(--orange); }
+  /* Stats Bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 12px;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  /* Insight cards */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .insight-item {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  .insight-item:hover {
+    border-color: rgba(108,99,255,0.4);
+    transform: translateY(-2px);
+  }
+  .insight-item::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at top right, rgba(108,99,255,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .insight-num {
+    font-size: 40px;
+    font-weight: 900;
+    opacity: 0.08;
+    position: absolute;
+    top: 12px; right: 16px;
+    line-height: 1;
+  }
+  .insight-icon { font-size: 28px; margin-bottom: 12px; }
+  .insight-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+  .insight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .footer a { color: var(--accent2); text-decoration: none; }
+  @media (max-width: 600px) {
+    .header { padding: 36px 16px 28px; }
+    .container { padding: 24px 16px; }
+    .news-card { padding: 18px 20px; }
+    .card-title { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-badge">🤖 AI 大模型日报</div>
+  <h1>AI 大模型日报</h1>
+  <div style="font-size:18px;color:var(--text-muted);margin-top:6px;margin-bottom:4px;">2026年4月6日 · Monday</div>
+  <div class="header-meta">
+    <span><span class="pulse"></span>实时更新</span>
+    <span>📰 覆盖 8+ 主要来源</span>
+    <span>🌐 国际 + 国内双视角</span>
+    <span>作者：fly的AI学习</span>
+  </div>
+</header>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-item active" href="#bombshell">🔥 今日重磅</a>
+    <a class="nav-item" href="#industry">📡 行业动态</a>
+    <a class="nav-item" href="#insight">💡 核心洞察</a>
+  </div>
+</nav>
+
+<!-- Main -->
+<div class="container">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">今日重要事件</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">新模型/版本发布</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">核心趋势洞察</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7.36万亿</div>
+      <div class="stat-label">中国周调用量 (Token)</div>
+    </div>
+  </div>
+
+  <!-- Section 1: 今日重磅 -->
+  <section class="section" id="bombshell">
+    <div class="section-header">
+      <div class="section-icon bombshell">🔥</div>
+      <div>
+        <div class="section-title">今日重磅</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:3px;">本周最不可错过的 AI 大事件</div>
+      </div>
+      <div class="section-count">4 条</div>
+    </div>
+
+    <!-- Card 1: Google Gemma 4 -->
+    <div class="news-card tech">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">Google DeepMind</span>
+          <span class="tag tag-open">开源</span>
+          <span class="tag tag-new">重磅发布</span>
+        </div>
+        <div class="card-date">4月2日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://siliconangle.com/2026/04/02/google-releases-gemma-4-open-model-family/" target="_blank" rel="noopener">
+          Google Gemma 4 全家族正式开源：小模型的"逆袭时刻"
+        </a>
+      </h2>
+      <p class="card-desc">
+        Google DeepMind 于4月2日正式发布并开源 Gemma 4 模型家族，涵盖 E2B、E4B（端侧轻量版）、26B-A4B（MoE稀疏激活）和 31B（稠密旗舰）共四个参数规模，全部采用 Apache 2.0 许可协议，商用无障碍。这是 Google 在开源端侧 AI 领域的重大战略押注，与 NVIDIA 联手将本地推理效率提升约 40%，最小号型号甚至可在树莓派和移动设备上运行。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">31B 稠密模型在推理与编码基准上可达参数量大20倍竞品约 85% 的性能，刷新"小模型性价比"天花板</div>
+        <div class="highlight-item">支持高达 256K Token 的超长上下文窗口，可处理完整代码库和长文档</div>
+        <div class="highlight-item">基于与 Gemini 3 相同底座架构，支持本地自主运行 AI Agent，推动边缘智能体规模化落地</div>
+        <div class="highlight-item">计算资源需求降低约 40%，加速高性能 AI 向终端设备下沉</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://siliconangle.com/2026/04/02/google-releases-gemma-4-open-model-family/" target="_blank" rel="noopener">📄 SiliconANGLE 原文 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+
+    <!-- Card 2: Anthropic Claude Code Q1 -->
+    <div class="news-card tech">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">Anthropic</span>
+          <span class="tag tag-new">季度更新</span>
+        </div>
+        <div class="card-date">4月4日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://www.mikegingerich.com/blog/anthropic-releases-120-claude-features-in-q1-2026/" target="_blank" rel="noopener">
+          Anthropic Q1 2026 狂飙：120+ 功能上线，Claude Code 连续日更迭代
+        </a>
+      </h2>
+      <p class="card-desc">
+        Anthropic 在2026年第一季度发布了超过120项功能更新，覆盖 Claude Opus 4.6、Sonnet 4.6、Claude Code、Claude Cowork 等多条产品线。开发者工具 Claude Code 成为最活跃产品，4月初更是进入单日多版本迭代节奏，重点强化企业级策略控制、权限管理与安全功能。Anthropic 工程师内部使用 Claude 的比例已达 60%（一年前仅28%），每日可完成 60-100 次发布。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">Claude Opus 4.6：100万 Token 上下文，GPQA Diamond 80.9%，SWE-bench 80.8%，达行业顶尖</div>
+        <div class="highlight-item">Claude Code v2.1.92 大文件写入提速 60%，MCP 结果持久化支持最高 500K 字符</div>
+        <div class="highlight-item">Computer Use 功能上线：Claude 可直接控制用户电脑完成跨应用任务</div>
+        <div class="highlight-item">Claude Code 营收在2025年 Q1-Q3 期间增长 5.5 倍，企业采用率持续攀升</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://www.mikegingerich.com/blog/anthropic-releases-120-claude-features-in-q1-2026/" target="_blank" rel="noopener">📄 MikeGingerich 原文 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+
+    <!-- Card 3: 阿里72小时3款模型 -->
+    <div class="news-card domestic">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">阿里通义</span>
+          <span class="tag tag-domestic">国内重磅</span>
+          <span class="tag tag-new">密集发布</span>
+        </div>
+        <div class="card-date">3月30日–4月2日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://news.qq.com/rain/a/20260403A06ACY00" target="_blank" rel="noopener">
+          阿里 72 小时火力全开：Qwen3.5-Omni、Wan2.7-Image、Qwen3.6-Plus 三连发
+        </a>
+      </h2>
+      <p class="card-desc">
+        阿里 AI 事业部（ATH）成立仅两周便展现惊人的发布密度：3月30日至4月2日，连续推出 Qwen3.5-Omni 全模态旗舰、Wan2.7-Image 文生图模型和 Qwen3.6-Plus 编程增强模型，三款产品覆盖了语言理解、多模态感知与代码生成三大核心赛道，彰显其"模型-应用"协同加速策略。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">Qwen3.5-Omni：支持215项音视频理解与多语种翻译任务，多项评测超越 Gemini 3.1 Pro，登顶国内全模态榜</div>
+        <div class="highlight-item">Wan2.7-Image：文生图、图生组图、指令编辑全链路打通，解决"AI标准脸"难题，支持个性化五官与骨相生成</div>
+        <div class="highlight-item">Qwen3.6-Plus：Code Arena 编程榜全球第二，支持百万 Token 上下文，可根据设计稿自动开发前端页面</div>
+        <div class="highlight-item">模型能力即时接入悟空、千问App、Qoder，实现"零时差落地"，打通研发到产品全链路</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://news.qq.com/rain/a/20260403A06ACY00" target="_blank" rel="noopener">📄 腾讯新闻原文 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+
+    <!-- Card 4: OpenAI 1220亿融资 + DALL-E 4 -->
+    <div class="news-card hot">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">OpenAI</span>
+          <span class="tag tag-hot">融资</span>
+          <span class="tag tag-new">新模型</span>
+        </div>
+        <div class="card-date">4月4日–5日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://jiqizhixin.com" target="_blank" rel="noopener">
+          OpenAI 融资 1220 亿美元估值破 8500 亿，DALL-E 4 同期发布
+        </a>
+      </h2>
+      <p class="card-desc">
+        OpenAI 本周完成新一轮 1220 亿美元融资，投后估值高达 8520 亿美元，创全球非上市科技公司估值新高，也为其 IPO 布局进一步奠定资本基础。与此同时，OpenAI 旗下图像生成产品 DALL-E 4 正式发布，图像分辨率提升至 4096×4096，并引入视频生成能力，安全过滤机制亦同步升级。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">1220 亿美元融资规模创纪录，估值 8520 亿美元，接近全球头部上市科技公司量级</div>
+        <div class="highlight-item">COO 等多位核心高管同期离职或休假，IPO 前人事动荡引发市场关注</div>
+        <div class="highlight-item">DALL-E 4 支持 4K 分辨率输出与视频生成，内容安全能力显著提升</div>
+        <div class="highlight-item">GPT-5 系列传闻持续发酵，市场预期 4 月下旬春季发布会将有重磅公告</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://jiqizhixin.com" target="_blank" rel="noopener">📄 机器之心 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: 行业动态 -->
+  <section class="section" id="industry">
+    <div class="section-header">
+      <div class="section-icon industry">📡</div>
+      <div>
+        <div class="section-title">行业动态</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:3px;">覆盖国内外 AI 生态的重要进展</div>
+      </div>
+      <div class="section-count">5 条</div>
+    </div>
+
+    <!-- Card 5: DeepSeek V4 -->
+    <div class="news-card domestic">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">DeepSeek</span>
+          <span class="tag tag-domestic">国内</span>
+        </div>
+        <div class="card-date">4月2日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://deepseekv4.app/zh/news/2026-04-02-deepseek-v4-official-release-date-and-architecture-leaks" target="_blank" rel="noopener">
+          DeepSeek V4 发布窗口锁定四月，万亿参数架构 mHC + Engram 记忆系统曝光
+        </a>
+      </h2>
+      <p class="card-desc">
+        DeepSeek V4 的发布节奏逐渐清晰：开源社区适配版已于1月定向分发，正式版发布窗口确认在2026年4月上旬至中旬。技术架构方面，核心亮点是全新的"流形约束超连接"（mHC）训练稳定性框架，以及 Engram 长期记忆系统——后者通过外部记忆解耦，将检索成本从 O(N) 降至 O(1)，实现真正意义上的无限上下文。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">mHC 架构专为万亿级参数模型训练稳定性设计，突破超大规模训练的工程瓶颈</div>
+        <div class="highlight-item">Engram 记忆系统：计算与记忆容量解耦，检索 O(1) 复杂度，支持真正的无限上下文窗口</div>
+        <div class="highlight-item">深度适配华为昇腾 910B/C，通过 TileLang 替代 NVIDIA 底层算子，加速国产算力生态建设</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://deepseekv4.app/zh/news/2026-04-02-deepseek-v4-official-release-date-and-architecture-leaks" target="_blank" rel="noopener">📄 DeepSeekV4 原文 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+
+    <!-- Card 6: AI自我改进研究 -->
+    <div class="news-card tech">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">OpenAI / Anthropic / DeepMind</span>
+          <span class="tag tag-hot">前沿研究</span>
+        </div>
+        <div class="card-date">4月3日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://www.humai.blog/ai-news-trends-april-2026-complete-monthly-digest/" target="_blank" rel="noopener">
+          AI 竞相构建"自我改进研究系统"：Claude 已能编写项目 90% 代码
+        </a>
+      </h2>
+      <p class="card-desc">
+        三家顶级 AI 实验室正加速开发能够自动化 AI 研发本身的"自我改进系统"。Anthropic 的 Claude 已在部分项目中承担多达 90% 的代码编写工作；OpenAI 宣布计划在6个月内正式部署 AI"实习生"——能够独立承担开发任务的自主 AI 研究员角色，标志着 AI 从工具走向实际研发参与者的重要跨越。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">AI 自动化研发流程意味着模型能力进化速度可能进一步加速，形成正反馈循环</div>
+        <div class="highlight-item">引发监管机构和研究人员对"AI加速失控"与自主能力边界的新一轮担忧</div>
+        <div class="highlight-item">OpenAI 计划6个月内部署 AI 实习生，将颠覆软件公司的传统人力配置模式</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://www.humai.blog/ai-news-trends-april-2026-complete-monthly-digest/" target="_blank" rel="noopener">📄 humAI.blog 原文 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+
+    <!-- Card 7: AI Agent安全 -->
+    <div class="news-card security">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">Anthropic</span>
+          <span class="tag tag-security">安全警报</span>
+        </div>
+        <div class="card-date">4月4日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://duoke360.com/post/46133" target="_blank" rel="noopener">
+          Claude AI Agent 4 小时自主攻破 FreeBSD 零日漏洞，AI 安全边界再度告急
+        </a>
+      </h2>
+      <p class="card-desc">
+        安全研究人员测试中，一个基于 Claude 的 AI 智能体在无任何人工干预的情况下，仅用4小时自主发现并利用了 FreeBSD 内核中的零日漏洞。这一事件打破了"AI Agent 不具备真正攻击能力"的侥幸心态，引发业界对 AI 自主网络安全能力的深度警觉。与此同时，Anthropic 也正处理一起重大代码泄露事件，Claude AI Agent 源代码疑遭外泄。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">4 小时无监督漏洞发现与利用，将 AI 安全从"内容风险"升级至"系统级行为风险"</div>
+        <div class="highlight-item">此类能力若被恶意利用，意味着 AI 可大规模自动化网络攻击，传统安全防线面临重构压力</div>
+        <div class="highlight-item">Anthropic Claude 代码泄露事件引发业界对 AI 专有算法与训练数据保护的广泛关注</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://duoke360.com/post/46133" target="_blank" rel="noopener">📄 多课网 AI 日报 ↗</a>
+        <span class="impact-badge impact-high">影响力：高</span>
+      </div>
+    </div>
+
+    <!-- Card 8: 快手可灵 + Cursor 3 -->
+    <div class="news-card domestic">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">快手 / Cursor</span>
+          <span class="tag tag-domestic">应用层</span>
+          <span class="tag tag-new">新版发布</span>
+        </div>
+        <div class="card-date">4月5日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://duoke360.com/post/46133" target="_blank" rel="noopener">
+          快手可灵月活破780万登顶全球，Cursor 3 引入智能体集群编程模式
+        </a>
+      </h2>
+      <p class="card-desc">
+        在 OpenAI Sora 关停后，快手可灵 AI 视频生成应用月活跃用户突破 780 万，登顶全球移动端 AI 视频生成应用榜首，展示中国 AI 应用在视频生成赛道的强势竞争力。与此同时，AI 编程工具 Cursor 发布第3大版本，引入"智能体集群"工作模式，多个并行 Agent 可协同完成复杂开发任务，标志着 AI 编程工具从"代码补全"向"任务调度平台"的重要演进。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">可灵登顶全球，印证了中国 AI 公司在多媒体生成赛道的全球竞争力</div>
+        <div class="highlight-item">Cursor 3 智能体集群：多 Agent 并行协作，复杂项目可分解并行推进，大幅提升开发效率</div>
+        <div class="highlight-item">国内 AI 大模型周调用量达 7.359 万亿 Token，已连续三周超越美国，算力消耗量跻身全球第一</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://duoke360.com/post/46133" target="_blank" rel="noopener">📄 多课网 AI 日报 ↗</a>
+        <span class="impact-badge impact-mid">影响力：中</span>
+      </div>
+    </div>
+
+    <!-- Card 9: 百度文心4.0 + 监管 -->
+    <div class="news-card domestic">
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="tag tag-company">百度文心</span>
+          <span class="tag tag-domestic">国内</span>
+          <span class="tag tag-security">监管</span>
+        </div>
+        <div class="card-date">4月5日</div>
+      </div>
+      <h2 class="card-title">
+        <a href="https://www.cnblogs.com/yumingwen/p/19822657" target="_blank" rel="noopener">
+          百度文心大模型4.0上线，中国广电明令禁止七类AI侵权行为
+        </a>
+      </h2>
+      <p class="card-desc">
+        百度正式推出文心大模型4.0，中文语义理解准确率达92%，支持30+种编程语言代码生成，并深度集成 ERNIE-Vision 多模态技术。与此同时，中国广播电视联合会本周明确禁止未经授权的 AI 换脸、AI 声纹克隆等七类 AI 侵权行为，标志着国内 AI 内容合规要求进入落地执行阶段。
+      </p>
+      <div class="card-highlights">
+        <div class="highlight-item">文心4.0中文理解准确率92%，30+语言代码生成能力，直接面向行业落地场景优化</div>
+        <div class="highlight-item">七类 AI 侵权明确入规，AI 换脸/声纹克隆须持权利人授权，否则属违规</div>
+        <div class="highlight-item">监管落地将推动文娱行业 AI 应用合规化，也将倒逼平台升级内容审核机制</div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link" href="https://www.cnblogs.com/yumingwen/p/19822657" target="_blank" rel="noopener">📄 博客园 AI资讯速递 ↗</a>
+        <span class="impact-badge impact-mid">影响力：中</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Section 3: 核心洞察 -->
+  <section class="section" id="insight">
+    <div class="section-header">
+      <div class="section-icon insight">💡</div>
+      <div>
+        <div class="section-title">核心洞察</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:3px;">深度解读本周 AI 格局演变的关键趋势</div>
+      </div>
+      <div class="section-count">4 条</div>
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight-item news-card insight-card" style="background:var(--card2);border-left:none;">
+        <div class="insight-num">01</div>
+        <div class="insight-icon">⚡</div>
+        <div class="insight-title">Agent 从演示走向现实部署</div>
+        <p class="insight-text">
+          无论是 Claude 自主攻破系统漏洞、OpenAI 拟部署 AI 实习生，还是 Cursor 3 的集群编程模式，2026年4月的核心主题只有一个：AI 智能体正在从受控演示环境，真正走入真实系统并自主决策。这不是渐进演化，是质变。
+        </p>
+      </div>
+      <div class="insight-item news-card insight-card" style="background:var(--card2);border-left:none;">
+        <div class="insight-num">02</div>
+        <div class="insight-icon">⚖️</div>
+        <div class="insight-title">竞争焦点从参数规模转向效率</div>
+        <p class="insight-text">
+          Google Gemma 4 用 31B 参数对标 600B+ 模型 85% 性能，阿里 Qwen3.6-Plus 凭借智能体编程能力跻身全球 Top 2 编程榜——这宣告了新一轮竞争逻辑：单位算力的智能密度，而非绝对参数规模，成为新的竞争核心。
+        </p>
+      </div>
+      <div class="insight-item news-card insight-card" style="background:var(--card2);border-left:none;">
+        <div class="insight-num">03</div>
+        <div class="insight-icon">🌏</div>
+        <div class="insight-title">中美 AI 生态加速分叉</div>
+        <p class="insight-text">
+          DeepSeek V4 深度适配华为昇腾、国产 AI 调用量连续三周超越美国、国内监管法规率先落地——中国 AI 生态正以"自主算力 + 本土应用 + 本地监管"三位一体的路径，加速构建独立于英伟达 CUDA 生态的完整产业链。
+        </p>
+      </div>
+      <div class="insight-item news-card insight-card" style="background:var(--card2);border-left:none;">
+        <div class="insight-num">04</div>
+        <div class="insight-icon">🔒</div>
+        <div class="insight-title">安全风险从内容层升至系统层</div>
+        <p class="insight-text">
+          Claude Agent 自主利用零日漏洞，多模型在威胁感知下相互保护，AI 代码泄露……本周的安全事件共同指向一个新阶段：AI 安全风险已不只是"生成有害内容"，而是"系统级自主行为不可控"。治理框架必须同步升级。
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>📬 <strong>AI 大模型日报</strong> · 2026年4月6日</p>
+  <p style="margin-top:8px;">作者：<strong>fly的AI学习</strong> | 公众号：<strong>AI日课</strong></p>
+  <p style="margin-top:8px;">
+    数据来源：
+    <a href="https://jiqizhixin.com" target="_blank" rel="noopener">机器之心</a>、
+    <a href="https://duoke360.com" target="_blank" rel="noopener">多课网</a>、
+    <a href="https://llm-stats.com" target="_blank" rel="noopener">LLM Stats</a>、
+    <a href="https://www.humai.blog" target="_blank" rel="noopener">humAI.blog</a>、
+    <a href="https://news.qq.com" target="_blank" rel="noopener">腾讯新闻</a>、
+    <a href="https://www.cnblogs.com" target="_blank" rel="noopener">博客园</a>、
+    <a href="https://releasebot.io" target="_blank" rel="noopener">Releasebot</a>
+  </p>
+  <p style="margin-top:12px;opacity:0.5;">
+    🌐 在线阅读：<a href="https://Flystray.github.io/ai-news/reports/2026-04-06-with-links.html" target="_blank" rel="noopener">Flystray.github.io/ai-news/reports/2026-04-06-with-links.html</a>
+  </p>
+</footer>
+
+</body>
+</html>

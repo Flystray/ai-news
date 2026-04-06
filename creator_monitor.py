@@ -323,14 +323,19 @@ def render_updates_page(all_updates, date_str, lang="cn"):
     lang='cn' 生成中文版（已翻译内容）
     lang='en' 生成英文原版
     """
-    # 只保留今天的更新（避免首次运行时历史内容太多）
-    today = datetime.now().strftime("%Y-%m-%d")
+    # 只保留近3天的更新（避免首次运行时历史内容太多；宽限时区差异）
+    today = datetime.now()
     today_updates = []
     for u in all_updates:
         pub = u.get("published", "")
-        if pub and pub[:10] == today:
-            today_updates.append(u)
-        elif not pub:
+        if pub:
+            try:
+                pub_date = datetime.fromisoformat(pub[:10])
+                if (today - pub_date).days <= 3:
+                    today_updates.append(u)
+            except Exception:
+                today_updates.append(u)
+        else:
             today_updates.append(u)
 
     display_updates = today_updates

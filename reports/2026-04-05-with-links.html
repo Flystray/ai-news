@@ -92,6 +92,43 @@
             font-weight: 700; font-size: 14px; flex-shrink: 0;
         }
         .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        
+        /* 创作者部分样式 */
+        .creator-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; padding: 20px; margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        .creator-card:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-2px);
+        }
+        .creator-header {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
+        .platform-tag {
+            font-size: 11px; padding: 3px 10px; border-radius: 10px; font-weight: 600;
+        }
+        .platform-tag.twitter { background: #1da1f2; color: #fff; }
+        .platform-tag.youtube { background: #ff0000; color: #fff; }
+        .creator-name { color: #888; font-size: 13px; }
+        .creator-handle { color: #555; font-size: 12px; }
+        .creator-content-en {
+            color: #d0d0ff; font-size: 14px; line-height: 1.7; margin-bottom: 10px;
+            background: rgba(102,126,234,0.08); padding: 12px 16px; border-radius: 10px;
+        }
+        .creator-content-zh {
+            color: #aaa; font-size: 13px; line-height: 1.7; margin-bottom: 12px;
+            padding-left: 8px; border-left: 2px solid #667eea;
+        }
+        .creator-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 12px; color: #555;
+        }
+        .creator-link { color: #667eea; text-decoration: none; }
+        .creator-link:hover { text-decoration: underline; }
+        
         .footer {
             text-align: center; padding: 40px 0; color: #555; font-size: 13px;
             border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px;
@@ -229,9 +266,86 @@
             </div>
         </div>
 
+        <!-- 创作者动态 -->
+        <div class="section">
+            <h2 class="section-title">👥 创作者动态</h2>
+            <p style="color:#666;font-size:14px;margin-bottom:20px;">优质UP主 · YouTube频道 · X大V 最新内容追踪（原文+中文翻译）</p>
+            
+            <div class="creator-card">
+                <div class="creator-header">
+                    <span class="platform-tag twitter">🐦 Twitter</span>
+                    <span class="creator-name">Sam Altman</span>
+                    <span class="creator-handle">@sama</span>
+                </div>
+                <div class="creator-content-en">RT by @sama: TBPN has been acquired by OpenAI! The show is staying the same and we'll continue to go live at 11am pacific every weekday. This is a full circle moment for me as I've worked with @sama for well over a decade...</div>
+                <div class="creator-content-zh">Sam Altman 转推：TBPN 被 OpenAI 收购了！节目形式保持不变，工作日每天太平洋时间上午11点继续直播。对我来说这是一个"回到原点"的时刻，因为我和 Sam 共事已经超过十年了...</div>
+                <div class="creator-footer">
+                    <span>📅 4月2日</span>
+                    <a href="https://nitter.net/johncoogan/status/2039756493621542915" class="creator-link" target="_blank">查看原推 →</a>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-header">
+                    <span class="platform-tag twitter">🐦 Twitter</span>
+                    <span class="creator-name">Sam Altman</span>
+                    <span class="creator-handle">@sama</span>
+                </div>
+                <div class="creator-content-en">TBPN is my favorite tech show. We want them to keep that going and for them to do what they do so well. I don't expect them to go any easier on us, am sure I'll do my part to help enable that with occasional stupid decisions.</div>
+                <div class="creator-content-zh">TBPN 是我最喜欢的科技节目。我们希望他们保持现状，继续做他们最擅长的事。我不指望他们会对我们手软，但我确信我会偶尔做出一些愚蠢的决定来"帮助"他们。</div>
+                <div class="creator-footer">
+                    <span>📅 4月2日</span>
+                    <a href="https://nitter.net/sama/status/2039773740586918137" class="creator-link" target="_blank">查看原推 →</a>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-header">
+                    <span class="platform-tag twitter">🐦 Twitter</span>
+                    <span class="creator-name">Sam Altman</span>
+                    <span class="creator-handle">@sama</span>
+                </div>
+                <div class="creator-content-en">The coolest meeting I had this week was with Paul, who used ChatGPT and other LLMs to create an mRNA vaccine protocol to save his dog Rosie. It is amazing story. "The chat bots empowered me as an individual to act with the power of a research institute..."</div>
+                <div class="creator-content-zh">这周最酷的会议是和 Paul 一起，他用 ChatGPT 等大模型创建了一个 mRNA 疫苗方案来拯救他的狗 Rosie。"AI 聊天机器人让我个人拥有了堪比研究机构的能力..."</div>
+                <div class="creator-footer">
+                    <span>📅 3月27日</span>
+                    <a href="https://nitter.net/sama/status/2037396826060673188" class="creator-link" target="_blank">查看原推 →</a>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-header">
+                    <span class="platform-tag twitter">🐦 Twitter</span>
+                    <span class="creator-name">Sam Altman</span>
+                    <span class="creator-handle">@sama</span>
+                </div>
+                <div class="creator-content-en">The first steel beams went up this week at our Michigan Stargate site with Oracle and Related Digital</div>
+                <div class="creator-content-zh">本周，我们在密歇根的 Stargate 数据中心与 Oracle 和 Related Digital 合作，竖起了第一批钢梁。</div>
+                <div class="creator-footer">
+                    <span>📅 3月27日</span>
+                    <a href="https://nitter.net/sama/status/2037610000122839116" class="creator-link" target="_blank">查看原推 →</a>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-header">
+                    <span class="platform-tag twitter">🐦 Twitter</span>
+                    <span class="creator-name">Sam Altman</span>
+                    <span class="creator-handle">@sama</span>
+                </div>
+                <div class="creator-content-en">The new OpenAI nonprofit just announced that it aims to spend $1B in its first year and will be led by two superb humans -- @JacobTref and @woj_zaremba. Simply put, this initiative has huge potential to do a whole lot of good.</div>
+                <div class="creator-content-zh">OpenAI 新成立的非营利组织刚刚宣布，计划在第一年投入10亿美元，由两位杰出的人才领导。简而言之，这个项目有巨大潜力去做很多好事。</div>
+                <div class="creator-footer">
+                    <span>📅 3月24日</span>
+                    <a href="https://nitter.net/nanransohoff/status/2036490524895617185" class="creator-link" target="_blank">查看原推 →</a>
+                </div>
+            </div>
+
+        </div>
+
         <div class="footer">
-            <p>📡 数据来源：量子位 · 机器之心 · 爱窝啦AI日报 · 新浪AI热点 · 知乎 · 腾讯新闻 · CSDN</p>
-            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 生成时间：2026-04-05 12:49</p>
+            <p>📡 新闻来源：量子位 · 机器之心 · 爱窝啦AI日报 · 新浪AI热点 · 知乎 · 腾讯新闻 · CSDN</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 生成时间：2026-04-05 17:40</p>
             <p style="margin-top:10px;">👤 作者：fly的AI学习 · 每日更新 AI 大模型最新动态</p>
         </div>
     </div>
