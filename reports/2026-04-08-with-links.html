@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI大模型日报 · 2026年4月8日</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card: #1a1d2e;
+      --card2: #20253a;
+      --border: #2e3452;
+      --accent1: #6366f1;
+      --accent2: #22d3ee;
+      --accent3: #f59e0b;
+      --accent4: #10b981;
+      --red: #f87171;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --tag-bg: #2e3452;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 0;
+    }
+    /* Header */
+    .hero {
+      background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 40%, #1a1d2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 2.4em;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 1.6em;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    /* Layout */
+    .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    /* Section titles */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0 20px;
+    }
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-hot { background: linear-gradient(135deg, #f59e0b33, #f87171); }
+    .icon-industry { background: linear-gradient(135deg, #6366f133, var(--accent1)); }
+    .icon-insight { background: linear-gradient(135deg, #10b98133, var(--accent4)); }
+
+    .section-title {
+      font-size: 1.25em;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .title-hot { color: var(--accent3); }
+    .title-industry { color: var(--accent1); }
+    .title-insight { color: var(--accent4); }
+    .section-count {
+      background: var(--tag-bg);
+      color: var(--muted);
+      font-size: 12px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-left: auto;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: var(--accent1);
+      transform: translateY(-2px);
+    }
+    .card-hot { border-left: 3px solid var(--accent3); }
+    .card-industry { border-left: 3px solid var(--accent1); }
+    .card-insight { border-left: 3px solid var(--accent4); }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .card-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 3px;
+    }
+    .badge-openai { background: #1e3a5f; color: #60a5fa; }
+    .badge-anthropic { background: #2a1f3d; color: #c4b5fd; }
+    .badge-google { background: #1a3a2e; color: #6ee7b7; }
+    .badge-deepseek { background: #2a2518; color: #fcd34d; }
+    .badge-zhipu { background: #1e2a3a; color: #7dd3fc; }
+    .badge-bytedance { background: #2a1e1e; color: #fca5a5; }
+    .badge-baidu { background: #1e2a1e; color: #86efac; }
+    .badge-policy { background: #1e2a2a; color: #67e8f9; }
+    .badge-meta { background: #1e2534; color: #93c5fd; }
+
+    .card-title {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: #f1f5f9;
+      line-height: 1.4;
+    }
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .card-title a:hover { color: var(--accent2); text-decoration: underline; }
+
+    .card-body { color: #cbd5e1; font-size: 14px; line-height: 1.75; }
+    .card-body p { margin-bottom: 8px; }
+    .card-body strong { color: #f1f5f9; }
+
+    .card-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      color: var(--muted);
+    }
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--accent2);
+      text-decoration: none;
+      padding: 3px 10px;
+      border: 1px solid rgba(34,211,238,0.3);
+      border-radius: 20px;
+      transition: background 0.2s;
+    }
+    .source-link:hover { background: rgba(34,211,238,0.1); }
+
+    /* Insight cards */
+    .insight-card {
+      background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+    .insight-card:hover { border-color: var(--accent4); }
+    .insight-num {
+      display: inline-block;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent4), var(--accent2));
+      color: #0f1117;
+      font-weight: 900;
+      font-size: 13px;
+      text-align: center;
+      line-height: 28px;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .insight-title {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--accent4);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+    .insight-body { color: #cbd5e1; font-size: 14px; line-height: 1.75; }
+
+    /* Divider */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.7em; }
+      .hero-stats { gap: 20px; }
+      .card { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">AI Daily Report</div>
+  <h1>AI 大模型日报</h1>
+  <div class="hero-sub">2026 年 4 月 8 日（周三）&nbsp;·&nbsp; fly的AI学习 出品</div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">今日重磅</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">行业动态</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">核心洞察</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 今日重磅 ===== -->
+  <div class="section-header">
+    <div class="section-icon icon-hot">🔥</div>
+    <div class="section-title title-hot">今日重磅</div>
+    <div class="section-count">3 条</div>
+  </div>
+
+  <!-- 重磅1: GPT-6 -->
+  <div class="card card-hot">
+    <div class="card-header">
+      <span class="card-badge badge-openai">OpenAI</span>
+      <div class="card-title">
+        <a href="https://www.qbitai.com/2026/04/396366.html" target="_blank" rel="noopener">
+          GPT-6「土豆」预计 4 月 14 日发布，性能暴涨 40%，200 万 Token 上下文引爆全球
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>据X平台知名爆料人@iruletheworldmo（草莓哥）透露，OpenAI最新旗舰模型GPT-6——内部代号"<strong>Spud（土豆）</strong>"——已于2026年3月17日完成预训练，安全调试亦告收尾，随时可以上线。目前最可信的发布日期锁定在<strong>4月14日</strong>，消息得到量子位、搜狐等多家科技媒体交叉验证。</p>
+      <p><strong>核心亮点一览：</strong><br>
+      ① 代码、推理、智能体任务比GPT-5.4强约<strong>40%</strong>；<br>
+      ② 原生支持文本、音频、图像、视频的统一多模态架构；<br>
+      ③ 上下文窗口高达<strong>200万Token</strong>，是GPT-5.4与Claude Opus 4.6的两倍；<br>
+      ④ 定价保持与GPT-5.4相近（输入$2.5/百万Token，输出$12/百万Token）；<br>
+      ⑤ ChatGPT、Codex、Atlas浏览器三合一，打造"桌面级超级应用"。</p>
+      <p>值得关注的是，OpenAI自2025年12月进入"编程红色警报"状态，砍掉Sora等非核心项目，将全部算力押注GPT-6，目标是追回在编程领域被Anthropic超越的差距。GPT-6一旦发布，将成为<strong>AI史上最重要的模型版本之一</strong>。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">🧠 AGI加速</span>
+      <span class="tag">🚀 200万Token</span>
+      <a class="source-link" href="https://www.qbitai.com/2026/04/396366.html" target="_blank" rel="noopener">↗ 量子位原文</a>
+      <a class="source-link" href="https://news.qq.com/rain/a/20260406A02IY600" target="_blank" rel="noopener">↗ 腾讯新闻</a>
+    </div>
+  </div>
+
+  <!-- 重磅2: Anthropic 300亿 -->
+  <div class="card card-hot">
+    <div class="card-header">
+      <span class="card-badge badge-anthropic">Anthropic</span>
+      <div class="card-title">
+        <a href="https://www.ithome.com/0/936/325.htm" target="_blank" rel="noopener">
+          Anthropic 年化收入突破 300 亿美元，首次超越 OpenAI，并与谷歌博通签署算力巨约
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Anthropic于4月7日通过官方博客宣布，公司年化收入（ARR）已正式突破<strong>300亿美元</strong>（约人民币2067亿元），较2025年末的90亿美元增长逾三倍，<strong>首次超越OpenAI约250亿美元的年化收入</strong>，成为AI大模型商业化赛道的新晋冠军。</p>
+      <p>与此同时，Anthropic官宣了一笔意义深远的算力合作：与<strong>谷歌、博通</strong>达成协议，三方将合作打造总功率达<strong>3.5吉瓦</strong>的超大规模TPU集群，预计<strong>2027年</strong>起供Anthropic使用，合同锁定期长达至<strong>2031年</strong>。这意味着Anthropic正在为下一代Claude模型储备足以对抗英伟达主导权的独立算力体系。</p>
+      <p>Claude企业客户年消费超百万美元者已逾<strong>1000家</strong>，自2026年2月以来数量翻倍，充分证明Claude系列在生产力和开发者工具市场的强劲渗透力。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">💰 300亿美元ARR</span>
+      <span class="tag">⚡ 3.5GW算力</span>
+      <a class="source-link" href="https://www.ithome.com/0/936/325.htm" target="_blank" rel="noopener">↗ IT之家原文</a>
+      <a class="source-link" href="https://www.thepaper.cn/newsDetail_forward_32916094" target="_blank" rel="noopener">↗ 澎湃新闻</a>
+    </div>
+  </div>
+
+  <!-- 重磅3: DeepSeek V4 -->
+  <div class="card card-hot">
+    <div class="card-header">
+      <span class="card-badge badge-deepseek">DeepSeek</span>
+      <div class="card-title">
+        <a href="https://news.qq.com/rain/a/20260403A07TZV00" target="_blank" rel="noopener">
+          DeepSeek V4 进入灰度发布阶段：1 万亿参数、全华为昇腾训练，定价仅 $0.30/百万 Token
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>经历两次延期的DeepSeek V4终于踏入冲刺阶段——据悉本周已开始灰度发布测试。这是迄今<strong>参数规模最大的开源大模型</strong>：总参数约<strong>1万亿</strong>，采用MoE架构，每次推理激活约370亿参数；支持<strong>100万Token</strong>上下文，原生多模态（文本/图像/视频）。</p>
+      <p>更具历史意义的是，DeepSeek V4是<strong>首个完全在非英伟达硬件上训练的前沿模型</strong>——全程使用华为<strong>昇腾950PR</strong>芯片完成训练，训练总成本约<strong>520万美元</strong>，以极低成本再次挑战硅谷范式。</p>
+      <p><strong>关键能力指标：</strong>HumanEval 87.6%、SWE-Bench Verified 83.7%（均声称超越GPT-5与Claude Opus）；搭载自研<strong>Engram条件记忆机制</strong>（LTM），支持近O(1)复杂度知识检索和永久对话历史；Design2Code准确率达<strong>92%</strong>。定价仅<strong>$0.30/百万Token</strong>，预计许可证为MIT/Apache 2.0完全开源。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">🤖 1T参数</span>
+      <span class="tag">🇨🇳 华为昇腾</span>
+      <span class="tag">🧠 永久记忆</span>
+      <a class="source-link" href="https://news.qq.com/rain/a/20260403A07TZV00" target="_blank" rel="noopener">↗ 腾讯新闻</a>
+      <a class="source-link" href="https://findskill.ai/blog/deepseek-v4-release-date-specs/" target="_blank" rel="noopener">↗ FindSkill.ai</a>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== 行业动态 ===== -->
+  <div class="section-header">
+    <div class="section-icon icon-industry">📡</div>
+    <div class="section-title title-industry">行业动态</div>
+    <div class="section-count">6 条</div>
+  </div>
+
+  <!-- 动态1: 智谱GLM-5.1 -->
+  <div class="card card-industry">
+    <div class="card-header">
+      <span class="card-badge badge-zhipu">智谱AI</span>
+      <div class="card-title">
+        <a href="https://news.qq.com/rain/a/20260402A04V7300" target="_blank" rel="noopener">
+          智谱 GLM-5.1 登顶 Arena 开源榜，编程能力达 Claude Opus 4.6 的 94.6%，定价仅后者 1/15
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>国产开源大模型迎来新标杆。智谱AI于4月8日凌晨宣布GLM-5.1在LMArena人类偏好评测中以<strong>1451分</strong>登顶开源模型榜首，同时在Artificial Analysis智能指数中位列<strong>65个模型第一梯队</strong>。</p>
+      <p>编程能力上，GLM-5.1的SWE-bench Verified得分<strong>77.8%</strong>，仅比Claude Opus 4.6（80.8%）低3个百分点，AICodeKing综合编程得分85.0分，甚至超过Opus+Claude Code组合（83.6分）。最关键的是，其API定价为输入<strong>$1/百万Token、输出$3.2/百万Token</strong>，仅为Opus的1/15至1/23，被社区誉为"用智力换性价比"的开源之光。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">🏆 开源榜首</span>
+      <span class="tag">💡 1/15价格</span>
+      <a class="source-link" href="https://cloud.tencent.com.cn/developer/article/2649485" target="_blank" rel="noopener">↗ 腾讯云开发者</a>
+      <a class="source-link" href="https://wavespeed.ai/blog/zh-cn/posts/glm-5-1-vs-claude-gpt-gemini-deepseek-llm-comparison/" target="_blank" rel="noopener">↗ WaveSpeed对比</a>
+    </div>
+  </div>
+
+  <!-- 动态2: 豆包120万亿Token -->
+  <div class="card card-industry">
+    <div class="card-header">
+      <span class="card-badge badge-bytedance">字节跳动</span>
+      <div class="card-title">
+        <a href="https://www.nbd.com.cn/articles/2026-04-02/4323121.html" target="_blank" rel="noopener">
+          豆包大模型日均 Token 使用量突破 120 万亿，两年增长 1000 倍；Seedance 2.0 视频模型开放企业公测
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>字节跳动旗下火山引擎总裁谭待在"AI创新巡展·武汉站"上披露：截至2026年3月，豆包大模型日均Token使用量已突破<strong>120万亿</strong>，相比2025年12月的63万亿实现翻倍增长，较2024年5月发布时增幅高达<strong>1000倍</strong>。</p>
+      <p>如此体量的Token消耗，意味着豆包正以工业级规模渗透C端与B端。与此同时，字节旗下视频生成模型<strong>Seedance 2.0</strong>正式面向企业用户开放公测，剑指视频生产力市场，与可灵、即梦等国内竞品正面交锋。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">📊 120万亿Token/日</span>
+      <span class="tag">🎬 视频生成</span>
+      <a class="source-link" href="https://www.nbd.com.cn/articles/2026-04-02/4323121.html" target="_blank" rel="noopener">↗ 每日经济新闻</a>
+    </div>
+  </div>
+
+  <!-- 动态3: 百度文心企业版 -->
+  <div class="card card-industry">
+    <div class="card-header">
+      <span class="card-badge badge-baidu">百度</span>
+      <div class="card-title">
+        <a href="https://www.cnblogs.com/yumingwen/p/19826978" target="_blank" rel="noopener">
+          百度发布文心千问 4.1 企业版：百万 Token 上下文、信创三级认证、金融医疗制造全面落地
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>百度于4月6日发布<strong>文心千问4.1企业版</strong>，专为政企数字化转型场景打磨。核心能力：①<strong>100万Token</strong>超长上下文，支持长文档深度分析；②企业知识库无缝融合，实现专业领域精准回答；③多模态联合处理文档、表格、图像；④获得<strong>国家信息安全等级保护三级认证</strong>，支持数据本地化部署。</p>
+      <p>该版本已在<strong>金融、制造、医疗</strong>等多个行业实现规模化落地，是百度在企业级AI市场的重要布局——与国际竞品Claude for Enterprise、ChatGPT Enterprise形成正面竞争，同时借助信创认证牢守政务市场护城河。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">🏢 企业级AI</span>
+      <span class="tag">🔒 信创三级</span>
+      <a class="source-link" href="https://www.cnblogs.com/yumingwen/p/19826978" target="_blank" rel="noopener">↗ 博客园报道</a>
+    </div>
+  </div>
+
+  <!-- 动态4: Gemma4 -->
+  <div class="card card-industry">
+    <div class="card-header">
+      <span class="card-badge badge-google">Google</span>
+      <div class="card-title">
+        <a href="https://www.36kr.com/p/3750284639552008" target="_blank" rel="noopener">
+          Google Gemma 4 正式开源：4B 参数逼近百倍级竞品，手机即可运行，Apache 2.0 完全免费商用
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Google DeepMind于4月2日正式发布<strong>Gemma 4</strong>开源模型家族，包含四个版本：E2B（20亿激活参数）、E4B（40亿激活参数）、26B-A4B（MoE架构）和31B（密集架构）。其中<strong>31B版本</strong>在多项基准测试中击败参数量大20倍以上的竞品，E4B在数学能力上更逼近<strong>90%</strong>的顶级闭源模型水平。</p>
+      <p>最受开发者关注的是，E2B和E4B版本可直接在<strong>手机和笔记本</strong>上运行，真正实现端侧AI；全系列采用<strong>Apache 2.0</strong>许可证，商用零限制。这对开源AI生态是一剂强心针，也给Llama 4和GLM-5.1等竞品带来了新的压力。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">📱 端侧AI</span>
+      <span class="tag">✅ 商用免费</span>
+      <a class="source-link" href="https://www.36kr.com/p/3750284639552008" target="_blank" rel="noopener">↗ 36氪原文</a>
+      <a class="source-link" href="https://news.qq.com/rain/a/20260403A03K6N00" target="_blank" rel="noopener">↗ 腾讯新闻</a>
+    </div>
+  </div>
+
+  <!-- 动态5: Anthropic Claude Mythos -->
+  <div class="card card-industry">
+    <div class="card-header">
+      <span class="card-badge badge-anthropic">Anthropic</span>
+      <div class="card-title">
+        <a href="https://news.daheiai.com/" target="_blank" rel="noopener">
+          Anthropic 推出 Claude Mythos Preview，专注超长推理链与高难度科学任务
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Anthropic在宣布营收突破后，同日低调发布了<strong>Claude Mythos Preview</strong>——一款专为超复杂科学和数学推理设计的实验模型。与现有Claude系列不同，Mythos采用了全新的"深度推理架构"，能够在单次回复中展开<strong>数万步骤</strong>的推理链，被视为Anthropic对标OpenAI o3和DeepSeek-R2的直接回击。</p>
+      <p>同步推出的还有新版AI安全计划，在Anthropic年化收入首超OpenAI的历史性时刻，这一举动意在向监管机构和投资者传递"<strong>安全与商业同步推进</strong>"的信号，巩固其在负责任AI开发方面的品牌护城河。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">🔬 超长推理链</span>
+      <span class="tag">🛡️ AI安全</span>
+      <a class="source-link" href="https://news.daheiai.com/" target="_blank" rel="noopener">↗ 大黑AI速报</a>
+    </div>
+  </div>
+
+  <!-- 动态6: 中国AI安全标准 -->
+  <div class="card card-industry">
+    <div class="card-header">
+      <span class="card-badge badge-policy">政策监管</span>
+      <div class="card-title">
+        <a href="http://www2.xinhuanet.com/tech/20260407/e5345fd98bcf4dc99fab49f2ec8eb1d5/c.html" target="_blank" rel="noopener">
+          我国 AI 安全标准工作组（WG9）正式成立，行业标准体系加速构建，市场规模将达 1500 亿元
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>新华社4月7日报道，全国网络安全标准化技术委员会正式设立<strong>人工智能安全标准工作组（WG9）</strong>，这标志着我国AI安全标准体系建设从探索期进入<strong>系统化推进阶段</strong>。工作组将优先推进《AI安全能力成熟度评估方法》《AI应用安全分类分级方法》《涉及未成年人AI应用安全指南》等核心标准。</p>
+      <p>背景是AI安全事件密集发生：Anthropic Claude Code源码泄露、OpenClaw存在155个漏洞（含11个超危漏洞），为监管落地提供了现实依据。专家预测国内网络安全市场2026年可突破<strong>1500亿元</strong>，2030年达<strong>3000亿元</strong>，"AI安全"正从可选配转变为<strong>行业必标配</strong>。</p>
+    </div>
+    <div class="card-meta">
+      <span class="tag">📋 国家标准</span>
+      <span class="tag">🔐 AI治理</span>
+      <a class="source-link" href="http://www2.xinhuanet.com/tech/20260407/e5345fd98bcf4dc99fab49f2ec8eb1d5/c.html" target="_blank" rel="noopener">↗ 新华网原文</a>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== 核心洞察 ===== -->
+  <div class="section-header">
+    <div class="section-icon icon-insight">💡</div>
+    <div class="section-title title-insight">核心洞察</div>
+    <div class="section-count">4 条</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-title">
+      <span class="insight-num">1</span>
+      GPT-6 与 DeepSeek V4 的"碰撞周"：AI 竞争进入超级密集发布期
+    </div>
+    <div class="insight-body">
+      OpenAI GPT-6计划4月14日上线，DeepSeek V4已进入灰度发布，两大分量最重的模型在同一时间窗口竞相亮相，这在AI发展史上极为罕见。更值得注意的是，两者的对决不仅是性能的较量，更是"美系闭源大厂 vs 中国开源力量"的路线之争——GPT-6背靠英伟达算力，DeepSeek V4全程跑在华为昇腾上，预示着AI算力的去英伟达化进程正在以真实生产模型为载体加速演进。开发者、企业和投资者将在未来两周内迎来自2025年8月GPT-5发布以来最密集的技术迭代冲击。
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-title">
+      <span class="insight-num">2</span>
+      Anthropic 反超 OpenAI：商业化竞争格局悄然逆转
+    </div>
+    <div class="insight-body">
+      Anthropic年化收入300亿美元超越OpenAI的250亿美元，背后逻辑耐人寻味：Claude系列并未依靠消费级爆款，而是深度绑定企业客户——1000家年消费超百万美元的大客户构成稳固的收入基本盘。这与OpenAI高度依赖ChatGPT个人用户付费的模式形成鲜明对比。同时，Anthropic与谷歌博通的算力长约，标志着顶级AI公司已开始脱离对英伟达的路径依赖，自建垂直算力生态。这一战略布局一旦成形，将极大降低Anthropic的边际成本，进一步强化商业护城河。
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-title">
+      <span class="insight-num">3</span>
+      开源大模型迎来"成熟拐点"：GLM-5.1 与 Gemma 4 合围闭源市场
+    </div>
+    <div class="insight-body">
+      GLM-5.1在编程领域以Claude Opus 4.6 94.6%的性能仅收取1/15的价格，Gemma 4的E4B版本实现手机端运行、数学能力逼近顶级闭源模型——这两个案例共同指向一个信号：<strong>开源模型正在突破"性能天花板"</strong>，在特定场景下已不输顶级闭源竞品。当开源模型的性能差距收窄至5%以内，而价格差距仍维持10倍乃至15倍，大量中小企业和独立开发者的选型决策将加速向开源倾斜，这对Anthropic和OpenAI的API商业模式构成长期隐性威胁。
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-title">
+      <span class="insight-num">4</span>
+      AI 安全监管从"姿态"走向"标准"：国内合规成本或将上升
+    </div>
+    <div class="insight-body">
+      WG9工作组的成立意味着中国AI安全监管正在完成从政策宣示到技术标准落地的关键一跳。一旦《AI应用安全分类分级方法》等标准正式颁布，凡涉及高风险场景的AI产品将面临强制安全认证要求，合规成本将显著上升。这对头部大厂影响有限（百度已率先拿到信创三级认证），但对中小AI创业公司来说是一道不可忽视的门槛。此外，Claude Code源码泄露与OpenClaw漏洞事件被官方援引为立法依据，也预示着未来国内对跨境AI工具的审查力度将持续加强。
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>📅 2026年4月8日 &nbsp;·&nbsp; 数据来源：量子位、IT之家、腾讯新闻、新华网、大黑AI速报、36氪等</p>
+  <p style="margin-top:8px;">
+    🌐 在线阅读：<a href="https://Flystray.github.io/ai-news/reports/2026-04-08-with-links.html" target="_blank" rel="noopener">GitHub Pages</a>
+    &nbsp;·&nbsp; 
+    ✍️ 出品：<a href="#" target="_blank">fly的AI学习</a>（公众号"AI日课"）
+  </p>
+</div>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>2026-04-07 · Creator Updates</title>
+<title>2026-04-08 · Creator Updates</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0;padding:0;box-sizing:border-box; }
@@ -40,12 +40,12 @@ body {
 <body>
 <div class="container">
     <div class="header">
-        <div class="date-tag">📅 2026-04-07</div>
+        <div class="date-tag">📅 2026-04-08</div>
         <h1>👥 Creator Updates</h1>
         <p class="subtitle">Top AI YouTube Channels · X (Twitter) · B站 Creators</p>
     </div>
     <div class="update-count">
-        <span class="count-badge">🔥 今日共 40 条更新</span>
+        <span class="count-badge">🔥 今日共 42 条更新</span>
     </div>
     <div class="grid">
         
@@ -58,12 +58,20 @@ body {
                     <span style="color:#555;font-size:11px;">@sama</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @sama: Proud to have been part of this. We outline policy ideas for the transition to superintelligence, to build an open economy where everyone benefits and a society that is resilient to the risks. Progress is fast, and we must navigate these issues urgently. https://openai.com/index/industrial-policy-for-the-intelligence-age/</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">To celebrate 3 million weekly codex users, we are resetting usage limits.
+
+We will do this every million users up to 10 million.
+
+Happy building!</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Proud to have been part of this. We outline policy ideas for the transition to superintelligence, to build an open economy where everyone benefits and a society that is resilient to the risks. Progress is fast, and we must navigate these issues urgently. openai.com/index/industrial-…</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">To celebrate 3 million weekly codex users, we are resetting usage limits.
+
+We will do this every million users up to 10 million.
+
+Happy building!</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/AdrienLE/status/2041179073167454689#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/sama/status/2041658719839383945#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -76,74 +84,12 @@ body {
                     <span style="color:#555;font-size:11px;">@ylecun</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: 🚨SHOCKING: Apple just proved that AI models cannot do math. Not advanced math. Grade school math. The kind a 10-year-old solves.
-
-And the way they proved it is devastating.
-
-Apple researchers took the most popular math benchmark in AI — GSM8K, a set of grade-school math problems — and made one change. They swapped the numbers. Same problem. Same logic. Same steps. Different numbers.
-
-Every model's performance dropped. Every single one. 25 state-of-the-art models tested.
-
-But that wasn't the real experiment.
-
-The real experiment broke everything.
-
-They added one sentence to a math problem. One sentence that is completely irrelevant to the answer. It has nothing to do with the math. A human would read it and ignore it instantly.
-
-Here's the actual example from the paper:
-
-"Oliver picks 44 kiwis on Friday. Then he picks 58 kiwis on Saturday. On Sunday, he picks double the number of kiwis he did on Friday, but five of them were a bit smaller than average. How many kiwis does Oliver have?"
-
-The correct answer is 190. The size of the kiwis has nothing to do with the count.
-
-A 10-year-old would ignore "five of them were a bit smaller" because it's obviously irrelevant. It doesn't change how many kiwis there are.
-
-But o1-mini, OpenAI's reasoning model, subtracted 5. It got 185.
-
-Llama did the same thing. Subtracted 5. Got 185.
-
-They didn't reason through the problem. They saw the number 5, saw a sentence that sounded like it mattered, and blindly turned it into a subtraction.
-
-The models do not understand what subtraction means. They see a pattern that looks like subtraction and apply it. That is all.
-
-Apple tested this across all models. They call the dataset "GSM-NoOp" — as in, the added clause is a no-operation. It does nothing. It changes nothing.
-
-The results are catastrophic.
-
-Phi-3-mini dropped over 65%. More than half of its "math ability" vanished from one irrelevant sentence.
-
-GPT-4o dropped from 94.9% to 63.1%.
-
-o1-mini dropped from 94.5% to 66.0%.
-
-o1-preview, OpenAI's most advanced reasoning model at the time, dropped from 92.7% to 77.4%.
-
-Even giving the models 8 examples of the exact same question beforehand, with the correct solution shown each time, barely helped. The models still fell for the irrelevant clause.
-
-This means it's not a prompting problem. It's not a context problem. It's structural.
-
-The Apple researchers also found that models convert words into math operations without understanding what those words mean. They see the word "discount" and multiply. They see a number near the word "smaller" and subtract. Regardless of whether it makes any sense.
-
-The paper's exact words: "current LLMs are not capable of genuine logical reasoning; instead, they attempt to replicate the reasoning steps observed in their training data."
-
-And: "LLMs likely perform a form of probabilistic pattern-matching and searching to find closest seen data during training without proper understanding of concepts."
-
-They also tested what happens when you increase the number of steps in a problem. Performance didn't just decrease. The rate of decrease accelerated. Adding two extra clauses to a problem dropped Gemma2-9b from 84.4% to 41.8%. Phi-3.5-mini from 87.6% to 44.8%. The more thinking required, the more the models collapse.
-
-A real reasoner would slow down and work through it. These models don't slow down. They pattern-match. And when the pattern becomes complex enough, they crash.
-
-This paper was published at ICLR 2025, one of the most prestigious AI conferences in the world.
-
-You are using AI to help you make financial decisions. To check legal documents. To solve problems at work. To help your children with homework. And Apple just proved that the AI is not thinking about any of it. It is pattern matching. And the moment something unexpected shows up in your question, it breaks. It does not tell you it broke. It just quietly gives you the wrong answer with full confidence.</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Estamos presenciando, en vivo y en directo, el colapso del imperio estadounidense. Trump pasará y vendrán los demócratas a intentar arreglar las cosas. Y algunas podrán recomponer. Pero ya nadie confiará en Estados Unidos sabiendo que cada cuatro años puede llegar a la Casa Blanca una cosa como la que hay ahora. Y he ahí, pues, donde radica el derrumbe de lo que sostiene todo imperio en el sistema-mundo EE.UU incluido: la confianza. Sin confianza no hay como establecer hegemonía, esto es, que los otros te sigan por convencimiento en tanto asumen que representas un bien. Eso no volverá para EE.UU. Y lo destruyó este populista de ultraderecha que ganó prometiendo hacer a Estados Unidos grande nuevo (mega sic). Tiempos de ver para creer.</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">🚨SHOCKING: Apple just proved that AI models cannot do math. Not advanced math. Grade school math. The kind a 10-year-old solves.
-
-And the way they proved it is devastating.
-
-Apple researchers took the most popular math benchmark in AI — GSM8K, a set of grade-school math problems — and made one chang...</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Estamos presenciando, en vivo y en directo, el colapso del imperio estadounidense. Trump pasará y vendrán los demócratas a intentar arreglar las cosas. Y algunas podrán recomponer. Pero ya nadie confiará en Estados Unidos sabiendo que cada cuatro años puede llegar a la Casa Blanca una cosa como la q...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/heynavtoor/status/2041243558833987600#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/elvin_calcano24/status/2041321968499093767#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -156,20 +102,34 @@ Apple researchers took the most popular math benchmark in AI — GSM8K, a set of
                     <span style="color:#555;font-size:11px;">@ylecun</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: He is insane. 
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Twitter used to inform the world.
+Now it misleads it.
 
-I am as MAGA as they get.  I was a Front Row Joe, 42 rallies, walked the halls of congress 3 times for Trump, became a state delegate, then a national delegate ALL TO SUPPORT TRUMP. 
+From breaking news → to broken trust.
+From real people → to bot armies.
+From conversation → to chaos.
 
-He has absolutely lost me, in fact I'm eyeing the 25th amendment for him because he's lost his damn mind.</h3>
+Elon didn’t “fix” Twitter.
+He flooded it with garbage, handed a megaphone to misinformation,
+and slapped a blue check on it! 
+
+There are only a few reliable sources on here now, the rest is misinformation trash 🗑️.</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">He is insane. 
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Twitter used to inform the world.
+Now it misleads it.
 
-I am as MAGA as they get.  I was a Front Row Joe, 42 rallies, walked the halls of congress 3 times for Trump, became a state delegate, then a national delegate ALL TO SUPPORT TRUMP. 
+From breaking news → to broken trust.
+From real people → to bot armies.
+From conversation → to chaos.
 
-He has absolutely lost me, in fact I'm eyeing the 25th amendment for him because he's lost his damn ...</p>
+Elon didn’t “fix” Twitter.
+He flooded it with garbage, handed a megaphone to misinformation,
+and slapped a blue check on it! 
+
+There are only ...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/JustTheTweets17/status/2041213037844050215#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <a href="https://nitter.net/guyfelicella/status/2041194756076966296#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -182,32 +142,26 @@ He has absolutely lost me, in fact I'm eyeing the 25th amendment for him because
                     <span style="color:#555;font-size:11px;">@ylecun</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Trump: "You know who else didn't help us? South Korea didn't help us. We've got 45,000 soldiers in South Korea to protect them from Kim Jong Un, who I get along with very well. He said very nice things about me. He used to call Joe Biden a mentally retarded person."</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Trump: "You know who else didn't help us? South Korea didn't help us. We've got 45,000 soldiers in South Korea to protect them from Kim Jong Un, who I get along with very well. He said very nice things about me. He used to call Joe Biden a mentally retarded person."
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: 🇺🇸🇭🇺La visite officielle de la honte.
 
-Video</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/atrupar/status/2041223186784665861#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Dear American citizens, whatever you wish more German citizens would have done in 1933, do that now.</h3>
+Alors que des preuves montrent que la Hongrie a livré des informations classifiée à la Russie, J.D Vance se rend à Budapest pour soutenir Orban avant les élections.
+
+Outre l'ingérence évidente juste avant les élections (mais on n'est plus à ça près), c'est un marqueur important de la politique étrangère des États-Unis vis-à-vis des Européens. C'est-à-dire qu'ils choisissent consciemment de soutenir celui même qui fait tout pour bloquer les institutions européennes.
+
+Il faut bien se rendre compte que dans un monde normal, les États-Unis auraient mis un maximum de pression sur la Hongrie et Orban pour le forcer à faire respecter le droit. Sans compter les révélations sur la collaboration avec la Russie.
+
+Il est donc officiel (même si on le savait déjà) que Washington soutient ceux qui affaiblissent l'Union Européenne. Washington valide, par cette visite, la collaboration entre la Hongrie et la Russie de Poutine. Il faut s'accrocher parce qu'à ce rythme, il ne restera plus grand chose à la fin du second mandat de Trump.
+
+Ronald Reagan doit se retourner dans sa tombe.</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Dear American citizens, whatever you wish more German citizens would have done in 1933, do that now.</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">🇺🇸🇭🇺La visite officielle de la honte.
+
+Alors que des preuves montrent que la Hongrie a livré des informations classifiée à la Russie, J.D Vance se rend à Budapest pour soutenir Orban avant les élections.
+
+Outre l'ingérence évidente juste avant les élections (mais on n'est plus à ça près), c'est un m...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Strandjunker/status/2041261153888727118#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/ObsDelphi/status/2041450468006625552#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -220,16 +174,16 @@ Video</p>
                     <span style="color:#555;font-size:11px;">@ylecun</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: "The fact is that Trump deserves to be impeached and convicted for his behavior in his second term. The misconduct of Trump, in terms of his corruption and his associates, is unparalleled in our history. His abuses of power leave Nixon in the dust."
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: "We have a president who is irresponsible, reckless, and unhinged...What’s to be done?...We need to think seriously about internal resistance in the executive branch. And the more straightforward measure that ought to be up for debate is impeachment."
 
 https://open.substack.com/pub/thebulwark/p/impeach-him-again-resistance-executive-branch-congress-trump-corruption?utm_campaign=post-expanded-share&utm_medium=web</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">"The fact is that Trump deserves to be impeached and convicted for his behavior in his second term. The misconduct of Trump, in terms of his corruption and his associates, is unparalleled in our history. His abuses of power leave Nixon in the dust."
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">"We have a president who is irresponsible, reckless, and unhinged...What’s to be done?...We need to think seriously about internal resistance in the executive branch. And the more straightforward measure that ought to be up for debate is impeachment."
 
 open.substack.com/pub/thebul…</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/BillKristol/status/2041206059411333170#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <a href="https://nitter.net/BillKristol/status/2041146676618891340#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -242,362 +196,48 @@ open.substack.com/pub/thebul…</p>
                     <span style="color:#555;font-size:11px;">@ylecun</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: From democracy to dictatorship is a shorter leap than many people think. The similarities of 2026 Trump America and 1938 Nazi Germany are striking.
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Everyone who thought Trump was an antiwar candidate was a complete unmitigated idiot, and should reflect on how not to be an idiot next time.
 
-As of April 2026, historians, political scientists, and former administration officials have identified several parallels between the rhetoric and actions of the fascist authoritarian Trump regime and 1930s Nazi Germany, particularly regarding the erosion of democratic norms and the use of state power against political opponents.
-
-Rhetorical and Ideological Parallels
-
-* Dehumanizing Language: Critics and historians note that Trump’s use of terms like "vermin" to describe political opponents and "poisoning the blood" regarding immigrants mirrors the dehumanizing language used by Adolf Hitler and other fascist leaders to scapegoat minorities and political enemies.
-
-* Attacks on the Press: Trump’s frequent labeling of mainstream media as "fake news" has been compared to the Nazi-era term Lügenpresse ("press of lies"), used to delegitimize independent journalism.
-
-* Cult of Personality: Experts argue that Trump fosters a cult of personality where his perceived strength and aura take precedence over policy or factual arguments, a hallmark of 1920s and 1930s fascist movements.
-
-* "Enemies from Within": Trump’s rhetoric regarding an "enemy from within," specifically targeting "radical left lunatics" and Democratic politicians, aligns with historical fascist strategies of identifying internal threats to justify authoritarian measures.
-
-Institutional and Structural Parallels
-
-* Weaponization of the Justice System: Observers highlight Trump’s repeated threats to investigate and prosecute political rivals as a parallel to the Nazi strategy of using "lawfare" to eliminate opposition.
-
-* Gleichschaltung (Coordination): Efforts to align federal agencies with personal and party loyalty—such as replacing military leaders with loyalists and centralizing executive control—draw comparisons to the Nazi policy of Gleichschaltung, the enforced alignment of all national institutions.
-
-* Militias and Political Violence: Trump’s "stand by" instruction to the Proud Boys and his encouragement of self-recruiting militias are frequently cited as modern echoes of the SA and SS paramilitaries used to intimidate political opponents.
-
-Influence on the 2026 Midterm Elections
-
-The SAVE Act (Safeguard American Voter Eligibility Act) has become a central part of Trump America's parallels to 1930s Nazi Germany, specifically regarding the centralized control of the democratic process.  
-
-These are some of the institutional and structural parallels between 1930s Nazi Germany and 2026 Trump America as the midterm elections approach. 
-
-The SAVE Act and Voter Roll Control
-
-* Nationalization of Voter Rolls: In early 2026, after Trump intensified his push for the SAVE Act. By requiring federal proof of citizenship for all federal elections and granting the executive branch power to "audit" state voter rolls, the act effectively strips states of their constitutional authority to manage elections.  
-
-* The "Purge" Mechanism: Historians note a parallel to 1930s "legal coordination," where laws were passed to systematically disenfranchise specific groups. The SAVE Act allows the federal government to flag and remove "suspect" voters from rolls — often targeting naturalized citizens and minority groups — under the guise of "election integrity." 
-
-* Bureaucratic Obstacles: Much like the 1935 Nuremberg Laws (which began by defining who was a "citizen" with the right to vote), the SAVE Act uses documentation requirements to create a tiered system of citizenship, making it harder for opposition-leaning demographics to remain on the rolls.  
-
-Impact on the 2026 Midterms
-
-* Mass De-registrations: In the lead-up to the midterms, the administration has used the SAVE Act's provisions to challenge the eligibility of millions of voters in "Blue" districts within swing states. 
-
-* Disruption of Local Authority: By giving federal agents loyal to Trump the power to intervene in local voter registration, the Act has caused chaos in election offices, leading to a wave of resignations among non-partisan election officials who refuse to implement the "purges."  
-
-* Pre-emptive Challenges: The Act allows the fascist authoritarian Trump regime to challenge election results before a single vote is cast by claiming the "rolls are corrupted," providing a legal pretext to contest any losses in November 2026.
-
-* Executive Orders on Voting: In March 2026, Trump signed a sweeping executive order targeting mail-in voting and seeking to impose new federal rules on local election organizers.
-
-* Targeting Election Officials: The administration has been accused of a coordinated campaign to dismantle federal election security agencies and pressure local election workers.
-
-* Use of "Lawfare" Against Candidates: There are concerns that the Department of Justice (DOJ) may be used to harass or disqualify opposition candidates in competitive 2026 races.
-
-* Proposed Election Subversion: Analysts have outlined potential scenarios where the administration could deploy troops near polling places or have federal agents seize voting machines to influence outcomes.
-
-Recent Military Leadership Changes
-
-Widespread Firings: Secretary of Defense Pete Hegseth has overseen the removal or forced retirement of more than 20 high-ranking generals and admirals since returning to office.
-
-Joint Chiefs of Staff Purge: Almost the entire Joint Chiefs of Staff has been remade, with only the Commandant of the Marine Corps and the Head of Space Force remaining from the previous leadership. 
-
-Allegations of a "Loyalty Purge"
-Targeting "Non-Loyalists": Reports from outlets like The Washington Post and NBC News indicate that while many removals occur without official explanation, Hegseth has frequently criticized leaders he perceives as lacking loyalty to President Trump.
-
-"Woke" Ideology as a Pretext: Hegseth has publicly targeted officers who championed diversity, equity, and inclusion (DEI) initiatives, describing such leadership as "woke" and inconsistent with his vision for the military.
-
-Impact of the Iran Conflict: The ongoing war with Iran has reportedly intensified these purges, with some officials being removed following disagreements over the scope and success of military operations.</h3>
+https://www.noahpinion.blog/p/i-told-you-this-would-end-badly</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">From democracy to dictatorship is a shorter leap than many people think. The similarities of 2026 Trump America and 1938 Nazi Germany are striking.
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Everyone who thought Trump was an antiwar candidate was a complete unmitigated idiot, and should reflect on how not to be an idiot next time.
 
-As of April 2026, historians, political scientists, and former administration officials have identified several parallels between the rhetoric and acti...</p>
+noahpinion.blog/p/i-told-you…</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/Noahpinion/status/2041452087930986767#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
+                    <span style="color:#555;font-size:11px;">@ylecun</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Is there anybody who does not see that Trump is mentally sick?</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Is there anybody who does not see that Trump is mentally sick?
+
+
+Rudy Havenstein, Senior Markets Commentator. (@RudyHavenstein)
+
+Oh boy.
+
+
+Community note: This image is a satirical parody, not an authentic Trump Truth Social post.
+
+Actual post (Apr 5, 2026): truthsocial.com/@realDonaldTru…
+
+
+
+— http...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/maddenifico/status/2041228378536124765#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: In case anybody missed it, France is actively preparing for a post Pax Americana world.
-
-In the last 6 months:
-∙ Aircraft carrier “France Libre”: 80,000-ton nuclear carrier, largest warship ever built in Europe announced, €10-12 billion
-∙ Nuclear arsenal expansion: first warhead increase in 30+ years, stockpile size now classified, forward-basing on allied territory authorized
-∙ European nuclear umbrella: “forward deterrence” doctrine with 8 partners (Germany, UK, Poland, Netherlands, Belgium, Greece, Sweden, Denmark)
-∙ UK-France nuclear pact: joint strategy consultations, joint submarine patrols, joint R&D since July 2025
-∙ 140 Rafale sold to India: 26 Rafale Marine ($7.5B, April 2025) + 114 Rafale for air force ($39B, cleared January 2026), largest Indian arms deal ever
-∙ World’s 2nd largest arms exporter: 9.8% global share (SIPRI, March 2026), up 21%, replacing Russia
-∙ Gold repatriation: 129 tonnes sold at the NY Fed, repurchased in Paris, entire 2,437-tonne reserve now in France, €12.8B profit
-∙ €36B defense spending increase: budget to reach €64B by 2027, two years ahead of schedule
-∙ Strait of Hormuz: leading EU escort mission, 19 of 23 major warships deployed to Mediterranean/Gulf. On April 3, a French-owned CMA CGM vessel became the first Western European ship to transit the strait since Iran closed it
-∙ New SSBN “L’Invincible”: next-generation nuclear ballistic missile submarine announced
-∙ JEWEL program: sovereign European space-based missile early warning system
-∙ ELSA initiative: Franco-British-German long-range conventional strike missile program
-∙ SAMP/T NG air defense: next-gen surface-to-air system, Denmark and Ukraine already buyers
-∙ 14 EPR2 nuclear reactors planned: largest nuclear construction program in Western Europe
-∙ Africa strategy reset: new Africa-France Summit in Nairobi, post-withdrawal from Sahel
-∙ 2025 National Strategic Review: new strategic objective on scientific and technological sovereignty (AI, quantum, nuclear propulsion)
-
-Ready to lead Europe into a path of independence.​​​​​​​​​​​​​​​​
-
-Vive la France, vive l’Europe</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">In case anybody missed it, France is actively preparing for a post Pax Americana world.
-
-In the last 6 months:
-∙ Aircraft carrier “France Libre”: 80,000-ton nuclear carrier, largest warship ever built in Europe announced, €10-12 billion
-∙ Nuclear arsenal expansion: first warhead increase in 30+ year...</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/larroumecj/status/2041223686909300950#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: UN secretary-general Antonio Guterres warns Trump that destroying Iran’s civilian infrastructure is a war crime because of the disproportionate cost to civilians. https://trib.al/BiUJaje</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">UN secretary-general Antonio Guterres warns Trump that destroying Iran’s civilian infrastructure is a war crime because of the disproportionate cost to civilians. trib.al/BiUJaje</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/KenRoth/status/2041239156425105830#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: In robotics manipulation, we see many cherry picked demos but no standardized benchmarks. I suggest  using STT (Success weighted by normalized inverse Task Time), analogous to SPL from navigation,  replacing length by time to do task relative to a human e.g. for "Pick up anything" on random household objects. https://arxiv.org/pdf/1807.06757</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">In robotics manipulation, we see many cherry picked demos but no standardized benchmarks. I suggest  using STT (Success weighted by normalized inverse Task Time), analogous to SPL from navigation,  replacing length by time to do task relative to a human e.g. for "Pick up anything" on random househol...</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/JitendraMalikCV/status/2041286654384869794#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: After an immigration agent shot and wounded a Venezuelan immigrant in Minneapolis, the Trump administration cast the injured man as an attempted murderer and the agent as victim of a brutal beating. That was false, as video footage of the shooting shows. https://trib.al/AXFbrUr</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">After an immigration agent shot and wounded a Venezuelan immigrant in Minneapolis, the Trump administration cast the injured man as an attempted murderer and the agent as victim of a brutal beating. That was false, as video footage of the shooting shows. trib.al/AXFbrUr</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/KenRoth/status/2041170654251098247#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: I find it amusing at just how much hatred there is towards France, because when you think about it, they ought to be the allies MAGA pretends they want: 
-
-1) they have and fund their own military, including their own nuclear weapons and defence industry/ production. 
-
-2) they share intel with the U.S. 
-
-3) they don’t have American bases on their soil that are supposedly draining the American taxpayer.
-
-4) they opposed the war in Iraq, which is something that JD Vance - they current sitting Vice President of the United States of America said that ALL Europeans should have done.
-
-So what’s the problem?</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">I find it amusing at just how much hatred there is towards France, because when you think about it, they ought to be the allies MAGA pretends they want: 
-
-1) they have and fund their own military, including their own nuclear weapons and defence industry/ production. 
-
-2) they share intel with the U....</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/BiankaB12/status/2041166604805746759#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: "He ran on no more wars" AND YOU FUCKING BELIEVED HIM
-
-THIS IS EXACTLY WHY YOU FUCKED UP</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">"He ran on no more wars" AND YOU FUCKING BELIEVED HIM
-
-THIS IS EXACTLY WHY YOU FUCKED UP
-
-
-paneleto (@paneleto)
-
-I dont think people voted for this. He ran on no more wars no? Problem is how do you get him out
-
-
-
-— https://nitter.net/paneleto/status/2040988390900875332#m</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Noahpinion/status/2040993198227456284#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Trump is deploying a classic tactic from the autocrat's playbook by encouraging friendly rich cronies to buy and silence independent media. CNN (and all of us) may be a victim. 
-https://trib.al/mGMIxnf</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Trump is deploying a classic tactic from the autocrat's playbook by encouraging friendly rich cronies to buy and silence independent media. CNN (and all of us) may be a victim. 
-trib.al/mGMIxnf</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/KenRoth/status/2040994438093189386#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Please please please. I'm on my knees begging every AI exec on the planet. Just stop with this stuff. Stop.
-
-Just give us models. Let the collective distributed intelligence of people figure things out in real time like we always do. Let people adapt. It's what we do.
-
-It's all just so tiresome. We just want models. We'll figure it out. We promise. We don't need societal level surgery and UBI and robot taxes and ham-fisted legislation and populists politicians passing dumb law after dumb law and lobbying groups and all this craziness.
-
-We are not giving birth to magic super miracle machines that suddenly invalidate every single pattern of the entirety of human history and technological development. 
-
-We're not. 
-
-Really. 
-
-AI is amazing. It's wonderful. But it's not magic. Can we please just let AI be cool and useful and problematic in realistic ways instead of all this crazy talk? 
-
-We are hallucinating at a collective scale. It's a madness really. A societal meme level madness.
-
-Just give us a products please and leave all the politics in the garage. Stop proposing societal level surgery with drastic measures for things that have not happened and may not happen and probably won't happen.
-
-Just stop.</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Please please please. I'm on my knees begging every AI exec on the planet. Just stop with this stuff. Stop.
-
-Just give us models. Let the collective distributed intelligence of people figure things out in real time like we always do. Let people adapt. It's what we do.
-
-It's all just so tiresome. We ...</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Dan_Jeffries1/status/2041170970631676067#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: No serious nation in the history of warfare has spent fourteen months insulting its allies, siding with their common enemy, and then knocked on their door expecting them to rescue a catastrophe of its own making.
-
-You abused the UK. Threatened Canada. Tried to grab Greenland. Called the EU an adversary. Praised Putin. Hosted Kremlin officials in the Capitol. Abandoned Ukraine. And did all of it loudly, proudly, and on camera.
-
-And now you are surprised that nobody is returning your calls.
-You want European boots on the ground? Start by explaining why America is more aligned with Moscow than with Brussels.
-Take your time. We will wait.
-
-Gandalv / @Microinteracti1</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">No serious nation in the history of warfare has spent fourteen months insulting its allies, siding with their common enemy, and then knocked on their door expecting them to rescue a catastrophe of its own making.
-
-You abused the UK. Threatened Canada. Tried to grab Greenland. Called the EU an advers...</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Sun, 05 Ap</span>
-                    <a href="https://nitter.net/Microinteracti1/status/2040711744750834144#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: If you elected this, you fucked up big time.</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">If you elected this, you fucked up big time.</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Noahpinion/status/2040987554636341417#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Yann LeCun</span>
-                    <span style="color:#555;font-size:11px;">@ylecun</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @ylecun: Trump's speech on Iran "was perhaps the clearest evidence yet that the leader of...the world’s predominant superpower is an utterly chaotic thinker, whose aptitude for his job—never obvious to begin with—appears to be in accelerating decline." https://trib.al/M5JPO1N</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Trump's speech on Iran "was perhaps the clearest evidence yet that the leader of...the world’s predominant superpower is an utterly chaotic thinker, whose aptitude for his job—never obvious to begin with—appears to be in accelerating decline." trib.al/M5JPO1N</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/KenRoth/status/2041009684178485362#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <a href="https://nitter.net/anders_aslund/status/2041281522368413913#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -610,22 +250,21 @@ You abused the UK. Threatened Canada. Tried to grab Greenland. Called the EU an 
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: a year ago, it was hard enough to build useful agents that most companies didn't have cost issues. that's changed a lot just from the start of this year!
-
-use langsmith to track agent costs and alert when anything unexpected happens</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: as always, it's an exciting time to be working at LangChain!</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">a year ago, it was hard enough to build useful agents that most companies didn't have cost issues. that's changed a lot just from the start of this year!
-
-use langsmith to track agent costs and alert when anything unexpected happens
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">as always, it's an exciting time to be working at LangChain!
 
 
 LangChain (@LangChain)
 
-Introducing Cost Alerting in LangSmith 💸
-...</p>
+LangSmith 🤝 San Francisco
+
+You don't know what your agents will do until you actually run them. What works in demos can break in the real world.
+
+Without tracing and evals, you're just guessing at why. Track what ...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/samecrowder/status/2041236536151425169#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Wed, 08 Ap</span>
+                    <a href="https://nitter.net/samecrowder/status/2041676376256999593#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -638,14 +277,158 @@ Introducing Cost Alerting in LangSmith 💸
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Did someone say fun new loading state?</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: This is just the beginning 👀
+
+Async subagents is a huge unlock to enable new capabilities orchestrating complex problems much faster and efficient 🚀
+
+Learn more about our motivation and this is implemented in our recent blog post: https://blog.langchain.com/deep-agents-v0-5/</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Did someone say fun new loading state?
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">This is just the beginning 👀
+
+Async subagents is a huge unlock to enable new capabilities orchestrating complex problems much faster and efficient 🚀
+
+Learn more about our motivation and this is implemented in our recent blog post: blog.langchain.com/deep-agen…
+
+
+
+LangChain JS (@LangChain_JS)
+
+🚀 deep...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/bromann/status/2041608597386514776#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Just shipped a walkthrough on building data agents using @LangChain's Deep Agents SDK.
+
+The goal was simple: replicate how real analytics teams work.
+
+An orchestrator delegates to specialized subagents, each with its own domain context and tools instead of one overloaded “do everything” agent.
+
+What made this interesting:
+
+• Skills as progressive context disclosure instead of dumping everything into the prompt
+• Domain-specific subagents to avoid context bloat
+• Custom SQL tooling for structured data workflows
+• Filesystem + memory for stateful reasoning
+I used dummy pharma data, but this pattern applies to any domain where you need context-aware analytics, not just a chatbot on top of a database.
+
+Full repo below:</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Just shipped a walkthrough on building data agents using @LangChain's Deep Agents SDK.
+
+The goal was simple: replicate how real analytics teams work.
+
+An orchestrator delegates to specialized subagents, each with its own domain context and tools instead of one overloaded “do everything” agent.
+
+What...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/vorashm/status/2041616208034676942#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Always a pleasure partnering with @LangChain team !</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Always a pleasure partnering with @LangChain team !
+
+
+Harrison Chase (@hwchase17)
+
+LangSmith Fleet 🤝 Arcade.dev
+
+Arcade provides enterprise grade access to 8,000+ tools
+
+As of today, you can connect to all these tools from LangSmith Fleet. This lets you easily build your own no-code Claude Cowork/Op...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/avoguru/status/2041616973931671696#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: I think Harrison was the most excited person in Slack to see GLM-5.1 drop 👀
+
+open models are (have been 😤) here, they’re very smart, very fast, and way cheaper
+
+honestly just try one 🤝</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">I think Harrison was the most excited person in Slack to see GLM-5.1 drop 👀
+
+open models are (have been 😤) here, they’re very smart, very fast, and way cheaper
+
+honestly just try one 🤝
+
+
+Harrison Chase (@hwchase17)
+
+Was already using glm5 for coding tasks, excited to try out glm5.1
+
+
+
+— https://nitt...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/Vtrivedy10/status/2041610895994826773#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: 🚀 deepagentsjs v1.9.0 is here! Here's what's new:
+
+👉Async subagents - Kick off background tasks on any Agent Protocol backed server
+👉Expanded multimodal support - allow your agent to understand PDFs, images, audio, and video files.
+👉Improved prompt caching performance for Claude models
+
+🧵1/3</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">🚀 deepagentsjs v1.9.0 is here! Here's what's new:
+
+👉Async subagents - Kick off background tasks on any Agent Protocol backed server
+👉Expanded multimodal support - allow your agent to understand PDFs, images, audio, and video files.
+👉Improved prompt caching performance for Claude models
+
+🧵1/3
 
 Video</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/BraceSproul/status/2041248249508753757#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/LangChain_JS/status/2041605185756393496#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -658,23 +441,19 @@ Video</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Very excited to talk about file systems in agents at the @AICouncilConf this May!
-
-Grab tickets now before they sell out:</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">Was already using glm5 for coding tasks, excited to try out glm5.1</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Very excited to talk about file systems in agents at the @AICouncilConf this May!
-
-Grab tickets now before they sell out:
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Was already using glm5 for coding tasks, excited to try out glm5.1
 
 
-AI Council (@AICouncilConf)
+Mason Daugherty (@masondrxy)
 
-Shipping an agent is the easy part. Keeping it alive while you ship 10 more? That's where things fall apart.
+GLM-5.1 from @Zai_org is available for use today in Deep Agents! as we wrote earlier this week, open weight models are becoming an increasingly attractive option for a wide spectrum of use cases.
 
-At AI Council this year we're dedicat...</p>
+Read...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/BraceSproul/status/2041259285305590052#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/hwchase17/status/2041606198022328555#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -687,9 +466,127 @@ At AI Council this year we're dedicat...</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Great 101 article by @hwchase17 to explain the differences and impact of different layers to make AI work: Model, Harness, Context.</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: GLM-5.1 from @Zai_org is available for use today in Deep Agents! as we wrote earlier this week, open weight models are becoming an increasingly attractive option for a wide spectrum of use cases.
+
+Read more ⬇️</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Great 101 article by @hwchase17 to explain the differences and impact of different layers to make AI work: Model, Harness, Context.
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">GLM-5.1 from @Zai_org is available for use today in Deep Agents! as we wrote earlier this week, open weight models are becoming an increasingly attractive option for a wide spectrum of use cases.
+
+Read more ⬇️
+
+
+
+
+Z.ai (@Zai_org)
+
+Introducing GLM-5.1: The Next Level of Open Source
+
+- Top-Tier Perfor...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/masondrxy/status/2041605754436649467#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">LangSmith Fleet 🤝 http://Arcade.dev
+
+Arcade provides enterprise grade access to 8,000+ tools
+
+As of today, you can connect to all these tools from LangSmith Fleet. This lets you easily build your own no-code Claude Cowork/OpenClaw style agents
+
+Blog: https://blog.langchain.com/arcade-dev-tools-now-in-langsmith-fleet/
+
+Video: https://www.youtube.com/watch?v=AaZQZ-mbUZc&t=2s</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">LangSmith Fleet 🤝 Arcade.dev
+
+Arcade provides enterprise grade access to 8,000+ tools
+
+As of today, you can connect to all these tools from LangSmith Fleet. This lets you easily build your own no-code Claude Cowork/OpenClaw style agents
+
+Blog: blog.langchain.com/arcade-de…
+
+Video: piped.video/watch?...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/hwchase17/status/2041598614712283390#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: No quarters needed. Try Arcade with LangSmith Fleet 🕹️🔥</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">No quarters needed. Try Arcade with LangSmith Fleet 🕹️🔥
+
+
+LangChain (@LangChain)
+
+.@TryArcade's 7,500+ agent-optimized MCP tools are now available in LangSmith Fleet.
+
+Create a gateway and your agents get secure access to Salesforce, GitHub, Zendesk, Asana, and many more.
+
+Read more: blog.langchain....</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/andrewnguonly/status/2041573669332512799#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Fleet just got 7,500x more powerful now that it has first class support for connecting to @TryArcade MCP servers 🎉
+
+Create MCP servers in Arcade using any of the thousands of tools they support, and have them load directly into Fleet.
+
+It's never been easier to create and use 3rd party tools in Fleet: http://smith.langchain.com/agents</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Fleet just got 7,500x more powerful now that it has first class support for connecting to @TryArcade MCP servers 🎉
+
+Create MCP servers in Arcade using any of the thousands of tools they support, and have them load directly into Fleet.
+
+It's never been easier to create and use 3rd party tools in Flee...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/BraceSproul/status/2041571868969468405#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
+                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: There are three layers you can improve an agent at: model, harness, and context. Most teams fixate on the model. But context (skills, instructions) is the layer you can iterate on fastest and the one most within your control today</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">There are three layers you can improve an agent at: model, harness, and context. Most teams fixate on the model. But context (skills, instructions) is the layer you can iterate on fastest and the one most within your control today
 
 
 Harrison Chase (@hwchase17)
@@ -698,10 +595,10 @@ x.com/i/article/204046441296…
 
 
 
-— https://nitter.net/hwchase17/status/2040467997022884194#m</p>
+— htt...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/prukalpa/status/2041237695343804499#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/caspar_br/status/2041593056236073105#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -714,24 +611,22 @@ x.com/i/article/204046441296…
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: if you’ve built some hook/middleware that makes your agent rock and want to share it with the community then reach out!
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: .@TryArcade's 7,500+ agent-optimized MCP tools are now available in LangSmith Fleet.
 
-crowdsourcing the patterns that make agents work is fun :)
+Create a gateway and your agents get secure access to Salesforce, GitHub, Zendesk, Asana, and many more.
 
-if you’re a company building on langchain we’d also love to add you to our integrations + docs
-
-shoutout our friends at @CopilotKit who make awesome middleware for generative UI and more</h3>
+Read more: https://blog.langchain.com/arcade-dev-tools-now-in-langsmith-fleet/?utm_medium=social&utm_source=twitter&utm_campaign=q1-2026_fleet-launch_aw</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">if you’ve built some hook/middleware that makes your agent rock and want to share it with the community then reach out!
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">.@TryArcade's 7,500+ agent-optimized MCP tools are now available in LangSmith Fleet.
 
-crowdsourcing the patterns that make agents work is fun :)
+Create a gateway and your agents get secure access to Salesforce, GitHub, Zendesk, Asana, and many more.
 
-if you’re a company building on langchain we’d also love to add you to our integrations + docs
+Read more: blog.langchain.com/arcade-de…
 
-shoutout our friends at...</p>
+Video</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Vtrivedy10/status/2041214237494964239#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/LangChain/status/2041557866365251588#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -744,26 +639,20 @@ shoutout our friends at...</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Introducing Cost Alerting in LangSmith 💸
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: we just released deepagents v0.5 with support for async subagents, multi-modal filesystem support, and a sleek new backend interface.
 
-More and more agents are making it to production, and costs are increasing dramatically.
+read all about it!!
 
-Use LangSmith to set configurable alerts on total cost, so you know right away when your agents are spending more than they should.
-
-Docs: https://docs.langchain.com/langsmith/alerts
-
-Sign up: https://smith.langchain.com/</h3>
+https://blog.langchain.com/deep-agents-v0-5/</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Introducing Cost Alerting in LangSmith 💸
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">we just released deepagents v0.5 with support for async subagents, multi-modal filesystem support, and a sleek new backend interface.
 
-More and more agents are making it to production, and costs are increasing dramatically.
+read all about it!!
 
-Use LangSmith to set configurable alerts on total cost, so you know right away when your agents are spending more than they should.
-
-Docs: docs.langchain.com/langsmith…...</p>
+blog.langchain.com/deep-agen…</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/LangChain/status/2041236011439771648#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/sydneyrunkle/status/2041572233496117642#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -776,17 +665,23 @@ Docs: docs.langchain.com/langsmith…...</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Open models have crossed a threshold in their ability to use tools and follow instructions. This is a huge moment! Try GLM-5 (deployed on @baseten) in Fleet today http://smith.langchain.com/agents</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Beautiful day to be a bus in San Francisco</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Open models have crossed a threshold in their ability to use tools and follow instructions. This is a huge moment! Try GLM-5 (deployed on @baseten) in Fleet today smith.langchain.com/agents
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Beautiful day to be a bus in San Francisco
 
 
-Mason Daugherty (@masondrxy)
+Julia Schottenstein (@j_schottenstein)
 
-we practice what we preach -- @Zai_org GLM-5 (via @baseten) now available in p...</p>
+Good morning, San Fran
+
+
+
+
+
+— https://nitter.net/j_schottenstein/status/2041527441085350391#m</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/caspar_br/status/2041193987437203526#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/BraceSproul/status/2041538731300290711#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -799,23 +694,24 @@ we practice what we preach -- @Zai_org GLM-5 (via @baseten) now available in p..
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: we’re spending as much time as possible to see if every agent can be better, cheaper, and faster
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">LangSmith 🤝Fix your agents
 
-open models + custom harnesses + evals are our on-ramp!
+You'll see our billboards around SF and NYC over the next few months.
 
-come mess around in a few seconds on Fleet or hack on your own with deepagents + baseten or openrouter until you’re open model pilled 👀</h3>
+The themes all point to the same problem: you don't know what your agents will do until you actually run them. What works in demos can break in the real world. Without tracing and evals, you're just guessing at why. Track what your agent actually does. Optimize and fix your agents. Then measure whether your fixes work.
+
+That loop is how agents get better, and LangSmith is built to power that workflow.
+
+If you spot one around, send it our way!</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">we’re spending as much time as possible to see if every agent can be better, cheaper, and faster
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">LangSmith 🤝Fix your agents
 
-open models + custom harnesses + evals are our on-ramp!
+You'll see our billboards around SF and NYC over the next few months.
 
-come mess around in a few seconds on Fleet or hack on your own with deepagents + baseten or openrouter until you’re open model pilled 👀
-
-
-Mason D...</p>
+The themes all point to the same problem: you don't know what your agents will do until you actually run them. What works in demos can break in the real world. Without tracing and evals, you're just gu...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Vtrivedy10/status/2041191459320111438#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/hwchase17/status/2041546634895757684#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -828,19 +724,12 @@ Mason D...</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: one of the coolest ones i've seen yet: @IeloEmanuele built a "context compaction" middleware powered by claude code's compaction algorithm.</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Good morning, San Fran</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">one of the coolest ones i've seen yet: @IeloEmanuele built a "context compaction" middleware powered by claude code's compaction algorithm.
-
-
-Sydney Runkle (@sydneyrunkle)
-
-we're building out a community middleware page for @LangChain, and we need your help growing it. 
-
-agent middleware is one of t...</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Good morning, San Fran</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/sydneyrunkle/status/2041204275557048783#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/j_schottenstein/status/2041527441085350391#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -853,23 +742,30 @@ agent middleware is one of t...</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">Middleware lets you tweak an agent harness to be more specific to your use case 
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: true!  but partly bc many of these  competing harnesses prob explicitly optimize their design for semi-long-horizon agentic coding tasks in tb2 style, which is fine!  if that’s what your real world usage looks like
 
-One of the most powerful ways to customize!</h3>
+but in any case great news for builders…build your own (better) harness!  the tools exist today (shameless plug for deepagents but there’s many options like Pi + extensions)
+
+you can almost always outperform default frontier lab harnesses on a set of Tasks you care about with some effort
+
+basically you just wanna rock at the Tasks your customers care about instead of being decent across many Tasks
+
+add in your human priors, obsess over prompts and tool design, hill climb domain specific evals, and use whatever collection of models get you to the Pareto frontier of perf/cost/latency
+
+try auto-harness loops on your evals but the main thing is just be able to control the pieces of your harness
+
+we can’t rely on labs to perfectly design harnesses for our tasks but we can invest the time today to make sure our harness rocks at our tasks, almost always worth it and it’s fun.  
+
+if we need to bin it with the next model, fine, we have the evals and more developed taste to hill climb agin
+
+to a million products/harnesses, each bespokely designed for their tasks :)</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Middleware lets you tweak an agent harness to be more specific to your use case 
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">true!  but partly bc many of these  competing harnesses prob explicitly optimize their design for semi-long-horizon agentic coding tasks in tb2 style, which is fine!  if that’s what your real world usage looks like
 
-One of the most powerful ways to customize!
-
-
-Sydney Runkle (@sydneyrunkle)
-
-we're building out a community middleware page for @LangChain, and we need your help growing it. 
-
-agent middleware is one of the most powerf...</p>
+but in any case great news for builders…build your own (better) harness!  the tools ...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/hwchase17/status/2041208906136072597#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/Vtrivedy10/status/2041401865514996081#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -882,20 +778,20 @@ agent middleware is one of the most powerf...</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: we're building out a community middleware page for @LangChain, and we need your help growing it. 
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: long running agents (like deepagents) suffer from tool call induced context bloat
 
-agent middleware is one of the most powerful building blocks we've shipped. what are you building with it? 
+s/o @johanbonilla for langchain-collapse, an eager context compaction middleware that collapses long tool call sequences, reducing summarization overhead
 
-https://docs.langchain.com/oss/python/integrations/middleware</h3>
+https://docs.langchain.com/oss/python/integrations/middleware#community-integrations</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">we're building out a community middleware page for @LangChain, and we need your help growing it. 
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">long running agents (like deepagents) suffer from tool call induced context bloat
 
-agent middleware is one of the most powerful building blocks we've shipped. what are you building with it? 
+s/o @johanbonilla for langchain-collapse, an eager context compaction middleware that collapses long tool call sequences, reducing summarization overhead
 
 docs.langchain.com/oss/pytho…</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/sydneyrunkle/status/2041203684705468672#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/sydneyrunkle/status/2041491111919636683#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -908,22 +804,31 @@ docs.langchain.com/oss/pytho…</p>
                     <span style="color:#555;font-size:11px;">@hwchase17</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: 🚀 Interrupt sold out last year, so don't wait: May 13-14 in San Francisco. https://interrupt.langchain.com/
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: this is why we should all be deeply promiscuous across models 👀
 
-Last year, hundreds of builders packed a room to share what's actually working in agent production. This year, we're going bigger.
+every model has its own spiky intelligence, but all we care about is giving users a great experience as fast and cheap as possible
 
-@hwchase17, @AndrewYNg, @cj_mongodb, are headlining. Alongside them: real-world sessions from teams shipping agents today, time with LangChain engineers, and a pioneering AI builder community.
+often the best way to do that with a bespoke multi-model harness with the best perf/cost/latency possible, ex:
+- GLM5 or Minimax or Arcee for most work execution
+- gpt-5.4 as an oracle/judge when needed
+- gemini flash for visual reasoning tasks
+- Opus for frontend taste
 
-If you're working on agents or thinking about it, this is two days with the people furthest along.</h3>
+don’t be married to one model!  
+use subagents & handoffs as needed
+
+build a set of evals that reflect good agent/user experience in prod and switch as soon as you can improve on an axis you care about
+
+your users (and wallet) will thank you :)</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">🚀 Interrupt sold out last year, so don't wait: May 13-14 in San Francisco. interrupt.langchain.com/
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">this is why we should all be deeply promiscuous across models 👀
 
-Last year, hundreds of builders packed a room to share what's actually working in agent production. This year, we're going bigger.
+every model has its own spiky intelligence, but all we care about is giving users a great experience as fast and cheap as possible
 
-@hwchase17, @AndrewYNg, @cj_mongodb, are headlining. Alongside them...</p>
+often the best way to do that with a bespoke multi-model harness with the best perf/cost/latency possib...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/LangChain/status/2041199014356402607#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <a href="https://nitter.net/Vtrivedy10/status/2041297155730571637#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -932,27 +837,20 @@ Last year, hundreds of builders packed a room to share what's actually working i
             <div style="padding:20px;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
                     <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    <span style="color:#888;font-size:12px;">Simon Willison</span>
+                    <span style="color:#555;font-size:11px;">@simonw</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: we practice what we preach -- @Zai_org GLM-5 (via @baseten) now available in production for @LangChain Fleet!</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">R to @simonw: And for the "they're training on your pelican now!" skeptics, here's what I got for NORTH VIRGINIA OPOSSUM ON AN E-SCOOTER
+
+Comments on that one include /* Earring sparkle */, <!-- Opossum fur gradient -->, <!-- Distant treeline silhouette - Virginia pines --> https://static.simonwillison.net/static/2026/glm-possum-escooter.html</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">we practice what we preach -- @Zai_org GLM-5 (via @baseten) now available in production for @LangChain Fleet!
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">And for the "they're training on your pelican now!" skeptics, here's what I got for NORTH VIRGINIA OPOSSUM ON AN E-SCOOTER
 
-
-
-
-Mason Daugherty (@masondrxy)
-
-x.com/i/article/203976317929…
-
-
-
-— https://nitter.net/masondrxy/status/2039768211554492420#m</p>
+Comments on that one include /* Earring sparkle */, <!-- Opossum fur gradient -->, <!-- Distant treeline silhouette - Virginia pines --> static.simonwillison.net/sta…</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/masondrxy/status/2041189901207519629#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/simonw/status/2041646779553476801#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -961,21 +859,22 @@ x.com/i/article/203976317929…
             <div style="padding:20px;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
                     <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    <span style="color:#888;font-size:12px;">Simon Willison</span>
+                    <span style="color:#555;font-size:11px;">@simonw</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Last year, we built a scientific feasibility estimation agent for DARPA, which produced results with ZERO hallucinated references. In the paper, we unpack that and publish an open source CLI tool and agent skill (link in reply) that reveals how we did it.</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">Wrote up some thoughts on Anthropic's Project Glassing, where their latest Opus-beating model is available to partnered security research organizations only
+
+Given recent alarm bells raised by credible security voices I think this is a justified decision
+https://simonwillison.net/2026/Apr/7/project-glasswing/</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Last year, we built a scientific feasibility estimation agent for DARPA, which produced results with ZERO hallucinated references. In the paper, we unpack that and publish an open source CLI tool and agent skill (link in reply) that reveals how we did it.
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Wrote up some thoughts on Anthropic's Project Glassing, where their latest Opus-beating model is available to partnered security research organizations only
 
-
-Sumit (@_reachsumit)
-
-Detecting and Correc...</p>
+Given recent alarm bells raised by credible security voices I think this is a justified decision
+simonwillison.net/2026/Apr/7…</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/deliprao/status/2041176687677714729#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/simonw/status/2041629636099240106#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -984,31 +883,16 @@ Detecting and Correc...</p>
             <div style="padding:20px;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
                     <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    <span style="color:#888;font-size:12px;">Simon Willison</span>
+                    <span style="color:#555;font-size:11px;">@simonw</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Releasing slidev-agent 🎉📦
-
-A @LangChain_JS Deep Agent integration into @Slidevjs (my favorite presentation framework). Have an agent create visually nice looking slides for you 🤯
-
-- creates/edits multiple slides in parallel using subagents
-- validates visual correctness through a validation step
-- integrated into Slidev's DevTools
-- support for @OpenAI , @AnthropicAI and Gemini models
-
-Go check it out: https://github.com/christian-bromann/slidev-agent</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">I'm a big fan of the pelican GLM-5.1 drew me today, it even animated it! https://simonwillison.net/2026/Apr/7/glm-51/</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Releasing slidev-agent 🎉📦
-
-A @LangChain_JS Deep Agent integration into @Slidevjs (my favorite presentation framework). Have an agent create visually nice looking slides for you 🤯
-
-- creates/edits multiple slides in parallel using subagents
-- validates visual correctness through a validation step
-- i...</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">I'm a big fan of the pelican GLM-5.1 drew me today, it even animated it! simonwillison.net/2026/Apr/7…</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/bromann/status/2041172779022897318#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/simonw/status/2041628808865050759#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -1017,26 +901,24 @@ A @LangChain_JS Deep Agent integration into @Slidevjs (my favorite presentation 
             <div style="padding:20px;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
                     <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    <span style="color:#888;font-size:12px;">Simon Willison</span>
+                    <span style="color:#555;font-size:11px;">@simonw</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Deep Agents everywhere! 🎉</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">754B parameters, 1.51TB on Hugging Face</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Deep Agents everywhere! 🎉
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">754B parameters, 1.51TB on Hugging Face
 
 
-Christian Bromann (@bromann)
+Z.ai (@Zai_org)
 
-Releasing slidev-agent 🎉📦
+Introducing GLM-5.1: The Next Level of Open Source
 
-A @LangChain_JS Deep Agent integration into @Slidevjs (my favorite presentation framework). Have an agent create visually nice looking slides for you 🤯
-
-- creates/edits multiple slides in parallel using subagents
-- ...</p>
+- Top-Tier Performance: #1 in open source and #3 globally across SWE-Bench Pro, Terminal-Bench, and NL2Repo.
+- Built for Long-Horizon Tasks: Runs autonomously for 8 hours, refining strategi...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/LangChain_JS/status/2041172887663788357#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/simonw/status/2041575980863828077#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -1045,107 +927,16 @@ A @LangChain_JS Deep Agent integration into @Slidevjs (my favorite presentation 
             <div style="padding:20px;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
                     <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
+                    <span style="color:#888;font-size:12px;">Simon Willison</span>
+                    <span style="color:#555;font-size:11px;">@simonw</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: nice walkthrough from Akshay bringing together Harness mental models from our blogs + research artifacts at LangChain, Anthropic/OAI write ups, examples from perplexity
-
-“if you’re not the model you’re the harness” 
-
-i had many back and forths writing this, can be coarse depending on what stage of agent development your on, but useful mental model imo for builders building agents for their tasks</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">Vibe check on Gemma 4 now that we've had a few days to play with it - how does it hold up against Qwen 3.5?</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">nice walkthrough from Akshay bringing together Harness mental models from our blogs + research artifacts at LangChain, Anthropic/OAI write ups, examples from perplexity
-
-“if you’re not the model you’re the harness” 
-
-i had many back and forths writing this, can be coarse depending on what stage of a...</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Vibe check on Gemma 4 now that we've had a few days to play with it - how does it hold up against Qwen 3.5?</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/Vtrivedy10/status/2041179313785933971#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: If you are new to AI, or if you aren’t, this is worth a read!
-This graphic alone is worth 1000x words!</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">If you are new to AI, or if you aren’t, this is worth a read!
-This graphic alone is worth 1000x words!
-
-
-
-
-Harrison Chase (@hwchase17)
-
-x.com/i/article/204046441296…
-
-
-
-— https://nitter.net/hwchase17/status/2040467997022884194#m</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/mr_r0b0t/status/2041137673029435680#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: Tracing and evaluations are essential for improving agent quality, and LangSmith has been working great for me so far.
-
-Without them, it’s easy to fall into a loop: spot a new pattern on X → ask Claude to implement it → end up with a more complex, buggy agent that performs worse than your original setup.</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Tracing and evaluations are essential for improving agent quality, and LangSmith has been working great for me so far.
-
-Without them, it’s easy to fall into a loop: spot a new pattern on X → ask Claude to implement it → end up with a more complex, buggy agent that performs worse than your original s...</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/maskaravivek/status/2041140252408979472#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
-                </div>
-            </div>
-        </div>
-        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
-            
-            <div style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
-                    <span style="color:#888;font-size:12px;">Harrison Chase</span>
-                    <span style="color:#555;font-size:11px;">@hwchase17</span>
-                    
-                </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @hwchase17: the langchain community is so awesome
-
-claude code's source leaked last week and @IeloEmanuele immediately built claude's compaction engine as @LangChain middleware
-
-drop this into your agents/deepagents today!
-
-https://github.com/emanueleielo/compact-middleware</h3>
-                
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">the langchain community is so awesome
-
-claude code's source leaked last week and @IeloEmanuele immediately built claude's compaction engine as @LangChain middleware
-
-drop this into your agents/deepagents today!
-
-github.com/emanueleielo/comp…</p>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/sydneyrunkle/status/2041123648900084105#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/simonw/status/2041525215264661672#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -1158,16 +949,31 @@ github.com/emanueleielo/comp…</p>
                     <span style="color:#555;font-size:11px;">@swyx</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @swyx: as always, highest alpha conference
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">R to @swyx: ok amazon i see you 
 
-make sure to put your notifications on.</h3>
+- https://x.com/Werner/status/2041601741049749883
+- https://x.com/awscloud/status/2041611271565381968
+
+(wew i'm actually going to try this)</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">as always, highest alpha conference
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">ok amazon i see you 
 
-make sure to put your notifications on.</p>
+- nitter.net/Werner/status/20416017…
+- nitter.net/awscloud/status/204161…
+
+(wew i'm actually going to try this)
+
+
+Amazon Web Services (@awscloud)
+
+Announcing Amazon S3 Files.
+
+The first and only cloud object store with fully-featured, high-performance file system access.
+
+Learn...</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/0xRaduan/status/2041176369519018023#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <span style="color:#555;font-size:11px;">Wed, 08 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041675995665612954#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
@@ -1180,12 +986,289 @@ make sure to put your notifications on.</p>
                     <span style="color:#555;font-size:11px;">@swyx</span>
                     
                 </div>
-                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @swyx: If you are a latent space fan, you can hear me rant about some of the motivating challenges with @swyx (and my admiration for Snowflake's VARIANT type) in Oct 2024: https://www.latent.space/p/braintrust</h3>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @swyx: Swyx (@swyx) compares agents in 2023 Vs 2026:
+
+"One of my most core memories on my podcast was telling David Luan (@jluan), the CEO of Adept - he was the first VP of engineering at OpenAI - to take 'agents' out of his company description because the word 'agent' was so uncool in 2023".
+
+"I think they're finally working and they're finally sort of replacing a lot of things that we used to do manually". 
+
+"Yak shaving means like you set out to do one thing but then you discover there's like two things that need to get done before you do that one thing". 
+
+"So you go and do the other two things and then you find two more things and you find two more things and it just spirals out of control. So the agent level - the agents let you just stay high level and they can take care of the yak shaving if it runs into that, which happens a lot in programming."</h3>
                 
-                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">If you are a latent space fan, you can hear me rant about some of the motivating challenges with @swyx (and my admiration for Snowflake's VARIANT type) in Oct 2024: latent.space/p/braintrust</p>
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">Swyx (@swyx) compares agents in 2023 Vs 2026:
+
+"One of my most core memories on my podcast was telling David Luan (@jluan), the CEO of Adept - he was the first VP of engineering at OpenAI - to take 'agents' out of his company description because the word 'agent' was so uncool in 2023".
+
+"I think the...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/etnshow/status/2041599389861294424#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">R to @latentspacepod: we didnt get a chance to pod with Alex yet but i am making damn sure to assign due credit!!!
+
+https://x.com/alex_frantic/status/2030400081636290748</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">we didnt get a chance to pod with Alex yet but i am making damn sure to assign due credit!!!
+
+nitter.net/alex_frantic/status/20…
+
+
+
+
+Alex Kotliarskyi 🇺🇦 (@alex_frantic)
+
+My thoughts on gas town and software factories:
+
+frantic.im/suddenly/
+
+
+
+
+— https://nitter.net/alex_frantic/status/203040008163629...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041568051041063118#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">R to @latentspacepod: live today: our podcast into the lives of the token billionaires.
+
+https://x.com/latentspacepod/status/2041567210871959672</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">live today: our podcast into the lives of the token billionaires.
+
+nitter.net/latentspacepod/status/…
+
+
+Latent.Space (@latentspacepod)
+
+🆕 Extreme Harness Engineering: 1M LOC, 1B toks/day, 0% human code, 0% human review
+
+latent.space/p/harness-eng
+
+@_lopopolo takes us inside @OpenAI Frontier & Sympho...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041567364601307214#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @swyx: more saturday morning [technical] writing. our next one will be April 18, with guest talk by @trq212 [Claude Code @ Anthropic]
+
+limited spots, let us know what you want to write about below
+
+cc @swyx</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">more saturday morning [technical] writing. our next one will be April 18, with guest talk by @trq212 [Claude Code @ Anthropic]
+
+limited spots, let us know what you want to write about below
+
+cc @swyx
+
+
+Sarah Chieng (@MilksandMatcha)
+
+[technical] write & learn #3 ✍️
+
+with @byAnhtho @swyx @darkproger ...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/MilksandMatcha/status/2041552768062656687#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">LOBSTER_BOOTSTRAP.md
+
+activated</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">LOBSTER_BOOTSTRAP.md
+
+activated
+
+Video
+  
+
+
+
+
+
+
+
+
+swyx 🇬🇧 @aidotengineer (@swyx)
+
+booth build day @aidotengineer
+
+peek behind the scenes!
+
+Video
+  
+
+
+
+
+
+— https://nitter.net/swyx/status/2041494431757451294#m</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041542129768350142#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @swyx: what cool ai folks in AI/investing in Singapore?</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">what cool ai folks in AI/investing in Singapore?</p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <span style="color:#555;font-size:11px;">Mon, 06 Ap</span>
-                    <a href="https://nitter.net/ankrgyl/status/2041209007252398420#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                    <a href="https://nitter.net/saranormous/status/2041287485649719653#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">i'm being asked for oneliner descriptions of each track, so here goes (pushback/improvements welcome):
+
+1. Claw track: This is the year of the personal agent - many people have been dreaming of a personal AI, from being a friend to an executive assistant. @steipete's OpenClaw created the category, and we've gathered maintainers and Claw competitors to preview what's next!
+
+2. Context Engineering: LLM context lengths grow from 4000 to 1 million tokens, our jobs went from prompting to RAG to search to ever more complex context management for agents. This is the track for everyone who's watched @dexhorthy's keynotes and stressed about getting in the dumb zone.
+
+3. Harness Engineering: The most exciting discovery in agent engineering is that harnesses are more responsible for variations in performance than the LLMs they build on. @_lopopolo ignited this category with the most extreme version of the dark factory harness we've ever seen, but here we have many of the best harness engineering ideas of 2026.
+
+4. Evals & Observability: All serious AI engineering starts with evals & observability — you only get paid for what you can reliably maintain and improve. We are proud to feature perspectives from eval platforms like @braintrustdata_, LLM researchers like @maximelabonne, and benchmark authors.
+
+5. Voice & Vision: The first of our multimodal AI tracks focus on voice and vision AI, the first modalities humans had before the invention of writing. This is the track to catch up on TTS, ASR, OCR, and all the other usecases from the @elevenlabs decacorn to @mistralai's new model to @meetgranola to @huggingface and more!
+
+6. Gemini: Last but certainly not least, London is home to @googledeepmind who have an amazing team of engineers, PMs, and researchers with updates on open models, evals, agents, WebMCP, and even a special presentation on Text Diffusion models!</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">i'm being asked for oneliner descriptions of each track, so here goes (pushback/improvements welcome):
+
+1. Claw track: This is the year of the personal agent - many people have been dreaming of a personal AI, from being a friend to an executive assistant. @steipete's OpenClaw created the category, a...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041517332011352121#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">just went live on european TBPN! exclusive preview of the @aiDotEngineer Europe Build Day today</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">just went live on european TBPN! exclusive preview of the @aiDotEngineer Europe Build Day today
+
+
+
+
+etn. (@etnshow)
+
+TBPN Acquired, New Yorker Vs. Sam Altman, Author of The Infinity Machine, Citrini Field Trip nitter.net/i/broadcasts/1kKzDMoAm…
+
+
+
+
+— https://nitter.net/etnshow/status/204145479899489...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041504079008919915#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
+                </div>
+            </div>
+        </div>
+        <div class="update-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.3s;">
+            
+            <div style="padding:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:#1da1f2;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;font-weight:600;">🐦 X(Twitter)</span>
+                    <span style="color:#888;font-size:12px;">swyx</span>
+                    <span style="color:#555;font-size:11px;">@swyx</span>
+                    
+                </div>
+                <h3 style="color:#fff;font-size:17px;margin-bottom:8px;line-height:1.4;">RT by @swyx: booth build day @aidotengineer
+
+peek behind the scenes!</h3>
+                
+                <p style="color:#aaa;font-size:13px;line-height:1.7;margin-bottom:14px;">booth build day @aidotengineer
+
+peek behind the scenes!
+
+Video
+  
+
+
+
+
+AI Engineer (@aiDotEngineer)
+
+🎥🔴 LIVESTREAM ANNOUNCEMENT: Keynotes + @openclaw / Personal Agents track 
+
+🔔 Hit the bell on our YT channel 👉 piped.video/watch?v=O_IMsEg9… 
+
+Starts promptly April 9, 9:00am UK / 4:00am ET
+
+Featuring ...</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#555;font-size:11px;">Tue, 07 Ap</span>
+                    <a href="https://nitter.net/swyx/status/2041494431757451294#m" target="_blank" style="color:#1da1f2;text-decoration:none;font-size:13px;font-weight:500;">🐦 查看原推 →</a>
                 </div>
             </div>
         </div>
