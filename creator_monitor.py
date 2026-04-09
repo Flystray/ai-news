@@ -56,6 +56,7 @@ BILI_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     "Referer": "https://www.bilibili.com",
     "Origin": "https://www.bilibili.com",
+    "Cookie": "buvid3=DE080968-2D70-5F51-E0C0-759961FB89E013544infoc; b_nut=1759847413; _uuid=F495F455-D10C3-8E64-8914-DCFBE3A4B42D15608infoc; CURRENT_QUALITY=0; rpdid=|(umRkRmJlR|0J'u~lm)R~RuY; buvid_fp=f95190dbe51573f797a43d5e87db1a41; buvid4=C2001806-1EA5-AB0A-BA58-A807D71AA62818785-025100722-pW1elzmXyBcBMDE3AZRexQ%3D%3D; CURRENT_FNVAL=2000; DedeUserID=650476746; DedeUserID__ckMd5=b0d6e6b747fe73ab; theme-tip-show=SHOWED; bsource=search_bing; bmg_af_switch=1; bmg_src_def_domain=i2.hdslb.com; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzU5NTU3NjAsImlhdCI6MTc3NTY5NjUwMCwicGx0IjotMX0.NHWKr4DeoQOZsMdCaA3iXBuxjI6-DDIRW7_07J5uuuM; bili_ticket_expires=1775955700; theme-avatar-tip-show=SHOWED; bili_jct=88e205998a4b5f575e965bc9008d9624; sid=8sz07zp9; home_feed_column=4; browser_resolution=536-768; b_lsid=F0FB31F3_19D6FD6A744",
 }
 
 # ============ 已验证的 YouTube Channel ID ============
@@ -144,6 +145,8 @@ def fetch_bilibili_videos(mid, pn=1, ps=5):
     try:
         j = json.loads(data)
         if j.get("code") != 0:
+            msg = j.get("message", "未知错误")
+            print(f"    [API ERR] code={j.get('code')}, msg={msg}")
             return []
         vlist = j.get("data", {}).get("list", {}).get("vlist", [])
         videos = []
@@ -538,7 +541,7 @@ def main(date_str=None):
         else:
             print(f"无更新")
         processed_count += 1
-        time.sleep(2)  # B站有频率限制，间隔大一些
+        time.sleep(5)  # B站有频率限制，间隔大一些
 
     # ── 保存状态 ─────────────────────────────────────────────
     save_state(state)
