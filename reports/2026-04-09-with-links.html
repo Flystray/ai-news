@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 大模型日报 · 2026年4月9日</title>
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --secondary: #f64f59;
+      --accent: #43e97b;
+      --bg-dark: #0f0f1a;
+      --bg-card: #1a1a2e;
+      --bg-card2: #16213e;
+      --text-primary: #e8e8f0;
+      --text-secondary: #a0a0b8;
+      --border: rgba(108,99,255,0.25);
+      --shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* === Header === */
+    .header {
+      background: linear-gradient(135deg, #1a1a3e 0%, #0f0f1a 50%, #1a0a2e 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(108,99,255,0.12) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(246,79,89,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #e8e8f0 0%, #a78bfa 50%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .header .subtitle {
+      color: var(--text-secondary);
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+    .header .date-row {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .header .date-tag {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 5px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .header .date-tag span { color: var(--text-primary); font-weight: 600; }
+
+    /* === Main === */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* === Section Header === */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 50px 0 24px;
+    }
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .icon-red { background: linear-gradient(135deg, #f64f59, #c0392b); }
+    .icon-blue { background: linear-gradient(135deg, #6c63ff, #3b82f6); }
+    .icon-green { background: linear-gradient(135deg, #43e97b, #0f9b58); }
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .section-title small {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .section-divider {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* === News Card === */
+    .news-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 28px;
+      margin-bottom: 18px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      border-radius: 4px 0 0 4px;
+    }
+    .card-red::before { background: linear-gradient(180deg, #f64f59, #c0392b); }
+    .card-blue::before { background: linear-gradient(180deg, #6c63ff, #3b82f6); }
+    .card-green::before { background: linear-gradient(180deg, #43e97b, #0f9b58); }
+    .news-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: rgba(108,99,255,0.5);
+    }
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .card-tag {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin-top: 3px;
+    }
+    .tag-openai { background: rgba(16,163,127,0.2); color: #10a37f; border: 1px solid rgba(16,163,127,0.3); }
+    .tag-anthropic { background: rgba(205,127,50,0.2); color: #d97706; border: 1px solid rgba(205,127,50,0.3); }
+    .tag-meta { background: rgba(24,119,242,0.2); color: #3b82f6; border: 1px solid rgba(24,119,242,0.3); }
+    .tag-google { background: rgba(234,67,53,0.2); color: #ef4444; border: 1px solid rgba(234,67,53,0.3); }
+    .tag-deepseek { background: rgba(108,99,255,0.2); color: #a78bfa; border: 1px solid rgba(108,99,255,0.3); }
+    .tag-zhipu { background: rgba(6,182,212,0.2); color: #06b6d4; border: 1px solid rgba(6,182,212,0.3); }
+    .tag-alibaba { background: rgba(249,115,22,0.2); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+    .tag-baidu { background: rgba(59,130,246,0.2); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+    .tag-ant { background: rgba(20,184,166,0.2); color: #14b8a6; border: 1px solid rgba(20,184,166,0.3); }
+    .tag-industry { background: rgba(139,92,246,0.2); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      flex: 1;
+    }
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .card-title a:hover {
+      color: #a78bfa;
+    }
+    .card-body {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .card-body p { margin-bottom: 10px; }
+    .card-body p:last-child { margin-bottom: 0; }
+    .card-body strong { color: var(--text-primary); }
+    .card-meta {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-source {
+      font-size: 12px;
+      color: rgba(160,160,184,0.6);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .read-more {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a78bfa;
+      text-decoration: none;
+      padding: 4px 12px;
+      border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .read-more:hover {
+      background: rgba(167,139,250,0.15);
+      border-color: rgba(167,139,250,0.6);
+    }
+
+    /* === Insight Box === */
+    .insight-card {
+      background: var(--bg-card2);
+      border: 1px solid rgba(67,233,123,0.2);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .insight-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #43e97b, #0f9b58);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #fff;
+    }
+    .insight-content { flex: 1; }
+    .insight-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .insight-text {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* === Summary Bar === */
+    .summary-bar {
+      background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(246,79,89,0.1));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .summary-bar .label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .summary-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .s-tag {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+    .s-tag.hot { background: rgba(246,79,89,0.15); border-color: rgba(246,79,89,0.3); color: #f87171; }
+
+    /* === Footer === */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { margin-top: 10px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 600px) {
+      .header { padding: 40px 16px 32px; }
+      .news-card { padding: 18px 16px; }
+      .card-top { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-badge">AI · Daily Intelligence</div>
+  <h1>AI 大模型日报</h1>
+  <p class="subtitle">每日追踪全球人工智能前沿动态 · 由 fly的AI学习 出品</p>
+  <div class="date-row">
+    <div class="date-tag">📅 <span>2026年4月9日</span> 星期四</div>
+    <div class="date-tag">📍 <span>杭州</span> · 全球 AI 前线</div>
+    <div class="date-tag">📊 今日共 <span>3 重磅 + 6 动态 + 4 洞察</span></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 今日概览 -->
+  <div class="summary-bar">
+    <span class="label">今日重点</span>
+    <div class="summary-tags">
+      <span class="s-tag hot">🔥 Meta Muse Spark 今日发布</span>
+      <span class="s-tag hot">🚀 Anthropic Claude 管理智能体</span>
+      <span class="s-tag hot">⚡ GPT-6 倒计时5天</span>
+      <span class="s-tag">Claude Mythos 前沿安全模型</span>
+      <span class="s-tag">智谱 GLM-5V 视觉编程</span>
+      <span class="s-tag">蚂蚁×清华 ClawAegis 开源</span>
+    </div>
+  </div>
+
+  <!-- ========== 今日重磅 ========== -->
+  <div class="section-header">
+    <div class="section-icon icon-red">🔥</div>
+    <div class="section-title">
+      今日重磅
+      <small>Breaking · 24小时内最重要发布与突破</small>
+    </div>
+    <div class="section-divider"></div>
+  </div>
+
+  <!-- Meta Muse Spark -->
+  <div class="news-card card-red">
+    <div class="card-top">
+      <span class="card-tag tag-meta">META</span>
+      <div class="card-title">
+        <a href="https://www.nbd.com.cn/articles/2026-04-09/4330783.html" target="_blank">
+          150亿美元豪赌落地：Meta 超级智能实验室首款模型 Muse Spark 今日亮相
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>北京时间 4 月 9 日凌晨，Meta 正式发布 <strong>Muse Spark</strong>（原内部代号"牛油果"），这是公司斥资 150 亿美元、挖角 Scale AI 创始人 <strong>Alexandr Wang</strong> 领衔打造的超级智能实验室（MSL）成立以来的第一款产品，标志着 Meta AI 战略从"开源布道"到"闭源商业化"的历史性转向。</p>
+      <p>Muse Spark 定位为 <strong>小型高速推理模型</strong>，主打科学、健康和数学问答领域，同时支持多层推理模式（即时 / 思考 / 深度推理）及 <strong>262K tokens 上下文</strong>。在第三方评估中，该模型推理榜单登顶，总榜第 28 位，API 预览期免费开放。与 Llama 系列不同，Muse Spark 采用闭源路线，将优先内嵌到 Facebook、Instagram、WhatsApp，重点发力 <strong>AI 购物助手</strong>场景。Meta 承认该模型在编程能力上尚不及 GPT-5 和 Claude，但定位为 Muse 系列的"起点模型"，更大规模版本正在研发。消息发出后，Meta 股价单日大涨 6.5%，市场对其战略转型给予正向反馈。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 华尔街见闻 · IT之家 · 每日经济新闻 — 2026/04/09</span>
+      <a href="https://wallstreetcn.com/articles/3769514" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- Anthropic Claude Managed Agents -->
+  <div class="news-card card-red">
+    <div class="card-top">
+      <span class="card-tag tag-anthropic">ANTHROPIC</span>
+      <div class="card-title">
+        <a href="https://news.qq.com/rain/a/20260409A010UL00" target="_blank">
+          Anthropic 发布 Claude 管理智能体：部署速度提升 10 倍，剑指企业自动化基础设施
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>继 Claude Mythos 发布两天后，Anthropic 再度出手，于 4 月 9 日正式推出 <strong>Claude Managed Agents（Claude 管理智能体）</strong>，这是一套全托管的 API 套件，专为大规模构建和部署云端 AI 智能体而生，将企业级智能体的构建和部署效率<strong>提升 10 倍</strong>。</p>
+      <p>Claude Managed Agents 的核心价值在于：开发者无需自行处理任务调度、错误恢复和并发扩展等底层基础设施，可直接通过配置定义"智能体做什么"。该平台支持<strong>长期运行任务、多步骤决策、外部工具调用及自动纠错</strong>，已有乐天集团在 Slack/Teams 中部署智能体自动生成报表，以及 Sentry 将 Bug 修复部署时间从数月压缩至数周的落地案例。分析人士认为，这标志着 Anthropic 正从"模型提供商"切入"企业自动化平台"这一市值更高的赛道，但托管模式下的算力成本控制与企业控制权问题仍是挑战。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 全天候科技 · 53AI · edgen.tech — 2026/04/09</span>
+      <a href="https://news.qq.com/rain/a/20260409A010UL00" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- GPT-6 倒计时 -->
+  <div class="news-card card-red">
+    <div class="card-top">
+      <span class="card-tag tag-openai">OPENAI</span>
+      <div class="card-title">
+        <a href="https://news.qq.com/rain/a/20260408A02H8A00" target="_blank">
+          GPT-6「土豆」发布倒计时：5 天后即将登场，200万 Token 窗口、5-6万亿参数
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>距离 OpenAI 宣称的 <strong>4 月 14 日发布窗口</strong>仅剩 5 天。多方信源交叉印证，内部代号"Spud（土豆）"的 GPT-6 已完成预训练，于 3 月底在德克萨斯州阿比林的 Stargate 超级集群训练完毕，预训练投入超过 <strong>20 亿美元</strong>，动用约 10 万张 H100。</p>
+      <p>GPT-6 底层架构名为"Symphony（交响乐）"，实现原生多模态统一——文本、图像、音频、视频在同一向量空间编码，上下文窗口扩展至 <strong>200 万 Token</strong>。参数规模达 5-6 万亿（采用混合专家架构，实际激活约 10%），主流基准较 GPT-5.4 提升 <strong>40%</strong>。值得关注的是，OpenAI 内部已将产品组织架构更名为 <strong>AGI Deployment</strong>，并将 ChatGPT、Codex 与 Atlas 整合为统一超级智能体，显示其冲刺 AGI 的战略意图愈发明显。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 腾讯新闻 · 华尔街见闻 · CometAPI — 2026/04/08-09</span>
+      <a href="https://news.qq.com/rain/a/20260408A02H8A00" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- ========== 行业动态 ========== -->
+  <div class="section-header">
+    <div class="section-icon icon-blue">📡</div>
+    <div class="section-title">
+      行业动态
+      <small>Industry · 模型发布、融资与技术进展</small>
+    </div>
+    <div class="section-divider"></div>
+  </div>
+
+  <!-- Claude Mythos -->
+  <div class="news-card card-blue">
+    <div class="card-top">
+      <span class="card-tag tag-anthropic">ANTHROPIC</span>
+      <div class="card-title">
+        <a href="https://www.cnblogs.com/qiniushanghai/p/19835734.html" target="_blank">
+          Claude Mythos Preview：Anthropic 最强模型浮出水面，涌现零日漏洞发现能力
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>4 月 7 日，Anthropic 随 <strong>Project Glasswing</strong> 正式发布了 Claude Mythos Preview 的系统卡（System Card）。Claude Mythos 定位为 Anthropic 迄今<strong>能力最强的前沿旗舰模型</strong>，专为防御性网络安全工作流设计，目前不对公众开放，仅限特定合作伙伴在严格限制下使用。</p>
+      <p>最令业界震动的是：在未经专项安全训练的情况下，Mythos Preview 竟<strong>自主涌现出发现数千个零日漏洞并编写完整利用链</strong>的能力，覆盖所有主流操作系统，在网络安全漏洞复现评测上取得压倒性领先。这是 AI 安全能力出现"涌现"的最具标志性案例，也迫使安全社区重新评估 AI 系统在攻防两端的双重潜力。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 博客园 · AI工具集 · Anthropic官网 — 2026/04/07-08</span>
+      <a href="https://www.anthropic.com/claude-mythos-preview-system-card" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- 智谱 GLM-5V-Turbo -->
+  <div class="news-card card-blue">
+    <div class="card-top">
+      <span class="card-tag tag-zhipu">智谱</span>
+      <div class="card-title">
+        <a href="https://www.chooseai.net/news/3140/" target="_blank">
+          智谱 GLM-5V-Turbo 发布：看图秒写代码，设计稿还原得分 94.8 超越 Claude
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>4 月 1-2 日，智谱 AI 正式发布 <strong>GLM-5V-Turbo</strong>，定位为业界首个原生多模态 Coding 基座模型，已于今日接入悟空等主流 AI 应用。与传统代码模型不同，GLM-5V-Turbo 可直接理解设计稿、截图、网页界面和视频，无需文字描述即可完成<strong>界面复刻、PDF 图表提取和风格迁移</strong>等任务。</p>
+      <p>在权威设计稿还原评测中，GLM-5V-Turbo 得分 <strong>94.8</strong>，超越 Claude Sonnet，接近前端工程师手写水准。该模型深度适配 Agent 工作流，能与 AutoClaw / OpenClaw / Claude Code 等主流 Coding Agent 无缝集成，深受独立开发者圈子热捧——"一张截图进去，整套前端代码就出来了"已成为其核心标签。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 机器之心 · chooseai.net · 智谱AI文档 — 2026/04/02-09</span>
+      <a href="https://docs.bigmodel.cn/cn/guide/models/vlm/glm-5v-turbo" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- DeepSeek V4 -->
+  <div class="news-card card-blue">
+    <div class="card-top">
+      <span class="card-tag tag-deepseek">DEEPSEEK</span>
+      <div class="card-title">
+        <a href="https://xueqiu.com/6023649549/382737043" target="_blank">
+          DeepSeek V4 本月落地：1 万亿参数 + LTM 长期记忆，全面适配华为昇腾
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>根据多方信源最新汇总，<strong>DeepSeek V4</strong> 预计在 2026 年 4 月中旬正式发布，距离首次预告已历经数轮延期。本次迭代最大亮点是首发颠覆性的 <strong>LTM（Long-Term Memory，长期记忆）</strong>技术，将彻底打破大语言模型"对话记忆归零"的固有局限，理论上支持跨会话持续学习。</p>
+      <p>DeepSeek V4 参数规模预计达 <strong>1 万亿</strong>，并全面换装华为昇腾 950PR 推理集群，训练与推理阶段均不依赖英伟达 GPU，推理速度提升 35 倍，能耗下降 40%。定价方面，据悉将维持 DeepSeek 一贯的超低价策略（预计 $0.30/百万 Token），这将对 GPT-6、Claude Mythos 的商业定价策略构成直接压力。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 雪球 · deepseekv4.app · 36氪 — 2026/04/05-09</span>
+      <a href="https://xueqiu.com/6023649549/382737043" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- 阿里 Qwen3.6-Plus -->
+  <div class="news-card card-blue">
+    <div class="card-top">
+      <span class="card-tag tag-alibaba">阿里</span>
+      <div class="card-title">
+        <a href="https://blog.csdn.net/qq_41797451/article/details/159785008" target="_blank">
+          阿里通义 Qwen3.6-Plus 上线：100 万 Token 上下文 + Agentic Coding，国产编程天花板
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>4 月 2 日，阿里通义实验室正式发布 <strong>Qwen3.6-Plus</strong>，这是千问 3.6 系列开门之作，也是目前国内最强的编程与智能体编排模型。核心亮点包括：<strong>100 万 Token 超长上下文</strong>（支持整个代码库级别的理解与重构）、业界领先的 <strong>Agentic Coding 能力</strong>（多步骤自动化编程和代码优化），以及原生多模态理解（可直接处理代码截图和文档图片）。</p>
+      <p>AskTable、悟空等国内主流 AI 应用第一时间接入，开发者圈反馈其在 LeetCode 困难题、大型项目代码重构等场景中已达到或超越 GPT-4o 的表现，且 API 价格远低于国际同类产品，性价比优势突出。千问 3.6 系列后续还将发布多模态和推理专项版本。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 CSDN · 机器之心 · asktable.com — 2026/04/02-09</span>
+      <a href="https://blog.csdn.net/qq_41797451/article/details/159785008" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- 百度 ERNIE 5.0 -->
+  <div class="news-card card-blue">
+    <div class="card-top">
+      <span class="card-tag tag-baidu">百度</span>
+      <div class="card-title">
+        <a href="http://k.sina.com.cn/article_7879848900_1d5acf3c401902w986.html" target="_blank">
+          百度文心 4.5 Turbo 降价 80%，ERNIE-5.0-Preview 登顶 LMArena 视觉理解全球前十
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>百度近期接连出手：一方面宣布<strong>文心大模型 4.5 Turbo 价格下降 80%</strong>（每百万 Token 输入仅 0.8 元，不到 DeepSeek-V3 的 40%），持续压低 AI 成本门槛；另一方面，<strong>ERNIE-5.0-Preview-1220</strong> 在 LMArena 全球视觉理解竞技场中跻身<strong>全球前十（第八位）</strong>，成为目前唯一进入该榜单前十的中国模型。</p>
+      <p>LMArena 的"用户盲测对战"机制是业内公认的最公平评测方式——两个匿名模型同时回答用户问题，由用户投票决出胜者，完全去除了品牌光环。百度能在谷歌、OpenAI 的顶尖模型中脱颖而出，标志着国产大模型的视觉理解能力已进入国际一线阵营。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 新浪财经 · 新浪网 — 2026/04/06-09</span>
+      <a href="http://k.sina.com.cn/article_7879848900_1d5acf3c401902w986.html" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- 蚂蚁 ClawAegis -->
+  <div class="news-card card-blue">
+    <div class="card-top">
+      <span class="card-tag tag-ant">蚂蚁集团</span>
+      <div class="card-title">
+        <a href="https://news.qq.com/rain/a/20260402A05S9C00" target="_blank">
+          蚂蚁×清华联合开源 ClawAegis：首个覆盖智能体全生命周期的安全防御插件
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>随着 OpenClaw 等开源智能体框架大规模普及，AI 智能体的安全漏洞问题日益突出。4 月 2 日，蚂蚁集团 AI 安全实验室与清华大学联合开源 <strong>ClawAegis</strong>，这是业内首个覆盖 OpenClaw 全生命周期的安全防御插件，为自主智能体提供多维度、多阶段的安全防护。</p>
+      <p>ClawAegis 针对智能体在规划、执行、工具调用等各阶段面临的提示注入、越权操作和数据泄露等风险，提供系统性防御方案。随着 Anthropic、OpenAI 等各大厂商相继推出智能体平台，智能体安全正从学术议题升级为产业基础设施。该项目已在 GitHub 开源，预计将被主流 Agentic 框架集成。</p>
+    </div>
+    <div class="card-meta">
+      <span class="card-source">📰 腾讯新闻 · 极客公园 · 观察者网 — 2026/04/02-09</span>
+      <a href="https://news.qq.com/rain/a/20260402A05S9C00" class="read-more" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+  <!-- ========== 核心洞察 ========== -->
+  <div class="section-header">
+    <div class="section-icon icon-green">💡</div>
+    <div class="section-title">
+      核心洞察
+      <small>Insight · 深度分析与行业判断</small>
+    </div>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-num">01</div>
+    <div class="insight-content">
+      <div class="insight-title">「智能体基础设施」成新主战场，模型公司加速平台化转型</div>
+      <div class="insight-text">Anthropic Claude Managed Agents 的发布标志着 AI 竞争已从"谁的模型更强"演进为"谁的智能体平台更易用、更可靠"。继 OpenAI 的 Operator 和 Google 的 Agentspace 之后，Anthropic 也正式切入企业自动化基础设施赛道。这三家公司都在用同一个逻辑：把 AI 从"工具"变成"员工"，直接卡位企业核心业务流程。这一趋势将深刻影响传统 SaaS 的商业模式，也意味着 AI 基础设施的护城河正在从"参数规模"转向"可靠性与生态集成深度"。</div>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-num">02</div>
+    <div class="insight-content">
+      <div class="insight-title">Meta 的"闭源转向"暗示 AI 格局加速收拢</div>
+      <div class="insight-text">Muse Spark 放弃 Meta 一贯的开源传统，转向闭源商业化，这是一个具有标志性意义的信号。此前 Anthropic 封锁 OpenClaw 接口、OpenAI 收紧 API 访问控制，如今 Meta 也跟进，预示着 AI 大模型生态正从"开源繁荣期"逐步过渡到"商业壁垒构建期"。对中国 AI 企业而言，这是一个两面性机会：一方面开源窗口可能收窄，另一方面如 DeepSeek、Qwen 等坚守开源路线的中国模型将填补这一生态空缺，争夺全球开发者社区的话语权。</div>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-num">03</div>
+    <div class="insight-content">
+      <div class="insight-title">GPT-6 发布窗口已至，AI 能力边界再度挑战认知</div>
+      <div class="insight-text">GPT-6 代号"土豆"的讨论已持续一周，但 5-6 万亿参数、200 万 Token 上下文、原生多模态统一的技术规格让业界意识到：这不是一次迭代升级，而是一次范式级飞跃。更值得关注的是 OpenAI 将产品部门更名为 AGI Deployment——这个命名决策传递的信号比任何技术参数都更直接。若 GPT-6 如期于 4 月 14 日上线，将引发全球 AI 应用生态的新一轮大洗牌，国内厂商需加速布局差异化场景和本土化优势。</div>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-num">04</div>
+    <div class="insight-content">
+      <div class="insight-title">AI 安全从学术议题跃升为产业基础设施必选项</div>
+      <div class="insight-text">Claude Mythos 涌现出零日漏洞自主发现能力、蚂蚁×清华开源 ClawAegis 智能体安全框架——这两件事放在同一天看格外发人深省。当 AI 系统的能力越来越逼近安全研究员的水准，"红队评估"和"安全防护插件"将从研究室走进每一个企业级 AI 部署流程。预计未来 12 个月内，AI 安全合规将成为企业采购 AI 平台的强制性评估维度，相关赛道（安全评估、Guardrail 工具、合规审计）将迎来重大商业机遇。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>由 <strong>fly的AI学习</strong> 出品 · 公众号"AI日课" · 数据来自公开报道，仅供参考</p>
+  <div class="footer-links">
+    <a href="https://Flystray.github.io/ai-news/" target="_blank">📚 AI日报订阅中心</a>
+    <a href="https://Flystray.github.io/ai-news/reports/2026-04-09-with-links.html" target="_blank">🔗 本期在线链接</a>
+    <a href="https://Flystray.github.io/ai-news/reports/2026-04-08-with-links.html" target="_blank">⬅ 昨日报告</a>
+  </div>
+  <p style="margin-top:10px;font-size:12px;opacity:0.5;">Generated: 2026-04-09 09:00 CST</p>
+</footer>
+
+</body>
+</html>
