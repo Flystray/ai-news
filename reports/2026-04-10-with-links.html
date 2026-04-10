@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 大模型日报 · 2026年4月10日</title>
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --primary-dark: #4B44CC;
+      --accent: #FF6B6B;
+      --accent2: #43C6AC;
+      --bg: #0F0F1A;
+      --bg-card: #1A1A2E;
+      --bg-card2: #16213E;
+      --text: #E8E8F0;
+      --text-muted: #9898B8;
+      --border: rgba(108,99,255,0.2);
+      --gold: #FFD700;
+      --green: #43C6AC;
+      --red: #FF6B6B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      background: linear-gradient(135deg, #1a1a3e 0%, #0d1b3e 50%, #0f0f1a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 20px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(108,99,255,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(67,198,172,0.1) 0%, transparent 60%);
+    }
+    .header-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(108,99,255,0.2); border: 1px solid rgba(108,99,255,0.4);
+      border-radius: 20px; padding: 4px 14px;
+      font-size: 12px; color: #aaa8ff; margin-bottom: 16px; letter-spacing: 1px;
+    }
+    .header h1 {
+      font-size: clamp(24px, 4vw, 40px); font-weight: 800;
+      background: linear-gradient(90deg, #fff 0%, #aaa8ff 50%, #43C6AC 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px; margin-bottom: 8px;
+    }
+    .header-sub {
+      font-size: 14px; color: var(--text-muted);
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+    .header-sub span { display: flex; align-items: center; gap: 4px; }
+
+    /* ===== Stats Bar ===== */
+    .stats-bar {
+      background: var(--bg-card2);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+    }
+    .stats-inner {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
+    }
+    .stat-item {
+      text-align: center; padding: 10px;
+      background: rgba(108,99,255,0.08); border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .stat-num { font-size: 22px; font-weight: 800; color: var(--primary); }
+    .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ===== Main Content ===== */
+    .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+    /* ===== Section ===== */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .icon-red { background: linear-gradient(135deg, #FF6B6B, #FF8E53); }
+    .icon-blue { background: linear-gradient(135deg, #6C63FF, #4B44CC); }
+    .icon-green { background: linear-gradient(135deg, #43C6AC, #1BAB8F); }
+
+    .section-title { font-size: 20px; font-weight: 700; color: #fff; }
+    .section-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ===== News Card ===== */
+    .news-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%; border-radius: 3px 0 0 3px;
+    }
+    .card-red::before { background: linear-gradient(180deg, #FF6B6B, #FF8E53); }
+    .card-blue::before { background: linear-gradient(180deg, #6C63FF, #43C6AC); }
+    .card-green::before { background: linear-gradient(180deg, #43C6AC, #1BAB8F); }
+    .card-gold::before { background: linear-gradient(180deg, #FFD700, #FFA500); }
+
+    .news-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(108,99,255,0.4);
+      box-shadow: 0 8px 32px rgba(108,99,255,0.15);
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .tag {
+      font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .tag-red { background: rgba(255,107,107,0.15); color: #FF6B6B; border: 1px solid rgba(255,107,107,0.3); }
+    .tag-blue { background: rgba(108,99,255,0.15); color: #aaa8ff; border: 1px solid rgba(108,99,255,0.3); }
+    .tag-green { background: rgba(67,198,172,0.15); color: #43C6AC; border: 1px solid rgba(67,198,172,0.3); }
+    .tag-gold { background: rgba(255,215,0,0.12); color: #FFD700; border: 1px solid rgba(255,215,0,0.3); }
+    .tag-gray { background: rgba(152,152,184,0.12); color: var(--text-muted); border: 1px solid rgba(152,152,184,0.2); }
+
+    .card-source { font-size: 11px; color: var(--text-muted); }
+    .card-title {
+      font-size: 17px; font-weight: 700; color: #fff;
+      margin-bottom: 10px; line-height: 1.4;
+    }
+    .card-body { font-size: 14px; color: #c8c8e0; line-height: 1.8; margin-bottom: 14px; }
+    .card-body strong { color: #fff; }
+    .card-body ul { padding-left: 20px; margin: 8px 0; }
+    .card-body li { margin: 4px 0; }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600;
+      color: #aaa8ff; text-decoration: none;
+      padding: 6px 12px; border-radius: 6px;
+      background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2);
+      transition: all 0.2s;
+    }
+    .card-link:hover { background: rgba(108,99,255,0.2); color: #fff; }
+    .card-link-green {
+      color: #43C6AC; background: rgba(67,198,172,0.1); border-color: rgba(67,198,172,0.2);
+    }
+    .card-link-green:hover { background: rgba(67,198,172,0.2); color: #fff; }
+
+    /* ===== Insight Card ===== */
+    .insight-card {
+      background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(67,198,172,0.05));
+      border: 1px solid rgba(108,99,255,0.25);
+      border-radius: 14px; padding: 22px 24px; margin-bottom: 16px;
+    }
+    .insight-num {
+      font-size: 11px; font-weight: 700; color: var(--primary);
+      letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;
+    }
+    .insight-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .insight-body { font-size: 14px; color: #c8c8e0; line-height: 1.8; }
+    .insight-body strong { color: #aaa8ff; }
+
+    /* ===== Data Table ===== */
+    .data-table {
+      width: 100%; border-collapse: collapse; margin: 16px 0;
+      font-size: 13px;
+    }
+    .data-table th {
+      background: rgba(108,99,255,0.15); color: #aaa8ff;
+      padding: 10px 14px; text-align: left; font-size: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+    .data-table tr:hover td { background: rgba(108,99,255,0.05); }
+    .num-up { color: var(--red); font-weight: 700; }
+    .num-neutral { color: var(--green); font-weight: 700; }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--bg-card2); border-top: 1px solid var(--border);
+      padding: 24px 20px; text-align: center;
+    }
+    .footer-inner { max-width: 900px; margin: 0 auto; }
+    .footer p { font-size: 13px; color: var(--text-muted); margin: 4px 0; }
+    .footer a { color: #aaa8ff; text-decoration: none; }
+    .footer a:hover { color: var(--primary); }
+
+    @media (max-width: 600px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .news-card { padding: 16px; }
+      .card-title { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">🤖 AI DAILY · 自动化采集</div>
+    <h1>AI 大模型日报</h1>
+    <h1 style="font-size:clamp(16px,2.5vw,24px);margin-top:-8px;margin-bottom:16px;">2026年4月10日 · 星期五</h1>
+    <div class="header-sub">
+      <span>📡 来源：OpenAI · Anthropic · Google · DeepSeek · 阿里 · 字节 · 百度</span>
+      <span>✍️ fly的AI学习</span>
+      <span>🔗 机器之心 · 量子位 · 36氪</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Stats Bar ===== -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">300亿</div>
+      <div class="stat-label">Anthropic年化收入（美元）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">27T</div>
+      <div class="stat-label">全球周AI调用Token量</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1220亿</div>
+      <div class="stat-label">OpenAI融资额（美元）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">TOP6</div>
+      <div class="stat-label">全球调用榜均为中国模型</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">28万+</div>
+      <div class="stat-label">OpenClaw GitHub Stars</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Main Content ===== -->
+<div class="container">
+
+  <!-- ===== 今日重磅 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-red">🔥</div>
+      <div>
+        <div class="section-title">今日重磅</div>
+        <div class="section-desc">行业级重大事件，影响全球AI格局</div>
+      </div>
+    </div>
+
+    <!-- 1. Anthropic超越OpenAI -->
+    <div class="news-card card-red">
+      <div class="card-meta">
+        <span class="tag tag-red">💰 商业</span>
+        <span class="tag tag-gold">⭐ 年度级</span>
+        <span class="card-source">来源：36氪 · 新智元 · 2026-04-07</span>
+      </div>
+      <div class="card-title">Anthropic年化收入首超OpenAI，突破300亿美元大关</div>
+      <div class="card-body">
+        <p>在业界预期之外，<strong>Anthropic的年化收入（ARR）正式突破300亿美元</strong>，较2025年底的90亿美元增长超过3倍，历史性地超过了OpenAI的约250亿美元。这一数字还包含了通过AWS Bedrock、Google Cloud Vertex AI等云合作伙伴的销售收入。</p>
+        <p style="margin-top:10px;">驱动增长的核心引擎是 <strong>Claude Code</strong>——Anthropic针对代码生成场景的利器，让企业客户数量在不到两个月内从500+家翻倍至<strong>1000+家</strong>（年消费超百万美元）。同期，Anthropic还与谷歌、博通达成战略合作，计划于2027年上线<strong>3.5GW超大规模TPU算力集群</strong>。</p>
+        <p style="margin-top:10px;">CFO Krishna Rao表示：<em>"这是我们迄今为止下过的最大算力血本，为的就是匹配前所未有的增长速度。"</em></p>
+      </div>
+      <a class="card-link" href="https://www.36kr.com/p/3756317091037956" target="_blank">📄 查看原文 · 36氪 ↗</a>
+    </div>
+
+    <!-- 2. Claude Mythos Preview -->
+    <div class="news-card card-red">
+      <div class="card-meta">
+        <span class="tag tag-red">🛡️ 安全</span>
+        <span class="tag tag-blue">模型发布</span>
+        <span class="card-source">来源：hatenablog · 2026-04-08</span>
+      </div>
+      <div class="card-title">Anthropic发布Claude Mythos Preview：超越人类专家的网络安全模型，不对公众开放</div>
+      <div class="card-body">
+        <p>Anthropic通过"<strong>Project Glasswing</strong>"计划悄然发布了旗下最强模型 <strong>Claude Mythos Preview</strong>。该模型在自主发现、利用软件漏洞（含零日漏洞）及工程编码方面的能力<strong>已超越绝大多数人类安全专家</strong>，因此不向公众开放，严格实施邀请制。</p>
+        <p style="margin-top:10px;">首批授权合作伙伴包括 AWS、苹果、谷歌、微软、英伟达等40余家核心科技机构。关键跑分：</p>
+        <ul>
+          <li>CyberGym（漏洞复现）：<strong>83.1%</strong>（上代Claude Opus 4.6为66.6%）</li>
+          <li>SWE-bench Pro（代理式软件工程）：<strong>77.8%</strong>（上代53.4%）</li>
+          <li>SWE-bench Verified：<strong>93.9%</strong>（上代80.8%）</li>
+          <li>GPQA Diamond（通用推理）：<strong>94.6%</strong></li>
+        </ul>
+        <p style="margin-top:10px;">Anthropic还为此捐赠了1亿美元算力额度，用于开源社区修复高危遗留漏洞。</p>
+      </div>
+      <a class="card-link" href="https://henry-lee-genai-fullstack.hatenablog.com/entry/2026/04/08/084625" target="_blank">📄 查看原文 ↗</a>
+    </div>
+
+    <!-- 3. OpenAI GPT-6 -->
+    <div class="news-card card-gold">
+      <div class="card-meta">
+        <span class="tag tag-gold">⚡ 重量级</span>
+        <span class="tag tag-blue">模型进展</span>
+        <span class="card-source">来源：多方报道 · 2026-04-08</span>
+      </div>
+      <div class="card-title">OpenAI GPT-6（代号"Spud"）：训练已收敛，IPO前最强催化剂</div>
+      <div class="card-body">
+        <p><strong>GPT-6</strong>（内部代号"Spud"）于2025年12月启动训练，已于2026年3月完成收敛，目前处于实验室内部可用阶段。Greg Brockman将其描述为"<em>不是增量改进，而是我们思考模型开发方式的重大改变</em>"，Sam Altman则直言它能"<strong>改变经济</strong>"。</p>
+        <p style="margin-top:10px;">发布节奏与OpenAI积极筹备中的<strong>2026年Q4 IPO（目标估值1万亿美元）</strong>深度绑定：</p>
+        <ul>
+          <li>Q2：可能开放API开发者预览</li>
+          <li>Q3-Q4：最有可能全面发布（Polymarket预测9月前发布概率约72%）</li>
+        </ul>
+        <p style="margin-top:10px;">值得关注的是，OpenAI在3月已发布 <strong>GPT-5.4 mini / nano</strong>，专为高频低延迟场景设计，企业级API调用量正快速增长。</p>
+      </div>
+      <a class="card-link" href="https://blog.csdn.net/weixin_41908519/article/details/159963116" target="_blank">📄 查看原文 · CSDN ↗</a>
+    </div>
+
+    <!-- 4. 阿里千问全球调用第一 -->
+    <div class="news-card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-blue">🇨🇳 国产之光</span>
+        <span class="tag tag-green">数据</span>
+        <span class="card-source">来源：多课网 AI日报 · 2026-04-07</span>
+      </div>
+      <div class="card-title">中国AI连续5周称霸全球调用榜，阿里千问单日处理1.4万亿Token</div>
+      <div class="card-body">
+        <p>过去一周（3月30日—4月5日），全球AI调用量达 <strong>27万亿Tokens（周增18.9%）</strong>，中国模型贡献了其中 <strong>12.96万亿Tokens（周增31.48%）</strong>，是美国的4倍以上。全球Top 6调用模型全部为中国模型：</p>
+        <ul>
+          <li>🥇 阿里 <strong>Qwen3.6-Plus</strong>：4.6万亿Tokens（单日最高突破1.4万亿）</li>
+          <li>🥈 小米 <strong>MiMo-V2-Pro</strong>：3.08万亿Tokens</li>
+          <li>🥉 阶跃星辰 Step 3.5 Flash、MiniMax M2.7、DeepSeek V3.2 紧随其后</li>
+        </ul>
+        <p style="margin-top:10px;">Qwen3.6-Plus上线OpenRouter后调用量激增 <strong>711%</strong>，成为平台首个单日处理超1万亿词元的模型，登顶全球日榜榜首。</p>
+      </div>
+      <a class="card-link card-link-green" href="https://duoke360.com/post/46137" target="_blank">📄 查看原文 · 多课网 ↗</a>
+    </div>
+  </div>
+
+  <!-- ===== 行业动态 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📡</div>
+      <div>
+        <div class="section-title">行业动态</div>
+        <div class="section-desc">各大厂商最新产品、融资与技术突破</div>
+      </div>
+    </div>
+
+    <!-- Google Gemma 4 -->
+    <div class="news-card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-blue">Google</span>
+        <span class="tag tag-green">开源</span>
+        <span class="card-source">来源：多课网 · 机器之心 · 2026-04-07</span>
+      </div>
+      <div class="card-title">Google Gemma 4 全系开源：310亿参数旗舰登顶全球第三，E2B轻量版颠覆性价比认知</div>
+      <div class="card-body">
+        <p>Google正式开源 <strong>Gemma 4</strong> 系列，采用 Apache 2.0 协议（可自由商用），共发布四款型号：</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>模型</th><th>参数规模</th><th>定位</th><th>亮点</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>gemma-4-E2B</td><td class="num-neutral">23亿（激活3.8亿）</td><td>手机/IoT</td><td>性能超越参数大20倍的对手</td></tr>
+            <tr><td>gemma-4-E4B</td><td class="num-neutral">45亿</td><td>笔记本/边缘</td><td>端侧部署优化</td></tr>
+            <tr><td>gemma-4-26B</td><td class="num-neutral">260亿（MoE）</td><td>开发者主力</td><td>混合注意力机制</td></tr>
+            <tr><td>gemma-4-31B</td><td class="num-up">310亿（Dense）</td><td>旗舰</td><td>Arena全球开源第三</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">Gemma 4基于与Gemini 3相同的技术体系，小模型版本还支持音频理解，为多模态端侧部署打开了新空间。</p>
+      </div>
+      <a class="card-link" href="https://duoke360.com/post/46137" target="_blank">📄 查看原文 ↗</a>
+    </div>
+
+    <!-- DeepSeek V4 -->
+    <div class="news-card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-blue">DeepSeek</span>
+        <span class="tag tag-gray">预告</span>
+        <span class="card-source">来源：综合报道 · 2026年4月</span>
+      </div>
+      <div class="card-title">DeepSeek V4发布在即，网页端已上线"快速模式"与"专家模式"</div>
+      <div class="card-body">
+        <p>深度求索（DeepSeek）将于<strong>2026年4月</strong>正式发布旗舰新版本 <strong>DeepSeek-V4</strong>。目前网页端已率先更新，输入框上方新增"<strong>快速模式</strong>"和"<strong>专家模式</strong>"两个功能选项，被外界解读为即将到来的全面升级预热。</p>
+        <p style="margin-top:10px;">V4延续了DeepSeek一贯的"极致效率"路线，其前代V3.2已在本周全球调用榜上位列Top 6，展示出极强的用户黏性与开发者生态。多方评测显示，V4在代码生成、长文本推理等核心指标上将有大幅跃升。</p>
+      </div>
+      <a class="card-link" href="https://www.deepseek.com/" target="_blank">📄 官网链接 ↗</a>
+    </div>
+
+    <!-- 百度文心 -->
+    <div class="news-card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-blue">百度</span>
+        <span class="tag tag-red">技术</span>
+        <span class="card-source">来源：百度官方 · 量子位 · 2026年</span>
+      </div>
+      <div class="card-title">百度文心5.0发布：2.4万亿参数原生全模态，40余项国际评测超越Gemini</div>
+      <div class="card-body">
+        <p>百度于2026年1月正式发布并上线 <strong>文心大模型5.0（ERNIE 5.0）</strong>，采用原生全模态统一建模技术，将文本、图像、音频、视频联合建模于同一框架下，参数规模达<strong>2.4万亿</strong>（超稀疏MoE架构）。</p>
+        <p style="margin-top:10px;">关键技术突破：</p>
+        <ul>
+          <li>采用"弹性训练"技术，在保持高性能的同时大幅降低训练成本</li>
+          <li>在40余项国际评测中全面超越Google Gemini系列</li>
+          <li>支持文本、图像、音频、视频全链路原生理解与生成</li>
+        </ul>
+        <p style="margin-top:10px;">李彦宏在2026年百度开发者大会上以《手把手教你做AI原生应用》为主题发表演讲，同期发布了新搜索、新地图等十余款AI原生应用。</p>
+      </div>
+      <a class="card-link" href="https://ernie.baidu.com/blog/zh/posts/ernie5.0/" target="_blank">📄 官方技术报告 ↗</a>
+    </div>
+
+    <!-- Meta算力 -->
+    <div class="news-card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-blue">Meta</span>
+        <span class="tag tag-gray">基础设施</span>
+        <span class="card-source">来源：多课网 · 2026-04-07</span>
+      </div>
+      <div class="card-title">Meta借贷30亿美元建1GW超级数据中心，为Llama新一代模型备战</div>
+      <div class="card-body">
+        <p>Meta宣布借贷<strong>30亿美元</strong>，在俄亥俄州建设代号"<strong>Prometheus</strong>"的超大规模数据中心，计算功率高达<strong>1吉瓦</strong>（相当于一座核电站的输出功率），专门为Llama下一代模型的训练提供算力底座。</p>
+        <p style="margin-top:10px;">这一动作表明Meta在大模型竞赛中正全力加码——在开源战略（Llama系列）取得显著成功后，Meta开始着力构建与OpenAI、Anthropic、谷歌比肩的超算基础设施。</p>
+      </div>
+      <a class="card-link" href="https://duoke360.com/post/46137" target="_blank">📄 查看原文 ↗</a>
+    </div>
+
+    <!-- 美团LongCat-Next -->
+    <div class="news-card card-green">
+      <div class="card-meta">
+        <span class="tag tag-green">美团</span>
+        <span class="tag tag-blue">开源</span>
+        <span class="card-source">来源：多课网 AI日报 · 2026-04-07</span>
+      </div>
+      <div class="card-title">美团开源LongCat-Next：DiNA架构实现原生多模态统一，多项指标超越Qwen3-Omni</div>
+      <div class="card-body">
+        <p>美团正式开源多模态大模型 <strong>LongCat-Next</strong>，采用自研的 <strong>DiNA（Dynamic Native Architecture）</strong> 架构，通过 <strong>dNaViT 视觉分词器</strong> 将像素空间压缩28倍，实现了真正意义上的原生多模态统一处理。</p>
+        <p style="margin-top:10px;">在多项多模态评测中，LongCat-Next超越了阿里的Qwen3-Omni，成为目前国内开源多模态模型中的顶尖选手。该模型已完全开源，社区开发者可直接下载部署。</p>
+      </div>
+      <a class="card-link card-link-green" href="https://duoke360.com/post/46137" target="_blank">📄 查看原文 ↗</a>
+    </div>
+
+    <!-- 国家安全部Token警示 -->
+    <div class="news-card card-green">
+      <div class="card-meta">
+        <span class="tag tag-red">⚠️ 监管</span>
+        <span class="tag tag-gray">国内</span>
+        <span class="card-source">来源：多课网 AI日报 · 2026-04-07</span>
+      </div>
+      <div class="card-title">国家安全部发布AI Token安全警示：日使用量突破140万亿，四类诈骗风险需警惕</div>
+      <div class="card-body">
+        <p>中国国家安全部发布权威警示，指出当前中国日Token使用量已突破<strong>140万亿</strong>（较2024年初增长超千倍），随之衍生的四类安全风险值得全社会高度关注：</p>
+        <ul>
+          <li><strong>身份劫持</strong>：利用API Token冒充用户发起操作</li>
+          <li><strong>数据伪造</strong>：用AI生成虚假文件、证明材料</li>
+          <li><strong>金融诈骗</strong>：AI换脸/变声实施电信诈骗</li>
+          <li><strong>Token囤积诈骗</strong>：借AI投资热度实施非法集资</li>
+        </ul>
+        <p style="margin-top:10px;">官方建议：启用双因素认证、警惕AI Token投资骗局、定期审计API调用权限。</p>
+      </div>
+      <a class="card-link card-link-green" href="https://duoke360.com/post/46137" target="_blank">📄 查看原文 ↗</a>
+    </div>
+  </div>
+
+  <!-- ===== 核心洞察 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">💡</div>
+      <div>
+        <div class="section-title">核心洞察</div>
+        <div class="section-desc">深度解读行业走势与技术趋势</div>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">洞察 01</div>
+      <div class="insight-title">AI商业化从"烧钱换规模"转向"盈利结构优化"</div>
+      <div class="insight-body">
+        <p>Anthropic年化收入破300亿美元这一节点背后，有一条更重要的逻辑线——<strong>80%的收入来自B端企业客户</strong>，这与OpenAI补贴C端免费用户的模式形成鲜明对比。未来两年，企业级AI服务的毛利率和客户生命周期价值将成为投资者评估AI公司核心价值的关键指标，而不再是单纯的ARR增速。</p>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">洞察 02</div>
+      <div class="insight-title">中国模型"规模输出"阶段开启，调用量超美国4倍的意义</div>
+      <div class="insight-body">
+        <p>全球Top 6调用模型全为中国模型，并非偶然。这背后是<strong>价格战+开源生态+企业侧快速落地</strong>三大驱动力共振的结果。阿里千问、DeepSeek持续保持极具竞争力的API定价，叠加开源模式降低集成门槛，正在形成<strong>以调用量为护城河的"生态锁定"效应</strong>，这对全球AI商业格局的影响将在2026年下半年持续显现。</p>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">洞察 03</div>
+      <div class="insight-title">Agentic AI：从"对话工具"到"数字员工"的范式跃迁</div>
+      <div class="insight-body">
+        <p>OpenClaw的GitHub Star突破28万，英伟达推出NemoClaw智能体平台基础设施——这是一个清晰的信号：<strong>AI智能体正在从"展示级Demo"走向"生产级落地"</strong>。真正的游戏规则改变在于：当AI能够自主操控鼠标键盘、执行复杂工作流时，它不再只是提升个人效率的工具，而是可以替代整类工种的"数字同事"。这一转变对软件行业的重构效应将在未来18个月内集中爆发。</p>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">洞察 04</div>
+      <div class="insight-title">安全AI：能力越强，访问越受限——Mythos的启示</div>
+      <div class="insight-body">
+        <p>Claude Mythos Preview的发布模式极具参考价值：<strong>这是AI行业首次以"能力超越人类专家"为由，主动拒绝公开发布一款强大模型</strong>。这意味着前沿AI能力与公众访问之间的鸿沟可能正在制度化——顶级能力只在核心基础设施伙伴中流通，形成一种新的"能力分层"格局。对于普通开发者而言，与其追逐最强模型，不如深耕特定场景的应用开发和生态绑定。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+  <div class="footer-inner">
+    <p>📚 完整图文版：<a href="https://flystray.github.io/ai-news/reports/2026-04-10-with-links.html" target="_blank">https://flystray.github.io/ai-news/reports/2026-04-10-with-links.html</a></p>
+    <p style="margin-top:8px;">✍️ <strong>fly的AI学习</strong> | 每日更新 AI 大模型最新动态 | 公众号：AI日课</p>
+    <p style="margin-top:4px; font-size:12px;">本报告由自动化脚本采集生成，信息来源：36氪、机器之心、量子位、多课网、官方公告 · 2026-04-10 09:17</p>
+  </div>
+</div>
+
+</body>
+</html>

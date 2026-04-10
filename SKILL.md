@@ -1,3 +1,9 @@
+---
+name: ai-news
+disable: false
+allowed-tools: 
+---
+
 # AI News Center - 技能配置
 
 ## 简介
