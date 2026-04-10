@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.4.10 | GitHub AI 项目精选</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      line-height: 1.7;
+    }
+    .header {
+      background: #fff;
+      border-bottom: 3px solid #0d6efd;
+      padding: 36px 0 28px;
+      text-align: center;
+    }
+    .header .date-badge {
+      display: inline-block;
+      background: #e7f1ff;
+      color: #0d6efd;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: #6c757d;
+      font-size: 15px;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #6c757d;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e9ecef;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .card-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: #0d6efd;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-title-group { flex: 1; }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .card-title a:hover { color: #0d6efd; }
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      color: #6c757d;
+      margin-bottom: 14px;
+    }
+    .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .tag {
+      display: inline-block;
+      background: #f1f3f5;
+      color: #495057;
+      font-size: 12px;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin: 2px 3px 2px 0;
+    }
+    .tag.blue { background: #e7f1ff; color: #0d6efd; }
+    .tag.green { background: #d1fae5; color: #065f46; }
+    .tag.orange { background: #fff3cd; color: #856404; }
+    .desc {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .section-block {
+      margin-bottom: 16px;
+    }
+    .section-block h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-block ul {
+      list-style: none;
+      padding: 0;
+    }
+    .section-block ul li {
+      font-size: 14px;
+      color: #444;
+      padding: 5px 0 5px 18px;
+      position: relative;
+      border-bottom: 1px solid #f1f3f5;
+    }
+    .section-block ul li:last-child { border-bottom: none; }
+    .section-block ul li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #0d6efd;
+      font-size: 12px;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .compare-table th {
+      background: #f8f9fa;
+      color: #495057;
+      font-weight: 600;
+      padding: 8px 12px;
+      text-align: left;
+      border: 1px solid #dee2e6;
+    }
+    .compare-table td {
+      padding: 8px 12px;
+      border: 1px solid #e9ecef;
+      color: #444;
+    }
+    .compare-table tr:nth-child(even) td { background: #fafafa; }
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #24292e;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 8px;
+    }
+    .github-link:hover { background: #0d6efd; }
+    .links-section {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e9ecef;
+      padding: 24px 28px;
+      margin-top: 24px;
+    }
+    .links-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 14px;
+    }
+    .links-section ol {
+      padding-left: 20px;
+    }
+    .links-section li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #444;
+    }
+    .links-section a {
+      color: #0d6efd;
+      word-break: break-all;
+    }
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+      color: #adb5bd;
+      border-top: 1px solid #e9ecef;
+    }
+    .footer a { color: #6c757d; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="date-badge">2026.4.10 · 每日精选</div>
+  <h1>GitHub AI 项目精选</h1>
+  <p>挑选 3 个有启发意义的 AI 开源项目 · 重点关注创新性和新鲜度</p>
+</div>
+
+<div class="container">
+
+  <div class="section-title">今日精选 · 3 个项目</div>
+
+  <!-- 项目 1: VibeVoice -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">1</div>
+      <div class="card-title-group">
+        <div class="card-title">
+          <a href="https://github.com/microsoft/VibeVoice" target="_blank">VibeVoice</a>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+          <span class="tag blue">微软出品</span>
+          <span class="tag green">语音 AI</span>
+          <span class="tag orange">ICLR 2026 Oral</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>⭐ 38.1k</span>
+      <span>🐍 Python</span>
+      <span>📄 MIT License</span>
+      <span>📅 2026-01 开源 ASR</span>
+    </div>
+
+    <div class="desc">
+      微软研究院开源的前沿语音 AI 模型家族，包含长音频语音识别（ASR）和文本转语音（TTS）两大方向。核心突破在于：<strong>单次处理长达 60 分钟的音频，同时输出说话人身份、时间戳和转录文本</strong>，并被 ICLR 2026 接收为 Oral 论文。
+    </div>
+
+    <div class="section-block">
+      <h4>💡 核心创新点</h4>
+      <ul>
+        <li>采用<strong>连续语音分词器（7.5 Hz 超低帧率）</strong>，在保持音质的同时大幅降低计算成本</li>
+        <li>使用 <strong>next-token diffusion</strong> 机制——LLM 理解上下文语义，扩散头负责生成高保真声学细节，两者分工明确</li>
+        <li>VibeVoice-ASR 7B：单次 60 分钟音频处理，内置说话人分离（Speaker Diarization）和时间戳对齐</li>
+        <li>VibeVoice-Realtime 0.5B：首包延迟仅 ~300ms，已集成至 Hugging Face Transformers v5.3.0</li>
+        <li>TTS 支持 <strong>90 分钟多说话人合成</strong>（4 个说话人），包含即兴歌唱能力</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h4>🎯 使用场景</h4>
+      <ul>
+        <li><strong>会议记录自动化</strong>：上传 1 小时会议录音，直接输出"谁/何时/说了什么"的结构化纪要</li>
+        <li><strong>播客/有声书生产</strong>：多角色长篇内容合成，无需人工配音</li>
+        <li><strong>实时输入法</strong>：社区基于此已做出 Vibing 语音输入法（macOS/Windows），延迟极低</li>
+        <li><strong>跨语言内容制作</strong>：英文→中文语音，或跨语言歌唱合成</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h4>📊 与同类方案对比</h4>
+      <table class="compare-table">
+        <tr>
+          <th>方案</th>
+          <th>最长单次处理</th>
+          <th>说话人分离</th>
+          <th>实时 TTS</th>
+          <th>是否开源</th>
+        </tr>
+        <tr>
+          <td>Whisper (OpenAI)</td>
+          <td>~30 分钟</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>AssemblyAI</td>
+          <td>~10 小时</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌ 商业</td>
+        </tr>
+        <tr>
+          <td><strong>VibeVoice</strong></td>
+          <td><strong>60 分钟 ASR / 90 分钟 TTS</strong></td>
+          <td>✅ 原生</td>
+          <td>✅ 300ms 延迟</td>
+          <td>✅ MIT</td>
+        </tr>
+      </table>
+    </div>
+
+    <a href="https://github.com/microsoft/VibeVoice" target="_blank" class="github-link">
+      ⭐ 查看 GitHub 仓库
+    </a>
+  </div>
+
+  <!-- 项目 2: Hermes Agent -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">2</div>
+      <div class="card-title-group">
+        <div class="card-title">
+          <a href="https://github.com/NousResearch/hermes-agent" target="_blank">Hermes Agent</a>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+          <span class="tag blue">Nous Research</span>
+          <span class="tag green">自我学习 Agent</span>
+          <span class="tag orange">$5 VPS 可运行</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>⭐ 44.6k</span>
+      <span>🐍 Python</span>
+      <span>📄 MIT License</span>
+      <span>📅 v0.8.0 · 2026.04.08</span>
+    </div>
+
+    <div class="desc">
+      Nous Research 出品的"会自我成长的 AI Agent"。区别于其他 Agent 框架只能执行预设任务，Hermes 内置了<strong>闭环学习机制</strong>：每完成一个复杂任务后，会自动创建新技能、强化记忆、优化已有工具，越用越智能。5 美元的 VPS 或 Serverless 平台即可部署，通过 Telegram/Discord 从手机远程控制。
+    </div>
+
+    <div class="section-block">
+      <h4>💡 核心创新点</h4>
+      <ul>
+        <li><strong>自主技能创建</strong>：执行复杂任务后，Agent 会自动将"经验"提炼为可复用的技能，并写入 ACP 技能注册表</li>
+        <li><strong>跨会话持久记忆</strong>：使用 FTS5 全文索引，支持语义级跨会话记忆检索；Honcho 框架维护用户画像（辩证用户建模）</li>
+        <li><strong>RL 训练闭环</strong>：内置 Atropos RL 环境，可批量生成工具调用轨迹，用于下一代工具调用模型的微调</li>
+        <li><strong>多平台统一网关</strong>：Telegram/Discord/Slack/WhatsApp/Email 等 6+ 平台，单一网关进程管理</li>
+        <li>支持 200+ LLM（OpenRouter）无缝切换，无需改代码，含 DeepSeek/Kimi/GLM 等国产模型</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h4>🎯 使用场景</h4>
+      <ul>
+        <li><strong>个人 AI 管家</strong>：云端 24/7 运行，手机 Telegram 随时下发任务，Agent 后台自主完成</li>
+        <li><strong>企业自动化</strong>：每日报告生成、每周代码审计、数据库备份，cron 调度自然语言配置</li>
+        <li><strong>开发加速器</strong>：并行化子代理处理多个代码任务，支持 SSH 连接到远程开发机</li>
+        <li><strong>AI 研究实验</strong>：批量轨迹生成 + RL 策略探索，加速工具调用模型研究</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h4>📊 与同类 Agent 框架对比</h4>
+      <table class="compare-table">
+        <tr>
+          <th>框架</th>
+          <th>跨会话记忆</th>
+          <th>自我学习</th>
+          <th>部署成本</th>
+          <th>多平台消息</th>
+        </tr>
+        <tr>
+          <td>AutoGPT</td>
+          <td>有限</td>
+          <td>❌</td>
+          <td>需要 GPU</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td>LangGraph Agent</td>
+          <td>需手动配置</td>
+          <td>❌</td>
+          <td>中等</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td><strong>Hermes Agent</strong></td>
+          <td><strong>✅ FTS5 语义检索</strong></td>
+          <td><strong>✅ 闭环自动化</strong></td>
+          <td><strong>$5 VPS</strong></td>
+          <td><strong>✅ 6+ 平台</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <a href="https://github.com/NousResearch/hermes-agent" target="_blank" class="github-link">
+      ⭐ 查看 GitHub 仓库
+    </a>
+  </div>
+
+  <!-- 项目 3: TimesFM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">3</div>
+      <div class="card-title-group">
+        <div class="card-title">
+          <a href="https://github.com/google-research/timesfm" target="_blank">TimesFM 2.5</a>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+          <span class="tag blue">Google Research</span>
+          <span class="tag green">时间序列基础模型</span>
+          <span class="tag orange">ICML 2024</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>⭐ 16k</span>
+      <span>🐍 Python</span>
+      <span>📅 最新版 2.5 · 2025.09</span>
+      <span>🔗 已集成 Google BigQuery</span>
+    </div>
+
+    <div class="desc">
+      Google Research 推出的<strong>时间序列预测基础模型</strong>，思路类比 LLM：先用海量时序数据预训练一个通用大模型，推理时<strong>无需微调即可零样本预测任何时间序列</strong>。2.5 版本将参数从 500M 压缩到 200M，同时上下文长度提升 8 倍至 16,000——更小、更快、更强。
+    </div>
+
+    <div class="section-block">
+      <h4>💡 核心创新点</h4>
+      <ul>
+        <li><strong>Decoder-only 架构</strong>：把预测序列当成"下一个 token 续写"问题，开创了时间序列基础模型新范式</li>
+        <li><strong>零样本推理</strong>：不需要用目标领域数据微调，直接预测销售/天气/传感器等任意序列</li>
+        <li><strong>16k 超长上下文</strong>：可利用超过 1 年的日粒度历史数据进行预测</li>
+        <li><strong>连续量化预测</strong>：可选 30M 量化头，同时输出 10 个分位数（P10~P90），量化不确定性</li>
+        <li><strong>Google Cloud 官方产品</strong>：已集成至 BigQuery ML，是首个进入主流云平台的开源时序基础模型</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h4>🎯 使用场景</h4>
+      <ul>
+        <li><strong>零售需求预测</strong>：无需历史样本，直接预测新 SKU 的销售量，解决冷启动问题</li>
+        <li><strong>云资源容量规划</strong>：预测服务器流量峰值，自动扩缩容决策</li>
+        <li><strong>金融时序分析</strong>：量化分位数预测给出置信区间，而非仅一个点预测</li>
+        <li><strong>工业设备监控</strong>：传感器异常预测，预测性维护（Predictive Maintenance）</li>
+        <li><strong>个人数据分析</strong>：200M 模型可在普通笔记本上运行，适合轻量本地部署</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h4>📊 与传统方法对比</h4>
+      <table class="compare-table">
+        <tr>
+          <th>方法</th>
+          <th>是否需微调</th>
+          <th>冷启动能力</th>
+          <th>不确定性量化</th>
+          <th>云端集成</th>
+        </tr>
+        <tr>
+          <td>ARIMA / Prophet</td>
+          <td>每个序列单独训练</td>
+          <td>❌</td>
+          <td>有限</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td>Transformer (PatchTST)</td>
+          <td>✅ 需微调</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td><strong>TimesFM 2.5</strong></td>
+          <td><strong>❌ 零样本</strong></td>
+          <td><strong>✅ 原生支持</strong></td>
+          <td><strong>✅ P10~P90</strong></td>
+          <td><strong>✅ BigQuery 原生</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <a href="https://github.com/google-research/timesfm" target="_blank" class="github-link">
+      ⭐ 查看 GitHub 仓库
+    </a>
+  </div>
+
+  <!-- 原文链接 -->
+  <div class="links-section">
+    <h3>🔗 原文链接汇总</h3>
+    <ol>
+      <li>
+        <strong>VibeVoice</strong>（微软开源语音 AI 模型家族）<br>
+        <a href="https://github.com/microsoft/VibeVoice" target="_blank">https://github.com/microsoft/VibeVoice</a>
+      </li>
+      <li>
+        <strong>Hermes Agent</strong>（Nous Research 自我学习 AI Agent）<br>
+        <a href="https://github.com/NousResearch/hermes-agent" target="_blank">https://github.com/NousResearch/hermes-agent</a>
+      </li>
+      <li>
+        <strong>TimesFM 2.5</strong>（Google Research 时间序列基础模型）<br>
+        <a href="https://github.com/google-research/timesfm" target="_blank">https://github.com/google-research/timesfm</a>
+      </li>
+    </ol>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>由 AI 自动整理 · 2026-04-10 · 作者：fly的AI学习</p>
+  <p style="margin-top:6px;">
+    <a href="https://Flystray.github.io/ai-news/ai-github-reports/2026-04-10-github-projects.html">在线阅读</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/Flystray/ai-news">GitHub</a>
+  </p>
+</div>
+
+</body>
+</html>
