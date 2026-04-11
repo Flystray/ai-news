@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026.04.11 | GitHub AI 项目精选</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 3px solid #3b82f6;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+        .header .date {
+            color: #64748b;
+            font-size: 1rem;
+        }
+        .project {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .project-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e40af;
+        }
+        .project-name a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+        .project-name a:hover {
+            text-decoration: underline;
+        }
+        .stars {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 20px 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .description {
+            color: #4b5563;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+        .features {
+            list-style: none;
+            padding: 0;
+        }
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            gap: 10px;
+        }
+        .features li:last-child { border-bottom: none; }
+        .feature-icon { color: #10b981; font-weight: bold; }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        .tech-table th, .tech-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+        .tech-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+        .tech-table td { color: #4b5563; }
+        .links {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px dashed #e5e7eb;
+        }
+        .links a {
+            display: inline-block;
+            margin-right: 20px;
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .links a:hover { text-decoration: underline; }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .innovation-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GitHub AI 项目精选</h1>
+            <p class="date">2026 年 4 月 11 日 · 每日更新</p>
+        </div>
+
+        <!-- 项目 1: Parlor -->
+        <div class="project">
+            <div class="project-header">
+                <span class="project-name">
+                    <a href="https://github.com/fikrikarim/parlor" target="_blank">fikrikarim/parlor</a>
+                </span>
+                <span class="stars">⭐ 1.3k</span>
+                <span class="innovation-tag">🔥 本周新建</span>
+            </div>
+
+            <p class="description">
+                设备端实时多模态 AI 对话系统。使用 Google Gemma 4 E2B + Kokoro TTS，在本地机器上实现语音+视觉的实时 AI 对话交互。所有处理完全离线，端到端延迟仅 2.5-3 秒。
+            </p>
+
+            <div class="section-title">🎯 核心创新点</div>
+            <ul class="features">
+                <li><span class="feature-icon">✦</span><strong>免提操作</strong> — 集成 Silero VAD 语音活动检测，说完即识别，无需按键触发</li>
+                <li><span class="feature-icon">✦</span><strong>随时打断</strong> — 支持 Barge-in，可随时中断 AI 说话进行追问</li>
+                <li><span class="feature-icon">✦</span><strong>流式 TTS</strong> — 句子级语音合成，响应生成同时开始播放，几乎无等待感</li>
+                <li><span class="feature-icon">✦</span><strong>视觉+语音同步</strong> — 边说话边展示摄像头画面，AI 同步理解并回应</li>
+            </ul>
+
+            <div class="section-title">⚙️ 技术架构</div>
+            <table class="tech-table">
+                <tr><th>模块</th><th>技术选型</th></tr>
+                <tr><td>LLM 推理</td><td>Google Gemma 4 E2B + LiteRT-LM</td></tr>
+                <tr><td>语音合成</td><td>Kokoro TTS (Mac: MLX / Linux: ONNX)</td></tr>
+                <tr><td>语音检测</td><td>Silero VAD</td></tr>
+                <tr><td>后端框架</td><td>FastAPI + WebSocket</td></tr>
+                <tr><td>端到端延迟</td><td>2.5-3.0 秒 (M3 Pro)</td></tr>
+            </table>
+
+            <div class="section-title">💡 使用场景</div>
+            <ul class="features">
+                <li><span class="feature-icon">→</span>隐私敏感场景：医疗、法律、金融对话不上云</li>
+                <li><span class="feature-icon">→</span>离线助手：网络不稳定环境下的可靠 AI 交互</li>
+                <li><span class="feature-icon">→</span>嵌入式设备：智能眼镜、机器人的语音交互模块</li>
+            </ul>
+
+            <div class="links">
+                <a href="https://github.com/fikrikarim/parlor" target="_blank">🔗 GitHub 仓库</a>
+                <a href="https://huggingface.co/fikrikarim/gemma-4-E2B" target="_blank">📦 模型下载</a>
+            </div>
+        </div>
+
+        <!-- 项目 2: MetaClaw -->
+        <div class="project">
+            <div class="project-header">
+                <span class="project-name">
+                    <a href="https://github.com/aiming-lab/MetaClaw" target="_blank">aiming-lab/MetaClaw</a>
+                </span>
+                <span class="stars">⭐ 3.4k</span>
+                <span class="innovation-tag">🧬 可进化</span>
+            </div>
+
+            <p class="description">
+                "Just talk to your agent — it learns and EVOLVES"。让 AI Agent 通过日常对话学习和进化的框架。受大脑学习方式启发，将每次对话转化为学习信号，支持云端 LoRA 微调，无需 GPU。
+            </p>
+
+            <div class="section-title">🎯 核心创新点</div>
+            <ul class="features">
+                <li><span class="feature-icon">✦</span><strong>对话即训练</strong> — 无需专门训练数据，日常对话自动生成技能和 LoRA 权重</li>
+                <li><span class="feature-icon">✦</span><strong>跨会话记忆</strong> — 5种记忆类型：情景/语义/偏好/项目状态/工作摘要</li>
+                <li><span class="feature-icon">✦</span><strong>云端训练</strong> — 所有微调通过 Tinker/MinT API 完成，本地无需 GPU</li>
+                <li><span class="feature-icon">✦</span><strong>自动技能进化</strong> — 会话结束后自动总结并生成新技能注入</li>
+            </ul>
+
+            <div class="section-title">⚙️ 技术架构</div>
+            <table class="tech-table">
+                <tr><th>模块</th><th>技术选型</th></tr>
+                <tr><td>训练算法</td><td>GRPO + 在线 LoRA 微调</td></tr>
+                <tr><td>训练后端</td><td>Tinker / MinT / Weaver</td></tr>
+                <tr><td>支持代理</td><td>OpenClaw, CoPaw, IronClaw, ZeroClaw 等 8 种</td></tr>
+                <tr><td>记忆系统</td><td>Contexture (v0.4.0 新增)</td></tr>
+                <tr><td>LLM 接口</td><td>OpenAI / Anthropic / Kimi / Qwen 兼容</td></tr>
+            </table>
+
+            <div class="section-title">💡 使用场景</div>
+            <ul class="features">
+                <li><span class="feature-icon">→</span>个人 AI 助手：越用越懂你，真正个性化的 Agent</li>
+                <li><span class="feature-icon">→</span>专业领域适应：法律、医疗、金融场景的快速适配</li>
+                <li><span class="feature-icon">→</span>团队协作：多 Claw 协作，各自学习不同技能</li>
+            </ul>
+
+            <div class="links">
+                <a href="https://github.com/aiming-lab/MetaClaw" target="_blank">🔗 GitHub 仓库</a>
+                <a href="https://arxiv.org/abs/2603.17187" target="_blank">📄 技术报告</a>
+            </div>
+        </div>
+
+        <!-- 项目 3: AI Engineering Interview -->
+        <div class="project">
+            <div class="project-header">
+                <span class="project-name">
+                    <a href="https://github.com/amitshekhariitbhu/ai-engineering-interview-questions" target="_blank">amitshekhariitbhu/ai-engineering-interview-questions</a>
+                </span>
+                <span class="stars">⭐ 1.0k</span>
+                <span class="innovation-tag">📚 学习资源</span>
+            </div>
+
+            <p class="description">
+                AI 工程面试" cheat sheet"，涵盖 LLM、RAG、Agent、Fine-tuning 等 15 大模块，100+生产场景问题，30+系统设计案例。由 Outcome School 创始人 Amit Shekhar 创建并维护。
+            </p>
+
+            <div class="section-title">🎯 核心内容</div>
+            <ul class="features">
+                <li><span class="feature-icon">✦</span><strong>15 大知识模块</strong> — 从 LLM 基础到 MLOps，覆盖 AI 工程全栈</li>
+                <li><span class="feature-icon">✦</span><strong>100+ 生产场景</strong> — 真实故障排查与优化问题</li>
+                <li><span class="feature-icon">✦</span><strong>30+ 系统设计</strong> — 客服机器人、代码生成、RAG 架构等</li>
+                <li><span class="feature-icon">✦</span><strong>20+ 实践任务</strong> — RAG 流水线、Agent、幻觉检测等代码实现</li>
+            </ul>
+
+            <div class="section-title">📖 知识体系</div>
+            <table class="tech-table">
+                <tr><th>模块</th><th>涵盖内容</th></tr>
+                <tr><td>LLM 基础</td><td>Transformer、注意力机制、KV Cache、Flash Attention</td></tr>
+                <tr><td>Prompt Engineering</td><td>CoT、ReAct、ToT、提示注入防御</td></tr>
+                <tr><td>RAG</td><td>分块策略、混合搜索、Graph RAG、Agentic RAG</td></tr>
+                <tr><td>AI Agent</td><td>ReAct、工具使用、MCP 协议、多 Agent</td></tr>
+                <tr><td>Fine-tuning</td><td>LoRA、QLoRA、RLHF、灾难性遗忘</td></tr>
+            </table>
+
+            <div class="section-title">💡 适用人群</div>
+            <ul class="features">
+                <li><span class="feature-icon">→</span>AI 工程师求职者：系统性准备面试，查漏补缺</li>
+                <li><span class="feature-icon">→</span>在职工程师：梳理知识体系，准备晋升答辩</li>
+                <li><span class="feature-icon">→</span>转型者：从传统开发切入 AI 工程的快速路径</li>
+            </ul>
+
+            <div class="links">
+                <a href="https://github.com/amitshekhariitbhu/ai-engineering-interview-questions" target="_blank">🔗 GitHub 仓库</a>
+                <a href="https://outcomeschool.com/" target="_blank">🎓 Outcome School</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📢 原文链接汇总</p>
+            <p style="margin-top:10px;">
+                <a href="https://github.com/fikrikarim/parlor" target="_blank">Parlor</a> ·
+                <a href="https://github.com/aiming-lab/MetaClaw" target="_blank">MetaClaw</a> ·
+                <a href="https://github.com/amitshekhariitbhu/ai-engineering-interview-questions" target="_blank">AI Interview</a>
+            </p>
+            <p style="margin-top: 20px; color: #94a3b8;">
+                由 AI 每日自动抓取 · 精选推荐有创新价值的项目
+            </p>
+        </div>
+    </div>
+</body>
+</html>
