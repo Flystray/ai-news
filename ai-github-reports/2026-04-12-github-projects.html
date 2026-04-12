@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub AI 项目精选 | 2026.4.12</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f7f8fa;
+      color: #2c3e50;
+      line-height: 1.75;
+    }
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e8ecf0;
+      padding: 28px 0 22px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: 0.02em;
+    }
+    .header .date {
+      font-size: 0.9rem;
+      color: #8492a6;
+      margin-top: 6px;
+    }
+    .header .tagline {
+      font-size: 0.85rem;
+      color: #b0bec5;
+      margin-top: 4px;
+    }
+    .container {
+      max-width: 860px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 22px 26px 16px;
+      border-bottom: 1px solid #f0f2f5;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .card-rank {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #e8ecf0;
+      min-width: 36px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .card-title-area { flex: 1; }
+    .card-title-area h2 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .card-title-area h2 a {
+      color: #1a1a2e;
+      text-decoration: none;
+    }
+    .card-title-area h2 a:hover { color: #4A90D9; }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-stars { background: #fff8e1; color: #f59e0b; }
+    .badge-lang { background: #e8f5e9; color: #2e7d32; }
+    .badge-new { background: #fce4ec; color: #c62828; }
+    .badge-hot { background: #fff3e0; color: #e65100; }
+    .card-body { padding: 20px 26px; }
+    .card-desc {
+      font-size: 0.97rem;
+      color: #546e7a;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .section-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #4A90D9;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 18px 0 8px;
+    }
+    .section-title:first-of-type { margin-top: 0; }
+    p { font-size: 0.95rem; color: #37474f; margin-bottom: 10px; }
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    ul li { font-size: 0.93rem; color: #455a64; margin-bottom: 5px; }
+    .highlight-box {
+      background: #f0f7ff;
+      border-left: 4px solid #4A90D9;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+      font-size: 0.92rem;
+      color: #2c3e50;
+    }
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 12px 0;
+    }
+    .tech-table th {
+      background: #f7f8fa;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #546e7a;
+      border-bottom: 2px solid #e8ecf0;
+    }
+    .tech-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f0f2f5;
+      color: #37474f;
+    }
+    .tech-table tr:last-child td { border-bottom: none; }
+    .tech-table tr:hover td { background: #fafbfc; }
+    .code-tag {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      background: #f3f4f6;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      color: #e91e63;
+    }
+    .card-footer {
+      padding: 14px 26px;
+      background: #fafbfc;
+      border-top: 1px solid #f0f2f5;
+      font-size: 0.83rem;
+      color: #8492a6;
+    }
+    .card-footer a {
+      color: #4A90D9;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .card-footer a:hover { text-decoration: underline; }
+    .links-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 22px 26px;
+      margin-bottom: 28px;
+    }
+    .links-section h3 {
+      font-size: 1.0rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 14px;
+    }
+    .links-section ol {
+      padding-left: 18px;
+    }
+    .links-section ol li {
+      font-size: 0.93rem;
+      color: #455a64;
+      margin-bottom: 8px;
+    }
+    .links-section ol li a {
+      color: #4A90D9;
+      text-decoration: none;
+    }
+    .links-section ol li a:hover { text-decoration: underline; }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.82rem;
+      color: #b0bec5;
+    }
+    .footer a { color: #90a4ae; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ GitHub AI 项目精选</h1>
+  <div class="date">2026年4月12日 · 星期日</div>
+  <div class="tagline">精选 3 个最具创新性的 AI 开源项目 · 新、有启发意义</div>
+</div>
+
+<div class="container">
+
+  <!-- Project 1: MemPalace -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-rank">01</div>
+      <div class="card-title-area">
+        <h2><a href="https://github.com/MemPalace/mempalace" target="_blank">MemPalace/mempalace</a></h2>
+        <div class="card-meta">
+          <span class="badge badge-stars">⭐ 41.9k</span>
+          <span class="badge badge-lang">Python</span>
+          <span class="badge badge-new">🆕 2026-04-05</span>
+          <span class="badge badge-hot">🔥 本周爆火</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">"The highest-scoring AI memory system ever benchmarked. And it's free."</div>
+
+      <div class="section-title">项目背景</div>
+      <p>你用了 6 个月 AI，产生了 1950 万 tokens 的对话记忆——但每次关闭窗口，全部归零。传统解法要么依赖 LLM 摘要（成本高、丢失细节），要么付费订阅 Mem0、Zep（$25-249/月）。MemPalace 用一套完全本地的开源系统解决了这个问题。</p>
+      <p>项目在 LongMemEval 基准测试中以 <strong>96.6% Recall@5（零 API 调用）</strong> 创下历史记录，可选开启 Haiku Rerank 后达到 <strong>100%（500/500）</strong>。</p>
+
+      <div class="section-title">核心创新：记忆宫殿架构</div>
+      <p>MemPalace 借鉴古希腊「记忆宫殿法」，将 AI 记忆组织成可导航的空间结构：</p>
+      <ul>
+        <li><strong>Wings（翼）</strong>：每个人或项目独立空间，如 <code class="code-tag">wing_kai</code></li>
+        <li><strong>Halls（厅）</strong>：分类走廊，含 facts / events / discoveries / preferences / advice</li>
+        <li><strong>Rooms（房间）</strong>：具体主题，同名 Room 在不同 Wing 间自动创建隧道连接</li>
+        <li><strong>Drawers（抽屉）</strong>：原始 verbatim 文件，永不摘要，完整保留每一个字</li>
+      </ul>
+      <div class="highlight-box">
+        结构不是装饰性的：Wing + Room 过滤相比全库搜索带来 <strong>+34% 检索精度提升</strong>（60.9% → 94.8%）
+      </div>
+
+      <div class="section-title">四层记忆栈（启动仅 170 tokens）</div>
+      <table class="tech-table">
+        <tr><th>层级</th><th>内容</th><th>大小</th><th>加载时机</th></tr>
+        <tr><td>L0 Identity</td><td>AI 身份定义</td><td>~50 tokens</td><td>始终加载</td></tr>
+        <tr><td>L1 Critical Facts</td><td>团队、项目、偏好</td><td>~120 tokens</td><td>始终加载</td></tr>
+        <tr><td>L2 Room Recall</td><td>近期会话、当前项目</td><td>按需</td><td>话题触发</td></tr>
+        <tr><td>L3 Deep Search</td><td>全库语义搜索</td><td>按需</td><td>明确请求</td></tr>
+      </table>
+
+      <div class="section-title">与竞品对比</div>
+      <table class="tech-table">
+        <tr><th>系统</th><th>LongMemEval R@5</th><th>需要 API</th><th>成本</th></tr>
+        <tr><td><strong>MemPalace (hybrid)</strong></td><td><strong>100%</strong></td><td>可选</td><td><strong>免费</strong></td></tr>
+        <tr><td><strong>MemPalace (raw)</strong></td><td><strong>96.6%</strong></td><td>否</td><td><strong>免费</strong></td></tr>
+        <tr><td>Mastra</td><td>94.87%</td><td>是 (GPT)</td><td>API 费用</td></tr>
+        <tr><td>Mem0</td><td>~85%</td><td>是</td><td>$19-249/月</td></tr>
+        <tr><td>Zep</td><td>~85%</td><td>是</td><td>$25/月+</td></tr>
+      </table>
+
+      <div class="section-title">技术栈 & 使用场景</div>
+      <ul>
+        <li>存储：ChromaDB（向量）+ SQLite（知识图谱），完全本地，零外部 API</li>
+        <li>集成：19 个 MCP 工具，支持 Claude Code / Gemini CLI / Cursor</li>
+        <li>适用场景：个人 AI 助手记忆、代码项目上下文持久化、团队知识库构建</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      🔗 <a href="https://github.com/MemPalace/mempalace" target="_blank">github.com/MemPalace/mempalace</a>
+      &nbsp;·&nbsp; 安装：<code class="code-tag">pip install mempalace</code>
+    </div>
+  </div>
+
+  <!-- Project 2: phantom -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-rank">02</div>
+      <div class="card-title-area">
+        <h2><a href="https://github.com/ghostwright/phantom" target="_blank">ghostwright/phantom</a></h2>
+        <div class="card-meta">
+          <span class="badge badge-stars">⭐ 1.2k</span>
+          <span class="badge badge-lang">TypeScript</span>
+          <span class="badge badge-new">🆕 2026-03-26</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">"An AI co-worker with its own computer. Self-evolving, persistent memory, MCP server."</div>
+
+      <div class="section-title">项目背景</div>
+      <p>传统 AI 助手是「一次性」的——关闭窗口，上下文归零；你的工具只在你的机器上跑，分享要截图发 localhost 链接。Phantom 的解法是：<strong>给 AI 分配一台专属虚拟机</strong>，让它像一个真正的同事一样 7×24 小时在线工作。</p>
+
+      <div class="section-title">核心创新：自我进化引擎</div>
+      <p>Phantom 最独特的能力是「自我进化」——6 步闭环流水线：</p>
+      <ol style="padding-left:18px; margin-bottom:12px;">
+        <li style="margin-bottom:5px; font-size:0.93rem; color:#455a64;"><strong>Observe</strong>：记录对话中的纠正、偏好和领域事实</li>
+        <li style="margin-bottom:5px; font-size:0.93rem; color:#455a64;"><strong>Critique</strong>：评估当前行为与目标的偏差</li>
+        <li style="margin-bottom:5px; font-size:0.93rem; color:#455a64;"><strong>Generate</strong>：生成行为改进建议</li>
+        <li style="margin-bottom:5px; font-size:0.93rem; color:#455a64;"><strong>Validate</strong>：5 门安全关卡（宪法、回归、大小、偏移、安全性）</li>
+        <li style="margin-bottom:5px; font-size:0.93rem; color:#455a64;"><strong>Apply</strong>：将通过验证的改进写入配置</li>
+        <li style="margin-bottom:5px; font-size:0.93rem; color:#455a64;"><strong>Merge</strong>：压缩零散观察为高维「原则」，防止记忆膨胀</li>
+      </ol>
+      <div class="highlight-box">
+        <strong>三法官投票机制</strong>：使用 Claude Sonnet 作为跨模型评判，只要一位法官反对，进化变更即被阻断，防止自我增强偏见。所有版本可追溯、可回滚。
+      </div>
+
+      <div class="section-title">持久记忆实现</div>
+      <ul>
+        <li>三层 Qdrant 向量存储（短期对话 / 长期事实 / 用户偏好）</li>
+        <li>本地运行 <code class="code-tag">nomic-embed-text</code> 嵌入模型（Ollama），零外部 API</li>
+        <li>每次对话自动注入相关记忆上下文：周一提到的事，周三它还记得</li>
+      </ul>
+
+      <div class="section-title">功能亮点</div>
+      <table class="tech-table">
+        <tr><th>能力</th><th>说明</th></tr>
+        <tr><td>独立计算环境</td><td>AI 在专属 VM 上，构建的仪表盘/API/页面自带公网 URL</td></tr>
+        <tr><td>动态工具创建</td><td>运行时自建 MCP 工具并注册，重启后依然存在</td></tr>
+        <tr><td>加密凭证管理</td><td>AES-256-GCM + Magic Link，无明文凭证</td></tr>
+        <tr><td>自带邮箱身份</td><td>每个 Phantom 有独立邮件地址，可向外部发报告</td></tr>
+        <tr><td>MCP Server</td><td>Claude Code / Desktop 可直接连接，调用其记忆和工具</td></tr>
+      </table>
+
+      <div class="section-title">适用场景</div>
+      <ul>
+        <li>个人 AI 同事：24/7 自主执行数据分析、监控、报告生成</li>
+        <li>团队工程助理：代码库解读、基础设施自动化、工具链构建</li>
+        <li>非技术人员：Slack 对话指令 → Chrome 插件/落地页自动部署</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      🔗 <a href="https://github.com/ghostwright/phantom" target="_blank">github.com/ghostwright/phantom</a>
+      &nbsp;·&nbsp; 基于 Claude Agent SDK + Bun 构建
+    </div>
+  </div>
+
+  <!-- Project 3: open-multi-agent -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-rank">03</div>
+      <div class="card-title-area">
+        <h2><a href="https://github.com/JackChen-me/open-multi-agent" target="_blank">JackChen-me/open-multi-agent</a></h2>
+        <div class="card-meta">
+          <span class="badge badge-stars">⭐ 5.6k</span>
+          <span class="badge badge-lang">TypeScript</span>
+          <span class="badge badge-new">🆕 2026-03-31</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">"TypeScript multi-agent framework — one runTeam() call from goal to result."</div>
+
+      <div class="section-title">项目背景</div>
+      <p>构建多智能体系统，你要么用 LangGraph 手绘复杂的状态机图，要么用 Python 生态的 CrewAI，还要搭一堆基础设施。TypeScript 开发者长期被「降级」到调用单个 LLM API 的水平。open-multi-agent 填补了这个空白。</p>
+
+      <div class="section-title">核心创新：目标驱动的自动编排</div>
+      <p>只需要三行代码：</p>
+      <div class="highlight-box">
+        <code class="code-tag">const team = new OpenMultiAgent({agents: [researcher, coder, reviewer]});</code><br>
+        <code class="code-tag">await team.runTeam("构建一个用户认证 REST API");</code><br><br>
+        框架自动：分解目标 → 建立 DAG 任务图 → 解析依赖 → 并行执行 → 合成输出
+      </div>
+
+      <div class="section-title">三种运行模式</div>
+      <ul>
+        <li><code class="code-tag">runAgent()</code>：单智能体单次提示，最简单入口</li>
+        <li><code class="code-tag">runTeam()</code>：给目标，框架自动规划执行（核心模式）</li>
+        <li><code class="code-tag">runTasks()</code>：自定义任务图，明确流水线控制</li>
+      </ul>
+
+      <div class="section-title">与主流框架对比</div>
+      <table class="tech-table">
+        <tr><th>框架</th><th>语言</th><th>编排方式</th><th>依赖数量</th><th>适合场景</th></tr>
+        <tr><td><strong>open-multi-agent</strong></td><td>TypeScript</td><td>目标驱动，自动规划</td><td><strong>3 个</strong></td><td>快速迭代、Node.js 集成</td></tr>
+        <tr><td>LangGraph JS</td><td>JavaScript</td><td>声明式图编排</td><td>较多</td><td>固定生产工作流</td></tr>
+        <tr><td>CrewAI</td><td>Python</td><td>角色驱动</td><td>较多</td><td>Python 技术栈</td></tr>
+        <tr><td>Vercel AI SDK</td><td>TypeScript</td><td>LLM 调用层</td><td>-</td><td>流式输出，与之互补</td></tr>
+      </table>
+
+      <div class="section-title">技术亮点</div>
+      <ul>
+        <li><strong>3 个依赖</strong>：仅 <code class="code-tag">@anthropic-ai/sdk</code> + <code class="code-tag">openai</code> + <code class="code-tag">zod</code></li>
+        <li><strong>多模型混合团队</strong>：同一团队可混用 Claude / GPT / Gemini / Ollama 本地模型</li>
+        <li><strong>工具权限控制</strong>：预设 readonly / readwrite / full，支持允许/拒绝列表</li>
+        <li><strong>结构化输出</strong>：Zod 模式验证 JSON，可观测性 <code class="code-tag">onTrace</code> 回调</li>
+        <li><strong>部署无限制</strong>：Express / Next.js / Serverless / CI 管道，任意 Node.js 环境</li>
+      </ul>
+
+      <div class="section-title">适用场景</div>
+      <ul>
+        <li>自动化研究+编码+审查流水线</li>
+        <li>多模型协作的内容生成系统</li>
+        <li>需要在 Next.js/Node.js 后端直接集成多智能体能力的项目</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      🔗 <a href="https://github.com/JackChen-me/open-multi-agent" target="_blank">github.com/JackChen-me/open-multi-agent</a>
+      &nbsp;·&nbsp; 安装：<code class="code-tag">npm install open-multi-agent</code>
+    </div>
+  </div>
+
+  <!-- Links Summary -->
+  <div class="links-section">
+    <h3>📎 原文链接汇总</h3>
+    <ol>
+      <li><a href="https://github.com/MemPalace/mempalace" target="_blank">MemPalace/mempalace</a> — 史上基准最高的 AI 记忆系统，完全本地化，⭐41.9k</li>
+      <li><a href="https://github.com/ghostwright/phantom" target="_blank">ghostwright/phantom</a> — 拥有独立计算机的 AI 同事，自我进化+持久记忆，⭐1.2k</li>
+      <li><a href="https://github.com/JackChen-me/open-multi-agent" target="_blank">JackChen-me/open-multi-agent</a> — 轻量 TypeScript 多智能体框架，仅 3 个依赖，⭐5.6k</li>
+    </ol>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>由 <a href="https://github.com/Flystray/ai-news" target="_blank">Flystray/ai-news</a> 自动生成 · 每日精选 3 个最具价值的 AI 开源项目</p>
+  <p style="margin-top:4px;">在线阅读：<a href="https://flystray.github.io/ai-news/ai-github-reports/2026-04-12-github-projects.html" target="_blank">flystray.github.io/ai-news/ai-github-reports/2026-04-12-github-projects.html</a></p>
+</div>
+
+</body>
+</html>
