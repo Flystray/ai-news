@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-13 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; border: none; padding: 14px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102,126,234,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-04-13</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+        
+        <div id="news-content">
+            <!-- 今日重大突破 -->
+            <div class="section">
+                <h2 class="section-title"><span>🔥</span> 今日重大突破</h2>
+                
+                <div class="news-card">
+                    <h3>GPT-6定档4月14日发布：原生多模态+200万上下文，OpenAI开启AGI冲刺 <span class="tag">OpenAI</span></h3>
+                    <p>OpenAI官方正式确认，代号为"Spud（土豆）"的新一代大模型GPT-6将于2026年4月14日全球同步发布。这是OpenAI有史以来最大规模的模型发布，预训练已于3月17日在德克萨斯州阿比林的Stargate超级集群完成。</p>
+                    <ul>
+                        <li><strong>性能提升：</strong>相比GPT-5，GPT-6性能暴涨40%，推理能力接近AGI临界点</li>
+                        <li><strong>上下文窗口：</strong>支持200万token超长上下文，可处理整本书籍或大型代码库</li>
+                        <li><strong>原生多模态：</strong>文本、图像、音频、视频统一处理，无需单独模型</li>
+                        <li><strong>代号由来：</strong>内部代号"Spud"源于团队对模型"朴实但强大"的期许</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260409A021OB00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                        <a href="https://www.36kr.com/p/3754726863012361" target="_blank" class="link">📌 36氪 →</a>
+                        <a href="https://zhuanlan.zhihu.com/p/2024952165383381974" target="_blank" class="link">📌 知乎 →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>DeepSeek V4官宣4月下旬发布：万亿参数+华为昇腾适配，国产算力里程碑 <span class="tag">DeepSeek</span></h3>
+                    <p>DeepSeek创始人梁文锋在内部沟通中明确：新一代旗舰大模型DeepSeek V4将于2026年4月下旬正式发布。这将是首个全面适配华为昇腾等国产算力芯片的万亿参数大模型，标志着国产AI算力生态的重大突破。</p>
+                    <ul>
+                        <li><strong>模型规模：</strong>1万亿参数，采用全新MoE架构，推理成本降低60%</li>
+                        <li><strong>国产适配：</strong>深度优化华为昇腾、寒武纪等国产芯片，摆脱对英伟达依赖</li>
+                        <li><strong>上下文能力：</strong>支持100万token长上下文，已启动灰度测试</li>
+                        <li><strong>多模态升级：</strong>文本、图像、代码能力全面增强，编程能力对标GPT-6</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://zhuanlan.zhihu.com/p/2016835636590576611" target="_blank" class="link">📌 知乎专栏 →</a>
+                        <a href="https://ai.zol.com.cn/1162/11620761.html" target="_blank" class="link">📌 中关村在线 →</a>
+                        <a href="https://discuss.deepseek.club/t/topic/1503" target="_blank" class="link">📌 DeepSeek社区 →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>Claude Mythos Preview震撼登场：Anthropic史上最强模型，网络安全领域引发轰动 <span class="tag">Anthropic</span></h3>
+                    <p>2026年4月7日，Anthropic发布Project Glasswing计划，同步推出Claude Mythos Preview——这是Anthropic迄今最强大的模型，专为防御性网络安全设计。其漏洞挖掘能力之强，甚至引发英国金融监管机构紧急开会评估风险。</p>
+                    <ul>
+                        <li><strong>模型定位：</strong>专为网络安全防御设计，具备碾压级漏洞挖掘能力</li>
+                        <li><strong>参数规模：</strong>据传达10万亿参数，远超Claude Opus 4.6</li>
+                        <li><strong>市场影响：</strong>发布当日美股网络安全板块千亿市值蒸发</li>
+                        <li><strong>发布策略：</strong>Anthropic选择不公开发布，仅通过受控渠道提供</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260412A01VEX00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                        <a href="https://www.cnblogs.com/qiniushanghai/p/19835734" target="_blank" class="link">📌 博客园 →</a>
+                        <a href="https://finance.sina.com.cn/wm/2026-04-08/doc-inhttxke2872926.shtml" target="_blank" class="link">📌 新浪财经 →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 行业动态 -->
+            <div class="section">
+                <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+                    
+                    <div class="news-card">
+                        <h3>Google Gemma 4全面开源 <span class="tag">Google</span></h3>
+                        <p>Google DeepMind于4月2日发布Gemma 4开源模型系列，采用Apache 2.0许可证。基于Gemini 3技术打造，首创26B MoE架构（激活仅4B），支持256K上下文与原生多模态，手机1.5GB内存即可运行。</p>
+                        <div class="links">
+                            <a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" class="link">📌 官方页面</a>
+                            <a href="https://www.36kr.com/p/3750284639552008" target="_blank" class="link">📌 36氪</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <h3>阿里Qwen3.6-Plus正式发布 <span class="tag">阿里通义</span></h3>
+                        <p>4月2日，阿里通义千问团队发布Qwen3.6-Plus，被誉为"中国编程能力最强的模型"。支持100万token超长上下文，Agentic Coding能力业界领先，全球调用量排名持续第一。</p>
+                        <div class="links">
+                            <a href="https://apisitlee.com/qwen3-6-plus-review-free-api-guide-2026/" target="_blank" class="link">📌 技术解析</a>
+                            <a href="https://blog.csdn.net/qq_41797451/article/details/159785008" target="_blank" class="link">📌 CSDN</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <h3>百度文心大模型5.0全面免费开放 <span class="tag">百度</span></h3>
+                        <p>4月1日起，百度文心一言正式面向所有PC端和APP端用户免费开放。文心大模型5.0在LMArena文本榜上表现优异，中文理解能力持续领先，月活跃用户已突破2亿。</p>
+                        <div class="links">
+                            <a href="https://yiyan.baidu.com/notice/feature" target="_blank" class="link">📌 官网公告</a>
+                            <a href="https://www.iheima.com/article-396057.html" target="_blank" class="link">📌 i黑马</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <h3>Anthropic年化收入首超OpenAI <span class="tag">商业动态</span></h3>
+                        <p>Anthropic最新披露，其年化营收已突破300亿美元，正式超越OpenAI的250亿美元。Claude Mythos的发布进一步巩固了其在企业级AI市场的领先地位。</p>
+                        <div class="links">
+                            <a href="https://devpress.csdn.net/v1/article/detail/159941522" target="_blank" class="link">📌 CSDN</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <h3>中国大模型全球调用量霸榜 <span class="tag">行业数据</span></h3>
+                        <p>据OpenRouter最新数据，截至4月5日当周，全球调用量排名前六的均为中国模型。阿里通义千问、DeepSeek等国产模型周调用量达12.96万亿Token，环比增长31.48%。</p>
+                        <div class="links">
+                            <a href="https://bbs.wps.cn/topic/85158" target="_blank" class="link">📌 WPS社区</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <h3>字节豆包日活突破1亿 <span class="tag">字节跳动</span></h3>
+                        <p>字节跳动豆包APP日活跃用户超1亿，通过视频通话、全双工语音等创新功能持续扩大用户规模。4月上线全双工语音交互，用户体验进一步提升。</p>
+                        <div class="links">
+                            <a href="https://aiproducthub.cn/ai-industry-report-20260121-wenxin-doubao-openai/" target="_blank" class="link">📌 AI产品报告</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心洞察 -->
+            <div class="section">
+                <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+                
+                <div class="insight-item">
+                    <div class="num">1</div>
+                    <div>
+                        <strong style="color:#fff;">AGI竞赛进入白热化阶段</strong>
+                        <p>GPT-6、Claude Mythos、DeepSeek V4三大旗舰模型将在4月密集发布，大模型竞争已从参数规模转向推理能力、智能体与场景闭环的深度较量。OpenAI的"土豆"、Anthropic的"神话"、DeepSeek的"国产突围"，标志着AGI前夜的最后冲刺。</p>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="num">2</div>
+                    <div>
+                        <strong style="color:#fff;">国产AI算力生态迎来拐点</strong>
+                        <p>DeepSeek V4全面适配华为昇腾等国产芯片，标志着中国AI产业在算力自主可控道路上迈出关键一步。结合中国大模型全球调用量霸榜的数据，国产AI正在从"跟跑"转向"并跑"甚至"领跑"。</p>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="num">3</div>
+                    <div>
+                        <strong style="color:#fff;">开源模型与闭源模型的博弈加剧</strong>
+                        <p>Google Gemma 4采用Apache 2.0全面开源，与Meta Llama、阿里Qwen形成开源阵营；而OpenAI、Anthropic则坚持闭源高端路线。两种模式的竞争将重塑AI产业格局。</p>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="num">4</div>
+                    <div>
+                        <strong style="color:#fff;">AI安全与监管成为全球焦点</strong>
+                        <p>Claude Mythos的强大能力引发英国金融监管机构紧急评估，奥特曼住宅遭燃烧弹袭击事件将AI争议推向物理暴力层面。如何在技术创新与安全监管之间找到平衡，成为全球治理的核心议题。</p>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="num">5</div>
+                    <div>
+                        <strong style="color:#fff;">多模态与长上下文成为标配</strong>
+                        <p>GPT-6的200万上下文、Gemma 4的256K上下文、Qwen3.6-Plus的100万上下文——超长上下文能力正在成为大模型的标准配置。同时，原生多模态能力（文本+图像+音频+视频）成为下一代模型的核心特征。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <div class="footer">
+                <p>📡 数据来源：OpenAI、Anthropic、Google DeepMind、DeepSeek、阿里通义、百度、字节跳动、机器之心、量子位、36氪</p>
+                <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: 2026-04-13 09:30</p>
+                <p style="margin-top:20px;">
+                    <a href="https://Flystray.github.io/ai-news/" target="_blank">🏠 订阅中心</a> · 
+                    <a href="https://github.com/Flystray/ai-news" target="_blank">⭐ GitHub</a>
+                </p>
+            </div>
+        </div>
+        
+        <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+    </div>
+</body>
+</html>
