@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-14 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: #1a1a2e; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #feca57);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(254,202,87,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: #1a1a2e; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 700; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul {
+            background: rgba(254,202,87,0.08);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #ddd; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "▸"; position: absolute; left: 0; color: #feca57; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #feca57; text-decoration: none; font-size: 14px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #fff; text-decoration: underline; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #feca57; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: #1a1a2e; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .live-badge {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: #1a1a2e; padding: 4px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: 700; animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-04-14 <span class="live-badge">🔥 GPT-6 发布日</span></div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><span>🚀</span> 今日重磅</h2>
+            
+            <div class="news-card">
+                <h3>OpenAI GPT-6 今日全球同步发布：代号"土豆"，AGI最后冲刺 <span class="tag">🔥 历史性时刻</span></h3>
+                <ul>
+                    <li><strong>核心规格</strong>：5-6万亿参数（MoE架构），200万Token上下文，较GPT-5.4性能暴涨40%</li>
+                    <li><strong>技术架构</strong>：Symphony原生多模态 + 双系统推理（System-1快思考 + System-2慢思考）</li>
+                    <li><strong>训练投入</strong>：超20亿美元，约10万张H100 GPU，Stargate超算集群完成</li>
+                    <li><strong>API定价</strong>：输入$2.5/百万Token，输出$12/百万Token</li>
+                    <li><strong>超级应用</strong>：ChatGPT + Codex + Atlas三合一，统一平台输出</li>
+                </ul>
+                <p>这是OpenAI迄今为止最重磅的发布，被内部定义为冲刺AGI的"最后20%"关键阶段。奥特曼孤注一掷，OpenAI已全面停止Sora App运营，所有算力投入GPT-6。</p>
+                <div class="links">
+                    <a href="https://news.qq.com/rain/a/20260409A021OB00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                    <a href="https://wallstreetcn.com/articles/3769283" target="_blank" class="link">📌 华尔街见闻 →</a>
+                    <a href="https://www.36kr.com/p/3754726863012361" target="_blank" class="link">📌 36氪 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <h3>Anthropic Claude Mythos Preview：超越 Opus 的前沿模型 <span class="tag">🛡️ 旗舰发布</span></h3>
+                <ul>
+                    <li><strong>定位</strong>：位于Claude Opus之上的最高层级模型，Claude Code单日贡献全球4%的公开GitHub代码</li>
+                    <li><strong>特殊能力</strong>：具备自主发现并利用零日漏洞的网络安全能力，AI安全攻防格局生变</li>
+                    <li><strong>访问策略</strong>：不公开API，仅通过"Project Glasswing"计划向国家级安全机构、学术机构提供受控访问</li>
+                    <li><strong>战略布局</strong>：4亿美元收购Coefficient Bio，首次高调布局生命科学领域</li>
+                </ul>
+                <p>Claude Mythos的发布标志着Anthropic从模型供应商向企业自动化平台的战略升级，部署速度提升10倍。</p>
+                <div class="links">
+                    <a href="https://k.sina.cn/article_7879995911_1d5af320706801s02g.html" target="_blank" class="link">📌 新浪财经 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <h3>DeepSeek V4 万亿参数架构揭秘：国产算力里程碑 <span class="tag">🇨🇳 国产骄傲</span></h3>
+                <ul>
+                    <li><strong>参数规模</strong>：1万亿参数MoE架构，激活约320-370亿</li>
+                    <li><strong>技术创新</strong>：mHC多头混合专家 + Engram长期记忆技术</li>
+                    <li><strong>国产适配</strong>：首次深度适配华为昇腾，100万Token上下文</li>
+                    <li><strong>极致性价比</strong>：API价格比竞品便宜10-50倍，可在单张RTX 5090上运行</li>
+                </ul>
+                <p>DeepSeek V4官宣4月下旬正式发布，首次实现与华为昇腾等国产生态的深度融合，打破算力依赖。</p>
+                <div class="links">
+                    <a href="https://www.bilibili.com/video/BV1NVDDB5EAC/" target="_blank" class="link">📌 B站视频 →</a>
+                    <a href="https://duoke360.com/post/46146" target="_blank" class="link">📌 多课网 →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+                
+                <div class="news-card">
+                    <h3>Google Gemma 4 全系开源 <span class="tag">🟢 开源</span></h3>
+                    <p>31B参数跻身全球开源前三，26B MoE版本推理仅激活3.8B参数。支持手机端本地运行，Apache 2.0商用无限制。</p>
+                    <div class="links">
+                        <a href="https://duoke360.com/post/46146" target="_blank" class="link">📌 多课网</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>英伟达 B200 全球断货 <span class="tag">⚠️ 算力危机</span></h3>
+                    <p>超大模型训练需求超预期+HBM4产能不足+云厂商囤积，社交媒体话题热度单日暴涨625%。AMD MI300X和华为昇腾910C需求激增。</p>
+                    <div class="links">
+                        <a href="https://duoke360.com/post/46146" target="_blank" class="link">📌 多课网</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>宇树科技 H1 人形机器人破纪录 <span class="tag">🤖 具身智能</span></h3>
+                    <p>百米测试实现每秒十米峰值速度，创全球人形机器人新纪录。2025年全球出货量1.3万台（同比+465%），宇树净利率达35%。</p>
+                    <div class="links">
+                        <a href="https://www.sohu.com/a/1008905067_122722506" target="_blank" class="link">📌 搜狐</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>小米 MiMo Token 包月套餐上线 <span class="tag">📱 产品</span></h3>
+                    <p>4月3日全球上线，通过统一Credit点数体系整合全模态AI模型能力，提供四档订阅方案。</p>
+                    <div class="links">
+                        <a href="https://www.sohu.com/a/1008905067_122722506" target="_blank" class="link">📌 搜狐</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>通矩模型：国际首个通用AI双重能力系统 <span class="tag">🔬 科研突破</span></h3>
+                    <p>国产通用AI逻辑推理重大突破，成为国际首个同时具备自主出题和自动解题双重能力的通用AI系统，成果发表于《自然·机器智能》。</p>
+                    <div class="links">
+                        <a href="https://www.sohu.com/a/1008905067_122722506" target="_blank" class="link">📌 搜狐</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>AI Agent 2026 Q1 核心趋势报告 <span class="tag">📊 洞察</span></h3>
+                    <p>Cursor Agent单任务36小时；OpenClaw 60天247k GitHub Stars；Anthropic超90%新代码由AI完成；ClawHub已有13,700+个Skill。</p>
+                    <div class="links">
+                        <a href="https://duoke360.com/post/46149" target="_blank" class="link">📌 多课网</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><span>📋</span> 政策与治理</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+                
+                <div class="news-card">
+                    <h3>十部门：AI伦理审查办法 <span class="tag">🏛️ 监管</span></h3>
+                    <p>国家网信办等十部门联合发布《人工智能科技伦理审查与服务办法》，3月20日发布，AI合规成本系统性上升。</p>
+                    <div class="links">
+                        <a href="https://duoke360.com/post/46149" target="_blank" class="link">📌 多课网</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <h3>五部门：AI拟人化管理暂行办法 <span class="tag">🏛️ 监管</span></h3>
+                    <p>国家网信办等五部门发布《人工智能拟人化互动服务管理暂行办法》，自2026年7月15日起施行，实行包容审慎和分类分级监管。</p>
+                    <div class="links">
+                        <a href="https://www.sohu.com/a/1008905067_122722506" target="_blank" class="link">📌 搜狐</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+            
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>AGI冲刺阶段正式开启</strong>：GPT-6被定义为"AGI最后20%"，Claude Mythos突破安全边界，2026年将是智能体爆发元年——大模型推理、规划、多模态理解能力同时成熟。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>开源与闭源边界模糊</strong>：Gemma 4、DeepSeek V4在特定场景已成为最优解，开源模型正在挑战闭源巨头的技术护城河。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>双轨算力格局形成</strong>：云端超级算力争夺（英伟达B200断货）与本地高效端侧推理（手机端Llama、单卡运行）并行，国产昇腾生态加速崛起。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>AI治理进入深水区</strong>：零日漏洞发现、具身智能伦理、拟人化互动——监管框架正在追赶技术狂奔的速度，2026年将是AI合规元年。</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>模型迭代周期压缩至季度</strong>：从"年"到"季"的迭代加速，应用开发面临持续重构压力，MLOps和快速迭代能力成为核心竞争力。</p>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>📡 数据来源：多课网 · 腾讯新闻 · 华尔街见闻 · 36氪 · 搜狐科技 · 机器之心</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: 2026-04-14 09:00</p>
+            <p style="margin-top:15px;"><a href="https://Flystray.github.io/ai-news/" target="_blank">📺 订阅中心</a> · <a href="https://github.com/Flystray/ai-news" target="_blank">💾 GitHub</a></p>
+        </div>
+    </div>
+</body>
+</html>
