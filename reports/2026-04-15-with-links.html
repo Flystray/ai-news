@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 每日新闻日报 · 2026年4月15日</title>
+<style>
+  :root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #ec4899;
+    --accent: #06b6d4;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --bg-dark: #0f0f1a;
+    --bg-card: #1a1a2e;
+    --bg-card2: #16213e;
+    --text-primary: #f0f0ff;
+    --text-secondary: #a0a0c0;
+    --border: rgba(99,102,241,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a1a3e 0%, #0f0f2a 50%, #1a0f2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: #a5b4fc;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .header h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .header-sub {
+    color: var(--text-secondary);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #a5b4fc;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    background: rgba(26,26,46,0.8);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav a:hover {
+    color: var(--text-primary);
+    border-color: var(--border);
+    background: rgba(99,102,241,0.1);
+  }
+
+  /* Main Content */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .icon-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  .icon-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .icon-green { background: linear-gradient(135deg, #10b981, #059669); }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .section-count {
+    margin-left: auto;
+    background: rgba(99,102,241,0.15);
+    color: #a5b4fc;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card-red::before { background: linear-gradient(90deg, #ef4444, #f97316); opacity: 1; }
+  .card-blue::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); opacity: 1; }
+  .card-green::before { background: linear-gradient(90deg, #10b981, #06b6d4); opacity: 1; }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(99,102,241,0.4);
+    box-shadow: 0 8px 30px rgba(99,102,241,0.12);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .tag-openai { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.2); }
+  .tag-anthropic { background: rgba(236,72,153,0.15); color: #f9a8d4; border: 1px solid rgba(236,72,153,0.2); }
+  .tag-deepmind { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+  .tag-deepseek { background: rgba(139,92,246,0.15); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.2); }
+  .tag-zhipu { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+  .tag-domestic { background: rgba(6,182,212,0.15); color: #67e8f9; border: 1px solid rgba(6,182,212,0.2); }
+  .tag-industry { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.2); }
+  .tag-security { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2); }
+
+  .card-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-left: auto;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .card-title a:hover { color: #a5b4fc; }
+
+  .card-body {
+    color: var(--text-secondary);
+    font-size: 14.5px;
+    line-height: 1.8;
+  }
+
+  .highlight-box {
+    background: rgba(99,102,241,0.08);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: #c7d2fe;
+  }
+
+  .key-points {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .key-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .key-point::before {
+    content: '▸';
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 12px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .stat-badge {
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .stat-badge strong {
+    color: #a5b4fc;
+    display: block;
+    font-size: 16px;
+  }
+
+  /* Insight Section */
+  .insight-card {
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.08));
+    border: 1px solid rgba(99,102,241,0.25);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .insight-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .insight-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+  }
+  .insight-body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+  .footer a { color: #a5b4fc; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px 60px; }
+    .card { padding: 18px; }
+    .stats-row { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-badge">
+    <span>⚡</span>
+    <span>AI DAILY · 每日智能观察</span>
+  </div>
+  <h1>🤖 AI 每日新闻日报</h1>
+  <p class="header-sub">2026年4月15日 · 星期三 · 覆盖 OpenAI、Anthropic、DeepMind、DeepSeek、国内大厂等主要来源</p>
+  <div class="header-stats">
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">今日新闻</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">重磅事件</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">核心洞察</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">信源覆盖</div>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav">
+  <a href="#breaking">🔥 今日重磅</a>
+  <a href="#industry">📡 行业动态</a>
+  <a href="#insight">💡 核心洞察</a>
+</div>
+
+<!-- Main -->
+<div class="container">
+
+  <!-- Section 1: 今日重磅 -->
+  <section class="section" id="breaking">
+    <div class="section-header">
+      <div class="section-icon icon-red">🔥</div>
+      <h2 class="section-title">今日重磅</h2>
+      <span class="section-count">5 条</span>
+    </div>
+
+    <!-- 1. GPT-6 正式发布 -->
+    <div class="card card-red">
+      <div class="card-meta">
+        <span class="tag tag-openai">OpenAI</span>
+        <span class="tag tag-industry">重磅发布</span>
+        <span class="card-date">4月14日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://h5.ifeng.com/c/vivo/v002kV6jvTSZqNJQrGq18udMpn1iYj0CZlU8R8Eh8uXm-_7A__" target="_blank" rel="noopener">
+          GPT-6 正式发布：代号"土豆"，Symphony架构颠覆AI上限，OpenAI宣称距AGI只剩"最后一公里"
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>北京时间2026年4月14日，全球AI圈等待了整整18个月的时刻终于到来——OpenAI CEO Sam Altman登台正式发布GPT-6，内部代号"Spud（土豆）"，全球同步上线。这是OpenAI有史以来规模最大、投入最重的一次发布，训练花费超过<strong>20亿美元</strong>，动用约<strong>10万张英伟达H100 GPU</strong>。</p>
+        <div class="stats-row">
+          <div class="stat-badge"><strong>5-6万亿</strong>参数规模(MoE)</div>
+          <div class="stat-badge"><strong>200万</strong>Token上下文</div>
+          <div class="stat-badge"><strong>+40%</strong>综合性能提升</div>
+          <div class="stat-badge"><strong>96.8%</strong>SWE-bench通过率</div>
+        </div>
+        <div class="highlight-box">
+          核心架构创新——"Symphony（交响乐）"：文本、图像、音频、视频在同一向量空间统一处理，无需插件桥接；引入 System-1（快思考）+ System-2（慢思考）双系统推理框架，幻觉率降至 0.1% 以下。
+        </div>
+        <div class="key-points">
+          <div class="key-point">200万Token上下文窗口约相当于两部完整《三体》，可一次性处理完整代码库或10小时视频，信息召回准确率超98%</div>
+          <div class="key-point">代码生成HumanEval+通过率96.8%，远超GPT-5.4的74.9%与Claude Opus的72%，有望重塑AI编程工具市场格局</div>
+          <div class="key-point">定价策略：输入2.5美元/百万Token，输出12美元/百万Token，保持竞争性价格</div>
+          <div class="key-point">数学推理GSM8K准确率92.5%，智能体任务完成率91%，全面刷新行业基准</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Anthropic Glasswing / Claude Mythos -->
+    <div class="card card-red">
+      <div class="card-meta">
+        <span class="tag tag-anthropic">Anthropic</span>
+        <span class="tag tag-security">AI安全</span>
+        <span class="card-date">4月7-14日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.anthropic.com/claude-mythos-preview-system-card" target="_blank" rel="noopener">
+          Anthropic 联合45家科技巨头启动"Project Glasswing"，Claude Mythos Preview 自主发现数千零日漏洞
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>4月7日，Anthropic宣布联合苹果、英伟达、微软、亚马逊、谷歌、CrowdStrike、Palo Alto Networks等超过<strong>45家</strong>科技与网络安全机构，正式启动"Project Glasswing（玻璃翼计划）"，发布迄今最强大的前沿模型<strong>Claude Mythos Preview</strong>，专为防御性网络安全工作流设计。</p>
+        <div class="highlight-box">
+          Claude Mythos Preview 并非针对安全任务专门训练，而是凭借其强大的智能体编程与推理能力，在过去数周内自主识别了覆盖所有主流操作系统及浏览器的<strong>数千个高危零日漏洞</strong>，包括OpenBSD中一个存在27年的错误和FFmpeg中一个经500万次自动测试仍未被发现的16年历史漏洞。
+        </div>
+        <div class="key-points">
+          <div class="key-point">模型参数据传约10万亿，能力"碾压级"，引发网络安全板块千亿市值蒸发，CrowdStrike单日涨6.2%</div>
+          <div class="key-point">项目核心目标：让防御方抢占先机，防范黑客利用AI发动规模化攻击</div>
+          <div class="key-point">Claude Mythos暂无公开发布计划，仅向合作伙伴开放，依据测试结果搭建统一安全防护体系</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. DeepSeek V4 -->
+    <div class="card card-red">
+      <div class="card-meta">
+        <span class="tag tag-deepseek">DeepSeek</span>
+        <span class="tag tag-domestic">国产大模型</span>
+        <span class="card-date">4月12日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.msn.com/zh-cn/news/other/deepseek-v4%E6%88%964%E6%9C%88%E4%B8%8B%E6%97%AC%E5%8F%91%E5%B8%83-%E9%80%82%E9%85%8D%E5%9B%BD%E4%BA%A7ai%E8%8A%AF%E7%89%87/ar-AA20H8m1" target="_blank" rel="noopener">
+          DeepSeek V4 官宣4月下旬发布：首次完全基于华为昇腾950PR，万亿参数MoE架构曝光
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>DeepSeek创始人梁文锋近期在内部沟通中正式确认：新一代旗舰大模型<strong>DeepSeek V4将于2026年4月下旬发布</strong>，这标志着跳票半年后的重磅归来。更关键的是，V4将完全抛弃英伟达GPU，<strong>全面基于华为昇腾950PR芯片</strong>运行，在AI芯片国产替代的历史进程中具有里程碑意义。</p>
+        <div class="highlight-box">
+          据流出的架构论文，DeepSeek V4采用万亿参数MoE架构，引入动态稀疏注意力机制，使128K上下文推理速度提升8.3倍，显存占用降低67%；全新MoE-Routing v2实现推理成本比V3降低40%。
+        </div>
+        <div class="key-points">
+          <div class="key-point">V4发布前，DeepSeek已推出快速模式+专家模式双模分层设计，用户体验大幅升级</div>
+          <div class="key-point">完全脱离英伟达生态，展示中国AI企业在"去英伟达化"路径上的重大突破</div>
+          <div class="key-point">与华为昇腾深度协同，为国内AI生态构建完整的算力自主可控闭环</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 智谱GLM-5.1 -->
+    <div class="card card-red">
+      <div class="card-meta">
+        <span class="tag tag-zhipu">智谱AI</span>
+        <span class="tag tag-domestic">开源标杆</span>
+        <span class="card-date">4月8日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://finance.sina.com.cn/jjxw/2026-04-10/doc-inhtyfhi5365288.shtml" target="_blank" rel="noopener">
+          智谱GLM-5.1登顶全球开源评测：唯一实现"8小时持续工作"，定价首次对齐Anthropic
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>4月8日，智谱正式发布并开源新一代旗舰模型<strong>GLM-5.1</strong>，发布当天即上线华为云并对接多款产品。GLM-5.1是迄今全球唯一验证了8小时级持续工作能力的开源模型——在一次任务中，模型可自主规划、执行、测试、修复，最终交付完整工程级成果，彻底改变了"模型只能分钟级交互"的行业认知。</p>
+        <div class="highlight-box">
+          在SWE-bench Pro基准测试中，GLM-5.1实现<strong>国产模型首次超越Claude Opus 4.6</strong>，标志着国产开源模型在专业软件开发能力上达到全球顶尖水准。港股智谱单日涨近18%。
+        </div>
+        <div class="key-points">
+          <div class="key-point">代码能力定价首次追平Anthropic，国产大模型从"价格战"转向"性能溢价"新阶段</div>
+          <div class="key-point">在昇腾算力上实现Layer级MoE绝对均衡，华为云整体推理吞吐提升30%</div>
+          <div class="key-point">行业信号：衡量模型价值的标准正从benchmark转向"能独立工作多久"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Google Gemma 4 -->
+    <div class="card card-red">
+      <div class="card-meta">
+        <span class="tag tag-deepmind">Google DeepMind</span>
+        <span class="tag tag-industry">开源模型</span>
+        <span class="card-date">4月2日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" rel="noopener">
+          Google DeepMind 发布Gemma 4开源系列：基于Gemini 3技术，支持本地部署与商业使用
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>Google DeepMind正式发布<strong>Gemma 4</strong>开源大模型系列，基于Gemini 3技术构建，采用Apache 2.0许可证，可在手机、笔记本电脑、工作站等多种设备上本地部署，并支持商业使用。相比上一代，Gemma 4全系列原生支持多模态（文本+图像），专为多步骤规划和自主Agent工作流设计。</p>
+        <div class="key-points">
+          <div class="key-point">已发布 gemma-4-26b-a4b-it 和 gemma-4-31b-it，可直接在 Google AI Studio 体验</div>
+          <div class="key-point">强化边缘计算能力，覆盖低端设备到高性能服务器的完整算力谱系</div>
+          <div class="key-point">在多模态理解、代码生成和推理任务上相比Gemma 3均有显著提升</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Section 2: 行业动态 -->
+  <section class="section" id="industry">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📡</div>
+      <h2 class="section-title">行业动态</h2>
+      <span class="section-count">4 条</span>
+    </div>
+
+    <!-- Tencent Pricing -->
+    <div class="card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-domestic">腾讯混元</span>
+        <span class="tag tag-industry">商业动态</span>
+        <span class="card-date">4月9日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://k.sina.com.cn/article_7857201856_1d45362c001904564a.html" target="_blank" rel="noopener">
+          腾讯云宣布混元模型大幅涨价逾400%：大模型"价格战"正式宣告终结
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>腾讯云宣布自3月13日起对AI模型计费策略进行重大调整，混元系列TencentHY2.0Instruct输入价格从每千tokens 0.0008元调整至0.004505元，<strong>涨幅高达463%</strong>；TencentHY2.0Think输入价从0.001元升至0.0053元。这是继智谱GLM-5.1提价10%、OpenRouter平台显示国产模型普遍提价后，大厂层面最大力度的一次集中提价。</p>
+        <div class="highlight-box">
+          行业背景：2025年延续全年的AI大模型"价格战"悄然落幕。从免费到低价再到性能溢价，整个行业开始回归商业理性，优质算力和顶尖能力的价值重新被市场定价。
+        </div>
+        <div class="key-points">
+          <div class="key-point">GLM、混元、OpenAI同步提价，标志着行业从"用低价换规模"转向"凭实力定价"</div>
+          <div class="key-point">对企业用户而言，AI成本结构将面临系统性重估，ROI评估更趋理性</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 字节豆包 全双工语音 -->
+    <div class="card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-domestic">字节豆包</span>
+        <span class="tag tag-industry">语音交互</span>
+        <span class="card-date">4月12日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.iheima.com/article-396057.html" target="_blank" rel="noopener">
+          字节豆包上线全双工语音模型：实时打断、情绪感知，重新定义人机对话体验
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>字节跳动旗下豆包大模型近期上线全双工语音交互模型，支持用户在AI说话时随时打断、模型实时感知情绪并动态调整回复风格，实现真正的"自然对话"而非"你说我答"式轮流交互。这是国内AI语音交互体验的重要里程碑。</p>
+        <div class="key-points">
+          <div class="key-point">全双工设计消除等待延迟，使AI通话体验接近真人水平</div>
+          <div class="key-point">情绪感知能力可识别用户语气变化，自动切换正式/轻松对话模式</div>
+          <div class="key-point">这一能力将率先在豆包App及企业API中开放，覆盖客服、陪伴、教育等多场景</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 人形机器人 -->
+    <div class="card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-industry">具身智能</span>
+        <span class="tag tag-domestic">国产硬件</span>
+        <span class="card-date">4月14日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://aigcdaily.cn/news/list/?artid=a24lqiodb3mrkhi&tag=%E9%87%8F%E5%AD%90%E4%BD%8D+%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+AIbase+2026%E5%B9%B44%E6%9C%8812%E6%97%A5+%E6%9C%80%E6%96%B0%E8%B5%84%E8%AE%AF" target="_blank" rel="noopener">
+          中国人形机器人产量将激增94%，宇树、智元包揽80%市场份额
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>最新数据显示，2026年中国人形机器人产量预计同比激增<strong>94%</strong>，宇树科技与智元机器人合计占据约80%的市场份额。随着GPT-6、GLM-5.1等大脑级模型的高速迭代，"大模型+人形机器人"的具身智能路线正在从实验室快速走向规模量产。</p>
+        <div class="key-points">
+          <div class="key-point">Q1具身智能领域融资超300亿元，资本热度史无前例</div>
+          <div class="key-point">汽车厂商押注人形机器人，传统制造与AI深度融合加速</div>
+          <div class="key-point">腾讯具身模型在操纵任务评测中刷新记录，软硬件协同生态加速构建</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阿里通义 国际榜首 -->
+    <div class="card card-blue">
+      <div class="card-meta">
+        <span class="tag tag-domestic">阿里通义</span>
+        <span class="tag tag-industry">国际竞争</span>
+        <span class="card-date">4月12日</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.cnblogs.com/yumingwen/p/19853950" target="_blank" rel="noopener">
+          阿里通义千问强势霸榜：全球AI调用量TOP 6悉数被中国模型包揽
+        </a>
+      </h3>
+      <div class="card-body">
+        <p>4月最新统计数据显示，全球AI大模型调用量前6名中，阿里通义千问系列已独占全球调用量榜首，其训练数据规模达1.4万亿Token，全面超越同类国际模型。更令业界震惊的是，全球调用量TOP 6悉数被中国AI模型包揽，标志着中国AI在规模应用层面已完成对欧美的全面超越。</p>
+        <div class="key-points">
+          <div class="key-point">Qwen3.6-Plus凭借卓越的多语言、代码、推理能力跻身国际第一梯队</div>
+          <div class="key-point">中国AI出海加速，全球开发者正将国产模型纳入生产工作流</div>
+          <div class="key-point">阿里云国际市场算力部署同步扩张，生态护城河进一步拓宽</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Section 3: 核心洞察 -->
+  <section class="section" id="insight">
+    <div class="section-header">
+      <div class="section-icon icon-green">💡</div>
+      <h2 class="section-title">核心洞察</h2>
+      <span class="section-count">4 条</span>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">1</div>
+      <div class="insight-title">GPT-6 的到来重新点燃"谁是第一"的争议</div>
+      <div class="insight-body">
+        过去一年，Claude 4系列在企业付费编程市场占据高达73%的份额，Anthropic一度在年化收入上首次超越OpenAI。而GPT-6以96.8%的SWE-bench成绩横空出世，仅从编程能力数据看，GPT-6已全面超越Claude Opus（72%）。但真正的市场战争远比基准测试复杂——企业迁移成本、API生态成熟度、定价策略、安全合规……GPT-6拿回了技术王座，但能否拿回商业王座，仍需时间检验。
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">2</div>
+      <div class="insight-title">AI安全进入"主动防御"新范式</div>
+      <div class="insight-body">
+        Anthropic的Project Glasswing揭示了一个深刻的行业转变：AI不再只是被攻击的对象，它正在成为最强大的防御武器。让AI主动挖掘漏洞、先于黑客修复，这一思路将从根本上改变网络安全行业的游戏规则。与此同时，这也引发了另一面的担忧——当这些能力被滥用时，AI攻击工具的门槛将大幅降低。Glasswing计划的本质，是用开放合作抢占AI安全能力的道义制高点。
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">3</div>
+      <div class="insight-title">国产大模型正式告别"价格战"，迈入"能力溢价"新纪元</div>
+      <div class="insight-body">
+        腾讯混元涨价400%、智谱GLM追平Anthropic定价——这两件事放在一起，意味着中国AI大模型走过了靠补贴换市场的蛮荒期，开始以真实性能参与全球定价博弈。DeepSeek V4全面换装华为昇腾、阿里通义全球调用榜首，多维度印证中国AI已从"价格低廉的替代品"升级为"全球竞争的主力选手"。下一阶段的竞争焦点，将是具体场景的深度应用与商业模式的可持续性。
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">4</div>
+      <div class="insight-title">"能工作多久"将取代benchmark，成为大模型的新评价坐标</div>
+      <div class="insight-body">
+        GLM-5.1提出的"8小时工作制"核心概念，折射出整个行业的深层转变：当所有模型的benchmark都已接近天花板，真正能区分强弱的，是模型在长程复杂任务中的自主执行能力——能否独立规划、遇挫自修复、持续输出工程级成果。这不只是技术问题，更是产品力的根本要素。未来，企业在选择AI工具时，"一次任务能做多长"可能比"一道题能得多少分"更重要。
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>
+    📰 <strong>AI 每日新闻日报</strong> · 2026年4月15日
+    &nbsp;|&nbsp;
+    作者：<strong>fly的AI学习</strong> · 公众号"AI日课"
+    &nbsp;|&nbsp;
+    在线归档：<a href="https://Flystray.github.io/ai-news/" target="_blank">Flystray.github.io/ai-news</a>
+  </p>
+  <p style="margin-top:8px; font-size:12px; color:#5a5a7a;">
+    数据来源：凤凰网、腾讯新闻、新浪财经、证券时报、机器之心、量子位 | 内容仅供参考，不构成投资建议
+  </p>
+</div>
+
+</body>
+</html>
