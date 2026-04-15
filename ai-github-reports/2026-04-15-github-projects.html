@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.4.15 | GitHub AI 项目精选</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      line-height: 1.7;
+    }
+    .header {
+      background: #fff;
+      border-bottom: 3px solid #0d6efd;
+      padding: 32px 0 24px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 8px;
+    }
+    .header .subtitle {
+      color: #6c757d;
+      font-size: 0.95rem;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #0d6efd;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.82rem;
+      margin: 4px 4px 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #495057;
+      margin: 36px 0 16px;
+      padding-left: 10px;
+      border-left: 4px solid #0d6efd;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      border: 1px solid #e9ecef;
+    }
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .project-rank {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #dee2e6;
+      line-height: 1;
+      min-width: 40px;
+    }
+    .project-rank.rank-1 { color: #ffc107; }
+    .project-rank.rank-2 { color: #adb5bd; }
+    .project-rank.rank-3 { color: #cd7f32; }
+    .project-meta { flex: 1; }
+    .project-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #212529;
+      margin-bottom: 4px;
+    }
+    .project-name a {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+    .project-name a:hover { text-decoration: underline; }
+    .project-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-stars { background: #fff3cd; color: #856404; }
+    .badge-new { background: #d1e7dd; color: #0f5132; }
+    .badge-hot { background: #f8d7da; color: #842029; }
+    .badge-lang { background: #cff4fc; color: #055160; }
+    .badge-innovation { background: #e2d9f3; color: #432874; }
+    .project-desc {
+      font-size: 0.95rem;
+      color: #6c757d;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #343a40;
+      margin: 18px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-heading::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 16px;
+      background: #0d6efd;
+      border-radius: 2px;
+    }
+    p, li { font-size: 0.95rem; line-height: 1.75; margin-bottom: 6px; }
+    ul { padding-left: 20px; }
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 0.88rem;
+    }
+    .tech-table th {
+      background: #f8f9fa;
+      color: #495057;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid #dee2e6;
+    }
+    .tech-table td {
+      padding: 8px 12px;
+      border: 1px solid #dee2e6;
+      color: #495057;
+      vertical-align: top;
+    }
+    .tech-table tr:nth-child(even) td { background: #f8f9fa; }
+    .highlight-box {
+      background: #f0f7ff;
+      border-left: 4px solid #0d6efd;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      margin: 14px 0;
+      font-size: 0.92rem;
+    }
+    .highlight-box strong { color: #0d6efd; }
+    .usage-scene {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 10px 0;
+    }
+    .usage-scene .scene-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      align-items: flex-start;
+    }
+    .usage-scene .scene-icon {
+      font-size: 1.1rem;
+      min-width: 24px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid #e9ecef;
+      margin: 20px 0;
+    }
+    .source-links {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-top: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      border: 1px solid #e9ecef;
+    }
+    .source-links h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #343a40;
+      margin-bottom: 14px;
+    }
+    .source-link-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .source-link-item:last-child { border-bottom: none; }
+    .source-link-item a {
+      color: #0d6efd;
+      text-decoration: none;
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+    .source-link-item a:hover { text-decoration: underline; }
+    .source-num {
+      background: #0d6efd;
+      color: #fff;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .footer {
+      text-align: center;
+      color: #adb5bd;
+      font-size: 0.82rem;
+      padding: 32px 20px;
+    }
+    .footer a { color: #0d6efd; text-decoration: none; }
+    code {
+      background: #f1f3f5;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.87rem;
+      font-family: 'Fira Code', 'Consolas', monospace;
+    }
+    .benchmark-row { font-weight: 600; }
+    .benchmark-row td:last-child { color: #198754; font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="header">
+  <div class="container">
+    <h1>🔬 GitHub AI 项目精选</h1>
+    <div class="subtitle">2026年4月15日 &nbsp;·&nbsp; 每日精选 3 个最具创新价值的开源 AI 项目</div>
+    <div style="margin-top:12px">
+      <span class="tag">🚀 爆火</span>
+      <span class="tag">💡 创新技术</span>
+      <span class="tag">🆕 近期新项目</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-title">今日精选</div>
+
+  <!-- ========== Project 1: Caveman ========== -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-rank rank-1">01</div>
+      <div class="project-meta">
+        <div class="project-name">
+          <a href="https://github.com/JuliusBrussee/caveman" target="_blank">JuliusBrussee / caveman</a>
+        </div>
+        <div class="project-badges">
+          <span class="badge badge-stars">⭐ 29.8k</span>
+          <span class="badge badge-hot">🔥 爆火·4月4日创建</span>
+          <span class="badge badge-lang">Markdown / SKILL</span>
+          <span class="badge badge-innovation">💡 Prompt工程</span>
+        </div>
+        <div class="project-desc">"why use many token when few token do trick" — 让 Claude Code 说穴居人语言，节省 65% token</div>
+      </div>
+    </div>
+
+    <div class="section-heading">项目背景</div>
+    <p>这是一个关于"对话压缩"的思想实验变成爆火工具的典型案例。开发者 Julius Brussee 从一个网络迷因出发：如果让 AI 助手像穴居人一样"说话"——用最少的词表达最核心的意思——会发生什么？结果是：<strong>平均节省 65% 的输出 token，某些任务节省高达 87%，响应速度提升约 3 倍。</strong>项目在发布后 11 天内已获得近 3 万 stars，成为 GitHub 有史以来增长最快的 Prompt 工程工具之一。</p>
+
+    <div class="section-heading">核心创新点</div>
+    <ul>
+      <li><strong>Token 经济学双端压缩</strong>：输出端通过语言风格约束减少 ~75%；输入端通过 <code>caveman-compress</code> 工具压缩 CLAUDE.md 等记忆文件，减少 ~46%</li>
+      <li><strong>学术背书</strong>：引用 2026年3月论文 <em>Brevity Constraints Reverse Performance Hierarchies in Language Models</em>（arXiv:2604.00025），证明约束简短输出在某些基准测试上准确率提升 26 个百分点，并完全逆转了模型性能层级</li>
+      <li><strong>文言文模式</strong>：把人类历史上最 token-efficient 的书面语——文言文——也纳入压缩选项，极具创意</li>
+      <li><strong>三臂科学评估</strong>：不是简单对比"冗长 vs 简洁"，而是设计专门验证 Caveman 技能本身价值的评估框架</li>
+      <li><strong>生态级设计</strong>：一套技能覆盖 40+ AI 代理（Claude Code、Codex、Gemini CLI、Cursor、Windsurf 等），通过 SessionStart 钩子自动激活</li>
+    </ul>
+
+    <div class="section-heading">三种强度等级对比</div>
+    <table class="tech-table">
+      <tr>
+        <th>等级</th>
+        <th>示例（解释 React 重渲染问题）</th>
+        <th>Token 数</th>
+      </tr>
+      <tr>
+        <td><strong>Normal</strong></td>
+        <td>The reason your React component is re-rendering is likely because you're creating a new object reference on each render cycle...</td>
+        <td>69</td>
+      </tr>
+      <tr>
+        <td><strong>Full</strong></td>
+        <td>New object ref each render. Inline object prop = new ref = re-render. Wrap in <code>useMemo</code>.</td>
+        <td>19</td>
+      </tr>
+      <tr>
+        <td><strong>Ultra</strong></td>
+        <td>Inline obj prop → new ref → re-render. <code>useMemo</code>.</td>
+        <td>11</td>
+      </tr>
+      <tr>
+        <td><strong>文言文</strong></td>
+        <td>物出新參照，致重繪。useMemo Wrap之。</td>
+        <td>~8</td>
+      </tr>
+    </table>
+
+    <div class="section-heading">实测节省数据</div>
+    <table class="tech-table">
+      <tr>
+        <th>任务场景</th>
+        <th>正常 token 数</th>
+        <th>Caveman token 数</th>
+        <th>节省比</th>
+      </tr>
+      <tr class="benchmark-row">
+        <td>解释 React 重渲染</td><td>1,180</td><td>159</td><td>87%</td>
+      </tr>
+      <tr class="benchmark-row">
+        <td>修复认证中间件</td><td>704</td><td>121</td><td>83%</td>
+      </tr>
+      <tr class="benchmark-row">
+        <td>配置 PostgreSQL 连接池</td><td>2,347</td><td>380</td><td>84%</td>
+      </tr>
+      <tr class="benchmark-row">
+        <td>Docker 多阶段构建</td><td>1,042</td><td>290</td><td>72%</td>
+      </tr>
+      <tr class="benchmark-row">
+        <td><strong>平均</strong></td><td><strong>1,214</strong></td><td><strong>294</strong></td><td><strong>65%</strong></td>
+      </tr>
+    </table>
+
+    <div class="section-heading">使用场景</div>
+    <div class="usage-scene">
+      <div class="scene-item"><span class="scene-icon">💰</span><span><strong>降低 API 成本</strong>：高频使用 Claude API 的团队/个人，按 token 计费场景下可直接节省 60%+ 支出</span></div>
+      <div class="scene-item"><span class="scene-icon">⚡</span><span><strong>提升响应速度</strong>：生成 token 减少 → 流式输出更快 → 开发调试效率提升</span></div>
+      <div class="scene-item"><span class="scene-icon">📦</span><span><strong>上下文节省</strong>：在长对话中使用，可以让更多历史上下文留在窗口内</span></div>
+      <div class="scene-item"><span class="scene-icon">🔬</span><span><strong>研究场景</strong>：验证"约束性输出是否真的更精准"这一有趣假设</span></div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>安装（Claude Code）：</strong><br>
+      <code>claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman</code>
+    </div>
+  </div>
+
+  <!-- ========== Project 2: holaOS ========== -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-rank rank-2">02</div>
+      <div class="project-meta">
+        <div class="project-name">
+          <a href="https://github.com/holaboss-ai/holaOS" target="_blank">holaboss-ai / holaOS</a>
+        </div>
+        <div class="project-badges">
+          <span class="badge badge-stars">⭐ 2.5k</span>
+          <span class="badge badge-new">🆕 3月22日创建</span>
+          <span class="badge badge-lang">TypeScript / Electron</span>
+          <span class="badge badge-innovation">💡 Agent运行时</span>
+        </div>
+        <div class="project-desc">The agent environment for long-horizon work, continuity, and self-evolution — 为 AI Agent 而生的"操作系统"</div>
+      </div>
+    </div>
+
+    <div class="section-heading">项目背景</div>
+    <p>当前绝大多数 AI Agent 框架的根本缺陷是：<strong>每次任务结束，Agent 就"死"了</strong>——记忆清空、状态重置、经验归零。holaOS 从根本上挑战这一设计，它的核心命题是：<em>如何让一个 AI Agent 真正"活着"——拥有持续记忆、跨会话状态、自我进化能力？</em>这不是一个 API 包装器，而是一个真正的 Agent 操作系统。</p>
+
+    <div class="section-heading">核心架构</div>
+    <table class="tech-table">
+      <tr>
+        <th>层次</th>
+        <th>组件</th>
+        <th>功能描述</th>
+      </tr>
+      <tr>
+        <td><strong>桌面层</strong></td>
+        <td>desktop (Electron)</td>
+        <td>可视化工作空间，提供人机交互界面，包含代码编辑器、终端、文件浏览器</td>
+      </tr>
+      <tr>
+        <td><strong>运行时层</strong></td>
+        <td>runtime</td>
+        <td>核心引擎，管理 Agent 执行上下文、记忆、工具生命周期，遵循 Agent Harness 设计</td>
+      </tr>
+      <tr>
+        <td><strong>开发层</strong></td>
+        <td>sdk</td>
+        <td>为开发者在 holaOS 上构建工作空间应用提供 API 和工具</td>
+      </tr>
+      <tr>
+        <td><strong>协议层</strong></td>
+        <td>MCP 集成</td>
+        <td>原生支持 Model Context Protocol，连接外部工具和数据源</td>
+      </tr>
+    </table>
+
+    <div class="section-heading">核心创新点</div>
+    <ul>
+      <li><strong>环境即系统</strong>：核心哲学是"环境定义了系统能力"。通过构建稳定、结构化、富含工具和状态的运行环境，而非仅优化 Agent 本身</li>
+      <li><strong>持续生命（Continuity over Reset）</strong>：Agent 拥有跨会话的持久记忆和状态，可以从中断处恢复，积累经验并自我进化</li>
+      <li><strong>可检查性（Inspectability）</strong>：操作员可以实时监控 Agent 的执行过程，不是黑盒——这对于长时任务的可信赖部署至关重要</li>
+      <li><strong>解耦架构</strong>：可移植的运行时与本地桌面应用解耦，同一运行时可部署到服务器、本地或云环境</li>
+      <li><strong>最新版本</strong>：Holaboss 2026.415.2 于2026年4月14日发布，持续迭代</li>
+    </ul>
+
+    <div class="section-heading">对比传统 Agent 框架</div>
+    <table class="tech-table">
+      <tr>
+        <th>维度</th>
+        <th>传统 Agent 框架</th>
+        <th>holaOS</th>
+      </tr>
+      <tr>
+        <td>状态持久性</td>
+        <td>任务结束即重置</td>
+        <td>跨会话持久状态</td>
+      </tr>
+      <tr>
+        <td>记忆机制</td>
+        <td>有限上下文窗口</td>
+        <td>持久化记忆 + 连续性构件</td>
+      </tr>
+      <tr>
+        <td>工作时长</td>
+        <td>单次短任务</td>
+        <td>支持长达数天的长期工作流</td>
+      </tr>
+      <tr>
+        <td>可观测性</td>
+        <td>输出结果（黑盒）</td>
+        <td>完整执行过程可检查</td>
+      </tr>
+      <tr>
+        <td>自我进化</td>
+        <td>❌</td>
+        <td>✅ 基于历史经验持续改进</td>
+      </tr>
+    </table>
+
+    <div class="section-heading">使用场景</div>
+    <div class="usage-scene">
+      <div class="scene-item"><span class="scene-icon">🏭</span><span><strong>企业级 Agent 部署</strong>：需要 Agent 持续运行、状态不丢失的生产环境</span></div>
+      <div class="scene-item"><span class="scene-icon">🔬</span><span><strong>AI Agent 研究</strong>：研究长期自主 Agent 的记忆、演化和持续学习</span></div>
+      <div class="scene-item"><span class="scene-icon">👤</span><span><strong>个人 AI 助理</strong>：构建真正"了解你"的个人 AI，而非每次对话从零开始</span></div>
+      <div class="scene-item"><span class="scene-icon">🛠️</span><span><strong>开发工具构建</strong>：基于 SDK 开发自定义工作空间应用，如 AI 代码审查、自动测试等</span></div>
+    </div>
+  </div>
+
+  <!-- ========== Project 3: how-claude-code-works ========== -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-rank rank-3">03</div>
+      <div class="project-meta">
+        <div class="project-name">
+          <a href="https://github.com/Windy3f3f3f3f/how-claude-code-works" target="_blank">Windy3f3f3f3f / how-claude-code-works</a>
+        </div>
+        <div class="project-badges">
+          <span class="badge badge-stars">⭐ 1.8k</span>
+          <span class="badge badge-new">🆕 3月31日创建</span>
+          <span class="badge badge-lang">中英双语文档</span>
+          <span class="badge badge-innovation">💡 架构解析</span>
+        </div>
+        <div class="project-desc">深入解析 Claude Code 源码：架构、Agent 循环、上下文工程、工具系统 — 50万行 TypeScript 的系统性解读</div>
+      </div>
+    </div>
+
+    <div class="section-heading">项目背景</div>
+    <p>Anthropic 开源了 Claude Code 的完整源码（512,000+ 行 TypeScript，1,884 个文件），但代码体量巨大，普通开发者难以入门。这个项目用 AI 辅助分析手段，产出 <strong>15 篇专题深度文档</strong>，系统性地解析一款百万日活 AI 编程工具的内部架构。对于想理解生产级 AI 系统设计的开发者而言，这是目前最好的第一手材料。</p>
+
+    <div class="section-heading">15 章内容结构</div>
+    <table class="tech-table">
+      <tr>
+        <th>类别</th>
+        <th>章节</th>
+        <th>核心内容</th>
+      </tr>
+      <tr>
+        <td rowspan="4"><strong>核心架构</strong></td>
+        <td>系统概述</td>
+        <td>技术选型（Bun/React/Zod）、6条设计原则、9阶段235ms启动流程</td>
+      </tr>
+      <tr>
+        <td>主循环</td>
+        <td>Agent 循环双层架构、7种 Continue Sites 故障恢复、StreamingToolExecutor 并发机制</td>
+      </tr>
+      <tr>
+        <td>上下文工程</td>
+        <td>4级压缩流水线（裁剪→去重→折叠→摘要）、压缩后自动恢复机制</td>
+      </tr>
+      <tr>
+        <td>工具系统</td>
+        <td>66个工具注册与并发控制、MCP 7种传输详解、OAuth认证流程</td>
+      </tr>
+      <tr>
+        <td rowspan="3"><strong>高级特性</strong></td>
+        <td>多Agent架构</td>
+        <td>子Agent/协调器/Swarm三种模式、Git Worktree 隔离机制</td>
+      </tr>
+      <tr>
+        <td>权限与安全</td>
+        <td>5层纵深防御、tree-sitter AST分析（非正则）+ 23项安全检查</td>
+      </tr>
+      <tr>
+        <td>系统提示词设计</td>
+        <td>7层递进式提示词架构、反模式接种、爆炸半径风险框架</td>
+      </tr>
+    </table>
+
+    <div class="section-heading">五大技术亮点</div>
+    <ul>
+      <li><strong>235ms 冷启动</strong>：通过 9 阶段并行启动优化，非相关任务并行执行，将关键路径压至 235ms</li>
+      <li><strong>7种静默故障恢复</strong>：上下文超限自动压缩重试、token 超限自动从 4K 升级到 64K——用户根本看不到报错</li>
+      <li><strong>4级渐进式压缩</strong>：上下文快满时分层处理（裁剪→去重→折叠→摘要），每级都可能释放足够空间，后续级别无需执行</li>
+      <li><strong>tree-sitter AST 安全分析</strong>：Bash 命令分析使用语法树而非正则表达式，能识别真实的命令意图，配合 23 项安全检查</li>
+      <li><strong>工具自动并发策略</strong>：只读工具自动并行执行，写操作自动串行；工具输出超 100K 字符自动落盘，模型只拿摘要</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>配套实践项目：</strong> <code>claude-code-from-scratch</code>（~4000行 TypeScript/Python），11章教程手把手从零构建自己的 Claude Code，是学习现代 AI Agent 工程的极佳实践材料。
+    </div>
+
+    <div class="section-heading">适合人群</div>
+    <div class="usage-scene">
+      <div class="scene-item"><span class="scene-icon">🏗️</span><span><strong>AI Agent 开发者</strong>：获取百万用户验证的生产级架构参考，避免重复踩坑</span></div>
+      <div class="scene-item"><span class="scene-icon">🎓</span><span><strong>学习者</strong>：从一个真实的大规模工程项目中学习架构设计、错误处理、性能优化</span></div>
+      <div class="scene-item"><span class="scene-icon">🔐</span><span><strong>AI 安全研究者</strong>：研究生产级 AI 系统的安全设计实战案例</span></div>
+      <div class="scene-item"><span class="scene-icon">🛠️</span><span><strong>Claude Code 深度用户</strong>：理解内部机制，学会用 Hooks 和 CLAUDE.md 深度定制</span></div>
+    </div>
+  </div>
+
+  <!-- 原文链接汇总 -->
+  <div class="source-links">
+    <h3>📎 原文链接汇总</h3>
+    <div class="source-link-item">
+      <div class="source-num">1</div>
+      <div>
+        <strong>caveman</strong> — Token 压缩神器，穴居人语言减少 65% token<br>
+        <a href="https://github.com/JuliusBrussee/caveman" target="_blank">https://github.com/JuliusBrussee/caveman</a>
+      </div>
+    </div>
+    <div class="source-link-item">
+      <div class="source-num">2</div>
+      <div>
+        <strong>holaOS</strong> — AI Agent 操作系统，支持长期运行与自我进化<br>
+        <a href="https://github.com/holaboss-ai/holaOS" target="_blank">https://github.com/holaboss-ai/holaOS</a>
+      </div>
+    </div>
+    <div class="source-link-item">
+      <div class="source-num">3</div>
+      <div>
+        <strong>how-claude-code-works</strong> — Claude Code 源码深度解析，15章专题文档<br>
+        <a href="https://github.com/Windy3f3f3f3f/how-claude-code-works" target="_blank">https://github.com/Windy3f3f3f3f/how-claude-code-works</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>由 <a href="https://github.com/Flystray/ai-news" target="_blank">AI日课</a> 自动生成 &nbsp;·&nbsp; 作者：fly的AI学习 &nbsp;·&nbsp; 2026年4月15日</p>
+    <p style="margin-top:4px">在线阅读：<a href="https://flystray.github.io/ai-news/ai-github-reports/2026-04-15-github-projects.html" target="_blank">GitHub Pages</a></p>
+  </div>
+</div>
+</body>
+</html>
