@@ -27,6 +27,14 @@
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
+        .feature-item { background: #f8fafc; border-radius: 8px; padding: 15px; }
+        .feature-item h3 { font-size: 14px; color: #2d6a9f; margin-bottom: 6px; }
+        .feature-item p { font-size: 13px; color: #666; }
+        .table-container { overflow-x: auto; margin-top: 15px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8fafc; font-weight: 600; color: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
     </style>
 </head>
@@ -35,30 +43,120 @@
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月16日</div>
         <h1>anything-llm</h1>
-        <p class="subtitle">The all-in-one AI productivity accelerator. On device and privacy first with no annoying setup or configuration.</p>
+        <p class="subtitle">全栈 AI 知识库工具 — 用 RAG 技术打造本地文档对话机器人</p>
     </div>
 
     <div class="meta-bar">
         <span>⭐ 58.4k</span>
-        <span>📝 JS</span>
-        <span>🕐 </span>
+        <span>🍴 6.3k</span>
+        <span>📝 JavaScript</span>
+        <span>📄 MIT License</span>
         <span>🔗 <a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank" style="color:#2d6a9f">Mintplex-Labs/anything-llm</a></span>
     </div>
 
-    <div class="topics"><span class="topic">ai-agents</span><span class="topic">custom-ai-agents</span><span class="topic">deepseek</span><span class="topic">kimi</span><span class="topic">llama3</span><span class="topic">llm</span><span class="topic">lmstudio</span><span class="topic">local-llm</span></div>
-
-    
-
-    <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+    <div class="topics">
+        <span class="topic">ai-agents</span>
+        <span class="topic">custom-ai-agents</span>
+        <span class="topic">deepseek</span>
+        <span class="topic">kimi</span>
+        <span class="topic">llama3</span>
+        <span class="topic">llm</span>
+        <span class="topic">lmstudio</span>
+        <span class="topic">local-llm</span>
+        <span class="topic">RAG</span>
+        <span class="topic">知识库</span>
     </div>
 
-    
+    <div class="desc-card">
+        <p>AnythingLLM 是 Y Combinator 孵化的全栈 AI 应用程序，将 RAG 技术与私有化部署完美结合，让你可以轻松打造本地 AI 知识库——上传文档，用自然语言跟它们对话。</p>
+    </div>
 
-    
+    <div class="card">
+        <h2>🎯 它是什么</h2>
+        <p>AnythingLLM 由 <strong>Mintplex Labs Inc.</strong> 开发，于 2022 年夏季通过 Y Combinator 孵化，2023 年 6 月正式发布。它将 RAG（检索增强生成）技术与私有化部署完美结合，让你轻松打造<strong>本地 AI 知识库</strong>。</p>
+        <p style="margin-top: 12px;">简单来说：你可以上传 PDF、文档、视频、网址链接，它会自动解析、向量化，然后你可以用自然语言<strong>跟这些文档对话</strong>——就像有个 AI 助手在帮你阅读和理解所有资料。</p>
+    </div>
 
-    
+    <div class="card">
+        <h2>✨ 核心功能</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>📄 20+ 文档格式支持</h3>
+                <p>PDF、DOCX、TXT、Markdown、网页、音频、视频……自动解析并生成向量嵌入</p>
+            </div>
+            <div class="feature-item">
+                <h3>🤖 多模型灵活切换</h3>
+                <p>支持本地模型（Llama、Ollama、LM Studio）和云端模型（GPT、Claude、Gemini、DeepSeek、Kimi）</p>
+            </div>
+            <div class="feature-item">
+                <h3>🏠 工作区隔离</h3>
+                <p>文档划分到独立工作区，互不干扰，支持跨工作区共享文档</p>
+            </div>
+            <div class="feature-item">
+                <h3>💬 双对话模式</h3>
+                <p>聊天模式（连续对话）& 查询模式（简单问答）自由切换</p>
+            </div>
+            <div class="feature-item">
+                <h3>🔗 AI 代理能力</h3>
+                <p>内置 Agent 可执行浏览网页、运行代码等任务</p>
+            </div>
+            <div class="feature-item">
+                <h3>🔒 隐私优先</h3>
+                <p>全程本地化数据存储，数据自主可控，零泄露风险</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🚀 快速部署</h2>
+        <p>提供多种部署方式，满足不同场景需求：</p>
+        <ul style="margin-top: 12px;">
+            <li><strong>桌面客户端</strong>：直接下载 Windows/macOS/Linux 安装包，图形界面点点点就完事</li>
+            <li><strong>Docker 部署</strong>：一行命令启动，推荐生产环境使用</li>
+            <li><strong>云平台</strong>：支持 AWS、GCP、DigitalOcean、Render.com 等</li>
+        </ul>
+        <div class="quickstart">
+            docker pull mintplexlabs/anythingllm
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 适用场景</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>场景</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>📚 个人知识管理</td><td>上传论文、书籍、笔记，构建个人 AI 知识库</td></tr>
+                    <tr><td>🏢 企业内部知识库</td><td>私有化部署，保障数据安全</td></tr>
+                    <tr><td>🔍 文档问答</td><td>跟 PDF/文档直接对话，快速提取信息</td></tr>
+                    <tr><td>💼 客服机器人</td><td>基于产品文档构建智能客服</td></tr>
+                    <tr><td>📊 音视频转文本</td><td>解析音频/视频内容，生成可对话的知识</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>💡 为什么值得关注</h2>
+        <ul>
+            <li><strong>低成本高效益</strong>：相比其他文档聊天机器人方案，可节省约 <strong>90% 成本</strong></li>
+            <li><strong>零门槛</strong>：无需专业开发知识，UI 友好，小白也能上手</li>
+            <li><strong>完全可控</strong>：数据本地存储，隐私安全有保障</li>
+            <li><strong>开发者友好</strong>：提供完整 API，支持二次开发和自定义集成</li>
+            <li><strong>模型灵活</strong>：BYO-LLM 设计，自由切换本地或云端大模型</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🔗 相关链接</h2>
+        <ul>
+            <li>🌐 官网：<a href="https://anythingllm.com" target="_blank" style="color:#2d6a9f">https://anythingllm.com</a></li>
+            <li>📦 GitHub：<a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank" style="color:#2d6a9f">https://github.com/Mintplex-Labs/anything-llm</a></li>
+            <li>📖 中文站：<a href="https://www.anythingllmcn.com" target="_blank" style="color:#2d6a9f">https://www.anythingllmcn.com</a></li>
+        </ul>
+    </div>
 
     <div class="cta">
         <a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank">前往 GitHub 查看完整项目 →</a>
