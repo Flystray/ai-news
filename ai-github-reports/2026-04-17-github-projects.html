@@ -18,19 +18,29 @@
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
         .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
-        .card ul { padding-left: 20px; }
+        .card h3 { font-size: 15px; color: #2d6a9f; margin: 20px 0 10px 0; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 12px; }
+        .card ul { padding-left: 20px; margin-bottom: 15px; }
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
-        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; margin-bottom: 0; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 13px; margin-top: 10px; word-break: break-all; line-height: 1.6; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
-        .step-list { counter-reset: step; }
-        .step-list li { position: relative; padding-left: 30px; }
-        .step-list li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 2px; background: #2d6a9f; color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+        .step-list { counter-reset: step; list-style: none; padding-left: 0; }
+        .step-list li { position: relative; padding-left: 35px; margin-bottom: 12px; }
+        .step-list li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 2px; background: #2d6a9f; color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .feature-box { background: #f8f9fa; border-radius: 8px; padding: 15px 20px; margin: 10px 0; }
+        .feature-box h4 { color: #1e3a5f; font-size: 14px; margin-bottom: 8px; }
+        .feature-box p { font-size: 14px; margin-bottom: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; }
+        th { background: #f0f6ff; color: #1e3a5f; font-weight: 600; }
+        tr:hover { background: #f8f9fa; }
+        .highlight-box { background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%); border-left: 4px solid #f0ad4e; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 15px 0; }
+        .highlight-box p { margin-bottom: 0; }
     </style>
 </head>
 <body>
@@ -49,7 +59,14 @@
         <span>🔗 <a href="https://github.com/666ghj/MiroFish" target="_blank" style="color:#2d6a9f">666ghj/MiroFish</a></span>
     </div>
 
-    <div class="topics"><span class="topic">multi-agent-simulation</span><span class="topic">knowledge-graph</span><span class="topic">llms</span><span class="topic">agent-memory</span><span class="topic">financial-forecasting</span><span class="topic">future-prediction</span></div>
+    <div class="topics">
+        <span class="topic">multi-agent-simulation</span>
+        <span class="topic">knowledge-graph</span>
+        <span class="topic">llms</span>
+        <span class="topic">agent-memory</span>
+        <span class="topic">financial-forecasting</span>
+        <span class="topic">future-prediction</span>
+    </div>
 
     <div class="desc-card">
         <p>🎯 <strong>核心理念</strong>：在数字沙盒中"排练未来"，在无数次模拟中赢得决策。<br><br>
@@ -57,56 +74,133 @@
     </div>
 
     <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul>
-            <li><strong>种子信息提取</strong> - 从现实世界提取种子信息（突发新闻、政策草案、金融信号等）</li>
-            <li><strong>平行数字世界构建</strong> - 自动构建高保真的平行数字世界</li>
-            <li><strong>多智能体模拟</strong> - 数千个具有独立个性、长期记忆和行为逻辑的智能体自由互动</li>
-            <li><strong>上帝视角注入</strong> - 从"上帝视角"动态注入变量，精确推演未来轨迹</li>
-            <li><strong>预测报告生成</strong> - 自动生成详细的预测报告</li>
-            <li><strong>深度交互</strong> - 与模拟世界中的任何智能体进行对话互动</li>
-        </ul>
+        <h2>📌 项目背景</h2>
+        <p><strong>MiroFish</strong> 是一个下一代 AI 预测引擎，由多智能体技术驱动，由盛大集团赞助开发。</p>
+        <p>传统的预测方法往往依赖历史数据和统计模型，而 MiroFish 采用了一种全新的思路——通过构建高保真的"平行数字世界"，让数千个具有独立个性、长期记忆和行为逻辑的智能体在其中自由互动，从而推演未来的可能走向。</p>
+        <div class="highlight-box">
+            <p>💡 这种方法特别适用于复杂系统的预测，如社会舆情演变、金融市场波动、政策影响评估等。</p>
+        </div>
     </div>
 
     <div class="card">
-        <h2>⚙️ 技术亮点</h2>
-        <p style="margin-bottom: 15px;"><strong>5步工作流程</strong>：</p>
+        <h2>🚀 核心功能详解</h2>
+        
+        <div class="feature-box">
+            <h4>1. 种子信息提取</h4>
+            <p>从现实世界提取关键"种子信息"作为模拟起点：突发新闻、政策草案、金融信号、社交媒体热点等。</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>2. 平行数字世界构建</h4>
+            <p>自动构建高保真平行世界：社会关系网络、GraphRAG 知识图谱、个体/集体记忆系统、真实环境约束。</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>3. 多智能体模拟（核心能力）</h4>
+            <p>数千个智能体并发运行，每个都有独立个性、基于 Zep Cloud 的长期记忆、符合角色的行为模式，自由互动演化。</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>4. 上帝视角注入</h4>
+            <p>模拟过程中动态注入变量：突发事件、外部冲击、干预措施，观察对系统演化的影响。</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>5. 预测报告生成</h4>
+            <p>ReportAgent 自动生成详细报告：多种未来场景、发生概率、关键影响因素、决策建议。</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>6. 深度交互</h4>
+            <p>与模拟世界中的智能体对话、向 ReportAgent 提问、调整参数重新运行、对比不同假设结果。</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ 技术架构</h2>
+        
+        <h3>5步工作流程</h3>
         <ul class="step-list">
-            <li><strong>图构建</strong> - 种子提取、个体/集体记忆注入、GraphRAG 构建</li>
-            <li><strong>环境设置</strong> - 实体关系提取、角色生成（Persona）、智能体配置注入</li>
-            <li><strong>模拟</strong> - 双平台并行模拟、自动解析预测需求、动态时间记忆更新</li>
-            <li><strong>报告生成</strong> - ReportAgent 配备丰富工具集、深度互动后模拟环境</li>
-            <li><strong>深度交互</strong> - 与模拟世界中的任何智能体聊天、与 ReportAgent 互动</li>
+            <li><strong>图构建</strong> - 种子提取、记忆注入、GraphRAG 构建</li>
+            <li><strong>环境设置</strong> - 实体关系提取、角色生成、智能体配置</li>
+            <li><strong>模拟</strong> - 双平台并行、需求解析、动态记忆更新</li>
+            <li><strong>报告生成</strong> - ReportAgent 工具集、深度分析</li>
+            <li><strong>深度交互</strong> - 与智能体聊天、与 ReportAgent 互动</li>
         </ul>
-        <br>
-        <p style="margin-bottom: 10px;"><strong>核心技术栈</strong>：</p>
-        <ul>
-            <li><strong>GraphRAG</strong> - 知识图谱增强检索，支撑复杂关系推理</li>
-            <li><strong>多智能体系统</strong> - 支持数千个智能体并发模拟</li>
-            <li><strong>长期记忆系统</strong> - Zep Cloud 记忆管理</li>
-            <li><strong>OASIS 引擎</strong> - 基于 CAMEL-AI 的 OASIS 模拟引擎</li>
-            <li><strong>灵活LLM支持</strong> - 支持任何 OpenAI SDK 格式的 LLM API</li>
-        </ul>
+
+        <h3>核心技术栈</h3>
+        <table>
+            <tr><th>技术</th><th>说明</th></tr>
+            <tr><td><strong>GraphRAG</strong></td><td>知识图谱增强检索，支撑复杂关系推理</td></tr>
+            <tr><td><strong>多智能体系统</strong></td><td>数千智能体并发，独立状态和行为逻辑</td></tr>
+            <tr><td><strong>长期记忆</strong></td><td>基于 Zep Cloud，智能体记住历史互动</td></tr>
+            <tr><td><strong>OASIS 引擎</strong></td><td>基于 CAMEL-AI 的开源社会交互模拟引擎</td></tr>
+            <tr><td><strong>灵活LLM</strong></td><td>支持 OpenAI SDK 格式，GPT-4/Claude/DeepSeek 等</td></tr>
+        </table>
     </div>
 
     <div class="card">
-        <h2>👥 适用人群</h2>
-        <ul>
-            <li><strong>政策制定者</strong> - 零风险测试政策影响</li>
-            <li><strong>金融分析师</strong> - 市场趋势预测</li>
-            <li><strong>舆情研究者</strong> - 公共事件舆论走向模拟</li>
-            <li><strong>创意工作者</strong> - 小说结局推演、创意探索</li>
-        </ul>
+        <h2>🎬 应用场景</h2>
+        
+        <h3>1. 宏观决策支持</h3>
+        <p>政策制定者在零风险虚拟环境中"预演"政策效果，识别阻力点和风险区域。</p>
+
+        <h3>2. 金融趋势预测</h3>
+        <p>考虑市场情绪和群体行为，生成多种可能的走势场景，而非仅依赖技术指标。</p>
+
+        <h3>3. 舆情演变分析</h3>
+        <p>模拟信息传播和观点演化，识别关键意见领袖和转折点（如武汉大学舆情报告案例）。</p>
+
+        <h3>4. 创意内容推演</h3>
+        <p>作家探索小说情节不同发展，如《红楼梦》遗失结局模拟。</p>
+
+        <h3>5. 产品发布预演</h3>
+        <p>预测新产品发布后的市场反应，识别用户痛点和亮点。</p>
     </div>
 
     <div class="card">
         <h2>⚡ 快速上手</h2>
-        <p style="margin-bottom: 10px;"><strong>Docker 部署（推荐）</strong>：</p>
-        <div class="quickstart">docker compose up -d</div>
-        <br>
-        <p style="margin-bottom: 10px;"><strong>源码部署</strong>：</p>
-        <div class="quickstart"># 1. 配置环境变量<br>cp .env.example .env<br><br># 2. 一键安装依赖<br>npm run setup:all<br><br># 3. 启动服务<br>npm run dev</div>
-        <p style="margin-top: 10px; font-size: 13px; color: #666;">前端：http://localhost:3000 | 后端：http://localhost:5001</p>
+        
+        <h3>Docker 部署（推荐，5分钟）</h3>
+        <div class="quickstart">git clone https://github.com/666ghj/MiroFish.git
+cd MiroFish
+cp .env.example .env
+# 编辑 .env 填入 API 密钥
+docker compose up -d</div>
+
+        <h3>源码部署</h3>
+        <div class="quickstart">git clone https://github.com/666ghj/MiroFish.git
+cd MiroFish
+cp .env.example .env
+npm run setup:all
+npm run dev</div>
+
+        <p style="margin-top: 15px; font-size: 13px; color: #666;">
+            前端：http://localhost:3000 | 后端：http://localhost:5001
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>💡 为什么值得关注</h2>
+        <ul>
+            <li><strong>创新的预测范式</strong> - "数字孪生+群体模拟"方法，捕捉复杂系统的涌现现象</li>
+            <li><strong>技术整合能力强</strong> - 整合 GraphRAG、多智能体、长期记忆等前沿技术</li>
+            <li><strong>应用场景广泛</strong> - 政策、金融、舆情、创意等多领域适用</li>
+            <li><strong>社区活跃</strong> - 55k+ Stars，盛大集团赞助，持续维护保障</li>
+            <li><strong>易用性设计</strong> - Docker 一键部署，现代化 Web 界面</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>📊 项目数据</h2>
+        <table>
+            <tr><td>Stars</td><td>55.7k</td></tr>
+            <tr><td>Forks</td><td>8.4k</td></tr>
+            <tr><td>主要语言</td><td>Python (57.6%) / Vue (41.2%)</td></tr>
+            <tr><td>最新版本</td><td>V0.1.2 (2026年3月7日)</td></tr>
+            <tr><td>开源协议</td><td>AGPL-3.0</td></tr>
+            <tr><td>赞助商</td><td>盛大集团</td></tr>
+        </table>
     </div>
 
     <div class="cta">
@@ -115,7 +209,10 @@
 
     <div class="footer">
         <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
-        <p style="margin-top: 5px;"><a href="https://666ghj.github.io/mirofish-demo/" target="_blank" style="color:#2d6a9f;">在线演示</a> · <a href="https://mirofish.ai" target="_blank" style="color:#2d6a9f;">官网</a></p>
+        <p style="margin-top: 8px;">
+            <a href="https://666ghj.github.io/mirofish-demo/" target="_blank" style="color:#2d6a9f;">在线演示</a> · 
+            <a href="https://mirofish.ai" target="_blank" style="color:#2d6a9f;">官网</a>
+        </p>
     </div>
 </div>
 </body>
