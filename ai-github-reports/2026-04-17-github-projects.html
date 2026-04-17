@@ -28,6 +28,9 @@
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .step-list { counter-reset: step; }
+        .step-list li { position: relative; padding-left: 30px; }
+        .step-list li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 2px; background: #2d6a9f; color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -35,30 +38,76 @@
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月17日</div>
         <h1>MiroFish</h1>
-        <p class="subtitle">A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物</p>
+        <p class="subtitle">简洁通用的群体智能引擎，预测万物</p>
     </div>
 
     <div class="meta-bar">
         <span>⭐ 55.7k</span>
-        <span>📝 Python</span>
-        <span>🕐 </span>
+        <span>🍴 8.4k</span>
+        <span>📝 Python / Vue</span>
+        <span>📄 AGPL-3.0</span>
         <span>🔗 <a href="https://github.com/666ghj/MiroFish" target="_blank" style="color:#2d6a9f">666ghj/MiroFish</a></span>
     </div>
 
-    <div class="topics"><span class="topic">agent-memory</span><span class="topic">financial-forecasting</span><span class="topic">future-prediction</span><span class="topic">knowledge-graph</span><span class="topic">llms</span><span class="topic">multi-agent-simulation</span><span class="topic">public-opinion-analysis</span><span class="topic">python3</span></div>
+    <div class="topics"><span class="topic">multi-agent-simulation</span><span class="topic">knowledge-graph</span><span class="topic">llms</span><span class="topic">agent-memory</span><span class="topic">financial-forecasting</span><span class="topic">future-prediction</span></div>
 
-    
+    <div class="desc-card">
+        <p>🎯 <strong>核心理念</strong>：在数字沙盒中"排练未来"，在无数次模拟中赢得决策。<br><br>
+        Miro（镜像，映射真实世界的群体智能）+ Fish（鱼群，象征群体智能）</p>
+    </div>
 
     <div class="card">
         <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+        <ul>
+            <li><strong>种子信息提取</strong> - 从现实世界提取种子信息（突发新闻、政策草案、金融信号等）</li>
+            <li><strong>平行数字世界构建</strong> - 自动构建高保真的平行数字世界</li>
+            <li><strong>多智能体模拟</strong> - 数千个具有独立个性、长期记忆和行为逻辑的智能体自由互动</li>
+            <li><strong>上帝视角注入</strong> - 从"上帝视角"动态注入变量，精确推演未来轨迹</li>
+            <li><strong>预测报告生成</strong> - 自动生成详细的预测报告</li>
+            <li><strong>深度交互</strong> - 与模拟世界中的任何智能体进行对话互动</li>
+        </ul>
     </div>
 
-    
+    <div class="card">
+        <h2>⚙️ 技术亮点</h2>
+        <p style="margin-bottom: 15px;"><strong>5步工作流程</strong>：</p>
+        <ul class="step-list">
+            <li><strong>图构建</strong> - 种子提取、个体/集体记忆注入、GraphRAG 构建</li>
+            <li><strong>环境设置</strong> - 实体关系提取、角色生成（Persona）、智能体配置注入</li>
+            <li><strong>模拟</strong> - 双平台并行模拟、自动解析预测需求、动态时间记忆更新</li>
+            <li><strong>报告生成</strong> - ReportAgent 配备丰富工具集、深度互动后模拟环境</li>
+            <li><strong>深度交互</strong> - 与模拟世界中的任何智能体聊天、与 ReportAgent 互动</li>
+        </ul>
+        <br>
+        <p style="margin-bottom: 10px;"><strong>核心技术栈</strong>：</p>
+        <ul>
+            <li><strong>GraphRAG</strong> - 知识图谱增强检索，支撑复杂关系推理</li>
+            <li><strong>多智能体系统</strong> - 支持数千个智能体并发模拟</li>
+            <li><strong>长期记忆系统</strong> - Zep Cloud 记忆管理</li>
+            <li><strong>OASIS 引擎</strong> - 基于 CAMEL-AI 的 OASIS 模拟引擎</li>
+            <li><strong>灵活LLM支持</strong> - 支持任何 OpenAI SDK 格式的 LLM API</li>
+        </ul>
+    </div>
 
-    
+    <div class="card">
+        <h2>👥 适用人群</h2>
+        <ul>
+            <li><strong>政策制定者</strong> - 零风险测试政策影响</li>
+            <li><strong>金融分析师</strong> - 市场趋势预测</li>
+            <li><strong>舆情研究者</strong> - 公共事件舆论走向模拟</li>
+            <li><strong>创意工作者</strong> - 小说结局推演、创意探索</li>
+        </ul>
+    </div>
 
-    
+    <div class="card">
+        <h2>⚡ 快速上手</h2>
+        <p style="margin-bottom: 10px;"><strong>Docker 部署（推荐）</strong>：</p>
+        <div class="quickstart">docker compose up -d</div>
+        <br>
+        <p style="margin-bottom: 10px;"><strong>源码部署</strong>：</p>
+        <div class="quickstart"># 1. 配置环境变量<br>cp .env.example .env<br><br># 2. 一键安装依赖<br>npm run setup:all<br><br># 3. 启动服务<br>npm run dev</div>
+        <p style="margin-top: 10px; font-size: 13px; color: #666;">前端：http://localhost:3000 | 后端：http://localhost:5001</p>
+    </div>
 
     <div class="cta">
         <a href="https://github.com/666ghj/MiroFish" target="_blank">前往 GitHub 查看完整项目 →</a>
@@ -66,6 +115,7 @@
 
     <div class="footer">
         <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+        <p style="margin-top: 5px;"><a href="https://666ghj.github.io/mirofish-demo/" target="_blank" style="color:#2d6a9f;">在线演示</a> · <a href="https://mirofish.ai" target="_blank" style="color:#2d6a9f;">官网</a></p>
     </div>
 </div>
 </body>
