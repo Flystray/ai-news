@@ -7,51 +7,68 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
-        .container { max-width: 860px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 40px 44px; margin-bottom: 28px; }
         .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
-        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header h1 { font-size: 34px; font-weight: 700; margin-bottom: 10px; }
         .header .subtitle { font-size: 15px; opacity: 0.85; }
         .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
         .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .meta-bar a { color: #2d6a9f; text-decoration: none; }
+        .meta-bar a:hover { text-decoration: underline; }
         .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
-        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
-        .card ul { padding-left: 20px; }
-        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .card h2 { font-size: 18px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card h3 { font-size: 15px; color: #2d6a9f; margin: 18px 0 8px 0; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
+        .card ul, .card ol { padding-left: 22px; margin: 10px 0; }
+        .card li { color: #444; font-size: 15px; margin-bottom: 6px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
-        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
-        .cta { text-align: center; margin-top: 30px; }
-        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
-        .cta a:hover { background: #1e3a5f; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; margin: 0; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
         .feature-item { background: #f8fafc; border-radius: 8px; padding: 15px; }
         .feature-item h3 { font-size: 14px; color: #2d6a9f; margin-bottom: 6px; }
-        .feature-item p { font-size: 13px; color: #666; }
+        .feature-item p { font-size: 13px; color: #666; margin: 0; }
         .table-container { overflow-x: auto; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eee; }
         th { background: #f8fafc; font-weight: 600; color: #1e3a5f; }
+        tr:hover { background: #f8fafc; }
+        .code-block { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 16px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 13px; margin: 12px 0; overflow-x: auto; }
+        .code-block .comment { color: #6272a4; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .diagram { background: #f0f7ff; border: 1px solid #d0e3ff; border-radius: 8px; padding: 20px; margin: 15px 0; text-align: center; font-family: monospace; font-size: 13px; line-height: 1.6; }
+        .cta { text-align: center; margin-top: 30px; }
+        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .badge { display: inline-block; background: #e8f0fe; color: #2d6a9f; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px; }
+        .highlight { background: #fffbea; padding: 2px 4px; border-radius: 3px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+        .stat-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; padding: 20px; text-align: center; }
+        .stat-box .num { font-size: 28px; font-weight: 700; }
+        .stat-box .label { font-size: 12px; opacity: 0.85; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 15px 0; }
+        @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 <div class="container">
+
     <div class="header">
-        <div class="date-badge">GitHub AI 项目 · 2026年04月16日</div>
+        <div class="date-badge">GitHub AI 项目深度介绍 · 2026年04月16日</div>
         <h1>anything-llm</h1>
-        <p class="subtitle">全栈 AI 知识库工具 — 用 RAG 技术打造本地文档对话机器人</p>
+        <p class="subtitle">Y Combinator 孵化的全栈 AI 知识库工具 — 用 RAG 技术打造本地文档对话机器人</p>
     </div>
 
     <div class="meta-bar">
         <span>⭐ 58.4k</span>
         <span>🍴 6.3k</span>
-        <span>📝 JavaScript</span>
+        <span>📝 JavaScript/TypeScript</span>
         <span>📄 MIT License</span>
-        <span>🔗 <a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank" style="color:#2d6a9f">Mintplex-Labs/anything-llm</a></span>
+        <span>🔗 <a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank">Mintplex-Labs/anything-llm</a></span>
     </div>
 
     <div class="topics">
@@ -68,94 +85,298 @@
     </div>
 
     <div class="desc-card">
-        <p>AnythingLLM 是 Y Combinator 孵化的全栈 AI 应用程序，将 RAG 技术与私有化部署完美结合，让你可以轻松打造本地 AI 知识库——上传文档，用自然语言跟它们对话。</p>
+        <p>AnythingLLM 是 Y Combinator 孵化的全栈 AI 应用程序，将 RAG（检索增强生成）技术与私有化部署完美结合，让你可以轻松打造本地 AI 知识库——上传文档，用自然语言跟它们对话，数据完全留在本地。</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-box"><div class="num">58.4k</div><div class="label">GitHub Stars</div></div>
+        <div class="stat-box"><div class="num">150+</div><div class="label">贡献者</div></div>
+        <div class="stat-box"><div class="num">20+</div><div class="label">支持格式</div></div>
+        <div class="stat-box"><div class="num">10k+</div><div class="label">Discord 成员</div></div>
     </div>
 
     <div class="card">
-        <h2>🎯 它是什么</h2>
-        <p>AnythingLLM 由 <strong>Mintplex Labs Inc.</strong> 开发，于 2022 年夏季通过 Y Combinator 孵化，2023 年 6 月正式发布。它将 RAG（检索增强生成）技术与私有化部署完美结合，让你轻松打造<strong>本地 AI 知识库</strong>。</p>
-        <p style="margin-top: 12px;">简单来说：你可以上传 PDF、文档、视频、网址链接，它会自动解析、向量化，然后你可以用自然语言<strong>跟这些文档对话</strong>——就像有个 AI 助手在帮你阅读和理解所有资料。</p>
+        <h2>🏢 团队背景</h2>
+        <table>
+            <tr><th>项目</th><th>说明</th></tr>
+            <tr><td>母公司</td><td>Mintplex Labs Inc.</td></tr>
+            <tr><td>孵化器</td><td>Y Combinator S22（2022年夏季）</td></tr>
+            <tr><td>开源时间</td><td>2023年6月</td></tr>
+            <tr><td>技术栈</td><td>JavaScript/TypeScript + Node.js + React</td></tr>
+            <tr><td>许可证</td><td>MIT</td></tr>
+        </table>
+        <p style="margin-top:15px;">Y Combinator 是全球最著名的创业孵化器，孵化了 Airbnb、Dropbox、Stripe 等明星公司。能被 YC 选中，说明 AnythingLLM 在技术创新与商业化之间找到了很好的平衡。</p>
     </div>
 
     <div class="card">
-        <h2>✨ 核心功能</h2>
+        <h2>🧠 RAG 技术原理解析</h2>
+        <p>RAG（Retrieval-Augmented Generation）是当前 AI 领域最重要的技术之一。AnythingLLM 正是基于 RAG 架构：</p>
+        <div class="diagram">
+            用户提问 ──▶ 语义检索 ──▶ LLM 生成<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向量数据库 ← 文档嵌入<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LLM 模型（本地/云端）
+        </div>
+        <h3>核心流程</h3>
+        <ol>
+            <li><strong>文档解析</strong>：上传的文件被分割成小块（chunks）</li>
+            <li><strong>向量化</strong>：每个 chunk 通过嵌入模型转换为数值向量</li>
+            <li><strong>语义检索</strong>：用户提问时，在向量数据库中找到最相关的文档块</li>
+            <li><strong>增强生成</strong>：将检索到的文档块作为上下文，连同用户问题一起发送给 LLM</li>
+            <li><strong>返回答案</strong>：LLM 基于真实内容生成回答，而非凭空编造</li>
+        </ol>
+        <h3>为什么需要 RAG？</h3>
+        <table>
+            <tr><th>问题</th><th>传统方式</th><th>RAG 方式</th></tr>
+            <tr><td>幻觉</td><td>LLM 可能胡编乱造</td><td>答案基于真实文档，可溯源</td></tr>
+            <tr><td>知识更新</td><td>需要重新训练模型</td><td>只需更新文档库</td></tr>
+            <tr><td>数据隐私</td><td>需上传数据到云端</td><td>文档本地存储</td></tr>
+            <tr><td>成本</td><td>微调大模型成本高昂</td><td>无需训练，直接使用</td></tr>
+            <tr><td>可控性</td><td>输出不可预测</td><td>答案限定在文档范围内</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>✨ 核心功能详解</h2>
+
+        <h3>1. 全格式文档支持</h3>
+        <p>AnythingLLM 支持解析 <strong>20+ 种格式</strong>，覆盖日常工作几乎所有文档类型：</p>
+        <table>
+            <tr><th>类别</th><th>支持格式</th></tr>
+            <tr><td>文档</td><td>PDF、DOCX、DOC、TXT、RTF、ODT</td></tr>
+            <tr><td>表格</td><td>XLSX、XLS、CSV</td></tr>
+            <tr><td>演示</td><td>PPTX、PPTM</td></tr>
+            <tr><td>网页</td><td>URL 链接（自动抓取）</td></tr>
+            <tr><td>笔记</td><td>Markdown、Notion 导出</td></tr>
+            <tr><td>音频</td><td>MP3、WAV、M4A（Whisper 转录）</td></tr>
+            <tr><td>视频</td><td>MP4、MOV、AVI（Whisper 转录）</td></tr>
+            <tr><td>代码</td><td>各类源代码文件（自动识别语言）</td></tr>
+        </table>
+
+        <h3>2. 多模型灵活切换（BYO-LLM）</h3>
+        <p>AnythingLLM 开创性地提出 <strong>BYO-LLM（Bring Your Own LLM）</strong> 概念：</p>
+        <div class="two-col">
+            <div>
+                <strong>支持的 LLM（大语言模型）</strong>
+                <table>
+                    <tr><th>类型</th><th>选项</th></tr>
+                    <tr><td>云端商业</td><td>GPT-4/3.5、Claude 3、Gemini Pro、DeepSeek、Kimi</td></tr>
+                    <tr><td>本地开源</td><td>Llama 2/3、Mistral、Qwen、ChatGLM</td></tr>
+                </table>
+            </div>
+            <div>
+                <strong>支持的嵌入模型</strong>
+                <table>
+                    <tr><th>类型</th><th>选项</th></tr>
+                    <tr><td>云端</td><td>OpenAI Ada/Nova、Mistral</td></tr>
+                    <tr><td>本地</td><td>Nomic Text、All-MiniLM-L6</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <h3>3. 向量数据库选择</h3>
+        <table>
+            <tr><th>数据库</th><th>特点</th><th>适用场景</th></tr>
+            <tr><td>LanceDB</td><td>内置、零配置、单文件</td><td>个人/小团队（推荐）</td></tr>
+            <tr><td>Pinecone</td><td>云端托管、高可用</td><td>企业级、分布式</td></tr>
+            <tr><td>Chroma</td><td>轻量级、开发友好</td><td>本地开发测试</td></tr>
+            <tr><td>Qdrant</td><td>高性能、生产级</td><td>大规模部署</td></tr>
+        </table>
+
+        <h3>4. 工作区隔离机制</h3>
+        <p>每个工作区有独立的文档库和对话上下文，工作区之间完全隔离。文档可以跨工作区共享，一个文档可在多个工作区中使用。</p>
+
+        <h3>5. 双对话模式</h3>
+        <table>
+            <tr><th>模式</th><th>特点</th><th>适用场景</th></tr>
+            <tr><td>聊天模式</td><td>保留完整对话历史，支持多轮追问</td><td>深度研究、复杂分析</td></tr>
+            <tr><td>查询模式</td><td>每次独立问答，不保留历史</td><td>快速检索、简单查询</td></tr>
+        </table>
+
+        <h3>6. 高级配置选项</h3>
+        <div class="feature-grid">
+            <div class="feature-item"><h3>聊天温度</h3><p>控制回答的创意性（0=保守，1=创意）</p></div>
+            <div class="feature-item"><h3>最大上下文</h3><p>每次对话使用的文档块数量</p></div>
+            <div class="feature-item"><h3>相似度阈值</h3><p>检索结果的最低匹配度</p></div>
+            <div class="feature-item"><h3>引用回源</h3><p>回答中标注参考的原始文档</p></div>
+            <div class="feature-item"><h3>流式输出</h3><p>打字机效果，提升体验</p></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🚀 详细部署指南</h2>
+
+        <h3>方案一：桌面客户端（零配置）</h3>
+        <p>适合 Windows / macOS / Linux 用户，不想折腾技术。</p>
+        <ol>
+            <li>访问 <a href="https://anythingllm.com/download" target="_blank">anythingllm.com/download</a> 下载安装包</li>
+            <li>安装后打开，自动进入设置向导</li>
+            <li>选择 LLM 提供商（推荐先用 OpenAI 体验）</li>
+            <li>配置 API Key</li>
+            <li>完成！开始上传文档</li>
+        </ol>
+
+        <h3>方案二：Docker 部署（推荐生产环境）</h3>
+        <div class="quickstart">
+docker pull mintplexlabs/anythingllm<br>
+mkdir anything-llm && cd anything-llm<br>
+curl -O https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/master/docker/.env.example<br>
+mv .env.example .env<br>
+docker-compose up -d<br>
+<span class="comment"># 访问 http://localhost:3000</span>
+        </div>
+
+        <h3>方案三：本地开发部署</h3>
+        <div class="quickstart">
+git clone https://github.com/Mintplex-Labs/anything-llm.git<br>
+cd anything-llm<br>
+npm install<br>
+<span class="comment"># 配置 .env 文件</span><br>
+npm run dev
+        </div>
+
+        <h3>硬件配置要求</h3>
+        <table>
+            <tr><th>使用方式</th><th>最低配置</th><th>推荐配置</th></tr>
+            <tr><td>仅使用云端模型</td><td>2GB RAM</td><td>4GB RAM</td></tr>
+            <tr><td>本地 LLM（小模型）</td><td>8GB RAM + 6GB 显存</td><td>16GB RAM + 8GB 显存</td></tr>
+            <tr><td>本地 LLM（大模型）</td><td>16GB RAM + 12GB 显存</td><td>32GB RAM + 24GB 显存</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>💡 进阶使用技巧</h2>
+
+        <h3>与 Ollama 完美配合</h3>
+        <p>如果想完全本地运行，推荐 Ollama：</p>
+        <div class="quickstart">
+ollama pull llama3<br>
+ollama pull nomic-embed-text<br>
+<span class="comment"># 然后在 AnythingLLM 中配置：</span><br>
+<span class="comment"># LLM_PROVIDER = ollama</span><br>
+<span class="comment"># OLLAMA_BASE_URL = http://localhost:11434</span>
+        </div>
+
+        <h3>优化文档解析技巧</h3>
+        <table>
+            <tr><th>技巧</th><th>说明</th></tr>
+            <tr><td>分段上传</td><td>大文件（>50MB）建议分段上传</td></tr>
+            <tr><td>清理格式</td><td>删除无关的页眉页脚，提高检索质量</td></tr>
+            <tr><td>中文优化</td><td>使用支持中文的嵌入模型</td></tr>
+            <tr><td>定期更新</td><td>文档更新后重新索引</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>⚖️ 与同类项目对比</h2>
+        <table>
+            <tr><th>项目</th><th>Stars</th><th>特点</th><th>适用场景</th></tr>
+            <tr><td><strong>AnythingLLM</strong></td><td>58.4k ⭐</td><td>全格式、多模型、RAG</td><td>通用知识库</td></tr>
+            <tr><td>LangChain-ChatGLM</td><td>32k</td><td>LangChain 生态、中文优化</td><td>技术开发者</td></tr>
+            <tr><td>PrivateGPT</td><td>28k</td><td>纯本地、简洁</td><td>离线隐私场景</td></tr>
+            <tr><td>Quivr</td><td>18k</td><td>团队协作、脑系统</td><td>团队知识管理</td></tr>
+            <tr><td>DocsGPT</td><td>16k</td><td>文档问答专用</td><td>开发者文档</td></tr>
+        </table>
+        <p style="margin-top:15px;"><strong>AnythingLLM 的优势</strong>：开箱即用（UI 最友好）· 格式支持最全面 · 模型选择最灵活 · YC 背书（持续活跃）</p>
+    </div>
+
+    <div class="card">
+        <h2>🎯 适用场景详解</h2>
+
         <div class="feature-grid">
             <div class="feature-item">
-                <h3>📄 20+ 文档格式支持</h3>
-                <p>PDF、DOCX、TXT、Markdown、网页、音频、视频……自动解析并生成向量嵌入</p>
+                <h3>📚 个人知识管理</h3>
+                <p>上传论文、书籍、笔记，AI 帮助理解和提取关键信息</p>
             </div>
             <div class="feature-item">
-                <h3>🤖 多模型灵活切换</h3>
-                <p>支持本地模型（Llama、Ollama、LM Studio）和云端模型（GPT、Claude、Gemini、DeepSeek、Kimi）</p>
+                <h3>🏢 企业内部知识库</h3>
+                <p>私有化部署，保障数据安全，新员工快速上手</p>
             </div>
             <div class="feature-item">
-                <h3>🏠 工作区隔离</h3>
-                <p>文档划分到独立工作区，互不干扰，支持跨工作区共享文档</p>
+                <h3>📰 记者/研究员资料库</h3>
+                <p>从大量新闻、报告中提取信息，生成摘要分析</p>
             </div>
             <div class="feature-item">
-                <h3>💬 双对话模式</h3>
-                <p>聊天模式（连续对话）& 查询模式（简单问答）自由切换</p>
+                <h3>💼 销售/客服知识库</h3>
+                <p>基于产品文档构建智能客服，回答一致准确</p>
             </div>
             <div class="feature-item">
-                <h3>🔗 AI 代理能力</h3>
-                <p>内置 Agent 可执行浏览网页、运行代码等任务</p>
+                <h3>🎓 学生文献管理</h3>
+                <p>论文太多难以看完，AI 帮助理解复杂概念</p>
             </div>
             <div class="feature-item">
-                <h3>🔒 隐私优先</h3>
-                <p>全程本地化数据存储，数据自主可控，零泄露风险</p>
+                <h3>🔍 竞品分析</h3>
+                <p>上传多份竞品资料，AI 对比分析异同点</p>
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>🚀 快速部署</h2>
-        <p>提供多种部署方式，满足不同场景需求：</p>
-        <ul style="margin-top: 12px;">
-            <li><strong>桌面客户端</strong>：直接下载 Windows/macOS/Linux 安装包，图形界面点点点就完事</li>
-            <li><strong>Docker 部署</strong>：一行命令启动，推荐生产环境使用</li>
-            <li><strong>云平台</strong>：支持 AWS、GCP、DigitalOcean、Render.com 等</li>
+        <h2>🤔 常见问题</h2>
+
+        <h3>Q1：需要什么样的硬件配置？</h3>
+        <p>根据使用场景不同，配置要求差异很大。仅使用云端模型时，2GB RAM 即可；若要本地运行大模型，则需要 16GB+ RAM 和高性能显卡。</p>
+
+        <h3>Q2：数据安全性如何？</h3>
+        <ul>
+            <li>✅ 文档存储在本地（或你控制的服务器）</li>
+            <li>✅ 只有向量化后的嵌入数据发送到云端 API</li>
+            <li>✅ 支持完全离线模式（使用本地模型）</li>
         </ul>
-        <div class="quickstart">
-            docker pull mintplexlabs/anythingllm
-        </div>
+
+        <h3>Q3：支持中文吗？</h3>
+        <p>✅ 完全支持中文文档解析和中文嵌入模型（Nomic、Chinese-Alpaca）。推荐使用 DeepSeek、Kimi 等对中文优化好的模型。</p>
+
+        <h3>Q4：免费吗？</h3>
+        <p>✅ 核心功能完全免费，开源代码可自由使用。企业版提供更多功能（SSO、高级权限管理等）。</p>
     </div>
 
     <div class="card">
-        <h2>🎯 适用场景</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>场景</th><th>说明</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>📚 个人知识管理</td><td>上传论文、书籍、笔记，构建个人 AI 知识库</td></tr>
-                    <tr><td>🏢 企业内部知识库</td><td>私有化部署，保障数据安全</td></tr>
-                    <tr><td>🔍 文档问答</td><td>跟 PDF/文档直接对话，快速提取信息</td></tr>
-                    <tr><td>💼 客服机器人</td><td>基于产品文档构建智能客服</td></tr>
-                    <tr><td>📊 音视频转文本</td><td>解析音频/视频内容，生成可对话的知识</td></tr>
-                </tbody>
-            </table>
-        </div>
+        <h2>📊 项目生态</h2>
+        <table>
+            <tr><th>维度</th><th>数据</th></tr>
+            <tr><td>GitHub Stars</td><td>58.4k ⭐</td></tr>
+            <tr><td>Forks</td><td>6.3k</td></tr>
+            <tr><td>贡献者</td><td>150+</td></tr>
+            <tr><td>GitHub Issues</td><td>活跃（平均响应 < 1 天）</td></tr>
+            <tr><td>Discord 社区</td><td>10,000+ 成员</td></tr>
+            <tr><td>NPM 周下载</td><td>5,000+</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>🔮 发展趋势</h2>
+        <ul>
+            <li><strong>多模态增强</strong>：更强的图像理解能力</li>
+            <li><strong>Agent 进化</strong>：更复杂的 AI Agent 工作流</li>
+            <li><strong>企业功能</strong>：更完善的权限系统、审计日志</li>
+            <li><strong>性能优化</strong>：更快的索引和检索速度</li>
+            <li><strong>API 扩展</strong>：更多集成能力</li>
+        </ul>
     </div>
 
     <div class="card">
         <h2>💡 为什么值得关注</h2>
         <ul>
-            <li><strong>低成本高效益</strong>：相比其他文档聊天机器人方案，可节省约 <strong>90% 成本</strong></li>
-            <li><strong>零门槛</strong>：无需专业开发知识，UI 友好，小白也能上手</li>
-            <li><strong>完全可控</strong>：数据本地存储，隐私安全有保障</li>
-            <li><strong>开发者友好</strong>：提供完整 API，支持二次开发和自定义集成</li>
-            <li><strong>模型灵活</strong>：BYO-LLM 设计，自由切换本地或云端大模型</li>
+            <li><strong>技术成熟度</strong>：基于 RAG 的知识库方案已经过充分验证</li>
+            <li><strong>易用性极佳</strong>：无需 AI 背景也能快速上手</li>
+            <li><strong>灵活性强</strong>：从个人到企业都可适用</li>
+            <li><strong>社区活跃</strong>：持续更新，问题响应快</li>
+            <li><strong>成本可控</strong>：最低只需 API 调用费用</li>
         </ul>
     </div>
 
     <div class="card">
         <h2>🔗 相关链接</h2>
-        <ul>
-            <li>🌐 官网：<a href="https://anythingllm.com" target="_blank" style="color:#2d6a9f">https://anythingllm.com</a></li>
-            <li>📦 GitHub：<a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank" style="color:#2d6a9f">https://github.com/Mintplex-Labs/anything-llm</a></li>
-            <li>📖 中文站：<a href="https://www.anythingllmcn.com" target="_blank" style="color:#2d6a9f">https://www.anythingllmcn.com</a></li>
-        </ul>
+        <table>
+            <tr><th>资源</th><th>链接</th></tr>
+            <tr><td>🌐 官网</td><td><a href="https://anythingllm.com" target="_blank">https://anythingllm.com</a></td></tr>
+            <tr><td>📦 GitHub</td><td><a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank">https://github.com/Mintplex-Labs/anything-llm</a></td></tr>
+            <tr><td>📖 文档</td><td><a href="https://docs.anythingllm.com" target="_blank">https://docs.anythingllm.com</a></td></tr>
+            <tr><td>📖 中文站</td><td><a href="https://www.anythingllmcn.com" target="_blank">https://www.anythingllmcn.com</a></td></tr>
+            <tr><td>💬 Discord</td><td><a href="https://discord.gg/mintplex" target="_blank">https://discord.gg/mintplex</a></td></tr>
+        </table>
     </div>
 
     <div class="cta">
