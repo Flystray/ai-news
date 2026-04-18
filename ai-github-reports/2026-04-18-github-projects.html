@@ -3,69 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>generative-ai · GitHub AI 项目深度介绍 · 2026年04月18日</title>
+    <title>DeepTutor · GitHub AI 项目深度介绍 · 2026年04月18日</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
         .container { max-width: 860px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header { background: linear-gradient(135deg, #1a2a4a 0%, #2d5a8e 60%, #3a7bd5 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; position: relative; overflow: hidden; }
+        .header::before { content: '🎓'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-size: 80px; opacity: 0.15; }
         .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
-        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
-        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 34px; font-weight: 700; margin-bottom: 10px; }
+        .header .subtitle { font-size: 15px; opacity: 0.9; max-width: 600px; }
+        .header .org-badge { display: inline-block; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 12px; font-size: 12px; margin-top: 12px; }
         .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
         .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .meta-bar a { color: #2d5a8e; text-decoration: none; }
+        .meta-bar a:hover { text-decoration: underline; }
         .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
-        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .topic { background: #e8f0fe; color: #2d5a8e; padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
-        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card h2 { font-size: 17px; color: #1a2a4a; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; display: flex; align-items: center; gap: 8px; }
         .card p { color: #444; font-size: 15px; line-height: 1.85; }
         .card ul { padding-left: 20px; }
-        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
-        .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
-        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
-        .cta { text-align: center; margin-top: 30px; }
-        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
-        .cta a:hover { background: #1e3a5f; }
-        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 10px; line-height: 1.7; }
+        .card ul li strong { color: #1a2a4a; }
+        .highlight-box { background: linear-gradient(135deg, #f0f6ff, #e8f4fd); border-left: 4px solid #3a7bd5; border-radius: 0 10px 10px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .highlight-box p { font-size: 15.5px; color: #2d3748; line-height: 1.9; }
+        .highlight-box strong { color: #1a2a4a; }
+        .arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .arch-item { background: #f8faff; border: 1px solid #dce8f8; border-radius: 8px; padding: 14px 16px; }
+        .arch-item .arch-title { font-size: 13px; font-weight: 700; color: #2d5a8e; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .arch-item .arch-desc { font-size: 13px; color: #555; line-height: 1.65; }
+        .mode-list { margin-top: 14px; }
+        .mode-item { background: #f8faff; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; border-left: 3px solid #3a7bd5; }
+        .mode-item .mode-name { font-size: 14px; font-weight: 700; color: #1a2a4a; margin-bottom: 4px; }
+        .mode-item .mode-desc { font-size: 13.5px; color: #555; line-height: 1.65; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 16px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 13.5px; margin-top: 12px; line-height: 1.8; }
+        .quickstart .comment { color: #6c7086; }
+        .quickstart .cmd { color: #a6e3a1; }
+        .quickstart .url { color: #89b4fa; }
+        .stats-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+        .stat-box { flex: 1; min-width: 120px; background: #f0f6ff; border-radius: 8px; padding: 14px; text-align: center; }
+        .stat-box .stat-num { font-size: 22px; font-weight: 700; color: #2d5a8e; }
+        .stat-box .stat-label { font-size: 12px; color: #777; margin-top: 3px; }
+        .why-box { background: #fffbf0; border: 1px solid #f6d860; border-radius: 10px; padding: 18px 24px; margin-bottom: 20px; }
+        .why-box h3 { font-size: 15px; color: #8a6d00; margin-bottom: 10px; }
+        .why-box ul { padding-left: 18px; }
+        .why-box ul li { font-size: 14px; color: #5a4800; margin-bottom: 7px; line-height: 1.65; }
+        .cta { text-align: center; margin-top: 32px; }
+        .cta a { display: inline-block; background: linear-gradient(135deg, #2d5a8e, #3a7bd5); color: white; padding: 13px 36px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; transition: opacity 0.2s; }
+        .cta a:hover { opacity: 0.9; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; padding-bottom: 20px; }
+        @media (max-width: 600px) { .arch-grid { grid-template-columns: 1fr; } .header { padding: 26px 22px; } .card { padding: 20px 18px; } }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <div class="date-badge">GitHub AI 项目 · 2026年04月18日</div>
-        <h1>generative-ai</h1>
-        <p class="subtitle">Comprehensive resources on Generative AI, including a detailed roadmap, projects, use cases, interview preparation, and coding preparation.</p>
+        <div class="date-badge">GitHub AI 项目深度介绍 · 2026年04月18日</div>
+        <h1>DeepTutor</h1>
+        <p class="subtitle">Agent-Native 个性化 AI 学习助手：五种模式共享上下文，让 AI 真正辅助学习而不只是聊天</p>
+        <span class="org-badge">🏫 香港大学 HKUDS 数据智能实验室 · v1.0.0</span>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 2.2k</span>
-        <span>📝 Jupyter</span>
-        <span>🕐 </span>
-        <span>🔗 <a href="https://github.com/genieincodebottle/generative-ai" target="_blank" style="color:#2d6a9f">genieincodebottle/generative-ai</a></span>
+        <span>⭐ 17.2k</span>
+        <span>🍴 1.8k</span>
+        <span>🐍 Python / TypeScript</span>
+        <span>📄 Apache-2.0</span>
+        <span>📅 2025-12-28 创建 · v1.0.0 于 2026-04-04 发布</span>
+        <span>🔗 <a href="https://github.com/HKUDS/DeepTutor" target="_blank">HKUDS/DeepTutor</a></span>
     </div>
 
-    <div class="topics"><span class="topic">agentic-ai</span><span class="topic">agentic-framework</span><span class="topic">claude</span><span class="topic">gemini</span><span class="topic">genai</span><span class="topic">genai-usecase</span><span class="topic">generative-ai</span><span class="topic">interview-questions</span></div>
+    <div class="topics">
+        <span class="topic">agent-native</span>
+        <span class="topic">personalized-learning</span>
+        <span class="topic">multi-agent</span>
+        <span class="topic">RAG</span>
+        <span class="topic">LlamaIndex</span>
+        <span class="topic">TutorBot</span>
+        <span class="topic">math-animator</span>
+        <span class="topic">persistent-memory</span>
+        <span class="topic">local-deployment</span>
+        <span class="topic">FastAPI</span>
+        <span class="topic">Next.js</span>
+    </div>
 
-    
+    <div class="highlight-box">
+        <p>DeepTutor 是香港大学数据智能实验室（HKUDS）开源的 <strong>智能体原生（Agent-Native）个性化学习助手</strong>。它的核心理念是：<strong>AI 不只是答题机器，而是伴随你学习成长的专属导师</strong>。v1.0.0 于 2026 年 4 月 4 日发布，从底层重构了整个架构，引入 TutorBot 持久化记忆和双层插件模型，彻底告别传统聊天套壳教育工具。开源 39 天即突破 10k stars，本周新增 5.5k 星。</p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-box"><div class="stat-num">17.2k</div><div class="stat-label">GitHub Stars</div></div>
+        <div class="stat-box"><div class="stat-num">39天</div><div class="stat-label">破 10k stars</div></div>
+        <div class="stat-box"><div class="stat-num">+5.5k</div><div class="stat-label">本周新增</div></div>
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">交互模式</div></div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+        <h2>🧠 什么是 Agent-Native？DeepTutor 凭什么不一样</h2>
+        <p style="margin-bottom:14px">传统 AI 教育工具本质上是"有问必答"的聊天机器人，每次对话独立、没有记忆、无法追踪学习进度。DeepTutor 从根本上重新思考了这个问题：</p>
+        <ul>
+            <li><strong>传统工具</strong>：问 → 答 → 结束。下次提问从零开始，AI 不知道你学到哪里。</li>
+            <li><strong>DeepTutor</strong>：上传教材 → AI 建立知识图谱 → 多个智能体协作分析你的问题 → 根据你的学习历史和水平生成个性化解释 → TutorBot 积累你的学习画像 → 下次更了解你。</li>
+        </ul>
+        <p style="margin-top:12px">这种"智能体原生"设计的关键在于：<strong>所有功能模块共享同一个上下文（UnifiedContext）和事件总线（StreamBus）</strong>，你可以在聊天中途无缝升级到深度解题或发起研究，历史对话全程有效。</p>
+    </div>
 
     <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+        <h2>⚡ 五种交互模式：统一线程，按需升级</h2>
+        <p style="margin-bottom:4px">DeepTutor 最核心的设计之一：<strong>五种模式共享同一对话线程</strong>，不需要切换界面，可以随时从简单提问升级到深度分析。</p>
+        <div class="mode-list">
+            <div class="mode-item">
+                <div class="mode-name">💬 Chat — 基础对话</div>
+                <div class="mode-desc">结合文档 RAG 检索和网络搜索，回答基础问题。支持 PDF、LaTeX、图片、代码等多模态输入。与其他模式共享知识库上下文。</div>
+            </div>
+            <div class="mode-item">
+                <div class="mode-name">🔍 Deep Solve — 深度解题</div>
+                <div class="mode-desc">针对复杂问题启动多智能体推理流水线：检索相关文档片段 → 调用深度推理模型逐步分析 → 生成带引用来源的详细解答。适合高难度习题和概念深究。</div>
+            </div>
+            <div class="mode-item">
+                <div class="mode-name">📝 Quiz Generation — 自动出题</div>
+                <div class="mode-desc">基于你上传的教材或指定章节，自动生成选择题、填空题、简答题，并即时批改反馈。题目难度根据你的学习历史自动调整。</div>
+            </div>
+            <div class="mode-item">
+                <div class="mode-name">🔬 Deep Research — 深度研究</div>
+                <div class="mode-desc">同时检索本地文档、Arxiv 学术数据库、网页，综合多源信息生成结构化研究报告。适合撰写论文综述或深入了解某个研究方向。</div>
+            </div>
+            <div class="mode-item">
+                <div class="mode-name">📐 Math Animator — 数学动画</div>
+                <div class="mode-desc">将抽象数学公式自动转化为逐步动画演示，支持微积分、线性代数、概率统计等领域。用可视化方式理解复杂数学，而不只是看一堆符号。</div>
+            </div>
+        </div>
     </div>
 
-    
+    <div class="card">
+        <h2>🏗️ 双层插件架构：Tools + Capabilities</h2>
+        <p style="margin-bottom:12px">v1.0.0 的最大架构升级是从单体聊天应用转向<strong>双层插件模型</strong>，使系统高度可扩展：</p>
+        <div class="arch-grid">
+            <div class="arch-item">
+                <div class="arch-title">🔧 Tools 层（原子能力）</div>
+                <div class="arch-desc">封装 RAG 检索、Web 搜索、Arxiv 查询、代码执行、深度推理等基础能力。每个 Tool 实现 BaseTool 协议，可独立复用。</div>
+            </div>
+            <div class="arch-item">
+                <div class="arch-title">🎯 Capabilities 层（业务模式）</div>
+                <div class="arch-desc">Chat、Deep Solve、Quiz、Research、Math Animator 五个能力模块，调用 Tools 层完成具体任务，实现 BaseCapability 协议。</div>
+            </div>
+            <div class="arch-item">
+                <div class="arch-title">🌊 StreamBus（事件总线）</div>
+                <div class="arch-desc">所有模块共享统一事件总线，实现模式间的无缝切换和上下文传递。Deep Solve 和 Deep Research 两条流水线虽各自独立，但共享同一 StreamBus。</div>
+            </div>
+            <div class="arch-item">
+                <div class="arch-title">🧠 UnifiedContext（统一上下文）</div>
+                <div class="arch-desc">跨所有 Capability 的共享上下文对象，保存对话历史、文档片段引用、学习进度等状态，确保五种模式协作一致。</div>
+            </div>
+        </div>
+    </div>
 
-    
+    <div class="card">
+        <h2>🤖 TutorBot：你的专属持久化导师</h2>
+        <p style="margin-bottom:12px">DeepTutor 中最具差异化的功能：<strong>TutorBot</strong> 是一个基于 ReAct（Reasoning + Acting）框架的个性化智能体，它不只是聊天，而是在每次交互中持续建立你的学习画像：</p>
+        <ul>
+            <li><strong>学习历史追踪</strong>：记录你学过什么、卡在哪里、强项和弱项分别是什么</li>
+            <li><strong>跨会话记忆</strong>：即使关闭再重新打开，TutorBot 仍然记得上次的进度和你的学习目标</li>
+            <li><strong>自适应风格</strong>：根据你的水平动态调整解释深度——初学者得到类比和直觉解释，进阶者直接获得推导过程</li>
+            <li><strong>目标导向规划</strong>：你可以设定"下周考试"或"深入理解 Transformer"等目标，TutorBot 自动规划学习路径</li>
+        </ul>
+    </div>
 
-    
+    <div class="card">
+        <h2>🚀 快速上手</h2>
+        <p style="margin-bottom:10px">支持 Docker 一键部署或本地手动安装（需要 Python 3.10+、Node.js 18+）：</p>
+        <div class="quickstart">
+            <span class="comment"># 方式一：Docker 一键启动（推荐）</span><br>
+            <span class="cmd">git clone https://github.com/HKUDS/DeepTutor</span><br>
+            <span class="cmd">cd DeepTutor</span><br>
+            <span class="cmd">cp .env.example .env</span>  <span class="comment"># 填入 API Key</span><br>
+            <span class="cmd">docker-compose up -d</span><br>
+            <br>
+            <span class="comment"># 方式二：CLI 接口（纯终端学习）</span><br>
+            <span class="cmd">pip install deeptutor-cli</span><br>
+            <span class="cmd">deeptutor chat --doc textbook.pdf</span><br>
+            <br>
+            <span class="comment"># 打开 Web 界面</span><br>
+            <span class="url">http://localhost:3000</span>
+        </div>
+    </div>
+
+    <div class="why-box">
+        <h3>💡 为什么值得关注？</h3>
+        <ul>
+            <li><strong>不是 ChatGPT 套壳</strong>：从底层重新设计，多智能体协作 + 持久化记忆 + 真正的个性化，不是把一个对话框换个皮</li>
+            <li><strong>学术背景扎实</strong>：港大 HKUDS 实验室出品，LlamaIndex 深度集成，RAG + 知识图谱 + 多源检索架构经过严格设计</li>
+            <li><strong>本地部署，数据私密</strong>：支持完全本地化运行，学习内容不上传云端，适合有隐私顾虑的研究者和学生</li>
+            <li><strong>Math Animator 是真正的创新</strong>：不只是展示公式，而是生成逐步动画，类似请了个会画动画的数学家解题</li>
+            <li><strong>39天破万星的速度</strong>说明社区真实需求强烈——教育 AI 工具的 Agent-Native 化是下一个重要方向</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>📊 技术栈一览</h2>
+        <ul>
+            <li><strong>后端</strong>：Python 3.11+ · FastAPI · LlamaIndex（RAG + 知识图谱）</li>
+            <li><strong>前端</strong>：Next.js 16 · TypeScript · 响应式 Web 界面</li>
+            <li><strong>智能体框架</strong>：自研 ReAct 循环 · BaseTool / BaseCapability 双层协议</li>
+            <li><strong>知识检索</strong>：本地 PDF/文档 RAG · Arxiv API · Web 搜索</li>
+            <li><strong>部署方式</strong>：Docker Compose · 本地安装 · CLI 命令行</li>
+            <li><strong>许可证</strong>：Apache-2.0（商业友好）</li>
+        </ul>
+    </div>
 
     <div class="cta">
-        <a href="https://github.com/genieincodebottle/generative-ai" target="_blank">前往 GitHub 查看完整项目 →</a>
+        <a href="https://github.com/HKUDS/DeepTutor" target="_blank">→ 查看 GitHub 仓库</a>
     </div>
 
     <div class="footer">
-        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+        fly的AI学习 · 2026-04-18 · 每天精选一个有启发价值的开源 AI 项目
     </div>
 </div>
 </body>
