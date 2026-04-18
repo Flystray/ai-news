@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 日报 | 2026年4月18日</title>
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --secondary: #ff6584;
+      --accent: #43d9a2;
+      --dark: #1a1a2e;
+      --card-bg: #16213e;
+      --text: #e0e0e0;
+      --muted: #a0aec0;
+      --border: rgba(108,99,255,0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* ─── Header ─── */
+    header {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      padding: 60px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(108,99,255,.25) 0%, transparent 70%);
+    }
+    .header-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #fff 0%, #c3b1e1 60%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    .header-meta {
+      font-size: .9rem;
+      color: var(--muted);
+    }
+    .header-meta span { margin: 0 10px; }
+
+    /* ─── Layout ─── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+    /* ─── Section titles ─── */
+    .section-title {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 1.35rem; font-weight: 700;
+      margin: 52px 0 24px;
+    }
+    .section-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .icon-hot  { background: linear-gradient(135deg,#ff6584,#ff9a44); }
+    .icon-news { background: linear-gradient(135deg,#6c63ff,#43d9a2); }
+    .icon-insight { background: linear-gradient(135deg,#f7971e,#ffd200); }
+
+    /* ─── Cards ─── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 28px;
+      margin-bottom: 18px;
+      position: relative;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(108,99,255,.2);
+    }
+    .card-header {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 12px;
+    }
+    .card-logo {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+      background: rgba(255,255,255,.07);
+    }
+    .card-title-wrap { flex: 1; }
+    .card-company {
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--primary); margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 1.1rem; font-weight: 700;
+      color: #fff; line-height: 1.4;
+    }
+    .card-body {
+      font-size: .95rem; color: #c8d4e0; line-height: 1.75;
+    }
+    .card-footer {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 16px; align-items: center;
+    }
+    .tag {
+      font-size: .72rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 20px; background: rgba(108,99,255,.18);
+      color: #a78bfa; border: 1px solid rgba(108,99,255,.3);
+    }
+    .source-link {
+      margin-left: auto;
+      font-size: .8rem; color: var(--accent);
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+    .source-link:hover { text-decoration: underline; }
+    .source-link::before { content: '↗'; }
+
+    /* hot badge */
+    .hot-badge {
+      position: absolute; top: 18px; right: 18px;
+      background: linear-gradient(90deg,#ff6584,#ff9a44);
+      color: #fff; font-size: .68rem; font-weight: 700;
+      padding: 2px 10px; border-radius: 20px;
+    }
+
+    /* data highlight */
+    .highlight {
+      display: inline-block;
+      background: rgba(67,217,162,.12);
+      border: 1px solid rgba(67,217,162,.3);
+      color: var(--accent); font-weight: 700;
+      padding: 1px 8px; border-radius: 6px;
+      font-size: .88rem;
+    }
+
+    /* ─── Insight cards ─── */
+    .insight-card {
+      background: linear-gradient(135deg, rgba(108,99,255,.12), rgba(67,217,162,.08));
+      border: 1px solid rgba(108,99,255,.3);
+      border-radius: 16px; padding: 26px 28px; margin-bottom: 18px;
+    }
+    .insight-number {
+      font-size: 2rem; font-weight: 900;
+      background: linear-gradient(90deg,var(--primary),var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      float: left; margin-right: 14px; line-height: 1;
+    }
+    .insight-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .insight-body { font-size: .93rem; color: #c8d4e0; line-height: 1.75; clear: both; }
+
+    /* ─── Stats bar ─── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px; margin: 36px 0;
+    }
+    .stat-item {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 18px; text-align: center;
+    }
+    .stat-num {
+      font-size: 1.8rem; font-weight: 800;
+      background: linear-gradient(90deg,var(--primary),var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: .85rem; color: var(--muted);
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">AI Daily Report</div>
+  <h1>AI 大模型日报</h1>
+  <p class="header-meta">
+    <span>📅 2026年4月18日 · 周六</span>
+    <span>⚡ 10条精选资讯</span>
+    <span>🌐 fly的AI学习</span>
+  </p>
+</header>
+
+<div class="container">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">10</div>
+      <div class="stat-label">今日精选新闻</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">$4.55亿</div>
+      <div class="stat-label">最大单笔融资</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">π0.7</div>
+      <div class="stat-label">机器人GPT-3时刻</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">300%</div>
+      <div class="stat-label">Gemini机器人成功率提升</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       今日重磅
+  ══════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-icon icon-hot">🔥</div>
+    今日重磅
+  </div>
+
+  <!-- 1. Claude Opus 4.7 -->
+  <div class="card">
+    <div class="hot-badge">🏆 登顶全球</div>
+    <div class="card-header">
+      <div class="card-logo">🤖</div>
+      <div class="card-title-wrap">
+        <div class="card-company">Anthropic</div>
+        <div class="card-title">Claude Opus 4.7 正式发布，多项能力登顶全球第一</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>4月17日，Anthropic正式发布旗舰模型 <strong>Claude Opus 4.7</strong>，在全球公开模型排行中一举登顶王座。根据最新评测数据，该模型综合评分达 <span class="highlight">95.2分</span>，代码生成准确率高达 <span class="highlight">98.2%</span>，支持超长上下文窗口 <span class="highlight">200万tokens</span>，可一次处理约1800万字文本。</p>
+      <br>
+      <p>与上一代相比，Opus 4.7 在编程能力上大幅提升，GitHub 代码基准较前代提升 13%；视觉识别精度也显著加强，可解析技术图纸、UI 界面及复杂表格。此次版本在 Arena 代码竞技场排名全球第一，且图像转网页开发能力也同步领跑行业，价格仅为竞品的 1/5。</p>
+      <br>
+      <p>值得关注的是，Anthropic 同步发布了自动化对齐研究新成果，相关论文登上《自然》期刊，标志着 AI 安全研究领域的又一重要突破。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">大模型</span>
+      <span class="tag">Anthropic</span>
+      <span class="tag">代码能力</span>
+      <a class="source-link" href="https://cloud.tencent.com/developer/article/2656324" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 2. DeepSeek V4 -->
+  <div class="card">
+    <div class="hot-badge">🚀 4月下旬</div>
+    <div class="card-header">
+      <div class="card-logo">🔮</div>
+      <div class="card-title-wrap">
+        <div class="card-company">DeepSeek · 深度求索</div>
+        <div class="card-title">DeepSeek V4 定档4月下旬：万亿参数+昇腾国产芯，梁文锋："又让美国朋友失眠了"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>深度求索创始人梁文锋正式官宣，新一代旗舰大模型 <strong>DeepSeek V4</strong> 将于 4 月下旬正式亮相，目前灰度测试版已向部分用户开放。</p>
+      <br>
+      <p>V4 采用 <strong>Ultra-MoE 稀疏混合专家架构</strong>，总参数量约 <span class="highlight">1万亿</span>，但推理时激活参数仅 370 亿，大幅降低推理成本。核心性能数据令业界震动：</p>
+      <br>
+      <p>• 编程能力全球登顶：SWE-Bench 测试得分 <span class="highlight">83.7%</span>，超越 Claude Opus 4.6；<br>
+      • 数学推理近满分：AIME 2026 测试得分 <span class="highlight">99.4%</span>；<br>
+      • 百万 Token 上下文，长文本检索准确率 ≥99.2%；<br>
+      • 推理速度较前代提升 <span class="highlight">35倍</span>，能耗降低 40%；<br>
+      • <strong>100% 国产算力</strong>：完全基于华为昇腾 950PR 芯片运行，彻底脱离 CUDA 生态。</p>
+      <br>
+      <p>在定价方面，V4 API 价格仅 2.00元/百万 Token，约为 GPT-4 的十分之一，性价比再次碾压国际竞品，成为全球成本最低的顶级模型之一。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">DeepSeek</span>
+      <span class="tag">国产芯片</span>
+      <span class="tag">编程能力</span>
+      <a class="source-link" href="https://discuss.deepseek.club/t/topic/1531" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 3. π0.7 -->
+  <div class="card">
+    <div class="hot-badge">🤯 历史性突破</div>
+    <div class="card-header">
+      <div class="card-logo">🦾</div>
+      <div class="card-title-wrap">
+        <div class="card-company">Physical Intelligence</div>
+        <div class="card-title">π0.7 发布：VLA 押出了机器人的"GPT-3 时刻"，首次展现涌现能力</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>4月16日，旧金山机器人初创公司 Physical Intelligence 发布新一代 VLA 模型 <strong>π0.7</strong>，将机器人 AI 研究推进到前所未有的历史节点。研究人员将其定义为"机器人领域的 GPT-3 时刻"——模型首次展现出<strong>组合泛化涌现能力</strong>。</p>
+      <br>
+      <p>π0.7 采用 5B 参数架构，以 4B 的 Gemma3 为 VLM 骨干、860M Action Expert 和 14B BAGEL World Model 协同工作。核心突破在于：<strong>无需任何专项训练</strong>，模型即可完成全新组合任务（如用空气炸锅做红薯、拧旋钮操作桌面风扇），这是机器人首次像 LLM 一样自主"涌现"新能力。</p>
+      <br>
+      <p>零样本跨本体泛化能力尤为惊艳：训练数据中<strong>没有一条 UR5e 机械臂叠衣服的样本</strong>，但在 UR5e 上任务完成度达 <span class="highlight">85.6%</span>，接近拥有 375 小时经验的顶级人类操作员（90.9%）。正如研究者 Sergey Levine 所言："一旦越过那个阈值，能力就会超线性地随数据增长。"</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">具身智能</span>
+      <span class="tag">VLA模型</span>
+      <span class="tag">涌现能力</span>
+      <a class="source-link" href="https://news.qq.com/rain/a/20260417A05R9C00" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 4. 它石智航 -->
+  <div class="card">
+    <div class="hot-badge">💰 创纪录</div>
+    <div class="card-header">
+      <div class="card-logo">🏭</div>
+      <div class="card-title-wrap">
+        <div class="card-company">它石智航</div>
+        <div class="card-title">中国具身智能最大单笔融资：4.55亿美元，高瓴红杉联手押注</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>4月16日，具身智能创业公司<strong>它石智航</strong>宣布完成 <span class="highlight">4.55亿美元</span> Pre-A 轮融资，一举刷新中国具身智能行业单轮融资纪录，成立仅一年累计融资近 7 亿美元。</p>
+      <br>
+      <p>本轮由高瓴创投、红杉中国联合领投，美团龙珠、中金资本等顶级机构跟投，北京机器人产业发展投资基金、上海国投先导等国有资本亦首次联合押注具身智能公司。投资者阵容堪称"全明星配置"，充分体现资本市场对具身智能赛道的高度认可。</p>
+      <br>
+      <p>它石智航由前华为车BU首席科学家陈亦伦、前百度自动驾驶总经理李震宇联合创办，核心团队兼具 AI 算法与工程落地双重基因。公司今年3月发布的 <strong>AWE3.0 通用具身大模型</strong>，以105次有效装配创下吉尼斯世界纪录；2026年1000台预期产能已被客户全额预定，已在苏州某汽车工厂交付15台机器人。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">具身智能</span>
+      <span class="tag">融资</span>
+      <span class="tag">人形机器人</span>
+      <a class="source-link" href="https://news.qq.com/rain/a/20260417A05TBZ00" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       行业动态
+  ══════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-icon icon-news">📡</div>
+    行业动态
+  </div>
+
+  <!-- 5. Gemini Robotics ER 1.6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-logo">🤖</div>
+      <div class="card-title-wrap">
+        <div class="card-company">Google DeepMind</div>
+        <div class="card-title">Gemini Robotics-ER 1.6 发布：机器人学会读仪表盘，成功率飙升300%</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>谷歌 DeepMind 于4月14日深夜发布 <strong>Gemini Robotics-ER 1.6</strong>，这是 Gemini Robotics 系列在空间推理方向的第三代迭代，也是与波士顿动力战略合作重启后的首个落地成果。</p>
+      <br>
+      <p>最亮眼的突破来自全新的<strong>仪表读数功能（Agentic Vision）</strong>：ER 1.6 在工业仪表读数任务中成功率达到 <span class="highlight">93%</span>，而上一代 ER 1.5 仅为 23%，提升幅度达到 <span class="highlight">300%</span>。Spot 四足机器人已借此实现全自主工业巡检。此外，模型在单视角检测成功率 90%、多视角检测 84%，并具备关键的"任务成功判断"能力——能自主决定是重新尝试还是进入下一步，这是迈向真正自主机器人的关键一环。</p>
+      <br>
+      <p>ER 1.6 即日起可通过 Gemini API 和 Google AI Studio 面向开发者开放使用。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">Google DeepMind</span>
+      <span class="tag">具身智能</span>
+      <span class="tag">工业机器人</span>
+      <a class="source-link" href="https://www.53ai.com/news/LargeLanguageModel/2026041584321.html" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 6. GPT-5.4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-logo">🧠</div>
+      <div class="card-title-wrap">
+        <div class="card-company">OpenAI</div>
+        <div class="card-title">GPT-5.4 发布：AI自主操控电脑成真，Codex 再度大升级服务300万开发者</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>OpenAI 于4月17日"超级发布日"推出 <strong>GPT-5.4</strong>，在全球模型排行中位居第二（综合评分 93.1 分），凭借独家的"<strong>AI 自主操控电脑</strong>"能力成为目前最具黑科技色彩的模型——可全自动完成跨应用的复杂任务，无需人工干预。</p>
+      <br>
+      <p>同步升级的 <strong>Codex</strong> 代码助手新增 Computer Use 和 Artifact 实用特性，支持图像生成与跨应用操作，已服务超 300 万开发者。此外，OpenAI 还为生命科学领域发布了 <strong>GPT-Rosalind</strong> 专用模型，以及面向网络安全专家的 <strong>GPT-5.4-Cyber</strong>，进一步推进垂直行业专用模型布局。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">OpenAI</span>
+      <span class="tag">Codex</span>
+      <span class="tag">具身操控</span>
+      <a class="source-link" href="https://cloud.tencent.com/developer/article/2656324" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 7. Qwen 3.6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-logo">🌟</div>
+      <div class="card-title-wrap">
+        <div class="card-company">阿里巴巴 · 通义</div>
+        <div class="card-title">Qwen 3.6-35B 开源领跑：稀疏MoE架构，智能体编程能力获全球关注</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>阿里通义团队开源发布 <strong>Qwen3.6-35B-A3B</strong>，采用稀疏 MoE 架构，总参数 350 亿、激活参数仅 30 亿，在智能体（Agent）编程场景下表现突出，受到开发者社区广泛关注。</p>
+      <br>
+      <p>与此同时，社区对 <strong>Qwen3.5-40B Dense</strong> 的魔改版本热度持续高涨，多个基于通义的下游优化模型相继发布，阿里千问已跻身全球调用榜前列。全球模型综合排名中，Qwen 3.6 Max 位列第7，是顶级梯队中唯一的中国开源模型体系代表。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">通义千问</span>
+      <span class="tag">开源模型</span>
+      <span class="tag">MoE架构</span>
+      <a class="source-link" href="https://news.daheiai.com/" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 8. 豆包5.0 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-logo">🎯</div>
+      <div class="card-title-wrap">
+        <div class="card-company">字节跳动 · 豆包</div>
+        <div class="card-title">豆包 5.0 Pro 上线：中文体验登顶国内第一，Seedance 2.0 视频生成正式开放 API</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>字节跳动旗下 AI 产品线迎来集中爆发：<strong>豆包 5.0 Pro</strong> 在全球模型排名中进入第二梯队顶级位置（排名第6），凭借流畅稳定的交互和出色的中文处理能力，成为国内用户量最大的AI助手首选。</p>
+      <br>
+      <p>同期，字节火山引擎正式开放 <strong>Seedance 2.0</strong> 视频生成模型 API，标志着视频生成大模型正式进入生产级应用阶段。Seedance 2.0 在运动流畅度、场景一致性和细节保真度上全面超越前代，已有多家内容平台接入测试，成为国内视频生成赛道重要里程碑。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">字节跳动</span>
+      <span class="tag">豆包</span>
+      <span class="tag">视频生成</span>
+      <a class="source-link" href="https://news.daheiai.com/" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 9. 天工3.0 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-logo">⚡</div>
+      <div class="card-title-wrap">
+        <div class="card-company">昆仑万维</div>
+        <div class="card-title">天工 3.0 发布：4000亿参数 MoE 架构，国内模型新晋挑战者</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>昆仑万维于4月17日发布旗舰大模型 <strong>天工 3.0</strong>，采用4000亿参数 MoE 架构，在中文推理、长文本理解和多轮对话能力上有显著提升。</p>
+      <br>
+      <p>天工 3.0 是继豆包、Qwen 之后国内发布的又一重量级模型，在中文创作、知识问答等基准测试中表现出色，已率先面向企业用户开放。昆仑万维表示，天工 3.0 将深度融合搜索引擎和内容生态，主打"大模型+搜索"的差异化路线，挑战现有国内 AI 助手格局。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">国产大模型</span>
+      <span class="tag">昆仑万维</span>
+      <span class="tag">MoE架构</span>
+      <a class="source-link" href="https://cloud.tencent.com/developer/article/2656324" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- 10. 腾讯AI小程序 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-logo">📱</div>
+      <div class="card-title-wrap">
+        <div class="card-company">腾讯</div>
+        <div class="card-title">腾讯升级 AI 小程序成长计划：全量开放申请，微信生态迎来 AI 应用爆发期</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>腾讯正式升级"<strong>AI 小程序成长计划</strong>"，宣布所有小程序均可申请参与，不再设置准入门槛，标志着微信生态对 AI 应用的全面开放。</p>
+      <br>
+      <p>该计划为 AI 小程序开发者提供流量扶持、运营支持和 API 费用补贴，预计将吸引大批 AI 应用借助微信 13 亿用户的规模红利快速增长。结合腾讯混元模型的持续升级（混元 3.0 本月内发布），以及 AI 对话、图像生成、知识助手等成熟场景，微信 AI 小程序生态有望在 2026 年下半年进入爆发期。</p>
+    </div>
+    <div class="card-footer">
+      <span class="tag">腾讯</span>
+      <span class="tag">微信小程序</span>
+      <span class="tag">AI生态</span>
+      <a class="source-link" href="https://www.qbitai.com/" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       核心洞察
+  ══════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-icon icon-insight">💡</div>
+    核心洞察
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-number">01</div>
+    <div class="insight-title">具身智能：从实验室到工厂车间的临界点</div>
+    <div class="insight-body">
+      本周具身智能连续出现多个重大节点：π0.7 展示涌现能力、Gemini Robotics-ER 1.6 工业部署成功率飙升 300%、它石智航获 4.55 亿美元创纪录融资。这不是偶然——具身智能正在从"能在实验室展示"跨越至"能在真实工厂干活"的临界点。当资本与技术同时加速，2026 年极有可能成为人形机器人规模商用的元年。
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-number">02</div>
+    <div class="insight-title">模型军备竞赛进入"周级迭代"时代</div>
+    <div class="insight-body">
+      仅4月17日一天，就有 Claude Opus 4.7、GPT-5.4、天工 3.0、MiniMax M2.7 四款旗舰模型同日发布或更新，全球 AI 模型排行榜在一夜之间彻底洗牌。模型迭代正式进入"周级节奏"，这对开发者和企业用户提出了严峻挑战：<strong>不是选哪个模型，而是如何建立快速切换和评估模型的能力</strong>，才是下一阶段真正的核心竞争力。
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-number">03</div>
+    <div class="insight-title">DeepSeek V4：用"100%国产算力"改写全球 AI 格局</div>
+    <div class="insight-body">
+      DeepSeek V4 的战略意义远超其性能数据。完全基于华为昇腾 950PR 运行，意味着中国首次在顶级 AI 模型层面实现硬件自主可控，彻底打破了"顶级大模型必须依赖英伟达芯片"的定论。叠加 API 价格仅为 GPT-4 的十分之一，全球 AI 应用的成本曲线将被重新定义，而这一切的核心推动力，正是中美科技博弈催生的国产替代加速。
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-number">04</div>
+    <div class="insight-title">数据多样性 > 数据清洁度：π0.7 的方法论革命</div>
+    <div class="insight-body">
+      π0.7 论文明确指出其核心贡献"不是新架构，而是让 VLA 能使用更多样化数据源的方法论"——只要模型知道每条数据的质量标签，就能自主决定学什么、不学什么，无需人工清洗数据。这与 LLM 领域近期的数据研究结论高度吻合：在 AI 的下一阶段，<strong>数据多样性和元数据标注的价值，将远超追求"干净数据集"本身</strong>。这一思路将深刻影响具身智能、多模态等领域的数据采集策略。
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📰 AI 大模型日报 · 2026年4月18日 | 公众号「<strong>AI日课</strong>」| 作者：fly的AI学习</p>
+  <p style="margin-top:8px;">
+    <a href="https://Flystray.github.io/ai-news/" target="_blank">订阅中心</a> ·
+    <a href="https://Flystray.github.io/ai-news/reports/2026-04-18-with-links.html" target="_blank">在线版本</a>
+  </p>
+</footer>
+
+</body>
+</html>
