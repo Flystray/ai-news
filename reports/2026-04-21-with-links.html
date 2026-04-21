@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 日报 · 2026年4月21日</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #6366f1;
+      --accent2: #8b5cf6;
+      --gold: #f59e0b;
+      --surface: #1e293b;
+      --card: #0f172a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #334155;
+      --tag-bg: rgba(99,102,241,0.15);
+      --tag-text: #a5b4fc;
+      --red: #ef4444;
+      --green: #22c55e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: #060b16;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* ─── Header ─── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1a0533 50%, #0f172a 100%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      padding: 56px 0 40px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 60% 0%, rgba(99,102,241,0.25) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 20% 100%, rgba(139,92,246,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--tag-bg);
+      border: 1px solid rgba(99,102,241,0.4);
+      color: var(--tag-text);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #e2e8f0, #a5b4fc 60%, #c4b5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-sub span { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    /* ─── Layout ─── */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ─── Section ─── */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .icon-bombshell { background: linear-gradient(135deg,#f59e0b,#ef4444); }
+    .icon-industry   { background: linear-gradient(135deg,#6366f1,#8b5cf6); }
+    .icon-insight    { background: linear-gradient(135deg,#0ea5e9,#06b6d4); }
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.01em;
+    }
+    .section-count {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+
+    /* ─── News Card ─── */
+    .news-card {
+      background: linear-gradient(135deg, #1a2236, #131a2e);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .news-card:hover { border-color: rgba(99,102,241,0.5); transform: translateY(-2px); }
+    .news-card:hover::before { opacity: 1; }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .card-source {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+    .src-openai   { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .src-anthropic{ background: rgba(239,68,68,0.12);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .src-google   { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .src-deepseek { background: rgba(6,182,212,0.12);  color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); }
+    .src-nvidia   { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+    .src-domestic { background: rgba(139,92,246,0.12); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+    .src-capital  { background: rgba(244,63,94,0.12);  color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
+    .src-robot    { background: rgba(34,197,94,0.12);  color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+    .src-industry { background: rgba(234,179,8,0.12);  color: #fde047; border: 1px solid rgba(234,179,8,0.3); }
+
+    .card-time {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .card-impact {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      color: var(--gold);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+    }
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card-title a:hover { color: #a5b4fc; }
+
+    .card-body { font-size: 0.9rem; color: #cbd5e1; line-height: 1.75; }
+    .card-body p { margin-bottom: 8px; }
+    .card-body p:last-child { margin-bottom: 0; }
+    .card-body strong { color: #f1f5f9; }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 9px;
+      border-radius: 5px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid rgba(99,102,241,0.2);
+    }
+
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #818cf8;
+      text-decoration: none;
+      border: 1px solid rgba(99,102,241,0.3);
+      padding: 5px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .read-link:hover {
+      background: rgba(99,102,241,0.12);
+      border-color: rgba(99,102,241,0.5);
+      color: #a5b4fc;
+    }
+
+    /* ─── Insight Box ─── */
+    .insight-card {
+      background: linear-gradient(135deg, #141e30, #0e1525);
+      border: 1px solid rgba(6,182,212,0.3);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .insight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+    }
+    .insight-num {
+      display: inline-flex;
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg,#0ea5e9,#06b6d4);
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .insight-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #67e8f9;
+      margin-bottom: 8px;
+    }
+    .insight-body { font-size: 0.88rem; color: #94a3b8; line-height: 1.75; }
+    .insight-body strong { color: #e2e8f0; }
+
+    /* ─── Stats Bar ─── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .stat-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer a { color: #6366f1; text-decoration: none; }
+    footer a:hover { color: #a5b4fc; }
+  </style>
+</head>
+<body>
+
+<!-- ══ Hero ══ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> 实时更新 · AI 日报</div>
+    <h1 class="hero-title">AI 日报<br>2026年4月21日</h1>
+    <div class="hero-sub">
+      <span>📅 星期二</span>
+      <span>·</span>
+      <span>涵盖 OpenAI · Anthropic · Google · DeepSeek · 国内大厂</span>
+      <span>·</span>
+      <span>共 <strong style="color:#a5b4fc">12</strong> 条核心动态</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ Main ══ -->
+<main class="main">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value">$330B+</div>
+      <div class="stat-label">今日资本动向（亚马逊+Anthropic）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$600B</div>
+      <div class="stat-label">四大巨头2026年AI基建总支出</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$2.52T</div>
+      <div class="stat-label">Gartner预测全球AI支出（2026）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">267</div>
+      <div class="stat-label">Q1新增大模型数量</div>
+    </div>
+  </div>
+
+  <!-- ══ 今日重磅 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-bombshell">🔥</div>
+      <h2 class="section-title">今日重磅</h2>
+      <span class="section-count">4 条</span>
+    </div>
+
+    <!-- 1 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-capital">资本动向</span>
+        <span class="card-source src-anthropic">Anthropic</span>
+        <span class="card-time">2026-04-21</span>
+        <span class="card-impact">⚡ 超重磅</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://news.qq.com/rain/a/20260421A01OCR00" target="_blank">
+          亚马逊向 Anthropic 追加最高 250 亿美元战略投资，十年 1000 亿美元 AWS 采购长约同步落地
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>亚马逊此前已向 Anthropic 累计投入 80 亿美元。随着 Claude Code 在企业市场强势崛起，Anthropic 年化营收从 90 亿美元跃升至 300 亿美元，估值触及 8000 亿美元。在与 OpenAI 的 AI 双寡头竞速中，亚马逊选择进一步押注。</p>
+        <p><strong>核心要点：</strong>本轮投资总额最高达 250 亿美元——50 亿美元立即到账，剩余 200 亿美元绑定商业化里程碑后续兑现。作为对等安排，Anthropic 承诺未来十年在 AWS（包括自研 Trainium 芯片）上采购超 1000 亿美元算力资源，Claude 平台全面上线亚马逊云科技。</p>
+        <p><strong>行业影响：</strong>此次合作实质上是一份双向深度绑定协议：亚马逊获得 Anthropic 的模型能力加持，以对抗微软/Azure+OpenAI 联盟；Anthropic 则锁定顶级算力资源与企业渠道。1000 亿美元的云端采购承诺，或将重塑 AI 算力市场的竞争格局，进一步强化 AWS 在云 AI 基础设施领域的地位。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#融资</span>
+        <span class="tag">#AWS</span>
+        <span class="tag">#战略合作</span>
+        <span class="tag">#Claude</span>
+      </div>
+      <a class="read-link" href="https://stock.10jqka.com.cn/usstock/20260421/c676135538.shtml" target="_blank">↗ 阅读原文</a>
+    </div>
+
+    <!-- 2 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-nvidia">NVIDIA</span>
+        <span class="card-time">2026-04-21</span>
+        <span class="card-impact">⚡ 重磅</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.nvidia.cn/data-center/technologies/rubin/" target="_blank">
+          英伟达 Vera Rubin 下半年上市：推理速度 50 PetaFLOPS，是 Blackwell 两倍以上
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>自 Blackwell 一代将算力推向新高之后，全球 AI 推理需求持续爆发，每秒需要处理的 Token 数量以指数级增长。市场对更高效、功耗更低的推理芯片的渴求空前迫切。</p>
+        <p><strong>核心要点：</strong>Vera Rubin 平台的推理速度达到每秒 50 PetaFLOPS，相比 Blackwell 提升超过一倍，同时大幅改善每瓦 Token 输出效率。英伟达确认该平台将在 2026 年下半年正式上市，对标 AI 推理场景的精细化分工趋势。同时，英伟达还发布了开源量子 AI 模型 Ising，将量子处理器校准时间从数天压缩至 5 小时。</p>
+        <p><strong>行业影响：</strong>Rubin 的到来将进一步拉大英伟达与竞争对手在推理基础设施领域的领先优势，并直接压制谷歌 TPU、AMD MI 系列在大规模部署中的可能性。对云服务商而言，这意味着算力采购策略需要提前布局，Rubin 将成为下一轮 AI 基础设施军备竞赛的核心争夺点。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#英伟达</span>
+        <span class="tag">#AI芯片</span>
+        <span class="tag">#Rubin</span>
+        <span class="tag">#算力</span>
+      </div>
+      <a class="read-link" href="https://www.nvidia.cn/data-center/technologies/rubin/" target="_blank">↗ 阅读原文</a>
+    </div>
+
+    <!-- 3 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-openai">OpenAI</span>
+        <span class="card-time">2026-04-15 发布</span>
+        <span class="card-impact">⚡ 重磅</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.36kr.com/p/3767734839210758" target="_blank">
+          OpenAI 发布 GPT-5.4-Cyber：无需源码即可发现漏洞，限定安全专家使用
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>网络安全正在成为 AI 商业化的重要垂直赛道。仅一周之前，Anthropic 刚发布了网络安全专用模型 Mythos，主打自动化渗透测试与红队演练，但因能力"过于危险"而采用限制发布策略。OpenAI 选择在一周后直接迎战。</p>
+        <p><strong>核心要点：</strong>GPT-5.4-Cyber 是 OpenAI 旗舰模型 GPT-5.4 的专项微调变体，专门针对防御性网络安全用例优化。与通用模型不同，该模型可在不获取源码的条件下发现系统安全漏洞，并具备更宽松的使用限制设计。初期仅面向经审核的安全供应商、组织及研究人员开放，同步扩展"网络安全受信访问"（Trusted Access）计划。</p>
+        <p><strong>行业影响：</strong>GPT-5.4-Cyber 的发布标志着 AI 巨头在网络安全专用模型领域的正面竞争正式打响。AI 驱动的分钟级全链路漏洞扫描，将对传统安全产品形成颠覆性挑战。但这也意味着 AI 在网络攻防领域的双刃剑效应日趋明显，相关治理规则亟待跟进。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#OpenAI</span>
+        <span class="tag">#网络安全</span>
+        <span class="tag">#GPT-5.4</span>
+        <span class="tag">#垂直模型</span>
+      </div>
+      <a class="read-link" href="https://www.caixin.com/2026-04-15/102434250.html" target="_blank">↗ 阅读原文</a>
+    </div>
+
+    <!-- 4 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-capital">资本</span>
+        <span class="card-time">2026-04-21</span>
+        <span class="card-impact">⚡ 重磅</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.sohu.com/a/1010838825_122523043" target="_blank">
+          四大科技巨头 2026 年 AI 基建支出合计超 6000 亿美元，算力军备竞赛全面升级
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>在 AI 大模型竞争持续白热化的背景下，算力基础设施成为决定竞争格局的核心变量。今年一季度，全球 AI 创业融资规模已创下历史天量——单季 807 起融资，总金额 2748 亿美元，环比暴涨 417%。</p>
+        <p><strong>核心要点：</strong>亚马逊年度 AI 基建支出高达 2000 亿美元，谷歌 1750~1850 亿，Meta 1150~1350 亿，微软超 1050 亿。四家合计突破 6000 亿美元，远超任何历史时期的科技基础设施投入。Gartner 同期预测，2026 年全球 AI 总支出将达 2.52 万亿美元，同比增长 44%。</p>
+        <p><strong>行业影响：</strong>巨量资本的集中涌入意味着 AI 基础设施建设进入"硬加速"阶段，算力、能源、冷却、网络互联等各个环节都将面临巨大供给压力。对于非头部企业而言，算力壁垒正在迅速拔高，AI 产业链的马太效应将进一步加速。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#AI基建</span>
+        <span class="tag">#算力</span>
+        <span class="tag">#资本</span>
+        <span class="tag">#云计算</span>
+      </div>
+      <a class="read-link" href="https://www.sohu.com/a/1010838825_122523043" target="_blank">↗ 阅读原文</a>
+    </div>
+  </section>
+
+  <!-- ══ 行业动态 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-industry">📡</div>
+      <h2 class="section-title">行业动态</h2>
+      <span class="section-count">5 条</span>
+    </div>
+
+    <!-- 5 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-google">Google</span>
+        <span class="card-time">2026-04-21</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://aiproducthub.cn/newsflash/2026-04-21/" target="_blank">
+          谷歌本周发布 TPUv8 双芯片策略：训练与推理分治，联手博通与联发科挑战英伟达
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>随着 AI 推理负载与训练负载的特性差异日益凸显，一刀切的通用 AI 芯片路线正面临效率挑战。谷歌长期投入的 TPU 自研路线迎来重要里程碑。</p>
+        <p><strong>核心要点：</strong>谷歌发布 TPUv8 系列，采用"训练+推理分治"双芯片策略：训练芯片 TPUv8t 由博通设计，推理芯片 TPUv8i 由联发科设计。此举有意降低对单一合作伙伴的依赖，并在推理场景精细化优化上直接叫板英伟达。同时，谷歌还宣布联手 Marvell 开发下一代专为 AI 推理打造的 TPU 及内存处理单元（MPU）。</p>
+        <p><strong>行业影响：</strong>谷歌的双芯片策略彰显了其在 AI 芯片供应链上的战略主动性，训练/推理的功能分离也为整个芯片行业提供了一种新范式，预计将带动更多云厂商跟进定制化芯片布局。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#谷歌</span><span class="tag">#TPU</span><span class="tag">#AI芯片</span><span class="tag">#博通</span><span class="tag">#联发科</span>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-robot">机器人</span>
+        <span class="card-source src-google">DeepMind</span>
+        <span class="card-time">2026-04-21</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://www.163.com/dy/article/KIJAKET005566WT8.html" target="_blank">
+          波士顿动力 × 谷歌 DeepMind：Atlas 人形机器人量产版深度整合 Gemini Robotics
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>波士顿动力早在 2026 年 1 月 CES 上宣布与谷歌 DeepMind 建立战略合作，将 Gemini Robotics 基础模型深度整合至新一代 Atlas 机器人。如今，这一整合正式进入实质落地阶段。</p>
+        <p><strong>核心要点：</strong>量产版 Atlas 已开始交付现代汽车及 AI 合作伙伴，搭载 Gemini Robotics 大脑后，机器人可完成复杂的多步骤任务规划、环境感知与自然语言指令理解。据悉，现有版本已在工厂场景中实现稳定量产部署。</p>
+        <p><strong>行业影响：</strong>顶级机器人本体与顶级 AI 大脑的深度融合，标志着具身智能从演示级走向产业级量产的关键拐点。这种"大模型+机器人本体"的标准化合作模式，将推动整个人形机器人赛道进入新一轮军备竞赛。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#具身智能</span><span class="tag">#Atlas</span><span class="tag">#Gemini Robotics</span><span class="tag">#人形机器人</span>
+      </div>
+      <a class="read-link" href="https://www.163.com/dy/article/KIJAKET005566WT8.html" target="_blank">↗ 阅读原文</a>
+    </div>
+
+    <!-- 7 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-domestic">国内动态</span>
+        <span class="card-time">2026-04-21</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://aiproducthub.cn/newsflash/2026-04-21/" target="_blank">
+          国产推理 GPU 独角兽曦望科技完成七轮融资，总额约 40 亿元，首家纯推理 GPU 独角兽诞生
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>在英伟达 H100/H200 对华出口受限、国产算力替代需求持续升温的背景下，面向 AI 推理场景的专用 GPU 成为资本热点。曦望科技从商汤科技分拆独立，专注推理芯片设计。</p>
+        <p><strong>核心要点：</strong>曦望科技已完成七轮融资，总融资额约 40 亿元，成为国内首家估值破百亿、专注纯推理场景的 GPU 独角兽。本轮资金将优先用于旗舰推理芯片 S3 的量产爬坡，以及与国内云厂商的深度整合。</p>
+        <p><strong>行业影响：</strong>曦望的崛起验证了"训推分离"的市场逻辑在国内同样成立，将加速国产推理芯片的商业化进程，并可能带动更多资本进入这一细分赛道。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#国产芯片</span><span class="tag">#AI推理</span><span class="tag">#曦望科技</span><span class="tag">#融资</span>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-deepseek">DeepSeek</span>
+        <span class="card-time">最新进展</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://blog.csdn.net/m0_69769567/article/details/160218612" target="_blank">
+          DeepSeek V4 万亿参数规格全面曝光：1T MoE + Engram 记忆 + 100万 Token，定档4月下旬
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>DeepSeek 以颠覆性的成本效率在全球 AI 领域引发轰动，其 V3 模型仍在业界广泛使用。V4 的到来承载着业界对"下一代高效大模型"的巨大期望。</p>
+        <p><strong>核心要点：</strong>DeepSeek V4 已确认将于 2026 年 4 月下旬发布。规格方面：1 万亿参数 MoE 架构、支持 100 万 Token 超长上下文、引入 Engram 条件记忆机制、稀疏 FP8 解码提升推理效率，同时 100% 适配华为昇腾 950PR 芯片，彰显自主化路线决心。</p>
+        <p><strong>行业影响：</strong>若规格属实，DeepSeek V4 将在参数规模、上下文长度、国产算力兼容性三个维度同步刷新行业标杆。其"高性能+自主化"的路线，对 GPT-5.x 系列构成直接挑战，也将进一步验证国产 AI 芯片的可用性。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#DeepSeek</span><span class="tag">#V4</span><span class="tag">#华为昇腾</span><span class="tag">#MoE</span>
+      </div>
+      <a class="read-link" href="https://blog.wenhaofree.com/posts/articles/2026-04-11-deepseek-v4-spec-leaks/" target="_blank">↗ 阅读原文</a>
+    </div>
+
+    <!-- 9 -->
+    <div class="news-card">
+      <div class="card-meta">
+        <span class="card-source src-industry">行业</span>
+        <span class="card-time">2026-04-21</span>
+      </div>
+      <h3 class="card-title">
+        <a href="https://aiproducthub.cn/newsflash/2026-04-21/" target="_blank">
+          吉利北京车展首发中国首台"原生 Robotaxi"，融合 WAM 世界动作模型与 L4 自动驾驶
+        </a>
+      </h3>
+      <div class="card-body">
+        <p><strong>背景：</strong>自动驾驶正从"感知+规划"的传统技术路线向"世界模型+物理 AI"的新范式迁移。4月24日北京国际汽车展览会将成为这一迁移的重要展示窗口。</p>
+        <p><strong>核心要点：</strong>吉利将在 4 月 24 日北京车展亮相中国首台原生 Robotaxi 原型车，融合 WAM（世界动作模型）、L4 级自动驾驶能力与物理 AI 感知体系，计划在特定城市场景内实现无安全员运营验证。</p>
+        <p><strong>行业影响：</strong>传统车企以"原生 Robotaxi"形态切入自动驾驶商业化赛道，意味着整车厂与科技公司的边界正在模糊。吉利的此次亮相，或将加速国内 Robotaxi 竞争格局的重新洗牌。</p>
+      </div>
+      <div class="card-tags">
+        <span class="tag">#Robotaxi</span><span class="tag">#吉利</span><span class="tag">#自动驾驶</span><span class="tag">#北京车展</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ 核心洞察 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-insight">💡</div>
+      <h2 class="section-title">核心洞察</h2>
+      <span class="section-count">3 条</span>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">1</div>
+      <div class="insight-title">资本格局：AI 进入"双寡头绑定"时代</div>
+      <div class="insight-body">
+        <p>今日最大新闻——亚马逊向 Anthropic 追加 250 亿美元投资，并达成 1000 亿美元云采购长约——标志着 AI 产业的资本格局正式进入"云巨头 + 模型公司深度绑定"的双寡头时代。<strong>微软绑定 OpenAI、亚马逊绑定 Anthropic、谷歌自研 Gemini</strong>，三足鼎立格局愈发清晰。对于独立 AI 公司而言，未来的生存空间将更多取决于与某一云巨头的深度战略协同，而非单纯的技术领先。</p>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">2</div>
+      <div class="insight-title">技术趋势：从"会聊天"到"能办事"，Agent 范式转移加速</div>
+      <div class="insight-body">
+        <p>一季度 267 个新模型的密集发布，背后的核心主题早已不是"谁的 Benchmark 更高"，而是 <strong>AI 能否真正嵌入并自动完成工作流程</strong>。Google Cloud 调研显示 88% 的 Agent 早期采用者已获正向 ROI，企业财务、编程、安全等垂直场景的 AI Agent 落地正在从试点走向大规模生产部署。与此同时，94% 的企业开始担忧"智能体蔓延"带来的治理风险。这预示着 <strong>AI 治理能力将成为下一阶段的核心竞争力</strong>。</p>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">3</div>
+      <div class="insight-title">中美博弈：算力管制催生国产化机遇，但差距仍在</div>
+      <div class="insight-body">
+        <p>DeepSeek V4 将 100% 适配华为昇腾 950PR 的路线选择，曦望科技百亿估值的推理 GPU 独角兽诞生，以及谷歌 TPUv8 双芯片策略——三者共同指向同一个趋势：<strong>AI 芯片供应链的多极化与国产替代已从口号变为具体行动</strong>。然而，全球 Token 调用量中美逆转（受国内算力涨价影响，中国模型周调用量大跌 23.77%）也提醒我们，算力成本与供给稳定性仍是国产 AI 落地的重要制约因素。</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>AI 日报 · 2026年4月21日 · 数据来源：AIProductHub、腾讯新闻、36氪、财新、IT之家</p>
+  <p style="margin-top:6px">
+    订阅中心：<a href="https://Flystray.github.io/ai-news/" target="_blank">Flystray.github.io/ai-news</a>
+    &nbsp;·&nbsp;
+    今日报告：<a href="https://Flystray.github.io/ai-news/reports/2026-04-21-with-links.html" target="_blank">在线查看</a>
+  </p>
+</footer>
+
+</body>
+</html>
