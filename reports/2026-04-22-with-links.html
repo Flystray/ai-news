@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 · 2026年4月22日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+            background: #0a0a0f;
+            color: #e8e8f0;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        /* 粒子背景 */
+        .bg-particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.15);
+            animation: float linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* 顶部 HERO */
+        .hero {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #0d0d2b 0%, #1a0a2e 30%, #0f1a35 60%, #0a1628 100%);
+            padding: 70px 20px 50px;
+            text-align: center;
+            border-bottom: 1px solid rgba(99,102,241,0.3);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(99,102,241,0.15);
+            border: 1px solid rgba(99,102,241,0.4);
+            border-radius: 20px;
+            font-size: 13px;
+            color: #a5b4fc;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+        .hero-badge .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #6366f1;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 40%, #60a5fa 80%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .hero-sub {
+            font-size: 15px;
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #64748b;
+        }
+        .meta-item .icon { font-size: 15px; }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* 章节标题 */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 50px 0 24px;
+        }
+        .section-icon {
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .icon-red { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+        .icon-blue { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); }
+        .icon-purple { background: linear-gradient(135deg, #4c1d95, #6d28d9); }
+        .section-title-wrap { flex: 1; }
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 2px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .section-divider {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(99,102,241,0.3), transparent);
+        }
+
+        /* 新闻卡片 */
+        .news-card {
+            background: rgba(15,20,40,0.8);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            padding: 24px 26px;
+            margin-bottom: 16px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            right: 0;
+            height: 2px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .news-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99,102,241,0.3);
+            box-shadow: 0 12px 40px rgba(99,102,241,0.12);
+        }
+        .news-card:hover::before {
+            opacity: 1;
+        }
+        .card-red::before { background: linear-gradient(90deg, #ef4444, #f97316); }
+        .card-blue::before { background: linear-gradient(90deg, #3b82f6, #6366f1); }
+        .card-purple::before { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .card-number {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .num-red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+        .num-blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
+        .num-purple { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.25); }
+
+        .card-title-wrap { flex: 1; }
+        .card-source {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 9px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .src-openai { background: rgba(16,163,127,0.1); color: #34d399; border: 1px solid rgba(16,163,127,0.2); }
+        .src-anthropic { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+        .src-google { background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+        .src-deepseek { background: rgba(139,92,246,0.1); color: #a78bfa; border: 1px solid rgba(139,92,246,0.2); }
+        .src-alibaba { background: rgba(249,115,22,0.1); color: #fb923c; border: 1px solid rgba(249,115,22,0.2); }
+        .src-global { background: rgba(99,102,241,0.1); color: #818cf8; border: 1px solid rgba(99,102,241,0.2); }
+        .src-robot { background: rgba(20,184,166,0.1); color: #2dd4bf; border: 1px solid rgba(20,184,166,0.2); }
+        .src-chip { background: rgba(234,179,8,0.1); color: #facc15; border: 1px solid rgba(234,179,8,0.2); }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #f1f5f9;
+            line-height: 1.4;
+        }
+        .card-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .card-title a:hover { color: #a5b4fc; }
+
+        .card-body { color: #94a3b8; font-size: 14.5px; line-height: 1.8; }
+        .card-body strong { color: #e2e8f0; font-weight: 600; }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 14px;
+        }
+        .tag {
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.05);
+            color: #64748b;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 14px;
+            font-size: 13px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: gap 0.15s;
+        }
+        .read-more:hover { gap: 8px; color: #818cf8; }
+        .read-more::after { content: '→'; }
+
+        /* 洞察卡片 */
+        .insight-card {
+            background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.06));
+            border: 1px solid rgba(99,102,241,0.2);
+            border-radius: 16px;
+            padding: 22px 24px;
+            margin-bottom: 14px;
+        }
+        .insight-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .insight-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+        .insight-body {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+        .insight-body strong { color: #c4b5fd; }
+
+        /* 数据统计栏 */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 30px 0;
+        }
+        .stat-item {
+            background: rgba(15,20,40,0.6);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+        /* 页脚 */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px 20px 40px;
+            color: #475569;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer a { color: #6366f1; text-decoration: none; }
+        .footer-logo {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 粒子背景 -->
+<div class="bg-particles" id="particles"></div>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-badge">
+        <span class="dot"></span>
+        LIVE · AI 日报
+    </div>
+    <h1>AI 每日情报简报</h1>
+    <p class="hero-sub">2026年4月22日（星期三） · 精选全球 AI 大模型重要动态</p>
+    <div class="hero-meta">
+        <span class="meta-item"><span class="icon">📰</span> 12 条精选资讯</span>
+        <span class="meta-item"><span class="icon">🌍</span> 覆盖 8 大来源</span>
+        <span class="meta-item"><span class="icon">⚡</span> 实时爬虫验证</span>
+        <span class="meta-item"><span class="icon">✍️</span> AI日课 · fly出品</span>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- 数据统计 -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">$3056亿</div>
+            <div class="stat-label">Forbes AI50 总融资规模</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">2.7%</div>
+            <div class="stat-label">中美顶级模型性能差距</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">50'26"</div>
+            <div class="stat-label">人形机器人半马冠军成绩</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">10亿+</div>
+            <div class="stat-label">阿里千问累计模型下载量</div>
+        </div>
+    </div>
+
+    <!-- ===== 今日重磅 ===== -->
+    <div class="section-header">
+        <div class="section-icon icon-red">🔥</div>
+        <div class="section-title-wrap">
+            <div class="section-label">Top Stories</div>
+            <div class="section-title">今日重磅</div>
+        </div>
+        <div class="section-divider"></div>
+    </div>
+
+    <!-- 新闻1：福布斯AI50 -->
+    <div class="news-card card-red">
+        <div class="card-header">
+            <div class="card-number num-red">01</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-global">🌐 福布斯</span>
+                <div class="card-title">
+                    <a href="https://www.ithome.com/0/941/759.htm" target="_blank" rel="noopener">
+                        福布斯发布 2026 年 AI 50 强榜单：OpenAI、Anthropic 吸走 8 成融资，20 家新秀入围
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>《福布斯》第八届人工智能 50 强榜单（AI 50）于 4 月 21 日正式发布，聚焦全球最具潜力的非上市 AI 企业。<strong>本届榜单总融资规模高达 3056 亿美元</strong>（约合人民币 2.09 万亿元），其中 OpenAI 和 Anthropic 两家巨头合计融资 <strong>2426 亿美元</strong>，占总额近 80%。这两家公司目前均在向 IPO 加速冲刺，收入持续爆发式增长：据报道 OpenAI 年化收入已突破数百亿美元量级。</p>
+            <p style="margin-top:10px;">今年共有 <strong>20 家新企业</strong>首次登榜，涵盖机器人、开源模型、医疗 AI 和药物研发等新兴领域，这一结构性变化预示着 AI 应用生态正从少数巨头主导走向多元化纵深发展的新阶段。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">融资格局</span>
+            <span class="tag">OpenAI</span>
+            <span class="tag">Anthropic</span>
+            <span class="tag">IPO预期</span>
+        </div>
+        <a href="https://www.thepaper.cn/newsDetail_forward_33020886" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻2：DeepSeek V4 融资+华为 -->
+    <div class="news-card card-red">
+        <div class="card-header">
+            <div class="card-number num-red">02</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-deepseek">🧠 DeepSeek</span>
+                <div class="card-title">
+                    <a href="https://baijiahao.baidu.com/s?id=1863051178138073945" target="_blank" rel="noopener">
+                        DeepSeek V4 定档 4 月下旬！全面拥抱华为昇腾 950PR，估值超 100 亿美元并启动首轮融资
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>DeepSeek 创始人梁文锋正式确认，新一代旗舰模型 <strong>DeepSeek V4 将于 4 月下旬全球发布</strong>，多位接近 DeepSeek 的人士证实发布窗口已锁定。V4 采用万亿级参数 MoE 架构，在长期记忆（LTM）、工程级编程、原生多模态与国产算力适配四大方向实现突破。</p>
+            <p style="margin-top:10px;">与此同时，DeepSeek 曝出成立以来<strong>首轮外部融资</strong>，估值超 100 亿美元。最令市场关注的是其算力战略彻底切换——<strong>华为昇腾 950PR 单卡算力是英伟达 H20 的 2.87 倍</strong>，且首支持 FP4 低精度计算，英伟达 CEO 黄仁勋直言此举"对美国是个坏消息"。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">DeepSeek V4</span>
+            <span class="tag">华为昇腾</span>
+            <span class="tag">国产算力</span>
+            <span class="tag">首轮融资</span>
+        </div>
+        <a href="https://news.qq.com/rain/a/20260421A03QFO00" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻3：GPT-6 -->
+    <div class="news-card card-red">
+        <div class="card-header">
+            <div class="card-number num-red">03</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-openai">✦ OpenAI</span>
+                <div class="card-title">
+                    <a href="https://www.sohu.com/a/1009429532_122725837" target="_blank" rel="noopener">
+                        GPT-6 正式发布：代号"土豆"，200 万 Token 上下文，性能整体提升 40%，瞄准 AGI 最后一公里
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>2026 年 4 月 14 日，OpenAI 正式发布 GPT-6（内部代号 <strong>Spud，即"土豆"</strong>）。这款历经 18 个月研发、耗资 20 亿美元、动用 10 万张 H100 GPU 的旗舰模型，采用全新 Symphony 架构，在代码、推理、多模态与智能体能力上全面跃升。</p>
+            <p style="margin-top:10px;">GPT-6 支持 <strong>200 万 Token 上下文窗口</strong>，综合性能较 GPT-5.4 提升约 40%，在代码生成基准上的得分接近人类顶尖工程师水平。OpenAI CEO 奥特曼称其为"AGI 完成度达 70%-80%"的里程碑版本，并宣布 Sora 同步关停下线，以腾出资源全力支撑新架构推理生态。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">GPT-6</span>
+            <span class="tag">Symphony架构</span>
+            <span class="tag">AGI里程碑</span>
+            <span class="tag">200万Token</span>
+        </div>
+        <a href="https://zhuanlan.zhihu.com/p/2027407706776971197" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- ===== 行业动态 ===== -->
+    <div class="section-header">
+        <div class="section-icon icon-blue">📡</div>
+        <div class="section-title-wrap">
+            <div class="section-label">Industry Updates</div>
+            <div class="section-title">行业动态</div>
+        </div>
+        <div class="section-divider"></div>
+    </div>
+
+    <!-- 新闻4：斯坦福AI指数 -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">04</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-global">📊 斯坦福HAI</span>
+                <div class="card-title">
+                    <a href="https://news.qq.com/rain/a/20260414A03PKT00" target="_blank" rel="noopener">
+                        《2026年斯坦福AI指数报告》：中美顶级模型差距收窄至 2.7%，22-25 岁软件岗就业已被切掉 20%
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>斯坦福大学以人为本 AI 研究院（Stanford HAI）于 4 月 13 日发布了长达 <strong>423 页</strong>的《2026 年 AI 指数报告》——这也是连续第九年发布的这份被誉为"AI 领域年度体检"的权威报告。</p>
+            <p style="margin-top:10px;">报告最核心的结论是：截至 2026 年 3 月，<strong>中美顶级 AI 模型的性能差距已缩窄至仅 2.7%</strong>，在语言、数学和编程能力等基准测试中，差距几乎消弭。全球顶尖 AI 年产 95 个模型，但高度集中于少数大厂。同时报告揭示一个严峻现实：<strong>22-25 岁初级开发者的就业率已被 AI 切掉 20%</strong>，引发社会对 AI 就业冲击的强烈关注。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">斯坦福报告</span>
+            <span class="tag">中美竞争</span>
+            <span class="tag">就业影响</span>
+            <span class="tag">行业格局</span>
+        </div>
+        <a href="https://www.36kr.com/p/3766102787162624" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻5：谷歌布林突击队 -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">05</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-google">🔷 Google DeepMind</span>
+                <div class="card-title">
+                    <a href="https://news.qq.com/rain/a/20260421A0616M00" target="_blank" rel="noopener">
+                        谷歌创始人布林亲自督战：组建 Gemini "突击队"攻克 AI 编程难题，内部备忘录要求"果断转向"
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>据 The Information 于 4 月 20 日独家报道，谷歌联合创始人 <strong>谢尔盖·布林</strong>亲自向 DeepMind 员工发出内部备忘录，要求团队"果断转向"，全力追赶智能体（Agent）编程技术。谷歌随即组建了由 DeepMind 工程师 Sebastian Borgeaud 领导的<strong>精英"突击队"</strong>（Strike Team），其核心使命是攻克从零编写复杂项目代码的难题。</p>
+            <p style="margin-top:10px;">此次行动直接指向 Anthropic Claude Code 在 AI 编程赛道的压倒性优势。这也意味着，<strong>谷歌一方面已有约 50% 的代码由 AI 工具生成，另一方面却承认在 Agentic Coding 方向仍存在明显短板</strong>，这种自我批判式的紧迫感实属罕见。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">布林</span>
+            <span class="tag">Gemini Coding</span>
+            <span class="tag">AI编程竞争</span>
+            <span class="tag">Agent技术</span>
+        </div>
+        <a href="https://www.sohu.com/a/1012461139_114760" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻6：Anthropic Claude Opus 4.7 -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">06</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-anthropic">◆ Anthropic</span>
+                <div class="card-title">
+                    <a href="https://www.ithome.com/0/940/099.htm" target="_blank" rel="noopener">
+                        Anthropic 发布 Claude Opus 4.7：CursorBench 从 58% 跳至 70%，金融分析能力再创新高
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Anthropic 于 4 月 16 日发布 <strong>Claude Opus 4.7</strong>，这是距上次 Opus 4.6 更新仅两个月的高频迭代。Opus 4.7 在高端软件开发（CursorBench 成绩从 58% 跃升至 70%）、金融分析和视觉多模态能力上实现显著突破，支持 <strong>100 万 Token 上下文窗口</strong>（由 Beta 升级为正式功能）。</p>
+            <p style="margin-top:10px;">值得关注的是，该版本与 Anthropic 神秘的"Mythos"模型之间的<strong>性能差距依然存在</strong>，这暗示后者正在作为网络安全与军事级专项模型独立推进。外界观察人士普遍认为，Anthropic 正通过持续高频迭代的方式来维持在代码能力上对谷歌的领先优势。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Claude Opus 4.7</span>
+            <span class="tag">AI编程</span>
+            <span class="tag">100万Token</span>
+            <span class="tag">金融分析</span>
+        </div>
+        <a href="https://klab.tw/2026/04/claude-opus-4-7/" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻7：阿里千问 Qwen3.6-Max -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">07</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-alibaba">🧿 阿里通义</span>
+                <div class="card-title">
+                    <a href="https://www.ithome.com/0/941/214.htm" target="_blank" rel="noopener">
+                        阿里发布 Qwen3.6-Max 预览版；千问系列全球下载量逼近 10 亿次，占开源模型半壁江山
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>4 月 20 日，阿里宣布 <strong>Qwen3.6-Max-Preview</strong> 正式发布，作为 Qwen 系列新一代旗舰模型的早期预览版，带来更强的世界知识、指令遵循能力以及在多项基准上显著提升的智能体编程能力。</p>
+            <p style="margin-top:10px;">与此同时，美国 AI 追踪机构 Interconnects AI 最新报告显示，截至 2026 年 3 月，<strong>阿里通义千问系列已占全球开源模型下载量的 50% 以上，累计下载量逼近 10 亿次</strong>，仅 2 月单月即产生约 1.536 亿次下载，超过 Meta、DeepSeek 和 OpenAI 另外八个主要发布方下载量的总和。这一数据彻底改写了全球开源模型的竞争格局。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Qwen3.6-Max</span>
+            <span class="tag">开源生态</span>
+            <span class="tag">10亿下载</span>
+            <span class="tag">Agent编程</span>
+        </div>
+        <a href="https://news.qq.com/rain/a/20260411A02CFJ00" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻8：人形机器人半马 -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">08</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-robot">🤖 具身智能</span>
+                <div class="card-title">
+                    <a href="https://www.chinanews.com/cj/2026/04-19/10606469.shtml" target="_blank" rel="noopener">
+                        全球首个人形机器人半程马拉松落幕：荣耀"闪电"50分26秒夺冠，38%参赛队自主导航
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>4 月 19 日，<strong>2026 北京亦庄半程马拉松暨人形机器人半程马拉松</strong>在北京经济技术开发区正式举办，这是全球首个人形机器人马拉松品牌赛事。来自全国 13 个省份的超百支参赛队伍与约 1.2 万名人类选手同场竞技，覆盖 26 个品牌的 300 余台人形机器人。</p>
+            <p style="margin-top:10px;">齐天大圣队的<strong>荣耀"闪电"机器人以 50 分 26 秒</strong>（净用时）夺得自主导航组冠军。更具历史意义的是，<strong>首次涌现的自主导航参赛队伍占比高达 38%</strong>，相较上届实现了质的飞跃。这场赛事被业界称为"观察中国具身智能产业的最佳窗口"，预示着人形机器人正加速从实验室走向真实场景。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">人形机器人</span>
+            <span class="tag">具身智能</span>
+            <span class="tag">自主导航</span>
+            <span class="tag">北京亦庄</span>
+        </div>
+        <a href="https://www.eet-china.com/news/202604201896.html" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻9：Cerebras IPO -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">09</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-chip">💎 AI芯片</span>
+                <div class="card-title">
+                    <a href="https://finance.ifeng.com/c/8sSNwGdQhK9" target="_blank" rel="noopener">
+                        "英伟达挑战者" Cerebras Systems 申请纳斯达克 IPO，目标估值 350 亿美元，半年涨 4 倍
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>4 月 17 日，美国 AI 芯片独角兽 <strong>Cerebras Systems</strong> 正式向 SEC 提交 IPO 申请，计划以 CBRS 为代码登陆纳斯达克，<strong>目标融资超 30 亿美元，估值瞄准 350 亿美元</strong>。</p>
+            <p style="margin-top:10px;">值得注意的是，Cerebras 半年前曾以 81 亿美元估值撤回首次 IPO，如今<strong>估值在 6 个月内飙升了逾 330%</strong>，核心支撑来自与 OpenAI 签订的逾 200 亿美元多年合作协议。Cerebras 以晶圆级芯片著称，单芯片面积相当于整张硅晶圆，在推理场景的功耗效率上对英伟达 GPU 形成独特挑战。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Cerebras</span>
+            <span class="tag">AI芯片IPO</span>
+            <span class="tag">晶圆级芯片</span>
+            <span class="tag">英伟达竞争</span>
+        </div>
+        <a href="https://finance.sina.com.cn/wm/2026-04-20/doc-inhveaac0805363.shtml" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- 新闻10：Google MedGemma -->
+    <div class="news-card card-blue">
+        <div class="card-header">
+            <div class="card-number num-blue">10</div>
+            <div class="card-title-wrap">
+                <span class="card-source src-google">🔷 Google DeepMind</span>
+                <div class="card-title">
+                    <a href="https://www.msn.cn/zh-cn/news/other/google%E5%8F%91%E5%B8%83medgemma-15-%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9C%8B%E6%87%823d%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E7%9A%84ai%E5%8C%BB%E7%94%9F%E5%8A%A9%E6%89%8B/ar-AA20VZSo" target="_blank" rel="noopener">
+                        Google 发布 MedGemma 1.5：能看懂 3D 医学影像的 AI 医生助手，解读能力大幅提升
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Google Research 与 Google DeepMind 联合发布了 <strong>MedGemma 1.5</strong>，这是 Google 医疗 AI 领域的最新旗舰成果。该模型以 Gemini 为底座，在对 3D 医学影像（CT、MRI、PET 等）的理解与推理上实现了重大突破，能够跨模态融合文本与影像进行临床诊断辅助。</p>
+            <p style="margin-top:10px;">MedGemma 1.5 的完整论文于 2026 年 4 月发表（编号 arXiv:2604.05081v1），在多项医疗 AI 基准测试中刷新了记录。业界认为，这标志着<strong>医疗大模型正从"理解文本病历"走向"直接感知三维影像"的能力跃迁</strong>，在辅助影像科、病理科等高专业壁垒科室方面潜力巨大。</p>
+        </div>
+        <div class="card-tags">
+            <span class="tag">MedGemma</span>
+            <span class="tag">医疗AI</span>
+            <span class="tag">3D影像</span>
+            <span class="tag">多模态</span>
+        </div>
+        <a href="https://www.msn.cn/zh-cn/news/other/google%E5%8F%91%E5%B8%83medgemma-15-%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9C%8B%E6%87%823d%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E7%9A%84ai%E5%8C%BB%E7%94%9F%E5%8A%A9%E6%89%8B/ar-AA20VZSo" target="_blank" class="read-more">查看原文</a>
+    </div>
+
+    <!-- ===== 核心洞察 ===== -->
+    <div class="section-header">
+        <div class="section-icon icon-purple">💡</div>
+        <div class="section-title-wrap">
+            <div class="section-label">Deep Insights</div>
+            <div class="section-title">核心洞察</div>
+        </div>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="insight-card">
+        <div class="insight-icon">🌐</div>
+        <div class="insight-title">中美 AI 能力差距正在快速消失，"一超多强"格局正在瓦解</div>
+        <div class="insight-body">
+            斯坦福 AI 指数报告揭示的 2.7% 差距是一个信号弹。短短两年前，这个差距还是 20% 以上。<strong>DeepSeek V4 全面拥抱华为算力</strong>、<strong>阿里千问占据全球开源下载量半壁江山</strong>，意味着中国 AI 已从追赶者演变为真正的并跑者乃至领先者。未来 12-18 个月，算力自主化将成为中国 AI 产业的核心叙事主线。
+        </div>
+    </div>
+
+    <div class="insight-card">
+        <div class="insight-icon">⚔️</div>
+        <div class="insight-title">AI 编程赛道成为新战场：谷歌布林亲自下场，说明 Claude Code 真的很强</div>
+        <div class="insight-body">
+            谷歌联合创始人级别人物亲自发内部备忘录，这在科技史上极为罕见。这意味着 <strong>AI 编程正从"辅助工具"升级为战略级核心能力</strong>，直接关系到开发者平台的护城河。Anthropic Claude Code 已让谷歌感到威胁，而字节豆包、阿里 Qwen 等国产玩家也在跟进。AI 编程将是下半年竞争最激烈的细分赛道之一。
+        </div>
+    </div>
+
+    <div class="insight-card">
+        <div class="insight-icon">🤖</div>
+        <div class="insight-title">人形机器人：从实验室到赛道，自主导航的 38% 是一个质变节点</div>
+        <div class="insight-body">
+            北京亦庄半马的核心看点不是成绩（50分26秒离人类速度还有距离），而是<strong>38%的参赛机器人首次实现完全自主导航</strong>。这意味着具身智能的"大脑"已经成熟到足够应对真实复杂道路环境。结合此前的 π0.7、宇树等一批新品，2026 年将是人形机器人从竞技秀场走向工厂和家庭的关键起点年。
+        </div>
+    </div>
+
+    <div class="insight-card">
+        <div class="insight-icon">💸</div>
+        <div class="insight-title">福布斯 AI 50 的融资极化现象：两家公司吸走 80%，行业马太效应加剧</div>
+        <div class="insight-body">
+            OpenAI + Anthropic 两家合计融资 2426 亿美元，占榜单总额的 80%。这种极化程度在任何行业都极其罕见。但另一面是 <strong>20 家新公司入榜</strong>，涵盖机器人、医疗 AI、开源模型等新赛道。这说明资本正在两个维度同步押注：在巨头层押注"AI 操作系统级平台"；在垂直层押注"AI 深度应用场景"。两极共存，将是未来 3 年的主旋律。
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-logo">AI 日课</div>
+    <p>由 <strong>fly 的 AI 学习</strong> 精选整理 · 公众号同步推送</p>
+    <p style="margin-top:8px;">
+        <a href="https://Flystray.github.io/ai-news/" target="_blank">在线版本</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/Flystray/ai-news" target="_blank">GitHub 仓库</a>
+    </p>
+    <p style="margin-top:12px; font-size:12px; color:#334155;">内容基于公开互联网资讯整理，链接指向原始来源，版权归原作者所有</p>
+</footer>
+
+<script>
+// 生成粒子背景
+const container = document.getElementById('particles');
+const colors = ['rgba(99,102,241,0.12)', 'rgba(59,130,246,0.1)', 'rgba(139,92,246,0.1)', 'rgba(16,185,129,0.08)'];
+for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 6 + 2;
+    const x = Math.random() * 100;
+    const delay = Math.random() * 15;
+    const duration = Math.random() * 15 + 15;
+    p.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        left: ${x}%;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        animation-delay: -${delay}s;
+        animation-duration: ${duration}s;
+    `;
+    container.appendChild(p);
+}
+</script>
+
+</body>
+</html>
