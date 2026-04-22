@@ -18,54 +18,185 @@
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
         .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card h3 { font-size: 15px; color: #2d6a9f; margin: 16px 0 8px; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
         .card ul { padding-left: 20px; }
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .highlight-box { background: #fff8e1; border-left: 4px solid #f9a825; border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 12px 0; }
+        .highlight-box p { color: #5d4037; font-size: 15px; margin: 0; }
+        .code-block { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 16px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 13px; margin: 12px 0; white-space: pre; overflow-x: auto; line-height: 1.6; }
+        .table-wrap { overflow-x: auto; margin: 12px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #1e3a5f; color: white; padding: 10px 14px; text-align: left; }
+        td { padding: 9px 14px; border-bottom: 1px solid #eee; color: #444; }
+        tr:hover td { background: #f8f9ff; }
+        .check-yes { color: #43a047; font-weight: 600; }
+        .check-no { color: #e53935; }
+        .arch-box { background: #f8f9ff; border: 1px solid #d0dff8; border-radius: 10px; padding: 16px 20px; font-family: monospace; font-size: 13px; line-height: 1.8; margin: 12px 0; white-space: pre; overflow-x: auto; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; white-space: pre; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .insight-badge { display: inline-block; background: #e3f2fd; color: #1565c0; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-right: 6px; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月22日</div>
-        <h1>edict</h1>
-        <p class="subtitle">🏛️ 三省六部制 · OpenClaw Multi-Agent Orchestration System — 9 specialized AI agents with real-time dashboard, model config, and full audit trails</p>
+        <h1>🏛️ edict（三省六部）</h1>
+        <p class="subtitle">把 1300 年前的帝国制度搬进 AI 多 Agent 系统——这可能是迄今为止最有"制度感"的 Multi-Agent 框架</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 15.3k</span>
-        <span>📝 Python</span>
-        <span>🕐 </span>
+        <span>⭐ 15,300</span>
+        <span>🍴 1,600</span>
+        <span>📝 Python + TypeScript</span>
+        <span>📄 MIT License</span>
         <span>🔗 <a href="https://github.com/cft0808/edict" target="_blank" style="color:#2d6a9f">cft0808/edict</a></span>
     </div>
 
     <div class="topics"><span class="topic">ai-agents</span><span class="topic">ai-orchestration</span><span class="topic">autonomous-agents</span><span class="topic">claude</span><span class="topic">dashboard</span><span class="topic">kanban</span><span class="topic">llm</span><span class="topic">multi-agent</span></div>
 
-    
-
-    <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+    <div class="desc-card">
+        <p>「我用 1300 年前的帝国制度，重新设计了 AI 多 Agent 协作架构。结果发现，古人比现代 AI 框架更懂分权制衡。」</p>
     </div>
 
-    
+    <!-- 一、项目是什么 -->
+    <div class="card">
+        <h2>📌 一、这是什么</h2>
+        <p>Edict 是一个基于 <strong>OpenClaw</strong> 的 Multi-Agent 编排系统。它把中国古代<strong>三省六部制</strong>（公元 606 年——1901 年，运行约 1300 年的帝国行政体系）直接映射为 AI Agent 的协作架构。</p>
+        <p>整套系统共 <strong>12 个 Agent</strong>，各有其"职能"，通过 Redis Streams 事件总线通信，配备实时看板、完整审计链、热切换模型等生产级功能。</p>
 
-    
+        <div class="highlight-box">
+            <p>🔑 核心洞见：现代 Multi-Agent 框架大多是「做完就交」——没有质量关卡。三省六部制最大的制度创新，是把"门下省封驳"引入 AI 工作流，让产出在送到执行层之前必须先过一道强制审核。</p>
+        </div>
 
-    
+        <h3>传统框架 vs 三省六部</h3>
+        <div class="table-wrap">
+        <table>
+            <tr><th>对比维度</th><th>CrewAI / AutoGen</th><th>三省六部（Edict）</th></tr>
+            <tr><td>任务审核机制</td><td class="check-no">❌ 无，做完就交</td><td class="check-yes">✅ 门下省专职审核 + 可封驳</td></tr>
+            <tr><td>实时可观测</td><td class="check-no">❌ 无看板</td><td class="check-yes">✅ 军机处 10 大功能面板</td></tr>
+            <tr><td>任务干预能力</td><td class="check-no">❌ 不可中断</td><td class="check-yes">✅ 随时叫停 / 取消 / 恢复</td></tr>
+            <tr><td>完整审计链</td><td class="check-no">⚠️ 有限</td><td class="check-yes">✅ 奏折存档 + 五阶段时间线</td></tr>
+            <tr><td>Agent 健康监控</td><td class="check-no">❌</td><td class="check-yes">✅ 心跳检测 + 活跃度统计</td></tr>
+            <tr><td>热切换 LLM</td><td class="check-no">❌ 重启才生效</td><td class="check-yes">✅ 看板一键切换，立即生效</td></tr>
+            <tr><td>部署难度</td><td>中</td><td class="check-yes">低 · 一键安装脚本</td></tr>
+        </table>
+        </div>
+    </div>
+
+    <!-- 二、Agent 架构 -->
+    <div class="card">
+        <h2>🏛️ 二、十二部制 Agent 架构</h2>
+        <p>整套架构对标三省六部，每个 Agent 都有明确的权限矩阵与状态机约束：</p>
+        <div class="arch-box">👑 皇上（你）
+    ↓ 下旨（Feishu · Telegram · Signal）
+🌟 太子（taizi）— 分拣：闲聊直接回 / 旨意建任务
+    ↓
+📜 中书省（zhongshu）— 接旨 → 规划 → 拆解子任务
+    ↓
+🔍 门下省（menxia）— 审议方案 → 准奏 ✅ / 封驳 🚫
+    ↓
+📮 尚书省（shangshu）— 派发任务 → 协调六部 → 汇总回奏
+    ↓
+┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐
+│💰 户部   │📝 礼部   │⚔️ 兵部   │⚖️ 刑部   │🔧 工部   │📋 吏部   │
+│(数据)    │(文档)    │(工程)    │(合规)    │(基建)    │(人事)    │
+└──────────┴──────────┴──────────┴──────────┴──────────┴──────────┘
++ 🌅 早朝官（情报枢纽 / 每日要闻播报）</div>
+
+        <h3>状态机流转</h3>
+        <div class="arch-box">皇上 → 太子分拣 → 中书规划 → 门下审议 → 已派发 → 执行中 → 待审查 → ✅ 已完成
+                           ↑         │
+                           └── 封驳 ─┘   （方案不合格则打回重做，强制循环）
+                                                              ↓
+                                                          阻塞 Blocked</div>
+    </div>
+
+    <!-- 三、军机处看板 -->
+    <div class="card">
+        <h2>📊 三、军机处看板（10 大功能面板）</h2>
+        <div class="table-wrap">
+        <table>
+            <tr><th>面板名称</th><th>功能说明</th></tr>
+            <tr><td>📋 旨意看板</td><td>Kanban 视图、过滤搜索、心跳徽章、随时叫停 / 取消 / 恢复任务</td></tr>
+            <tr><td>🔭 省部调度</td><td>各状态任务数量统计、部门分布条形图、Agent 健康卡片</td></tr>
+            <tr><td>📜 奏折阁</td><td>已完成任务归档、五阶段执行时间线、一键复制 Markdown</td></tr>
+            <tr><td>📜 旨库</td><td>9 个预设任务模板、分类筛选、参数表单、预估时间与费用</td></tr>
+            <tr><td>👥 官员总览</td><td>Token 消耗排行、活跃度 / 完成数 / 会话数统计</td></tr>
+            <tr><td>📰 天下要闻</td><td>每日科技 / 财经资讯、分类订阅、飞书推送</td></tr>
+            <tr><td>⚙️ 模型配置</td><td>每个 Agent 独立切换 LLM，<strong>热切换立即生效</strong></td></tr>
+            <tr><td>🛠️ 技能配置</td><td>各 Agent 已安装 Skills 一览、支持添加新技能</td></tr>
+            <tr><td>💬 小任务</td><td>OC-* 会话实时监控、消息预览</td></tr>
+            <tr><td>🎬 上朝仪式</td><td>每日首次打开播放开场动画（细节满分）</td></tr>
+        </table>
+        </div>
+    </div>
+
+    <!-- 四、技术架构 -->
+    <div class="card">
+        <h2>⚙️ 四、技术架构亮点</h2>
+        <div class="table-wrap">
+        <table>
+            <tr><th>层级</th><th>技术选型</th><th>说明</th></tr>
+            <tr><td>前端</td><td>React 18 + TypeScript + Vite + Zustand</td><td>13 个功能组件</td></tr>
+            <tr><td>后端</td><td>Python stdlib (http.server)</td><td>零依赖，约 2300 行</td></tr>
+            <tr><td>看板</td><td>单文件 HTML (~2500 行)</td><td>零依赖，即开即用</td></tr>
+            <tr><td>数据库</td><td>SQLAlchemy + Redis</td><td>异步数据持久化</td></tr>
+            <tr><td>消息队列</td><td>Redis Streams</td><td>EventBus 事件总线</td></tr>
+        </table>
+        </div>
+
+        <h3>六大核心技术亮点</h3>
+        <ul>
+            <li><strong>EventBus 事件总线</strong>：Redis Streams 发布/订阅，服务间解耦通信</li>
+            <li><strong>Outbox Relay</strong>：事务性 Outbox 模式，保障事件可靠投递（至少一次语义）</li>
+            <li><strong>状态机审计</strong>：严格生命周期状态转换 + 完整审计日志，每次流转都有记录</li>
+            <li><strong>并行调度引擎</strong>：Dispatch Worker 支持指数退避重试 + 资源锁</li>
+            <li><strong>DAG 编排器</strong>：Orchestrator 基于有向无环图的任务分解与依赖解析</li>
+            <li><strong>Agent 思考可视化</strong>：实时展示 thinking 过程、工具调用、返回结果</li>
+        </ul>
+    </div>
+
+    <!-- 五、为什么值得关注 -->
+    <div class="card">
+        <h2>💡 五、为什么值得关注</h2>
+        <p>Multi-Agent 系统的核心挑战从来不是"让 Agent 能跑起来"，而是<strong>如何让它在复杂任务下输出可靠结果</strong>。Edict 的三个核心洞见：</p>
+        <ul>
+            <li><strong>制度性审核 > 提示词优化</strong>：与其反复调 prompt 希望 LLM 输出质量更高，不如在架构层引入强制的"门下省封驳"机制——输出不达标就打回重做。</li>
+            <li><strong>可观测性是生产必需</strong>：没有实时看板的 Multi-Agent 系统就像黑箱，出错时无从排查。军机处看板将所有 Agent 的状态、Token 消耗、任务流转全部可视化。</li>
+            <li><strong>人机协同 > 全自动</strong>：任务随时可叫停、干预、恢复，把人始终放在决策链路上，而不是"把所有事交给 AI 然后祈祷"。</li>
+        </ul>
+        <div class="highlight-box">
+            <p>🏛️ 古代三省六部制能运行 1300 年，靠的是「制度」而非「依赖某个聪明人」。把这套分权制衡的设计移植到 AI Agent 架构，或许是让 Multi-Agent 系统真正走向可靠的一条路。</p>
+        </div>
+    </div>
+
+    <!-- 六、快速体验 -->
+    <div class="card">
+        <h2>🚀 六、快速体验</h2>
+        <h3>Docker 一键体验（推荐）</h3>
+        <div class="quickstart">docker run --platform linux/amd64 -p 7891:7891 cft0808/sansheng-demo
+# 打开浏览器：http://localhost:7891</div>
+
+        <h3>完整安装</h3>
+        <div class="quickstart">git clone https://github.com/cft0808/edict.git
+cd edict && chmod +x install.sh && ./install.sh
+./start.sh
+# 打开浏览器：http://localhost:7891</div>
+    </div>
 
     <div class="cta">
         <a href="https://github.com/cft0808/edict" target="_blank">前往 GitHub 查看完整项目 →</a>
     </div>
 
     <div class="footer">
-        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目 · 2026-04-22</p>
     </div>
 </div>
 </body>
