@@ -23,42 +23,120 @@
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .highlight-box { background: #fff9e6; border: 1px solid #f0d060; border-radius: 10px; padding: 18px 24px; margin: 16px 0; }
+        .highlight-box h3 { font-size: 15px; color: #8a6000; margin-bottom: 10px; }
+        .highlight-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .highlight-box th { background: #f0d060; padding: 6px 10px; text-align: left; }
+        .highlight-box td { padding: 5px 10px; border-bottom: 1px solid #f0e0a0; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; line-height: 1.6; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .badge { display: inline-block; background: #d4574b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 8px; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月23日</div>
-        <h1>rtk</h1>
-        <p class="subtitle">CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies</p>
+        <h1>rtk<span class="badge">32.5k Stars</span></h1>
+        <p class="subtitle">高性能 CLI 代理，让 AI 编码工具节省 60-90% token。Rust 单文件，零依赖，100+ 命令内置过滤</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 32.5k</span>
+        <span>⭐ 32.5k Stars</span>
+        <span>🍴 1.9k Forks</span>
         <span>📝 Rust</span>
-        <span>🕐 </span>
+        <span>📄 MIT</span>
+        <span>🕐 活跃于最近数天</span>
         <span>🔗 <a href="https://github.com/rtk-ai/rtk" target="_blank" style="color:#2d6a9f">rtk-ai/rtk</a></span>
     </div>
 
-    <div class="topics"><span class="topic">agentic-coding</span><span class="topic">ai-coding</span><span class="topic">anthropic</span><span class="topic">claude-code</span><span class="topic">cli</span><span class="topic">command-line-tool</span><span class="topic">cost-reduction</span><span class="topic">developer-tools</span></div>
+    <div class="topics">
+        <span class="topic">agentic-coding</span>
+        <span class="topic">ai-coding</span>
+        <span class="topic">anthropic</span>
+        <span class="topic">claude-code</span>
+        <span class="topic">cli</span>
+        <span class="topic">cost-reduction</span>
+        <span class="topic">developer-tools</span>
+    </div>
 
-    
+    <div class="desc-card">
+        <p>RTK（Rust Token Killer）拦截命令输出，在送达 AI 之前完成四层压缩：过滤噪音 → 聚合相似项 → 截断冗余 → 去重重复行。AI 端完全无感知，token 消耗立降 60-90%。</p>
+    </div>
+
+    <div class="card">
+        <h2>📌 项目背景</h2>
+        <p>开发者在使用 AI 编码工具（Claude Code、Cursor、Copilot 等）时，每次执行 <code>git status</code>、<code>cargo test</code>、<code>pytest</code> 等命令，AI 收到的都是完整的原始输出——大量无关紧要的日志行、冗余信息、格式符号白白消耗 token。RTK 应运而生：它像"中间人"一样拦截命令输出，在送达 AI 之前完成四层压缩。</p>
+    </div>
 
     <div class="card">
         <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+        <ul>
+            <li><strong>智能过滤（Smart Filtering）</strong>：自动移除注释、空行、模板代码</li>
+            <li><strong>聚合分组（Grouping）</strong>：按目录聚合文件、按类型聚合错误，让 AI 看到的不是 200 行而是 10 行</li>
+            <li><strong>智能截断（Truncation）</strong>：保留相关上下文，裁掉重复冗余部分</li>
+            <li><strong>去重压缩（Deduplication）</strong>：将重复日志行合并为带计数器的简洁条目</li>
+            <li><strong>透明重写钩子（Auto-Rewrite Hook）</strong>：自动拦截 Bash 命令，将 <code>git status</code> 改写为 <code>rtk git status</code>，AI 端完全无感知，100% 自动采用</li>
+            <li><strong>Token 节省分析（rtk gain）</strong>：查看各命令的节省统计，识别未被优化的命令</li>
+            <li><strong>支持 12 种 AI 编码工具</strong>：Claude Code、Copilot、Cursor、Gemini CLI、Codex、Windsurf、Cline 等</li>
+        </ul>
     </div>
 
-    
+    <div class="card">
+        <h2>⚙️ 技术亮点</h2>
+        <ul>
+            <li><strong>极低开销</strong>：单文件 Rust 二进制，解析开销 &lt;10ms，对开发体验无感知</li>
+            <li><strong>零依赖安装</strong>：Homebrew 一行安装，或 <code>curl | sh</code> 快速部署</li>
+            <li><strong>命令覆盖全面</strong>：100+ 常用命令内置过滤器（git、cargo、npm、pytest、docker、kubectl 等）</li>
+            <li><strong>失败安全（tee 模式）</strong>：命令失败时自动保存完整原始输出，AI 仍可读取，不遗漏调试信息</li>
+            <li><strong>多平台支持</strong>：Linux/macOS 全功能（hook 重写），Windows（CLAUDE.md 注入模式），WSL 最佳体验</li>
+            <li><strong>隐私优先</strong>：遥测默认关闭，仅收集匿名聚合数据，完全符合 GDPR</li>
+        </ul>
+    </div>
 
-    
+    <div class="highlight-box">
+        <h3>📊 量化效果（30分钟 Claude Code 会话）</h3>
+        <table>
+            <tr><th>操作</th><th>次数</th><th>无 RTK</th><th>有 RTK</th><th>节省</th></tr>
+            <tr><td><code>ls</code> / <code>tree</code></td><td>10x</td><td>2,000</td><td>400</td><td>-80%</td></tr>
+            <tr><td><code>cat</code> / <code>read</code></td><td>20x</td><td>40,000</td><td>12,000</td><td>-70%</td></tr>
+            <tr><td><code>pytest</code></td><td>4x</td><td>8,000</td><td>800</td><td><strong>-90%</strong></td></tr>
+            <tr><td><code>cargo test</code></td><td>5x</td><td>25,000</td><td>2,500</td><td><strong>-90%</strong></td></tr>
+            <tr><td><code>git status</code></td><td>10x</td><td>3,000</td><td>600</td><td>-80%</td></tr>
+            <tr><td><code>git add/commit/push</code></td><td>8x</td><td>1,600</td><td>120</td><td><strong>-92%</strong></td></tr>
+            <tr style="background:#f0e0a0;font-weight:bold"><td>总计</td><td></td><td>~118,000</td><td>~23,900</td><td>-80%</td></tr>
+        </table>
+    </div>
 
-    
+    <div class="card">
+        <h2>⚡ 快速上手</h2>
+        <div class="quickstart">
+# 一键安装（Linux/macOS）
+curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+
+# 为 Claude Code 初始化（安装自动重写钩子）
+rtk init -g
+
+# 重启 Claude Code，搞定！之后所有命令自动走 RTK 过滤
+git status   # 自动被改写为 rtk git status
+
+# 查看节省了多少 token
+rtk gain
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>👥 适用人群</h2>
+        <ul>
+            <li>频繁使用 AI 编码工具（Claude Code、Cursor、Windsurf 等）的开发者</li>
+            <li>希望降低 LLM API 成本（token 费用）的个人和团队</li>
+            <li>处理大型代码库、频繁运行测试的工程师</li>
+            <li>对隐私敏感、拒绝遥测但又希望优化 AI 工作流的用户</li>
+        </ul>
+    </div>
 
     <div class="cta">
         <a href="https://github.com/rtk-ai/rtk" target="_blank">前往 GitHub 查看完整项目 →</a>
