@@ -41,3 +41,12 @@
 - B站：全部返回 412 错误（code=-799 请求过于频繁），平台持续限流
 - 生成文件：creator-updates.html（已更新但内容为空）
 - 问题持续：YouTube RSS、nitter RSS、B站 API 三路数据源均失效，建议切换备用数据源
+
+## 2026-04-22 09:27 执行
+- 状态：成功
+- 检测到新内容：0条（今日无更新）
+- YouTube：10个频道全部超时（urlopen error timed out），连接不可用
+- X(Twitter)：7个账号全部超时（nitter.net 无法访问）
+- B站：全部返回 412 错误（code=-799 请求过于频繁），平台持续限流
+- 生成文件：creator-updates.html（已更新但内容为空）
+- 问题持续：三路数据源（YouTube RSS / nitter RSS / B站 API）连续多日全部失效
