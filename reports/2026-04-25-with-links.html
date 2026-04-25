@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 大模型日报 · 2026-04-25</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --accent1: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #f78166;
+      --accent4: #d2a8ff;
+      --accent5: #ffa657;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --tag-bg: #1f2937;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 40%, #0f1a2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(88,166,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(88,166,255,0.12);
+      border: 1px solid rgba(88,166,255,0.3);
+      color: var(--accent1);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      background: linear-gradient(90deg, #58a6ff, #a5d6ff, #d2a8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 26px; font-weight: 700; color: var(--accent1); }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Layout */
+    .container { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+
+    /* Section */
+    .section { margin-bottom: 52px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .section-icon.red { background: rgba(247,129,102,0.15); }
+    .section-icon.blue { background: rgba(88,166,255,0.12); }
+    .section-icon.green { background: rgba(63,185,80,0.12); }
+    .section-icon.purple { background: rgba(210,168,255,0.12); }
+    .section-title { font-size: 20px; font-weight: 700; }
+    .section-count {
+      margin-left: auto;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* News Card */
+    .news-grid { display: grid; gap: 16px; }
+    .news-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .news-card:hover { border-color: var(--accent1); transform: translateY(-2px); }
+    .news-card.highlight { border-left: 3px solid var(--accent3); }
+    .news-card.blue-hl { border-left: 3px solid var(--accent1); }
+    .news-card.green-hl { border-left: 3px solid var(--accent2); }
+
+    .card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+    .card-logo {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+    }
+    .card-meta { flex: 1; }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .card-source {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tag {
+      display: inline-flex; align-items: center;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .tag.red { background: rgba(247,129,102,0.15); color: var(--accent3); }
+    .tag.blue { background: rgba(88,166,255,0.1); color: var(--accent1); }
+    .tag.green { background: rgba(63,185,80,0.1); color: var(--accent2); }
+    .tag.purple { background: rgba(210,168,255,0.1); color: var(--accent4); }
+    .tag.orange { background: rgba(255,166,87,0.1); color: var(--accent5); }
+
+    .card-body { font-size: 14px; color: #b1bac4; line-height: 1.8; }
+    .card-body strong { color: var(--text); font-weight: 600; }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--accent1);
+      text-decoration: none;
+      font-size: 13px;
+      margin-top: 12px;
+      padding: 5px 12px;
+      border: 1px solid rgba(88,166,255,0.25);
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .card-link:hover { background: rgba(88,166,255,0.1); }
+
+    /* Insight Box */
+    .insight-box {
+      background: linear-gradient(135deg, rgba(88,166,255,0.05), rgba(210,168,255,0.05));
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+    .insight-number {
+      display: inline-flex;
+      width: 26px; height: 26px;
+      background: var(--accent1);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .insight-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .insight-body { font-size: 13.5px; color: #b1bac4; line-height: 1.85; padding-left: 36px; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--accent1); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hero-stats { gap: 20px; }
+      .card-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">AI Daily Report</div>
+  <h1>🤖 AI 大模型日报</h1>
+  <p class="hero-sub">2026 年 4 月 25 日 · 星期六 · 重磅齐发，GPT-5.5 × DeepSeek V4 正面交锋</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">10</div>
+      <div class="stat-label">条核心新闻</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">重磅发布</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">400亿</div>
+      <div class="stat-label">谷歌投资 Anthropic</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1.6T</div>
+      <div class="stat-label">DeepSeek V4 参数量</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 今日重磅 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon red">🔥</div>
+      <span class="section-title">今日重磅</span>
+      <span class="section-count">4 条</span>
+    </div>
+    <div class="news-grid">
+
+      <!-- 1. GPT-5.5 -->
+      <div class="news-card highlight">
+        <div class="card-header">
+          <div class="card-logo">🧠</div>
+          <div class="card-meta">
+            <div class="card-title">OpenAI 发布 GPT-5.5：编程满分冲击，智能体新王加冕</div>
+            <div class="card-source">来源：21经济网 / 36氪 · 2026-04-24</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag red">重磅发布</span>
+          <span class="tag blue">OpenAI</span>
+          <span class="tag orange">编程能力</span>
+        </div>
+        <div class="card-body">
+          北京时间 4 月 24 日凌晨，OpenAI 正式发布迄今最强旗舰模型 <strong>GPT-5.5</strong>，内部代号"土豆"。这款以"智能体优先"为核心设计理念的新模型，在编程领域取得历史突破：<strong>Terminal-Bench 2.0</strong> 基准测试达到 <strong>82.7%</strong> 的 SOTA 准确率；<strong>SWE-Bench Pro</strong>（评估真实 GitHub 问题解决能力）命中率达 <strong>58.6%</strong>，一次性端到端解决的任务数量超过以往所有模型。GPT-5.5 在多步骤自主任务执行上实现代际跃升——能够无需人类介入地完成代码对比、分支管理、跨工具协作等复杂工作流，将"AI 办公"真正推入实战阶段。与此同时，Anthropic 在 GPT-5.5 发布当天紧急发布技术报告，承认 Claude Code 近期"降智"并重置所有订阅用户使用额度，上演一场正面交锋。
+        </div>
+        <a class="card-link" href="https://www.21jingji.com/article/20260425/c811e178e665d7abc9b213cba7a0dc34.html" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 2. DeepSeek V4 -->
+      <div class="news-card highlight">
+        <div class="card-header">
+          <div class="card-logo">🐋</div>
+          <div class="card-meta">
+            <div class="card-title">DeepSeek V4 正式开源：1.6T 参数、百万上下文，"鲸鱼"回归</div>
+            <div class="card-source">来源：腾讯新闻 / 新浪财经 · 2026-04-24</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag red">重磅发布</span>
+          <span class="tag blue">DeepSeek</span>
+          <span class="tag green">开源</span>
+          <span class="tag purple">MoE 架构</span>
+        </div>
+        <div class="card-body">
+          沉寂 15 个月后，杭州 DeepSeek 于 4 月 24 日上午携 V4 系列正式回归，并同步开源（MIT 协议），在 HuggingFace 全量开放权重。V4 系列包含两款 MoE 模型：<strong>V4-Pro</strong>（总参数 1.6 万亿，激活参数 49B）和 <strong>V4-Flash</strong>（总参数 284B，激活参数 13B）。核心亮点：支持 <strong>百万词元超长上下文</strong>，Agent 能力、世界知识和推理性能全面大幅提升；首个实现脱离 CUDA 纯适配华为昇腾的大模型；API 定价仅为 GPT-5.5 的 <strong>1/10</strong>。海外开发者惊呼"鲸鱼回归"，全球开源排行榜前 5 中有 4 款中国模型，DeepSeek 此番发布直接重塑了国际开源格局。
+        </div>
+        <a class="card-link" href="https://news.qq.com/rain/a/20260425A03DAL00" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 3. 谷歌400亿 -->
+      <div class="news-card highlight">
+        <div class="card-header">
+          <div class="card-logo">💰</div>
+          <div class="card-meta">
+            <div class="card-title">谷歌宣布向 Anthropic 投资最高 400 亿美元，持股 14%</div>
+            <div class="card-source">来源：腾讯新闻 / 经济观察报 · 2026-04-25</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag red">巨额融资</span>
+          <span class="tag blue">谷歌</span>
+          <span class="tag purple">Anthropic</span>
+        </div>
+        <div class="card-body">
+          4 月 25 日，Anthropic 宣布与谷歌达成新一轮重磅协议：谷歌承诺以 <strong>3500 亿美元估值</strong> 即刻投入 <strong>100 亿美元</strong>现金，在 Anthropic 达成业绩目标后将追加 300 亿美元，合计最高投资额达 <strong>400 亿美元</strong>，同时提供 <strong>5 吉瓦算力支持</strong>。在此次公告前，谷歌已累计向 Anthropic 投资超 30 亿美元，持股约 14%。这笔交易将成为科技史上对 AI 初创公司规模最大的单一战略投资之一，标志着谷歌正以前所未有的力度押注 Claude 阵营，以应对 OpenAI 与微软的联合挑战。Amazon 此前已承诺向 Anthropic 追加至多 250 亿美元，两大云巨头"双押 Anthropic"的态势愈发明显。
+        </div>
+        <a class="card-link" href="https://www.eeo.com.cn/2026/0425/850890.shtml" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 4. 腾讯Hy3 -->
+      <div class="news-card highlight">
+        <div class="card-header">
+          <div class="card-logo">🐧</div>
+          <div class="card-meta">
+            <div class="card-title">腾讯发布 Hy3 preview：前 OpenAI 研究员姚顺雨主导"推倒重建"</div>
+            <div class="card-source">来源：腾讯新闻 / 搜狐 · 2026-04-23</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag red">重磅发布</span>
+          <span class="tag blue">腾讯混元</span>
+          <span class="tag green">MoE</span>
+        </div>
+        <div class="card-body">
+          4 月 23 日，腾讯混元团队官宣发布 <strong>Hy3 preview</strong> 并同步开源，这是前 OpenAI 研究员、腾讯首席 AI 科学家<strong>姚顺雨</strong>加入后主导"推倒重建"预训练与强化学习基础设施三个月以来交出的第一份答卷。Hy3 采用快慢思考融合的混合专家（MoE）架构，重点强化了实用性与性价比，在国内主流模型横评中表现亮眼。此次发布距腾讯 2026 年 2 月宣布重构不足三个月，进度超预期，折射出腾讯重新在 AI 赛道布局的急迫心情，也显示出从顶尖高校与大厂招揽 AI 科学家正在快速结出果实。
+        </div>
+        <a class="card-link" href="https://news.qq.com/rain/a/20260423A04VUP00" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 行业动态 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">📡</div>
+      <span class="section-title">行业动态</span>
+      <span class="section-count">4 条</span>
+    </div>
+    <div class="news-grid">
+
+      <!-- 5. Anthropic Claude Code 道歉 -->
+      <div class="news-card blue-hl">
+        <div class="card-header">
+          <div class="card-logo">🔧</div>
+          <div class="card-meta">
+            <div class="card-title">Anthropic 正式道歉：Claude Code "降智"属产品层问题，已修复</div>
+            <div class="card-source">来源：36氪 / IT熊猫 · 2026-04-24</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag blue">Anthropic</span>
+          <span class="tag orange">Claude Code</span>
+        </div>
+        <div class="card-body">
+          在 GPT-5.5 发布的同一天，Anthropic 发布技术报告，正式回应持续发酵的 Claude Code"降智"风波。报告确认：问题并非底层模型能力退化，而是<strong>过去一个多月内三项产品调整叠加失效</strong>所致，截至 4 月 20 日全部修复。Anthropic 强调公司从未主动降低模型性能，并宣布<strong>重置所有订阅用户使用额度</strong>以示诚意。此举被外界解读为在 GPT-5.5 发布冲击下的紧急公关，但也体现了 Anthropic 在透明度文化上的一贯坚守。
+        </div>
+        <a class="card-link" href="https://www.36kr.com/p/3780358673863687" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 6. 阿里Qwen3.6-Max + Kimi K2.6 -->
+      <div class="news-card blue-hl">
+        <div class="card-header">
+          <div class="card-logo">🌙</div>
+          <div class="card-meta">
+            <div class="card-title">国内密集发布：阿里 Qwen3.6-Max 登顶国产榜，Kimi K2.6 强化 Agent 集群</div>
+            <div class="card-source">来源：腾讯新闻 / i黑马 · 2026-04-20</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag blue">阿里云</span>
+          <span class="tag purple">Kimi</span>
+          <span class="tag green">开源</span>
+        </div>
+        <div class="card-body">
+          4 月 20 日，国内两大模型厂商几乎同时放出重磅更新。<strong>阿里云</strong>发布 Qwen3.6-Max-Preview，在第三方评测榜单 Artificial Analysis 智能指数中以 52 分登顶国产最高分，超越 GLM-5.1 和 MiniMax-M2.7；<strong>月之暗面</strong>发布并开源 Kimi K2.6，重点升级<strong>长程编码与 Agent 集群能力</strong>，在软件工程领域基准中首次超越 GPT-5.4。两款模型的同日发布，折射出国内大模型"月更"已成常态——速度已不再是门槛，竞争焦点正在向 Agent 能力和真实任务完成率迁移。
+        </div>
+        <a class="card-link" href="https://www.iheima.com/article-396647.html" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 7. Google Gemma 4 + 谷歌算力 -->
+      <div class="news-card blue-hl">
+        <div class="card-header">
+          <div class="card-logo">🔵</div>
+          <div class="card-meta">
+            <div class="card-title">谷歌 Gemma 4 开源 + 自有模型每分钟处理 160 亿 Token</div>
+            <div class="card-source">来源：阿里云开发者 / 财新 · 2026-04-23</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag blue">Google DeepMind</span>
+          <span class="tag green">开源</span>
+          <span class="tag purple">256K 上下文</span>
+        </div>
+        <div class="card-body">
+          Google DeepMind 发布的 <strong>Gemma 4</strong> 基于 Gemini 3 同源研究，首创 26B MoE 架构（激活仅 4B），支持 256K 超长上下文与原生多模态，以 Apache 2.0 协议全面开源，适合低算力的端侧部署。同期，谷歌披露其自有模型推理基础设施已达到<strong>每分钟处理超 160 亿 Token</strong> 的峰值吞吐量，展示了其在"算力即护城河"时代的绝对优势。结合当日宣布的 400 亿美元投资 Anthropic，谷歌正在同时走"自研+投资"双路线，构建全球最大的 AI 算力与模型版图。
+        </div>
+        <a class="card-link" href="https://developer.aliyun.com/article/1723940" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 8. 北京车展AI上车 -->
+      <div class="news-card blue-hl">
+        <div class="card-header">
+          <div class="card-logo">🚗</div>
+          <div class="card-meta">
+            <div class="card-title">2026 北京车展：AI 大模型全面上车，L3 商业化进入决定性拐点</div>
+            <div class="card-source">来源：腾讯新闻 / 澎湃新闻 · 2026-04-24</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag orange">自动驾驶</span>
+          <span class="tag blue">具身智能</span>
+          <span class="tag green">AI 上车</span>
+        </div>
+        <div class="card-body">
+          第十九届北京国际车展于 4 月 24 日启幕。2026 年被业界公认为 <strong>L3 级自动驾驶规模化商用关键节点</strong>与 AI 大模型上车爆发年。本次车展 38 万平米展区聚焦智能驾驶、车载大模型与固态电池三大主题：特斯拉中国车机接入字节豆包大模型的方案正式亮相；比亚迪、吉利加入英伟达 Drive Hyperion 生态；多家车企展示基于国产芯片的端到端自动驾驶方案。AI 大模型从"高端选配"下沉至"大众标配"的趋势在车展上获得了最直观的验证，汽车行业正迎来智能化重构的历史性窗口期。
+        </div>
+        <a class="card-link" href="https://news.qq.com/rain/a/20260419A03XE700" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DeepSeek V4 特别报道 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">⚡</div>
+      <span class="section-title">特别报道：竞合博弈</span>
+      <span class="section-count">2 条</span>
+    </div>
+    <div class="news-grid">
+
+      <!-- 9. DeepSeek 融资与竞合 -->
+      <div class="news-card green-hl">
+        <div class="card-header">
+          <div class="card-logo">💎</div>
+          <div class="card-meta">
+            <div class="card-title">DeepSeek 首轮融资估值 200 亿美元，"被大厂围猎"中的竞合逻辑</div>
+            <div class="card-source">来源：腾讯新闻 · 2026-04-25</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag orange">融资</span>
+          <span class="tag blue">DeepSeek</span>
+        </div>
+        <div class="card-body">
+          随着 DeepSeek V4 正式发布，其首轮融资细节也随之曝光：<strong>估值超 200 亿美元</strong>，较此前 100 亿美元估值大幅翻倍。在 V4 的发布过程中，DeepSeek 需要在算力供给上依赖阿里、腾讯、华为等大厂，同时又在 API 市场与其激烈竞争，呈现出典型的"竞合"格局。梁文锋带领的团队以"技术纯粹主义"著称，拒绝外部董事席位，在资本与大厂的围猎中维持高度独立性，这种罕见的姿态与其超低定价策略（不足 GPT-5.5 价格的十分之一）共同构成了 DeepSeek 独特的生存逻辑。
+        </div>
+        <a class="card-link" href="https://news.qq.com/rain/a/20260425A02OQB00" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+      <!-- 10. GPT周报 综合 -->
+      <div class="news-card green-hl">
+        <div class="card-header">
+          <div class="card-logo">📊</div>
+          <div class="card-meta">
+            <div class="card-title">本周 AI 总结：开源榜前 5 五席中国包揽 4 席，全球 AI 格局加速重写</div>
+            <div class="card-source">来源：财新周刊 · 2026-04-25</div>
+          </div>
+        </div>
+        <div class="card-tags">
+          <span class="tag purple">全球格局</span>
+          <span class="tag green">开源</span>
+          <span class="tag blue">中美竞争</span>
+        </div>
+        <div class="card-body">
+          4 月第四周，AI 领域创下多项历史纪录：同一天内 <strong>GPT-5.5 与 DeepSeek V4 正式对决</strong>，前者代表了 OpenAI 对"智能体优先"的赌注，后者代表了中国开源势力的全面反攻。全球开源模型排行榜前 5 中，中国已占 4 席（DeepSeek V4-Pro/Flash、Kimi K2.6、Qwen3.6-Max），这在历史上尚属首次。与此同时，谷歌 400 亿美元投资 Anthropic 将科技史上最大的 AI 战略投资推向新高峰，而国内车企大规模接入大模型则标志着 AI 开始全面渗透工业生产领域。2026 年 4 月，正在成为 AI 史上最密集、最关键的转折点之一。
+        </div>
+        <a class="card-link" href="https://www.caixin.com/2026-04-25/102437791.html" target="_blank">
+          📄 阅读原文 →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 核心洞察 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple">🔭</div>
+      <span class="section-title">核心洞察</span>
+      <span class="section-count">3 条</span>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">
+        <span class="insight-number">1</span>
+        智能体时代全面开启：模型竞争的焦点已从"基准分"迁移到"任务完成率"
+      </div>
+      <div class="insight-body">
+        本周最重要的信号不在于 GPT-5.5 的基准分数，而在于其能<strong>无需人工介入地完成 20 分钟的真实代码协作任务</strong>。DeepSeek V4 和 Kimi K2.6 同样将 Agent 能力列为首要升级项。这预示着 2026 年下半年，大模型评测体系将彻底从"填空题基准"走向"真实任务完成率"，用户付费意愿也将直接与 AI 能替代多少真实工作挂钩。
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">
+        <span class="insight-number">2</span>
+        资本马太效应极度加剧：头部玩家的"钱墙"正在筑起不可逾越的算力护城河
+      </div>
+      <div class="insight-body">
+        谷歌 400 亿 + Amazon 250 亿，两大云巨头合计向 Anthropic 承诺超过 <strong>650 亿美元</strong>，而 OpenAI 背后同样有微软数百亿资金背书。这一量级的算力资源投入，正在将中小 AI 初创公司挡在竞争门外——没有云巨头战略背书，很难独立维持前沿模型的训练成本。DeepSeek 以极致效率主义对抗资本壁垒的路线，将成为越来越稀缺的"异类"存在。
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">
+        <span class="insight-number">3</span>
+        AI 应用正从"云端"下沉至"产线"：汽车、制造业成为下一个主战场
+      </div>
+      <div class="insight-body">
+        北京车展揭示了 AI 产业化的最新前沿：大模型上车不再是概念演示，而是通过软件 OTA 触达数百万真实用户的量产路径。这一趋势意味着 AI 能力正在通过汽车、机器人等耐用消费品载体，以<strong>订阅制和端侧推理</strong>的形式进入每家每户。谁能先完成从"云端 API"到"端侧集成"的路线切换，谁就能在 2026 年下半年的应用战场中抢占先机。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>
+    📰 AI 大模型日报 · 2026-04-25 &nbsp;|&nbsp;
+    <a href="https://Flystray.github.io/ai-news/" target="_blank">订阅中心</a> &nbsp;|&nbsp;
+    <a href="https://github.com/Flystray/ai-news" target="_blank">GitHub</a>
+  </p>
+  <p style="margin-top:8px; font-size:12px; color:#4a5568;">
+    数据来源：21经济网、财新、36氪、腾讯新闻、新浪财经、搜狐科技 · 编辑整理：AI日课
+  </p>
+</footer>
+
+</body>
+</html>
