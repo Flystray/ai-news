@@ -8,65 +8,203 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
         .container { max-width: 860px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
-        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
-        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
-        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; background: rgba(45,106,159,0.3); border-radius: 50%; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+        .header h1 { font-size: 32px; font-weight: 800; margin-bottom: 10px; position: relative; }
+        .header .org { font-size: 14px; opacity: 0.7; margin-bottom: 8px; }
+        .header .subtitle { font-size: 15px; opacity: 0.88; line-height: 1.7; position: relative; }
         .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
         .meta-bar span { display: flex; align-items: center; gap: 5px; }
         .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
-        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; font-weight: 500; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
-        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
-        .card ul { padding-left: 20px; }
-        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
-        .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
-        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .card h2 { font-size: 18px; color: #1e3a5f; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #e8f0fe; display: flex; align-items: center; gap: 8px; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 12px; }
+        .card ul { padding-left: 20px; margin-top: 8px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 8px; line-height: 1.75; }
+        .card ul li strong { color: #1e3a5f; }
+        .desc-card { background: linear-gradient(135deg, #f0f6ff, #e8f4ff); border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 20px 26px; margin-bottom: 20px; }
+        .desc-card p { font-size: 16px; color: #1a2a3a; line-height: 1.9; }
+        .highlight-box { background: #fff8e1; border: 1px solid #ffc107; border-radius: 10px; padding: 16px 22px; margin-bottom: 20px; }
+        .highlight-box p { font-size: 14px; color: #5d4037; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 18px 22px; font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace; font-size: 13.5px; margin-top: 12px; line-height: 1.9; overflow-x: auto; }
+        .quickstart .comment { color: #6a9955; }
+        .arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .arch-item { background: #f8faff; border: 1px solid #d8e8f8; border-radius: 8px; padding: 14px 18px; }
+        .arch-item h3 { font-size: 14px; color: #1e3a5f; margin-bottom: 6px; font-weight: 700; }
+        .arch-item p { font-size: 13px; color: #666; line-height: 1.6; margin: 0; }
+        .table-wrap { overflow-x: auto; margin-top: 12px; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #1e3a5f; color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        td { padding: 9px 14px; border-bottom: 1px solid #edf2f7; }
+        tr:nth-child(even) { background: #f8faff; }
+        tr:hover { background: #e8f0fe; }
+        .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+        .badge { padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .badge-blue { background: #e3f2fd; color: #1565c0; }
+        .badge-green { background: #e8f5e9; color: #2e7d32; }
+        .badge-orange { background: #fff3e0; color: #e65100; }
+        .badge-purple { background: #f3e5f5; color: #6a1b9a; }
         .cta { text-align: center; margin-top: 30px; }
-        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
-        .cta a:hover { background: #1e3a5f; }
-        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .cta a { display: inline-block; background: linear-gradient(135deg, #1e3a5f, #2d6a9f); color: white; padding: 14px 38px; border-radius: 10px; text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(45,106,159,0.35); transition: transform 0.2s; }
+        .cta a:hover { transform: translateY(-2px); }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; padding-bottom: 20px; }
+        .section-intro { background: #f9fafb; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; font-size: 14px; color: #555; border-left: 3px solid #90caf9; }
+        @media (max-width: 600px) { .arch-grid { grid-template-columns: 1fr; } .header { padding: 24px; } }
     </style>
 </head>
 <body>
 <div class="container">
+
     <div class="header">
-        <div class="date-badge">GitHub AI 项目 · 2026年04月25日</div>
-        <h1>deer-flow</h1>
-        <p class="subtitle">An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</p>
+        <div class="date-badge">GitHub AI 项目深度介绍 · 2026年04月25日</div>
+        <div class="org">字节跳动（ByteDance）开源</div>
+        <h1>🦌 deer-flow</h1>
+        <p class="subtitle">开源长周期 SuperAgent 框架——自主完成需要几分钟到数小时的复杂任务，集成沙箱、记忆、工具与多子智能体编排于一体。</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 63.7k</span>
-        <span>📝 Python</span>
-        <span>🕐 </span>
+        <span>⭐ 63.7k Stars</span>
+        <span>🍴 8.3k Forks</span>
+        <span>📝 Python / TypeScript</span>
+        <span>📄 MIT License</span>
         <span>🔗 <a href="https://github.com/bytedance/deer-flow" target="_blank" style="color:#2d6a9f">bytedance/deer-flow</a></span>
     </div>
 
-    <div class="topics"><span class="topic">agent</span><span class="topic">agentic</span><span class="topic">agentic-framework</span><span class="topic">agentic-workflow</span><span class="topic">ai</span><span class="topic">ai-agents</span><span class="topic">deep-research</span><span class="topic">harness</span></div>
-
-    
-
-    <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+    <div class="topics">
+        <span class="topic">agent</span>
+        <span class="topic">agentic-framework</span>
+        <span class="topic">agentic-workflow</span>
+        <span class="topic">deep-research</span>
+        <span class="topic">super-agent</span>
+        <span class="topic">langgraph</span>
+        <span class="topic">sandbox</span>
+        <span class="topic">long-term-memory</span>
     </div>
 
-    
+    <div class="desc-card">
+        <p>DeerFlow（Deep Exploration and Efficient Research Flow）是字节跳动开源的超级智能体框架，2026年2月发布 2.0 重写版本，基于 LangGraph 构建。它能够编排子智能体网络、持久化记忆系统和隔离沙箱，完成从深度研究到代码执行、内容创作的全链路复杂任务。凭借 Agent Skills 设计——用 Markdown 文件定义智能体能力模块——实现了"即插即用"的可扩展架构。</p>
+    </div>
 
-    
+    <div class="highlight-box">
+        <p>💡 <strong>为何值得关注：</strong>DeerFlow 代表了 2026 年 Agent 框架的新范式转变——从"单轮对话助手"升级为"可持续运行数小时的自主工作流引擎"。Agent Skills 设计让任何人都能用 Markdown 扩展智能体能力，无需深入框架代码；而 Context Engineering（上下文工程）模块解决了长任务中上下文爆炸的核心难题。</p>
+    </div>
 
-    
+    <div class="card">
+        <h2>🚀 五大核心功能</h2>
+        <div class="arch-grid">
+            <div class="arch-item">
+                <h3>🔧 Agent Skills（技能模块）</h3>
+                <p>用 Markdown 文件定义能力，支持内置技能（研究、报告、幻灯片）和自定义技能 + MCP 服务器。仅按需加载，保持上下文精简。</p>
+            </div>
+            <div class="arch-item">
+                <h3>🤖 Sub-Agents（子智能体）</h3>
+                <p>主智能体动态生成子智能体，每个子智能体拥有独立上下文、工具和终止条件。支持并行执行，结果由主智能体综合整合。</p>
+            </div>
+            <div class="arch-item">
+                <h3>📦 Sandbox（执行沙箱）</h3>
+                <p>每个任务拥有隔离执行环境，支持 Local / Docker / Kubernetes 三种沙箱模式。文件系统结构清晰：uploads / workspace / outputs。</p>
+            </div>
+            <div class="arch-item">
+                <h3>🧠 Context Engineering（上下文工程）</h3>
+                <p>子智能体间上下文互相隔离；主动摘要压缩已完成任务；严格工具调用恢复机制，防止中间件中断错误。</p>
+            </div>
+            <div class="arch-item">
+                <h3>💾 Long-Term Memory（长期记忆）</h3>
+                <p>跨会话持久化记忆，自动记住用户画像、偏好与积累的知识。本地存储可控，自动去重避免重复积累。</p>
+            </div>
+            <div class="arch-item">
+                <h3>📡 Message Gateway（消息网关）</h3>
+                <p>集成 Telegram / Slack / Feishu / WeChat / WeCom 等主流 IM 渠道。支持 LangSmith / Langfuse 全链路追踪与可观测性。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚡ 快速开始</h2>
+        <div class="section-intro">推荐使用 Docker 部署，三步即可完成本地启动（需提前配置 LLM API Key）。</div>
+        <div class="quickstart">
+<span class="comment"># 1. 克隆项目</span>
+git clone https://github.com/bytedance/deer-flow.git
+cd deer-flow
+
+<span class="comment"># 2. 运行交互式配置向导（自动配置模型和环境）</span>
+make setup
+
+<span class="comment"># 3. Docker 启动（推荐生产模式）</span>
+make docker-start
+
+<span class="comment"># 访问 http://localhost:2026 即可开始使用</span>
+        </div>
+        <div class="quickstart" style="margin-top:10px">
+<span class="comment"># Python 嵌入式客户端调用示例</span>
+from deerflow.client import DeerFlowClient
+
+client = DeerFlowClient()
+
+<span class="comment"># 发送任务（流式输出）</span>
+for event in client.stream("帮我研究 2026 年 AI Agent 框架趋势"):
+    if event.type == "messages-tuple":
+        print(event.data["content"])
+
+<span class="comment"># 列出可用模型</span>
+models = client.list_models()
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🏗️ 技术架构</h2>
+        <div class="section-intro">DeerFlow 2.0 基于 LangGraph + LangChain 重写，提供标准模式和实验性 Gateway 模式两种部署选项。</div>
+        <div class="table-wrap">
+            <table>
+                <tr><th>特性</th><th>详情</th></tr>
+                <tr><td><strong>核心框架</strong></td><td>LangGraph + LangChain（Python 70.1%，TypeScript 18.7%）</td></tr>
+                <tr><td><strong>模型兼容性</strong></td><td>任何 OpenAI 兼容 API（GPT-4o / Claude / Gemini / 本地模型）</td></tr>
+                <tr><td><strong>沙箱模式</strong></td><td>Local / Docker / Kubernetes 三档可选</td></tr>
+                <tr><td><strong>IM 集成</strong></td><td>Telegram / Slack / Feishu / WeChat / WeCom</td></tr>
+                <tr><td><strong>可观测性</strong></td><td>LangSmith / Langfuse 追踪集成</td></tr>
+                <tr><td><strong>部署要求（推荐）</strong></td><td>生产：16 vCPU / 32GB RAM；开发：8 vCPU / 16GB RAM</td></tr>
+            </table>
+        </div>
+        <div class="badge-row">
+            <span class="badge badge-blue">模型无关</span>
+            <span class="badge badge-green">MIT 开源</span>
+            <span class="badge badge-orange">LangGraph 驱动</span>
+            <span class="badge badge-purple">多 IM 渠道</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 适合哪些场景</h2>
+        <ul>
+            <li><strong>深度研究任务</strong>：自动搜索、整合、分析多源信息，生成结构化研究报告</li>
+            <li><strong>代码自动化</strong>：在隔离沙箱中自主编写、调试、执行代码，处理复杂工程任务</li>
+            <li><strong>内容创作流水线</strong>：从调研到撰写文章、生成幻灯片、制作网页，全链路自动化</li>
+            <li><strong>企业 IM Bot</strong>：接入 Feishu / WeCom，让员工通过聊天界面触发复杂 Agent 工作流</li>
+            <li><strong>长周期自主任务</strong>：处理需要数小时完成的分布式、多步骤任务，无需人工干预</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>💡 核心亮点总结</h2>
+        <ul>
+            <li><strong>Agent Skills = Markdown 文件</strong>：任何人都能用 Markdown 定义新的智能体能力，无需改动框架代码，极大降低扩展门槛</li>
+            <li><strong>Context Engineering 模块</strong>：业界罕见的系统性解决方案——隔离子上下文 + 主动摘要压缩，让长任务不再"失忆"</li>
+            <li><strong>字节跳动背书</strong>：⭐63.7k 星，内部大规模使用验证，质量和稳定性有工业级保障</li>
+            <li><strong>开放生态</strong>：支持 MCP 服务器扩展 + 任意 OpenAI 兼容模型，不锁定特定供应商</li>
+        </ul>
+    </div>
 
     <div class="cta">
         <a href="https://github.com/bytedance/deer-flow" target="_blank">前往 GitHub 查看完整项目 →</a>
     </div>
 
     <div class="footer">
-        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目 · 2026-04-25</p>
+        <p style="margin-top:6px">GitHub Pages: <a href="https://flystray.github.io/ai-news/ai-github-reports/2026-04-25-github-projects.html" style="color:#aaa">flystray.github.io/ai-news/ai-github-reports/2026-04-25-github-projects.html</a></p>
     </div>
+
 </div>
 </body>
 </html>
