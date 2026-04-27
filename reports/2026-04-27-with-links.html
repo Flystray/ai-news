@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 日报 · 2026-04-27</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: #12121a;
+    --card-border: #1e1e2e;
+    --accent1: #7c3aed;
+    --accent2: #2563eb;
+    --accent3: #0891b2;
+    --gold: #f59e0b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --tag-red: #ef4444;
+    --tag-blue: #3b82f6;
+    --tag-green: #10b981;
+    --tag-purple: #8b5cf6;
+    --tag-orange: #f97316;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  /* ---- Header ---- */
+  .hero {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, transparent 60%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: #a78bfa;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: '◉'; animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 12px; position: relative;
+  }
+  .hero-sub {
+    color: var(--text-muted); font-size: 15px;
+    margin-top: 8px;
+    position: relative;
+  }
+  .hero-meta {
+    display: flex; justify-content: center; gap: 24px; margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 14px 24px; text-align: center;
+  }
+  .hero-stat .num { font-size: 28px; font-weight: 700; color: #a78bfa; }
+  .hero-stat .label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ---- Layout ---- */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---- Section headers ---- */
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 48px 0 24px;
+  }
+  .section-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .s1 .section-icon { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+  .s2 .section-icon { background: linear-gradient(135deg, #0891b2, #2563eb); }
+  .s3 .section-icon { background: linear-gradient(135deg, #d97706, #f59e0b); }
+  .section-title { font-size: 22px; font-weight: 700; }
+  .section-desc { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ---- Cards ---- */
+  .news-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 24px;
+    margin-bottom: 16px;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .news-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(124,58,237,0.4);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.1);
+  }
+  .news-card.hot::before {
+    content: 'HOT';
+    position: absolute; top: 16px; right: 16px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff; font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    letter-spacing: 1px;
+  }
+  .card-top {
+    display: flex; align-items: flex-start;
+    gap: 12px; margin-bottom: 14px;
+  }
+  .card-num {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+    color: #fff;
+  }
+  .card-title-wrap { flex: 1; }
+  .card-title {
+    font-size: 17px; font-weight: 700;
+    color: #fff; line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px; padding: 2px 10px; border-radius: 100px; font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .tag-red    { background: rgba(239,68,68,0.15);  color: #f87171; border: 1px solid rgba(239,68,68,0.3);  }
+  .tag-blue   { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+  .tag-green  { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .tag-purple { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+  .tag-orange { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
+  .tag-cyan   { background: rgba(8,145,178,0.15);  color: #22d3ee; border: 1px solid rgba(8,145,178,0.3);  }
+  .card-body {
+    color: var(--text-muted); font-size: 14.5px; line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .card-body strong { color: var(--text); }
+  .card-highlight {
+    background: rgba(124,58,237,0.08);
+    border-left: 3px solid var(--accent1);
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: #c4b5fd;
+    margin: 12px 0;
+  }
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    gap: 12px; flex-wrap: wrap;
+  }
+  .card-source { font-size: 12px; color: var(--text-muted); }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    color: #a78bfa; font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .card-link:hover { background: rgba(124,58,237,0.3); color: #c4b5fd; }
+
+  /* ---- Section 2 (行业) variant ---- */
+  .s2 .news-card:hover { border-color: rgba(8,145,178,0.4); box-shadow: 0 8px 32px rgba(8,145,178,0.1); }
+  .s2 .card-num { background: linear-gradient(135deg, #0891b2, #2563eb); }
+  .s2 .card-highlight { border-left-color: var(--accent3); background: rgba(8,145,178,0.08); color: #67e8f9; }
+  .s2 .card-link { background: rgba(8,145,178,0.15); border-color: rgba(8,145,178,0.3); color: #22d3ee; }
+  .s2 .card-link:hover { background: rgba(8,145,178,0.3); }
+
+  /* ---- Insights ---- */
+  .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .insights-grid { grid-template-columns: 1fr; } }
+  .insight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 20px;
+    transition: transform 0.2s;
+  }
+  .insight-card:hover { transform: translateY(-2px); }
+  .insight-icon { font-size: 28px; margin-bottom: 12px; }
+  .insight-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .insight-body { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 64px; padding: 40px 24px;
+    border-top: 1px solid var(--card-border);
+    text-align: center; color: var(--text-muted); font-size: 13px;
+  }
+  footer a { color: #a78bfa; text-decoration: none; }
+
+  /* ---- Scrollbar ---- */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">AI 日报 · LIVE</div>
+  <h1>AI 大模型日报</h1>
+  <div class="hero-sub">2026 年 4 月 27 日 · 星期一 · 精选 10 条核心动态</div>
+  <div class="hero-meta">
+    <div class="hero-stat"><div class="num">10</div><div class="label">今日新闻</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label">重磅事件</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">国产亮点</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- Section 1: 今日重磅 -->
+<!-- ============================================================ -->
+<div class="section-header s1">
+  <div class="section-icon">🔥</div>
+  <div>
+    <div class="section-title">今日重磅</div>
+    <div class="section-desc">行业格局性事件，不容错过</div>
+  </div>
+</div>
+
+<!-- 1. DeepSeek V4 -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">1</div>
+    <div class="card-title-wrap">
+      <div class="card-title">DeepSeek-V4 深度解析：百万 Token 时代的效率革命</div>
+      <div class="card-tags">
+        <span class="tag tag-red">重磅开源</span>
+        <span class="tag tag-purple">1.6T 参数</span>
+        <span class="tag tag-green">国产</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    4月24日发布的 <strong>DeepSeek-V4</strong> 正在掀起更深远的技术讨论。V4-Pro（1.6 万亿总参数 / 490 亿激活参数）与 V4-Flash（2840 亿总参数）均支持百万 Token 超长上下文，架构上采用创新的<strong>混合注意力机制（CSA + HCA）</strong>——90% 背景内容由 HCA 以 128 倍极端压缩比处理，10% 关键信息由 CSA 精细稀疏计算，单 Token 推理浮点运算量降至 V3.2 的 <strong>27%</strong>，KV Cache 占用量降至 <strong>10%</strong>。
+    <div class="card-highlight">
+      💡 战略意义：在 Agentic Coding 评测中，V4-Pro-Max 通过率达 67%，Codeforces 竞赛跻身人类选手第 23 位。API 价格仅为 GPT-5.4 和 Claude Opus 4.6 的 <strong>1/50</strong>，将长上下文从"奢侈品"变为"标准件"。
+    </div>
+    ✅ 英伟达 Blackwell 平台与华为昇腾 NPU 均已完成 Day 0 适配，寒武纪基于 vLLM 同步适配，开箱性能超 150 tokens/sec/user。
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：腾讯新闻 · 2026-04-27</span>
+    <a href="https://news.qq.com/rain/a/20260427A01ICN00" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 2. NVIDIA 适配 -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">2</div>
+    <div class="card-title-wrap">
+      <div class="card-title">英伟达 Blackwell 全面适配 DeepSeek-V4，开箱超 150 tokens/sec/user</div>
+      <div class="card-tags">
+        <span class="tag tag-blue">英伟达</span>
+        <span class="tag tag-green">算力适配</span>
+        <span class="tag tag-orange">生态</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <strong>英伟达</strong>官方宣布，NVIDIA Blackwell 平台已正式适配 DeepSeek-V4-Pro 与 DeepSeek-V4-Flash，开发者可通过 <strong>NVIDIA NIM 微服务</strong>一键下载部署，也可利用 SGLang 与 vLLM 框架定制推理管道。实测开箱性能超 <strong>150 tokens/sec/user</strong>，GB200 在高吞吐场景下表现尤为突出。
+    <div class="card-highlight">
+      🌐 意义：国产开源模型获得全球最主流 AI 算力平台官方认证，标志着 DeepSeek 生态正式进入全球算力体系。开源 + 高性价比 + 主流硬件加持，三重优势叠加。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：IT之家 · 搜狐科技 · 2026-04-25</span>
+    <a href="https://www.sohu.com/a/1014583802_122004016" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 3. OpenAI Workspace Agents -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">3</div>
+    <div class="card-title-wrap">
+      <div class="card-title">OpenAI 推出 ChatGPT Workspace Agents，企业工作流智能体正式落地</div>
+      <div class="card-tags">
+        <span class="tag tag-blue">OpenAI</span>
+        <span class="tag tag-purple">智能体</span>
+        <span class="tag tag-orange">企业级</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <strong>OpenAI</strong> 正式推出面向团队协作的 <strong>ChatGPT Workspace Agents</strong>，深度整合工作流自动化能力，支持跨工具任务链编排、多步骤代码生成与调试、在线研究与数据分析报告生成。此前发布的 GPT-5.5（4月23日）已被定位为"最智能、最直观"的旗舰模型，擅长以极少人类指令驱动复杂多步骤 Agent 任务。
+    <div class="card-highlight">
+      📌 背景：企业市场对"自主完成任务"的 AI Agent 需求已超越"辅助对话"阶段。OpenAI Workspace Agents 是 GPT-5.5 能力的产品化落地，直接对标 Anthropic Claude for Work 和 Google Workspace AI。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：积墨AI · CSDN · 2026-04-26</span>
+    <a href="https://jimo.studio/blog/2026-ai-daily-report-nvidia-deepseek-v4-openai-workspace-agents-google-anthropic-investment/" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 4. 谷歌 400 亿 Anthropic -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">4</div>
+    <div class="card-title-wrap">
+      <div class="card-title">谷歌豪掷 400 亿美元投资 Anthropic，附配套 5 吉瓦算力承诺</div>
+      <div class="card-tags">
+        <span class="tag tag-blue">谷歌</span>
+        <span class="tag tag-red">Anthropic</span>
+        <span class="tag tag-orange">400 亿美元</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <strong>Google</strong> 正式确认向 <strong>Anthropic</strong> 承诺 400 亿美元投资，配套承诺提供 <strong>5 吉瓦新增算力</strong>，与此前亚马逊的 250 亿美元 + 10 年千亿 AWS 算力协议形成双巨头押注格局。此轮融资后，Anthropic 估值预计超过 <strong>3500 亿美元</strong>，Claude 产品线的研发弹药大幅充足。
+    <div class="card-highlight">
+      ⚡ 战略博弈：Google 与 Amazon 同时重仓 Anthropic，表面是竞争关系，实质是两大云厂商在底层模型层的战略卡位——谁的云算力跑 Claude，谁就获得企业级 AI 最稀缺的流量入口。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：第一财经 · 积墨AI · 2026-04-26</span>
+    <a href="https://www.yicai.com/news/103152996.html" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 2: 行业动态 -->
+<!-- ============================================================ -->
+<div class="section-header s2">
+  <div class="section-icon">📡</div>
+  <div>
+    <div class="section-title">行业动态</div>
+    <div class="section-desc">国内外大厂最新进展与产品发布</div>
+  </div>
+</div>
+
+<!-- 5. 腾讯混元 Hy3 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">5</div>
+    <div class="card-title-wrap">
+      <div class="card-title">腾讯开源混元 Hy3 Preview：295B 参数，快慢思考融合架构</div>
+      <div class="card-tags">
+        <span class="tag tag-blue">腾讯</span>
+        <span class="tag tag-green">开源</span>
+        <span class="tag tag-cyan">295B</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    腾讯于 4 月 23 日开源 <strong>混元 Hy3 preview</strong>，由前 OpenAI 研究员<strong>姚顺雨</strong>主导，仅用三个月完成的重大成果。模型采用快慢思考融合的混合专家架构，总参数 <strong>295B</strong>，激活参数 21B，支持 <strong>256K 上下文</strong>，已在腾讯云、元宝、QQ、微信等全系产品上线。
+    <div class="card-highlight">
+      🔑 行业信号：姚顺雨回国后三个月便交出 295B 开源模型，证明国内顶尖团队在资源到位后的研发加速能力不可低估。腾讯在大模型方向的布局从"跟跑"转向"参赛"。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：CSDN 周报 · 2026-04-26</span>
+    <a href="https://blog.csdn.net/yifan99/article/details/160503953" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 6. 美团 LongCat-2.0 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">6</div>
+    <div class="card-title-wrap">
+      <div class="card-title">美团开放 LongCat-2.0：万亿参数 + 百万上下文，纯国产算力</div>
+      <div class="card-tags">
+        <span class="tag tag-orange">美团</span>
+        <span class="tag tag-green">国产算力</span>
+        <span class="tag tag-purple">Agent</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    4 月 24 日，美团正式开放 <strong>LongCat-2.0</strong>，参数规模突破<strong>万亿</strong>，支持<strong>百万 Token 上下文窗口</strong>，面向 Agent 复杂任务深度优化，完全基于国产算力训练。美团此举是大厂中首批将 Agent 场景作为核心优化目标（而非会话能力）的模型发布之一。
+    <div class="card-highlight">
+      🍔 行业背景：美团作为生活服务巨头布局万亿大模型，折射出 AI 能力正从"内容生成"向"任务执行"迁移——订单调度、配送规划、商家服务等场景均需要超长上下文的智能体能力。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：CSDN 周报 · 2026-04-26</span>
+    <a href="https://blog.csdn.net/yifan99/article/details/160503953" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 7. Anthropic 智能体交易测试 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">7</div>
+    <div class="card-title-wrap">
+      <div class="card-title">Anthropic 搭建 AI 智能体真实交易测试平台，用真钱完成商品买卖</div>
+      <div class="card-tags">
+        <span class="tag tag-red">Anthropic</span>
+        <span class="tag tag-purple">智能体</span>
+        <span class="tag tag-cyan">实验性</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <strong>Anthropic</strong> 搭建了一个名为 <strong>Project Deal</strong> 的二手交易市场，由 AI 智能体分别扮演买家和卖家，针对真实商品达成交易，并使用<strong>真实货币</strong>结算。参与者为 69 名自愿报名的公司员工，每人获得 100 美元初始资金。Anthropic 承认这仅为试点实验，重点研究智能体在现实约束下的博弈与决策能力。
+    <div class="card-highlight">
+      🤔 深层意义：这是继"Claude 玩外交棋局"之后，Anthropic 又一次让 AI 智能体进入"真实利益冲突"场景。研究目的可能指向：智能体的欺骗倾向、价值对齐稳健性以及 Agentic AI 的商业安全边界。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：IT之家 · 2026-04-26</span>
+    <a href="https://www.ithome.com/0/943/557.htm" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 8. 国务院政策 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">8</div>
+    <div class="card-title-wrap">
+      <div class="card-title">国务院首次明确"支持采购大模型、智能体服务"，政策红利窗口开启</div>
+      <div class="card-tags">
+        <span class="tag tag-red">政策</span>
+        <span class="tag tag-green">利好</span>
+        <span class="tag tag-orange">智能体采购</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    2026 年 4 月 21 日，国务院印发《关于推进服务业扩能提质的意见》，在"人工智能+"行动中，首次以正式文件形式明确提出<strong>"支持采购大模型、智能体服务"</strong>，并将该条款列为十大要点<strong>首位</strong>。文件同步设定目标：到 2030 年，服务业总规模迈上 100 万亿元台阶。
+    <div class="card-highlight">
+      🏛️ 政策信号：从"鼓励探索"到"支持采购"，是 AI 产业化进程中的里程碑转变——意味着政府采购预算将向大模型与智能体服务开放，国内 AI 公司迎来制度性需求确认。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：腾讯新闻 · 2026-04-22</span>
+    <a href="https://news.qq.com/rain/a/20260422A01ESD00" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 9. 小米 MiMo-V2.5 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">9</div>
+    <div class="card-title-wrap">
+      <div class="card-title">小米发布 MiMo-V2.5 系列：Pro 版可完成千轮工具调用，11 小时自建视频编辑器</div>
+      <div class="card-tags">
+        <span class="tag tag-orange">小米</span>
+        <span class="tag tag-purple">长程任务</span>
+        <span class="tag tag-cyan">多模态</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    小米于 4 月 23 日发布 <strong>MiMo-V2.5</strong>、V2.5-Pro、V2.5-TTS Series、V2.5-ASR 四款模型。其中 <strong>V2.5-Pro 可稳定完成近千轮工具调用</strong>的超长程任务，并完成了自主构建视频编辑器（11 小时连续工作）的验证实验。TTS 与 ASR 版本则补齐语音多模态能力短板。
+    <div class="card-highlight">
+      📱 端侧 + 云端融合：小米的大模型布局以设备端场景为核心切入，V2.5 系列在手机、智能家居等端侧场景具有天然优势，有望成为小米 AI 生态的关键底座。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：CSDN 周报 · 2026-04-26</span>
+    <a href="https://blog.csdn.net/yifan99/article/details/160503953" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 10. 算力荒 + SpaceX 收购 Cursor -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">10</div>
+    <div class="card-title-wrap">
+      <div class="card-title">全球算力荒加剧 + SpaceX 拟 600 亿美元收购 AI 编程神器 Cursor</div>
+      <div class="card-tags">
+        <span class="tag tag-red">算力</span>
+        <span class="tag tag-blue">SpaceX</span>
+        <span class="tag tag-purple">编程 AI</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    本周 Token 消耗量激增 <strong>7-8 倍</strong>，MiniMax、Kimi、智谱等 API 频繁过载中断，云厂商集体涨价——腾讯云已上调混元核心模型价格 <strong>430% 以上</strong>。与此同时，<strong>SpaceX</strong> 被曝出洽谈以 600 亿美元收购 AI 编程软件 <strong>Cursor</strong>，若成功，将是迄今最大规模的 AI 开发工具并购案。
+    <div class="card-highlight">
+      📊 行业折射：Token 消耗量的爆炸式增长是 AI Agent 从"展示层"进入"工作层"的直接证据。算力荒背后，是生产力需求与基础设施建设速度之间的结构性矛盾。Cursor 的并购消息则预示 AI 编程赛道价值正被重新定价。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：CSDN 周报 · 2026-04-26</span>
+    <a href="https://blog.csdn.net/yifan99/article/details/160503953" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 3: 核心洞察 -->
+<!-- ============================================================ -->
+<div class="section-header s3">
+  <div class="section-icon">💡</div>
+  <div>
+    <div class="section-title">核心洞察</div>
+    <div class="section-desc">今日 AI 格局深层趋势解读</div>
+  </div>
+</div>
+
+<div class="insights-grid">
+  <div class="insight-card">
+    <div class="insight-icon">⚔️</div>
+    <div class="insight-title">开源 vs 闭源：成本博弈新均衡</div>
+    <div class="insight-body">DeepSeek-V4 的 API 价格仅为 GPT-5.4 的 1/50，英伟达的官方适配彻底打通了国产开源模型的算力生态壁垒。闭源模型的竞争优势正在从"能力领先"收窄至"3-6 个月的时间窗口"，开源压力将倒逼 OpenAI 和 Anthropic 重新审视商业模式。</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-icon">🏗️</div>
+    <div class="insight-title">算力资本化：投资即为"买入"算力</div>
+    <div class="insight-body">谷歌 400 亿 + 亚马逊 250 亿的双重押注 Anthropic，本质上是在用资本置换算力入口。AI 时代的战略投资逻辑已从"股权回报"演变为"算力绑定"——谁的 GPU 训练 Claude，谁就锁定了下一代 AI 基础设施的流量分发权。</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-icon">🤖</div>
+    <div class="insight-title">Agent 进入"真实利益"测试阶段</div>
+    <div class="insight-body">Anthropic 的 Project Deal 用真钱测试 AI 买卖博弈，OpenAI 推出 Workspace Agents 自动执行工作流——AI 智能体已从"对话助手"升级为"真实利益参与者"。这一跃迁对 AI 安全、法律责任和伦理边界提出了全新挑战。</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-icon">🇨🇳</div>
+    <div class="insight-title">国产 AI：从追赶到并跑，政策补位</div>
+    <div class="insight-body">斯坦福报告显示中美模型差距已"基本消除"，国务院首次将大模型纳入政府采购清单。腾讯 Hy3、美团 LongCat、小米 MiMo-V2.5 的密集发布背后，是全产业链国产算力（昇腾、寒武纪）的同步成熟，中国 AI 生态正在加速闭环。</div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>
+    AI 日报 · 2026-04-27 &nbsp;|&nbsp; 
+    数据来源：腾讯新闻、IT之家、CSDN、积墨AI、第一财经 &nbsp;|&nbsp;
+    <a href="https://Flystray.github.io/ai-news/" target="_blank">订阅中心</a>
+    &nbsp;|&nbsp;
+    <a href="https://Flystray.github.io/ai-news/reports/2026-04-27-with-links.html" target="_blank">在线访问</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;opacity:0.5;">公众号 "AI日课" &nbsp;·&nbsp; fly的AI学习 &nbsp;·&nbsp; 每日精选 AI 前沿动态</p>
+</footer>
+
+</body>
+</html>

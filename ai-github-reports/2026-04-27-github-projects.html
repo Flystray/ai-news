@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>open-webui · GitHub AI 项目深度介绍 · 2026年04月27日</title>
+    <title>mattpocock/skills · GitHub AI 项目深度介绍 · 2026年04月27日</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
@@ -23,49 +23,191 @@
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .highlight-box { background: #fff9e6; border: 1px solid #f0d060; border-radius: 10px; padding: 18px 24px; margin: 16px 0; }
+        .highlight-box h3 { font-size: 15px; color: #8a6000; margin-bottom: 10px; }
+        .highlight-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .highlight-box th { background: #f0d060; padding: 6px 10px; text-align: left; }
+        .highlight-box td { padding: 5px 10px; border-bottom: 1px solid #f0e0a0; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; line-height: 1.6; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .badge { display: inline-block; background: #d4574b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 8px; }
+        .badge-hot { display: inline-block; background: #e8420a; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 8px; }
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+        .skill-item { background: #f8faff; border: 1px solid #d0dff5; border-radius: 8px; padding: 12px 16px; }
+        .skill-item .skill-name { font-family: 'Fira Code', Consolas, monospace; font-size: 13px; color: #2d6a9f; font-weight: 600; margin-bottom: 4px; }
+        .skill-item .skill-desc { font-size: 13px; color: #555; line-height: 1.5; }
+        .category-label { font-size: 13px; font-weight: 700; color: #1e3a5f; margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .quote-box { background: #fef3e2; border-left: 4px solid #f0a030; padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 16px 0; font-style: italic; color: #555; font-size: 15px; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月27日</div>
-        <h1>open-webui</h1>
-        <p class="subtitle">User-friendly AI Interface (Supports Ollama, OpenAI API, ...)</p>
+        <h1>mattpocock/skills<span class="badge-hot">今日 +2519 ⭐</span></h1>
+        <p class="subtitle">22 个经真实项目验证的 Claude Code 技能库 · 专为严肃工程师设计，覆盖 PRD 拆解→TDD→架构重构完整流程</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 134.3k</span>
-        <span>📝 Python</span>
-        <span>🕐 </span>
-        <span>🔗 <a href="https://github.com/open-webui/open-webui" target="_blank" style="color:#2d6a9f">open-webui/open-webui</a></span>
+        <span>⭐ 23.9k Stars</span>
+        <span>🍴 1.9k Forks</span>
+        <span>📝 Shell</span>
+        <span>📄 MIT</span>
+        <span>🕐 今日 GitHub Trending 第一</span>
+        <span>🔗 <a href="https://github.com/mattpocock/skills" target="_blank" style="color:#2d6a9f">mattpocock/skills</a></span>
     </div>
 
-    <div class="topics"><span class="topic">ai</span><span class="topic">llm</span><span class="topic">llm-ui</span><span class="topic">llm-webui</span><span class="topic">llms</span><span class="topic">mcp</span><span class="topic">ollama</span><span class="topic">ollama-webui</span></div>
+    <div class="topics">
+        <span class="topic">claude-code</span>
+        <span class="topic">ai-agent</span>
+        <span class="topic">skills</span>
+        <span class="topic">developer-tools</span>
+        <span class="topic">tdd</span>
+        <span class="topic">typescript</span>
+        <span class="topic">engineering-workflow</span>
+    </div>
 
-    
+    <div class="desc-card">
+        <p>"Not for vibe coders." —— Matt Pocock</p>
+        <p style="margin-top:8px; font-size:14px; font-style:normal; color:#555;">作者是 TypeScript 社区知名教育者（Total TypeScript 课程创始人），把 13 年工程经验沉淀的 22 个 Claude Code 技能全部开源。这是真实工程项目里磨出来的工具，不是教程里的演示玩具。</p>
+    </div>
 
     <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+        <h2>🎯 是什么？解决什么问题？</h2>
+        <p>当大多数人还在用 Claude Code 写"氛围代码"时，Matt Pocock 已经把它整合进了完整的工程工作流。</p>
+        <p style="margin-top: 12px;">这个仓库包含 22 个精心设计的「技能」，每个技能都是一个可复用的 AI 工作流单元，直接来自作者的 <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;">.claude</code> 目录（Claude Code 的本地配置）。覆盖从需求分析、PRD 生成、Issue 拆解，到 TDD 开发、架构重构、代码质量保障的完整研发链路。</p>
+        <div class="quote-box">
+            如果你把 Claude Code 当成"聊天机器人"在用，你只用到了它 10% 的价值。这 22 个技能展示了剩下 90% 的正确打开方式。
+        </div>
     </div>
 
-    
+    <div class="card">
+        <h2>📦 22 个技能全览</h2>
 
-    
+        <div class="category-label">📋 规划与设计（4个）</div>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">to-prd</div>
+                <div class="skill-desc">将对话上下文直接合成为 PRD，自动提交为 GitHub Issue</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">to-issues</div>
+                <div class="skill-desc">将 PRD 按垂直切片拆分为多个独立可执行的 GitHub Issue</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">grill-me</div>
+                <div class="skill-desc">深度追问方案，直到所有决策分支全部落定</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">design-an-interface</div>
+                <div class="skill-desc">并行子代理生成多个差异化接口方案，让 AI 自己 PK</div>
+            </div>
+        </div>
 
-    
+        <div class="category-label">⚙️ 开发类（5个）</div>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">tdd</div>
+                <div class="skill-desc">标准 TDD 循环：红→绿→重构，按垂直切片逐步实现</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">triage-issue</div>
+                <div class="skill-desc">遍历代码库定位 bug 根因，生成含 TDD 修复方案的 Issue</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">improve-codebase-architecture</div>
+                <div class="skill-desc">结合 ADR 文档自动发现架构优化点</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">request-refactor-plan</div>
+                <div class="skill-desc">访谈式生成含细粒度 commit 的详细重构计划</div>
+            </div>
+        </div>
+
+        <div class="category-label">🔧 工具链（2个）</div>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">setup-pre-commit</div>
+                <div class="skill-desc">一键配置 Husky + lint-staged + Prettier + 类型检查</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">git-guardrails-claude-code</div>
+                <div class="skill-desc">拦截 push/reset --hard/clean 等危险 git 命令，强制确认</div>
+            </div>
+        </div>
+
+        <div class="category-label">✍️ 写作与知识（4个）</div>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">write-a-skill</div>
+                <div class="skill-desc">创建新技能（规范结构 + 渐进披露设计）</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">edit-article</div>
+                <div class="skill-desc">重构文章章节、提升清晰度、精简措辞</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">ubiquitous-language</div>
+                <div class="skill-desc">从对话提取 DDD 统一语言词汇表</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">obsidian-vault</div>
+                <div class="skill-desc">搜索、创建、管理 Obsidian 笔记（含维基链接）</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🚀 怎么用？</h2>
+        <p>安装某个技能只需一行命令（需要先安装 Claude Code）：</p>
+        <div class="quickstart">
+# 安装 to-prd 技能（需求分析 → PRD → GitHub Issue）<br>
+npx skills@latest add mattpocock/skills/to-prd<br><br>
+# 安装 tdd 技能（测试驱动开发）<br>
+npx skills@latest add mattpocock/skills/tdd<br><br>
+# 安装 git-guardrails（强烈推荐！防止代理误删代码）<br>
+npx skills@latest add mattpocock/skills/git-guardrails-claude-code<br><br>
+# 安装 design-an-interface（并行接口方案生成）<br>
+npx skills@latest add mattpocock/skills/design-an-interface
+        </div>
+        <p style="margin-top:12px; font-size:14px; color:#666;">安装后在 Claude Code 对话中直接输入技能名称即可调用。订阅 newsletter 获取新技能更新：<a href="https://www.aihero.dev/s/skills-newsletter" target="_blank" style="color:#2d6a9f">aihero.dev/s/skills-newsletter</a></p>
+    </div>
+
+    <div class="card">
+        <h2>💡 为什么值得关注？</h2>
+        <ul>
+            <li><strong>经过真实项目验证，不是玩具 Prompt。</strong>13 年工程经验沉淀，每个技能都有明确的输入/输出边界。</li>
+            <li><strong><code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;">git-guardrails</code> 解决了 AI 编程最真实的痛点。</strong>让代理在执行危险 git 命令前强制停下来，避免自作主张搞坏仓库。</li>
+            <li><strong><code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;">to-prd</code> + <code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;">to-issues</code> 改变了需求分解流程。</strong>从"开会讨论+手写PRD+拆Issue"缩短为分钟级自动化。</li>
+            <li><strong><code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;">design-an-interface</code> 体现并行代理思维。</strong>同时启动多个子代理各自生成不同接口方案，"让 AI 自己 PK 自己"——这正是工程化 AI 工作流的方向。</li>
+            <li><strong>今日 GitHub Trending 第一，+2519 stars。</strong>说明工程师社区正在从"尝鲜"转向"工程化 AI 工具链"阶段。</li>
+        </ul>
+
+        <div class="highlight-box" style="margin-top:18px;">
+            <h3>🔥 核心洞察</h3>
+            <p style="font-size:14px; color:#555; line-height:1.7;">
+                这个仓库的意义不只是"一些有用的 Prompt"，而是展示了一种新的工程工作流范式：<br>
+                AI 技能 = 可复用的工作流单元，可以像 npm 包一样安装、组合、分享。<br>
+                这和"写一个好 Prompt"完全不同——它是在构建可维护的 AI 工程工具链。
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 一句话总结</h2>
+        <p>Matt Pocock 把自己的"Claude Code 肌肉记忆"开源了——22 个经过真实项目验证的 AI 技能，覆盖从需求拆解到代码架构的完整工程流程，专为不想写"氛围代码"的严肃工程师设计。</p>
+    </div>
 
     <div class="cta">
-        <a href="https://github.com/open-webui/open-webui" target="_blank">前往 GitHub 查看完整项目 →</a>
+        <a href="https://github.com/mattpocock/skills" target="_blank">🔗 查看 GitHub 原文</a>
     </div>
 
     <div class="footer">
-        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+        <p>fly的AI学习 · 2026-04-27 · GitHub AI 项目深度介绍</p>
+        <p style="margin-top:6px;"><a href="https://flystray.github.io/ai-news/" style="color:#aaa;">flystray.github.io/ai-news</a></p>
     </div>
 </div>
 </body>
