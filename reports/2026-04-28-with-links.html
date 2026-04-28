@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 日报 · 2026-04-28</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: #12121a;
+    --card-border: #1e1e2e;
+    --accent1: #7c3aed;
+    --accent2: #2563eb;
+    --accent3: #0891b2;
+    --gold: #f59e0b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --tag-red: #ef4444;
+    --tag-blue: #3b82f6;
+    --tag-green: #10b981;
+    --tag-purple: #8b5cf6;
+    --tag-orange: #f97316;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  /* ---- Header ---- */
+  .hero {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, transparent 60%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: #a78bfa;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: '◉'; animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 12px; position: relative;
+  }
+  .hero-sub {
+    color: var(--text-muted); font-size: 15px;
+    margin-top: 8px;
+    position: relative;
+  }
+  .hero-meta {
+    display: flex; justify-content: center; gap: 24px; margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 14px 24px; text-align: center;
+  }
+  .hero-stat .num { font-size: 28px; font-weight: 700; color: #a78bfa; }
+  .hero-stat .label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ---- Layout ---- */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---- Section headers ---- */
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 48px 0 24px;
+  }
+  .section-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .s1 .section-icon { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+  .s2 .section-icon { background: linear-gradient(135deg, #0891b2, #2563eb); }
+  .s3 .section-icon { background: linear-gradient(135deg, #d97706, #f59e0b); }
+  .section-title { font-size: 22px; font-weight: 700; }
+  .section-desc { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ---- Cards ---- */
+  .news-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 24px;
+    margin-bottom: 16px;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .news-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(124,58,237,0.4);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.1);
+  }
+  .news-card.hot::before {
+    content: 'HOT';
+    position: absolute; top: 16px; right: 16px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff; font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    letter-spacing: 1px;
+  }
+  .card-top {
+    display: flex; align-items: flex-start;
+    gap: 12px; margin-bottom: 14px;
+  }
+  .card-num {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+    color: #fff;
+  }
+  .card-title-wrap { flex: 1; }
+  .card-title {
+    font-size: 17px; font-weight: 700;
+    color: #fff; line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px; padding: 2px 10px; border-radius: 100px; font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .tag-red    { background: rgba(239,68,68,0.15);  color: #f87171; border: 1px solid rgba(239,68,68,0.3);  }
+  .tag-blue   { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+  .tag-green  { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .tag-purple { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+  .tag-orange { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
+  .tag-cyan   { background: rgba(8,145,178,0.15);  color: #22d3ee; border: 1px solid rgba(8,145,178,0.3);  }
+  .card-body {
+    color: var(--text-muted); font-size: 14.5px; line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .card-body strong { color: var(--text); }
+  .card-highlight {
+    background: rgba(124,58,237,0.08);
+    border-left: 3px solid var(--accent1);
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: #c4b5fd;
+    margin: 12px 0;
+  }
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    gap: 12px; flex-wrap: wrap;
+  }
+  .card-source { font-size: 12px; color: var(--text-muted); }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    color: #a78bfa; font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .card-link:hover { background: rgba(124,58,237,0.3); color: #c4b5fd; }
+
+  /* ---- Section 2 (行业) variant ---- */
+  .s2 .news-card:hover { border-color: rgba(8,145,178,0.4); box-shadow: 0 8px 32px rgba(8,145,178,0.1); }
+  .s2 .card-num { background: linear-gradient(135deg, #0891b2, #2563eb); }
+  .s2 .card-highlight { border-left-color: var(--accent3); background: rgba(8,145,178,0.08); color: #67e8f9; }
+  .s2 .card-link { background: rgba(8,145,178,0.15); border-color: rgba(8,145,178,0.3); color: #22d3ee; }
+  .s2 .card-link:hover { background: rgba(8,145,178,0.3); }
+
+  /* ---- Insights ---- */
+  .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .insights-grid { grid-template-columns: 1fr; } }
+  .insight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 20px;
+    transition: transform 0.2s;
+  }
+  .insight-card:hover { transform: translateY(-2px); }
+  .insight-icon { font-size: 28px; margin-bottom: 12px; }
+  .insight-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .insight-body { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 64px; padding: 40px 24px;
+    border-top: 1px solid var(--card-border);
+    text-align: center; color: var(--text-muted); font-size: 13px;
+  }
+  footer a { color: #a78bfa; text-decoration: none; }
+
+  /* ---- Scrollbar ---- */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">AI 日报 · LIVE</div>
+  <h1>AI 大模型日报</h1>
+  <div class="hero-sub">2026 年 4 月 28 日 · 星期二 · 精选 10 条核心动态</div>
+  <div class="hero-meta">
+    <div class="hero-stat"><div class="num">10</div><div class="label">今日新闻</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">重磅事件</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label">国产亮点</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- Section 1: 今日重磅 -->
+<!-- ============================================================ -->
+<div class="section-header s1">
+  <div class="section-icon">🔥</div>
+  <div>
+    <div class="section-title">今日重磅</div>
+    <div class="section-desc">行业格局性事件，不容错过</div>
+  </div>
+</div>
+
+<!-- 1. 马斯克诉OpenAI开庭 -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">1</div>
+    <div class="card-title-wrap">
+      <div class="card-title">"AI 世纪诉讼"正式开庭：马斯克索赔 1340 亿美元，终极诉求是"开除奥特曼"</div>
+      <div class="card-tags">
+        <span class="tag tag-red">重磅诉讼</span>
+        <span class="tag tag-blue">OpenAI</span>
+        <span class="tag tag-orange">马斯克</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    当地时间 4 月 27 日，被称为"AI 世纪诉讼"的<strong>马斯克诉 OpenAI 案</strong>在加州奥克兰联邦法院正式开庭，启动陪审团遴选程序，庭审预计持续四周。主审法官为曾审理 Epic 诉苹果案的联邦法官伊冯娜·冈萨雷斯·罗杰斯。马斯克诉求包括：索赔 <strong>1340 亿美元</strong>、罢免 CEO 奥尔特曼、将 OpenAI 恢复为非营利机构。<br><br>
+    此案恰逢 OpenAI 冲刺<strong>今年四季度 IPO</strong>的关键节点，一旦马斯克胜诉，不仅 OpenAI 的架构、融资路径乃至上市计划可能被迫重写，微软、甲骨文、英伟达、亚马逊等深度绑定的科技巨头，以及总规模超过 <strong>8400 亿美元</strong>（约 5.7 万亿元人民币）的 AI 产业链也可能面临连锁冲击。
+    <div class="card-highlight">
+      ⚖️ 行业震动：这不仅是联合创始人之间的私人恩怨，更是对 AI 行业"非营利初心 vs 商业利益"的终极拷问。案件结果将直接决定 OpenAI 8500 亿美元估值和 IPO 能否落地，或将重塑全球 AI 产业权力版图。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：每日经济新闻 · 36氪 · 新浪财经 · 2026-04-28</span>
+    <a href="https://finance.sina.com.cn/wm/2026-04-27/doc-inhvxtrh7809153.shtml" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 2. DeepSeek骨干离职 + 大幅降价 -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">2</div>
+    <div class="card-title-wrap">
+      <div class="card-title">DeepSeek-V4 技术报告标注 10 人已离职，核心骨干被大厂"抢人"</div>
+      <div class="card-tags">
+        <span class="tag tag-red">人才流失</span>
+        <span class="tag tag-green">DeepSeek</span>
+        <span class="tag tag-purple">V4</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    DeepSeek-V4 技术报告中<strong>近 300 人的作者名单</strong>里，有 10 人被标注"已离职"。据不完全统计，自 2025 年下半年至今，DeepSeek 已有<strong>至少 5 名核心骨干</strong>离职，去向多为国内外头部科技大厂。与此同时，DeepSeek-V4-API 迎来新一轮<strong>大幅降价</strong>——输入缓存降至 0.25 元/百万 Token，仅为 GPT-5.5 Pro 的 1/700，进一步拉大性价比差距。
+    <div class="card-highlight">
+      📉 背景解读：V4 发布后拥趸"等了 484 天"的狂欢尚未退潮，核心骨干的流失已为这场开源盛宴蒙上阴影。开源模型的人才留存难题正在成为行业共性问题——技术开源后，人如何"不开源"？
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：财新网 · 澎湃新闻 · 每日经济新闻 · 2026-04-28</span>
+    <a href="https://tech.caijing.com.cn/20260427/5156197.shtml" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 3. 特斯拉 Cybercab 投产 -->
+<div class="news-card hot">
+  <div class="card-top">
+    <div class="card-num">3</div>
+    <div class="card-title-wrap">
+      <div class="card-title">特斯拉 Cybercab 正式投产：全球首款无方向盘量产 L5 无人驾驶车下线</div>
+      <div class="card-tags">
+        <span class="tag tag-red">历史性突破</span>
+        <span class="tag tag-orange">特斯拉</span>
+        <span class="tag tag-cyan">L5 无人驾驶</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    特斯拉官方宣布，<strong>Cybercab 赛博无人驾驶车</strong>在得州超级工厂正式投产。这是<strong>全球首款原生无方向盘、无踏板、无后视镜</strong>的量产 L5 级无人驾驶车。特斯拉同时计划在 2026 年年中前，将无人驾驶出租车服务拓展至凤凰城、迈阿密和拉斯维加斯三大城市。此前，Cybercab 于今年 2 月完成首台车下线，4 月正式启动批量生产。
+    <div class="card-highlight">
+      🚗 行业意义：Cybercab 投产标志着自动驾驶从"辅助驾驶"迈入"完全自主驾驶"时代。特斯拉计划下线 <strong>100 万台机器人产能</strong>，多家汽车供应商已开始将技术迁移至人形机器人领域。2026 年被广泛视为具身智能工业化落地的"元年"。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：网易科技 · 爱合伙 · 新浪财经 · 2026-04-28</span>
+    <a href="https://k.sina.com.cn/article_7857201856_1d45362c001904s6xy.html" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 2: 行业动态 -->
+<!-- ============================================================ -->
+<div class="section-header s2">
+  <div class="section-icon">📡</div>
+  <div>
+    <div class="section-title">行业动态</div>
+    <div class="section-desc">国内外大厂最新进展与产品发布</div>
+  </div>
+</div>
+
+<!-- 4. Anthropic Claude Code 权益调整 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">4</div>
+    <div class="card-title-wrap">
+      <div class="card-title">Anthropic 偷偷移除 Pro 用户 Claude Code 权限，AI 编程代理订阅规则面临重写</div>
+      <div class="card-tags">
+        <span class="tag tag-red">Anthropic</span>
+        <span class="tag tag-purple">Claude Code</span>
+        <span class="tag tag-orange">权益调整</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    4 月 21 日下午，<strong>Anthropic</strong> 悄然从官网 Pro 套餐页面移除了<strong>Claude Code</strong>的访问权标记，仅保留在 100 美元/月的 Max 套餐中，引发开发者社区强烈反弹。数小时后页面回滚，官方称仅为"小范围测试"。但在此之前，Anthropic 已承认 Claude Code 确实存在"降智"问题，并确认由三个 Bug 导致。
+    <div class="card-highlight">
+      💰 行业信号：高消耗的 AI 编程代理正逼迫平台重写订阅规则。Claude Code 转向 Max 或按量计费的可能性正在上升——AI 编程从"无限畅饮"进入"按量付费"时代，这是整个行业商业化拐点的信号。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：36氪 · 机器之心 · 站长之家 · 2026-04-22/24</span>
+    <a href="https://www.36kr.com/p/3777836165223426" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 5. 阿里 HappyHorse 开测 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">5</div>
+    <div class="card-title-wrap">
+      <div class="card-title">阿里 HappyHorse"欢乐马"AI 视频模型正式开测，曾登顶视频生成榜单</div>
+      <div class="card-tags">
+        <span class="tag tag-orange">阿里</span>
+        <span class="tag tag-green">AI 视频</span>
+        <span class="tag tag-cyan">新测试</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    阿里 ATH 宣布，<strong>HappyHorse-1.0</strong>已于 4 月 27 日通过阿里云百炼平台逐步开放 API 测试，首批邀测对象为企业级客户，预计 5 月份正式发布商用。该项目由 ATH 创新事业部主导，联合阿里平台技术、通义实验室及淘天技术等多个团队协同打造。HappyHorse 此前已登顶 <strong>Artificial Analysis</strong> 视频生成榜单历史纪录。
+    <div class="card-highlight">
+      🎬 行业定位：阿里在 AI 视频生成领域已深耕多年，HappyHorse 的开放标志着国产 AI 视频生成正式进入商用竞赛。在 Sora 仍为闭源状态时，阿里选择走开放 API 路线，有望在电商、短视频等场景快速落地。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：IT之家 · 中华网 · 2026-04-20/28</span>
+    <a href="https://news.china.com/socialgd/10000169/20260420/49433207.html" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 6. 国产开源迭代潮 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">6</div>
+    <div class="card-title-wrap">
+      <div class="card-title">AI 产业链迎共振：国产开源大模型迭代潮起，多企业密集发布升级版本</div>
+      <div class="card-tags">
+        <span class="tag tag-green">国产开源</span>
+        <span class="tag tag-purple">迭代升级</span>
+        <span class="tag tag-cyan">生态共振</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    近日，<strong>DeepSeek-V4</strong>引发广泛关注，同期国内多家科技企业密集推出开源大模型迭代升级版本——<strong>腾讯混元 Hy3</strong>（295B 参数，256K 上下文）、<strong>美团 LongCat-2.0</strong>（万亿参数，百万上下文）、<strong>小米 MiMo-V2.5</strong>（千轮工具调用）等纷纷亮相。央视报道称，国产大模型在百万级超长上下文处理、全球实时知识储备、复杂逻辑推理等核心技术维度实现了<strong>跨越式升级</strong>。
+    <div class="card-highlight">
+      🏭 产业共振：OpenAI GPT-5.5、DeepSeek-V4、腾讯 Hy3、美团 LongCat、小米 MiMo 几乎同时期发布，标志着大模型竞争从"参数竞赛"转向"生态闭环"——谁能在国产算力上跑出最优性价比，谁就掌握了下半场的入场券。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：新浪财经 · 央视新闻 · 2026-04-28</span>
+    <a href="https://finance.sina.com.cn/jjxw/2026-04-28/doc-inhvyzks7404832.shtml" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 7. DeepMind 智能体陷阱 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">7</div>
+    <div class="card-title-wrap">
+      <div class="card-title">Google DeepMind 揭示 2026 智能体陷阱：AI Agent 的安全"至暗时刻"</div>
+      <div class="card-tags">
+        <span class="tag tag-blue">Google</span>
+        <span class="tag tag-red">安全研究</span>
+        <span class="tag tag-purple">Agent 陷阱</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    Google DeepMind 近日发布了一份令人背脊发凉的网络安全报告，绘制了一个<strong>"智能体陷阱"（AI Agent Traps）</strong>攻击面。核心发现是：网站现在可以轻而易举地识别访问者是人类还是 AI 智能体，这意味着<strong>同一个网页可以向人类展示正常内容，向 AI 智能体展示恶意指令</strong>，利用"检测不对称性"发起定向攻击。
+    <div class="card-highlight">
+      🛡️ 安全警示：随着 AI Agent 越来越多地代替人类执行在线操作（浏览网页、填写表单、处理交易），Agent Trap 攻击将成为 AI 安全领域最严峻的挑战之一。DeepMind 的报告为行业敲响了警钟——Agent 的"自主性"与"安全性"之间的张力正在急剧加大。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：腾讯新闻 · DeepMind Blog · 2026-04-20</span>
+    <a href="https://news.qq.com/rain/a/20260420A02TYR00" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 8. OpenAI GPT-Image-2 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">8</div>
+    <div class="card-title-wrap">
+      <div class="card-title">OpenAI GPT-Image-2 爆火：从"赛博算命"到"看手相"，AI 生图引发隐私争议</div>
+      <div class="card-tags">
+        <span class="tag tag-blue">OpenAI</span>
+        <span class="tag tag-orange">AI 生图</span>
+        <span class="tag tag-red">隐私风险</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    OpenAI 最新图像生成模型 <strong>GPT-Image-2</strong>发布后迅速爆火，被用户创意应用于"赛博算命"和"AI 看手相"等场景，反映了用户对"被理解"的心理需求。但同时也引发了<strong>生物特征数据泄露</strong>的隐私风险讨论——用户上传的手部照片等生物信息可能被模型厂商收集并难以控制。
+    <div class="card-highlight">
+      🔍 深层思考：GPT-Image-2 的爆火再次验证了一个规律——AI 突破性技术往往通过最"接地气"的使用场景被大众感知。但每一次创意狂欢背后，都伴随着数据安全和隐私保护的红线考验。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：爱合伙 · AI工具集 · 2026-04-28</span>
+    <a href="https://www.aihehuo.com/blog/8840-news-2026-04-28" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 9. 破壳机器人 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">9</div>
+    <div class="card-title-wrap">
+      <div class="card-title">清华教授创立"破壳机器人"：放弃主流 VLA 方案，预言两年内出现可用家庭机器人</div>
+      <div class="card-tags">
+        <span class="tag tag-green">具身智能</span>
+        <span class="tag tag-purple">清华系</span>
+        <span class="tag tag-cyan">新架构</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    清华大学教授<strong>许华哲</strong>创立的"破壳机器人"宣布已完成<strong>数千万美元融资</strong>。团队选择放弃主流 VLA（视觉-语言-动作）方案，转向构建<strong>"视频-动作"世界模型的 UAG 架构</strong>，认为混乱随机的家庭场景才是训练通用模型的最佳土壤。许华哲预言，<strong>两年内中国将出现可用的家庭机器人</strong>。
+    <div class="card-highlight">
+      🏠 行业视角：与特斯拉追求工厂级标准化量产不同，破壳机器人选择从"最混乱"的家庭场景切入，代表了具身智能的另一条技术路线。UAG 架构能否在非结构化环境中证明通用性，将成为行业关键验证点。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：爱合伙 · 2026-04-28</span>
+    <a href="https://www.aihehuo.com/blog/8840-news-2026-04-28" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- 10. 一季度工业利润 -->
+<div class="news-card s2">
+  <div class="card-top">
+    <div class="card-num">10</div>
+    <div class="card-title-wrap">
+      <div class="card-title">一季度工业利润同比增长 15.5%，电子行业飙升 124.5%，AI 产业链成盈利核心引擎</div>
+      <div class="card-tags">
+        <span class="tag tag-green">宏观经济</span>
+        <span class="tag tag-orange">产业红利</span>
+        <span class="tag tag-cyan">AI 产业链</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    国家统计局公布一季度工业企业利润数据，<strong>同比增长 15.5%</strong>，多个行业利润翻倍增长。其中，<strong>电子行业增长 124.5%</strong>、光纤制造增长 336.8% 等高技术制造业成为盈利核心引擎，为 AI 和半导体相关领域的创业与投资提供了明确的方向指引。
+    <div class="card-highlight">
+      📈 宏观信号：电子、光纤等 AI 基础设施相关行业利润暴增，验证了"AI 是新基建"的判断——大模型竞赛的背后，是整个产业链从芯片制造到光通信的系统性繁荣。
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="card-source">来源：爱合伙 · 国家统计局 · 2026-04-28</span>
+    <a href="https://www.aihehuo.com/blog/8840-news-2026-04-28" target="_blank" class="card-link">阅读原文 →</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 3: 核心洞察 -->
+<!-- ============================================================ -->
+<div class="section-header s3">
+  <div class="section-icon">💡</div>
+  <div>
+    <div class="section-title">核心洞察</div>
+    <div class="section-desc">今日 AI 格局深层趋势解读</div>
+  </div>
+</div>
+
+<div class="insights-grid">
+  <div class="insight-card">
+    <div class="insight-icon">⚖️</div>
+    <div class="insight-title">AI 创始人之争：资本与理想的终极对决</div>
+    <div class="insight-body">马斯克诉 OpenAI 案开庭，核心争议是 OpenAI 从非营利转向营利实体是否违背初心。这场诉讼不仅关乎 1340 亿美元和一个人工智能巨头的命运，更将定义 AI 行业未来十年的治理框架——"开源造福全人类"与"商业价值最大化"之间，是否存在第三条路？</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-icon">🚗</div>
+    <div class="insight-title">L5 无人驾驶量产：具身智能进入工业化元年</div>
+    <div class="insight-body">特斯拉 Cybercab 无方向盘量产下线，100 万台产能规划，多家汽车供应商涌入具身智能赛道。2026 年正在成为"从实验室到工厂"的转折年——当无方向盘的车和能干家务的机器人同时走出实验室，具身智能的商业化竞赛正式鸣枪。</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-icon">👤</div>
+    <div class="insight-title">AI 人才争夺白热化：开源模型的人才悖论</div>
+    <div class="insight-body">DeepSeek V4 技术报告标注 10 人已离职，核心骨干被大厂高薪"挖角"。开源模型的困境正在显现：技术可以开源，但人才无法开源。如何在"技术共享"与"人才留存"之间找到平衡，是开源 AI 公司必须破解的组织难题。</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-icon">💰</div>
+    <div class="insight-title">AI 产业化加速：利润暴增验证"新基建"逻辑</div>
+    <div class="insight-body">一季度电子行业利润增长 124.5%，国产开源大模型密集迭代，阿里 HappyHorse 开测商用——从芯片制造到视频生成，AI 产业链的每个环节都在释放利润信号。宏观经济的强劲数据为 AI 创业者提供了最坚实的产业支撑。</div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>
+    AI 日报 · 2026-04-28 &nbsp;|&nbsp;
+    数据来源：新浪财经、36氪、财新网、澎湃新闻、央视新闻、爱合伙 &nbsp;|&nbsp;
+    <a href="https://Flystray.github.io/ai-news/" target="_blank">订阅中心</a>
+    &nbsp;|&nbsp;
+    <a href="https://Flystray.github.io/ai-news/reports/2026-04-28-with-links.html" target="_blank">在线访问</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;opacity:0.5;">公众号 "AI日课" &nbsp;·&nbsp; fly的AI学习 &nbsp;·&nbsp; 每日精选 AI 前沿动态</p>
+</footer>
+
+</body>
+</html>
