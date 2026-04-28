@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lancedb · GitHub AI 项目深度介绍 · 2026年04月28日</title>
+    <title>huggingface/ml-intern · GitHub AI 项目深度介绍 · 2026年04月28日</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
@@ -18,54 +18,178 @@
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
         .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
         .card ul { padding-left: 20px; }
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
+        .benchmark-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+        .benchmark-table th { background: #2d6a9f; color: white; padding: 8px 14px; text-align: left; }
+        .benchmark-table td { padding: 8px 14px; border-bottom: 1px solid #e8f0fe; }
+        .benchmark-table tr:nth-child(even) td { background: #f8fbff; }
+        .benchmark-table .highlight { color: #2d6a9f; font-weight: 700; }
+        .pipeline { display: flex; gap: 0; margin: 14px 0; }
+        .pipeline-step { flex: 1; background: #e8f0fe; border-radius: 8px; padding: 12px 10px; text-align: center; font-size: 13px; color: #1e3a5f; position: relative; }
+        .pipeline-step + .pipeline-step { margin-left: 4px; }
+        .pipeline-step .icon { font-size: 22px; display: block; margin-bottom: 4px; }
+        .pipeline-step .label { font-weight: 600; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .badge { display: inline-block; background: #ffecb3; color: #7a4f00; border-radius: 6px; padding: 2px 10px; font-size: 12px; font-weight: 600; margin-left: 8px; vertical-align: middle; }
+        .badge-new { background: #e8f5e9; color: #1b5e20; }
+        .badge-hot { background: #fce4ec; color: #880e4f; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月28日</div>
-        <h1>lancedb</h1>
-        <p class="subtitle">Developer-friendly OSS embedded retrieval library for multimodal AI. Search More; Manage Less.</p>
+        <h1>huggingface/ml-intern <span class="badge badge-new">📅 新项目</span><span class="badge badge-hot">🔥 爆火</span></h1>
+        <p class="subtitle">开源 ML 工程师：自主读论文、调数据集、训模型、发模型——全流程一键完成</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 10.1k</span>
-        <span>📝 HTML</span>
-        <span>🕐 </span>
-        <span>🔗 <a href="https://github.com/lancedb/lancedb" target="_blank" style="color:#2d6a9f">lancedb/lancedb</a></span>
+        <span>⭐ ~5k（上线 7 天）</span>
+        <span>📅 2026-04-20 发布</span>
+        <span>🐍 Python</span>
+        <span>📄 Apache-2.0</span>
+        <span>🔗 <a href="https://github.com/huggingface/ml-intern" target="_blank" style="color:#2d6a9f">huggingface/ml-intern</a></span>
     </div>
 
-    <div class="topics"><span class="topic">approximate-nearest-neighbor-search</span><span class="topic">image-search</span><span class="topic">nearest-neighbor-search</span><span class="topic">recommender-system</span><span class="topic">search-engine</span><span class="topic">semantic-search</span><span class="topic">similarity-search</span><span class="topic">vector-database</span></div>
+    <div class="topics">
+        <span class="topic">ml-agent</span>
+        <span class="topic">post-training</span>
+        <span class="topic">smolagents</span>
+        <span class="topic">huggingface</span>
+        <span class="topic">llm-fine-tuning</span>
+        <span class="topic">autonomous-agent</span>
+        <span class="topic">rlhf</span>
+        <span class="topic">experiment-tracking</span>
+    </div>
 
-    
+    <div class="desc-card">
+        <p>🤖 "给我一个科学推理任务，我来帮你找论文、选数据集、写训练脚本、跑 12 轮训练迭代，最后把模型发布到 HuggingFace Hub。"—— 这就是 ml-intern 正在做的事。</p>
+    </div>
 
     <div class="card">
-        <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+        <h2>📌 项目背景：为什么需要它？</h2>
+        <p>LLM 的 post-training（指令微调、RLHF、对齐训练）是整个 AI 工程链中最繁琐的环节之一：找对文献、清洗数据集、写训练配置、调超参、盯实验日志……每一步都需要大量人力。</p>
+        <p>Hugging Face 在 2026 年 4 月 20 日开源了 <strong>ml-intern</strong>，定位就是<strong>「开源 ML 工程师 Agent」</strong>——基于自家的 smolagents 框架，深度对接 HF 生态（Hub、TRL、Datasets、Spaces），让整个 post-training 流程真正可以自动跑起来，无需人工反复介入。</p>
     </div>
 
-    
+    <div class="card">
+        <h2>🏗️ 架构设计：三层流水线</h2>
+        <p>ml-intern 由三个专职子 Agent 协同完成整条流水线：</p>
+        <div class="pipeline">
+            <div class="pipeline-step">
+                <span class="icon">📚</span>
+                <div class="label">Reader Agent</div>
+                <div>检索 arXiv 论文<br>查阅 HF 文档<br>定位数据集</div>
+            </div>
+            <div class="pipeline-step">
+                <span class="icon">🏋️</span>
+                <div class="label">Trainer Agent</div>
+                <div>生成训练脚本<br>启动 GPU 任务<br>追踪实验指标</div>
+            </div>
+            <div class="pipeline-step">
+                <span class="icon">🚀</span>
+                <div class="label">Publisher Agent</div>
+                <div>评估模型质量<br>生成 Model Card<br>推送到 HF Hub</div>
+            </div>
+        </div>
+        <p>三个 Agent 全部基于 <strong>smolagents CodeAgent</strong> 实现，用「写代码」的方式来表达动作（而不是 JSON function call），让工具组合更灵活，循环逻辑更自然。</p>
+    </div>
 
-    
+    <div class="card">
+        <h2>🛠️ 核心工具集</h2>
+        <ul>
+            <li><strong>arxiv_search</strong>：搜索/解析学术论文，支持 citation 链式追踪</li>
+            <li><strong>hf_docs_lookup</strong>：检索 Transformers / TRL / Datasets 官方文档 API</li>
+            <li><strong>dataset_inspector</strong>：探索 HF Hub 数据集结构、字段类型与样本分布</li>
+            <li><strong>training_runner</strong>：生成并执行 TRL 训练脚本，支持 SFT / DPO / RLHF 等策略</li>
+            <li><strong>trackio_logger</strong>：基于 HF Trackio 记录实验指标，与 W&B API 兼容</li>
+            <li><strong>model_publisher</strong>：自动生成 Model Card、推送模型权重到 Hub</li>
+            <li><strong>cloud_compute</strong>：调用 HF Spaces GPU 资源（A10G / H100）执行长时训练</li>
+        </ul>
+    </div>
 
-    
+    <div class="card">
+        <h2>📊 性能基准：在 PostTrainBench 上超越 Claude Code</h2>
+        <p>ml-intern 在 PostTrainBench（图宾根大学 + 马克斯普朗克研究所联合提出）上进行了评测，结果令人意外：</p>
+        <table class="benchmark-table">
+            <tr>
+                <th>系统</th>
+                <th>GPQA 科学推理</th>
+                <th>耗时</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td class="highlight">ml-intern（本项目）</td>
+                <td class="highlight">32%</td>
+                <td>< 10 小时</td>
+                <td>单张 H100，12 轮训练迭代</td>
+            </tr>
+            <tr>
+                <td>Claude Code</td>
+                <td>22.99%</td>
+                <td>-</td>
+                <td>基线对比</td>
+            </tr>
+            <tr>
+                <td>指令微调上限</td>
+                <td>51%</td>
+                <td>-</td>
+                <td>人工设计上限（当前自主循环尚不可及）</td>
+            </tr>
+        </table>
+        <p style="margin-top:12px;font-size:13px;color:#888;">任务示例：给定"提升 Qwen3-1.7B 的科学推理能力"，ml-intern 自主检索 NVIDIA 相关论文 → 发现合适数据集 → 运行 12 次训练 → 推送最优 checkpoint。</p>
+    </div>
+
+    <div class="card">
+        <h2>⚡ 快速上手</h2>
+        <p>支持两种使用模式：<strong>交互对话</strong>（像聊天一样委托任务）和<strong>无头自动化</strong>（脚本接入 CI/CD）。</p>
+<div class="quickstart"># 安装
+pip install ml-intern
+
+# 交互模式（对话驱动）
+ml-intern chat
+
+# 无头模式（批量自动化）
+ml-intern run --task "Fine-tune Qwen3-1.7B on scientific reasoning using DPO" \
+              --model Qwen/Qwen3-1.7B \
+              --budget 10h \
+              --push-to-hub my-username/qwen3-science</div>
+    </div>
+
+    <div class="card">
+        <h2>💡 为什么值得关注？</h2>
+        <ul>
+            <li><strong>端到端闭环</strong>：业内首个将「文献调研→数据处理→训练→部署」串成单一 Agent 流水线的开源项目，不再是某个环节的 copilot，而是整个 ML 工程流程的 autopilot</li>
+            <li><strong>HF 生态深度整合</strong>：原生调用 Hub、TRL、Trackio、Spaces GPU，不需要额外搭配任何第三方工具链</li>
+            <li><strong>可干预、可审计</strong>：每一步 Agent 动作均通过 CodeAgent 以代码形式呈现，支持人工在任意节点介入审查或修改</li>
+            <li><strong>对 ML 研究者的意义</strong>：一个人以前需要花一天设置的实验，现在只需一条自然语言描述——这是 AI 辅助科研的具体落地，不是 PPT 上的概念</li>
+            <li><strong>开源 + 社区黑客马拉松</strong>：项目同步开放黑客马拉松，鼓励社区贡献新工具和新训练策略，生态正在快速扩展</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🔍 与同类项目的区别</h2>
+        <ul>
+            <li><strong>vs. OpenDevin / SWE-agent</strong>：后者聚焦代码工程任务（修 bug、写代码），ml-intern 专攻 ML 训练全流程，两者是不同赛道</li>
+            <li><strong>vs. AutoML 工具（如 AutoGluon）</strong>：AutoML 是超参搜索的自动化，ml-intern 是研究目标→实验设计→训练→部署整条链路的自动化，范围更大</li>
+            <li><strong>vs. LangChain / CrewAI</strong>：通用 Agent 框架，ml-intern 是垂直于 ML 工程的领域专用 Agent，工具库针对性极强</li>
+        </ul>
+    </div>
 
     <div class="cta">
-        <a href="https://github.com/lancedb/lancedb" target="_blank">前往 GitHub 查看完整项目 →</a>
+        <a href="https://github.com/huggingface/ml-intern" target="_blank">前往 GitHub 查看完整项目 →</a>
     </div>
 
     <div class="footer">
-        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目 · 2026-04-28</p>
     </div>
 </div>
 </body>
