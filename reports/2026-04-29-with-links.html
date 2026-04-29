@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 · 2026-04-29</title>
+    <style>
+      :root {
+        --bg: #0a0a0f;
+        --card-bg: #12121a;
+        --card-border: #1e1e2e;
+        --accent1: #7c3aed;
+        --accent2: #2563eb;
+        --accent3: #0891b2;
+        --gold: #f59e0b;
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --tag-red: #ef4444;
+        --tag-blue: #3b82f6;
+        --tag-green: #10b981;
+        --tag-purple: #8b5cf6;
+        --tag-orange: #f97316;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+      .hero {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        padding: 60px 24px 48px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, transparent 60%);
+        animation: pulse 6s ease-in-out infinite;
+      }
+      @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+      .container { max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+      .hero-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(124,58,237,0.3); border: 1px solid rgba(124,58,237,0.5);
+        padding: 6px 16px; border-radius: 20px; font-size: 13px; color: #a78bfa;
+        margin-bottom: 20px;
+      }
+      .hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 12px; }
+      .hero p { color: var(--text-muted); font-size: 16px; max-width: 500px; margin: 0 auto; }
+      .hero-date { margin-top: 20px; color: var(--gold); font-size: 14px; letter-spacing: 1px; }
+      .section { margin: 50px 0; }
+      .section-title {
+        display: flex; align-items: center; gap: 12px;
+        font-size: 22px; font-weight: 600; margin-bottom: 24px;
+        padding-bottom: 12px; border-bottom: 1px solid var(--card-border);
+      }
+      .section-icon { font-size: 24px; }
+      .card {
+        background: var(--card-bg); border: 1px solid var(--card-border);
+        border-radius: 16px; padding: 28px; margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+      .card:hover { border-color: var(--accent1); transform: translateY(-2px); }
+      .card.featured { border-left: 4px solid var(--gold); }
+      .card h3 { font-size: 18px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+      .card .emoji { font-size: 22px; }
+      .card p { color: var(--text-muted); margin-bottom: 12px; font-size: 15px; }
+      .card ul { color: var(--text-muted); margin: 12px 0; padding-left: 20px; font-size: 15px; }
+      .card li { margin-bottom: 8px; }
+      .card strong { color: var(--text); }
+      .highlight-box {
+        background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.15));
+        border-radius: 12px; padding: 18px; margin: 15px 0;
+        border: 1px solid rgba(124,58,237,0.3);
+      }
+      .highlight-box .label { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+      .highlight-box .value { font-size: 20px; font-weight: 600; }
+      .stats-row { display: flex; gap: 12px; margin: 15px 0; flex-wrap: wrap; }
+      .stat-item { flex: 1; min-width: 100px; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 14px; text-align: center; }
+      .stat-value { font-size: 20px; font-weight: 700; color: var(--accent1); }
+      .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+      .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+      .tag { padding: 4px 12px; border-radius: 15px; font-size: 12px; }
+      .tag-red { background: rgba(239,68,68,0.2); color: #fca5a5; }
+      .tag-blue { background: rgba(59,130,246,0.2); color: #93c5fd; }
+      .tag-green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+      .tag-purple { background: rgba(139,92,246,0.2); color: #c4b5fd; }
+      .tag-orange { background: rgba(249,115,22,0.2); color: #fdba74; }
+      .tag-gold { background: rgba(245,158,11,0.2); color: #fcd34d; }
+      .source-link {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--accent2); text-decoration: none; font-size: 14px;
+        padding: 8px 16px; background: rgba(37,99,235,0.15);
+        border-radius: 20px; margin-top: 15px; transition: all 0.3s;
+      }
+      .source-link:hover { background: var(--accent2); color: white; }
+      .footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; }
+      .footer a { color: var(--accent2); text-decoration: none; }
+      blockquote {
+        background: rgba(255,255,255,0.03);
+        border-left: 3px solid var(--accent1);
+        padding: 15px 20px; margin: 15px 0;
+        color: var(--text-muted); font-style: italic;
+        border-radius: 0 8px 8px 0;
+      }
+      @media (max-width: 768px) {
+        .hero h1 { font-size: 28px; }
+        .stats-row { flex-direction: column; }
+      }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-badge">🤖 AI Daily</div>
+        <h1>AI 每日新闻</h1>
+        <p>汇聚全球AI大模型最新动态，深度解读行业变革与技术突破</p>
+        <div class="hero-date">2026年4月29日 · 周三</div>
+    </div>
+
+    <div class="container">
+        <!-- 今日重磅 -->
+        <section class="section">
+            <h2 class="section-title"><span class="section-icon">🔥</span> 今日重磅</h2>
+
+            <div class="card featured">
+                <h3><span class="emoji">🎯</span> OpenAI发布GPT-5.5：最智能的AI模型，Token成本降至1/35</h3>
+                <p>北京时间4月24日凌晨，OpenAI正式发布旗舰模型<strong>GPT-5.5</strong>。这是该公司迄今为止最智能、直观易用的模型，主打"智能体优先"定位——专为真实工作和复杂多步骤任务打造。</p>
+
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-value">82.7%</div>
+                        <div class="stat-label">Terminal-Bench 2.0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">58.6%</div>
+                        <div class="stat-label">SWE-Bench Pro</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1/35</div>
+                        <div class="stat-label">Token成本降低</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50x</div>
+                        <div class="stat-label">输出量提升</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="label">核心突破</div>
+                    <div class="value">延迟持平 × 更少Token消耗 × 50倍输出量提升</div>
+                </div>
+
+                <blockquote>Cursor CEO Michael Truell评价："GPT-5.5比GPT-5.4明显更聪明、更持久，编码性能更强，工具使用也更可靠。它能够在不提前中断的情况下持续处理任务的时间显著更长。"</blockquote>
+
+                <p><strong>定价：</strong>标准版$5输入/$30输出每百万Token；Pro版$30/$180。虽然价格翻倍，但效率大幅提升抵消成本。</p>
+
+                <div class="tags">
+                    <span class="tag tag-red">GPT-5.5</span>
+                    <span class="tag tag-blue">智能体</span>
+                    <span class="tag tag-purple">编码能力</span>
+                    <span class="tag tag-green">成本优化</span>
+                </div>
+                <a href="https://www.21jingji.com/article/20260424/herald/9b54114a0d6d30cda6d2ba9e04335665.html" target="_blank" class="source-link">📖 阅读原文</a>
+            </div>
+
+            <div class="card featured">
+                <h3><span class="emoji">🇨🇳</span> DeepSeek V4发布：开源阵营最强音，200亿美元估值融资中</h3>
+                <p>就在GPT-5.5发布同一天，DeepSeek亮出底牌——<strong>V4系列预览版正式上线并同步开源</strong>，采用MIT协议。国产AI再次震撼全球。</p>
+
+                <div class="highlight-box">
+                    <div class="label">双版本发布</div>
+                    <div class="value">V4-Pro (1.6万亿参数/49B激活) | V4-Flash (2840亿参数/13B激活)</div>
+                </div>
+
+                <p><strong>性能表现：</strong></p>
+                <ul>
+                    <li><strong>代码能力：</strong>LiveCodeBench得分93.5，超越GPT-5.4(91.7)和Gemini-3.1-Pro(89.2)</li>
+                    <li><strong>数学能力：</strong>HMMT 2026 Feb得分95.2，与Claude Opus 4.6(96.2)差距极小</li>
+                    <li><strong>编程排名：</strong>Codeforces人类选手排行榜第23位</li>
+                </ul>
+
+                <p><strong>战略意义：</strong></p>
+                <ul>
+                    <li>华为昇腾深度适配，<strong style="color:#fcd34d">打破对英伟达CUDA生态依赖</strong></li>
+                    <li>引发A股/港股芯片板块暴涨：皖通科技涨停，华虹+12.31%，中芯国际+10.01%</li>
+                    <li>融资估值超<strong style="color:#fcd34d">200亿美元</strong>，腾讯、阿里正洽谈投资</li>
+                </ul>
+
+                <div class="tags">
+                    <span class="tag tag-gold">DeepSeek V4</span>
+                    <span class="tag tag-green">开源</span>
+                    <span class="tag tag-orange">国产芯片</span>
+                    <span class="tag tag-purple">200亿美元估值</span>
+                </div>
+                <a href="https://news.qq.com/rain/a/20260425A03DAL00" target="_blank" class="source-link">📖 阅读原文</a>
+            </div>
+
+            <div class="card">
+                <h3><span class="emoji">💰</span> 谷歌400亿美元入股Anthropic：AI史上最大赌注</h3>
+                <p>谷歌宣布向Anthropic投入最高<strong>400亿美元</strong>：100亿美元立即到账，按3800亿美元估值入股Anthropic。这是AI行业有史以来最大的单笔投资之一。</p>
+                <p><strong>战略逻辑：</strong></p>
+                <ul>
+                    <li>Claude年化收入已突破300亿美元，同比增长30倍</li>
+                    <li>Anthropic已锁定亚马逊+谷歌合计11吉瓦以上算力承诺</li>
+                    <li>谷歌将Anthropic变成TPU芯片的最大买家</li>
+                </ul>
+                <blockquote>讽刺的是，Anthropic CEO Dario Amodei曾警告"超级AI可能在2年内威胁人类"，而谷歌却豪掷400亿押注这家"AI安全公司"。</blockquote>
+                <div class="tags">
+                    <span class="tag tag-blue">谷歌</span>
+                    <span class="tag tag-purple">Anthropic</span>
+                    <span class="tag tag-red">400亿美元</span>
+                </div>
+                <a href="https://www.36kr.com/p/3784243425565953" target="_blank" class="source-link">📖 阅读原文</a>
+            </div>
+        </section>
+
+        <!-- 行业动态 -->
+        <section class="section">
+            <h2 class="section-title"><span class="section-icon">📊</span> 行业动态</h2>
+
+            <div class="card">
+                <h3><span class="emoji">🏆</span> 字节、阿里入选《时代》全球十大最具影响力AI公司</h3>
+                <p>《时代》杂志公布2026全球十大最具影响力AI公司：</p>
+                <ul>
+                    <li><strong>字节跳动</strong>——以TikTok母公司身份入选</li>
+                    <li><strong>阿里巴巴</strong>——通义千问系列持续迭代</li>
+                    <li><strong>智谱AI</strong>——唯一入选的中国AI创业公司</li>
+                    <li>其他入选者：OpenAI、Google Alphabet、Meta、Anthropic、亚马逊、Mistral、Hugging Face</li>
+                </ul>
+                <p><strong>中国公司占据三席</strong>，标志着中国AI势力的全球崛起。</p>
+                <div class="tags">
+                    <span class="tag tag-gold">字节跳动</span>
+                    <span class="tag tag-orange">阿里巴巴</span>
+                    <span class="tag tag-green">智谱AI</span>
+                </div>
+                <a href="https://www.ithome.com/0/944/371.htm" target="_blank" class="source-link">📖 阅读原文</a>
+            </div>
+
+            <div class="card">
+                <h3><span class="emoji">🔧</span> Google Cloud Next 2026：AI Agent规模化落地</h3>
+                <p>谷歌年度云计算大会发布重磅更新：</p>
+                <ul>
+                    <li><strong>Workspace Intelligence</strong>：Gmail、Docs、Sheets全面AI化</li>
+                    <li><strong>Gemini Enterprise Agent Platform</strong>：企业级智能体平台</li>
+                    <li><strong>第八代TPU芯片</strong>：推理性能大幅提升</li>
+                </ul>
+                <p>摩根大通分析师指出：这是智能体AI从实验走向企业级工作负载的关键转折点。</p>
+                <div class="tags">
+                    <span class="tag tag-blue">Google</span>
+                    <span class="tag tag-purple">Agent</span>
+                    <span class="tag tag-green">TPU</span>
+                </div>
+                <a href="https://news.qq.com/rain/a/20260423A037BF00" target="_blank" class="source-link">📖 阅读原文</a>
+            </div>
+
+            <div class="card">
+                <h3><span class="emoji">🐛</span> Anthropic承认Claude"降智"：三项优化叠加失效所致</h3>
+                <p>针对用户反映Claude"变笨"的问题，Anthropic发布技术报告正面回应：问题并非模型能力退化，而是过去一个多月内<strong>三项产品调整叠加失效</strong>所致。</p>
+                <p>Anthropic强调绝不会蓄意降低模型性能，并已重置所有订阅用户的使用额度。</p>
+                <div class="tags">
+                    <span class="tag tag-purple">Anthropic</span>
+                    <span class="tag tag-blue">Claude</span>
+                </div>
+                <a href="https://www.36kr.com/p/3780358673863687" target="_blank" class="source-link">📖 阅读原文</a>
+            </div>
+        </section>
+
+        <!-- 核心洞察 -->
+        <section class="section">
+            <h2 class="section-title"><span class="section-icon">💡</span> 核心洞察</h2>
+
+            <div class="card">
+                <h3><span class="emoji">📈</span> 历史性时刻：国产大模型调用量首次超越美国</h3>
+                <div class="highlight-box">
+                    <div class="label">数据来源</div>
+                    <div class="value">中国 4.69万亿Token/周 vs 美国 4.21万亿Token/周</div>
+                </div>
+                <p>根据OpenRouter与斯坦福HAI研究院联合发布的数据，中国大模型周调用量同比增长320%，连续两周超越美国。全球TOP10中中国模型占据6席。</p>
+                <p><strong>国产模型优势：</strong></p>
+                <ul>
+                    <li>推理成本：仅为GPT-4 Turbo的1/8，Claude 4.6的1/5</li>
+                    <li>中文处理：方言识别准确率98.2%，文言文准确率97.8%</li>
+                    <li>端侧部署：小米15系列、华为Mate 70已原生集成</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag tag-gold">国产崛起</span>
+                    <span class="tag tag-green">4.69万亿Token</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="emoji">🤖</span> 2026：Agent工业化元年</h3>
+                <p>2026年被业界公认为"Agentic AI元年"。智能体正从概念验证走向产业落地：</p>
+                <ul>
+                    <li><strong>神经符号融合架构</strong>：将幻觉率降至1.0%以下</li>
+                    <li><strong>华为AgentArts平台</strong>：接入1000+工具，4月正式公测</li>
+                    <li><strong>微信OpenClaw智能体</strong>：累计用户突破1000万</li>
+                    <li><strong>Gartner预测</strong>：到2028年至少15%的日常工作决策将由智能体自主完成</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag tag-purple">Agent</span>
+                    <span class="tag tag-blue">产业化</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="emoji">⚡</span> 多模型协作成为主流范式</h3>
+                <p>单一模型难以满足复杂业务需求，多模型协作成为新趋势：</p>
+                <ul>
+                    <li>代码生成 → GPT-5.5-Codex</li>
+                    <li>长文档分析 → Claude Opus 4.7</li>
+                    <li>多模态任务 → Gemini 3.1 Pro</li>
+                    <li>成本优先 → DeepSeek V4 / MiniMax M2.5</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag tag-blue">多模型</span>
+                    <span class="tag tag-green">协作</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>📡 数据来源：量子位、机器之心、36氪、IT之家、量子科技等</p>
+            <p>🔗 在线阅读：<a href="https://Flystray.github.io/ai-news/reports/2026-04-29-with-links.html">https://Flystray.github.io/ai-news/reports/2026-04-29-with-links.html</a></p>
+            <p style="margin-top:15px;opacity:0.6;">由 AI 日课 自动生成 | 2026年4月29日</p>
+        </footer>
+    </div>
+</body>
+</html>
