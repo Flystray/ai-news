@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>awesome-llm-apps · GitHub AI 项目深度介绍 · 2026年04月29日</title>
+    <title>GenericAgent · GitHub AI 项目深度介绍 · 2026年04月29日</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
@@ -14,6 +14,8 @@
         .header .subtitle { font-size: 15px; opacity: 0.85; }
         .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
         .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .meta-bar a { color: #2d6a9f; text-decoration: none; }
+        .meta-bar a:hover { text-decoration: underline; }
         .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
@@ -23,45 +25,106 @@
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
-        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .highlight-card { background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%); border-left: 5px solid #f0ad4e; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .highlight-card p { font-size: 15px; color: #555; line-height: 1.85; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        .comparison-table th { background: #e8f0fe; color: #1e3a5f; padding: 8px 12px; text-align: left; font-weight: 600; }
+        .comparison-table td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
+        .comparison-table tr:hover { background: #f8f9ff; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月29日</div>
-        <h1>awesome-llm-apps</h1>
-        <p class="subtitle">100+ AI Agent & RAG apps you can actually run — clone, customize, ship.</p>
+        <h1>GenericAgent</h1>
+        <p class="subtitle">自进化通用智能体：仅 3K 行核心代码，让任何 LLM 获得完整的系统级控制能力，并自动将任务执行路径结晶为可复用的"技能树"</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 108.0k</span>
+        <span>⭐ 8.0k</span>
+        <span>🍴 920+</span>
         <span>📝 Python</span>
-        <span>🕐 </span>
-        <span>🔗 <a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" style="color:#2d6a9f">Shubhamsaboo/awesome-llm-apps</a></span>
+        <span>🕐 活跃于今天</span>
+        <span>📄 MIT</span>
+        <span>🔗 <a href="https://github.com/lsdefine/GenericAgent" target="_blank">lsdefine/GenericAgent</a></span>
     </div>
 
-    <div class="topics"><span class="topic">agents</span><span class="topic">llms</span><span class="topic">python</span><span class="topic">rag</span></div>
+    <div class="topics">
+        <span class="topic">agent</span>
+        <span class="topic">autonomous</span>
+        <span class="topic">self-evolving</span>
+        <span class="topic">llm</span>
+        <span class="topic">browser-automation</span>
+    </div>
 
-    
+    <div class="highlight-card">
+        <p><strong>💡 自举证明：</strong>该项目本身的所有 Git 操作——包括 git init、代码提交和 commit message——全部由 GenericAgent 自主完成，无需人工终端干预。这是"自进化"理念的最佳证明。</p>
+    </div>
+
+    <div class="desc-card">
+        <p>当前 AI Agent 框架普遍面临两个矛盾：能力越强代码越臃肿（如 OpenClaw 约 53 万行）、上下文越长幻觉越多成本越高（主流方案需 200K-1M token）。GenericAgent 提出"极简自进化"范式——不预加载技能，让 Agent 自己进化出技能。核心仅 ~3K 行代码，Agent 循环仅 ~100 行。</p>
+    </div>
 
     <div class="card">
         <h2>🚀 核心功能</h2>
-        <ul><li>暂无</li></ul>
+        <ul>
+            <li><strong>自进化机制</strong> — 每次执行任务后，自动将执行路径"结晶"为可复用的 Skill；使用越久，能力越强，从 3K 行种子代码生长出个性化技能树</li>
+            <li><strong>极简架构</strong> — ~3K 行核心代码 + ~100 行 Agent 循环 + 9 个原子工具，零复杂依赖</li>
+            <li><strong>真实浏览器注入</strong> — 直接注入真实浏览器（保留登录会话），区别于沙箱/无头方案</li>
+            <li><strong>多层记忆系统</strong> — L0 元规则 → L1 洞察索引 → L2 全局事实 → L3 任务技能/SOP → L4 会话归档，五层记忆分层存储</li>
+            <li><strong>Token 高效</strong> — 上下文窗口 &lt;30K（对比主流方案的 200K-1M），token 消耗降低约 6 倍，同时减少幻觉</li>
+            <li><strong>全平台兼容</strong> — 支持 Claude、Gemini、Kimi、MiniMax 等主流 LLM 模型；跨平台运行</li>
+            <li><strong>多前端支持</strong> — Streamlit Web UI、Qt 桌面应用、微信/QQ/Telegram/飞书/钉钉 Bot</li>
+        </ul>
     </div>
 
-    
+    <div class="card">
+        <h2>⚙️ 技术亮点</h2>
+        <ul>
+            <li><strong>9 个原子工具覆盖完整系统控制</strong>：code_run（执行任意代码）、file_read/write/patch（文件操作）、web_scan（网页感知）、web_execute_js（浏览器控制）、ask_user（人工确认）、记忆管理工具。通过 code_run 还可动态安装包、调用 API、控制硬件——临时能力可被"结晶"为永久工具</li>
+            <li><strong>动态工具创建</strong> — 运行时通过 code_run 创建新工具，随后自动"结晶"为永久可用工具，实现能力的持续增长</li>
+            <li><strong>论文 + 社区支持</strong> — 已发布技术报告（arXiv: 2604.17091），有 Datawhale 社区教程和百万级技能库</li>
+        </ul>
+    </div>
 
-    
+    <div class="card">
+        <h2>📊 与主流方案对比</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr><th>特性</th><th>GenericAgent</th><th>OpenClaw</th><th>Claude Code</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>核心代码量</td><td>~3K 行</td><td>~530,000 行</td><td>大量（已开源）</td></tr>
+                <tr><td>上下文窗口</td><td>&lt;30K</td><td>200K-1M</td><td>200K</td></tr>
+                <tr><td>浏览器控制</td><td>真实浏览器（保留会话）</td><td>沙箱/无头</td><td>通过 MCP 插件</td></tr>
+                <tr><td>自进化</td><td>自主技能生长</td><td>插件生态</td><td>会话间无状态</td></tr>
+                <tr><td>部署方式</td><td>pip install + API Key</td><td>多服务编排</td><td>CLI + 订阅</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    
+    <div class="card">
+        <h2>👥 适用人群</h2>
+        <p>AI 研究者和开发者、希望构建自主 AI Agent 的团队、需要自动化浏览器/终端/手机操作的工程师、对 Agent 自进化机制感兴趣的研究人员</p>
+    </div>
+
+    <div class="card">
+        <h2>⚡ 快速上手</h2>
+        <div class="quickstart">git clone https://github.com/lsdefine/GenericAgent.git
+cd GenericAgent
+pip install requests streamlit pywebview
+cp mykey_template.py mykey.py  # 填入 LLM API Key
+python launch.pyw</div>
+    </div>
 
     <div class="cta">
-        <a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank">前往 GitHub 查看完整项目 →</a>
+        <a href="https://github.com/lsdefine/GenericAgent" target="_blank">前往 GitHub 查看完整项目 →</a>
     </div>
 
     <div class="footer">
