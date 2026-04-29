@@ -1,0 +1,29 @@
+interactive rebase in progress; onto 59fe9f3
+Last command done (1 command done):
+   pick ca6f1f9 # AI News: 2026-04-29
+Next command to do (1 remaining command):
+   pick 8d5bc97 # AI News Apr 29 2026
+  (use "git rebase --edit-todo" to view and edit)
+You are currently rebasing branch 'main' on '59fe9f3'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   git_sync.bat
+	new file:   github_sync.bat
+	new file:   reports/2026-04-29-with-links.html
+	new file:   run_push.bat
+	new file:   run_push.ps1
+
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+	both modified:   ai-github-reports/2026-04-29-github-projects.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	git_error.txt
+	git_status.txt
+

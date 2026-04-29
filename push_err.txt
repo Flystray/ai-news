@@ -1,0 +1,2 @@
+To https://github.com/Flystray/ai-news.git
+   59fe9f3..0d2add6  main -> main

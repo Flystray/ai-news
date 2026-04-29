@@ -1,0 +1,4 @@
+[main 0d2add6] AI News Apr 29 2026
+ Author: AI Bot <bot@ai-news.com>
+ 1 file changed, 336 insertions(+)
+ create mode 100644 reports/2026-04-29-with-links.html
