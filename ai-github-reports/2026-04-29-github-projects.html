@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenericAgent · GitHub AI 项目深度介绍 · 2026年04月29日</title>
+    <title>Graphify · GitHub AI 项目深度介绍 · 2026年04月29日</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
@@ -20,111 +20,140 @@
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
         .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
         .card ul { padding-left: 20px; }
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .card ol { padding-left: 20px; }
+        .card ol li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
         .highlight-card { background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%); border-left: 5px solid #f0ad4e; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
         .highlight-card p { font-size: 15px; color: #555; line-height: 1.85; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        .comparison-table th { background: #e8f0fe; color: #1e3a5f; padding: 8px 12px; text-align: left; font-weight: 600; }
+        .comparison-table td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
+        .comparison-table tr:hover { background: #f8f9ff; }
+        .confidence-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        .confidence-table th { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; text-align: left; font-weight: 600; }
+        .confidence-table td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
         .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
         .cta { text-align: center; margin-top: 30px; }
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
-        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-        .comparison-table th { background: #e8f0fe; color: #1e3a5f; padding: 8px 12px; text-align: left; font-weight: 600; }
-        .comparison-table td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
-        .comparison-table tr:hover { background: #f8f9ff; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年04月29日</div>
-        <h1>GenericAgent</h1>
-        <p class="subtitle">自进化通用智能体：仅 3K 行核心代码，让任何 LLM 获得完整的系统级控制能力，并自动将任务执行路径结晶为可复用的"技能树"</p>
+        <h1>Graphify</h1>
+        <p class="subtitle">将任意代码库、文档、论文、图片和视频转化为可查询的知识图谱，为 AI 编程助手提供结构化代码理解，实现 71.5 倍 Token 压缩率</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 8.0k</span>
-        <span>🍴 920+</span>
+        <span>⭐ 37.5k</span>
+        <span>🍴 4.2k</span>
         <span>📝 Python</span>
-        <span>🕐 活跃于今天</span>
+        <span>🕐 新建 26 天</span>
         <span>📄 MIT</span>
-        <span>🔗 <a href="https://github.com/lsdefine/GenericAgent" target="_blank">lsdefine/GenericAgent</a></span>
+        <span>🔗 <a href="https://github.com/safishamsi/graphify" target="_blank">safishamsi/graphify</a></span>
     </div>
 
     <div class="topics">
-        <span class="topic">agent</span>
-        <span class="topic">autonomous</span>
-        <span class="topic">self-evolving</span>
-        <span class="topic">llm</span>
-        <span class="topic">browser-automation</span>
+        <span class="topic">claude-code</span>
+        <span class="topic">knowledge-graph</span>
+        <span class="topic">graphrag</span>
+        <span class="topic">tree-sitter</span>
+        <span class="topic">ai-coding</span>
     </div>
 
     <div class="highlight-card">
-        <p><strong>💡 自举证明：</strong>该项目本身的所有 Git 操作——包括 git init、代码提交和 commit message——全部由 GenericAgent 自主完成，无需人工终端干预。这是"自进化"理念的最佳证明。</p>
+        <p><strong>💡 灵感来源：</strong>AI 教育先驱 Andrej Karpathy 维护一个 /raw 文件夹，随手把论文、截图、笔记丢进去。每次需要回顾主题时，要把整个文件夹喂给 LLM——浪费大量 Token。Graphify 就是这个痛点的答案：把原始文件变成结构化知识图谱，71.5 倍压缩，跨会话持久化。</p>
     </div>
 
     <div class="desc-card">
-        <p>当前 AI Agent 框架普遍面临两个矛盾：能力越强代码越臃肿（如 OpenClaw 约 53 万行）、上下文越长幻觉越多成本越高（主流方案需 200K-1M token）。GenericAgent 提出"极简自进化"范式——不预加载技能，让 Agent 自己进化出技能。核心仅 ~3K 行代码，Agent 循环仅 ~100 行。</p>
+        <p>2026 年 4 月初发布，仅 26 天 GitHub Stars 飙升至 37.5k。Graphify 是一款多模态知识图谱构建工具，专为 Claude Code、Codex、Cursor 等 AI 编程助手设计。通过 Tree-sitter 静态分析提取代码结构，结合 LLM 语义提取文档和图片内容，使用 Leiden 算法进行零 embedding 聚类，最终生成可查询的知识图谱。无需向量数据库、无需外部服务，完全本地运行。</p>
     </div>
 
     <div class="card">
         <h2>🚀 核心功能</h2>
         <ul>
-            <li><strong>自进化机制</strong> — 每次执行任务后，自动将执行路径"结晶"为可复用的 Skill；使用越久，能力越强，从 3K 行种子代码生长出个性化技能树</li>
-            <li><strong>极简架构</strong> — ~3K 行核心代码 + ~100 行 Agent 循环 + 9 个原子工具，零复杂依赖</li>
-            <li><strong>真实浏览器注入</strong> — 直接注入真实浏览器（保留登录会话），区别于沙箱/无头方案</li>
-            <li><strong>多层记忆系统</strong> — L0 元规则 → L1 洞察索引 → L2 全局事实 → L3 任务技能/SOP → L4 会话归档，五层记忆分层存储</li>
-            <li><strong>Token 高效</strong> — 上下文窗口 &lt;30K（对比主流方案的 200K-1M），token 消耗降低约 6 倍，同时减少幻觉</li>
-            <li><strong>全平台兼容</strong> — 支持 Claude、Gemini、Kimi、MiniMax 等主流 LLM 模型；跨平台运行</li>
-            <li><strong>多前端支持</strong> — Streamlit Web UI、Qt 桌面应用、微信/QQ/Telegram/飞书/钉钉 Bot</li>
+            <li><strong>多模态知识提取</strong> — 支持 25 种编程语言的 AST 解析（Python、TypeScript、Go、Rust、Java 等），同时支持 Markdown、PDF、图片（白板照片、架构图）、音视频文件（Whisper 本地转录）。所有内容统一进入同一张知识图谱</li>
+            <li><strong>三种标准产物</strong> — graph.html（基于 vis.js 的可交互图谱，浏览器中点击节点、搜索、按社区过滤）、GRAPH_REPORT.md（结构化分析报告：核心节点、意外连接、建议问题）、graph.json（持久化图谱数据，支持 Neo4j 导出）</li>
+            <li><strong>全平台集成</strong> — Claude Code、OpenAI Codex、Cursor、Gemini CLI、GitHub Copilot、Aider、OpenClaw 等 10+ 个工具的 /graphify 命令直接可用。一条命令完成安装配置，支持 MCP Server 模式</li>
+            <li><strong>零 embedding 聚类</strong> — 使用 Leiden 社区发现算法基于图拓扑结构划分社区，不需要向量数据库、不需要 embedding 模型，完全本地运行</li>
+            <li><strong>增量更新与实时监控</strong> — SHA256 哈希缓存机制，只重新解析变更部分。--watch 后台监控模式、Git Hooks 自动更新</li>
+            <li><strong>安全设计</strong> — 严格输入验证、SSRF/注入/XSS 防护、Cypher 注入防御。零遥测数据收集，仅向已配置的 AI 模型 API 发送语义内容（不发送原始源码）</li>
         </ul>
     </div>
 
     <div class="card">
         <h2>⚙️ 技术亮点</h2>
-        <ul>
-            <li><strong>9 个原子工具覆盖完整系统控制</strong>：code_run（执行任意代码）、file_read/write/patch（文件操作）、web_scan（网页感知）、web_execute_js（浏览器控制）、ask_user（人工确认）、记忆管理工具。通过 code_run 还可动态安装包、调用 API、控制硬件——临时能力可被"结晶"为永久工具</li>
-            <li><strong>动态工具创建</strong> — 运行时通过 code_run 创建新工具，随后自动"结晶"为永久可用工具，实现能力的持续增长</li>
-            <li><strong>论文 + 社区支持</strong> — 已发布技术报告（arXiv: 2604.17091），有 Datawhale 社区教程和百万级技能库</li>
-        </ul>
+        <p><strong>7 阶段模块化流水线：</strong></p>
+        <ol>
+            <li><strong>detect</strong> — 文件检测，支持 .graphifyignore 排除规则</li>
+            <li><strong>extract</strong> — 代码用 Tree-sitter 提取 AST（函数、类、导入、调用、docstring）；文档/图片用 Claude Vision 提取语义；音视频用 Whisper 转录后再提取</li>
+            <li><strong>build</strong> — 合并为 NetworkX 图，节点=概念/函数/类，边=调用/继承/引用</li>
+            <li><strong>cluster</strong> — Leiden 算法基于图拓扑结构划分社区，无需向量嵌入</li>
+            <li><strong>analyze</strong> — 识别 God Nodes（核心组件）、Surprise Connections（意外跨域连接）</li>
+            <li><strong>report</strong> — 从 # NOTE: # WHY: 注释中提取设计动机，生成 GRAPH_REPORT.md</li>
+            <li><strong>export</strong> — HTML 交互图谱 + JSON + Obsidian 兼容格式 + Neo4j Cypher</li>
+        </ol>
+        <p style="margin-top: 16px;"><strong>三级置信度体系</strong>（降低 AI 幻觉风险）：</p>
+        <table class="confidence-table">
+            <thead>
+                <tr><th>级别</th><th>含义</th><th>置信度</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>EXTRACTED</code></td><td>源码中直接存在的确定关系</td><td>1.0</td></tr>
+                <tr><td><code>INFERRED</code></td><td>LLM 合理推断的潜在关系</td><td>0.0~1.0</td></tr>
+                <tr><td><code>AMBIGUOUS</code></td><td>不确定的关系，需人工审核</td><td>—</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 16px;"><strong>71.5 倍 Token 压缩</strong> — 在 Karpathy 风格混合语料库（3 个 GPT 框架 + 5 篇论文 + 4 张图，~92k 词）上，传统方式查询消耗 ~123k tokens，Graphify 子图查询仅 ~1.7k tokens。</p>
     </div>
 
     <div class="card">
-        <h2>📊 与主流方案对比</h2>
+        <h2>📊 与同类工具对比</h2>
         <table class="comparison-table">
             <thead>
-                <tr><th>特性</th><th>GenericAgent</th><th>OpenClaw</th><th>Claude Code</th></tr>
+                <tr><th>特性</th><th>Graphify</th><th>Sourcegraph</th><th>Code2Vec</th><th>Neo4j</th></tr>
             </thead>
             <tbody>
-                <tr><td>核心代码量</td><td>~3K 行</td><td>~530,000 行</td><td>大量（已开源）</td></tr>
-                <tr><td>上下文窗口</td><td>&lt;30K</td><td>200K-1M</td><td>200K</td></tr>
-                <tr><td>浏览器控制</td><td>真实浏览器（保留会话）</td><td>沙箱/无头</td><td>通过 MCP 插件</td></tr>
-                <tr><td>自进化</td><td>自主技能生长</td><td>插件生态</td><td>会话间无状态</td></tr>
-                <tr><td>部署方式</td><td>pip install + API Key</td><td>多服务编排</td><td>CLI + 订阅</td></tr>
+                <tr><td>定位</td><td>AI 编程知识图谱</td><td>企业级代码搜索</td><td>函数级向量嵌入</td><td>通用图数据库</td></tr>
+                <tr><td>代码→图自动生成</td><td>✅ 自动</td><td>❌</td><td>❌</td><td>❌ 需手动</td></tr>
+                <tr><td>多模态支持</td><td>✅ 代码+文档+图+视频</td><td>❌ 仅代码</td><td>❌ 仅代码</td><td>❌ 仅结构化数据</td></tr>
+                <tr><td>外部依赖</td><td>✅ 零依赖</td><td>❌ 需服务端</td><td>❌ 需嵌入模型</td><td>❌ 需数据库实例</td></tr>
+                <tr><td>AI 助手集成</td><td>✅ 10+ 平台开箱即用</td><td>⚠️ 有限</td><td>❌</td><td>⚠️ 需手动对接</td></tr>
             </tbody>
         </table>
     </div>
 
     <div class="card">
         <h2>👥 适用人群</h2>
-        <p>AI 研究者和开发者、希望构建自主 AI Agent 的团队、需要自动化浏览器/终端/手机操作的工程师、对 Agent 自进化机制感兴趣的研究人员</p>
+        <p>使用 Claude Code、Cursor、Codex 等 AI 编程助手的日常开发者；负责 monorepo 或遗留系统维护、需要快速定位代码影响范围的工程师；希望将架构知识沉淀为可版本化图谱的技术团队；对 GraphRAG 在代码理解中的应用感兴趣的研究者。</p>
     </div>
 
     <div class="card">
         <h2>⚡ 快速上手</h2>
-        <div class="quickstart">git clone https://github.com/lsdefine/GenericAgent.git
-cd GenericAgent
-pip install requests streamlit pywebview
-cp mykey_template.py mykey.py  # 填入 LLM API Key
-python launch.pyw</div>
+        <div class="quickstart">pip install graphifyy          # 注意包名多一个 y
+graphify install              # 为 AI 助手安装适配层
+
+# 在任意项目中使用
+/graphify .                   # 一键生成知识图谱
+
+# 可选：Git Hooks 自动更新
+graphify hook install</div>
+    </div>
+
+    <div class="card">
+        <h2>🔮 作者愿景</h2>
+        <p>Graphify 的作者 Safi Shamsi 还有一个更大的计划——<strong>Penpax</strong>：一个端侧数字孪生系统，把会议记录、浏览器历史、文件系统、邮件和代码全部连成一张持续更新的知识图谱。核心原则：<strong>不上云、不用你的数据训练模型</strong>。</p>
     </div>
 
     <div class="cta">
-        <a href="https://github.com/lsdefine/GenericAgent" target="_blank">前往 GitHub 查看完整项目 →</a>
+        <a href="https://github.com/safishamsi/graphify" target="_blank">前往 GitHub 查看完整项目 →</a>
     </div>
 
     <div class="footer">
