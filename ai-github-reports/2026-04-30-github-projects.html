@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 开源项目日报 · 2026-04-30 · code-review-graph</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 760px; margin: 0 auto; }
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .badge {
+            background: rgba(76,175,80,0.2);
+            color: #4caf50;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(76,175,80,0.4);
+        }
+        .hero h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .hero h1 a { color: #4caf50; text-decoration: none; }
+        .hero h1 a:hover { text-decoration: underline; }
+        .hero .desc {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .meta span { display: flex; align-items: center; gap: 4px; }
+        .meta .fresh { color: #4caf50; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag {
+            background: rgba(255,255,255,0.08);
+            color: #aaa;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .section {
+            background: #111827;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h3 {
+            font-size: 16px;
+            color: #d0d0d0;
+            margin: 25px 0 12px 0;
+            font-weight: bold;
+        }
+        .section p { font-size: 15px; color: #b0b0b0; margin-bottom: 14px; }
+        .section ul { padding-left: 22px; margin: 12px 0; }
+        .section li { font-size: 15px; color: #c0c0c0; margin-bottom: 8px; line-height: 1.7; }
+        .section li strong { color: #e0e0e0; }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(76,175,80,0.1), rgba(76,175,80,0.05));
+            border: 1px solid rgba(76,175,80,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box h4 {
+            color: #4caf50;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .highlight-box p { color: #a0a0a0; margin-bottom: 0; }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 28px; font-weight: bold; color: #4caf50; }
+        .stat-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background: rgba(255,255,255,0.06); color: #d0d0d0; font-weight: bold; }
+        td { color: #b0b0b0; }
+        td strong { color: #e0e0e0; }
+        code {
+            background: rgba(76,175,80,0.15);
+            color: #81c784;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .cmd-block {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 3px solid #4caf50;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #c9d1d9;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 13px;
+        }
+        .footer a { color: #4caf50; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .ref-list { margin-top: 8px; }
+        .ref-list a { color: #4caf50; font-size: 13px; }
+        .mono { font-family: 'Courier New', monospace; }
+        @media (max-width: 600px) {
+            .hero { padding: 24px; }
+            .section { padding: 20px; }
+            .hero h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+    <div class="badge-row">
+        <span class="badge">⭐ 14.1k Stars</span>
+        <span class="badge">🔥 新建 63 天</span>
+        <span class="badge">⚡ MCP 协议</span>
+        <span class="badge">🌲 Tree-sitter</span>
+    </div>
+    <h1><a href="https://github.com/tirth8205/code-review-graph" target="_blank">code-review-graph</a></h1>
+    <p class="desc">为 AI 编程助手构建增量代码知识图谱 — 审查 Token 降低 6.8×，大型 monorepo 降低 49×</p>
+    <div class="meta">
+        <span>🕐 活跃于 5 天前</span>
+        <span>📝 Python</span>
+        <span>🍴 1.6k Forks</span>
+        <span>📄 MIT License</span>
+    </div>
+    <div class="tags">
+        <span class="tag">knowledge-graph</span>
+        <span class="tag">claude-code</span>
+        <span class="tag">tree-sitter</span>
+        <span class="tag">mcp</span>
+        <span class="tag">code-review</span>
+        <span class="tag">ai-coding</span>
+    </div>
+</div>
+
+<!-- 数据速览 -->
+<div class="section">
+    <h2>📊 核心数据</h2>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="num">6.8×</div>
+            <div class="label">代码审查 Token 压缩</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">49×</div>
+            <div class="label">大型 monorepo 最高压缩</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">&lt;2s</div>
+            <div class="label">增量更新耗时</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">23+</div>
+            <div class="label">支持语言数量</div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目背景 -->
+<div class="section">
+    <h2>📌 项目背景</h2>
+    <p>当你在 VS Code 里打开一个 1000 行的新项目，向 Claude Code 发出第一条指令——"帮我理解这个代码库"——它会做什么？答案是：它会把你整个项目从头到尾读一遍。无论你只改了 3 个文件，还是有 10000 个文件，它都会重新扫描，因为每次对话对它来说都是"无状态"的。</p>
+    <p>这是所有 AI 编程工具的共同痛点——上下文开销随代码库规模线性增长。一位名叫 Tirth Kanani 的独立开发者，在一次代码审查任务中遭遇了这个问题的极端案例：那次审查消耗了 <strong>5500 个 Token</strong>，而实际上只需要 <strong>800 个</strong>。这促使他花了三个月开发了 code-review-graph。</p>
+    <p>它的核心思路是——在人类开发者和 AI 编程工具之间，插入一个<strong>"代码结构索引层"</strong>：用 Tree-sitter 把代码解析成结构化图谱，然后让 AI 只读真正相关的部分。GitHub 上线仅两个月，已获得 <strong>14.1k stars</strong>，被 AI 开发者社区广泛讨论。</p>
+</div>
+
+<!-- 核心功能 -->
+<div class="section">
+    <h2>🚀 核心功能</h2>
+
+    <h3>1. 增量代码知识图谱构建</h3>
+    <p>首次运行 <code>code-review-graph build</code> 后，工具会用 Tree-sitter 解析整个代码库，将每个文件转换为 AST（抽象语法树），从中提取节点（函数、类、类型、测试）和边（调用、导入、继承、依赖、测试覆盖），全部存入本地 SQLite 数据库。一个 2900 个文件的 Python + TypeScript 项目，首次构建仅需约 10 秒。构建完成后图谱持久化存储，后续对话无需重新读取文件。</p>
+
+    <h3>2. 精准影响半径分析</h3>
+    <p>这是 code-review-graph 最有价值的功能。当文件发生变更时，图谱执行<strong>广度优先搜索（BFS）</strong>，追踪所有可能受影响的上游调用者、下游依赖方和相关测试，从而精确定位变更的"影响范围"。AI 助手只需要读取这个精确的最小文件集。测试数据显示，在包含 <strong>27000+ 文件的 monorepo</strong> 中，仅修改 5 个文件时，影响半径仅涉及约 15 个文件——而不是 27000 个。</p>
+
+    <h3>3. MCP 协议原生集成</h3>
+    <p><code>code-review-graph install</code> 一条命令即可自动检测你安装了哪些工具（Claude Code、Cursor、Codex、Kiro 等），为每个平台生成正确的 MCP 配置文件，将图感知指令注入平台规则文件。安装后直接重启编辑器即可使用。工具优先推荐使用 <code>uvx</code> 运行 MCP 服务（如系统安装了 uv），否则回退到标准 pip 模式。</p>
+
+    <h3>4. 增量更新：不到 2 秒完成刷新</h3>
+    <p>每次文件保存或 git 提交时，工具通过 <strong>SHA-256 哈希校验</strong>快速检测变更文件，仅对受影响的文件和依赖进行差异解析并更新图谱。一个 2900 个文件的项目，增量更新在 <strong>2 秒内</strong>完成。</p>
+
+    <h3>5. 多维代码理解与导航</h3>
+    <p>执行流（Flows）追踪从入口点到各函数的调用链，计算每个函数的"关键性"评分；社区检测（Communities）使用 Leiden 算法将代码按模块自然分组；语义搜索结合 SQLite FTS5 全文索引和可选向量嵌入，支持关键词和语义双重查询模式。</p>
+
+    <h3>6. 自动化知识库生成</h3>
+    <p><code>code-review-graph wiki</code> 自动将图谱转化为 Markdown 文档；<code>code-review-graph visualize</code> 生成基于 vis.js 的交互式 HTML 图谱页面，在浏览器中自由探索代码结构。</p>
+</div>
+
+<!-- 技术亮点 -->
+<div class="section">
+    <h2>⚙️ 技术亮点</h2>
+
+    <h3>亮点一：Tree-sitter AST — 精准到语言语义的代码理解</h3>
+    <p>不同于简单的正则匹配，Tree-sitter 为每种编程语言提供正式的语法解析器，能准确识别函数签名、类定义、类型注解等语义结构。这意味着图谱中的节点是"语义完整"的——一个函数节点包含了它的名称、参数、返回值、docstring 以及它在代码中的实际位置。AI 不是在读"文本"，而是在读"结构化的语义网络"。</p>
+
+    <h3>亮点二：MCP 协议 — 开放标准的 AI 工具互联</h3>
+    <p>code-review-graph 选择 MCP（Model Context Protocol）作为与 AI 编程工具的通信协议，这是 Claude Code、Cursor、Kiro、OpenClaw 等多个主流工具采用的开放标准。这意味着一个图谱可以同时为多个 AI 工具提供上下文，无需为每个工具单独适配。MCP 工具集包含：图谱增删改查、blast 半径分析、审查上下文生成、执行流查询、架构概览等。</p>
+
+    <h3>亮点三：Leiden 拓扑聚类 — 无需 embedding 的架构理解</h3>
+    <p>传统工具依赖向量嵌入来做语义理解，需要额外运行 embedding 模型、消耗额外 Token。code-review-graph 使用 Leiden 算法直接基于图拓扑结构进行社区发现，同一社区内的节点在调用关系、导入关系和依赖关系上具有高度内聚性——这恰恰对应了代码的"模块化"设计。这种方法完全不依赖外部服务，在本地即可完成高质量的架构分析。</p>
+</div>
+
+<!-- 适用人群 -->
+<div class="section">
+    <h2>👥 适用人群</h2>
+    <ul>
+        <li><strong>大型项目开发者</strong>：代码库超过 1000 个文件，每次 AI 对话都要等待很长时间。影响半径分析能显著减少等待时间和 Token 费用，尤其适合 monorepo 场景。</li>
+        <li><strong>高频使用 AI 编程的团队</strong>：每天大量使用 Claude Code、Cursor 等工具处理代码审查、bug 修复、功能开发。增量更新确保图谱始终是最新的。</li>
+        <li><strong>需要理解陌生代码库的开发者</strong>：无论是接手遗留项目还是参与开源贡献，图谱的社区检测和架构概览能帮助快速建立对项目整体结构的认知。</li>
+        <li><strong>AI 辅助开发研究者</strong>：基准测试数据是公开的，可通过 <code>code-review-graph eval --all</code> 复现，是研究 LLM + 代码理解工具效率的绝佳案例。</li>
+    </ul>
+</div>
+
+<!-- 快速上手 -->
+<div class="section">
+    <h2>🚀 快速上手</h2>
+    <div class="cmd-block"># 1. 安装
+pip install code-review-graph
+
+# 2. 进入项目目录并初始化
+cd your-project
+code-review-graph install
+
+# 3. 构建知识图谱
+code-review-graph build
+
+# 4. 可选：生成交互式图谱页面
+code-review-graph visualize
+
+# 5. 可选：生成知识库文档
+code-review-graph wiki
+
+# 6. 重启 AI 编程工具，开始使用</div>
+    <p>安装后，在 Claude Code 中直接说："Build the code review graph for this project"，或让 AI 助手使用 MCP 工具集查询图谱。也可指定平台：<code>--platform claude-code</code>、<code>--platform cursor</code>、<code>--platform codex</code>。</p>
+</div>
+
+<!-- 对比分析 -->
+<div class="section">
+    <h2>📊 对比分析</h2>
+    <table>
+        <tr>
+            <th>维度</th>
+            <th>code-review-graph</th>
+            <th>Graphify</th>
+            <th>传统 RAG</th>
+        </tr>
+        <tr>
+            <td><strong>Token 压缩效果</strong></td>
+            <td>6.8×（审查）~49×（大型项目）</td>
+            <td>71.5×（多模态场景）</td>
+            <td>约 3~10×</td>
+        </tr>
+        <tr>
+            <td><strong>更新机制</strong></td>
+            <td>增量更新，&lt;2 秒</td>
+            <td>需手动重建或 watch</td>
+            <td>每次重新索引</td>
+        </tr>
+        <tr>
+            <td><strong>多模态支持</strong></td>
+            <td>仅代码文件</td>
+            <td>代码 + PDF + 图片 + 音视频</td>
+            <td>文本文件</td>
+        </tr>
+        <tr>
+            <td><strong>协议标准</strong></td>
+            <td>MCP（开放标准）</td>
+            <td>私有 Skill / CLI</td>
+            <td>API</td>
+        </tr>
+        <tr>
+            <td><strong>适用场景</strong></td>
+            <td>AI 编程助手上下文优化</td>
+            <td>代码库理解 / 论文知识库</td>
+            <td>文档问答</td>
+        </tr>
+        <tr>
+            <td><strong>聚类方式</strong></td>
+            <td>Leiden 拓扑聚类</td>
+            <td>Leiden 拓扑聚类</td>
+            <td>Embedding + 余弦相似度</td>
+        </tr>
+    </table>
+    <div class="highlight-box">
+        <h4>💡 选择建议</h4>
+        <p>Graphify 的 71.5× 压缩效果来自其多模态处理能力（论文、图片、音视频都压缩），在<strong>纯代码审查场景</strong>下，code-review-graph 的 6.8×~49× 数据更具参考价值。如果你的需求是"让 AI 编程助手更高效地理解代码"，code-review-graph 是更专业的选择；如果你需要处理多模态文档并建立知识库，Graphify 更适合。</p>
+    </div>
+</div>
+
+<!-- 参考资料 -->
+<div class="section">
+    <h2>📚 参考资料</h2>
+    <div class="ref-list">
+        <p>• <a href="https://github.com/tirth8205/code-review-graph" target="_blank">GitHub - tirth8205/code-review-graph</a></p>
+        <p>• <a href="https://deepwiki.com/tirth8205/code-review-graph" target="_blank">DeepWiki - code-review-graph 深度解析</a></p>
+        <p>• <a href="https://wangjunjian.com/posts/2026-04-19-code-review-graph.html" target="_blank">王俊坚 - 代码评审知识图谱：code-review-graph</a></p>
+        <p>• <a href="https://pypi.org/project/code-review-graph/" target="_blank">PyPI - code-review-graph</a></p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📅 AI 开源项目日报 · 2026-04-30</p>
+    <p>👤 fly的AI学习 · <a href="https://flystray.github.io/ai-news/" target="_blank">查看历史日报</a></p>
+</div>
+
+</div>
+</body>
+</html>
