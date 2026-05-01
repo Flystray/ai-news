@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 开源项目日报 · 2026-05-01 · OpenAI Codex CLI</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 760px; margin: 0 auto; }
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .badge {
+            background: rgba(16,163,127,0.2);
+            color: #10a37f;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(16,163,127,0.4);
+        }
+        .hero h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .hero h1 a { color: #10a37f; text-decoration: none; }
+        .hero h1 a:hover { text-decoration: underline; }
+        .hero .desc {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .meta span { display: flex; align-items: center; gap: 4px; }
+        .meta .fresh { color: #10a37f; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag {
+            background: rgba(255,255,255,0.08);
+            color: #aaa;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .section {
+            background: #111827;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #10a37f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h3 {
+            font-size: 16px;
+            color: #d0d0d0;
+            margin: 25px 0 12px 0;
+            font-weight: bold;
+        }
+        .section p { font-size: 15px; color: #b0b0b0; margin-bottom: 14px; }
+        .section ul { padding-left: 22px; margin: 12px 0; }
+        .section li { font-size: 15px; color: #c0c0c0; margin-bottom: 8px; line-height: 1.7; }
+        .section li strong { color: #e0e0e0; }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(16,163,127,0.1), rgba(16,163,127,0.05));
+            border: 1px solid rgba(16,163,127,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box h4 {
+            color: #10a37f;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .highlight-box p { color: #a0a0a0; margin-bottom: 0; }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 28px; font-weight: bold; color: #10a37f; }
+        .stat-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background: rgba(255,255,255,0.06); color: #d0d0d0; font-weight: bold; }
+        td { color: #b0b0b0; }
+        td strong { color: #e0e0e0; }
+        code {
+            background: rgba(16,163,127,0.15);
+            color: #4ade80;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .cmd-block {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 3px solid #10a37f;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #c9d1d9;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 13px;
+        }
+        .footer a { color: #10a37f; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .ref-list { margin-top: 8px; }
+        .ref-list a { color: #10a37f; font-size: 13px; }
+        .mono { font-family: 'Courier New', monospace; }
+        @media (max-width: 600px) {
+            .hero { padding: 24px; }
+            .section { padding: 20px; }
+            .hero h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+    <div class="badge-row">
+        <span class="badge">⭐ 18k Stars</span>
+        <span class="badge">🔥 发布 7 天</span>
+        <span class="badge">⚡ ChatGPT 集成</span>
+        <span class="badge">🌐 多端协同</span>
+    </div>
+    <h1><a href="https://github.com/openai/codex" target="_blank">openai/codex</a></h1>
+    <p class="desc">OpenAI 重启 Codex 品牌 —— 终端 CLI + 桌面 App + Web + IDE 四位一体，发布 24 小时 Star 破万</p>
+    <div class="meta">
+        <span>🕐 活跃于 1 天前</span>
+        <span>📝 TypeScript</span>
+        <span>🍴 开源</span>
+        <span>📄 MIT License</span>
+    </div>
+    <div class="tags">
+        <span class="tag">openai</span>
+        <span class="tag">cli</span>
+        <span class="tag">ai-coding</span>
+        <span class="tag">chatgpt-integration</span>
+        <span class="tag">multi-modal</span>
+        <span class="tag">agent</span>
+    </div>
+</div>
+
+<!-- 数据速览 -->
+<div class="section">
+    <h2>📊 核心数据</h2>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="num">~80%</div>
+            <div class="label">SWE-bench Verified</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">56.8%</div>
+            <div class="label">SWE-bench Pro 领先</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">4×</div>
+            <div class="label">Token 效率 vs Claude Code</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">10×</div>
+            <div class="label">配额量 vs 同级 Claude Code</div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目背景 -->
+<div class="section">
+    <h2>📌 项目背景</h2>
+    <p>Codex 这个品牌对 AI 圈来说是个"老朋友"。2021 年，OpenAI 基于 GPT-3 微调出了专门用于代码生成的 Codex 模型，一度是 <strong>GitHub Copilot 的底层引擎</strong>。但随着 OpenAI 战略调整，Codex 品牌逐渐淡出。</p>
+    <p><strong>2026 年 4 月，OpenAI 正式重启 Codex</strong>——这次不是 API 模型，而是一个完整的本地 AI 编程助手产品，包含三个形态：<strong>Codex CLI</strong>（终端命令行）、<strong>Codex App</strong>（桌面应用）、<strong>Codex Web</strong>（云端 Agent，访问 chatgpt.com/codex）。</p>
+    <p>发布不到 24 小时，GitHub Star 数突破 <strong>1 万</strong>；一周后达到 <strong>1.8 万</strong>，增速超过同期绝大多数 AI 编程工具。这背后折射出的是开发者对"OpenAI 官方编程工具"的强烈期待。</p>
+    <div class="highlight-box">
+        <h4>💡 两个关键产品决策</h4>
+        <p><strong>第一，与 ChatGPT 订阅深度绑定。</strong>登录 ChatGPT Plus/Pro/Business/Edu 账号后，Codex 可直接使用对应模型的 Agent 能力，无需单独按 token 计费。这让它在"订阅制 AI 编程工具"中拥有了目前最慷慨的配额。</p>
+        <p><strong>第二，全平台覆盖。</strong>不仅提供 CLI 和桌面 App，还支持 VS Code、Cursor、Windsurf 插件。OpenAI 显然想用 Codex 统一用户在各种场景下的 AI 编程需求。</p>
+    </div>
+</div>
+
+<!-- 核心功能 -->
+<div class="section">
+    <h2>🚀 核心功能</h2>
+
+    <h3>1. 多形态无缝切换：CLI + 桌面 + IDE + Web</h3>
+    <p>Codex 是目前 AI 编程工具中形态最完整的：终端里运行 <code>codex</code> 进入 CLI 对话；运行 <code>codex app</code> 启动桌面应用（支持 GUI 操作、worktree 可视化管理）；在 VS Code / Cursor / Windsurf 中安装插件获得内嵌体验；或者直接访问 chatgpt.com/codex 使用云端 Agent。<strong>四种形态共享同一个 ChatGPT 订阅，上下文可延续。</strong></p>
+
+    <h3>2. "开箱即用"的完整工作流</h3>
+    <p>与 Claude Code 需要配置 Hooks、Subagents、Skills 才能发挥全部能力不同，Codex CLI 的<strong>默认工作流就已经包含</strong>：自动扫描整个代码库 → 搜索解决方案 → 编写代码 → 运行回归测试。用户无需学习高级功能即可获得可靠的编码结果。对 AI 编程新手来说，这个设计显著降低了上手门槛。</p>
+
+    <h3>3. ChatGPT 订阅深度集成，配额极为慷慨</h3>
+    <p>这是 Codex 最大的竞争优势。使用 ChatGPT Plus（20 美元/月）登录后，Codex CLI 每 5 小时窗口可发送 <strong>30~150 条消息</strong>（搭配 GPT-5.3-Codex 模型）。真实用户反馈：单窗口使用几乎不会触发限额。作为对比，同级 Claude Code（Claude Pro，20 美元/月）使用 Sonnet 模型时，每 5 小时仅 <strong>10~40 次对话</strong>，且很容易触达上限。</p>
+    <p>换算成工作量，Codex 同等订阅的实际可用量是 Claude Code 的 <strong>10 倍以上</strong>。</p>
+
+    <h3>4. 极高的 Token 效率</h3>
+    <p>第三方测试数据显示，在完成相同编码任务时，Codex CLI 的 Token 消耗量约为 Claude Code 的 <strong>1/4~1/2</strong>。按 API 计费口径计算，20 美元在 Codex CLI 中能做的工作量，在 Claude Code 中需要约 <strong>80 美元</strong>才能等价完成。这对高频使用 AI 编程的开发者来说是实质性成本优势。</p>
+
+    <h3>5. 多模态输入支持</h3>
+    <p>Codex CLI 支持截图输入（类似 Claude Code 的多模态能力），可以将 UI 设计稿、错误截图直接传给模型，让它基于图像内容生成或修复代码。这个功能在调试前端问题或实现设计稿时特别实用。</p>
+
+    <h3>6. 自动化任务（Automations）</h3>
+    <p>Codex 内置定时任务功能，可以通过自然语言配置周期性执行的编程任务（如"每天早上 9 点检查 issue 并用中文回复"）。任务在沙箱中运行，结果进入审核队列，用户确认后再合并。这个设计类似 <code>cron</code> + Codex 的组合，减少了手动触发重复任务的负担。</p>
+</div>
+
+<!-- 技术亮点 -->
+<div class="section">
+    <h2>⚙️ 技术亮点</h2>
+
+    <h3>亮点一：GPT-5.3-Codex 模型——推理与执行的平衡</h3>
+    <p>Codex CLI 的默认模型是 GPT-5.3-Codex（ChatGPT Plus/Pro 用户可直接使用），这是 OpenAI 专门针对编程任务微调的模型。在 SWE-bench Verified 基准测试中，GPT-5.3-Codex 得分约 <strong>80%</strong>，与 Claude Opus 4.6 的 <strong>80.9%</strong> 基本持平（差距在统计误差范围内）。</p>
+    <p>但在 <strong>SWE-bench Pro</strong>（更复杂、更接近真实开发场景的基准）中，GPT-5.3-Codex 以 <strong>56.8%</strong> 的成绩领先于未公布成绩的 Opus 4.6。</p>
+    <p>值得注意的是 OpenAI 社区反馈：GPT-5 系列相比 GPT-4.1，推理质量有明显提升，但<strong>生成速度显著变慢</strong>（约慢 4~7 倍），且经常出现 <code>Failed to sample tokens</code> 错误导致中断。OpenAI 已推出 GPT-5.3-Codex-Spark（实时模型），输出速度达 <strong>1000+ tokens/秒</strong>，但整体工作流仍然偏重。</p>
+
+    <h3>亮点二：与 ChatGPT 生态的无缝衔接</h3>
+    <p>Codex 不是孤立的 CLI 工具，而是整个 ChatGPT 产品矩阵的一部分。你在 Codex CLI 中的对话历史可以在 chatgpt.com/codex 网页版中继续；在桌面 App 中开启的任务，可以在 CLI 中接管。<strong>这种"多端协同"是目前其他 AI 编程工具（Claude Code、Cursor、Cline）都未实现的。</strong>对已经在使用 ChatGPT 的开发者来说，这种连续性显著提升了使用体验。</p>
+
+    <h3>亮点三：Agent Skills 系统——可复用的能力单元</h3>
+    <p>Codex 支持 Agent Skills（指令、资源、脚本的打包单元），类似 Claude Code 的 Skills 机制，但更强调<strong>跨团队协作和社区分发</strong>。一个 Skill 可以包含：系统指令（不依赖具体项目结构）、资源文件（Gemini CLI 兼容）、可执行脚本、环境配置。Skills 通过 <code>skills/</code> 目录分发，支持团队共享和社区发布。目前 OpenAI 官方正在建立 Skills 生态，这可能是未来 AI 编程工具的重要差异化方向。</p>
+</div>
+
+<!-- 适用人群 -->
+<div class="section">
+    <h2>👥 适用人群</h2>
+    <ul>
+        <li><strong>AI 编程新手</strong>：Codex 的开箱即用体验是目前同类产品中最友好的，无需配置 Hooks、Subagents 等高级功能就能获得可靠结果。加上 ChatGPT 订阅的慷慨配额，个人项目开发几乎"无限量"。</li>
+        <li><strong>已使用 ChatGPT 的开发者</strong>：如果你已经是 ChatGPT Plus/Pro 用户，Codex 相当于"免费附赠"的编程助手，无需额外付费即可获得完整的 AI 编程能力。</li>
+        <li><strong>对成本敏感的个人开发者</strong>：Codex 的 Token 效率显著高于 Claude Code，同等预算下能完成更多工作。对于没有企业报销、自费使用 AI 工具的开发者，这是实质性的经济优势。</li>
+        <li><strong>需要多端协同的开发者</strong>：如果你希望在终端、桌面、IDE、Web 之间无缝切换编程会话，Codex 是目前唯一支持这种完整多端体验的工具。</li>
+    </ul>
+</div>
+
+<!-- 快速上手 -->
+<div class="section">
+    <h2>🛠️ 快速上手</h2>
+    <div class="cmd-block"># 1. 安装（任选一种方式）
+npm install -g @openai/codex
+# 或
+brew install --cask codex
+
+# 2. 启动（首次启动会引导登录）
+codex
+# 选择 "Sign in with ChatGPT"，用 Plus/Pro 账号登录
+
+# 3. 桌面 App 模式（可选）
+codex app
+
+# 4. IDE 插件安装（可选）
+# 访问 https://developers.openai.com/codex/ide 按指引安装
+
+# 5. 使用（直接输入自然语言指令）
+# "帮我修复这个 bug：当用户名包含中文时会崩溃"
+# "基于 screenshots/design.png 实现对应的 UI 组件"</div>
+    <p>登录后，直接在终端中输入自然语言指令即可。也可访问 <a href="https://chatgpt.com/codex" target="_blank">chatgpt.com/codex</a> 使用 Web 版，或在 VS Code / Cursor / Windsurf 中安装插件获得内嵌体验。</p>
+</div>
+
+<!-- 对比分析 -->
+<div class="section">
+    <h2>📊 对比分析</h2>
+    <table>
+        <tr>
+            <th>维度</th>
+            <th>OpenAI Codex CLI</th>
+            <th>Claude Code</th>
+            <th>Cursor</th>
+        </tr>
+        <tr>
+            <td><strong>SWE-bench Verified</strong></td>
+            <td>~80% (GPT-5.3-Codex)</td>
+            <td><strong>80.9%</strong> (Opus 4.6)</td>
+            <td>N/A（依赖接入的模型）</td>
+        </tr>
+        <tr>
+            <td><strong>20 美元档配额</strong></td>
+            <td>30~150 条/5h，几乎无限</td>
+            <td>10~40 次对话/5h，易触顶</td>
+            <td>$20/月订阅制</td>
+        </tr>
+        <tr>
+            <td><strong>Token 效率</strong></td>
+            <td><strong>高（约为 Claude Code 的 1/4）</strong></td>
+            <td>中等</td>
+            <td>取决于接入模型</td>
+        </tr>
+        <tr>
+            <td><strong>生成速度</strong></td>
+            <td>较慢（GPT-5 比 GPT-4.1 慢 4~7×）</td>
+            <td><strong>快（小任务秒级响应）</strong></td>
+            <td>快</td>
+        </tr>
+        <tr>
+            <td><strong>多端协同</strong></td>
+            <td><strong>CLI + 桌面 + IDE + Web</strong></td>
+            <td>仅 CLI + 有限 Web</td>
+            <td>仅 IDE</td>
+        </tr>
+        <tr>
+            <td><strong>高级功能</strong></td>
+            <td>Agent Skills + Automations</td>
+            <td>Subagents + Hooks + Skills + Ultraplan</td>
+            <td>Agent Mode</td>
+        </tr>
+        <tr>
+            <td><strong>新手友好度</strong></td>
+            <td>⭐⭐⭐⭐⭐（开箱即用）</td>
+            <td>⭐⭐⭐（需配置）</td>
+            <td>⭐⭐⭐⭐⭐（IDE 集成）</td>
+        </tr>
+    </table>
+    <div class="highlight-box">
+        <h4>💡 选择建议</h4>
+        <p><strong>AI 编程新手 / 个人项目</strong>：优先 Codex，配额够大、开箱即用，ChatGPT 订阅用户相当于免费获得。</p>
+        <p><strong>企业日常开发 / 追求效率</strong>：优先 Claude Code，速度更快、功能更完整、Subagents 和 Hooks 对工作流帮助极大。</p>
+        <p><strong>最划算组合</strong>：同时订阅 Codex 和 Claude Code（各 $20/月），用 Codex 处理个人项目，用 Claude Code 处理企业开发。</p>
+    </div>
+</div>
+
+<!-- 参考资料 -->
+<div class="section">
+    <h2>📚 参考资料</h2>
+    <div class="ref-list">
+        <p>• <a href="https://github.com/openai/codex" target="_blank">GitHub - openai/codex</a></p>
+        <p>• <a href="https://developers.openai.com/codex" target="_blank">OpenAI Codex 官方文档</a></p>
+        <p>• <a href="https://hellogithub.com/article/4bd7507e55164821bf7bb6ae2b112158" target="_blank">HelloGitHub - 一天 Star 破万的开源项目</a></p>
+        <p>• <a href="https://www.ccliang.com/2026/04/11/ai/%E9%80%89codex%E8%BF%98%E6%98%AFclaude/" target="_blank">沧沧凉凉 - 选 Codex 还是 Claude Code？</a></p>
+        <p>• <a href="https://ofox.ai/zh/blog/ai-programming-tools-comparison-2026/" target="_blank">ofox.ai - 2026 AI 编程工具大横评</a></p>
+        <p>• <a href="https://www.heyuan110.com/zh/posts/ai/2026-02-19-claude-code-vs-codex/" target="_blank">Heyuan110 - Claude Code 和 Codex CLI 八维度深度对比</a></p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📅 AI 开源项目日报 · 2026-05-01</p>
+    <p>👤 fly的AI学习 · <a href="https://flystray.github.io/ai-news/" target="_blank">查看历史日报</a></p>
+</div>
+
+</div>
+</body>
+</html>
