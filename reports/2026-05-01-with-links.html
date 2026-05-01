@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-01 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; line-height: 1.8; }
+        .news-card ul {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-05-01</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>🔥</span> 今日重磅</h2>
+
+            <div class="news-card">
+                <h3>DeepSeek 公布多模态推理新范式：用视觉原语思考 <span class="tag">技术突破</span></h3>
+                <p>DeepSeek 联合北大、清华在 GitHub 发布多模态模型「Thinking with Visual Primitives」，提出以视觉原语思考的全新推理范式——用坐标做推理锚点，在多项推理测试中性能超越 GPT-5.4 等主流模型。这距 V4 预览版发布仅一周，DeepSeek 再次震撼行业。V4 本身以 1.6 万亿参数、MIT 全开源、百万 Token 上下文标配引爆全球，Flash 版本推理成本低至 GPT-5.5 Pro 的 1.55‰，并完成华为昇腾 950PR 的 Day 0 适配。</p>
+                <div class="links">
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24620" target="_blank" class="link">📌 AITNT 报道 →</a>
+                    <a href="https://news.qq.com/rain/a/20260425A08EUT00" target="_blank" class="link">📌 腾讯新闻 · V4 发布 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>阿里通义发布 QoderWake：真正的"数字员工"来了 <span class="tag">重磅产品</span></h3>
+                <p>阿里于 4 月 30 日正式发布全新 Agent 产品 QoderWake，定位生产可用的数字员工，具备岗位制、长期记忆、权限管控等能力，可 7×24 小时自主值守完成岗位工作。这标志着大模型从"对话助手"向"AI 劳动力"的角色跃迁。与此同时，平头哥发布首款内置 PCIe Switch 的 400G 智能网卡「磐脉 920」，补齐 AI 算力最后一块短板，将率先部署阿里云。</p>
+                <div class="links">
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24614" target="_blank" class="link">📌 AITNT · QoderWake →</a>
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24597" target="_blank" class="link">📌 AITNT · 磐脉 920 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>谷歌 Q1 财报炸裂：净利暴涨 81%，Gemini 用户破 3.5 亿 <span class="tag">商业动态</span></h3>
+                <p>谷歌母公司 Alphabet 发布 2026 年 Q1 财报，净利润同比暴增 81%，谷歌云营收首破 200 亿美元（同比 +63%），Gemini 付费用户达 3.5 亿。与此同时，谷歌在 Cloud Next '26 上推出第八代自研 TPU 芯片（TPU 8t 训练 / TPU 8i 推理），发布 Gemini Deep Research 和 Deep Research Max 智能体，并宣布设立 7.5 亿美元 AI 基金推动企业采纳。布林（Sergey Brin）亲自督战，组建精英团队专攻 Gemini 编程能力，誓与 Anthropic 正面竞争。</p>
+                <div class="links">
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24607" target="_blank" class="link">📌 AITNT · 财报 →</a>
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24606" target="_blank" class="link">📌 AITNT · Deep Research →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>Karpathy 最新判断：Vibe Coding 只是抬高了地板，真正的战场在这里 <span class="tag">行业观点</span></h3>
+                <p>OpenAI 联合创始人 Andrej Karpathy 在 AI Ascent 2026 对话中指出，Vibe Coding 抬高了开发下限，但 agentic engineering（智能体工程学）才是保证质量的新工程学科，人类判断力与理解力仍不可替代。同期，Atom 原班人马历时五年、用 Rust 重写百万行代码推出的 Zed 1.0 AI 代码编辑器上线即爆火，GitHub 获 8 万星，标志 AI 代码编辑器的竞争进入新阶段。</p>
+                <div class="links">
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24594" target="_blank" class="link">📌 AITNT · Karpathy →</a>
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24617" target="_blank" class="link">📌 AITNT · Zed 1.0 →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+
+            <div class="news-card">
+                <h3>字节豆包登顶中文视觉大模型榜首，超越谷歌 Gemini <span class="tag">国内动态</span></h3>
+                <p>4 月 29 日，SuperCLUE-VLM 2026 年 4 月中文多模态视觉语言模型测评结果发布，字节跳动 Doubao-Seed-2.0-Pro-260215 以 90.66 分拿下总榜第一，超越海外最强模型谷歌 Gemini-3.1-Pro-Preview（89.35 分）。国产阵营整体爆发，阿里 Qwen3.5 系列、商汤 SenseNova、智谱 GLM 等均有亮眼表现。同时，豆包 App 于 4 月下旬低调上线"豆包帮你选"AI 购物功能，依托抖音电商生态，可在 App 内完成大部分网购流程。</p>
+                <div class="links">
+                    <a href="https://finance.sina.com.cn/tech/discovery/2026-04-29/doc-inhwckrn7869124.shtml" target="_blank" class="link">📌 新浪科技 · 榜单 →</a>
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24605" target="_blank" class="link">📌 AITNT · 豆包电商 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>百度文心 ERNIE-5.1 荣登 LMArena 国内文本榜第一 <span class="tag">国内动态</span></h3>
+                <p>4 月 30 日，大模型竞技场 LMArena 公布最新排名，文心大模型 ERNIE-5.1-Preview 荣登文本榜国内第一、全球第十三，在法律与政府、商业管理金融、软件与 IT 服务等多个垂类领域表现突出。4 月 24 日，百度在创作者大会上宣布升级搜索 AI 引擎，核心是 Master Agent，旨在将搜索从信息查找升级为任务执行。</p>
+                <div class="links">
+                    <a href="https://yiyan.baidu.com/blog/zh/posts/ernie-5.1-preview-0430-release-on-lmarena/" target="_blank" class="link">📌 百度官方 →</a>
+                    <a href="https://www.eeo.com.cn/2026/0429/856534.shtml" target="_blank" class="link">📌 经济观察网 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>宇树 R1 人形机器人定价 2.69 万元，具身智能进入万元时代 <span class="tag">硬件动态</span></h3>
+                <p>宇树科技发布迄今定价最低的人形机器人 R1 系列双臂机器人，售价 2.69 万元起，含四个版本，可用于工业及日常家用场景，支持二次开发。CEO 王兴兴还亲测了斑马智能的"元神 AI 汽车机器人大脑"并点赞。同时，深圳小象电动突破人形机器人关节电机量产难题，成本砍半，已进入华为、比亚迪等头部供应链。</p>
+                <div class="links">
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24615" target="_blank" class="link">📌 AITNT · 宇树R1 →</a>
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24604" target="_blank" class="link">📌 AITNT · 小象电动 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>特斯拉车机语音接入豆包 + DeepSeek：最大一次功能更新 <span class="tag">行业合作</span></h3>
+                <p>4 月 22 日，特斯拉宣布车机语音服务将正式接入字节跳动豆包大模型与 DeepSeekChat，两款模型均通过火山引擎提供。这是特斯拉自 2013 年进入中国市场以来车机语音助手迎来的最大一次功能升级。同期，国产 AI 医疗超级智能体也传来突破——一脉阳光联合北京天坛医院发布的颅脑 CT 超级智能体准确率达 87.8%，1 分钟生成报告。</p>
+                <div class="links">
+                    <a href="https://www.itbear.com.cn/html/2026-04/1294286.html" target="_blank" class="link">📌 ITBear · 特斯拉 →</a>
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24621" target="_blank" class="link">📌 AITNT · 医疗AI →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>中国 AI 医疗超级智能体亮相：准确率 87.8%，推动影像 AI 进入 3.0 <span class="tag">垂直应用</span></h3>
+                <p>一脉阳光联合影禾医脉、北京天坛医院发布全球首个临床可用颅脑 CT 超级智能体，手握国内最大医学影像数据库，准确率达 87.8%，1 分钟可生成完整报告。这一进展标志着中国医疗 AI 从辅助诊断工具向 AI 原生临床决策支持系统的实质性跨越。</p>
+                <div class="links">
+                    <a href="https://www.aitntnews.com/newDetail.html?newId=24621" target="_blank" class="link">📌 AITNT 报道 →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>AI 从"对话工具"走向"数字劳动力"：</strong>阿里 QoderWake 的发布标志着大模型正在从"聪明的聊天机器人"进化为可自主值守、拥有岗位权限管理的"数字员工"。这意味着企业 AI 采纳从试点走向规模化生产，AI Agent 赛道进入实质性商业化阶段。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>国产视觉模型全面反超，字节豆包登顶全球中文榜单：</strong>SuperCLUE-VLM 最新结果显示，字节 Doubao-Seed-2.0-Pro 以 90.66 分超越谷歌 Gemini，国产模型在多模态视觉领域已具备全球领先实力。这将加速 AI 视觉在电商、工业检测、医疗影像等场景的规模化落地。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>表征压缩：世界模型从 L2 迈向 L3 的核心瓶颈：</strong>两位 95 后研究者在新加坡南洋理工创立 SparcAI，提出表征压缩是构建真正世界模型的核心挑战，并已在 NeurIPS 2025 发表相关工作。这一方向可能决定未来 3-5 年 AI 在物理世界建模和具身智能的天花板。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>人形机器人万元时代开启，具身智能进入规模化前夜：</strong>宇树 R1 以 2.69 万元刷新人形机器人价格底线，深圳小象电动实现关节电机量产成本减半，华为、比亚迪等头部厂商进入供应链。2026 年是人形机器人从实验室走向工厂和家庭的转折年。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>Agent 上下文失焦成致命瓶颈，记忆管理工具迎来爆发：</strong>AI Agent 普遍存在"上下文丢失"问题，智谱 GLM-5 披露高并发场景异常源于底层竞态 Bug。上下文管理与长期记忆工具（如"洁癖.skill"）正在成为 Agent 工程化的核心基础设施，决定 Agent 能否真正可靠地完成长程任务。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📡 数据来源：AITNT · 腾讯新闻 · 新浪财经 · IT之家 · 经济观察网 · 36氪 · 百度官方</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: 2026-05-01 09:40</p>
+            <p style="margin-top:20px;">🤖 由 WorkBuddy AI 自动生成 | <a href="https://Flystray.github.io/ai-news/reports/2026-05-01-with-links.html">在线访问</a></p>
+        </div>
+    </div>
+</body>
+</html>
