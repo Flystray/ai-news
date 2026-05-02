@@ -3,315 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="OpenAI Codex CLI 深度解析：迟到三年重启 Codex 品牌，Token 效率 4 倍于 Claude Code，发布 24 小时 Star 破万">
-    <title>AI 开源项目日报 · openai/codex：迟到三年的"归来"</title>
+    <title>把 LLM 装进口袋：Google LiteRT-LM 开启端侧推理新纪元</title>
     <style>
-        * { margin:0; padding:0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: #ffffff;
-            color: #333333;
-            line-height: 2;
-            padding: 20px;
-        }
-        .container {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.9;
             max-width: 680px;
             margin: 0 auto;
-            background: #ffffff;
+            padding: 20px;
         }
         h1 {
             font-size: 22px;
-            font-weight: bold;
-            color: #000000;
-            margin-bottom: 15px;
+            color: #111;
+            border-left: 4px solid #07c160;
+            padding-left: 12px;
+            margin-bottom: 8px;
             line-height: 1.5;
         }
-        .quote {
-            background: #f7f7f7;
-            border-left: 4px solid #1aad19;
-            padding: 12px 15px;
-            margin-bottom: 30px;
-            font-size: 14px;
-            color: #666;
-        }
-        h2 {
-            font-size: 18px;
-            font-weight: bold;
-            color: #000000;
-            margin: 30px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #1aad19;
-        }
-        h3 {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1aad19;
-            margin: 20px 0 10px 0;
-            line-height: 1.5;
-        }
-        p {
-            font-size: 15px;
-            color: #333;
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-        li {
-            font-size: 15px;
-            color: #333;
-            margin-bottom: 10px;
-            line-height: 1.8;
-        }
-        li strong { color: #000; }
-        .badge-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-        .badge {
-            background: #f0f9eb;
-            color: #1aad19;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 20px 0;
-        }
-        .stat-card {
-            background: #f7f7f7;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-        }
-        .stat-card .num {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1aad19;
-        }
-        .stat-card .label {
-            font-size: 12px;
+        .subtitle {
             color: #888;
-            margin-top: 4px;
+            font-size: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
         }
+        .section-title {
+            font-size: 18px;
+            color: #07c160;
+            margin: 28px 0 12px 0;
+            font-weight: bold;
+        }
+        p { font-size: 15px; color: #444; margin-bottom: 14px; }
+        ul, ol { padding-left: 24px; margin: 12px 0; }
+        li { font-size: 15px; color: #444; margin-bottom: 8px; }
+        li strong { color: #222; }
+        code {
+            background: #f4f4f4;
+            color: #c7254e;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        pre {
+            background: #f4f4f4;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        pre code { background: transparent; color: #333; padding: 0; }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 13px;
+            margin: 16px 0;
+            font-size: 14px;
         }
         th, td {
             border: 1px solid #e0e0e0;
-            padding: 10px;
+            padding: 8px 10px;
             text-align: left;
         }
-        th {
-            background: #f7f7f7;
-            font-weight: bold;
-            color: #333;
-        }
+        th { background: #f8f8f8; color: #333; font-weight: bold; }
         td { color: #555; }
-        .highlight-box {
-            background: #f0f9eb;
-            border-left: 4px solid #1aad19;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
+        td strong { color: #222; }
+        .highlight {
+            background: #e8f8f0;
+            border-left: 3px solid #07c160;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 6px 6px 0;
         }
-        .highlight-box h4 {
-            color: #1aad19;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        .highlight-box p {
-            color: #555;
-            margin-bottom: 0;
-            font-size: 14px;
-        }
-        .cmd-block {
-            background: #f7f7f7;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #333;
-            overflow-x: auto;
-            white-space: pre;
-            line-height: 1.6;
-        }
-        .divider {
-            height: 1px;
-            background: #e0e0e0;
-            margin: 30px 0;
-        }
+        .highlight strong { color: #07c160; }
         .footer {
-            margin-top: 40px;
-            padding: 20px;
-            background: #f7f7f7;
-            border-radius: 8px;
             text-align: center;
-            font-size: 14px;
-            color: #666;
+            padding: 24px 0;
+            color: #aaa;
+            font-size: 13px;
+            border-top: 1px solid #eee;
+            margin-top: 32px;
         }
-        .footer strong { color: #1aad19; }
-        a { color: #1aad19; text-decoration: none; }
+        hr { border: none; border-top: 1px solid #eee; margin: 24px 0; }
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            h1 { font-size: 20px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
 
-        <h1>OpenAI Codex CLI：迟到三年的"归来"，Token 效率 4× 于 Claude Code</h1>
+<h1>把 LLM 装进口袋：Google LiteRT-LM 开启端侧推理新纪元</h1>
+<p class="subtitle">今日推荐 · Google 端侧 LLM 推理框架 · 2026-05-02</p>
 
-        <div class="quote">
-            🤖 AI 开源项目日报 · 每日精选一个有启发价值的开源 AI 项目 · fly的AI学习
-        </div>
+<p>今天推荐一个 Google 刚推出不久、但已经被集成到数百万真实设备上的开源项目：<strong>LiteRT-LM</strong>——把大模型真正跑在手机、浏览器和嵌入式设备上的生产级推理框架。</p>
 
-        <div class="badge-row">
-            <span class="badge">⭐ 18k Stars</span>
-            <span class="badge">🔥 发布 7 天</span>
-            <span class="badge">⚡ ChatGPT 集成</span>
-            <span class="badge">🌐 多端协同</span>
-        </div>
+<!-- 项目背景 -->
+<h2 class="section-title">为什么值得关注？</h2>
 
-        <h2>📌 项目背景</h2>
+<p>过去两年，大模型的主流部署方式是"云端 API"：把 prompt 发到远程服务器，等几百毫秒拿回结果。这有三大问题：<strong>网络延迟不可控</strong>（100–500ms 起步）、<strong>隐私难保障</strong>（数据全离设备）、<strong>成本随用量线性增长</strong>。</p>
 
-        <p>Codex 这个品牌对 AI 圈来说是个"老朋友"。2021 年，OpenAI 基于 GPT-3 微调出了专门用于代码生成的 Codex 模型，一度是 <strong>GitHub Copilot 的底层引擎</strong>。但随着 OpenAI 战略调整，Codex 品牌逐渐淡出。</p>
+<p>与此同时，2025–2026 年的旗舰芯片 NPU 算力已突破 40 TOPS：高通骁龙 X Elite（45 TOPS）、Apple M4（38 TOPS）、Intel Lunar Lake NPU（48 TOPS）。硬件就位了，缺的是能真正用起来的软件。</p>
 
-        <p><strong>2026 年 4 月，OpenAI 正式重启 Codex</strong>——这次不是 API 模型，而是一个完整的本地 AI 编程助手产品，包含三个形态：<strong>Codex CLI</strong>（终端命令行）、<strong>Codex App</strong>（桌面应用）、<strong>Codex Web</strong>（云端 Agent，访问 chatgpt.com/codex）。</p>
+<p>LiteRT-LM 就是这个答案。它是 TensorFlow Lite 的正式继任者，但这次是为 LLM 从底层重新设计的——TensorFlow Lite 的架构（静态图、批量推理、无 KV Cache）完全不适合 LLM。</p>
 
-        <p>发布不到 24 小时，GitHub Star 数突破 <strong>1 万</strong>；一周后达到 <strong>1.8 万</strong>，增速超过同期绝大多数 AI 编程工具。这背后折射出的是开发者对"OpenAI 官方编程工具"的强烈期待。</p>
+<div class="highlight">
+<strong>LiteRT-LM 的核心定位：</strong>生产级、开源、跨平台（Android/iOS/Web/桌面/IoT）的端侧 LLM 推理引擎，已在 Chrome、Chromebook Plus、Pixel Watch 等数百万真实设备上验证。
+</div>
 
-        <div class="highlight-box">
-            <h4>💡 两个关键产品决策</h4>
-            <p><strong>第一，与 ChatGPT 订阅深度绑定。</strong>登录 ChatGPT Plus/Pro/Business/Edu 账号后，Codex 可直接使用对应模型的 Agent 能力，无需单独按 token 计费。这让它在"订阅制 AI 编程工具"中拥有了目前最慷慨的配额。</p>
-            <p><strong>第二，全平台覆盖。</strong>不仅提供 CLI 和桌面 App，还支持 VS Code、Cursor、Windsurf 插件。OpenAI 显然想用 Codex 统一用户在各种场景下的 AI 编程需求。</p>
-        </div>
+<!-- 核心功能 -->
+<h2 class="section-title">十大核心功能</h2>
 
-        <h2>🚀 核心功能</h2>
+<p><strong>1. 跨平台覆盖：</strong>Android（稳定）、iOS（开发中）、Web/Wasm（稳定）、Linux/macOS/Windows（WSL）、Raspberry Pi</p>
+<p><strong>2. 多级硬件加速：</strong>GPU（Adreno/Mali/Apple GPU）+ NPU（Hexagon/Apple Neural Engine）+ CPU（ARM NEON/SIMD）</p>
+<p><strong>3. 多模态能力：</strong>文本 + 图片（图表/文档）+ 语音，一套框架全支持</p>
+<p><strong>4. 原生工具调用：</strong>函数调用、结构化 JSON、LGuidance 约束、RAG，Agentic Workflow 端侧直跑</p>
+<p><strong>5. 四级量化体系：</strong>FP16 → INT8（<1% 损失）→ <strong>INT4（3–8% 损失，7B 模型仅 3.5GB）</strong> → INT2</p>
+<p><strong>6. KV Cache 量化 + 分页管理：</strong>INT8 量化 KV Cache，分页管理（16 token/块，LRU 淘汰），内存利用率提升 60%</p>
+<p><strong>7. 三层内存池（EdgeMemoryManager）：</strong>热点数据（<1MB，<1ns）→ 主内存（8–16GB）→ 存储池（>64GB），实测内存减少 40%、延迟提升 2.5×、能耗降低 60%</p>
+<p><strong>8. 算子融合：</strong>Attention 全链路融合为单次核函数，HBM 读写 4 次→2 次，长序列性能提升 10×+</p>
+<p><strong>9. 多语言 API：</strong>Kotlin（生产）、Python（nanobind）、C++、Swift（即将）、Rust</p>
+<p><strong>10. HuggingFace 直接加载：</strong>无需手动转换，API 直接指定 HuggingFace 仓库即可</p>
 
-        <h3>1. 多形态无缝切换：CLI + 桌面 + IDE + Web</h3>
-        <p>Codex 是目前 AI 编程工具中形态最完整的：终端里运行 <code>codex</code> 进入 CLI 对话；运行 <code>codex app</code> 启动桌面应用；在 VS Code / Cursor / Windsurf 中安装插件获得内嵌体验；或者直接访问 chatgpt.com/codex 使用云端 Agent。<strong>四种形态共享同一个 ChatGPT 订阅，上下文可延续。</strong></p>
+<!-- 性能数据 -->
+<h2 class="section-title">实测性能数据</h2>
 
-        <h3>2. "开箱即用"的完整工作流</h3>
-        <p>与 Claude Code 需要配置 Hooks、Subagents、Skills 才能发挥全部能力不同，Codex CLI 的默认工作流就已经包含：自动扫描整个代码库 → 搜索解决方案 → 编写代码 → 运行回归测试。用户无需学习高级功能即可获得可靠的编码结果。</p>
+<p><strong>端侧设备：</strong></p>
+<table>
+<tr><th>设备</th><th>模型</th><th>量化</th><th>速度</th></tr>
+<tr><td>Pixel 9 Pro (Tensor G4)</td><td>Gemma-4B</td><td>INT4</td><td>18 tokens/s</td></tr>
+<tr><td>MacBook Air M4</td><td>Gemma-4B</td><td>INT4</td><td>42 tokens/s</td></tr>
+<tr><td>RTX 4090</td><td>Gemma-4B</td><td>INT4</td><td>95 tokens/s</td></tr>
+</table>
 
-        <h3>3. ChatGPT 订阅深度集成，配额极为慷慨</h3>
-        <p>使用 ChatGPT Plus（20 美元/月）登录后，Codex CLI 每 5 小时窗口可发送 <strong>30~150 条消息</strong>。真实用户反馈：单窗口使用几乎不会触发限额。作为对比，同级 Claude Code 使用 Sonnet 模型时，每 5 小时仅 <strong>10~40 次对话</strong>，且很容易触达上限。</p>
+<p><strong>WebGPU 浏览器推理（Chrome 134 + RTX 4070 Laptop）：</strong></p>
+<table>
+<tr><th>模型</th><th>量化</th><th>首token延迟</th><th>生成速度</th></tr>
+<tr><td>Gemma-2B</td><td>INT4</td><td>2.3s</td><td>42 tokens/s</td></tr>
+<tr><td>Phi-3-mini</td><td>INT4</td><td>1.8s</td><td>55 tokens/s</td></tr>
+<tr><td>Qwen2-1.5B</td><td>INT4</td><td>1.1s</td><td>78 tokens/s</td></tr>
+</table>
 
-        <h3>4. 极高的 Token 效率</h3>
-        <p>第三方测试数据显示，在完成相同编码任务时，Codex CLI 的 Token 消耗量约为 Claude Code 的 <strong>1/4~1/2</strong>。按 API 计费口径计算，20 美元在 Codex CLI 中能做的工作量，在 Claude Code 中需要约 <strong>80 美元</strong>才能等价完成。</p>
+<p><strong>对比 llama.cpp：</strong>CPU 解码速度快 3×，GPU 模式快 7×。</p>
 
-        <h2>⚙️ 技术亮点</h2>
+<!-- 技术亮点 -->
+<h2 class="section-title">三个技术亮点</h2>
 
-        <h3>亮点一：GPT-5.3-Codex 模型</h3>
-        <p>在 SWE-bench Verified 基准测试中，GPT-5.3-Codex 得分约 <strong>80%</strong>，与 Claude Opus 4.6 的 <strong>80.9%</strong> 基本持平。但在 <strong>SWE-bench Pro</strong>（更接近真实开发场景）中，GPT-5.3-Codex 以 <strong>56.8%</strong> 的成绩领先。</p>
+<p><strong>亮点1：唯一支持 WebGPU 的端侧 LLM 引擎</strong><br/>
+通过 WebGPU + WASM，直接在浏览器里跑 LLM，零服务器成本、零网络延迟。对 Web AI 应用（实时翻译、代码补全）是颠覆性能力。</p>
 
-        <h3>亮点二：与 ChatGPT 生态的无缝衔接</h3>
-        <p>Codex 不是孤立的 CLI 工具，而是整个 ChatGPT 产品矩阵的一部分。你在 Codex CLI 中的对话历史可以在网页版中继续；在桌面 App 中开启的任务，可以在 CLI 中接管。<strong>这种"多端协同"是目前其他 AI 编程工具都未实现的。</strong></p>
+<p><strong>亮点2：三级内存池的精细工程</strong><br/>
+端侧内存带宽是主要瓶颈（移动端 LPDDR5X ~68 GB/s，远低于服务端 DDR5 的 ~400 GB/s）。三层池设计（pin 热点在 SRAM → 激活值预取 → 备用权重 DMA 换入）是关键突破。</p>
 
-        <h3>亮点三：Agent Skills 系统</h3>
-        <p>Codex 支持 Agent Skills（指令、资源、脚本的打包单元），更强调跨团队协作和社区分发。一个 Skill 可以包含系统指令、资源文件、可执行脚本、环境配置，通过 <code>skills/</code> 目录分发。</p>
+<p><strong>亮点3：生产级验证</strong><br/>
+不是实验室项目——已集成 Chrome、Chromebook Plus、Pixel Watch，在数百万真实设备上运行。这是开源社区少数几个真正生产就绪的端侧 LLM 框架之一。</p>
 
-        <h2>📊 核心数据</h2>
-        <div class="stat-grid">
-            <div class="stat-card">
-                <div class="num">~80%</div>
-                <div class="label">SWE-bench Verified</div>
-            </div>
-            <div class="stat-card">
-                <div class="num">56.8%</div>
-                <div class="label">SWE-bench Pro 领先</div>
-            </div>
-            <div class="stat-card">
-                <div class="num">4×</div>
-                <div class="label">Token 效率 vs Claude Code</div>
-            </div>
-            <div class="stat-card">
-                <div class="num">10×</div>
-                <div class="label">配额量 vs 同级 Claude Code</div>
-            </div>
-        </div>
+<!-- 适用人群 -->
+<h2 class="section-title">适用人群</h2>
 
-        <h2>📊 对比分析</h2>
-        <table>
-            <tr>
-                <th>维度</th>
-                <th>OpenAI Codex CLI</th>
-                <th>Claude Code</th>
-                <th>Cursor</th>
-            </tr>
-            <tr>
-                <td><strong>SWE-bench</strong></td>
-                <td>~80%</td>
-                <td><strong>80.9%</strong></td>
-                <td>N/A</td>
-            </tr>
-            <tr>
-                <td><strong>20 美元档配额</strong></td>
-                <td>30~150 条/5h</td>
-                <td>10~40 次对话/5h</td>
-                <td>$20/月订阅制</td>
-            </tr>
-            <tr>
-                <td><strong>Token 效率</strong></td>
-                <td><strong>高（1/4 Claude Code）</strong></td>
-                <td>中等</td>
-                <td>取决于接入模型</td>
-            </tr>
-            <tr>
-                <td><strong>多端协同</strong></td>
-                <td><strong>CLI+桌面+IDE+Web</strong></td>
-                <td>仅 CLI + 有限 Web</td>
-                <td>仅 IDE</td>
-            </tr>
-            <tr>
-                <td><strong>新手友好度</strong></td>
-                <td>⭐⭐⭐⭐⭐</td>
-                <td>⭐⭐⭐</td>
-                <td>⭐⭐⭐⭐⭐</td>
-            </tr>
-        </table>
+<ul>
+<li>移动应用开发者（Android/iOS App 离线程 AI）</li>
+<li>隐私敏感应用（医疗健康、金融，数据不离设备）</li>
+<li>Web 开发者（浏览器 AI 能力，零成本部署）</li>
+<li>边缘计算工程师（IoT 设备，智能家居/工业物联网）</li>
+<li>LLM 推理优化研究人员</li>
+</ul>
 
-        <div class="highlight-box">
-            <h4>💡 选择建议</h4>
-            <p><strong>AI 编程新手 / 个人项目</strong>：优先 Codex，配额够大、开箱即用。</p>
-            <p><strong>企业日常开发 / 追求效率</strong>：优先 Claude Code，速度更快、功能更完整。</p>
-            <p><strong>最划算组合</strong>：同时订阅 Codex 和 Claude Code，用 Codex 处理个人项目，用 Claude Code 处理企业开发。</p>
-        </div>
+<!-- 快速上手 -->
+<h2 class="section-title">快速上手</h2>
 
-        <h2>🛠️ 快速上手</h2>
-        <div class="cmd-block"># 1. 安装（任选一种方式）
-npm install -g @openai/codex
-# 或
-brew install --cask codex
+<p><strong>CLI 尝鲜（推荐）：</strong></p>
+<pre><code>uv tool install litert-lm
 
-# 2. 启动（首次启动会引导登录）
-codex
-# 选择 "Sign in with ChatGPT"，用 Plus/Pro 账号登录
+litert-lm run   --from-huggingface-repo=google/gemma-3n-E2B-it-litert-lm   gemma-3n-E2B-it-int4   --prompt="解释一下 Transformer 架构"</code></pre>
 
-# 3. 桌面 App 模式（可选）
-codex app
+<p><strong>Python：</strong></p>
+<pre><code>pip install litertlm
+from litertlm import Model
+model = Model.from_huggingface("google/gemma-3n-E2B-it-litert-lm")
+print(model.generate("法国的首都是哪里？").text)</code></pre>
 
-# 4. 使用（直接输入自然语言指令）
-# "帮我修复这个 bug：当用户名包含中文时会崩溃"
-# "基于 screenshots/design.png 实现对应的 UI 组件"</div>
+<p><strong>Android：</strong></p>
+<pre><code>dependencies { implementation("com.google.ai.edge.litert:litert:0.10.1") }
 
-        <div class="divider"></div>
+val model = Model.fromFile("gemma-3n-e2b-it.litertlm")
+val response = model.generate("法国的首都是哪里？")
+println(response.text)</code></pre>
 
-        <div class="footer">
-            <p>📚 <strong>fly的AI学习</strong> · 每日更新优质 AI 开源项目推荐</p>
-            <p>🔗 <a href="https://flystray.github.io/ai-news/ai-github-reports/2026-05-01-github-projects.html" target="_blank">查看完整图文版</a></p>
-        </div>
+<!-- 总结 -->
+<hr/>
+<p>LiteRT-LM 是 2026 年端侧 AI 领域最重要的开源项目之一。它填补了关键空白：一个<strong>生产级、真正跨平台、对 Web 友好的 LLM 推理框架</strong>。Google 背景意味着不会轻易放弃，Apache 2.0 意味着可以放心用于商业项目，3,147 stars 的体量意味着现在还是蓝海期——现在上车正是时候。</p>
 
-    </div>
+<div class="footer">
+<p>👤 fly的AI学习 · AI 开源项目日报 · 2026-05-02</p>
+<p><a href="https://flystray.github.io/ai-news/" style="color:#07c160;">查看历史日报</a></p>
+</div>
+
 </body>
 </html>

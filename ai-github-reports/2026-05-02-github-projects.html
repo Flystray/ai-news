@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 开源项目日报 · 2026-05-02 · LiteRT-LM 端侧推理</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 760px; margin: 0 auto; }
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .badge {
+            background: rgba(16,163,127,0.2);
+            color: #10a37f;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(16,163,127,0.4);
+        }
+        .hero h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .hero h1 a { color: #10a37f; text-decoration: none; }
+        .hero h1 a:hover { text-decoration: underline; }
+        .hero .desc {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .meta span { display: flex; align-items: center; gap: 4px; }
+        .meta .fresh { color: #10a37f; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag {
+            background: rgba(255,255,255,0.08);
+            color: #aaa;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .section {
+            background: #111827;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #10a37f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h3 {
+            font-size: 16px;
+            color: #d0d0d0;
+            margin: 25px 0 12px 0;
+            font-weight: bold;
+        }
+        .section p { font-size: 15px; color: #b0b0b0; margin-bottom: 14px; }
+        .section ul { padding-left: 22px; margin: 12px 0; }
+        .section li { font-size: 15px; color: #c0c0c0; margin-bottom: 8px; line-height: 1.7; }
+        .section li strong { color: #e0e0e0; }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(16,163,127,0.1), rgba(16,163,127,0.05));
+            border: 1px solid rgba(16,163,127,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box h4 {
+            color: #10a37f;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .highlight-box p { color: #a0a0a0; margin-bottom: 0; }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 28px; font-weight: bold; color: #10a37f; }
+        .stat-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background: rgba(255,255,255,0.06); color: #d0d0d0; font-weight: bold; }
+        td { color: #b0b0b0; }
+        td strong { color: #e0e0e0; }
+        code {
+            background: rgba(16,163,127,0.15);
+            color: #4ade80;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        pre {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 3px solid #10a37f;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #c9d1d9;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 13px;
+        }
+        .footer a { color: #10a37f; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .ref-list { margin-top: 8px; }
+        .ref-list a { color: #10a37f; font-size: 13px; }
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 24px 0;
+        }
+        @media (max-width: 600px) {
+            .hero { padding: 24px; }
+            .section { padding: 20px; }
+            .hero h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+    <div class="badge-row">
+        <span class="badge">⭐ 3,147 Stars</span>
+        <span class="badge">🔥 2026-04 发布</span>
+        <span class="badge">⚡ WebGPU 原生</span>
+        <span class="badge">🌐 全平台</span>
+    </div>
+    <h1><a href="https://github.com/google-ai-edge/LiteRT-LM" target="_blank">google-ai-edge/LiteRT-LM</a></h1>
+    <p class="desc">把 LLM 装进口袋：Google 端侧 LLM 推理框架，TensorFlow Lite 的正式继任者，让大模型真正跑在手机、浏览器和嵌入式设备上</p>
+    <div class="meta">
+        <span>🕐 快速上升中</span>
+        <span>📝 C++ / Python</span>
+        <span>🍴 开源</span>
+        <span>📄 Apache 2.0</span>
+    </div>
+    <div class="tags">
+        <span class="tag">google</span>
+        <span class="tag">llm-inference</span>
+        <span class="tag">edge-ai</span>
+        <span class="tag">webgpu</span>
+        <span class="tag">mobile-ai</span>
+        <span class="tag">android</span>
+    </div>
+</div>
+
+<!-- 数据速览 -->
+<div class="section">
+    <h2>📊 核心数据</h2>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="num">18 tokens/s</div>
+            <div class="label">Pixel 9 Pro (Gemma-4B INT4)</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">42 tokens/s</div>
+            <div class="label">MacBook Air M4 (Gemma-4B INT4)</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">3× faster</div>
+            <div class="label">CPU vs llama.cpp</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">7× faster</div>
+            <div class="label">GPU vs llama.cpp</div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目背景 -->
+<div class="section">
+    <h2>📌 项目背景</h2>
+    <p>2026 年，端侧 AI 的拐点已经到来。过去两年，大模型的主流部署方式一直是"云端 API"——把用户的 prompt 发到远程服务器，等几百毫秒再拿回结果。这套模式有三大结构性困境：<strong>网络延迟不可控</strong>（100–500ms 起步）、<strong>数据隐私难保障</strong>（所有输入都离开设备）、<strong>成本随用量线性累积</strong>。</p>
+    <p>与此同时，2025–2026 年发布的旗舰芯片 NPU 算力已经突破 40 TOPS：高通骁龙 X Elite（45 TOPS）、Apple M4（38 TOPS）、Intel Lunar Lake NPU（48 TOPS）相继落地。硬件已经就位，缺的是能真正把这些算力用起来的软件框架。</p>
+    <p>LiteRT-LM 是 Google AI Edge 团队推出的<strong>生产级、开源、跨平台 LLM 推理框架</strong>，也是 TensorFlow Lite 的直接继承者——但这次，是为大型语言模型从底层重新设计的。</p>
+    <div class="highlight-box">
+        <h4>💡 TensorFlow Lite 为什么不够用了？</h4>
+        <p>TensorFlow Lite 的架构是为 CNN、RNN 等小模型（<100MB）设计的：静态计算图、批量推理、无 KV Cache 支持。这些设计在 LLM 时代全部成为瓶颈。LiteRT-LM 原生支持动态长度序列、自回归推理、KV Cache、流式 token 生成——这些都是 Transformer 推理的基本需求。</p>
+    </div>
+</div>
+
+<!-- 核心功能 -->
+<div class="section">
+    <h2>🚀 核心功能</h2>
+
+    <h3>1. 跨平台推理支持</h3>
+    <p>覆盖从数据中心到指尖的全场景：Android（稳定）、iOS（开发中）、Web/Wasm/WebGL（稳定）、Linux/macOS/Windows（WSL）、Raspberry Pi 等 ARM 嵌入式设备。</p>
+
+    <h3>2. 多级硬件加速</h3>
+    <p>GPU 加速（Adreno / Mali / Apple GPU）、NPU 加速（Hexagon / Apple Neural Engine / 联发科 NPU）、CPU 优化（ARM NEON / SIMD 深度优化）。</p>
+
+    <h3>3. 多模态能力</h3>
+    <p>支持文本、图片（图表、文档）、语音音频流（Gemma Vision、Qwen2-VL、Gemma 3n 语音模型）。一套框架覆盖三种模态。</p>
+
+    <h3>4. 原生工具调用（Tool Use / Function Calling）</h3>
+    <p>原生支持函数调用、结构化 JSON 输出、LGuidance 语法约束，以及 RAG 内置支持。Agentic Workflow 可直接在端侧运行。</p>
+
+    <h3>5. 四级量化体系</h3>
+    <p>FP16 → INT8（<1% 精度损失）→ <strong>INT4（3–8%，3.5GB/7B 模型）</strong> → INT2。支持 GPTQ、AWQ 等先进量化算法。</p>
+
+    <h3>6. KV Cache 量化与分页管理</h3>
+    <p>支持 KV Cache INT8 量化，以及类操作系统的分页 KV Cache（Paged KV Cache）：以 16 个 token 为一块，支持 LRU 淘汰策略。内存利用率提升约 <strong>60%</strong>。</p>
+
+    <h3>7. 分层内存池（EdgeMemoryManager）</h3>
+    <p>三层设计：高速缓存池（<1MB，延迟 <1ns）→ 主内存池（8–16GB）→ 存储池（>64GB）。实测：内存占用减少 <strong>40%</strong>，推理延迟提升 <strong>2.5×</strong>，能耗降低 <strong>60%</strong>。</p>
+
+    <h3>8. 算子融合（Kernel Fusion）</h3>
+    <p>整个 Attention 融合为单次 CUDA/Metal/Vulkan 核函数调用，HBM 读写从 4 次降至 2 次。结合 Flash Attention 2/3，长序列性能提升 <strong>10× 以上</strong>。</p>
+
+    <h3>9. 多语言 API</h3>
+    <p>Kotlin（生产就绪）、Python（nanobind）、C++（高性能）、Swift（即将发布）、C API、Rust 绑定。</p>
+
+    <h3>10. 专有格式 + HuggingFace 直接加载</h3>
+    <p>使用 <code>.litertlm</code> 专有格式，也支持从 HuggingFace 仓库直接加载，无需手动转换。</p>
+</div>
+
+<!-- 技术亮点 -->
+<div class="section">
+    <h2>⚙️ 技术亮点</h2>
+
+    <h3>亮点一：唯一支持 WebGPU 的 LLM 推理引擎</h3>
+    <p>通过 WebGPU + WASM，直接在<strong>浏览器</strong>里运行 LLM，零服务器成本、零网络延迟。Chrome 134 + RTX 4070 Laptop GPU 实测：Gemma-2B INT4 可达 <strong>42 tokens/s</strong>，Qwen2-1.5B INT4 达 <strong>78 tokens/s</strong>。延迟压缩到 <10ms，且完全免费。</p>
+
+    <h3>亮点二：与 llama.cpp 的直接性能对比</h3>
+    <p>CPU 解码速度比 llama.cpp 快约 <strong>3×</strong>，GPU 模式快约 <strong>7×</strong>，NPU 预填充阶段额外提升约 3×。</p>
+
+    <h3>亮点三：三级内存池的工程价值</h3>
+    <p>Pixel 9 Pro（Tensor G4）+ Gemma-4B INT4 实测：内存峰值占用仅 <strong>2.8GB</strong>，持续生成 <strong>18 tokens/s</strong>——端侧 LLM 框架第一梯队表现。</p>
+</div>
+
+<!-- 适用人群 -->
+<div class="section">
+    <h2>👥 适用人群</h2>
+    <ul>
+        <li><strong>移动应用开发者</strong>：在 Android/iOS App 中集成本地 LLM，离线 AI + 隐私保护</li>
+        <li><strong>边缘计算工程师</strong>：IoT 设备部署，智能家居、工业物联网场景</li>
+        <li><strong>隐私敏感应用</strong>：医疗健康、金融、企业级（数据不能上云）</li>
+        <li><strong>Web 开发者</strong>：浏览器里直接提供 AI 能力，零成本部署</li>
+        <li><strong>研究人员</strong>：边缘 AI、LLM 推理优化、多模态 AI 研究</li>
+        <li><strong>企业开发团队</strong>：需要生产级稳定性、全平台覆盖 + Google 官方支持</li>
+    </ul>
+</div>
+
+<!-- 快速上手 -->
+<div class="section">
+    <h2>🛠️ 快速上手</h2>
+    <p><strong>CLI 尝鲜：</strong></p>
+    <pre><code>uv tool install litert-lm
+
+litert-lm run   --from-huggingface-repo=google/gemma-3n-E2B-it-litert-lm   gemma-3n-E2B-it-int4   --prompt="解释一下 Transformer 架构"</code></pre>
+    <p><strong>Python：</strong></p>
+    <pre><code>pip install litertlm
+from litertlm import Model
+model = Model.from_huggingface("google/gemma-3n-E2B-it-litert-lm")
+result = model.generate("法国的首都是哪里？")
+print(result.text)</code></pre>
+    <p><strong>Android Kotlin：</strong></p>
+    <pre><code>dependencies { implementation("com.google.ai.edge.litert:litert:0.10.1") }
+
+val model = Model.fromFile("gemma-3n-e2b-it.litertlm")
+val response = model.generate("法国的首都是哪里？")
+println(response.text)</code></pre>
+</div>
+
+<!-- 参考资料 -->
+<div class="section">
+    <h2>📚 参考资料</h2>
+    <div class="ref-list">
+        <p>• <a href="https://github.com/google-ai-edge/LiteRT-LM" target="_blank">GitHub - google-ai-edge/LiteRT-LM</a></p>
+        <p>• <a href="https://txtmix.com/posts/tech/litert-lm-google-edge-llm-inference-guide/" target="_blank">LiteRT-LM 完全指南（txtmix.com）</a></p>
+        <p>• <a href="https://www.chenxutan.com/d/1834.html" target="_blank">LiteRT-LM 革命性架构解析（chenxutan.com）</a></p>
+        <p>• <a href="https://github.com/google-ai-edge/litert" target="_blank">Google AI Edge 官方 LiteRT 仓库</a></p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📅 AI 开源项目日报 · 2026-05-02</p>
+    <p>👤 fly的AI学习 · <a href="https://flystray.github.io/ai-news/" target="_blank">查看历史日报</a></p>
+</div>
+
+</div>
+</body>
+</html>
