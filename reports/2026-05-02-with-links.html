@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-02 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff; }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul { background: rgba(102,126,234,0.1); border-radius: 12px; padding: 16px 20px; margin-bottom: 15px; list-style: none; }
+        .news-card ul li { color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px; }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link { display: inline-flex; align-items: center; gap: 6px; color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 0; color: #666; font-size: 13px; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .insight-item .num { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 14px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4); transition: all 0.3s ease; }
+        .refresh-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(102,126,234,0.5); }
+        .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-05-02</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <!-- 今日重磅 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔥</span> 今日重磅</h2>
+
+            <div class="news-card">
+                <h3>GPT-5.5 发布：OpenAI 史上最强智能体编码模型 <span class="tag">OpenAI</span></h3>
+                <ul>
+                    <li>编程能力登顶 Terminal-Bench 2.0，准确率达 82.7%（当前最优）</li>
+                    <li>GitHub 问题解决能力（SWE-Bench Pro）达 58.6%，一次性端到端解决</li>
+                    <li>API 输出定价 $30/M，较前代翻三倍</li>
+                    <li>更擅长使用计算机和深度研究，是真正的 Agent 原生模型</li>
+                </ul>
+                <div class="links">
+                    <a href="https://finance.sina.com.cn/tech/roll/2026-04-24/doc-inhvqmqe8012023.shtml" target="_blank" class="link">📌 新浪科技 →</a>
+                    <a href="https://www.21jingji.com/article/20260424/herald/9b54114a0d6d30cda6d2ba9e04335665.html" target="_blank" class="link">📌 21世纪经济报道 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>谷歌豪掷 400 亿美元锁定 Anthropic：AI 格局彻底重塑 <span class="tag">战略投资</span></h3>
+                <ul>
+                    <li>100 亿美元立即到账，按 3800 亿美元最新估值入股 Anthropic</li>
+                    <li>后续追加 300 亿美元，按业绩里程碑分期支付</li>
+                    <li>Anthropic 年化收入一年暴涨 30 倍，冲至 300 亿人民币</li>
+                    <li>谷歌将 Anthropic 打造为 TPU 最大买家，形成深度绑定</li>
+                </ul>
+                <div class="links">
+                    <a href="https://www.36kr.com/p/3784243425565953" target="_blank" class="link">📌 36氪 →</a>
+                    <a href="https://finance.sina.com.cn/wm/2026-04-25/doc-inhvupep0114847.shtml" target="_blank" class="link">📌 新浪财经 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>Claude Opus 4.7 突袭发布：编程登顶，价格不变 <span class="tag">Anthropic</span></h3>
+                <ul>
+                    <li>编程能力达 64.3% 基准分，复杂系统开发能力大幅提升</li>
+                    <li>视觉识别精度大幅提高，可解析技术图纸和 UI 界面</li>
+                    <li>新增自我验证机制，降低幻觉率</li>
+                    <li>1M token 上下文窗口由 Beta 升级为正式支持</li>
+                    <li>定价与 Opus 4.6 完全一致（$5/$25 per M token）</li>
+                </ul>
+                <div class="links">
+                    <a href="https://cloud.tencent.com/developer/news/3844958" target="_blank" class="link">📌 腾讯云开发者社区 →</a>
+                    <a href="https://www.anthropic.com/claude/opus" target="_blank" class="link">📌 Anthropic 官网 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行业动态 -->
+        <div class="section">
+            <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+            <div class="industry-grid">
+                <div class="news-card">
+                    <h3>字节豆包 <span class="tag">MAU 第一</span></h3>
+                    <p>QuestMobile 报告显示，2026 年 Q1 国内 AI 原生 APP 月活达 4.4 亿，豆包以 3.45 亿月活稳居第一，同比增长显著。</p>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/stock/t/2026-04-21/doc-inhvfivi8079205.shtml" target="_blank" class="link">📌 新浪财经</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>通义千问 & DeepSeek <span class="tag">工信部点名</span></h3>
+                    <p>工信部在国新办吹风会上点名通义千问、混元、DeepSeek-V4，称国产大模型开源生态全球领先。</p>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260428A06PZ800" target="_blank" class="link">📌 腾讯新闻</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>国内大模型格局 <span class="tag">寡头主导</span></h3>
+                    <p>2026 年 4 月，腾讯混元 3.0、DeepSeek V4、百度文心一言 5.0 密集发布，从「百模大战」进入寡头主导、新贵突围的新格局。</p>
+                    <div class="links">
+                        <a href="https://xueqiu.com/8315851674/386270992" target="_blank" class="link">📌 雪球</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>具身智能 <span class="tag">国家电网</span></h3>
+                    <p>国家电网计划采购具身智能设备约 8500 台，总投资约 68 亿元，AI + 电力场景成为最快落地方向之一。</p>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260429A02Z0C00" target="_blank" class="link">📌 腾讯新闻</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>马斯克 VS OpenAI <span class="tag">世纪诉讼</span></h3>
+                    <p>马斯克在 OpenAI 审判中出庭作证，表示对 AI 抱有极度担忧：「既能让全人类繁荣，也可能带来毁灭性后果。」</p>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/world/2026-04-29/doc-inhwceiq7973181.shtml" target="_blank" class="link">📌 新浪财经</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>Meta 收购 Manus <span class="tag">被叫停</span></h3>
+                    <p>国家发展改革委依法对外资收购 Manus 项目作出禁止投资决定，要求撤销该收购交易。Meta 此前以 20 亿美元估值宣布收购。</p>
+                    <div class="links">
+                        <a href="https://www.nbd.com.cn/articles/2026-04-28/4364909.html" target="_blank" class="link">📌 每日经济新闻</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>AI 大模型降价潮 <span class="tag">价格战</span></h3>
+                    <p>2026 年 Q1，字节豆包、阿里通义、百度文心、智谱 GLM 集体降价，最高降幅达 97%，AI 应用进入普惠时代。</p>
+                    <div class="links">
+                        <a href="http://www.gether.net/news/show-219.html" target="_blank" class="link">📌 GET 时代</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <h3>百度文心一言 <span class="tag">V5 发布</span></h3>
+                    <p>文心一言 5.0 发布，在中文理解与创作、专业领域推理、多模态生成等方面全面升级。</p>
+                    <div class="links">
+                        <a href="https://xueqiu.com/8315851674/386270992" target="_blank" class="link">📌 雪球</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>【Agent 时代全面到来】</strong>国产 AI Agent 工具从 Copilot 全面升级为 Agent，腾讯 WorkBuddy、字节 Coze、阿里百炼密集迭代，Agent 可自主规划、多步执行、工具调用。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>【开源生态全球领先】</strong>工信部首次公开表态国产大模型开源生态全球领先，DeepSeek 系列已成为全球最受关注的中国 AI 品牌。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>【AI 芯片国产替代紧迫】</strong>国产光芯片 25G 以上产品国产化率仅 4%，算力瓶颈倒逼国产替代加速，政策与资本双重加码。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>【具身智能率先规模化】</strong>国家电网 68 亿具身智能采购拉开大幕，电力、安防、制造业场景率先规模化落地。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>【AI + 基础设施加速】</strong>斯坦福 2026 AI 指数报告显示，AI 研发投入同比增长 40%，全球进入以 AGI 为目标的基础设施建设阶段。</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>📡 数据来源：OpenAI · Anthropic · Google · 36氪 · 量子位 · 新浪财经 · 机器之心</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: 2026-05-02 09:00</p>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+</body>
+</html>
