@@ -1,5 +1,30 @@
 # ai-2 自动化执行记录（创作者动态监控）
 
+## 2026-05-02 15:11
+
+- **状态**：成功（沙箱环境受限，0条新内容）
+- **更新数**：0 条
+- **YouTube**：10个频道全部超时（国内网络被墙，无VPN）
+- **X(Twitter)**：7个账号全部 WinError 10054（nitter.net 连接被远程主机关闭）
+- **B站**：10个UP主全部获取失败（code=-799，请求过于频繁，持续超过18天）
+- **输出文件**：creator-updates.html、creator-updates-en.html（未更新，无新内容）
+- **备注**：直接运行 `creator_monitor.py` 无输出（退出码1），需 `PYTHONIOENCODING=utf-8 python -u creator_monitor.py` 才能正常输出
+
+---
+
+## 2026-05-01 09:35
+
+- **状态**：成功（沙箱环境受限，0条新内容）
+- **更新数**：0 条
+- **YouTube**：10个频道全部超时（国内网络被墙，无VPN）
+- **X(Twitter)**：7个账号全部超时（nitter.net 国内被墙）
+- **B站**：10个UP主全部获取失败（HTTP 412，持续限流超过17天）
+- **环境说明**：当前 Agent 沙箱在国内网络环境，无法访问 YouTube/Twitter，需在用户本机（有VPN）运行才能正常抓取
+- **输出文件**：creator-updates.html、creator-updates-en.html（未更新，无新内容）
+- **脚本优化**：创建了 `creator_monitor_quick.py`，超时从12秒降为3秒，可在90秒内完成
+
+---
+
 ## 2026-04-30 09:28
 
 - **状态**：成功

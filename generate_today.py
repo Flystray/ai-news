@@ -1,131 +1,131 @@
 # -*- coding: utf-8 -*-
-import sys, io
+import sys, io, json
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 from datetime import datetime
 
-date_str = "2026-05-02"
+date_str = datetime.now().strftime("%Y-%m-%d")
 
-# 今日新闻数据
+# 今日新闻数据（2026-05-03）
 breaking_news = [
     {
-        "title": "🔥 GPT-5.5 发布：OpenAI 史上最强智能体编码模型",
-        "tag": "OpenAI",
+        "title": "🔥 马斯克出庭 OpenAI 案：AI 可能是人类最后一项发明",
+        "tag": "OpenAI 诉讼",
         "highlights": [
-            "编程能力登顶 Terminal-Bench 2.0，准确率达 82.7%（当前最优）",
-            "GitHub 问题解决能力（SWE-Bench Pro）达 58.6%，一次性端到端解决",
-            "API 输出定价 $30/M，较前代翻三倍",
-            "更擅长使用计算机和深度研究",
+            "马斯克在奥克兰出庭作证，称 AI「既能让全人类繁荣，也可能带来毁灭性后果」",
+            "庭审仅剩两项指控：OpenAI 违反慈善信托、不正当致富",
+            "马斯克警告：绝不希望迎来《终结者》式悲剧，AI 监管刻不容缓",
+            "双方互揭老底： Altman 曾私下表示 GPT-4 是「惊悚」的，OpenAI 则指马斯克曾想控制公司",
         ],
         "links": [
-            {"url": "https://finance.sina.com.cn/tech/roll/2026-04-24/doc-inhvqmqe8012023.shtml", "source": "新浪科技"},
-            {"url": "https://www.21jingji.com/article/20260424/herald/9b54114a0d6d30cda6d2ba9e04335665.html", "source": "21世纪经济报道"},
+            {"url": "https://www.ithome.com/0/941/780.htm", "source": "IT之家"},
+            {"url": "https://finance.sina.com.cn/world/2026-04-29/doc-inhwceiq7973181.shtml", "source": "新浪财经"},
         ]
     },
     {
-        "title": "🔥 谷歌豪掷 400 亿美元锁定 Anthropic：AI 格局彻底重塑",
-        "tag": "战略投资",
+        "title": "🔥 微软与 OpenAI 正式分手：结束独家云合作，OpenAI 可自由选择云厂商",
+        "tag": "战略重组",
         "highlights": [
-            "100 亿美元立即到账，按 3800 亿美元最新估值入股 Anthropic",
-            "后续追加 300 亿美元，按业绩里程碑分期支付",
-            "Anthropic 年化收入一年暴涨 30 倍，冲至 300 亿人民币",
-            "谷歌将 Anthropic 打造为 TPU 最大买家，形成深度绑定",
+            "4 月 27 日双方同时发布博文，修订延续多年的合作协议",
+            "微软从「独家合作伙伴」降级为「首要合作伙伴」，措辞微妙转变",
+            "OpenAI 可将产品卖给任何云服务商——包括亚马逊 AWS 和谷歌云",
+            "Azure 仍为 OpenAI 主要云伙伴，AGI 相关协议条款取消",
         ],
         "links": [
-            {"url": "https://www.36kr.com/p/3784243425565953", "source": "36氪"},
-            {"url": "https://finance.sina.com.cn/wm/2026-04-25/doc-inhvupep0114847.shtml", "source": "新浪财经"},
+            {"url": "https://news.qq.com/rain/a/20260427A08BIL00", "source": "腾讯新闻"},
+            {"url": "https://finance.sina.com.cn/tech/2026-04-28/doc-inhvfivi8029288.shtml", "source": "新浪科技"},
         ]
     },
     {
-        "title": "🔥 Claude Opus 4.7 突袭发布：编程登顶，价格不变",
-        "tag": "Anthropic",
+        "title": "🔥 具身智能突破：新一代高保真仿真框架开源，真机部署「零微调」",
+        "tag": "技术突破",
         "highlights": [
-            "编程能力达 64.3% 基准分，复杂系统开发能力大幅提升",
-            "视觉识别精度大幅提高，可解析技术图纸和 UI 界面",
-            "新增自我验证机制，降低幻觉率",
-            "1M token 上下文窗口由 Beta 升级为正式支持",
-            "定价与 Opus 4.6 完全一致（$5/$25 per M token）",
+            "突破视觉仿真算力瓶颈，新框架实现高吞吐并行高保真渲染",
+            "助力规模化训练，机器人真机部署无需微调即可运行",
+            "国家电网 68 亿具身智能采购已拉开大幕，电力场景率先落地",
+            "工业机器人万亿市场正式开启，AI 驱动的物理世界交互成新战场",
         ],
         "links": [
-            {"url": "https://cloud.tencent.com/developer/news/3844958", "source": "腾讯云开发者社区"},
-            {"url": "https://www.anthropic.com/claude/opus", "source": "Anthropic 官网"},
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
+            {"url": "https://news.qq.com/rain/a/20260429A02Z0C00", "source": "腾讯新闻"},
         ]
     },
 ]
 
 industry_news = [
     {
-        "company": "字节豆包",
-        "tag": "MAU 第一",
-        "description": "QuestMobile 报告显示，2026 年 Q1 国内 AI 原生 APP 月活达 4.4 亿，豆包以 3.45 亿月活稳居第一，同比增长显著。",
+        "company": "阿里通义千问",
+        "tag": "数字员工",
+        "description": "阿里发布 QoderWake 数字员工产品，可承担工程师、运营、销售等岗位角色，支持根据自身业务流程定制，标志着 AI 从辅助工具升级为真正的数字劳动力。",
         "links": [
-            {"url": "https://finance.sina.com.cn/stock/t/2026-04-21/doc-inhvfivi8079205.shtml", "source": "新浪财经"},
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
         ]
     },
     {
-        "company": "通义千问 & DeepSeek",
-        "tag": "工信部点名",
-        "description": "工信部在国新办吹风会上点名通义千问、混元、DeepSeek-V4，称国产大模型开源生态全球领先。",
+        "company": "DeepSeek",
+        "tag": "V4 性能",
+        "description": "DeepSeek V4 支持 100 万 token 上下文，通过 V4-Pro 和 V4-Flash 提供预览版，开放权重，在编码和推理方面声称有提升。识图模式疑似新模型，非思考模式速度极快。",
         "links": [
-            {"url": "https://news.qq.com/rain/a/20260428A06PZ800", "source": "腾讯新闻"},
+            {"url": "https://theaitrack.com/ai-news-may-2026-in-depth-and-concise/", "source": "The AI Track"},
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
         ]
     },
     {
-        "company": "国内大模型格局",
-        "tag": "寡头主导",
-        "description": "2026 年 4 月，腾讯混元 3.0、DeepSeek V4、百度文心一言 5.0 密集发布，国内大模型从「百模大战」进入寡头主导、新贵突围的新格局。",
+        "company": "Anthropic Claude",
+        "tag": "连接器生态",
+        "description": "Claude 连接器扩展至 Adobe、Blender 和 Autodesk Fusion，支持设计、音乐、视频、3D 建模、现场视觉效果和创意教育工作流，AI 工具链生态进一步壮大。",
         "links": [
-            {"url": "https://xueqiu.com/8315851674/386270992", "source": "雪球"},
+            {"url": "https://theaitrack.com/ai-news-may-2026-in-depth-and-concise/", "source": "The AI Track"},
         ]
     },
     {
-        "company": "百度文心一言",
-        "tag": "V5 发布",
-        "description": "文心一言 5.0 发布，在中文理解与创作、专业领域推理、多模态生成等方面全面升级，进一步缩小与 GPT 系列差距。",
+        "company": "腾讯",
+        "tag": "开源翻译",
+        "description": "腾讯开源手机端离线翻译模型，仅 0.4G 大小，支持 33 种语言，可在无网络环境下运行，部署门槛大幅降低，离线 AI 应用成为现实。",
         "links": [
-            {"url": "https://xueqiu.com/8315851674/386270992", "source": "雪球"},
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
         ]
     },
     {
-        "company": "具身智能",
-        "tag": "国家电网",
-        "description": "国家电网计划采购具身智能设备约 8500 台，总投资约 68 亿元，AI + 电力场景成为最快落地方向之一。",
+        "company": "苹果 × Anthropic",
+        "tag": "乌龙事件",
+        "description": "苹果官方 App 误打包了 Claude.md 文件，引发社区热议。这一「Vibe Coding」式失误显示 Claude 已深度渗透科技巨头日常工作流。",
         "links": [
-            {"url": "https://news.qq.com/rain/a/20260429A02Z0C00", "source": "腾讯新闻"},
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
         ]
     },
     {
-        "company": "马斯克 VS OpenAI",
-        "tag": "世纪诉讼",
-        "description": "马斯克在 OpenAI 审判中出庭作证，表示对 AI 抱有极度担忧：「既能让全人类繁荣，也可能带来毁灭性后果，绝不希望迎来《终结者》式悲剧。」",
+        "company": "谷歌 DeepMind",
+        "tag": "AI 编程",
+        "description": "布林（Sergey Brin）亲自督战，组建精英 Gemini 团队专攻 AI 编程，全力追赶 Anthropic Claude。团队由预训练 Gemini 的工程师 Sebastian Borgeaud 领导，核心任务攻克从零编写代码难题。",
         "links": [
-            {"url": "https://finance.sina.com.cn/world/2026-04-29/doc-inhwceiq7973181.shtml", "source": "新浪财经"},
+            {"url": "https://www.ithome.com/0/941/551.htm", "source": "IT之家"},
         ]
     },
     {
-        "company": "Meta 收购 Manus",
-        "tag": "被叫停",
-        "description": "国家发展改革委依法对外资收购 Manus 项目作出禁止投资决定，要求撤销该收购交易。Meta 此前以 20 亿美元估值宣布收购。",
+        "company": "中国监管",
+        "tag": "叫停收购",
+        "description": "中国依法阻止 Meta 超 20 亿美元收购 AI 初创公司 Manus，使 Meta 进军自主 AI 代理的计划复杂化，标志着对美国投资中国关联技术公司的审查持续收紧。",
         "links": [
-            {"url": "https://www.nbd.com.cn/articles/2026-04-28/4364909.html", "source": "每日经济新闻"},
+            {"url": "https://theaitrack.com/ai-news-may-2026-in-depth-and-concise/", "source": "The AI Track"},
         ]
     },
     {
-        "company": "AI 大模型降价潮",
-        "tag": "价格战",
-        "description": "2026 年 Q1，字节豆包、阿里通义、百度文心、智谱 GLM 集体降价，最高降幅达 97%，AI 应用进入普惠时代。",
+        "company": "福布斯 AI 50",
+        "tag": "全球榜单",
+        "description": "福布斯发布 2026 年 AI 50 榜单，OpenAI、Anthropic 领衔，本届共有 20 家新上榜公司。两家 AI 巨头累计融资 2426 亿美元（约合 1.66 万亿元人民币），占上榜企业总融资额 80%。",
         "links": [
-            {"url": "http://www.gether.net/news/show-219.html", "source": "GET 时代"},
+            {"url": "https://www.ithome.com/0/941/759.htm", "source": "IT之家"},
         ]
     },
 ]
 
 insights = [
-    "【Agent 时代全面到来】国产 AI Agent 工具从 Copilot 全面升级为 Agent，腾讯 WorkBuddy、字节 Coze、阿里百炼密集迭代，Agent 可自主规划、多步执行、工具调用。",
-    "【开源生态全球领先】工信部首次公开表态国产大模型开源生态全球领先，DeepSeek 系列已成为全球最受关注的中国 AI 品牌。",
-    "【AI 芯片国产替代紧迫】国产光芯片 25G 以上产品国产化率仅 4%，算力瓶颈倒逼国产替代加速，政策与资本双重加码。",
-    "【具身智能率先规模化】国家电网 68 亿具身智能采购拉开大幕，电力、安防、制造业场景率先规模化落地，工业机器人迎来万亿市场。",
-    "【AI + 基础设施加速】斯坦福 2026 AI 指数报告显示，AI 研发投入同比增长 40%，全球进入以 AGI 为目标的基础设施建设阶段。",
+    "【AI 监管已成全球议题】马斯克庭审揭示 AI 安全风险，各国监管机构加速介入，AI 治理框架竞争正式开始。",
+    "【开源生态决定产业格局】DeepSeek V4、腾讯小模型持续开源，国产 AI 开源生态进入全球第一梯队，倒逼闭源厂商加速创新。",
+    "【数字员工进入企业主赛道】阿里 QoderWake、腾讯 WorkBuddy 密集迭代，AI Agent 从辅助工具升级为可替代岗位角色的数字劳动力。",
+    "【具身智能规模化元年开启】国家电网 68 亿采购 + 新一代仿真框架开源，具身智能从实验室走向工厂，2026 年是规模化元年。",
+    "【AI 基础设施竞争白热化】大模型降价 97%、开源小模型崛起，AI 应用普惠时代到来，但算力瓶颈与芯片国产替代仍是核心挑战。",
 ]
 
 news_items = {
