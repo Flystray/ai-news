@@ -57,3 +57,23 @@
 - 行业动态: 豆包月活3.45亿、工信部表态国产开源领先、具身智能68亿采购大单
 - 核心洞察: Agent时代到来、开源生态领先、芯片国产替代紧迫、具身智能规模化
 - GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-02-with-links.html
+
+### ⚠️ 待处理：微信IP白名单（持续，需用户手动添加）
+- 需在 mp.weixin.qq.com 后台添加 IP 220.176.214.175 到白名单
+- 添加后重新运行: push_draft.py 2026-05-04
+
+---
+
+### 2026-05-04
+- 执行时间: 2026-05-04 09:00
+- 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更）
+- 报告路径: reports/2026-05-04-with-links.html
+- 新闻来源: 量子位/36氪/新浪财经/腾讯新闻/Anthropic官方
+- 步骤1: ✅ 生成精美HTML日报（重磅3条 + 行业8条 + 洞察5条）
+- 步骤2: ✅ HTML已生成（wechat_article.html），推送失败（errcode 40164: IP 220.176.214.175 未在微信白名单）
+- 步骤3: ✅ Git add/commit/push（commit a074e31）
+- 步骤4: 📋 简报摘要在下方输出（无个人微信API直连能力）
+- 今日重磅: 马斯克OpenAI庭审警告AI风险、GPT-5.6哥布林怪癖事件、谷歌400亿豪赌Anthropic
+- 行业动态: DeepSeek V4开源百万上下文、智谱揭秘Scaling瓶颈、华为灵境造物、Claude Opus 4.7、国家电网68亿具身智能大单
+- 核心洞察: AI监管从议题到行动、Scaling Law瓶颈、具身智能规模化元年开启、AI原住民代际更替
+- GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-04-with-links.html
