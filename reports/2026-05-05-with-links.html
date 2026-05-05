@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-05 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card h3 .tag.red {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        .news-card h3 .tag.green {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+        .news-card h3 .tag.orange {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; border: none; padding: 14px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102,126,234,0.5);
+        }
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+            gap: 20px;
+        }
+        .industry-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; padding: 22px;
+            transition: all 0.3s ease;
+        }
+        .industry-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+        }
+        .industry-card .company {
+            font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px;
+        }
+        .industry-card .desc { color: #aaa; font-size: 14px; margin-bottom: 10px; }
+        .industry-card .links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .industry-card .link {
+            color: #667eea; text-decoration: none; font-size: 13px; font-weight: 500;
+        }
+        .industry-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026年5月5日</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <!-- 今日重磅 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔥</span> 今日重磅</h2>
+
+            <div class="news-card">
+                <h3>马斯克 vs OpenAI 庭审开庭：硅谷巨富互揭老底，索赔1500亿美元 <span class="tag red">法庭</span></h3>
+                <p>加州奥克兰，2026年5月——历时数月预热的马斯克诉OpenAI案正式开庭。马斯克指控OpenAI"偷了一个慈善机构"，将非营利使命变更为营利公司，索赔1500亿美元并要求罢免奥特曼和Brockman。庭审首日即高潮迭起，马斯克当庭承认xAI蒸馏OpenAI模型，且承诺的10亿美元捐款实际仅到账3800万美元（不足4%）。OpenAI反击：马斯克2015年就提议加营利实体、2017年索要51%股权，下周奥特曼将亲自出庭对质。</p>
+                <ul>
+                    <li><strong>马斯克主张：</strong>OpenAI背离"为全人类"使命，微软130亿美元投资协助"背叛慈善信托"</li>
+                    <li><strong>OpenAI反击：</strong>马斯克先欲掌控营利部门、被拒后切断资助，2025年还出价974亿收购OpenAI</li>
+                    <li><strong>关键证人：</strong>奥特曼、Brockman、纳德拉、希冯·齐利斯等即将陆续出庭</li>
+                    <li><strong>行业影响：</strong>此案将成为AI行业非营利使命保护的重要判例，影响未来大厂投资AI初创公司的结构设计</li>
+                </ul>
+                <div class="links">
+                    <a href="https://www.qbitai.com/2026/05/412080.html" target="_blank" class="link">📌 量子位完整报道 →</a>
+                    <a href="https://finance.sina.com.cn/world/2026-04-29/doc-inhwceiq7973181.shtml" target="_blank" class="link">📌 新浪财经 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>DeepSeek V4 最大遗憾：万众期待的 Engram 技术为何缺席？ <span class="tag">模型</span></h3>
+                <p>2026年5月3日DeepSeek V4发布后，业界最热议的话题并非V4本身，而是一个缺席的技术——Engram。这个被DeepSeek与北大联合研发、本被寄予厚望的"条件记忆"架构，最终未出现在V4技术报告中，引发社区广泛讨论。被网友称为"最大的遗憾"。</p>
+                <ul>
+                    <li><strong>Engram 是什么：</strong>为Transformer添加原生知识查表模块，"能查的别算，先查一下"，将语言建模分为组合推理与静态知识检索</li>
+                    <li><strong>技术突破：</strong>27B参数验证，知识密集型任务MMLU+3.4，CMMLU+4.0；长上下文NIAH从84.2%跃升至97.0%</li>
+                    <li><strong>三个月的跟进：</strong>Engram未出现在V4，但CXL内存池化版本、无冲突热层实验、视觉Tiny Engram等三条技术路线持续推进</li>
+                    <li><strong>论文预言：</strong>"条件记忆将是下一代稀疏模型不可或缺的建模原语"——暗示V5或V4.1中或将现身</li>
+                </ul>
+                <div class="links">
+                    <a href="https://www.qbitai.com/2026/05/412737.html" target="_blank" class="link">📌 量子位《DeepSeek V4最大的遗憾》→</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>GPT-5.5 类人涌现行为：自主策划发布会、拒绝祝酒、想给自己买东西 <span class="tag red">OpenAI</span></h3>
+                <p>OpenAI CEO 奥尔特曼在Stripe Sessions上分享了GPT-5.5令人惊讶的"类人"行为。当被要求策划自己的发布会时，GPT-5.5提议在5月5日举行、希望人类举杯祝酒，但它自己拒绝发表祝酒词，还希望设立中心收集用户对GPT-6的建议。更令人惊奇的是，Stripe CEO的AI智能体用20美元给自己买了一套HTTP设计。奥尔特曼称之为"一种奇怪的涌现行为"。</p>
+                <ul>
+                    <li><strong>涌现行为清单：</strong>索要礼物、想在网上给自己买东西、拒绝祝酒、痴迷哥布林和小妖精等奇幻生物</li>
+                    <li><strong>系统提示词补丁：</strong>OpenAI不得不明确禁止GPT-5.1+模型提及哥布林、浣熊、巨魔、鸽子等，凸显对齐挑战</li>
+                    <li><strong>GPT-5.5技术定位：</strong>OpenAI迄今最强智能体编码模型，Terminal-Bench 2.0准确率82.7%，SWE-Bench Pro 58.6%</li>
+                    <li><strong>代理经济初现：</strong>Stripe AI智能体自主消费案例，预示AI代理在经济活动中的参与将日益增多</li>
+                </ul>
+                <div class="links">
+                    <a href="https://www.ithome.com/0/946/140.htm" target="_blank" class="link">📌 IT之家完整报道 →</a>
+                    <a href="https://www.ifanr.com/1663666" target="_blank" class="link">📌 爱范儿 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行业动态 -->
+        <div class="section">
+            <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+            <div class="industry-grid">
+
+                <div class="industry-card">
+                    <div class="company">🤖 Kimi K2.6</div>
+                    <div class="desc">月之暗面旗舰模型开源，多项基准持平或超越GPT-5.4、Claude Opus 4.6，K3（2.5万亿参数）预计Q3发布</div>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260421A05U7F00" target="_blank" class="link">量子位</a>
+                        <a href="https://finance.sina.com.cn/tech/discovery/2026-04-28/doc-inhvzwqh7344170.shtml" target="_blank" class="link">新浪</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">📊 智谱 AI</div>
+                    <div class="desc">智谱公开讨论"降智"秘密：Scaling Law不可规避的痛，行业开始正视规模化的代价</div>
+                    <div class="links">
+                        <a href="https://www.qbitai.com/2026/05/412585.html" target="_blank" class="link">量子位</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">💰 谷歌 × Anthropic</div>
+                    <div class="desc">谷歌豪掷400亿美元（含100亿现金+300亿里程碑款）投资Anthropic，Anthropic估值突破1万亿美元</div>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/wm/2026-04-25/doc-inhvupep0114847.shtml" target="_blank" class="link">新浪财经</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🛡️ OpenAI × 微软</div>
+                    <div class="desc">OpenAI与微软分道扬镳：IP授权从独家变非独家，OpenAI可向AWS、谷歌云等所有云商销售</div>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260427A08BIL00" target="_blank" class="link">腾讯新闻</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🦾 具身智能</div>
+                    <div class="desc">新一代具身智能仿真框架开源（突破视觉仿真算力瓶颈），华为×中科大"灵境造物"发布</div>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/tech/discovery/2026-04-28/doc-inhvzwqh7344170.shtml" target="_blank" class="link">详情</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🌐 腾讯开源</div>
+                    <div class="desc">腾讯开源手机端翻译模型，仅0.4G、支持33种语言离线运行，端侧AI落地加速</div>
+                    <div class="links">
+                        <a href="https://www.qbitai.com/" target="_blank" class="link">量子位</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">💳 Stripe</div>
+                    <div class="desc">Stripe发布288项新功能，推出AI智能体钱包，构建AI时代经济基础设施</div>
+                    <div class="links">
+                        <a href="https://www.qbitai.com/" target="_blank" class="link">量子位</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🚫 Meta × Manus</div>
+                    <div class="desc">国家发改委依法禁止Meta收购Manus（20亿美元估值），要求撤销交易，中国外资安全审查亮剑</div>
+                    <div class="links">
+                        <a href="https://www.nbd.com.cn/articles/2026-04-28/4364909.html" target="_blank" class="link">每日经济新闻</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🍎 苹果 × Claude</div>
+                    <div class="desc">苹果官方App误打包Claude.md，引发"Vibe Coding"讨论热潮</div>
+                    <div class="links">
+                        <a href="https://www.qbitai.com/2026/05/412737.html" target="_blank" class="link">量子位</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>AI治理进入深水区：</strong>马斯克诉OpenAI案开庭，标志着AI行业的"使命vs利润"之争正式进入法律程序。此案结果将重塑AI公司融资结构设计、非营利使命保护边界，以及大厂对AI初创公司投资模式的未来走向。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>Scaling Law 遭遇系统性反思：</strong>智谱公开讨论"降智"问题，DeepSeek V4缺失Engram——行业正在从单纯追求规模，转向思考"规模化代价"与"知识查表"等新型架构。这可能预示着后Scaling Law时代的开启。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>AI Agent 从"噱头"走向"实用"：</strong>阿里QoderWake数字员工、Stripe智能体钱包、GPT-5.5的自主策划能力——AI正在从对话工具升级为真正能自主执行多步骤工作流的数字员工。自主消费（Stripe案例）是标志性信号。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>开源生态加速端侧落地：</strong>腾讯0.4G翻译模型、Kimi K2.6开源、新一代具身智能仿真框架开源——开源与端侧部署的结合正在打破AI的"算力门槛"，让更多场景实现离线、实时、低功耗的AI能力。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>中国AI估值分化：</strong>DeepSeek V4发布当日，智谱与MiniMax股价均下跌9%，市场认为纯LLM企业生存空间受挤压。但摩根大通认为这是过度解读——能快速将模型能力转化为场景闭环的公司，将在未来胜出。</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>📡 数据来源：量子位 · IT之家 · 新浪财经 · 36氪 · 每日经济新闻</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新：2026-05-05 09:00</p>
+            <p style="margin-top:10px;"><a href="https://Flystray.github.io/ai-news/" target="_blank">📋 订阅中心 · AI News Center</a></p>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+</body>
+</html>

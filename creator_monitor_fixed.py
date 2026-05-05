@@ -63,11 +63,6 @@ YOUTUBE_CHANNEL_IDS = {
     "openai-yt": "UCXZCJLdBC09xxGZ6gcdrc6A",
     "3b1b": "UCYO_jab_esuFRV4b17AJtAw",
     "sentdex": "UCfzlCWGWYyIQ0aLC5w48gBQ",
-    "twominute": "UCbfYPyITQ-7l4upoX8nvctg",
-    "yannic": "UCZHmQk67mSJgfCCTn7xBfew",
-    "dwar": "UCXl4i9dYBrFOabk0xGmbkRA",
-    "latentspace": "UCxBcwypKK-W3GHd_RZ9FZrQ",
-    "riley": "UCMcOud_ZW7cfxeIugBflSBw",
 }
 
 
@@ -478,87 +473,72 @@ def main(date_str=None):
     all_new_items_en = []  # 英文原版
     processed_count = 0
 
-    # ── YouTube ─────────────────────────────────────────────
+    # ── YouTube ──────────────────────────────────────────────
     yt_section = creators_data["platforms"]["youtube"]
     print(f"\n▶️  YouTube ({len(yt_section['creators'])} 个频道)")
     for creator in yt_section["creators"]:
-        try:
-            cid = YOUTUBE_CHANNEL_IDS.get(creator["id"], creator.get("channel_id", ""))
-            if not cid:
-                print(f"  ⚠️  无 channel_id: {creator['name']}")
-                continue
-            url = f"https://www.youtube.com/feeds/videos.xml?channel_id={cid}"
-            print(f"  • {creator['name']} ...", end=" ")
-            xml = http_get(url)
-            videos = parse_youtube_rss(xml)
-            new = check_new_items(creator, videos, state)
-            if new:
-                print(f"🆕 {len(new)}条新内容!")
-                for v in new:
-                    all_new_items_cn.append(generate_interpretation(v, creator, date_str, "cn"))
-                    all_new_items_en.append(generate_interpretation(v, creator, date_str, "en"))
-            else:
-                print(f"无更新")
-            processed_count += 1
-            time.sleep(0.5)
-        except Exception as e:
-            print(f"  ⚠️  处理失败: {e}")
-            processed_count += 1
+        cid = YOUTUBE_CHANNEL_IDS.get(creator["id"], creator.get("channel_id", ""))
+        if not cid:
+            print(f"  ⚠️  无 channel_id: {creator['name']}")
             continue
+        url = f"https://www.youtube.com/feeds/videos.xml?channel_id={cid}"
+        print(f"  • {creator['name']} ...", end=" ")
+        xml = http_get(url)
+        videos = parse_youtube_rss(xml)
+        new = check_new_items(creator, videos, state)
+        if new:
+            print(f"🆕 {len(new)}条新内容!")
+            for v in new:
+                all_new_items_cn.append(generate_interpretation(v, creator, date_str, "cn"))
+                all_new_items_en.append(generate_interpretation(v, creator, date_str, "en"))
+        else:
+            print(f"无更新")
+        processed_count += 1
+        time.sleep(0.5)
 
     # ── Twitter ─────────────────────────────────────────────
     tw_section = creators_data["platforms"]["twitter"]
     print(f"\n🐦 X(Twitter) ({len(tw_section['creators'])} 个账号)")
     for creator in tw_section["creators"]:
-        try:
-            handle = creator.get("handle", "").lstrip("@")
-            url = f"https://nitter.net/{handle}/rss"
-            print(f"  • {creator['name']} ...", end=" ")
-            xml = http_get(url)
-            tweets = parse_nitter_rss(xml)
-            new = check_new_items(creator, tweets, state)
-            if new:
-                print(f"🆕 {len(new)}条新推!")
-                for t in new:
-                    all_new_items_cn.append(generate_interpretation(t, creator, date_str, "cn"))
-                    all_new_items_en.append(generate_interpretation(t, creator, date_str, "en"))
-            else:
-                print(f"无更新")
-            processed_count += 1
-            time.sleep(0.5)
-        except Exception as e:
-            print(f"  ⚠️  处理失败: {e}")
-            processed_count += 1
-            continue
+        handle = creator.get("handle", "").lstrip("@")
+        url = f"https://nitter.net/{handle}/rss"
+        print(f"  • {creator['name']} ...", end=" ")
+        xml = http_get(url)
+        tweets = parse_nitter_rss(xml)
+        new = check_new_items(creator, tweets, state)
+        if new:
+            print(f"🆕 {len(new)}条新推!")
+            for t in new:
+                all_new_items_cn.append(generate_interpretation(t, creator, date_str, "cn"))
+                all_new_items_en.append(generate_interpretation(t, creator, date_str, "en"))
+        else:
+            print(f"无更新")
+        processed_count += 1
+        time.sleep(0.5)
 
     # ── B站 ─────────────────────────────────────────────────
     bili_section = creators_data["platforms"]["bilibili"]
     print(f"\n📺 B站 ({len(bili_section['creators'])} 个UP主)")
     for creator in bili_section["creators"]:
-        try:
-            uid = creator.get("uid", "")
-            if not uid:
-                print(f"  ⚠️  无 UID: {creator['name']}")
-                continue
-            print(f"  • {creator['name']} ...", end=" ")
-            videos = fetch_bilibili_videos(uid, ps=5)
-            if not videos:
-                print("获取失败")
-                continue
-            new = check_new_items(creator, videos, state)
-            if new:
-                print(f"🆕 {len(new)}条新视频!")
-                for v in new:
-                    all_new_items_cn.append(generate_interpretation(v, creator, date_str, "cn"))
-                    all_new_items_en.append(generate_interpretation(v, creator, date_str, "en"))
-            else:
-                print(f"无更新")
-            processed_count += 1
-            time.sleep(5)  # B站有频率限制，间隔大一些
-        except Exception as e:
-            print(f"  ⚠️  处理失败: {e}")
-            processed_count += 1
+        uid = creator.get("uid", "")
+        if not uid:
+            print(f"  ⚠️  无 UID: {creator['name']}")
             continue
+        print(f"  • {creator['name']} ...", end=" ")
+        videos = fetch_bilibili_videos(uid, ps=5)
+        if not videos:
+            print("获取失败")
+            continue
+        new = check_new_items(creator, videos, state)
+        if new:
+            print(f"🆕 {len(new)}条新视频!")
+            for v in new:
+                all_new_items_cn.append(generate_interpretation(v, creator, date_str, "cn"))
+                all_new_items_en.append(generate_interpretation(v, creator, date_str, "en"))
+        else:
+            print(f"无更新")
+        processed_count += 1
+        time.sleep(5)  # B站有频率限制，间隔大一些
 
     # ── 保存状态 ─────────────────────────────────────────────
     save_state(state)
