@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-05-05</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #667eea; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-license { background: #e8f5e9; color: #388e3c; }
+        .badge-new { background: #ff6b6b; color: white; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #667eea; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #667eea; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+        .comparison-table th { background: #1a1a2e; color: white; padding: 12px; text-align: left; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid #e0e0e0; }
+        .comparison-table tr:nth-child(even) { background: #f8f9fa; }
+        .comparison-table .highlight { background: #e8f5e9 !important; font-weight: 600; }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .tech-tag { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565C0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #388e3c; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #2e7d32; margin-bottom: 10px; }
+        .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #667eea; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em; font-family: 'Courier New', monospace; margin: 15px 0; }
+        .code-block .comment { color: #6a9955; }
+        .code-block .cmd { color: #ce9178; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #667eea; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .agent-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 15px 0; }
+        .agent-chip { background: #f3e5f5; color: #6a1b9a; padding: 8px 14px; border-radius: 20px; font-size: 0.85em; text-align: center; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GitHub AI 项目日报</h1>
+            <p class="date">2026年5月5日 · 星期二</p>
+        </div>
+
+        <div class="content">
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-name">TradingAgents</h2>
+                    <span class="badge badge-stars">⭐ 67.5k</span>
+                    <span class="badge badge-forks">🍴 13.0k</span>
+                    <span class="badge badge-license">📄 Apache-2.0</span>
+                </div>
+
+                <a href="https://github.com/TauricResearch/TradingAgents" class="github-link" target="_blank">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    访问 GitHub 仓库
+                </a>
+
+                <div class="highlight-box">
+                    <h4>一句话介绍</h4>
+                    <p>用多智能体辩论重塑 AI 量化交易——7 类专职 Agent 模拟真实交易公司协作流程，回测累计收益 23.21%、年化 24.90%，显著优于传统策略，零 GPU 部署，支持 A 股/港股/美股。</p>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-box"><div class="num">67.5k</div><div class="label">GitHub Stars</div></div>
+                    <div class="stat-box"><div class="num">7</div><div class="label">专职 Agent</div></div>
+                    <div class="stat-box"><div class="num">23.21%</div><div class="label">回测累计收益</div></div>
+                    <div class="stat-box"><div class="num">60+</div><div class="label">支持模型</div></div>
+                </div>
+
+                <div class="section">
+                    <h3>项目背景</h3>
+                    <p>传统量化交易依赖人工编写的策略规则或黑盒式的深度学习模型。前者难以应对复杂多变的市场环境，后者虽然性能强大却缺乏可解释性——你很难知道模型为什么在某个时刻做出买入或卖出的决定。</p>
+                    <p>2024 年 12 月，TauricResearch 团队在 arXiv 上发布了一篇引发广泛关注的研究论文，提出了一个大胆的设想：<strong>用多个 LLM 智能体模拟真实交易公司的协作流程来做交易决策</strong>。这不是简单的"AI 聊天机器人选股"，而是一套完整的组织架构——有分析师团队负责收集数据、研究员团队进行多空辩论、交易员制定策略、风控团队把关审核、基金经理最终拍板。</p>
+                    <p>TradingAgents 正是基于这一研究的开源实现。经过数月快速迭代，目前已更新至 v0.2.4，支持 GPT-5.x、Gemini 3.x、Claude 4.x、DeepSeek、Qwen 等主流模型，并衍生出了支持 A 股/港股/美股的中文增强版（cn-0.1.13）。6.75 万颗星的数据表明，这个项目已经成为了 AI 金融领域最受关注的开源框架之一。</p>
+                </div>
+
+                <div class="section">
+                    <h3>🛠️ 技术栈</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">LangGraph</span>
+                        <span class="tech-tag">ReAct</span>
+                        <span class="tech-tag">OpenAI / Claude / Gemini / DeepSeek</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">MongoDB / Redis</span>
+                    </div>
+                    <p><strong>架构亮点</strong>：所有 Agent 通过定制系统提示实现角色扮演，内部采用 ReAct（推理+行动）模式工作。底层使用 LangGraph 构建有状态的多轮交互图谱，支持断点续跑。仅依赖 LLM API 调用，无需本地 GPU。</p>
+                </div>
+
+                <div class="section">
+                    <h3>🤖 七类专职 Agent 的层级化协作</h3>
+                    <div class="agent-list">
+                        <div class="agent-chip">📊 基本面分析师</div>
+                        <div class="agent-chip">📈 技术分析师</div>
+                        <div class="agent-chip">💬 情绪分析师</div>
+                        <div class="agent-chip">📰 宏观分析师</div>
+                        <div class="agent-chip">🐂🐂 看涨研究员</div>
+                        <div class="agent-chip">🐻 看跌研究员</div>
+                        <div class="agent-chip">💰 交易员</div>
+                        <div class="agent-chip">🛡️ 风控经理</div>
+                        <div class="agent-chip">👔 基金经理</div>
+                    </div>
+                    <p style="font-size: 0.9em; color: #888; margin-top: 10px;">从数据采集到最终执行的完整流水线：分析师并行收集数据 → 研究员多空辩论 → 交易员制定计划 → 风控经理审核 → 基金经理最终拍板。通过多轮自然语言辩论整合观点，有效纠正单个 LLM 的幻觉和偏见。</p>
+                </div>
+
+                <div class="section">
+                    <h3>✨ 核心功能（6 大能力）</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4>🧠 多空辩论与反思机制</h4>
+                            <p>看涨和看跌两个对立角色进行多轮自然语言辩论，通过对抗性讨论纠正 LLM 幻觉和偏见，降低误判概率</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📡 结构化与自然语言混合通信</h4>
+                            <p>分析师输出结构化报告（表格、指标清单），研究员之间使用自然语言辩论，兼顾信息传递效率和推理深度</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>⚡ 动态快慢思考模型选择</h4>
+                            <p>关键决策交由"慢思考"模型（o1/DeepSeek-R1），常规任务分配给"快思考"模型（gpt-4o-mini），控制推理成本</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🌏 完整的 A 股/港股/美股支持</h4>
+                            <p>中文增强版内置三大市场数据源，优先适配阿里百炼、DeepSeek 等国产大模型，50000+ 字中文技术文档</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📄 专业级报告导出</h4>
+                            <p>生成 Markdown/Word/PDF 三种格式的投资报告，包含买卖建议、置信度评分、风险评分、目标价位</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🔍 ReAct 推理框架驱动</h4>
+                            <p>每个 Agent 采用"思考-行动-观察"循环，主动获取所需数据，基于数据生成结论</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>💡 技术亮点（4 大架构创新）</h3>
+                    <div class="highlight-box-blue">
+                        <h4>亮点 1：ReAct 推理框架驱动每个 Agent</h4>
+                        <p>所有智能体内部采用 ReAct（Reason + Act）模式工作——先推理需要什么数据，再执行对应的数据获取工具，最后基于数据生成结论。这种"思考-行动-观察"的循环让每个 Agent 都能主动获取所需信息，而非被动等待输入。</p>
+                    </div>
+                    <div class="highlight-box-blue">
+                        <h4>亮点 2：LangGraph 构建有状态多轮交互</h4>
+                        <p>底层使用 LangGraph 定义智能体图谱，节点代表各分析师角色，边定义通信流和工作流。这保证了多轮辩论过程中的状态持久化和可追溯性，支持断点续跑。</p>
+                    </div>
+                    <div class="highlight-box-blue">
+                        <h4>亮点 3：显式风控而非隐式损失函数</h4>
+                        <p>大多数 AI 交易系统将风控隐含在损失函数中，难以直观了解模型的控风险逻辑。TradingAgents 设置独立的风控经理角色，从冒险/中性/保守三个视角进行风险评估，决策逻辑完全透明可审阅。</p>
+                    </div>
+                    <div class="highlight-box-blue">
+                        <h4>亮点 4：零 GPU 部署 + Docker 一键启动</h4>
+                        <p>整个系统仅依赖 LLM API 调用，无需本地 GPU。通过 Docker Compose 一键部署完整的 Web 应用、MongoDB、Redis 等服务栈，大幅降低使用门槛。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📊 回测表现</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>指标</th>
+                            <th>TradingAgents</th>
+                            <th>Buy &amp; Hold</th>
+                            <th>MACD</th>
+                            <th>KDJ+RSI</th>
+                        </tr>
+                        <tr>
+                            <td>累计收益</td>
+                            <td class="highlight">≥ 23.21%</td>
+                            <td>~5-10%</td>
+                            <td>~17%</td>
+                            <td>~15%</td>
+                        </tr>
+                        <tr>
+                            <td>年化收益</td>
+                            <td class="highlight">≥ 24.90%</td>
+                            <td>~8%</td>
+                            <td>~20%</td>
+                            <td>~18%</td>
+                        </tr>
+                        <tr>
+                            <td>Sharpe 比率</td>
+                            <td class="highlight">显著领先</td>
+                            <td>较低</td>
+                            <td>中等</td>
+                            <td>中等</td>
+                        </tr>
+                        <tr>
+                            <td>最大回撤</td>
+                            <td class="highlight">≤ 2（可控）</td>
+                            <td>较高</td>
+                            <td>较高</td>
+                            <td>较高</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.9em; color: #888;">测试标的：AAPL、GOOGL、AMZN。尤其在市场震荡和趋势反转场景下表现最优——多维度数据整合和多空辩论能有效过滤假信号。</p>
+                </div>
+
+                <div class="section">
+                    <h3>👥 适用人群</h3>
+                    <ul style="margin-left: 20px; color: #555; line-height: 2;">
+                        <li><strong>量化研究员</strong>：快速验证 AI Agent 在交易策略中的应用潜力，作为研究基线</li>
+                        <li><strong>金融科技开发者</strong>：基于多智能体架构构建定制化的投研系统</li>
+                        <li><strong>个人投资者</strong>：借助中文增强版的 A 股/港股分析能力辅助投资决策</li>
+                        <li><strong>AI 工程师</strong>：学习多智能体协作、ReAct 推理、LangGraph 状态管理的最佳实践</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>🚀 快速上手</h3>
+
+                    <p><strong>原版安装（2 行命令）</strong></p>
+                    <div class="code-block">
+<span class="cmd">pip install tradingagents</span>
+<span class="cmd">tradingagents run --ticker AAPL</span></div>
+
+                    <p><strong>中文增强版 Docker 部署（4 步）</strong></p>
+                    <div class="code-block">
+<span class="cmd">git clone</span> https://github.com/hsliuping/TradingAgents-CN.git
+<span class="cmd">cd</span> TradingAgents-CN
+<span class="cmd">cp</span> .env.example .env  <span class="comment"># 填入 API 密钥</span>
+<span class="cmd">docker-compose up -d --build</span>
+<span class="comment"># 浏览器打开 http://localhost:8501</span></div>
+
+                    <p><strong>支持的模型提供商</strong>（60+ 模型）</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">阿里百炼 (Qwen)</span>
+                        <span class="tech-tag">DeepSeek</span>
+                        <span class="tech-tag">Google AI (Gemini)</span>
+                        <span class="tech-tag">OpenAI (GPT-5.x)</span>
+                        <span class="tech-tag">Anthropic (Claude)</span>
+                        <span class="tech-tag">OpenRouter (60+)</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box-green" style="margin-top: 25px;">
+                    <h4>⚠️ 风险提示</h4>
+                    <p>本项目仅供研究与教育使用，回测表现不代表未来实盘收益。AI 生成的投资建议存在不确定性，请勿直接用于实盘交易决策。投资有风险，入市需谨慎。</p>
+                </div>
+
+                <div class="cta-section">
+                    <h3>🎯 立即体验 TradingAgents</h3>
+                    <p>多智能体 LLM 金融交易框架，模拟真实交易公司协作流程</p>
+                    <a href="https://github.com/TauricResearch/TradingAgents" class="cta-button" target="_blank">访问 GitHub 仓库</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>GitHub AI 项目日报 · 每日精选优质开源项目</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">本文基于公开信息整理，项目持续迭代中，请以官方最新版本为准</p>
+        </div>
+    </div>
+</body>
+</html>
