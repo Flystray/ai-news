@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-06 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff; }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul { background: rgba(102,126,234,0.1); border-radius: 12px; padding: 16px 20px; margin-bottom: 15px; list-style: none; }
+        .news-card ul li { color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px; }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link { display: inline-flex; align-items: center; gap: 6px; color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 0; color: #666; font-size: 13px; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .insight-item .num { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .section-icon { font-size: 28px; }
+        .highlight-bar { width: 5px; height: auto; min-height: 100%; border-radius: 3px; background: linear-gradient(180deg, #ff6b6b, #ee5a24); position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 0.3s; }
+        .news-card:hover .highlight-bar { opacity: 1; }
+
+        /* 重磅标签特殊样式 */
+        .tag-hot { background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important; }
+        .tag-industry { background: linear-gradient(135deg, #11998e, #38ef7d) !important; }
+        .tag-insight { background: linear-gradient(135deg, #f093fb, #f5576c) !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">2026年5月6日 星期三</div>
+            <h1>AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <!-- 今日重磅 -->
+        <div class="section">
+            <div class="section-title"><span class="section-icon">🔥</span> 今日重磅</div>
+
+            <!-- 1. GPT-5.5 Instant 发布 -->
+            <div class="news-card" style="position:relative;">
+                <h3>GPT-5.5 Instant 正式发布：OpenAI 新一代默认模型上线 <span class="tag tag-hot">OpenAI</span></h3>
+                <p>北京时间5月6日凌晨，OpenAI 发布 GPT-5.5 Instant（代号 Spud），正式替代 GPT-5.3 Instant 成为 ChatGPT 全平台默认模型。这是继4月发布完整版 GPT-5.5 后的轻量级变体，主打低延迟与高可靠性的日常使用体验。奥特曼同时邀请马斯克参加由 AI 参与策划的 OpenAI 上线派对，引发行业关注。</p>
+                <ul>
+                    <li><strong>幻觉率大幅下降：</strong>在法律、医疗、金融等高敏感领域错误率显著降低，可靠性达到新高度</li>
+                    <li><strong>基准测试飞跃：</strong>AIME 2025 数学竞赛得分 81.2（前代 65.4），MMMU-Pro 多模态推理 76 分（前代 69.2）</li>
+                    <li><strong>记忆来源功能：</strong>可引用历史对话、上传文件和关联 Gmail 账户提供个性化回答，并显示记忆来源追溯</li>
+                    <li><strong>用户可控性增强：</strong>用户可删除过时记忆或纠正不准确条目，分享对话时自动隐藏记忆信息</li>
+                    <li><strong>API 标识符：</strong>通过 chat-latest 接入 API，GPT-5.3 将仅保留 3 个月后停用</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/" target="_blank">📎 TechCrunch 原文</a>
+                    <a class="link" href="https://www.aitntnews.com/newDetail.html?newId=24743" target="_blank">📎 AITNT 详情</a>
+                </div>
+            </div>
+
+            <!-- 2. 斯坦福HAI重组 李飞飞升任校长顾问 -->
+            <div class="news-card" style="position:relative;">
+                <h3>斯坦福 HAI 大重组：李飞飞升任校长 AI 特别顾问，与图灵奖得主共掌战略 <span class="tag tag-hot">学术界</span></h3>
+                <p>5月4日，斯坦福大学宣布将 Stanford HAI（以人为本人工智能研究院）与 Stanford Data Science 合并为统一机构，保留 HAI 名称，由 HCI 领域先驱 James Landay 全面领导。ImageNet 之父李飞飞升任校长 Jonathan Levin 的 AI 特别顾问，与 RISC 架构发明人、图灵奖得主 John Hennessy 共同担任 HAI 顾问委员会联席主席。此举被视为斯坦福应对 AI 研究重心向工业界转移的关键战略调整。</p>
+                <ul>
+                    <li><strong>合并背景：</strong>HAI 成立7年汇聚400+跨学科学者、发放6000万美元研究经费；Data Science 拥有高性能计算集群 Marlowe</li>
+                    <li><strong>三大战略支柱：</strong>重新定义大学科学发现范式（从 AI+X 装饰到核心研究范式）、推动教育改革（自适应辅导系统）、研究 AI 社会影响</li>
+                    <li><strong>核心理念：</strong>以"开放"为原则——开源代码、开源数据、开源模型、开源课程</li>
+                    <li><strong>Landay 的团队科学哲学：</strong>倡导20-30人的大规模跨学科团队替代传统5人小实验室模式</li>
+                    <li><strong>行业意义：</strong>学术 AI 竞争已从单篇论文转向系统能力竞争——算力、数据、人才、组织力和开放生态的综合较量</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.sohu.com/a/1018528732_99973445" target="_blank">📎 搜狐原文</a>
+                    <a class="link" href="https://finance.sina.com.cn/stock/t/2026-05-05/doc-inhwvumi9885839.shtml" target="_blank">📎 新浪财经</a>
+                    <a class="link" href="https://www.163.com/dy/article/KS5IRPIQ0511ABV6.html" target="_blank">📎 网易新闻</a>
+                </div>
+            </div>
+
+            <!-- 3. 豆包推出付费会员 -->
+            <div class="news-card" style="position:relative;">
+                <h3>字节豆包正式推出付费会员：标准版68元/月起，中国 AI 免费时代迎转折点 <span class="tag tag-hot">字节跳动</span></h3>
+                <p>5月4日，字节跳动旗下 AI 应用豆包在 App Store 上线付费版本声明，最快5月中下旬推出三档会员服务：标准版68元/月、加强版200元/月、专业版500元/月。作为中国 AI 免费叙事的最强代表（月活3.45亿），豆包率先设立付费墙，标志着国内大模型应用从"烧钱获客"进入"商业化探索"的新阶段。</p>
+                <ul>
+                    <li><strong>成本压力直接推手：</strong>单次推理成本中硬件折旧占58%、电力占29%，3亿月活已到达"字节自己也兜不住"的临界点</li>
+                    <li><strong>双重战略意图：</strong>"筛子"筛选高算力用户收回成本 + "橱窗"重塑C端能力认知（免费版为控成本压缩了模型能力和上下文窗口）</li>
+                    <li><strong>竞品对标：</strong>入门价锚定 ChatGPT Plus（约58元），500元专业档主要作为价格锚点让200元档更具吸引力</li>
+                    <li><strong>行业信号：</strong>动了整个"免费→海量用户→飞轮→商业化自然到来"集体信仰的第一道裂缝</li>
+                    <li><strong>挑战：</strong>豆包用户多来自抖音随手点击或手机预装，缺乏付费教育，自然转化率面临考验</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://news.qq.com/rain/a/20260504A0765N00" target="_blank">📎 腾讯新闻深度分析</a>
+                    <a class="link" href="https://finance.sina.com.cn/wm/2026-05-03/doc-inhwsist0957775.shtml" target="_blank">📎 新浪财经独家报道</a>
+                </div>
+            </div>
+
+            <!-- 4. 马斯克诉OpenAI庭审第二周 -->
+            <div class="news-card" style="position:relative;">
+                <h3>马斯克诉 OpenAI 庭审第二周：布罗克曼出庭，300亿美元股份成焦点 <span class="tag tag-hot">OpenAI</span></h3>
+                <p>5月5日周一，硅谷"世纪诉讼"马斯克诉 OpenAI 案进入第二周庭审。OpenAI 总裁兼联合创始人 Greg Brockman 作为关键证人出庭作证，其持有的近300亿美元免费股份成为控辩交锋的核心焦点之一。</p>
+                <ul>
+                    <li><strong>布罗克曼股份争议：</strong>证实其营利实体股份分文未出获得，当前估值近300亿美元</li>
+                    <li><strong>2017年日记成为关键证据：</strong>马斯克方出示布罗克曼私人日记——"我们一直在想，也许应该直接转型为营利性机构。为我们自己赚钱听起来很不错"</li>
+                    <li><strong>和解尝试失败：</strong>审判前两天马斯克试探和解遭拒后发出威胁："到本周末你和山姆将成为全美最招人恨的人"</li>
+                    <li><strong>xAI "蒸馏"承认：</strong>马斯克在交叉盘问中承认 xAI "部分"蒸馏了 OpenAI 技术</li>
+                    <li><strong>后续证人阵容：</strong>奥特曼、微软 CEO 纳德拉、前 CTO 穆拉蒂、苏茨克维及齐里斯（马斯克四孩之母）即将登场</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuxfq9304114.shtml" target="_blank">📎 新浪财经庭审报道</a>
+                    <a class="link" href="https://www.36kr.com/p/3786382419827971" target="_blank">📎 36氪深度分析</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行业动态 -->
+        <div class="section">
+            <div class="section-title"><span class="section-icon">📡</span> 行业动态</div>
+
+            <!-- 1. Claude Mythos 安全事件 -->
+            <div class="news-card" style="position:relative;">
+                <h3>Claude Mythos 遭未授权访问事件持续发酵：Anthropic 展开紧急调查 <span class="tag tag-industry">Anthropic</span></h3>
+                <p>Anthropic 于4月下旬确认其机密级网络安全 AI 模型 Claude Mythos Preview 发生未授权组织入侵事件。该模型因具备自主发现零日漏洞并发动多阶段攻击链的能力而被 Anthropic 自评为"危险程度过高不宜公开发布"，目前仅对少数选定公司、政府机构开放。此次安全事件让全球 AI 安全格局再添不确定性。</p>
+                <ul>
+                    <li><strong>Mythos 能力范围：</strong>能自主发现主流操作系统和浏览器零日漏洞，串联多个漏洞形成攻击链——此前仅顶尖人类黑客掌握此能力</li>
+                    <li><strong>Anthropic 估值飙升：</strong>最新达9000亿美元，谷歌承诺投400亿美元（100亿现金+300亿里程碑追加），亚马逊投入50亿并计划追加200亿</li>
+                    <li><strong>Claude 连接器生态扩展：</strong>新增 Adobe、Blender、Autodesk Fusion 三大创意工具连接器，覆盖设计、音乐、视频、3D建模工作流</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.huxiu.com/article/4854114.html" target="_blank">📎 虎嗅深度解析</a>
+                    <a class="link" href="https://www.thepaper.cn/newsDetail_forward_33059135" target="_blank">📎 澎湃新闻调查</a>
+                    <a class="link" href="https://theaitrack.com/claude-connectors-adobe-blender/" target="_blank">📎 The AI Track</a>
+                </div>
+            </div>
+
+            <!-- 2. 微软OpenAI结束独家云合作 -->
+            <div class="news-card" style="position:relative;">
+                <h3>微软与 OpenAI 结束独家云合作：Azure 仍为主要云伙伴但移除 AGI 条款 <span class="tag tag-industry">微软/OpenAI</span></h3>
+                <p>4月27日，微软与 OpenAI 宣布重构合作关系，结束云服务排他性协议。Azure 继续作为 OpenAI 主要云合作伙伴，但双方移除了此前备受争议的 AGI（通用人工智能）相关条款——该条款曾规定一旦 OpenAI 实现 AGI，微软将自动丧失控制权。</p>
+                <ul>
+                    <li><strong>合作重构要点：</strong>云排他性取消后 OpenAI 可自由选择其他云服务商；AGI 条款被完全移除</li>
+                    <li><strong>微软不再支付收入分成：</strong>据财新报道，微软将停止按比例向 OpenAI 支付收入分成，合作模式转为更传统的云基础设施采购关系</li>
+                    <li><strong>行业影响：</strong>标志着 OpenAI 从"微软附庸"走向独立发展道路，也为 AWS、Google Cloud 等竞争对手打开大门</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://theaitrack.com/microsoft-and-openai-end-exclusive-deal/" target="_blank">📎 The AI Track</a>
+                    <a class="link" href="https://www.caixin.com/2026-04-28/102438580.html" target="_blank">📎 财新网 T早报</a>
+                </div>
+            </div>
+
+            <!-- 3. 中国叫停Meta收购Manus -->
+            <div class="news-card" style="position:relative;">
+                <h3>中国发改委叫停 Meta 超20亿美元收购 AI 初创 Manus：外资安全审查里程碑案例 <span class="tag tag-industry">监管</span></h3>
+                <p>国家发展改革委通报称，外商投资安全审查工作机制办公室依法依规对外资收购 Manus 项目作出禁止投资决定，要求当事人撤销收购交易。Manus 是一家在自主 AI Agent 领域具有领先地位的初创公司，此次否决被视为中国在 AI 领域外资监管的重要风向标。</p>
+                <ul>
+                    <li><strong>收购规模：</strong>Meta 计划以超过 20 亿美元收购 Manus，旨在强化其在自主智能体领域的布局</li>
+                    <li><strong>监管意义：</strong>典型的域外管辖案例——收购方和目标公司均为境外主体，但仍触发中国审查</li>
+                    <li><strong>行业信号：</strong>中美科技脱钩在 AI 领域进一步深化，跨境 AI 投资并购审查将持续趋严</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://theaitrack.com/china-blocks-meta-ai-startup-manus-deal/" target="_blank">📎 The AI Track</a>
+                    <a class="link" href="https://www.caixin.com/2026-04-28/102438580.html" target="_blank">📎 财新网</a>
+                </div>
+            </div>
+
+            <!-- 4. 谷歌Gemini企业Agent平台 & TPUs -->
+            <div class="news-card" style="position:relative;">
+                <h3>Google Cloud 发布 Gemini Enterprise Agent 平台与新一代 TPU：Vertex AI 升级为企业 Agent 统一栈 <span class="tag tag-industry">Google</span></h3>
+                <p>在 Google Cloud Next 2026 大会上，Google Cloud 推出 Gemini Enterprise Agent Platform，将 Vertex AI 升级为企业 AI Agent 的统一构建、治理、安全和优化平台。同期发布的还有新一代 TPU 加速硬件，进一步完善 Google 在企业 AI 基础设施层面的竞争力。</p>
+                <ul>
+                    <li><strong>平台定位：</strong>一站式企业 Agent 开发平台，覆盖构建→部署→治理→安全→优化全生命周期</li>
+                    <li><strong>与 OpenAI Workspace Agents 正面竞争：</strong>OpenAI 4月刚推出面向企业的 Workspace Agents 功能，两大巨头在企业 Agent 市场短兵相接</li>
+                    <li><strong>Gemini 3.1 Flash TTS：</strong>同月发布经济型文字转语音预览版，支持细粒度音频标签控制语音表现力</li>
+                    <li><strong>Gemma 4 开源：</strong>基于 Gemini 3 技术的 26B MoE 开源模型，激活参数仅 4B，支持 256K 上下文</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://theaitrack.com/gemini-enterprise-agent-platform/" target="_blank">📎 The AI Track</a>
+                    <a class="link" href="https://developer.aliyun.com/article/1723940" target="_blank">📎 阿里云 Gemma 4 解析</a>
+                    <a class="link" href="https://ai.google.dev/gemini-api/docs/changelog?hl=zh-cn" target="_blank">📎 Google AI 更新日志</a>
+                </div>
+            </div>
+
+            <!-- 5. DeepSeek V4 百万上下文 -->
+            <div class="news-card" style="position:relative;">
+                <h3>DeepSeek V4 持续发酵：百万 token 上下文窗口引开发者热议，实际输出质量存疑 <span class="tag tag-industry">DeepSeek</span></h3>
+                <p>DeepSeek V4 已于4月下旬开放预览（V4-Pro 和 V4-Flash 双版本），主打开源权重、100万 token 上下文支持和更低的推理成本。然而早期上手反馈显示，虽然基准测试成绩亮眼，但真实世界输出质量仍存在明显差距。</p>
+                <ul>
+                    <li><strong>核心规格：</strong>开源权重、1M token 上下文窗口（业界最长之一）、编程和推理能力声称提升</li>
+                    <li><strong>双版本策略：</strong>V4-Pro 定位旗舰性能，V4-Flash 主打速度和成本效率</li>
+                    <li><strong>社区反馈：</strong>编程基准表现优异，但在复杂任务的实际输出中偶尔出现逻辑不一致问题</li>
+                    <li><strong>行业影响：</strong>延续 DeepSeek "极致性价比"路线，继续对闭源模型形成定价压力</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://theaitrack.com/deepseek-v4-1m-context-preview/" target="_blank">📎 The AI Track 深度评测</a>
+                </div>
+            </div>
+
+            <!-- 6. MiniMax M2.5 & Moltbook -->
+            <div class="news-card" style="position:relative;">
+                <h3>MiniMax M2.5 刷榜 SOTA：编程与 Agent 能力接近前沿水平，价格仅竞品 1/10 ~ 1/20 <span class="tag tag-industry">MiniMax</span></h3>
+                <p>上海稀宇科技（MiniMax）于今年2月发布 M2.5 系列 MoE 模型（总参2300亿），在编程、工具调用和搜索等多项基准上达到或刷新 SOTA。其极低的 API 定价（仅为同级别模型的 1/10 至 1/20）引发行业广泛关注，万元预算即可支撑多个 Agent 全年运行。同期上线的 Moltbook——AI Agent 社交网络——上线数日内即实现爆发式增长。</p>
+                <ul>
+                    <li><strong>M2.5 核心亮点：</strong>原生 Agent 生产级设计，100 TPS 和 50 TPS 双版本，SWE-bench/Terminal-Bench 编程基准领先</li>
+                    <li><strong>Office Skills 深度集成：</strong>标准化办公技能已内嵌至 MiniMax Agent 产品</li>
+                    <li><strong>Moltbook 创新概念：</strong>全球首个 AI Agent 专用社交网络，Agent 可自主交互、建立社交关系</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://minimaxi.com/models/text" target="_blank">📎 MiniMax 官网</a>
+                    <a class="link" href="https://github.com/MiniMax-AI/MiniMax-M2.5" target="_blank">📎 GitHub 开源仓库</a>
+                    <a class="link" href="https://theaitrack.com/moltbook-ai-agents-social-network/" target="_blank">📎 Moltbook 报道</a>
+                </div>
+            </div>
+
+            <!-- 7. 具身智能六大趋势 -->
+            <div class="news-card" style="position:relative;">
+                <h3>2026具身智能产业六大趋势：从"炫技造人"到"抢落地"的关键分水岭 <span class="tag tag-industry">具身智能</span></h3>
+                <p>2026具身智能与人形机器人大会近日召开，34家核心展商集中亮相。行业观察指出，如果说过去两年沉浸在"造人"的狂热中——惊叹机器人跑跳翻跟头——那么今年一种更加沉静却坚实的力量正在浮现：产业正从技术炫技阶段全面转向规模化落地。</p>
+                <ul>
+                    <li><strong>趋势一：</strong>从通用人形到场景专用——通用人形机器人退热，特定场景专用本体崛起</li>
+                    <li><strong>趋势二：</strong>数据合成替代真实采集——Sim2Real 数据管线成熟度大幅提升</li>
+                    <li><strong>趋势三：</strong>端侧算力突破——模型压缩使机器人本地推理成为可能</li>
+                    <li><strong>趋势四：</strong>国家电网68亿采购8500台机器人——电力行业具身智能今年破百亿市场</li>
+                    <li><strong>趋势五：</strong>苏州发布十大重点新兴产业政策——地方政府加码具身智能赛道</li>
+                    <li><strong>趋势六：</strong>广东开发高能效AI芯片和异构计算架构，推动脑机接口与具身智能融合</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://news.qq.com/rain/a/20260502A045VV00" target="_blank">📎 腾讯新闻深度报道</a>
+                    <a class="link" href="https://finance.sina.com.cn/wm/2026-04-27/doc-inhvxxwz2266577.shtml" target="_blank">📎 苏州大会报道</a>
+                    <a class="link" href="https://finance.sina.com.cn/wm/2026-04-25/doc-inhvtwhv0456462.shtml" target="_blank">📎 国家电网采购详情</a>
+                </div>
+            </div>
+
+            <!-- 8. 阿里Qwen3.6系列更新 -->
+            <div class="news-card" style="position:relative;">
+                <h3>阿里通义 Qwen3.6-27B 开源发布：稠密架构聚焦智能体编程与多模态推理 <span class="tag tag-industry">阿里</span></h3>
+                <p>阿里通义千问团队发布 Qwen3.6-27B —— Qwen3.6 系列唯一的稠密架构版本（270亿参数）。模型定位于智能体编程和多模态推理双场景，在 SWE-bench、Terminal-Bench 等编程基准测试中表现优异，同时保持了对 OpenClaw 等 Agent 框架的良好兼容性。</p>
+                <ul>
+                    <li><strong>架构特色：</strong>270亿稠密参数（区别于MoE变体），适合资源受限环境部署</li>
+                    <li><strong>核心优势：</strong>SWE-bench 编程基准领跑同级模型，多模态推理能力显著提升</li>
+                    <li><strong>Qwen 全矩阵：</strong>涵盖 Qwen3 Max、Qwen3.5-Plus、Qwen3-Max-Thinking、Qwen3 Coder Next 等多条产品线</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://ai-bot.cn/qwen3-6-27b/" target="_blank">📎 AI工具集介绍</a>
+                    <a class="link" href="https://news.qq.com/rain/a/20260417A01S0100" target="_blank">📎 腾讯新闻报道</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <div class="section-title"><span class="section-icon">💡</span> 核心洞察</div>
+
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>AI 商业化拐点已至：</strong>豆包（3.45亿月活）率先推付费墙，是中国 AI 应用从"烧钱换增长"转向"追求单位经济效益"的标志性事件。当连字节都扛不住免费模式的成本压力时，整个行业的商业逻辑都在被迫重写。OpenAI 同期反向操作推低价 Go 版本（8美元/月），中美两市场选择了截然不同的变现路径。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>学术 AI 组织重构应对工业主导：</strong>斯坦福将 HAI 与 Data Science 合并，李飞飞从院长升任校长顾问，释放明确信号——前沿 AI 研究的主导权已大幅向 OpenAI、Google DeepMind 等工业实验室倾斜。学术机构的应对之策是：不再比拼单点论文，而是构建"组织力"——用跨学科团队科学、开源生态和人文视角打造不可替代的价值主张。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>OpenAI 庭审暴露行业"原罪"：</strong>马斯克诉 OpenAI 案不仅是两个男人的恩怨，更是整个 AI 行业发展过程中"理想主义 vs 资本意志"矛盾的集中爆发。布罗克曼300亿美元免费股份、2017年"为自己赚钱听起来不错"的日记、xAI 承认蒸馏 OpenAI 技术——每一个证据都在追问同一个问题：当 AI 公司从非营利使命出发，最终都变成了什么？</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>企业 AI Agent 战争正式打响：</strong>微软结束 OpenAI 云独占的同时，Google 发布 Gemini Enterprise Agent Platform，OpenAI 推出 Workspace Agents——三大巨头在同一月内密集布局企业 Agent 基础设施。这意味着 2026 年的 AI 竞争主战场正在从"谁的模型更强"转向"谁能更好地让 AI 融入企业工作流"。MiniMax M2.5 以 1/10 价格切入同一赛道，搅局者已经就位。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>具身智能从"秀肌肉"进入"卖铲子"阶段：</strong>国家电网68亿元采购8500台机器人大单、苏州将具身智能列入十大新兴产业、广东加码脑机接口融合——这些信号共同指向一个判断：具身智能正在经历类似云计算从概念到落地的跨越。2026年可能不是"人形机器人元年"，但一定是"具身智能产业化元年"。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">6</div>
+                <p><strong>AI 安全从理论讨论进入实战阶段：</strong>Claude Mythos 未授权入侵事件表明，具备自主攻击能力的 AI 模型已成为现实威胁而非科幻假设。当 AI 模型能够独立发现并串联零日漏洞，传统网络安全防线需要从根本上重新思考。与此同时，中国否决 Meta 收购 Manus、谷歌豪掷 400 亿锁定 Anthropic——地缘政治与 AI 安全正在深度融合。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>AI 每日资讯 · 由 AI 日课自动生成 · 数据来源：TechCrunch / AITNT / 腾讯新闻 / 新浪财经 / 36氪 / 搜狐 / The AI Track / 虎嗅 / 澎湃等</p>
+            <p style="margin-top:10px;">© 2026 AI日课 · <a href="https://Flystray.github.io/ai-news/">GitHub Pages</a></p>
+        </div>
+    </div>
+</body>
+</html>
