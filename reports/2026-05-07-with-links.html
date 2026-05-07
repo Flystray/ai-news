@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-07 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff; }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul { background: rgba(102,126,234,0.1); border-radius: 12px; padding: 16px 20px; margin-bottom: 15px; list-style: none; }
+        .news-card ul li { color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px; }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link { display: inline-flex; align-items: center; gap: 6px; color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 0; color: #666; font-size: 13px; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .insight-item .num { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .section-icon { font-size: 28px; }
+        .tag-hot { background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important; }
+        .tag-industry { background: linear-gradient(135deg, #11998e, #38ef7d) !important; }
+        .tag-insight { background: linear-gradient(135deg, #f093fb, #f5576c) !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">2026年5月7日 星期四</div>
+            <h1>AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <!-- 今日重磅 -->
+        <div class="section">
+            <div class="section-title"><span class="section-icon">🔥</span> 今日重磅</div>
+
+            <!-- 1. OpenAI & Anthropic 华尔街合资 -->
+            <div class="news-card" style="position:relative;">
+                <h3>OpenAI 与 Anthropic 同日"牵手"华尔街：AI 商业化决战打响，两种路线正面交锋 <span class="tag tag-hot">战略</span></h3>
+                <p>5月5日，全球 AI 行业迎来历史性一幕——OpenAI 与 Anthropic 几乎同时宣布与华尔街顶级金融机构成立合资企业，分别剑指企业 AI 落地市场。OpenAI 成立"The Deployment Company"，从19家投资者处融资超40亿美元，估值100亿美元；Anthropic 则联合黑石、高盛、Hellman & Friedman 成立约15亿美元合资公司（各出资约3亿美元）。两条分销路线——云平台 vs PE 资本渠道——正式分野。</p>
+                <ul>
+                    <li><strong>OpenAI 路线（云平台）：</strong>The Deployment Company 依托 TPG、贝恩资本、Advent 等机构超过2000家被投企业客户网络，快速铺开 AI 软件部署</li>
+                    <li><strong>Anthropic 路线（PE 渠道）：</strong>高盛从 Claude 用户变身为分销商，已在内测6个月用于交易对账、KYC 合规等金融场景——这是科技行业罕见的"反向渠道"</li>
+                    <li><strong>行业意义：</strong>如果说前两年 AI 竞争焦点是"谁的模型更强"，2026年的焦点已转向"谁的分销更广"；PE 渠道客单价和客户黏性更高，云平台覆盖更广——两者各有优势</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml" target="_blank">📎 新浪财经</a>
+                    <a class="link" href="https://www.sohu.com/a/1018320088_121885030" target="_blank">📎 搜狐详细报道</a>
+                    <a class="link" href="https://news.qq.com/rain/a/20260504A046LO00" target="_blank">📎 腾讯新闻</a>
+                    <a class="link" href="https://www.itbear.com.cn/html/2026-05/1323804.html" target="_blank">📎 ITBear</a>
+                </div>
+            </div>
+
+            <!-- 2. Anthropic 2000亿美元云订单 -->
+            <div class="news-card" style="position:relative;">
+                <h3>Anthropic 向谷歌承诺5年2000亿美元云服务账单：AI 算力军备竞赛再破纪录 <span class="tag tag-hot">算力</span></h3>
+                <p>5月6日，据财联社报道，Anthropic 已与谷歌签署未来五年总额2000亿美元的云服务和自研芯片算力采购协议。业内估计，该笔交易占谷歌近期财报披露总收入的40%以上。这意味着 Anthropic 和 OpenAI 两家的订单合计已占据美国主要云服务商积压订单的一半以上，规模接近1万亿美元。</p>
+                <ul>
+                    <li><strong>算力成本规模：</strong>2026年 OpenAI 服务器支出预计达450亿美元，Anthropic 约200亿美元——AI 基础设施投入已进入"国家级别"</li>
+                    <li><strong>谷歌的战略逻辑：</strong>400亿入股 Anthropic 后，又收获2000亿云订单——Anthropic 既是谷歌的"对手"（Gemini vs Claude），又是其 TPU 和云服务的最大客户</li>
+                    <li><strong>AI 基础设施泡沫之争：</strong>分析师警告，如此规模的投资需要"AI 普及速度比预期快10倍"才能在合理周期内回收，"烧钱换规模"的模式正在逼近临界点</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://news.sina.cn/gj/2026-05-06/detail-inhwxxkm5892275.d.html" target="_blank">📎 新浪财经</a>
+                    <a class="link" href="https://www.sohu.com/a/1019001605_122396381" target="_blank">📎 搜狐详细分析</a>
+                </div>
+            </div>
+
+            <!-- 3. 特朗普政府AI监管 -->
+            <div class="news-card" style="position:relative;">
+                <h3>特朗普政府 AI 政策急转弯：与谷歌 DeepMind / 微软 / xAI 签署前沿模型预评估协议 <span class="tag tag-hot">监管</span></h3>
+                <p>5月6日，美国人工智能标准与创新中心（CAISI）宣布与谷歌 DeepMind、微软及 xAI 签署协议，要求在这三家 AI 实验室公开发布前沿模型之前开展安全评估。这是继去年与 OpenAI、Anthropic 合作之后 CAISI 的第二次重大扩展，标志着特朗普政府从"全面绿灯"正式转向"审慎监管"的 AI 政策拐点。</p>
+                <ul>
+                    <li><strong>核心要求：</strong>AI 模型公开发布前必须经过 CAISI 安全评估，评估重点覆盖模型能力边界、安全风险和潜在滥用场景</li>
+                    <li><strong>白宫新动向：</strong>或设立全新 AI 工作组统筹监管，可能为 AI 行业引入类似医药行业的"上市前审批"机制</li>
+                    <li><strong>Anthropic 的代价：</strong>Anthropic 因拒绝将 Claude 用于完全自主武器与大规模监控而被五角大楼排除在540亿美元军事 AI 合同之外——这显示了"安全优先"立场的商业代价</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.sohu.com/a/1018940754_114838" target="_blank">📎 搜狐报道</a>
+                    <a class="link" href="https://blog.csdn.net/2401_84289488/article/details/160737064" target="_blank">📎 CSDN 详情</a>
+                </div>
+            </div>
+
+            <!-- 4. GPT-5.5 Instant 发布 -->
+            <div class="news-card" style="position:relative;">
+                <h3>GPT-5.5 Instant 正式上线：ChatGPT 默认模型大升级，幻觉率骤降52.5% <span class="tag tag-hot">OpenAI</span></h3>
+                <p>5月6日，OpenAI 正式发布 GPT-5.5 Instant 并将其设为 ChatGPT 全平台默认模型，这是继4月23日完整版 GPT-5.5 旗舰发布后又一个关键更新。新模型在保持低延迟的同时，在准确性、回复风格和个性化能力上实现全面提升。</p>
+                <ul>
+                    <li><strong>幻觉率大幅下降：</strong>在医疗、法律、金融等高敏感领域幻觉率较前代降低约52.5%；用户已标记的错误对话减少37.3%</li>
+                    <li><strong>记忆来源功能：</strong>可引用历史对话、上传文件和 Gmail 账户，并显示记忆来源追溯，用户可删除或纠正记忆条目</li>
+                    <li><strong>基准测试飞跃：</strong>AIME 2025 数学竞赛得分81.2（前代65.4），MMMU-Pro 多模态推理76分（前代69.2）</li>
+                    <li><strong>API 接入：</strong>通过 chat-latest 接入，GPT-5.3 将仅保留3个月后停用</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.sohu.com/a/1018904990_114986" target="_blank">📎 搜狐详细报道</a>
+                    <a class="link" href="https://www.21jingji.com/article/20260425/c811e178e665d7abc9b213cba7a0dc34.html" target="_blank">📎 21财经</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行业动态 -->
+        <div class="section">
+            <div class="section-title"><span class="section-icon">📡</span> 行业动态</div>
+
+            <!-- 1. OpenAI × 高通 AI手机芯片 -->
+            <div class="news-card" style="position:relative;">
+                <h3>OpenAI × 高通联合研发 AI 手机芯片：2028年量产，手机端本地运行百亿参数大模型 <span class="tag tag-industry">OpenAI</span></h3>
+                <p>5月2日，OpenAI 与高通宣布联合研发专用 AI 手机芯片，目标是在手机端本地运行百亿参数大模型，实现低功耗、高推理性能，脱离云端依赖。苹果同日市值一夜蒸发约500亿美元，端侧 AI 芯片竞赛正式进入白热化阶段。</p>
+                <ul>
+                    <li><strong>分工明确：</strong>高通负责芯片设计和功耗优化，OpenAI 负责模型适配和压缩，立讯精密担任独家系统设计商</li>
+                    <li><strong>竞品格局：</strong>谷歌×三星、联发科×Meta、华为×盘古——端侧 AI 芯片四路竞争全面开打</li>
+                    <li><strong>影响深远：</strong>手机端本地 AI 将重新定义隐私标准，数据无需上传云端即可完成复杂推理任务</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://blog.csdn.net/2401_84289488/article/details/160737064" target="_blank">📎 CSDN 详情</a>
+                </div>
+            </div>
+
+            <!-- 2. DeepSeek V4 开源 -->
+            <div class="news-card" style="position:relative;">
+                <h3>DeepSeek V4 开源：百万 token 上下文 + MIT 许可，继续压低闭源模型定价天花板 <span class="tag tag-industry">DeepSeek</span></h3>
+                <p>DeepSeek 于4月24日正式开源 V4 系列模型，推出 V4-Pro（1.6万亿参数）和 V4-Flash（2840亿参数）两个版本，均配备100万 token 上下文窗口，采用 MIT 许可证完全开源可商用。业界分析认为，DeepSeek 正在复刻"极致性价比"路线，对闭源厂商持续施制定价压力。</p>
+                <ul>
+                    <li><strong>技术架构：</strong>DSA 稀疏注意力 + 混合注意力机制，激活参数效率业界领先</li>
+                    <li><strong>基准表现：</strong>V4-Pro 在编程和 STEM 基准测试中声称开源模型顶级，但实际任务输出质量仍有争议</li>
+                    <li><strong>生态意义：</strong>MIT 许可允许二次分发与商业微调，开发者无需担忧版权壁垒</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.aibars.net/zh/library/ai-news/details/835522837790986240" target="_blank">📎 AIBars 详情</a>
+                </div>
+            </div>
+
+            <!-- 3. Meta Llama 3 开源 -->
+            <div class="news-card" style="position:relative;">
+                <h3>Meta Llama 3 开源发布：70B / 8B 双版本完全可商用，开源生态迎最强劲对手 <span class="tag tag-industry">Meta</span></h3>
+                <p>5月3日，Meta 发布 Llama 3 系列开源模型，包含 70B 和 8B 两个版本，完全开源且可商用。Llama 3 70B 在多项基准测试中接近 GPT-4 水平，同时配套推出 Llama Guard 3（安全护栏）、CodeLlama 3（代码专用）和 Llama Vision（多模态），以及机器人专用变体。</p>
+                <ul>
+                    <li><strong>开源优势：</strong>无版权费，允许二次分发与微调，企业可私有化部署</li>
+                    <li><strong>配套生态完善：</strong>Llama Guard 3 负责内容安全，CodeLlama 3 专注编程场景，Llama Vision 支持多模态理解</li>
+                    <li><strong>开源竞争格局：</strong>Llama 3 + DeepSeek V4 双线开源，对 Anthropic Claude 和 OpenAI GPT 形成开源替代压力</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://blog.csdn.net/2401_84289488/article/details/160737064" target="_blank">📎 CSDN 详情</a>
+                </div>
+            </div>
+
+            <!-- 4. 谷歌 Gemini 1.5 Pro 升级 -->
+            <div class="news-card" style="position:relative;">
+                <h3>Google Gemini 1.5 Pro 重磅升级：100万 token 上下文 + API 价格下调60%，正面迎战 GPT-4o <span class="tag tag-industry">Google</span></h3>
+                <p>5月3日，Google 发布 Gemini 1.5 Pro 重大升级版，将上下文窗口维持在100万 token，同时大幅下调 API 价格（降幅达60%）以争夺企业客户。Gemini 1.5 Pro 支持500页 PDF 一次性输入、10小时音频和2小时4K视频的无损理解。</p>
+                <ul>
+                    <li><strong>长上下文能力：</strong>100万 token 窗口允许一次性分析整本书籍、长篇报告或多部完整电影</li>
+                    <li><strong>价格战开启：</strong>API 价格下调60%直接对标 OpenAI GPT-4o，企业客户争夺战加剧</li>
+                    <li><strong>多模态领先：</strong>OCR + 图像分析双强，是企业处理复杂文档的理想选择</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://blog.csdn.net/2401_84289488/article/details/160737064" target="_blank">📎 CSDN 详情</a>
+                </div>
+            </div>
+
+            <!-- 5. xAI Grok 4.3 发布 -->
+            <div class="news-card" style="position:relative;">
+                <h3>xAI 发布 Grok 4.3：100万 token 上下文 + 思维链推理 + 原生视频输入 <span class="tag tag-industry">xAI</span></h3>
+                <p>4月30日，马斯克旗下 xAI 发布 Grok 4.3 大模型，引入100万 token 上下文窗口、始终在线的思维链（Chain-of-Thought）推理能力，以及原生视频输入功能。40%的成本优化使 Grok 在性价比方面具备竞争力。</p>
+                <ul>
+                    <li><strong>思维链推理：</strong>内置始终在线推理链，复杂问题逐步拆解，逻辑透明度更高</li>
+                    <li><strong>视频理解：</strong>支持原生视频输入，可实时分析视频内容</li>
+                    <li><strong>成本优势：</strong>比前代降低40%成本，Grok API 价格竞争力显著提升</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.aibars.net/zh/library/ai-news/list" target="_blank">📎 AIBars 资讯</a>
+                </div>
+            </div>
+
+            <!-- 6. 华为 + 中科大 灵境造物 -->
+            <div class="news-card" style="position:relative;">
+                <h3>华为 × 中科大发布"灵境造物"：Coordination Engineering 全栈支撑，具身智能新范式 <span class="tag tag-industry">华为</span></h3>
+                <p>华为与中科大联合发布"灵境造物"技术体系，聚焦具身智能的协调工程（Coordination Engineering）全栈技术支撑。这一项目被业内视为中国在具身智能领域的重要布局，通过协同多个 AI 智能体实现复杂物理任务的规划与执行。</p>
+                <ul>
+                    <li><strong>技术方向：</strong>多智能体协同 + 物理世界实时感知，推动机器人从"单点能力"到"系统协作"的跨越</li>
+                    <li><strong>算力支撑：</strong>华为昇腾系列芯片提供底层算力，鲲鹏生态提供异构计算架构</li>
+                    <li><strong>具身智能热潮：</strong>国内具身智能赛道持续升温，国家电网68亿采购只是开始</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.jiqizhixin.com/" target="_blank">📎 机器之心</a>
+                </div>
+            </div>
+
+            <!-- 7. 智谱 AI Scaling 降智 -->
+            <div class="news-card" style="position:relative;">
+                <h3>智谱 AI 揭秘"Scaling 降智"真相：Prefill 瓶颈成大模型推理天花板 <span class="tag tag-industry">智谱AI</span></h3>
+                <p>智谱 AI 首席科学家近日公开分享了 Scaling Law 背后被忽视的"降智"问题——即随着模型参数增大，在 Prefill（前缀填充）阶段的效率瓶颈反而导致有效推理能力下降。这一发现揭示了当前大模型发展的又一关键瓶颈，引发行业热议。</p>
+                <ul>
+                    <li><strong>核心问题：</strong>大模型在 Prefill 阶段计算密度过高，导致长序列任务有效吞吐量反而下降</li>
+                    <li><strong>解决思路：</strong>需要重新设计注意力机制或引入稀疏激活策略来突破 Prefill 瓶颈</li>
+                    <li><strong>行业影响：</strong>预示着 Scaling Law 的简单堆算力路径正在遭遇工程瓶颈，行业需要新的算法范式突破</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://www.qbitai.com/" target="_blank">📎 量子位</a>
+                </div>
+            </div>
+
+            <!-- 8. 五角大楼 540 亿军事 AI -->
+            <div class="news-card" style="position:relative;">
+                <h3>五角大楼签约7家 AI 巨头：540亿美元军事 AI 合同，Anthropic 因"安全立场"被排除 <span class="tag tag-industry">监管</span></h3>
+                <p>美国五角大楼与 OpenAI、Google、NVIDIA、Microsoft、Amazon、SpaceX、Reflection AI 签署540亿美元军事 AI 合同，用于 AI 作战系统、情报决策和无人集群控制。然而，明确表示"拒绝将 Claude 用于完全自主武器与大规模监控"的 Anthropic 被排除在外，并面临诉讼风险。</p>
+                <ul>
+                    <li><strong>合同规模：</strong>540亿美元，覆盖 IL-6（机密）和 IL-7（最高机密）网络，接入美军核心杀伤链</li>
+                    <li><strong>GenAI.mil 平台：</strong>上线5个月已有130万+国防部人员使用，数十万智能体部署</li>
+                    <li><strong>Anthropic 的代价：</strong>安全优先立场赢得公众好感，但每年可能损失数十亿美元政府合同</li>
+                </ul>
+                <div class="links">
+                    <a class="link" href="https://blog.csdn.net/2401_84289488/article/details/160737064" target="_blank">📎 CSDN 详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <div class="section-title"><span class="section-icon">💡</span> 核心洞察</div>
+
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>华尔街资本重塑 AI 商业化路径：</strong>PE 渠道（黑石/高盛）vs 云平台（Azure）两种分销路线并行，标志着 AI 商业化从"技术驱动"转向"渠道驱动"。高盛从 AI 用户变身为分销商，这在科技行业极为罕见——意味着金融资本正在成为 AI 落地的关键推手，而不仅仅是资金提供者。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>算力军备竞赛逼近经济临界点：</strong>Anthropic 2000亿美元云订单 + OpenAI 年服务器成本450亿美元，意味着 AI 基础设施投入已超多数国家军费。分析师警告，除非 AI 普及速度比预期快10倍，否则这笔账难以在合理周期内回收——泡沫破裂风险正在累积。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>开源双线竞争格局成型：</strong>Llama 3 + DeepSeek V4 双线开源，给 Anthropic Claude 和 OpenAI GPT 形成强大的开源替代压力。这与 Llama 4 Ultra 对标 GPT-4 的格局叠加，意味着闭源模型厂商必须加速差异化——否则开源模型将蚕食其中间市场。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>AI 监管进入"上市前审批"时代：</strong>CAISI 预评估协议标志着 AI 监管从"事后追责"转向"事前审查"，类似医药行业的 NDA（新药申请）审批机制可能在 AI 领域复制。Anthropic 因安全立场失去五角大楼合同，显示监管合规正在成为商业竞争的隐性壁垒。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>端侧 AI 芯片重塑移动生态：</strong>OpenAI×高通、谷歌×三星、华为×盘古三路并进，手机端本地 AI 推理即将成为现实。这意味着：数据无需上传云端、AI 响应延迟大幅降低、隐私标准全面重塑——苹果市值一夜蒸发500亿美元只是开始，传统硬件厂商的护城河正在被瓦解。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">6</div>
+                <p><strong>具身智能规模化元年已至：</strong>国家电网68亿采购 + 华为灵境造物 + 具身智能六大趋势共同指向——2026年是从"炫技"到"落地"的分水岭。通用人形机器人退热，场景专用本体崛起，数据合成替代真实采集，端侧算力突破让机器人本地推理成为可能。</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>📡 AI 每日资讯 · 2026年5月7日 · 星期四</p>
+            <p>由 AI 自动采集整理 | <a href="https://Flystray.github.io/ai-news/" target="_blank">订阅中心</a> | <a href="https://github.com/Flystray/ai-news" target="_blank">GitHub 仓库</a></p>
+            <p style="margin-top:8px;color:#555;">新闻来源：新浪财经 / 搜狐 / 腾讯新闻 / 量子位 / 机器之心 / CSDN / AIBars / ITBear / 36氪</p>
+        </div>
+    </div>
+</body>
+</html>

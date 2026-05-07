@@ -2,11 +2,7 @@
 creator_monitor_quick.py - 快速版本
 将 http_get timeout 降为 3 秒，快速失败
 """
-import sys, io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
-
-import json, os, ssl, time, re, hashlib, xml.etree.ElementTree as ET, urllib.request, urllib.parse
+import sys, os, json, ssl, time, re, hashlib, xml.etree.ElementTree as ET, urllib.request, urllib.parse
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -400,7 +396,7 @@ def main(date_str=None):
         else:
             print(f"无更新")
         processed_count += 1
-        time.sleep(1)
+        time.sleep(0.5)
 
     # ── 保存状态 ─────────────────────────────────────────────
     save_state(state)

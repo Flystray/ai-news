@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understand-Anything · GitHub AI 项目 · 2026年5月7日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.9;
+            padding: 20px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        h2 {
+            font-size: 19px;
+            color: #1a1a1a;
+            margin: 32px 0 16px;
+            padding-left: 12px;
+            border-left: 4px solid #e74c3c;
+            font-weight: 700;
+        }
+        h2.green { border-left-color: #27ae60; }
+        h2.purple { border-left-color: #8e44ad; }
+        h3 {
+            font-size: 17px;
+            color: #1a1a1a;
+            margin: 20px 0 10px;
+            font-weight: 700;
+        }
+        p {
+            margin-bottom: 14px;
+            font-size: 15px;
+            color: #444;
+            text-align: justify;
+        }
+        ul {
+            margin: 12px 0 14px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 14.5px;
+            color: #555;
+        }
+        li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        blockquote {
+            margin: 16px 0;
+            padding: 12px 18px;
+            background: #f8f9fa;
+            border-left: 3px solid #3498db;
+            color: #666;
+            font-style: italic;
+            border-radius: 0 6px 6px 0;
+        }
+        blockquote p { margin-bottom: 0; font-size: 14px; }
+        hr {
+            border: none;
+            height: 1px;
+            background: #eee;
+            margin: 28px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            color: #999;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .highlight-red { color: #e74c3c; font-weight: 700; }
+        .highlight-blue { color: #3498db; font-weight: 600; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #f8f9ff, #fff5f8);
+            border: 1px solid #e8e0ef;
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+        .insight-box strong:first-child {
+            color: #8e44ad;
+            font-size: 15.5px;
+        }
+        .insight-box p { margin-bottom: 0; font-size: 14.5px; color: #555; }
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+        .project-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            border-radius: 12px;
+            padding: 24px 26px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .project-header .name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: white;
+        }
+        .project-header .desc {
+            font-size: 14px;
+            opacity: 0.9;
+            color: white;
+        }
+        .project-header .meta {
+            margin-top: 10px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        .section-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3498db;
+        }
+        .section-box h4 {
+            color: #2c3e50;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .section-box p { margin-bottom: 0; font-size: 14.5px; }
+        .tip-box {
+            background: #fff8e6;
+            border: 1px solid #ffe0a0;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 14px 0;
+        }
+        .tip-box p { margin-bottom: 0; font-size: 14px; color: #666; }
+        .cta-box {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .cta-box p { color: white; margin-bottom: 10px; font-size: 15px; }
+        .cta-box a {
+            display: inline-block;
+            background: white;
+            color: #2c3e50;
+            padding: 10px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🤖 GitHub AI 项目 · 2026年5月7日</h1>
+<div class="subtitle">每天精选一个有启发价值的开源 AI 项目 · fly的AI学习</div>
+
+<!-- 项目头部 -->
+<div class="project-header">
+    <div class="name">Understand-Anything</div>
+    <div class="desc">Graphs that teach > graphs that impress.<br>多智能体管道将代码库转化为交互式知识图谱，支持 Claude Code / Cursor / Copilot</div>
+    <div class="meta">⭐ 12.9k &nbsp;·&nbsp; 🍴 1.1k &nbsp;·&nbsp; 📝 TypeScript &nbsp;·&nbsp; 📄 MIT &nbsp;·&nbsp; 🕐 7 周前创建</div>
+</div>
+
+<!-- 项目背景 -->
+<h2>📌 为什么这个项目值得关注？</h2>
+
+<p>刚加入一个 20 万行代码的老项目，导师甩来一句"自己先看吧"——这种场景，每个开发者都不陌生。传统方案是 IDE 全局搜索加断点调试，但面对一个完全陌生的代码库，这种方式效率极低。你得像考古一样逐文件追踪调用链，往往花了两天时间，还没搞清楚系统的核心模块在哪儿。</p>
+
+<p><strong class="highlight-blue">Understand-Anything</strong> 正是为解决这个问题而生。它是一个 Claude Code 插件，核心理念用一句话概括：<strong>"能教人的图，比能炫技的图更重要"</strong>（Graphs that teach > graphs that impress）。它的做法是：用<strong>多智能体管道</strong>扫描整个代码库，构建一张包含所有文件、函数、类和依赖关系的交互式知识图谱，然后提供可视化看板和 AI 问答功能，让你真正"看懂"一个项目。</p>
+
+<p>这个项目由 Lum1104 开发，于 <strong>2026 年 3 月 15 日发布</strong>，至今仅约 7 周时间，已获得 <strong>12.9k GitHub stars</strong>，在 Hacker News 上引发热烈讨论，是当前代码理解工具赛道最值得关注的新项目之一。MIT 许可证，TypeScript 开发，支持 Claude Code、Codex、Cursor、VS Code Copilot、Gemini CLI 等 9 大平台。</p>
+
+<!-- 核心功能 -->
+<h2>🚀 核心功能（7 大能力）</h2>
+
+<div class="section-box">
+    <h4>1. 多智能体流水线：6 个专业 Agent 协作分析代码</h4>
+    <p>这是 Understand-Anything 的技术核心。6 个分工明确的 Agent 模拟真实代码审查流程：<strong>Project Scanner</strong>（扫描目录树、识别技术栈）→ <strong>File Analyzer</strong>（并行分析文件，提取函数/类/导入关系，每批 20-30 文件，5 个并发 worker）→ <strong>Architecture Analyzer</strong>（识别架构层次，标记循环依赖）→ <strong>Tour Builder</strong>（为新开发者/PM/AI 代理生成定制导览）→ <strong>Graph Reviewer</strong>（验证图谱完整性）→ <strong>Domain Analyzer</strong>（提取业务域知识）。</p>
+</div>
+
+<div class="section-box">
+    <h4>2. 交互式知识图谱看板：鼠标点到哪里，哪里就有通俗解释</h4>
+    <p>分析完成后输出 <code>knowledge-graph.json</code>，React 19 + React Flow 看板读取后渲染成交互相网点图。点击任意节点查看 LLM 生成的通俗英文摘要（普通人也能看懂），双击函数节点展开完整代码和调用关系，支持按架构层筛选，提供导览模式按依赖顺序逐步高亮核心模块。</p>
+</div>
+
+<div class="section-box">
+    <h4>3. 自然语言问答：<code>/understand-chat</code> 让 AI 直接回答代码问题</h4>
+    <p>在看板中直接输入自然语言问题，AI 基于预建的结构化图谱而非盲目全文扫描来回答。例如："认证模块在哪里？它依赖哪些服务？""这个支付流程涉及哪几个文件？""哪个函数处理用户上传的图片？"回答的准确性和上下文连贯性远高于直接用 LLM 扫描代码。</p>
+</div>
+
+<div class="section-box">
+    <h4>4. Git 增量分析：<code>/understand-diff</code> 不重复全量扫描</h4>
+    <p>运行 <code>/understand-diff</code> 时，工具捕获 <code>git diff</code>，将变更文件映射到已有知识图谱，高亮显示受影响的下游依赖节点——无需重新运行完整管线。以官方 tank-game 示例：22 个文件、21 条边、6 个架构层、9 步导览，增量更新仅需分析变更部分。</p>
+</div>
+
+<div class="section-box">
+    <h4>5. 多平台无缝集成：Claude Code / Cursor / Copilot 通用</h4>
+    <p>通过自动发现配置文件支持多平台：Claude Code 插件市场安装、Cursor 自动发现 <code>.cursor-plugin/</code> 目录、VS Code Copilot 读取 <code>.copilot-plugin/</code> 配置。Codex / Gemini CLI / Pi Agent / Antigravity 也有 AI 驱动的自动化安装方案。同一个知识图谱可以在不同 AI 编程工具中共享使用。</p>
+</div>
+
+<div class="section-box">
+    <h4>6. 知识库支持：<code>/understand-knowledge</code> 分析文档和 Wiki</h4>
+    <p>指向一个 Karpathy 风格的 LLM Wiki（纯文本或 Markdown），可自动提取其中的实体、论断和隐式关系，生成可探索的知识图谱。配合看板的通俗英文摘要，可以让非开发者（产品经理、设计师）理解系统架构和核心流程。</p>
+</div>
+
+<div class="section-box">
+    <h4>7. 入职导览生成：<code>/understand-onboard</code> 为新人定制 onboarding 路径</h4>
+    <p>当新成员加入项目时，运行此命令即可自动生成一份引导式入职指南：先从哪个入口文件开始、了解哪些核心模块、按什么顺序追踪依赖链——新人第一天就能对系统有个整体认知，而不必花一周时间才能上手。</p>
+</div>
+
+<!-- 技术亮点 -->
+<h2 class="green">⚙️ 技术亮点</h2>
+
+<div class="section-box">
+    <h4>多 Agent 并行管道：质量与速度的平衡</h4>
+    <p>6 个 Agent 各司其职、并行协作，相比单程扫描管线能提供更丰富的语义信息（LLM 摘要、架构分层、角色定制导览）。File Analyzer 的并发设计（5 worker，每批 20-30 文件）保证分析速度，大型项目另有 <code>/understand-diff</code> 增量更新机制兜底。</p>
+</div>
+
+<div class="section-box">
+    <h4>React Flow + Dagre 可视化引擎</h4>
+    <p>看板采用 React 19 + React Flow（交互图渲染）+ Dagre（自动分层布局）+ Zustand（状态管理）+ Fuse.js（语义模糊搜索）的现代前端技术栈。Dagre 自动将节点按依赖关系分层排列，React Flow 负责拖拽、缩放、高亮的流畅交互体验。</p>
+</div>
+
+<div class="section-box">
+    <h4>知识图谱数据即产品：可提交、可共享</h4>
+    <p>输出的 <code>knowledge-graph.json</code> 可以提交到代码仓库，团队成员 clone 后无需重新分析即可直接使用看板。这意味着图谱成为团队共享的代码资产，新成员加入时拉取最新图谱即可快速上手。</p>
+</div>
+
+<!-- 对比分析 -->
+<h2 class="purple">📊 对比分析：Understand-Anything vs 竞品</h2>
+
+<table>
+    <tr><th>维度</th><th><strong>Understand-Anything</strong></th><th>Graphify</th><th>code-review-graph</th></tr>
+    <tr><td>发布时间</td><td><strong>2026-03（最新）</strong></td><td>2026-04</td><td>2025</td></tr>
+    <tr><td>分析方法</td><td><strong>LLM 多 Agent 管线</strong></td><td>LLM + Leiden 聚类</td><td>静态 tree-sitter</td></tr>
+    <tr><td>交互看板</td><td><strong>✅ React Flow</strong></td><td>✅ 有</td><td>❌</td></tr>
+    <tr><td>自然语言摘要</td><td><strong>✅ 每个节点</strong></td><td>✅</td><td>❌</td></tr>
+    <tr><td>增量更新</td><td><strong>✅ /understand-diff</strong></td><td>❌</td><td>✅ git diff</td></tr>
+    <tr><td>多角色导览</td><td><strong>✅ /understand-onboard</strong></td><td>❌</td><td>❌</td></tr>
+    <tr><td>Token 优化</td><td>无特殊优化</td><td>71.5x 压缩</td><td><strong>6.8x~49x 降低</strong></td></tr>
+    <tr><td>开源协议</td><td><strong>✅ MIT（最开放）</strong></td><td>AGPL</td><td>MIT</td></tr>
+</table>
+
+<p>Understand-Anything 的最大特点是"多 Agent 协作 + 多视图看板 + 多交互命令"的完整产品体验，在语义理解深度和用户体验上领先，但 Token 消耗较高，适合中小型代码库。Graphify 和 code-review-graph 侧重静态分析，适合超大规模代码库的轻量索引。</p>
+
+<!-- 适用人群 -->
+<h2>👥 适用人群</h2>
+
+<ul>
+    <li><strong>刚接手陌生项目的新开发者</strong>：无论入职还是临时维护老系统，Understand-Anything 能让你在几分钟内建立全局认知，而不必在文件海洋里摸索数天</li>
+    <li><strong>技术团队负责人 / Tech Lead</strong>：用 <code>/understand-onboard</code> 为每位新成员自动生成定制 onboarding 路径，将新人上手时间从数天缩短到数小时</li>
+    <li><strong>AI 编程工具重度用户</strong>：在 Claude Code / Cursor 中让 AI 基于预建的结构化理解而非盲目全文扫描来编写代码，减少幻觉和上下文遗漏</li>
+    <li><strong>产品经理 / 非技术协作方</strong>：<code>/understand-domain</code> 提取业务领域知识，配合通俗摘要，让非开发者理解系统的整体架构</li>
+</ul>
+
+<!-- 快速上手 -->
+<h2 class="green">⚡ 快速上手</h2>
+
+<p><strong>Step 1：安装（Claude Code）</strong></p>
+<div class="code-block">/plugin marketplace add Lum1104/Understand-Anything</div>
+
+<p><strong>Step 2：分析当前项目</strong></p>
+<div class="code-block"># 在任意项目目录下运行完整管线
+/understand
+
+# 等待多 Agent 分析完成（首次约 1-5 分钟）
+# 自动生成 knowledge-graph.json
+
+# 启动交互看板
+/understand-dashboard</div>
+
+<p><strong>Step 3：使用 AI 问答和差分分析</strong></p>
+<div class="code-block"># 问任意关于代码库的问题
+/understand-chat "认证模块依赖哪些服务？"
+
+/understand-explain src/auth/login.ts
+/understand-domain
+
+# 代码变更后增量分析
+/understand-diff</div>
+
+<!-- 注意 -->
+<div class="tip-box">
+    <p><strong>⚠️ 使用注意：</strong>首次运行会消耗大量 Token，建议 Max 计划用户使用，或先在小项目上测试。图谱超过 ~3,000 节点 / 5,000 条边时看板可能出现冻结，建议对大代码库使用 git-lfs 管理图谱文件。</p>
+</div>
+
+<!-- CTA -->
+<div class="cta-box">
+    <p>多智能体管道 × 交互式知识图谱 × 多平台 AI 助手集成</p>
+    <p>让你真正"看懂"任何代码库</p>
+    <a href="https://github.com/Lum1104/Understand-Anything" target="_blank">🔗 前往 GitHub 查看</a>
+</div>
+
+<hr>
+
+<div class="footer">
+    <p>👤 <strong>fly的AI学习</strong> | 每日更新 AI 大模型最新动态</p>
+    <p>📄 GitHub: <a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a> · <a href="https://understand-anything.com/demo/">官方演示</a></p>
+    <p style="margin-top: 8px;">📊 GitHub Stars: 12.9k · 语言: TypeScript · 协议: MIT</p>
+</div>
+
+</body>
+</html>

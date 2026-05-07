@@ -1,5 +1,22 @@
 # ai-2 自动化执行记录（创作者动态监控）
 
+## 2026-05-06 09:30
+
+- **状态**：成功
+- **更新数**：3 条（全部来自 B站「图灵的猫」）
+- **YouTube**：10个频道全部超时（国内网络被墙）
+- **X(Twitter)**：7个账号全部超时（nitter.net 被墙）
+- **B站**：图灵的猫 3条新视频；其余9个UP主中5个 API ERR(-799)限流，4个连接失败
+- **检测到的新内容**：
+  1. "折腾"是有成本的，"守旧"也是有成本的……| 刘擎×王骁×图灵的猫【一麦三连EP18】 (BV1fQ9SBuEae, 2026-05-05)
+  2. 2026了，AI还在产出垃圾音乐吗？从夯到拉锐评AI音乐 (BV1ZmonBFEbe, 2026-05-04)
+  3. 实习生靠一个AI，把职场老油条干沉默了 (BV1TcQTB4E78, 2026-05-03)
+- **输出文件**：creator-updates.html（已更新）
+- **脚本修复**：修复了 `creator_monitor_quick.py` 的 `ValueError: I/O operation on closed file` bug（删除了开头的 sys.stdout/stderr 重包装代码）；缩短 B 站 sleep 从 1s 到 0.5s
+- **运行方式**：必须用托管 Python 完整路径运行，`python` 命令本身退出码49无输出
+
+---
+
 ## 2026-05-02 15:11
 
 - **状态**：成功（沙箱环境受限，0条新内容）
@@ -99,7 +116,6 @@
 - **YouTube**：10个频道全部 WinError 10061（连接被拒绝）
 - **X(Twitter)**：7个账号全部 timed out（nitter.net 超时）
 - **B站**：10个UP主全部 HTTP 412（Precondition Failed）
-- **输出文件**：creator-updates.html、creator-updates-en.html
 - **备注**：网络问题持续，同上次（2026-04-07）
 
 ---
