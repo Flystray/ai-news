@@ -53,6 +53,11 @@
         "agentscope-ai/reme",
         "juliusbrussee/caveman",
         "lsdefine/GenericAgent",
-        "openai/codex"
+        "openai/codex",
+        "Fincept-Corporation/FinceptTerminal",
+        "nexu-io/open-design",
+        "TauricResearch/TradingAgents",
+        "screenpipe/screenpipe",
+        "Lum1104/Understand-Anything"
     ]
 }

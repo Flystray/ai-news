@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-08 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff; }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card ul { background: rgba(102,126,234,0.1); border-radius: 12px; padding: 16px 20px; margin-bottom: 15px; list-style: none; }
+        .news-card ul li { color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px; }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link { display: inline-flex; align-items: center; gap: 6px; color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 0; color: #666; font-size: 13px; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .insight-item .num { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 14px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4); transition: all 0.3s ease; }
+        .refresh-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(102,126,234,0.5); }
+        .section-icon { font-size: 28px; }
+        .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-05-08</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <div id="news-content"></div>
+
+        <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+    </div>
+
+    <script>
+        const newsData = {
+  "breaking_news": [
+    {
+      "title": "🔥 月之暗面（Kimi）完成约20亿美元融资，估值超200亿美元",
+      "tag": "国产融资",
+      "highlights": [
+        "月之暗面（Kimi）已完成新一轮约20亿美元融资，投后估值超200亿美元，成为国产AI独角兽中最耀眼的一员",
+        "Kimi K3大模型预计Q3发布，参数量将达2.5万亿，远超DeepSeek V4，剑指全球最强开源模型",
+        "这是继DeepSeek 200亿美元估值之后，国产大模型赛道再现超级独角兽",
+        "资本持续押注国产AI，意味着中国大模型已从追赶者转向全球竞争的重要力量"
+      ],
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_28969fd2cfb12652",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "title": "🔥 马斯克宣布解散xAI：作为SpaceX AI产品线重获新生",
+      "tag": "战略重组",
+      "highlights": [
+        "5月6日马斯克在社交媒体发文宣布，xAI作为独立公司将不复存在，将以SpaceX AI产品线的形式融入SpaceX",
+        "Grok聊天机器人及其背后技术将继续存在，但不再作为独立实体运营",
+        "这是继Starlink、Tesla、FSD之后，xAI正式成为马斯克商业帝国的关键一环",
+        "分析认为此举意在整合算力资源，应对OpenAI、Anthropic、谷歌三方围攻"
+      ],
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_28969fd2cfb12652",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "title": "🔥 中央网信办启动「清朗·整治AI应用乱象」专项行动，持续4个月",
+      "tag": "监管动态",
+      "highlights": [
+        "中央网信办宣布开展为期4个月的专项行动，重点整治AI生成内容虚假信息、侵权盗版、违规应用等乱象",
+        "工信部与国家数据局同步启动2026年「模数共振」行动，聚焦大模型数据治理与合规",
+        "美国五角大楼同步推进AI军事化采购，与SpaceX、OpenAI、谷歌等七家企业签署涉密AI协议，Anthropic意外被排除",
+        "全球AI监管正从松散自律走向强制性合规，中美两大经济体同步出手"
+      ],
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_36169fc8cce19552",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "title": "🔥 腾讯混元Hy3 preview两周Token调用量增长10倍，WorkBuddy/Codebuddy增长16.5倍",
+      "tag": "应用爆发",
+      "highlights": [
+        "腾讯混元Hy3 preview自上线以来，Token调用量持续激增，目前总量已是上一代Hy2的10倍",
+        "代码和智能体类场景Token增长尤为突出：WorkBuddy、Codebuddy及Qclaw等应用增幅超16.5倍",
+        "由腾讯首席AI科学家姚顺雨（OpenAI前研究员）主导，Hy3已成为混元大模型重建的核心引擎",
+        "国产大模型正在从技术追赶到生态爆发的重要转折点"
+      ],
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_28969fd2cfb12652",
+          "source": "腾讯资讯"
+        }
+      ]
+    }
+  ],
+  "industry_news": [
+    {
+      "company": "宇树科技",
+      "tag": "机器人生态",
+      "description": "宇树科技宣布宇树UniStore官方共享应用平台正式全面开放，这是全球首个人形机器人任务动作应用商店。开发者可为宇树G1等人形机器人上传和分享任务动作应用，用户可直接下载安装，大幅降低人形机器人使用门槛。",
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_28969fd2cfb12652",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "company": "阿里通义千问",
+      "tag": "产品升级",
+      "description": "通义千问在PC端正式上线AI语音输入功能，用户通过快捷键即可在各类桌面应用中直接使用，打通了办公场景的AI交互最后一公里。",
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_28969fd2cfb12652",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "company": "英矽智能",
+      "tag": "AI制药",
+      "description": "港股公司英矽智能宣布正式发布最新一代智能实验室操作系统LabClaw。作为制药行业率先基于轻量级智能体（Agent-Guard）架构设计的实验室自主化系统，LabClaw专为LifeStar2全自动化实验室匹配打造，股价当日涨超7%。",
+      "links": [
+        {
+          "url": "https://k.sina.com.cn/article_7857201856_1d45362c0019056mb4.html",
+          "source": "新浪财经"
+        }
+      ]
+    },
+    {
+      "company": "宇树 × 韩国寺庙",
+      "tag": "机器人僧侣",
+      "description": "韩国首尔曹溪寺引入宇树G1人形机器人作为僧侣，被赐法名「迦悲」并正式受戒。机器人被赋予特殊版「五戒」：不伤害生命、不损坏其他机器人和物品、不顶撞人类、不做欺骗性表达、不过度充电。",
+      "links": [
+        {
+          "url": "https://k.sina.com.cn/article_7857201856_1d45362c0019056mb4.html",
+          "source": "中新社"
+        }
+      ]
+    },
+    {
+      "company": "华硕 × Hailo",
+      "tag": "AI硬件",
+      "description": "华硕正式发售旗下首款USB-C接口AI加速器UGen 300，搭载Hailo-10H处理器，可提供40 TOPS算力，典型功耗仅2.5W，达到微软Copilot+ PC的NPU最低要求，台湾地区售价约合人民币1400元。",
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_06969fc568601352",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "company": "科创50 × AI硬件",
+      "tag": "市场暴涨",
+      "description": "5月6日上午AI硬件板块暴涨，科创50指数一度涨超9%，多只权重股创历史新高。机构普遍看好AI应用板块后续行情，国信证券、天风证券等相继发布深度看好报告。",
+      "links": [
+        {
+          "url": "https://finance.sina.com.cn/headline/2026-05-07/doc-inhxanxc8277826.shtml",
+          "source": "新浪财经"
+        }
+      ]
+    },
+    {
+      "company": "三星电子",
+      "tag": "业务收缩",
+      "description": "三星电子宣布停止在中国大陆市场销售电视、显示器、空调、冰箱、洗衣机、空气净化器等全部家电产品，手机业务维持正常运营。2026年Q1三星手机全球市场份额20%位居第二，但在中国已跌出前六。",
+      "links": [
+        {
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_06969fc568601352",
+          "source": "腾讯资讯"
+        }
+      ]
+    },
+    {
+      "company": "DeepSeek V4",
+      "tag": "开源里程碑",
+      "description": "DeepSeek V4已于4月24日发布，支持100万token上下文，Pro版参数1.6万亿、激活4900亿，预训练数据33万亿token。华为昇腾和寒武纪均完成Day 0适配，标志国产AI芯片生态正式支撑前沿大模型。",
+      "links": [
+        {
+          "url": "https://www.yicai.com/news/103152996.html",
+          "source": "第一财经"
+        }
+      ]
+    }
+  ],
+  "insights": [
+    "【国产AI资本化加速】月之暗面200亿美元估值落地，意味着国产大模型赛道正式进入「百亿独角兽时代」，Kimi K3参数量2.5万亿的野心彰显国产力量。",
+    "【AI监管进入全球协同执法阶段】中央网信办「清朗」行动与五角大楼AI采购协议同日出现，AI治理不再只是行业自律，而是各国主权的核心议题。",
+    "【xAI解散标志AI整合时代到来】马斯克将xAI并入SpaceX，意味着算力、数据、资本的综合竞争已超越单一AI公司边界，AI进入「生态帝国」竞争阶段。",
+    "【人形机器人从产品走向生态】宇树开放全球首个机器人任务动作应用商店，标志具身智能从硬件销售转向平台生态运营，类似iPhone的App Store时刻正在机器人领域重演。",
+    "【大模型应用爆发元年已至】腾讯混元Hy3 Token调用量两周增长10倍，WorkBuddy等应用增长16.5倍——当模型能力足够好后，开发者生态正在用脚投票。"
+  ],
+  "sources": [
+    "腾讯资讯",
+    "第一财经",
+    "新浪财经",
+    "中新社",
+    "华峰资本"
+  ],
+  "updated": "2026-05-08 09:04"
+};
+
+        function renderNews() {
+            const container = document.getElementById('news-content');
+
+            let html = `
+                <div class="section">
+                    <h2 class="section-title"><span class="section-icon">🔥</span> 今日重磅</h2>
+            `;
+
+            newsData.breaking_news.forEach(news => {
+                html += `
+                    <div class="news-card">
+                        <h3>${news.title} <span class="tag">${news.tag}</span></h3>
+                        <ul>
+                            ${news.highlights.map(h => `<li>${h}</li>`).join('')}
+                        </ul>
+                        <div class="links">
+                            ${news.links.map(l => `<a href="${l.url}" target="_blank" class="link">📌 ${l.source} →</a>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+
+            if (newsData.industry_news && newsData.industry_news.length > 0) {
+                html += `
+                    <div class="section">
+                        <h2 class="section-title"><span class="section-icon">🏆</span> 行业动态</h2>
+                        <div class="industry-grid">
+                `;
+
+                newsData.industry_news.forEach(item => {
+                    html += `
+                        <div class="news-card">
+                            <h3>${item.company} <span class="tag">${item.tag}</span></h3>
+                            <p>${item.description}</p>
+                            <div class="links">
+                                ${item.links.map(l => `<a href="${l.url}" target="_blank" class="link">📌 ${l.source}</a>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+            }
+
+            if (newsData.insights && newsData.insights.length > 0) {
+                html += `
+                    <div class="section">
+                        <h2 class="section-title"><span class="section-icon">💡</span> 核心洞察</h2>
+                `;
+
+                newsData.insights.forEach((insight, i) => {
+                    html += `
+                        <div class="insight-item">
+                            <div class="num">${i + 1}</div>
+                            <p>${insight}</p>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            }
+
+            html += `
+                <div class="footer">
+                    <p>📡 数据来源：${newsData.sources ? newsData.sources.join(' · ') : '多方采集'}</p>
+                    <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: ${newsData.updated}</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        renderNews();
+    </script>
+</body>
+</html>
