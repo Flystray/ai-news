@@ -87,7 +87,7 @@
                     <p>AI 编程助手（Cursor、Claude Code、GitHub Copilot 等）已经能帮我们写代码、改 Bug，但它们有一个共同的盲区：<strong>不理解代码库的整体结构</strong>。</p>
                     <p>当你让 AI "修改用户认证逻辑"时，它往往不知道这个改动会影响哪些模块。结果就是：AI 改了一处，别处悄悄崩了。</p>
                     <p><strong>GitNexus</strong> 正是来解决这个问题的——把整个代码库构建成知识图谱，让 AI Agent 在回答之前就能"看见"完整的依赖关系网络。</p>
-                    <p>更令人惊讶的是，这一切<strong>完全在浏览器或本地机器上运行</strong>，代码永远不会离开你的设备。</p>
+                    <p>所有计算<strong>完全在本地机器上运行</strong>，代码永远不会离开你的设备。</p>
                 </div>
 
                 <div class="section">
@@ -102,8 +102,8 @@
                             <p>通过 16 个 MCP 工具向 AI 编辑器暴露代码上下文，一次调用返回完整依赖视图</p>
                         </div>
                         <div class="feature-item">
-                            <h4>🌐 零服务器架构</h4>
-                            <p>完全在浏览器内运行，代码不上传任何服务器，支持拖入 GitHub 仓库或 ZIP 文件</p>
+                            <h4>🌐 完全本地运行</h4>
+                            <p>代码不上传任何服务器，通过 Bridge 模式配合 Web UI 可视化浏览知识图谱</p>
                         </div>
                         <div class="feature-item">
                             <h4>🤖 4 个 Agent Skills</h4>
@@ -147,8 +147,16 @@ npx gitnexus mcp
                         <p>支持 Cursor、Claude Code、Codex、Windsurf、OpenCode，数据存储在本地 <code>.gitnexus/</code> 目录。</p>
                     </div>
                     <div class="highlight-box-blue">
-                        <h4>模式二：Web UI（适合快速探索）</h4>
-                        <p>访问 <a href="https://gitnexus.vercel.app" target="_blank">gitnexus.vercel.app</a>，拖入 GitHub 仓库 URL 或上传 ZIP，即可在浏览器内查看交互式知识图谱，无需安装任何软件。</p>
+                        <h4>模式二：Web UI 可视化（Bridge 模式）</h4>
+                        <p>GitNexus 提供浏览器端可视化界面，需要配合本地服务器使用：</p>
+                        <div class="code-block">
+<span class="comment"># 启动本地服务器</span><br>
+npx gitnexus@latest serve<br>
+<br>
+<span class="comment"># 浏览器打开 gitnexus.vercel.app</span><br>
+<span class="comment"># 页面会自动检测本地服务器并连接</span>
+                    </div>
+                        <p>代码完全在本地处理，不会上传到任何云端服务器。支持查看所有已索引的仓库，无需重复上传。</p>
                     </div>
                 </div>
 
@@ -228,8 +236,14 @@ npx gitnexus setup<br>
 <span class="comment"># 3. 启动 MCP 服务器</span><br>
 npx gitnexus mcp
                     </div>
-                    <p><strong>方式二：Web UI（零安装）</strong></p>
-                    <p>打开 <a href="https://gitnexus.vercel.app" target="_blank">gitnexus.vercel.app</a>，拖入仓库或上传 ZIP，等待索引完成即可开始探索。</p>
+                    <p><strong>方式二：Web UI 可视化</strong></p>
+                    <div class="code-block">
+<span class="comment"># 启动本地服务器</span><br>
+npx gitnexus@latest serve<br>
+<br>
+<span class="comment"># 浏览器打开 https://gitnexus.vercel.app</span><br>
+<span class="comment"># 自动检测本地服务器并连接</span>
+                    </div>
                     <p><strong>方式三：Docker 部署（团队协作）</strong></p>
                     <div class="code-block">
 git clone https://github.com/abhigyanpatwari/GitNexus.git<br>
