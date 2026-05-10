@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 大模型日报 · 2026年5月10日</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            border-bottom: 1px solid rgba(99,102,241,0.3);
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(99,102,241,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 50%, rgba(16,185,129,0.06) 0%, transparent 60%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+        @keyframes bgFloat {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(-3%,2%); }
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(99,102,241,0.2);
+            border: 1px solid rgba(99,102,241,0.4);
+            color: #a5b4fc;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 5px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .hero-date {
+            color: #94a3b8;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat-num {
+            font-size: 28px;
+            font-weight: 700;
+            color: #10b981;
+            display: block;
+        }
+        .hero-stat-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .section-icon { font-size: 24px; line-height: 1; }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(99,102,241,0.4), transparent);
+        }
+        .breaking .card { border-left: 4px solid #ef4444; }
+        .breaking .section-title { color: #fca5a5; }
+        .industry .card { border-left: 4px solid #3b82f6; }
+        .industry .section-title { color: #93c5fd; }
+        .insights .card { border-left: 4px solid #10b981; }
+        .insights .section-title { color: #6ee7b7; }
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 28px 30px;
+            margin-bottom: 18px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-1px);
+        }
+        .card-source-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .card-source {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.07);
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+        .card-tag {
+            display: inline-flex;
+            align-items: center;
+            color: #6366f1;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: rgba(99,102,241,0.12);
+        }
+        .card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 14px;
+            line-height: 1.75;
+        }
+        .card-points {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+        .card-points li {
+            padding: 5px 0;
+            color: #cbd5e1;
+            font-size: 13.5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .card-points li::before {
+            content: '▸';
+            color: #6366f1;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #818cf8;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 7px 14px;
+            background: rgba(99,102,241,0.1);
+            border: 1px solid rgba(99,102,241,0.2);
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .card-link:hover {
+            background: rgba(99,102,241,0.2);
+            border-color: rgba(99,102,241,0.4);
+            color: #a5b4fc;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #475569;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer a { color: #6366f1; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 28px; }
+            .hero-meta { gap: 20px; }
+            .card { padding: 20px 18px; }
+            .container { padding: 24px 16px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🤖 AI 大模型日报</div>
+        <h1>2026年5月10日</h1>
+        <p class="hero-date">星期日 · 每日 09:00 更新</p>
+        <div class="hero-meta">
+            <div class="hero-stat">
+                <span class="hero-stat-num">9</span>
+                <span class="hero-stat-label">条精选新闻</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-num">3</span>
+                <span class="hero-stat-label">大分类</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-num">8+</span>
+                <span class="hero-stat-label">新闻来源</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 今日重磅 -->
+    <div class="section breaking">
+        <div class="section-header">
+            <span class="section-icon">🔥</span>
+            <span class="section-title">今日重磅</span>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">Nous Research / AITNT</span>
+                <span class="card-tag">Agent 竞赛</span>
+            </div>
+            <h3>首超 OpenClaw！Hermes Agent 登顶全球调用榜，小米 MiMo 成第一贡献模型</h3>
+            <p>2026年5月10日凌晨，Nous Research 旗下 Hermes Agent 在 OpenRouter 全球应用调用榜上实现历史性突破：单日 Token 消耗达 2710 亿，首次超越长期霸榜的 OpenClaw，累计消耗已超过 6.37 万亿 Token。小米开源的 MiMo 推理模型是 Hermes Agent 调用量最高的底层模型，标志着中国开源模型在全球 Agent 生态中已占据核心地位。</p>
+            <ul class="card-points">
+                <li>单日 Token 消耗 2710 亿，超越了 OpenClaw 的霸榜地位</li>
+                <li>累计消耗超 6.37 万亿 Token，全球 Agent 应用调用第一</li>
+                <li>小米 MiMo 是第一贡献模型，国产开源模型站上世界舞台</li>
+                <li>Hermes Agent 由 Nous Research 开发，主打长任务自主执行</li>
+            </ul>
+            <a class="card-link" href="https://www.aitntnews.com/newDetail.html?newId=24900" target="_blank">
+                ↗ 阅读原文 — AITNT
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">Business Insider / 新浪科技</span>
+                <span class="card-tag">产品前瞻</span>
+            </div>
+            <h3>谷歌秘密内测 AI 智能体 Remy，对标 OpenClaw，或在 I/O 2026 亮相</h3>
+            <p>据 Business Insider 获取的内部文件，谷歌正在为 Gemini 大模型开发一款代号为"Remy"的个人 AI 智能体，目前已进入员工内部测试阶段。Remy 被描述为"Gemini App 内部的高级代理功能"，目标是将 Gemini 从被动应答工具转变为主动执行任务的 24/7 个人代理。外界普遍预测，该产品将在 5月19日至20日召开的谷歌 I/O 2026 大会上正式亮相。</p>
+            <ul class="card-points">
+                <li>Remy 支持 24/7 主动执行任务，不局限于被动应答</li>
+                <li>目前仅在谷歌员工内部测试，尚未对公众开放</li>
+                <li>对标 OpenClaw，直接竞争个人 AI 代理赛道</li>
+                <li>预计在 Google I/O 2026（5月19-20日）正式发布</li>
+            </ul>
+            <a class="card-link" href="https://www.itbear.com.cn/html/2026-05/1326152.html" target="_blank">
+                ↗ 阅读原文 — IT熊
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">财新 / EET-China</span>
+                <span class="card-tag">资本动态</span>
+            </div>
+            <h3>月之暗面 Kimi 完成136亿元D轮融资，创中国大模型单笔融资最高纪录</h3>
+            <p>5月7日，国内头部大模型公司月之暗面（Kimi）正式官宣完成约136.22亿元人民币（约20亿美元）D轮融资，创下中国大模型领域单笔融资最高纪录，投后估值突破200亿美元。本轮由美团龙珠领投，水木资本、中国移动、CPE源峰等参投，华峰资本担任部分买方财务顾问。与此同时，国家集成电路产业投资基金（大基金）洽谈领投 DeepSeek 的消息持续发酵，国产AI大模型赛道正迎来史无前例的资本盛宴。</p>
+            <ul class="card-points">
+                <li>136.22亿元人民币D轮，中国大模型单笔融资最高纪录</li>
+                <li>投后估值突破200亿美元，跻身全球顶级AI独角兽</li>
+                <li>美团龙珠领投，国资背景基金首次大比例入场</li>
+                <li>DeepSeek 同步洽谈大基金领投，国产AI资本竞赛全面升温</li>
+            </ul>
+            <a class="card-link" href="https://www.eet-china.com/mp/a493204.html" target="_blank">
+                ↗ 阅读原文 — EET-China
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">中新网 / 中国工信部</span>
+                <span class="card-tag">行业标准</span>
+            </div>
+            <h3>人工智能终端国家标准发布，涉及手机、眼镜、耳机等七大品类</h3>
+            <p>5月8日，中国国家市场监管总局正式发布人工智能终端系列国家标准，明确了智能化概念、等级划分和测试方法，涉及手机、电脑、电视、眼镜、汽车座舱、音箱、耳机等七大品类。这是国内首次对AI终端产品的智能化能力进行系统化规范，将加速AI终端产业的规模化落地，并为消费者选购提供参考依据。</p>
+            <ul class="card-points">
+                <li>首批标准覆盖手机、电脑、电视、眼镜、汽车座舱、音箱、耳机7大品类</li>
+                <li>明确智能化等级划分，为消费者选购提供权威参考</li>
+                <li>标志着中国AI终端产业从野蛮生长进入规范化发展阶段</li>
+                <li>后续将继续推进其余品类的标准研制工作</li>
+            </ul>
+            <a class="card-link" href="https://www.chinanews.com.cn/cj/2026/05-08/10617706.shtml" target="_blank">
+                ↗ 阅读原文 — 中国新闻网
+            </a>
+        </div>
+
+    </div>
+
+    <!-- 行业动态 -->
+    <div class="section industry">
+        <div class="section-header">
+            <span class="section-icon">📡</span>
+            <span class="section-title">行业动态</span>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">OpenAI 官方</span>
+                <span class="card-tag">模型发布</span>
+            </div>
+            <h3>GPT-5.5 Instant 正式上线，成为默认模型，幻觉率降低 52.5%</h3>
+            <p>5月6日，OpenAI 宣布 GPT-5.5 Instant 正式上线并取代 GPT-5.3 成为默认模型。新版本在保持快速响应的同时，大幅降低了幻觉率（较上一代降低52.5%），并在推理质量、上下文理解和多模态能力上实现全面提升。与此同时，OpenAI 与华尔街多家金融机构成立合资企业，加速 AI 工具在企业级场景的落地应用。</p>
+            <ul class="card-points">
+                <li>幻觉率降低52.5%，可靠性大幅提升</li>
+                <li>取代 GPT-5.3 成为 OpenAI 默认模型</li>
+                <li>与 TPG、贝莱德、Advent、贝恩资本等成立合资企业</li>
+                <li>聚焦企业级 AI 工具落地，直接对标 Anthropic 的类似布局</li>
+            </ul>
+            <a class="card-link" href="https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml" target="_blank">
+                ↗ 阅读原文 — 新浪财经
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">字节跳动 / 澎湃新闻</span>
+                <span class="card-tag">商业化</span>
+            </div>
+            <h3>豆包启动付费订阅测试，三档方案最高 5088 元/年</h3>
+            <p>5月4日，字节跳动旗下豆包 App 在 App Store 更新开发说明，新增订阅服务声明，正式启动付费会员测试。三档方案分别为：标准版连续包月68元（包年688元）、加强版200元（包年2048元）、专业版500元（包年5088元）。付费功能聚焦 PPT 生成、数据分析、影视制作等复杂生产力场景，免费版继续保留。这是继 Kimi、文心之后，又一家头部大模型产品启动商业化收费。</p>
+            <ul class="card-points">
+                <li>三档订阅：标准版68元/月，专业版500元/月</li>
+                <li>聚焦复杂生产力场景，与免费版形成差异化</li>
+                <li>Kimi、文心、豆包相继启动付费，AI应用商业化拐点已至</li>
+                <li>字节以豆包为旗舰，全面押注 AI 应用变现</li>
+            </ul>
+            <a class="card-link" href="https://m.thepaper.cn/newsDetail_forward_33101613" target="_blank">
+                ↗ 阅读原文 — 澎湃新闻
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">谷歌 DeepMind</span>
+                <span class="card-tag">编程模型</span>
+            </div>
+            <h3>Gemini 2.5 Pro I/O 版发布，登顶 AI 编程榜，超越 Claude 3.7</h3>
+            <p>谷歌 DeepMind 在 I/O 大会前夕推出 Gemini 2.5 Pro "I/O" 特别版，在 HLE、Aider 等多项基准测试中创下 SOTA 成绩，并新增"思考预算（thinking budgets）"功能，允许开发者动态控制推理算力投入以优化成本。该版本在 LMArena 得分跃升24点，WebDevArena 反超 Claude 3.7，被开发者社区称为"AI编程新王"。</p>
+            <ul class="card-points">
+                <li>HLE、Aider 基准测试 SOTA，编程能力跨越式提升</li>
+                <li>新增"thinking budgets"功能，动态控制推理成本</li>
+                <li>LMArena 得分跃升24点，WebDevArena 超越 Claude 3.7</li>
+                <li>单条文本提示即可生成完整交互式 Web 应用</li>
+            </ul>
+            <a class="card-link" href="https://www.36kr.com/p/3281991045358212" target="_blank">
+                ↗ 阅读原文 — 36氪
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">跨国公司 / 工信部</span>
+                <span class="card-tag">人形机器人</span>
+            </div>
+            <h3>宇树科技开放全球首个人形机器人任务动作应用商店</h3>
+            <p>宇树科技（Unitree）正式开放全球首个人形机器人任务动作应用商店，允许用户像下载手机 App 一样获取机器人执行特定任务的动作包。与此同时，宇树 G1 机器人化身"僧侣"在韩国寺庙完成受戒仪式，引发全球媒体关注。这标志着人形机器人从硬件竞赛迈向平台生态竞争，"iPhone 时刻"渐行渐近。</p>
+            <ul class="card-points">
+                <li>全球首个人形机器人"应用商店"，平台化生态正式开启</li>
+                <li>宇树 G1 在韩国寺庙"受戒"，人形机器人走入公众文化场景</li>
+                <li>从卖硬件到卖"技能"，人形机器人商业化路径日益清晰</li>
+                <li>业界预测2026年将成为人形机器人规模化量产元年</li>
+            </ul>
+            <a class="card-link" href="https://news.qq.com/rain/a/20260507A01REZ00" target="_blank">
+                ↗ 阅读原文 — 腾讯新闻
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">路透社 / Anthropic</span>
+                <span class="card-tag">资本动态</span>
+            </div>
+            <h3>Anthropic 与黑石、高盛成立合资企业，加速 AI 工具企业落地</h3>
+            <p>继 OpenAI 宣布与华尔街成立合资企业后数分钟，Anthropic 随即宣布与黑石集团（Blackstone）、Hellman & Friedman 以及高盛（Goldman Sachs）合作，成立一家类似的公司，专注于推动其 AI 工具在企业场景的广泛应用。与此同时，Anthropic 正在讨论新一轮融资，公司估值已接近1万亿美元大关，年化收入突破41亿美元。</p>
+            <ul class="card-points">
+                <li>与 OpenAI 同日宣布华尔街合作，AI 巨头to B 布局正面交锋</li>
+                <li>Anthropic 年化收入突破41亿美元，增速超市场预期</li>
+                <li>新一轮融资估值或逼近1万亿美元，刷新私营科技公司记录</li>
+                <li>与 Akamai 签订18亿美元算力合同，保障长期推理能力</li>
+            </ul>
+            <a class="card-link" href="https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml" target="_blank">
+                ↗ 阅读原文 — 新浪财经
+            </a>
+        </div>
+
+    </div>
+
+    <!-- 核心洞察 -->
+    <div class="section insights">
+        <div class="section-header">
+            <span class="section-icon">💡</span>
+            <span class="section-title">核心洞察</span>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">行业分析</span>
+                <span class="card-tag">竞争格局</span>
+            </div>
+            <h3>AI Agent 竞赛进入白热化：OpenClaw 被超越，谷歌 Remy 入场</h3>
+            <p>Hermes Agent 登顶 OpenRouter 调用榜，标志着 AI Agent 赛道正在经历剧烈洗牌。从 OpenClaw 一家独大到 Hermes、Remy 等多强争霸，Agent 的竞争焦点已从"能否完成任务"转向"谁能更高效、更持久地完成复杂任务"。中国模型（如小米 MiMo）在全球 Agent 生态中的贡献度持续上升，开源力量正在改变产业格局。</p>
+            <ul class="card-points">
+                <li>Agent 竞争格局：从一家独大到多强争霸，行业进入分化期</li>
+                <li>中国开源模型（MiMo等）正成为全球 Agent 生态的关键基础设施</li>
+                <li>谷歌 Remy 若如期在 I/O 发布，将直接冲击 OpenClaw 市场地位</li>
+                <li>Agent 的竞争维度正在从模型能力转向生态整合与任务持久性</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">资本观察</span>
+                <span class="card-tag">投融资趋势</span>
+            </div>
+            <h3>中国AI大模型进入"百亿独角兽时代"，国有资本大比例入场</h3>
+            <p>Kimi 136亿元D轮融资创下中国大模型单笔融资最高纪录，DeepSeek 洽谈大基金领投，标志着中国AI大模型赛道正式进入"百亿独角兽时代"。与2023-2025年以美元基金为主不同，本轮融资中国资背景基金大比例入场，显示出国家对AI战略基础设施的重视程度达到新高度。同时，头部玩家集体启动商业化收费，行业从"烧钱换增长"转向"自我造血"。</p>
+            <ul class="card-points">
+                <li>Kimi、DeepSeek 相继完成超级融资，百亿估值成新常态</li>
+                <li>国家大基金入场，AI 成为国家级战略基础设施</li>
+                <li>豆包、Kimi、文心相继收费，商业化拐点已至</li>
+                <li>从"百模大战"到"赢家通吃"，竞争格局加速收敛</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">技术趋势</span>
+                <span class="card-tag">AI 硬件</span>
+            </div>
+            <h3>AI 终端国家标准落地，从"概念炒作"到"规范发展"</h3>
+            <p>人工智能终端国家标准的发布，是中国AI产业发展的重要里程碑。过去两年，AI 手机、AI 眼镜、AI 耳机等概念炒作过热，但缺乏统一的能力评价标准，消费者难以判断产品真实智能化水平。国家标准的出台将有效规范市场秩序，推动真正有技术实力的企业脱颖而出，同时也为 AI 终端产品的出海竞争提供了国内标准支撑。</p>
+            <ul class="card-points">
+                <li>首批七大品类标准落地，AI 终端从野蛮生长到规范发展</li>
+                <li>智能化等级划分，为消费者选购提供权威参考</li>
+                <li>标准落地将加速 AI 终端渗透率提升，预计2026年迎来换机潮</li>
+                <li>中国 AI 终端标准或成为海外市场准入的重要参考</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-source-row">
+                <span class="card-source">产业前瞻</span>
+                <span class="card-tag">平台生态</span>
+            </div>
+            <h3>人形机器人"应用商店"开启，具身智能迈入平台化竞争</h3>
+            <p>宇树科技开放全球首个人形机器人任务动作应用商店，是具身智能发展史上的标志性事件。这意味着人形机器人的价值创造方式正在发生根本转变：从"卖硬件"到"卖技能"，从"封闭系统"到"开放生态"。正如智能手机的 App Store 催生了万亿级应用生态，人形机器人应用商店有望开启一个同样量级的增量市场。2026年，具身智能正从技术验证期迈入产业化爆发期。</p>
+            <ul class="card-points">
+                <li>人形机器人应用商店开启，具身智能进入平台化竞争阶段</li>
+                <li>从卖硬件到卖"技能"，商业模式发生根本转变</li>
+                <li>2026年有望成为人形机器人规模化量产元年</li>
+                <li>中国企业在具身智能赛道具备全球竞争优势</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>数据来源：AITNT、新浪财经、36氪、腾讯新闻、澎湃新闻、EET-China、中国新闻网、IT熊等</p>
+    <p style="margin-top:8px;">
+        <a href="https://flystray.github.io/ai-news/reports/2026-05-10-with-links.html">查看在线版本</a>
+        · 每日 09:00 自动更新
+    </p>
+    <p style="margin-top:8px; color:#334155;">© 2026 fly的AI学习 · AI大模型日报</p>
+</div>
+
+</body>
+</html>
