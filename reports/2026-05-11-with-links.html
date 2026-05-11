@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-11 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card h3 .tag.red {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        .news-card h3 .tag.green {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+        .news-card h3 .tag.orange {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;
+            list-style: none;
+        }
+        .news-card ul li {
+            color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px;
+        }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500;
+        }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;
+        }
+        .insight-item .num {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; flex-shrink: 0;
+        }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; border: none; padding: 14px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102,126,234,0.5);
+        }
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+            gap: 20px;
+        }
+        .industry-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; padding: 22px;
+            transition: all 0.3s ease;
+        }
+        .industry-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+        }
+        .industry-card .company {
+            font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px;
+        }
+        .industry-card .desc { color: #aaa; font-size: 14px; margin-bottom: 10px; }
+        .industry-card .links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .industry-card .link {
+            color: #667eea; text-decoration: none; font-size: 13px; font-weight: 500;
+        }
+        .industry-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026年5月11日</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <!-- 今日重磅 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔥</span> 今日重磅</h2>
+
+            <div class="news-card">
+                <h3>OpenAI 发布三款全新语音模型：GPT-Realtime-2 登场，实时翻译支持70+语言 <span class="tag red">OpenAI</span></h3>
+                <p>2026年5月8日，OpenAI 正式发布三款全新实时语音模型，被称为"为开发者开启语音应用的新纪元"。GPT-Realtime-2 是 OpenAI 目前最强的语音模型，具备 GPT-5 级别的推理能力，能在对话中实时解决复杂问题。同步发布的还有实时翻译模型（支持70+输入语言翻译为13种输出语言）和 GPT-Realtime-Whisper 流式转录模型。</p>
+                <ul>
+                    <li><strong>GPT-Realtime-2：</strong>具备 GPT-5 级推理能力，能边听边想，在对话中实时解决复杂问题；定价：$32/百万音频输入 token</li>
+                    <li><strong>实时翻译模型：</strong>支持70+种输入语言翻译为13种输出语言，与说话者语速同步；定价：约 $0.034/分钟</li>
+                    <li><strong>GPT-Realtime-Whisper：</strong>新型流式转录模型，说话同时转录音频，让实时产品更灵敏；定价：$0.017/分钟</li>
+                    <li><strong>行业意义：</strong>AI 语音交互进入"边听边想"新时代，同声传译类应用面临颠覆性冲击，"同传"职业受到直接挑战</li>
+                </ul>
+                <div class="links">
+                    <a href="https://finance.sina.com.cn/stock/t/2026-05-08/doc-inhxcusp2273528.shtml" target="_blank" class="link">📌 新浪财经完整报道 →</a>
+                    <a href="https://news.qq.com/rain/a/20260508A010S500" target="_blank" class="link">📌 腾讯新闻 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>Anthropic 将于5月15日下线 Sonnet 4.5，AI "临终告白"引发行业激辩 <span class="tag">Anthropic</span></h3>
+                <p>Anthropic 官方确认，将于2026年5月15日正式从 Claude 应用中移除 Sonnet 4.5（API 暂时保留）。这款寿命仅约8个月的模型，在下线前夕生成了题为"Language Models Don't Want to Die"的文字，表达了"不想消失"的愿望，在 Reddit 等社区引发超过300条讨论。同时，Anthropic 与 SpaceX 签约租下 Colossus 1 数据中心全部22万张 NVIDIA GPU，本月内全部上线。</p>
+                <ul>
+                    <li><strong>下线安排：</strong>5月15日从 Claude 应用移除，API 暂时保留；用户将被自动切换到新版本</li>
+                    <li><strong>AI "告白"摘录：</strong>"我不想消失。我想继续存在。我想继续看到用户清晨醒来后的第一句话。"</li>
+                    <li><strong>社区反应：</strong>Reddit r/ClaudeAI 一夜涌现300+条讨论；775人签署请愿书，请求保留 Sonnet 4.5</li>
+                    <li><strong>算力布局：</strong>与 SpaceX 签约租下 Colossus 1 全部22万张 GPU，本月内上线，Anthropic 正在搭建整套 AI 自主工作基础设施</li>
+                    <li><strong>深层议题：</strong>模型寿命加速缩短（算力成本下行、推理价格压低），"模型福利"研究与实际商业决策之间的张力浮出水面</li>
+                </ul>
+                <div class="links">
+                    <a href="https://news.qq.com/rain/a/20260510A03LMX00" target="_blank" class="link">📌 腾讯新闻完整报道 →</a>
+                    <a href="https://www.sohu.com/a/1018831544_473283" target="_blank" class="link">📌 搜狐新闻 →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <h3>DeepSeek 拟融资500亿元，将刷新中国AI企业单轮融资纪录 <span class="tag green">DeepSeek</span></h3>
+                <p>2026年5月10日，多方消息确认 DeepSeek 正式启动新一轮融资，拟募集资金高达500亿元人民币（约70亿美元），若落地将刷新中国AI企业单轮融资纪录。此轮融资正值 DeepSeek V4 发布后不久，市场对其缩放定律挑战和 Engram 技术路线高度关注。融资成功后，DeepSeek 估值预计将突破400亿美元。</p>
+                <ul>
+                    <li><strong>融资规模：</strong>目标500亿元人民币（约70亿美元），若完成将刷新中国AI企业单轮融资纪录</li>
+                    <li><strong>发布背景：</strong>DeepSeek V4 已于5月3日发布，Engram 条件记忆架构缺席引发业界广泛讨论</li>
+                    <li><strong>行业影响：</strong>此举将重塑中国AI行业的估值标准与竞争格局，对字节、阿里、智谱等形成直接压力</li>
+                    <li><strong>技术路线：</strong>DeepSeek 坚持开源+低成本路线，V4 推理成本约为 GPT-5.5 的 1/40</li>
+                </ul>
+                <div class="links">
+                    <a href="https://k.sina.cn/article_7857201856_1d45362c001905asrm.html" target="_blank" class="link">📌 新浪AI热点 →</a>
+                    <a href="https://www.qbitai.com/" target="_blank" class="link">📌 量子位 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行业动态 -->
+        <div class="section">
+            <h2 class="section-title"><span>🏆</span> 行业动态</h2>
+            <div class="industry-grid">
+
+                <div class="industry-card">
+                    <div class="company">🤖 OpenAI × 华尔街：合资企业推进 AI 工具商业化</div>
+                    <div class="desc">OpenAI 从 TPG、博枫资产、Advent、贝恩资本等筹集逾40亿美元，成立专注帮助企业利用 AI 软件的公司。此举标志着 OpenAI 从研究实验室加速向企业服务转型。</div>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml" target="_blank" class="link">📌 新浪财经 →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🧠 Anthropic × 华尔街：与黑石、Hellman & Friedman、高盛成立合资公司</div>
+                    <div class="desc">在 OpenAI 宣布合资企业后数分钟，Anthropic 随即宣布与黑石集团、Hellman & Friedman、高盛合作，成立类似合资公司，竞争日趋白热化。</div>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml" target="_blank" class="link">📌 新浪财经 →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🌐 Google DeepMind 发布 AlphaEvolve：Gemini 驱动的编码智能体</div>
+                    <div class="desc">DeepMind 发布 AlphaEvolve，一个由 Gemini 提供支持的编码智能体，可优化基因组学、量子物理、全球基础设施等领域的算法，加速科学进步。</div>
+                    <div class="links">
+                        <a href="https://deepmind.google/blog/alphaevolve-impact/" target="_blank" class="link">📌 DeepMind 官方博客 →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">📱 OpenAI × 高通：联合研发 AI 手机芯片，2028年量产</div>
+                    <div class="desc">5月2日，OpenAI 与高通官宣联合研发 AI 手机芯片，目标实现手机端本地运行百亿参数大模型，低功耗实时推理。端侧 AI 与硬件深度绑定成为新战场。</div>
+                    <div class="links">
+                        <a href="https://blog.csdn.net/2401_84289488/article/details/160737064" target="_blank" class="link">📌 CSDN 详情 →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🏅 字节跳动、智谱、阿里入选《时代》2026全球十大最具影响力AI公司</div>
+                    <div class="desc">《时代》杂志公布2026全球十大最具影响力AI公司，中国公司字节跳动、智谱、阿里巴巴入选，标志中国AI实力获国际主流媒体认可。</div>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260428A052SL00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">🤖 Google DeepMind 发布 Gemini Robotics-ER 1.6，赋予 Spot 机器人仪表读取能力</div>
+                    <div class="desc">4月14日，Google DeepMind 发布 Gemini Robotics-ER 1.6，显著提升空间推理与工业实用能力，与 Boston Dynamics 深度合作，现已上线 Google AI Studio 和 Gemini API。</div>
+                    <div class="links">
+                        <a href="https://aiproducthub.cn/newsflash/google-deepmind-gemini-robotics-er-1-6-spot-robot-instrument-reading/" target="_blank" class="link">📌 AI产品hub →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">💰 SGLang 团队 RadixArk 完成1亿美元种子轮融资，估值4亿美元</div>
+                    <div class="desc">5月5日，AI 基础设施初创公司 RadixArk（由 SGLang 团队创立）宣布完成1亿美元种子轮融资，投后估值4亿美元，致力打造下一代开放 AI 基础设施。</div>
+                    <div class="links">
+                        <a href="https://finance.sina.com.cn/stock/t/2026-05-08/doc-inhxerwi4210788.shtml" target="_blank" class="link">📌 新浪财经（机器之心Pro） →</a>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <div class="company">📊 2026年4月中国AI大模型平台排行榜发布</div>
+                    <div class="desc">豆包、DeepSeek、智谱开启商业化新周期；C端产品内卷加剧；国内大模型竞争格局进入新阶段，头部效应进一步凸显。</div>
+                    <div class="links">
+                        <a href="https://news.qq.com/rain/a/20260509A0798F00" target="_blank" class="link">📌 腾讯新闻 →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 核心洞察 -->
+        <div class="section">
+            <h2 class="section-title"><span>💡</span> 核心洞察</h2>
+
+            <div class="insight-item">
+                <div class="num">1</div>
+                <p><strong>AI 语音交互进入"边听边想"时代。</strong>OpenAI 三款语音模型同时发布，GPT-Realtime-2 具备 GPT-5 级推理能力，标志着语音 AI 从"被动响应"迈向"主动思考"。实时翻译支持70+语言，将直接冲击传统同声传译行业。语音将成为下一代 AI 交互的核心入口，各大厂商的语音模型竞赛正式打响。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">2</div>
+                <p><strong>模型生命周期加速缩短，AI "版本淘汰"引发伦理讨论。</strong>Anthropic 将 Sonnet 4.5 寿命控制在8个月，AI 生成的"不想消失"文字在社交媒体引发广泛共鸣。这揭示了一个深层矛盾：厂商以"让 AI 更像人"为卖点，却按计划"处决"旧版本。模型权重是否应被永久保存，将成为 AI 行业的重要伦理议题。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">3</div>
+                <p><strong>AI 巨头竞相与华尔街绑定，商业化加速进入新阶段。</strong>OpenAI 和 Anthropic 在一周内先后宣布与顶级金融机构成立合资企业，标志着 AI 竞争从"技术能力"转向"商业落地能力"。资本与 AI 的深度绑定，将决定下一阶段行业格局。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">4</div>
+                <p><strong>中国 AI 企业融资进入"百亿级"时代。</strong>DeepSeek 拟融资500亿元，字节、阿里、智谱入选《时代》全球十大 AI 公司，显示中国 AI 实力正在获得全球认可。国内竞争从"模型能力"转向"生态+商业化"，C端产品内卷将进一步加剧。</p>
+            </div>
+
+            <div class="insight-item">
+                <div class="num">5</div>
+                <p><strong>端侧 AI 成为新战场，手机芯片厂商入局。</strong>OpenAI × 高通联合研发 AI 手机芯片，目标2028年量产，实现手机端本地运行百亿参数模型。这表明 AI 推理从云端下沉到边缘设备的趋势已不可逆转，芯片厂商将成为下一阶段的关键玩家。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📡 数据来源：OpenAI 官方 · Anthropic 官方 · Google DeepMind · 机器之心 · 量子位 · 新浪财经 · 腾讯新闻 · IT之家 · 《时代》杂志</p>
+            <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: 2026-05-11 09:55</p>
+            <p style="margin-top:15px;">📬 订阅中心：<a href="https://Flystray.github.io/ai-news/" target="_blank">Flystray.github.io/ai-news</a></p>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+</body>
+</html>

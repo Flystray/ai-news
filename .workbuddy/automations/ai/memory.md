@@ -108,3 +108,34 @@
 - 行业动态: DeepSeek V4开源百万上下文、智谱揭秘Scaling瓶颈、华为灵境造物、Claude Opus 4.7、国家电网68亿具身智能大单
 - 核心洞察: AI监管从议题到行动、Scaling Law瓶颈、具身智能规模化元年开启、AI原住民代际更替
 - GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-04-with-links.html
+
+### 2026-05-10
+- 执行时间: 2026-05-10 09:00
+- 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.11.207）
+- 报告路径: reports/2026-05-10-with-links.html
+- 新闻来源: AITNT / 新浪财经 / 36氪 / 腾讯新闻 / 澎湃新闻 / EET-China / 中国新闻网 / IT熊
+- 步骤1: ✅ 生成精美HTML日报（重磅4条 + 行业5条 + 洞察4条）
+- 步骤2: ⚠️ HTML已生成（wechat_article.html），推送失败（errcode 40164: IP 115.200.11.207 未在微信白名单）
+- 步骤3: ✅ Git add/commit/push（commit b84f487）
+- 步骤4: 📋 简报摘要在下方输出（无个人微信API直连能力）
+- 今日重磅:
+  - Hermes Agent 登顶 OpenRouter 全球调用榜，单日 Token 消耗 2710 亿，首次超越 OpenClaw
+  - 谷歌秘密内测 AI 智能体 Remy，对标 OpenClaw，或于 I/O 2026 正式亮相
+  - 月之暗面 Kimi 完成 136 亿元 D 轮融资，创中国大模型单笔融资最高纪录
+  - 人工智能终端国家标准发布，涉及手机、眼镜、耳机等七大品类
+- 行业动态:
+  - GPT-5.5 Instant 正式上线，幻觉率降低 52.5%
+  - 豆包启动付费订阅测试，三档方案最高 5088 元/年
+  - Gemini 2.5 Pro I/O 版登顶 AI 编程榜
+  - 宇树科技开放全球首个人形机器人任务动作应用商店
+- 核心洞察:
+  - AI Agent 竞赛进入白热化，中国开源模型登上全球舞台
+  - 中国 AI 大模型进入百亿独角兽时代，国有资本大比例入场
+  - 人形机器人应用商店开启，具身智能迈入平台化竞争
+- GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-10-with-links.html
+
+### ⚠️ 待处理：微信IP白名单（持续，需用户手动添加）
+- 需在 mp.weixin.qq.com 后台添加 IP 115.200.11.207 到白名单（注意：IP 已多次变更！）
+- 添加后重新运行: C:/Users/YF/.workbuddy/binaries/python/versions/3.13.12/python.exe C:/Users/YF/.workbuddy/skills/wechat-mp/push_draft.py 2026-05-10
+
+---
