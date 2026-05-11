@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-05-11</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header .date { font-size: 16px; opacity: 0.9; }
+        .project-badge {
+            display: inline-block;
+            margin-top: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .content { padding: 30px; }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2 span { font-size: 24px; }
+        .section h3 {
+            color: #333;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .section p, .section li {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .section ul, .section ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .section li { margin-bottom: 8px; }
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 14px;
+            color: #e83e8c;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        tr:hover { background: #f8f9fa; }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .star-count {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #dee2e6;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 GitHub AI 项目日报</h1>
+            <div class="date">2026-05-11 · AI 日课</div>
+            <div class="project-badge">
+                ⭐ <span class="star-count">61.3k</span> gsd-build/get-shit-done
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2><span>📌</span>今日推荐项目</h2>
+                <h3>Get Shit Done (GSD) - AI 编程的工程化框架</h3>
+                <p><strong>项目地址：</strong><a href="https://github.com/gsd-build/get-shit-done">github.com/gsd-build/get-shit-done</a></p>
+                <p><strong>技术栈：</strong> <span class="tag">JavaScript</span><span class="tag">Meta-Prompting</span><span class="tag">Context Engineering</span><span class="tag">MIT License</span></p>
+                <p><strong>一句话介绍：</strong>一个轻量但强大的元提示、上下文工程与规格驱动开发系统，解决 AI 辅助编程中的"上下文腐烂"难题。</p>
+            </div>
+
+            <div class="section">
+                <h2><span>📖</span>项目背景</h2>
+                <p>当你用 Claude Code 或 Cursor 开发了半小时后，是否发现 AI 的回答越来越"笨"？这不是你的错觉——这是 <strong>上下文腐烂（Context Rot）</strong>，是当下所有 AI 编程助手面临的核心痛点。</p>
+                <p>AI 模型的上下文窗口（如 Claude 的 200K token）在长时间对话中逐渐被填满，历史信息、代码片段、调试日志不断累积，导致模型"记忆过载"，输出质量显著下降。更糟糕的是，传统 AI 编程缺乏可追踪、可验证的工程流程，往往变成无结构的"氛围编码（Vibecoding）"——看起来很酷，但产出难以维护。</p>
+                <p><strong>Get Shit Done（GSD）</strong> 应运而生。这是一个<strong>元提示（meta-prompting）、上下文工程（context engineering）和规格驱动开发（spec-driven development）系统</strong>，将 AI 编程从"碰运气"升级为可验证的工程化流程。项目由 TÂCHES 团队开发，2025 年 12 月发布，仅 5 个月便获得 6.1 万 Star，成为 AI 编程工具链中最受关注的项目之一。</p>
+            </div>
+
+            <div class="section">
+                <h2><span>⚡</span>核心功能</h2>
+                
+                <h3>1. 薄编排器模式（Thin Orchestrator Pattern）</h3>
+                <p>GSD 的核心架构创新。它使用精简的协调器生成<strong>专用代理（agent）</strong>，每个代理拥有<strong>全新的 200K+ token 上下文</strong>，从根本上避免单个代理累积过多实现细节导致的质量退化。</p>
+
+                <h3>2. 阶段化工作流（Discuss → Plan → Execute → Verify）</h3>
+                <p>严格的四阶段生命周期，确保每一步都可验证：</p>
+                <ul>
+                    <li><strong>Discuss</strong>：与用户讨论需求和目标</li>
+                    <li><strong>Plan</strong>：<code>gsd-planner</code> 创建详细执行计划，<code>gsd-plan-checker</code> 验证计划质量</li>
+                    <li><strong>Execute</strong>：<code>gsd-executor</code> 按计划执行，支持并行执行（Waves）、检查点（Checkpoints）</li>
+                    <li><strong>Verify</strong>：<code>gsd-verifier</code> 通过目标反向分析验证完成度</li>
+                </ul>
+
+                <h3>3. 多运行时支持（15+ AI 工具）</h3>
+                <p>单一代码库通过<strong>转换引擎</strong>适配 15+ AI 运行时：Claude Code、OpenCode、Gemini CLI、Codex、GitHub Copilot、Cursor、Windsurf、Antigravity、Trae、Qwen Code、Cline、Augment 等。自动检测环境并输出对应格式。</p>
+
+                <h3>4. 文件化状态管理</h3>
+                <p>所有项目状态持久化在 <code>.planning/</code> 目录，使用<strong>结构化 Markdown + YAML frontmatter</strong>：</p>
+                <ul>
+                    <li><code>PLAN.md</code>：阶段计划（任务列表、目标、验证标准）</li>
+                    <li><code>ROADMAP.md</code>：项目路线图</li>
+                    <li><code>STATE.md</code>：当前项目状态</li>
+                    <li><code>VERIFICATION.md</code>：验证结果记录</li>
+                </ul>
+                <p>人类可读，机器可处理，支持 Git 版本控制。</p>
+
+                <h3>5. 原子化 Git 提交</h3>
+                <p>每个任务一次提交，标准化消息格式，创建完全可追溯的开发历史。与传统的"大杂烩提交"说再见。</p>
+
+                <h3>6. Nyquist 验证（需求可证伪性）</h3>
+                <p>在研究阶段即进行<strong>测试覆盖率映射</strong>，确保每个需求都有对应的验证手段。这是 GSD 对软件工程理论的创新贡献——将需求可证伪性引入 AI 编程流程。</p>
+
+                <h3>7. 命名空间元技能（v1.41+）</h3>
+                <p>通过<strong>分层路由</strong>机制，将冷启动开销从 <strong>~2,150 token 降至 ~120 token</strong>（降低约 94%）。6 个命名空间元技能实现两阶段加载，极致优化 token 效率。</p>
+            </div>
+
+            <div class="section">
+                <h2><span>💡</span>技术亮点</h2>
+
+                <h3>亮点 1：上下文工程（Context Engineering）</h3>
+                <p>GSD 将"上下文管理"作为一等公民：</p>
+                <ul>
+                    <li><strong>受控上下文预算</strong>：精确管理每个代理的上下文使用量</li>
+                    <li><strong>提示精简机制</strong>：自动减少冗余信息，防止质量退化</li>
+                    <li><strong>新鲜上下文策略</strong>：每次任务由新代理执行，避免历史累积</li>
+                </ul>
+                <p>这三者结合，使 GSD 能有效维持 AI 输出质量，即使项目持续数天。</p>
+
+                <h3>亮点 2：无头 SDK（Headless SDK）</h3>
+                <p><code>@gsd-build/sdk</code> 支持<strong>自主项目执行</strong>，无需人工干预。结合 <code>gsd-tools.cjs</code> 集中式 CLI 工具，可实现 CI/CD 流水线中的全自动 AI 开发。</p>
+
+                <h3>亮点 3：Brownfield 项目集成</h3>
+                <p>GSD 不仅支持新项目（Greenfield），还支持<strong>已有项目的 AI 集成（Brownfield）</strong>。通过代码库映射工具（<code>gsd-tools map-codebase</code>）和依赖图生成（<code>gsd-tools graphify</code>），AI 能快速理解遗留代码。</p>
+            </div>
+
+            <div class="section">
+                <h2><span>👥</span>适用人群</h2>
+                <table>
+                    <tr>
+                        <th>人群</th>
+                        <th>使用场景</th>
+                    </tr>
+                    <tr>
+                        <td><strong>AI 辅助开发者</strong></td>
+                        <td>使用 Claude Code/Cursor 等工具，但受困于上下文腐烂问题</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工程团队负责人</strong></td>
+                        <td>需要建立可验证、可追踪的 AI 开发流程</td>
+                    </tr>
+                    <tr>
+                        <td><strong>全栈独立开发者</strong></td>
+                        <td>希望用 AI 完成复杂项目，而不只是单文件补全</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI 工具研究者</strong></td>
+                        <td>研究上下文工程、元提示系统的实践案例</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2><span>🚀</span>快速上手</h2>
+                
+                <h3>安装（30 秒完成）</h3>
+                <pre>npx get-shit-done-cc@latest</pre>
+                <p>安装脚本自动检测你的 AI 运行时环境（Claude Code、Cursor 等），并将 GSD 命令注入对应工具。</p>
+
+                <h3>最小化安装（v1.41+）</h3>
+                <pre>npx get-shit-done-cc@latest --minimal</pre>
+                <p>仅安装核心技能，进一步减少系统提示开销（适合对 token 预算敏感的场景）。</p>
+
+                <h3>第一个项目</h3>
+                <pre># 在 AI 编程工具中输入
+/gsd-new-project my-ai-app</pre>
+                <p>GSD 将引导你完成需求讨论、计划制定、执行和验证的完整流程。</p>
+            </div>
+
+            <div class="section">
+                <h2><span>📊</span>对比分析</h2>
+                <table>
+                    <tr>
+                        <th>维度</th>
+                        <th>传统 AI 编程（Claude Code/Cursor）</th>
+                        <th>GSD</th>
+                    </tr>
+                    <tr>
+                        <td><strong>上下文管理</strong></td>
+                        <td>单代理累积，约 1-2 小时后质量显著下降</td>
+                        <td>多代理新鲜上下文，质量稳定</td>
+                    </tr>
+                    <tr>
+                        <td><strong>可验证性</strong></td>
+                        <td>无内置验证机制</td>
+                        <td>Nyquist 验证 + 目标反向分析</td>
+                    </tr>
+                    <tr>
+                        <td><strong>可追踪性</strong></td>
+                        <td>依赖手动 Git 提交</td>
+                        <td>原子化提交 + 结构化状态文件</td>
+                    </tr>
+                    <tr>
+                        <td><strong>冷启动开销</strong></td>
+                        <td>~2,150 token（全部命令加载）</td>
+                        <td>~120 token（命名空间元技能，降低 94%）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>多工具支持</strong></td>
+                        <td>单一工具锁定</td>
+                        <td>15+ 运行时，单一代码库</td>
+                    </tr>
+                    <tr>
+                        <td><strong>适合项目规模</strong></td>
+                        <td>单文件/小功能</td>
+                        <td>复杂多阶段项目</td>
+                    </tr>
+                </table>
+                <p><em>数据来源：GSD 官方基准测试，v1.41 版本。</em></p>
+            </div>
+
+            <div class="section">
+                <h2><span>🔗</span>相关链接</h2>
+                <ul>
+                    <li><strong>GitHub 仓库：</strong><a href="https://github.com/gsd-build/get-shit-done">gsd-build/get-shit-done</a></li>
+                    <li><strong>官方网站：</strong><a href="https://gsd.build/">gsd.build</a></li>
+                    <li><strong>深度解析：</strong><a href="https://deepwiki.com/gsd-build/get-shit-done">DeepWiki - GSD</a></li>
+                    <li><strong>npm 包：</strong><a href="https://www.npmjs.com/package/get-shit-done-cc">get-shit-done-cc</a></li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>💭 总结</h3>
+                <p><strong>Get Shit Done</strong> 代表了 AI 辅助编程从"玩具"向"工程工具"的关键转型。它通过<strong>薄编排器模式</strong>解决上下文腐烂，通过<strong>阶段化工作流</strong>建立可验证流程，通过<strong>多运行时支持</strong>打破工具锁定。</p>
+                <p>对于认真使用 AI 进行软件开发的工程师而言，GSD 不是可选项——而是必需品。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📅 每日更新 · <strong>AI 日课</strong> · 公众号：AI日课 · 作者：fly的AI学习</p>
+            <p>🔗 在线版：<a href="https://flystray.github.io/ai-news/ai-github-reports/2026-05-11-github-projects.html">flystray.github.io/ai-news</a></p>
+            <p style="margin-top: 10px; color: #999; font-size: 12px;">Generated by WorkBuddy Auto</p>
+        </div>
+    </div>
+</body>
+</html>
