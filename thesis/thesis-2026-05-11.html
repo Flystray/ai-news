@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.5.11｜GraphReAct · 让大模型学会在图上"边想边查"</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;">
+
+<div style="max-width: 680px; margin: 0 auto; background-color: #ffffff; padding: 24px 20px; min-height: 100vh;">
+
+  <!-- 标题区 -->
+  <h1 style="font-size: 22px; font-weight: bold; color: #1a1a1a; line-height: 1.4; margin: 0 0 8px 0;">2026.5.11｜GraphReAct · 让大模型学会在图上"边想边查"</h1>
+  <p style="font-size: 15px; color: #7c3aed; font-weight: 500; margin: 0 0 6px 0;">✍️ fly的AI学习</p>
+  <p style="font-size: 13px; color: #888888; margin: 0 0 24px 0;">论文解读 · 国内 · 阅读时长 5 分钟</p>
+
+  <!-- 论文信息卡片 -->
+  <div style="background-color: #f8f9ff; border: 1px solid #e8eaed; border-radius: 10px; padding: 14px 16px; margin-bottom: 24px;">
+    <p style="font-size: 13px; color: #555; margin: 0 0 4px 0;"><b>论文：</b><a href="https://arxiv.org/abs/2605.07357" style="color: #4a6cf7; text-decoration: none;">GraphReAct: Reasoning and Acting for Multi-step Graph Inference</a></p>
+    <p style="font-size: 13px; color: #555; margin: 0 0 4px 0;"><b>作者：</b>香港中文大学 · 中国科学技术大学 · 电子科技大学</p>
+    <p style="font-size: 13px; color: #555; margin: 0;"><b>日期：</b>2026 年 5 月 8 日（arXiv）</p>
+  </div>
+
+  <!-- 第一章 -->
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin: 0 0 12px 0; padding-left: 12px; border-left: 4px solid #4a6cf7;">这篇论文在说什么？</h2>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">我们平时用大模型，比如让 GPT 帮忙分析一段文本，它会"读完之后想一想，然后给答案"。但如果让它分析一个社交网络、一个推荐系统里的用户关系图呢？图上的信息不是线性排列的，而是散落在无数个节点和连线上，大模型没法一口气"读完"。</p>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">GraphReAct 干的事情就是：让大模型在图结构数据上，也能像人一样"边想边查"——想一步，去图里找找线索，再想一步，再找找，最后综合判断。6 个数据集上跑下来，大部分场景比现有最好方法高了 <b>8% 到 35%</b>。</p>
+  </div>
+
+  <!-- 第二章 -->
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin: 0 0 12px 0; padding-left: 12px; border-left: 4px solid #4a6cf7;">为什么要关注？</h2>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">大模型和图数据的结合是这两年很火的方向。现实世界里大量数据天然就是图结构：</p>
+    <ul style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0; padding-left: 20px;">
+      <li style="margin-bottom: 6px;">社交网络：人和人的关注、互动关系</li>
+      <li style="margin-bottom: 6px;">电商：用户买了什么、浏览了什么</li>
+      <li style="margin-bottom: 6px;">学术：论文引用谁、谁和谁合作</li>
+      <li style="margin-bottom: 6px;">知识图谱：实体之间的关系</li>
+    </ul>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">传统做法是用图神经网络（GNN）直接处理这些图数据。GNN 擅长捕捉局部结构，但它的"视野"是固定的——几层聚合之后就看不了太远。而且 GNN 只能做一次推理，不能像人一样"想想再查，查了再想"。</p>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">另一方面，大模型擅长推理，但不认识图结构。怎么让大模型既能利用图上的结构信息，又能保持"边想边查"的推理能力？这就是 GraphReAct 要解决的问题。</p>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0;">之前也有人尝试过让大模型处理图数据，比如 GraphGPT、TEA-GLM。但它们基本是"把图信息一股脑喂给大模型"，大模型被动接收。GraphReAct 的思路不一样——它让大模型<b>主动决定</b>去图上哪里找信息，这才是真正意义上的"Agent 式图推理"。</p>
+  </div>
+
+  <!-- 第三章 -->
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin: 0 0 12px 0; padding-left: 12px; border-left: 4px solid #4a6cf7;">核心方法</h2>
+    <h3 style="font-size: 16px; font-weight: bold; color: #1a1a1a; margin: 0 0 10px 0;">关键思路</h3>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">GraphReAct 借鉴了 NLP 里很成熟的 ReAct（Reasoning + Acting）范式。简单说就是：模型不只是坐在那想，它可以"行动"——去外部环境里获取信息。用在图上，GraphReAct 给大模型设计了三种"行动"：</p>
+
+    <!-- 三种Action卡片 -->
+    <div style="background-color: #f0f4ff; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid #dde3f0;">
+      <p style="font-size: 15px; font-weight: bold; color: #4a6cf7; margin: 0 0 6px 0;">① 拓扑检索（Topological Retrieval）</p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0;">沿着图的连线，找目标节点的邻居。就像你在社交网络里查一个人的资料，顺便看看他的朋友都是谁、关注了什么话题。具体做法是 BFS（广度优先搜索），找最近的 4 个邻居节点，然后让大模型生成一段"拓扑摘要"。</p>
+    </div>
+
+    <div style="background-color: #f0faf4; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid #d4e8dc;">
+      <p style="font-size: 15px; font-weight: bold; color: #1d9e75; margin: 0 0 6px 0;">② 语义检索（Semantic Retrieval）</p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0;">不看图的连线，而是用"语义相似度"在整个图里找跟目标节点最像的 4 个节点。相当于你不仅看身边的人，还在整个公司里找跟你做类似项目的人。好处是突破图的连通性限制——即使两个节点在图上隔得很远，只要语义接近就能关联起来。</p>
+    </div>
+
+    <div style="background-color: #fef9f0; border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; border: 1px solid #f0e0c0;">
+      <p style="font-size: 15px; font-weight: bold; color: #ba7517; margin: 0 0 6px 0;">③ 上下文精炼（Context Refinement）</p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0;">前两步在不断"扩展"信息，但信息多了也有问题——大模型的上下文窗口是有限的，塞太多东西反而会干扰判断。所以 GraphReAct 加了一个"精炼"动作：每推理一步，就把之前积累的信息压缩整理一遍，去掉噪音，保留关键线索。就像你做了大量笔记之后，重新整理一份精简版提纲。</p>
+    </div>
+
+    <h3 style="font-size: 16px; font-weight: bold; color: #1a1a1a; margin: 0 0 10px 0;">整体流程</h3>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">整个推理过程分 4 步：</p>
+    <ol style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0; padding-left: 20px;">
+      <li style="margin-bottom: 6px;">大模型先看一眼目标节点的信息，做一个初步判断</li>
+      <li style="margin-bottom: 6px;">同时触发拓扑检索和语义检索，把相关线索收集过来</li>
+      <li style="margin-bottom: 6px;">后续几步反复精炼：想一想、整理一下、再想一想</li>
+      <li style="margin-bottom: 6px;">最后给出最终预测</li>
+    </ol>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0;">论文做了一组消融实验：只用拓扑检索，准确率从 24.8% 升到 27.4%；只加语义检索升到 25.6%；两个一起用到 28.5%。说明两种检索方式确实是互补的——一个管"局部结构"，一个管"全局语义"。</p>
+  </div>
+
+  <!-- 第四章 -->
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin: 0 0 12px 0; padding-left: 12px; border-left: 4px solid #4a6cf7;">效果怎么样？</h2>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">论文在 6 个数据集上做了 zero-shot 节点分类实验：</p>
+
+    <div style="background-color: #f8f9ff; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid #e8eaed;">
+      <p style="font-size: 14px; font-weight: bold; color: #1a1a1a; margin: 0 0 8px 0;">学术引文网络（论文分类）</p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0 0 4px 0;">· <b>Cora</b>：准确率 27.3%，比 TEA-GLM 高了 <span style="color: #1d9e75; font-weight: bold;">35%</span>（从 20.2% 提升）</p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0 0 4px 0;">· <b>History</b>（历史领域）：64.5%，提升 <span style="color: #1d9e75; font-weight: bold;">22%</span></p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0;">· <b>Photo</b>（摄影领域）：52.3%，提升近 <span style="color: #1d9e75; font-weight: bold;">30%</span></p>
+    </div>
+
+    <div style="background-color: #f0faf4; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid #d4e8dc;">
+      <p style="font-size: 14px; font-weight: bold; color: #1a1a1a; margin: 0 0 8px 0;">电商推荐场景（用户/商品分类）</p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0 0 4px 0;">· <b>Children</b>：29.4%，提升 <span style="color: #1d9e75; font-weight: bold;">8.5%</span></p>
+      <p style="font-size: 14px; color: #444; line-height: 1.8; margin: 0;">· <b>Sports</b> Macro-F1 达到 46.4%，提升 <span style="color: #1d9e75; font-weight: bold;">17%</span></p>
+    </div>
+
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0;">坦白说，不是每个数据集都赢了——PubMed 上反而低了几个百分点。但整体趋势很明显：在图结构比较复杂、信息分散的数据集上，GraphReAct 的优势更大。这也好理解——图越复杂，"边想边查"的价值就越突出。</p>
+  </div>
+
+  <!-- 第五章 -->
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin: 0 0 12px 0; padding-left: 12px; border-left: 4px solid #4a6cf7;">和其他方案比有什么不同？</h2>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">之前的方法（GraphGPT、TEA-GLM）相当于给大模型一份整理好的资料，让它看完给答案。GraphReAct 让大模型像侦探一样，先看现有线索，觉得不够就主动去查——查邻居、查相似的人、整理已有的线索，一步步逼近真相。</p>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0;">最大的区别就是<b>"主动性"</b>。之前的方法是被动接收信息，GraphReAct 是主动探索。而且它有专门的"精炼"动作来管理上下文，不会因为信息太多而"迷路"。</p>
+  </div>
+
+  <!-- 第六章 -->
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin: 0 0 12px 0; padding-left: 12px; border-left: 4px solid #4a6cf7;">对开发者意味着什么？</h2>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;"><b>什么场景适用？</b></p>
+    <ul style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0; padding-left: 20px;">
+      <li style="margin-bottom: 6px;">社交网络分析（用户画像、社区发现）</li>
+      <li style="margin-bottom: 6px;">推荐系统（基于用户-商品图的推荐）</li>
+      <li style="margin-bottom: 6px;">知识图谱问答（在实体关系图上推理）</li>
+      <li style="margin-bottom: 6px;">金融风控（交易网络中的异常检测）</li>
+    </ul>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;"><b>能直接用吗？</b></p>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0 0 12px 0;">目前论文没有开源代码，但 GraphReAct 的思路可以自己实现：核心就是在现有的 GNN + LLM pipeline 里，加上"拓扑检索 + 语义检索 + 上下文精炼"的循环。拓扑检索用 BFS 就行，语义检索用向量相似度，精炼就是再调一次 LLM 总结，技术上没有特别高的门槛。</p>
+    <p style="font-size: 15px; color: #333; line-height: 1.9; margin: 0;"><b>一个实用建议：</b>如果你的图数据规模很大（百万级节点），直接用这个方法可能有性能问题，因为每步都要跑 BFS 和相似度检索。可以考虑先做一层粗筛，再在子图上用 GraphReAct 推理。</p>
+  </div>
+
+  <!-- 底部署名 -->
+  <div style="border-top: 1px solid #e8eaed; padding-top: 16px; margin-top: 8px;">
+    <p style="font-size: 14px; color: #888888; margin: 0;">👤 fly的AI学习 | 每日更新 AI 大模型最新动态</p>
+  </div>
+
+</div>
+
+</body>
+</html>
