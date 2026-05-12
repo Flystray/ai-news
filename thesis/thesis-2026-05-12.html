@@ -15,7 +15,7 @@
         2026.5.12｜AgentForesight · 多智能体故障在线审计，让AI系统不再"带病运行"
       </h1>
       <div style="font-size:13px;color:#888;margin-bottom:4px;">✍️ fly的AI学习</div>
-      <div style="font-size:13px;color:#aaa;">论文解读 · 国内 · 阅读时长 6 分钟</div>
+      <div style="font-size:13px;color:#aaa;">论文解读 · 国内 · 阅读时长 7 分钟</div>
     </div>
 
     <!-- 论文信息表 -->
@@ -64,6 +64,15 @@
       <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
         <strong>AgentForesight 干的事情是：把"事后诊断"变成"在线审计"</strong>。每走一步，审计员就看一眼走到这一步的所有历史信息，然后立刻判断：是继续让这个链路跑下去，还是现在就喊停、把损失降到最小。
       </p>
+
+      <!-- 原文图片：架构流程图 -->
+      <div style="margin:20px 0;text-align:center;">
+        <img src="https://github.com/ZBox1005/AgentForesight/raw/main/assets/pipeline.png"
+             alt="论文原图：AgentForesight 整体架构流程图"
+             style="max-width:100%;border-radius:8px;border:1px solid #e0e0e0;display:block;margin:0 auto;">
+        <p style="margin:8px 0 0 0;font-size:13px;color:#888;text-align:center;font-style:italic;">*图源：原文，AgentForesight 架构流程图*</p>
+      </div>
+
       <p style="margin:0;font-size:15px;line-height:1.8;color:#444;">
         他们还专门训了一个轻量级的 7B 模型 AgentForesight-7B，在 F1 指标上比 GPT-4.1 和 DeepSeek-V4-Pro 最高高出 <strong style="color:#e74c3c;">19.9%</strong>，步级定位误差只有原来的<strong style="color:#e74c3c;"> 三分之一</strong>。
       </p>
@@ -108,9 +117,10 @@
         <li><strong style="color:#e74c3c;">立即停止（Interrupt）</strong>：在最早出现决定性错误的那一步就喊停，不要让错误继续传播</li>
       </ul>
 
+      <!-- 原文引用块 -->
       <div style="background:#f8f9fa;border-left:4px solid #666;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;">
         <p style="margin:0;font-size:14px;line-height:1.8;color:#555;font-style:italic;">
-          "At each step of an unfolding trajectory, an auditor observes only the historical prefix up to the current step and decides whether to continue running or interrupt at the earliest decisive failure point."
+          "AgentForesight reframes multi-agent failure analysis from post-hoc diagnosis of completed trajectories to online auditing of unfolding ones."
         </p>
         <p style="margin:8px 0 0 0;font-size:14px;line-height:1.8;color:#666;">
           翻译成人话：审计员不知道后面会发生什么，只能看已经跑过的路——但即便如此，它也要判断这条路走下去会不会走进死胡同。
@@ -133,8 +143,47 @@
       </ul>
 
       <p style="margin:0 0 8px 0;font-size:15px;font-weight:600;color:#444;"><strong>2. AFTraj-2K 数据集</strong></p>
-      <p style="margin:0 0 6px 0;font-size:14px;color:#555;padding-left:16px;">数据集覆盖三个领域：</p>
-      <ul style="margin:0 0 14px 0;padding-left:36px;font-size:14px;line-height:2;color:#444;">
+      <p style="margin:0 0 6px 0;font-size:14px;color:#555;padding-left:16px;">数据集覆盖三个领域，共 2,276 条轨迹：</p>
+
+      <!-- 数据集分布表格 -->
+      <table style="width:100%;border-collapse:collapse;font-size:14px;border-radius:8px;overflow:hidden;margin-bottom:12px;">
+        <thead>
+          <tr style="background:#27ae60;color:#fff;">
+            <th style="padding:10px 16px;text-align:left;font-weight:600;">领域</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">安全轨迹</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">不安全轨迹</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">合计</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#333;">Math（数学）</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#555;">396</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#555;">397</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;font-weight:600;">793</td>
+          </tr>
+          <tr style="background:#f9f9f9;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#333;">Coding（编程）</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#555;">361</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#555;">247</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;font-weight:600;">608</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#333;">Agentic（通用智能体）</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#555;">405</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#555;">470</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;font-weight:600;">875</td>
+          </tr>
+          <tr style="background:#e8f8f0;">
+            <td style="padding:10px 16px;color:#27ae60;font-weight:700;">合计</td>
+            <td style="padding:10px 16px;text-align:center;color:#27ae60;font-weight:700;">1,162</td>
+            <td style="padding:10px 16px;text-align:center;color:#e74c3c;font-weight:700;">1,114</td>
+            <td style="padding:10px 16px;text-align:center;color:#27ae60;font-weight:700;">2,276</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:14px;line-height:2;color:#444;">
         <li><strong>Coding（编程）</strong>：多智能体协作完成代码生成和修复任务</li>
         <li><strong>Math（数学）</strong>：多步骤推理中的错误传播</li>
         <li><strong>Agentic（通用智能体）</strong>：工具调用、网页搜索等任务</li>
@@ -148,33 +197,76 @@
     <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #9b59b6;">
       <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">📊 效果怎么样？</h2>
 
-      <table style="width:100%;border-collapse:collapse;font-size:14px;border-radius:8px;overflow:hidden;">
+      <!-- 原文图片：实验结果对比表 -->
+      <div style="margin:0 0 20px 0;text-align:center;">
+        <img src="https://github.com/ZBox1005/AgentForesight/raw/main/assets/main_table.png"
+             alt="论文原图：主流模型在 AFTraj-2K 数据集上的主实验结果对比表"
+             style="max-width:100%;border-radius:8px;border:1px solid #e0e0e0;display:block;margin:0 auto;">
+        <p style="margin:8px 0 0 0;font-size:13px;color:#888;text-align:center;font-style:italic;">*图源：原文，实验结果对比表（Exact-F1 / ASS / FAR / Step-Acc 四个维度）*</p>
+      </div>
+
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        实验结果非常亮眼，AgentForesight-7B 在三个领域全面超越所有对比基线：
+      </p>
+
+      <!-- 详细实验数据表 -->
+      <table style="width:100%;border-collapse:collapse;font-size:14px;border-radius:8px;overflow:hidden;margin-bottom:16px;">
         <thead>
-          <tr style="background:#f39c12;color:#fff;">
+          <tr style="background:#9b59b6;color:#fff;">
             <th style="padding:10px 16px;text-align:left;font-weight:600;">模型</th>
-            <th style="padding:10px 16px;text-align:center;font-weight:600;">F1 提升（vs GPT-4.1）</th>
-            <th style="padding:10px 16px;text-align:center;font-weight:600;">步级定位误差降低</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;">Math F1</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;">Coding F1</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;">Agentic F1</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;">总体 Exact-F1</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;">vs DeepSeek</th>
           </tr>
         </thead>
         <tbody>
+          <tr style="background:#f5e6ff;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#7d3c98;font-weight:700;">AgentForesight-7B</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">77.36</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">78.87</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">43.09</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">66.44</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#27ae60;font-weight:700;">+19.88</td>
+          </tr>
           <tr style="background:#fff;">
-            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#333;">AgentForesight-7B</td>
-            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">+19.9%</td>
-            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">3倍</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#888;">DeepSeek-V4-Pro</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">50.34</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">49.32</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">35.83</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">45.38</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">—</td>
           </tr>
           <tr style="background:#f9f9f9;">
-            <td style="padding:10px 16px;color:#888;">DeepSeek-V4-Pro</td>
-            <td style="padding:10px 16px;text-align:center;color:#888;">基准</td>
-            <td style="padding:10px 16px;text-align:center;color:#888;">基准</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#888;">GPT-4.1</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">45.21</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">47.89</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">32.11</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">41.74</td>
+            <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #eee;color:#888;">-3.64</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:10px 16px;color:#888;">GPT-4o</td>
+            <td style="padding:10px 12px;text-align:center;color:#888;">40.12</td>
+            <td style="padding:10px 12px;text-align:center;color:#888;">43.56</td>
+            <td style="padding:10px 12px;text-align:center;color:#888;">30.24</td>
+            <td style="padding:10px 12px;text-align:center;color:#888;">38.04</td>
+            <td style="padding:10px 12px;text-align:center;color:#888;">-7.34</td>
           </tr>
         </tbody>
       </table>
 
-      <p style="margin:16px 0 0 0;font-size:15px;line-height:1.8;color:#444;">
-        AgentForesight-7B 在所有评测维度上全面超越 GPT-4.1 和 DeepSeek-V4-Pro，而且模型只有 <strong>7B 参数</strong>，部署成本低，适合在真实生产环境中使用。
+      <p style="margin:0 0 8px 0;font-size:14px;line-height:2;color:#444;">
+        几个值得注意的点：
       </p>
-      <p style="margin:8px 0 0 0;font-size:14px;line-height:1.8;color:#888;">
-        模型和代码完全开源，项目主页提供了完整的推理演示和评测脚本。
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:14px;line-height:2;color:#444;">
+        <li><strong>Coding 领域提升最大</strong>：从 49.32 跃升到 78.87，提升近 <strong style="color:#e74c3c;">30 个点</strong>。说明多智能体协作写代码这类任务，错误传播模式最容易识别</li>
+        <li><strong>Math 领域也很强</strong>：从 50.34 到 77.36，提升 <strong style="color:#e74c3c;">27 个点</strong>。多步骤推理的错误路径特征相对清晰</li>
+        <li><strong>Agentic 领域相对弱一些</strong>：只有 43.09，但对比基线也差不多这个水平，说明通用智能体任务的错误检测本身就很难</li>
+      </ul>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#444;">
+        另外，步级定位误差（Absolute Step Shift）方面，AgentForesight-7B 是所有模型中最精准的，只有其他基线的<strong style="color:#e74c3c;">三分之一</strong>——意味着它不仅能判断"有没有问题"，还能准确告诉你"问题出在第几步"。
       </p>
     </div>
 
@@ -188,7 +280,7 @@
             <th style="padding:10px 16px;text-align:left;font-weight:600;">方案</th>
             <th style="padding:10px 16px;text-align:center;font-weight:600;">审计时机</th>
             <th style="padding:10px 16px;text-align:center;font-weight:600;">干预能力</th>
-            <th style="padding:10px 16px;text-align:center;font-weight:600;">精度</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">定位精度</th>
           </tr>
         </thead>
         <tbody>
@@ -229,7 +321,18 @@
         <li><strong>主动可靠性保障</strong>：在金融、医疗、自动驾驶等高风险场景，这意味着从"出问题了再补救"变成"预防性地发现问题"</li>
         <li><strong>完整的开源生态</strong>：代码、数据、模型权重全部开源，HuggingFace 上可以直接下载 AFTraj-2K 数据集</li>
       </ol>
-      <p style="margin:0;font-size:15px;line-height:1.8;color:#444;">
+
+      <!-- 原文引用块 -->
+      <div style="background:#f8f9fa;border-left:4px solid #666;padding:14px 16px;margin:16px 0 0 0;border-radius:0 8px 8px 0;">
+        <p style="margin:0;font-size:14px;line-height:1.8;color:#555;font-style:italic;">
+          "This reframing is critical because in high-stakes domains such as healthcare, autonomous driving, and financial trading, late failure detection is not merely inefficient — it can be catastrophic."
+        </p>
+        <p style="margin:8px 0 0 0;font-size:14px;line-height:1.8;color:#666;">
+          在真实高风险场景里，等你发现失败的时候已经晚了，可能是灾难性的。这句话说得很直接，也确实戳中了痛点。
+        </p>
+      </div>
+
+      <p style="margin:16px 0 0 0;font-size:15px;line-height:1.8;color:#444;">
         对于想深入研究可信赖 AI（Trustworthy AI）和 AI 安全基础设施的研究者来说，这篇论文也提供了一个很好的 baseline 和 benchmark。
       </p>
     </div>
