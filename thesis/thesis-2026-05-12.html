@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.5.12｜AgentForesight · 多智能体故障在线审计，让AI系统不再"带病运行"</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;color:#333;line-height:1.8;">
+
+  <div style="max-width:680px;margin:0 auto;padding:20px 16px;">
+
+    <!-- 文章标题 -->
+    <div style="background:#fff;border-radius:12px;padding:28px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;line-height:1.5;">
+        2026.5.12｜AgentForesight · 多智能体故障在线审计，让AI系统不再"带病运行"
+      </h1>
+      <div style="font-size:13px;color:#888;margin-bottom:4px;">✍️ fly的AI学习</div>
+      <div style="font-size:13px;color:#aaa;">论文解读 · 国内 · 阅读时长 6 分钟</div>
+    </div>
+
+    <!-- 论文信息表 -->
+    <div style="background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;width:90px;">论文标题</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#333;font-weight:600;">AgentForesight: Online Auditing for Early Failure Prediction in Multi-Agent Systems</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#666;">作者</td>
+          <td style="padding:8px 0;color:#333;">Boxuan Zhang, Jianing Zhu, Zeru Shi, Dongfang Liu, Ruixiang Tang（罗格斯大学）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;">发表日期</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#333;">2026-05-09</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;">来源</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#333;">BAAI 智源社区</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;">论文链接</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;"><a href="https://zbox1005.github.io/agent-foresight/" style="color:#4a90e2;text-decoration:none;">项目主页 ↗</a></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;">代码/数据</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;"><a href="https://github.com/ZBox1005/AgentForesight" style="color:#4a90e2;text-decoration:none;">GitHub ↗</a> · <a href="https://huggingface.co/datasets/ZBox008003/AFTraj" style="color:#4a90e2;text-decoration:none;">AFTraj 数据集 ↗</a></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;">标签</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#e67e22;">Agent · 多智能体 · 在线审计 · 故障检测 · 可信AI</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 章节1：这篇论文在说什么 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #4a90e2;">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">🤖 这篇论文在说什么？</h2>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        当多个AI智能体组队干活的时候，一个智能体出错，整条任务链可能全部跑偏——而且这个错误会被后面的人继续用、继续传，等你发现不对劲的时候已经晚了。
+      </p>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        现在主流的解决办法叫"事后归因"：等整条链路跑完了，再回头找是谁在哪一步出了问题。这就像病人已经病危了，你才回过头来写病历。
+      </p>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        <strong>AgentForesight 干的事情是：把"事后诊断"变成"在线审计"</strong>。每走一步，审计员就看一眼走到这一步的所有历史信息，然后立刻判断：是继续让这个链路跑下去，还是现在就喊停、把损失降到最小。
+      </p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#444;">
+        他们还专门训了一个轻量级的 7B 模型 AgentForesight-7B，在 F1 指标上比 GPT-4.1 和 DeepSeek-V4-Pro 最高高出 <strong style="color:#e74c3c;">19.9%</strong>，步级定位误差只有原来的<strong style="color:#e74c3c;"> 三分之一</strong>。
+      </p>
+    </div>
+
+    <!-- 章节2：为什么要关注 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #f39c12;">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">🔍 为什么要关注？</h2>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        现在的 AI 智能体系统有个很麻烦的问题：<strong>长链路任务特别容易级联失败</strong>。
+      </p>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        举个例子：三个智能体协作完成一个代码生成任务，第一个负责理解需求，第二个负责写代码，第三个负责测试。如果第一个理解错了，那第二个大概率会基于一个错误的需求写出跑偏的代码，第三个再接着执行——最后整个系统产出了一个完全不对的结果，但你可能要到第三步才发现。
+      </p>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        现有的方法都是"事后诸葛亮"：等整个流程跑完了，再回头看日志，找问题出在哪里。但问题是，<strong>有些场景不允许你等到最后才发现问题</strong>。
+      </p>
+      <p style="margin:0 0 8px 0;font-size:15px;line-height:1.8;color:#444;font-weight:600;">举几个例子：</p>
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:15px;line-height:2;color:#444;">
+        <li><strong>金融交易智能体</strong>：如果某个步骤出了方向性错误，等跑完再诊断，黄花菜都凉了</li>
+        <li><strong>医疗辅助系统</strong>：一个错误决策可能已经造成不可逆的影响</li>
+        <li><strong>自动驾驶决策系统</strong>：实时性要求极高，必须在线发现问题</li>
+      </ul>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#e74c3c;font-weight:600;">
+        所以，在执行过程中实时检测并预警故障，而不是事后分析日志，才是真正有用的方案。这个问题之前没人系统性地解决过。
+      </p>
+    </div>
+
+    <!-- 章节3：核心方法 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #27ae60;">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">⚙️ 核心方法</h2>
+
+      <h3 style="font-size:16px;font-weight:600;color:#27ae60;margin:0 0 12px 0;">关键思路</h3>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        AgentForesight 的核心洞察很简单：<strong>在不知道未来会怎样的前提下，能不能只靠已经发生的事，提前预判这个链路会不会出问题？</strong>
+      </p>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        他们把这个问题建模成"在线审计"：审计智能体在轨迹执行的每一步，只被允许观察截至当前步的历史前缀，不允许看后续任何步骤。基于这个约束，它要做出一个二选一的决定：
+      </p>
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:15px;line-height:2;color:#444;">
+        <li><strong style="color:#27ae60;">继续运行（Continue）</strong>：这条路看着还能走</li>
+        <li><strong style="color:#e74c3c;">立即停止（Interrupt）</strong>：在最早出现决定性错误的那一步就喊停，不要让错误继续传播</li>
+      </ul>
+
+      <div style="background:#f8f9fa;border-left:4px solid #666;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;">
+        <p style="margin:0;font-size:14px;line-height:1.8;color:#555;font-style:italic;">
+          "At each step of an unfolding trajectory, an auditor observes only the historical prefix up to the current step and decides whether to continue running or interrupt at the earliest decisive failure point."
+        </p>
+        <p style="margin:8px 0 0 0;font-size:14px;line-height:1.8;color:#666;">
+          翻译成人话：审计员不知道后面会发生什么，只能看已经跑过的路——但即便如此，它也要判断这条路走下去会不会走进死胡同。
+        </p>
+      </div>
+
+      <h3 style="font-size:16px;font-weight:600;color:#27ae60;margin:24px 0 12px 0;">技术细节</h3>
+
+      <p style="margin:0 0 8px 0;font-size:15px;font-weight:600;color:#444;"><strong>1. 两阶段"由粗到精"强化学习训练</strong></p>
+      <p style="margin:0 0 6px 0;font-size:14px;color:#555;padding-left:16px;">训练分两个阶段：</p>
+      <ul style="margin:0 0 14px 0;padding-left:36px;font-size:14px;line-height:2;color:#444;">
+        <li><strong>粗粒度预训练</strong>：用安全/不安全轨迹对，让模型学会区分"这条路看着还行"和"这条路大概率要翻车"</li>
+        <li><strong>精调阶段</strong>：三维联合奖励函数，同时优化三个维度：
+          <ul style="padding-left:16px;">
+            <li><strong>What（出了什么问题）</strong>：识别故障的类型</li>
+            <li><strong>Where（在哪一步）</strong>：定位最早的决定性错误步骤</li>
+            <li><strong>Who（是谁）</strong>：找出是哪个智能体导致了这个问题</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p style="margin:0 0 8px 0;font-size:15px;font-weight:600;color:#444;"><strong>2. AFTraj-2K 数据集</strong></p>
+      <p style="margin:0 0 6px 0;font-size:14px;color:#555;padding-left:16px;">数据集覆盖三个领域：</p>
+      <ul style="margin:0 0 14px 0;padding-left:36px;font-size:14px;line-height:2;color:#444;">
+        <li><strong>Coding（编程）</strong>：多智能体协作完成代码生成和修复任务</li>
+        <li><strong>Math（数学）</strong>：多步骤推理中的错误传播</li>
+        <li><strong>Agentic（通用智能体）</strong>：工具调用、网页搜索等任务</li>
+      </ul>
+      <p style="margin:0;font-size:14px;line-height:1.8;color:#666;background:#f0f7ff;padding:10px 14px;border-radius:6px;">
+        💡 数据标注方式很有意思：安全轨迹直接保留，不安全轨迹由多个 LLM 评判员达成共识，在决定性错误出现的精确步骤上完成标注——不是随便标一个区间，而是精确到哪一步。
+      </p>
+    </div>
+
+    <!-- 章节4：效果怎么样 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #9b59b6;">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">📊 效果怎么样？</h2>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;border-radius:8px;overflow:hidden;">
+        <thead>
+          <tr style="background:#f39c12;color:#fff;">
+            <th style="padding:10px 16px;text-align:left;font-weight:600;">模型</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">F1 提升（vs GPT-4.1）</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">步级定位误差降低</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#333;">AgentForesight-7B</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">+19.9%</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;font-weight:700;">3倍</td>
+          </tr>
+          <tr style="background:#f9f9f9;">
+            <td style="padding:10px 16px;color:#888;">DeepSeek-V4-Pro</td>
+            <td style="padding:10px 16px;text-align:center;color:#888;">基准</td>
+            <td style="padding:10px 16px;text-align:center;color:#888;">基准</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin:16px 0 0 0;font-size:15px;line-height:1.8;color:#444;">
+        AgentForesight-7B 在所有评测维度上全面超越 GPT-4.1 和 DeepSeek-V4-Pro，而且模型只有 <strong>7B 参数</strong>，部署成本低，适合在真实生产环境中使用。
+      </p>
+      <p style="margin:8px 0 0 0;font-size:14px;line-height:1.8;color:#888;">
+        模型和代码完全开源，项目主页提供了完整的推理演示和评测脚本。
+      </p>
+    </div>
+
+    <!-- 章节5：和其他方案比有什么不同 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #e74c3c;">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">⚔️ 和其他方案比有什么不同？</h2>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;border-radius:8px;overflow:hidden;">
+        <thead>
+          <tr style="background:#e74c3c;color:#fff;">
+            <th style="padding:10px 16px;text-align:left;font-weight:600;">方案</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">审计时机</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">干预能力</th>
+            <th style="padding:10px 16px;text-align:center;font-weight:600;">精度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;color:#888;">传统事后归因</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#666;">轨迹结束后</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#e74c3c;">❌ 无</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#666;">事后定位</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:10px 16px;border-bottom:1px solid #eee;font-weight:700;color:#27ae60;">AgentForesight</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#27ae60;font-weight:600;">轨迹执行中</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#27ae60;font-weight:600;">✅ 实时中断</td>
+            <td style="padding:10px 16px;text-align:center;border-bottom:1px solid #eee;color:#27ae60;font-weight:600;">精确到步</td>
+          </tr>
+          <tr style="background:#f9f9f9;">
+            <td style="padding:10px 16px;color:#888;">传统投票机制</td>
+            <td style="padding:10px 16px;text-align:center;color:#888;">每步投票</td>
+            <td style="padding:10px 16px;text-align:center;color:#888;">无实质干预</td>
+            <td style="padding:10px 16px;text-align:center;color:#888;">易被级联放大</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin:16px 0 0 0;font-size:15px;line-height:1.8;color:#444;">
+        核心区别在于：<strong>传统方法是"事后查案"，AgentForesight 是"在线巡检"</strong>。一个是等你病危了再分析病历，一个是每天查房、发现问题立刻处理。
+      </p>
+    </div>
+
+    <!-- 章节6：对开发者意味着什么 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:4px solid #3498db;">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;padding-bottom:10px;border-bottom:1px solid #eee;">💡 对开发者意味着什么？</h2>
+      <p style="margin:0 0 14px 0;font-size:15px;line-height:1.8;color:#444;">
+        这个工作解决了一个之前被严重低估的问题。对于在实际生产环境中部署多智能体系统的开发者来说，AgentForesight 提供了：
+      </p>
+      <ol style="margin:0 0 14px 0;padding-left:20px;font-size:15px;line-height:2;color:#444;">
+        <li><strong>即插即用的审计模块</strong>：AgentForesight-7B 可以作为现有系统的外挂审计层，不需要改原来的多智能体架构</li>
+        <li><strong>主动可靠性保障</strong>：在金融、医疗、自动驾驶等高风险场景，这意味着从"出问题了再补救"变成"预防性地发现问题"</li>
+        <li><strong>完整的开源生态</strong>：代码、数据、模型权重全部开源，HuggingFace 上可以直接下载 AFTraj-2K 数据集</li>
+      </ol>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#444;">
+        对于想深入研究可信赖 AI（Trustworthy AI）和 AI 安全基础设施的研究者来说，这篇论文也提供了一个很好的 baseline 和 benchmark。
+      </p>
+    </div>
+
+    <!-- 底部署名 -->
+    <div style="text-align:center;padding:24px 0;font-size:14px;color:#aaa;margin-top:8px;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </div>
+
+  </div>
+
+</body>
+</html>
