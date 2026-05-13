@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Skills：让 AI 编程拥有 Google 级工程成熟度 · GitHub AI 项目深度介绍 · 2026年05月13日</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
+        .container { max-width: 860px; margin:0 auto; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
+        .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card ul { padding-left: 20px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .card ul li strong { color: #1e3a5f; }
+        .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .desc-card p { font-size: 15px; color: #1a1a1a; line-height: 1.85; }
+        .arch-flow { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 16px 22px; font-family: 'Fira Code', Consolas, monospace; font-size: 13px; margin: 14px 0; text-align: center; line-height: 2; }
+        .arch-flow .arrow { color: #89b4fa; font-weight: bold; }
+        .arch-flow .stage { background: #313244; padding: 3px 12px; border-radius: 6px; color: #a6e3a1; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 13px; margin-top: 10px; white-space: pre-wrap; word-break: break-all; }
+        .cta { text-align: center; margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .cta a { display: inline-block; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a.github { background: #2d6a9f; color: white; }
+        .cta a.github:hover { background: #1e3a5f; }
+        .cta a.deepwiki { background: #f0f6ff; color: #2d6a9f; border: 2px solid #2d6a9f; }
+        .cta a.deepwiki:hover { background: #2d6a9f; color: white; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+        table th { background: #e8f0fe; color: #1e3a5f; padding: 8px 12px; text-align: left; border: 1px solid #d0e2f7; }
+        table td { padding: 8px 12px; border: 1px solid #e8e8e8; vertical-align: top; }
+        table tr:nth-child(even) td { background: #f9fbfd; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+        .highlight { background: #fff8e1; padding: 2px 6px; border-radius: 4px; }
+        .workflow-box { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 20px 24px; font-family: 'Fira Code', Consolas, monospace; font-size: 13px; margin: 14px 0; text-align: center; line-height: 2.2; }
+        .workflow-box .cmd { background: #313244; padding: 3px 10px; border-radius: 6px; color: #89b4fa; margin: 0 4px; }
+        .workflow-box .arrow { color: #f38ba8; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date-badge">GitHub AI 项目 · 2026年05月13日</div>
+        <h1>Agent Skills：让 AI 编程拥有 Google 级工程成熟度</h1>
+        <p class="subtitle">Google Gemini 主管 Addy Osmani 开源，20 个工程技能让 AI 遵循资深工程师的开发纪律</p>
+    </div>
+
+    <div class="meta-bar">
+        <span>⭐ 40,438</span>
+        <span>📝 MIT</span>
+        <span>🕐 创建于 2026-02-15（最新项目！）</span>
+        <span>🔗 <a href="https://github.com/addyosmani/agent-skills" target="_blank" style="color:#2d6a9f">addyosmani/agent-skills</a></span>
+    </div>
+
+    <div class="topics">
+        <span class="topic">agent-skills</span>
+        <span class="topic">claude-code</span>
+        <span class="topic">cursor</span>
+        <span class="topic">skills</span>
+        <span class="topic">AI-agent</span>
+        <span class="topic">engineering</span>
+        <span class="topic">best-practices</span>
+    </div>
+
+    <div class="card">
+        <h2>项目背景</h2>
+        <p>2026年2月，Google Gemini 团队主管、AngularJS 联合创始人 <strong>Addy Osmani</strong> 在 GitHub 上发布了一个令人眼前一亮的新项目——<strong>Agent Skills</strong>。</p>
+        <p style="margin-top:12px">这个项目的诞生，源于一个所有 AI 编程工具都面临的共同困境：<strong>AI 代理默认选择最短路径——跳过需求文档、跳过测试、跳过安全评审、省略那些让软件真正可靠的最佳实践。</strong></p>
+        <p style="margin-top:12px">Agent Skills 的核心使命，是将 Google 二十年的工程实践封装成 AI 可执行的技能模块，通过 7 个 Slash 命令让 Claude Code、Cursor、Windsurf、Gemini CLI 等主流 AI 编程工具在工程成熟度上直接对齐 Google 标准。从 2 月发布到 5 月，这个项目已狂揽 <strong>4 万+ Stars</strong>，成为 2026 年最受关注的 AI 编程辅助工具之一。</p>
+    </div>
+
+    <div class="card">
+        <h2>核心功能</h2>
+
+        <h3 style="font-size:15px;color:#2d6a9f;margin:18px 0 10px">1. 六阶段开发流程</h3>
+        <div class="workflow-box">
+            <span class="cmd">/spec</span>
+            <span class="arrow">→</span>
+            <span class="cmd">/plan</span>
+            <span class="arrow">→</span>
+            <span class="cmd">/build</span>
+            <span class="arrow">→</span>
+            <span class="cmd">/test</span>
+            <span class="arrow">→</span>
+            <span class="cmd">/review</span>
+            <span class="arrow">→</span>
+            <span class="cmd">/ship</span>
+        </div>
+        <p>Agent Skills 围绕软件开发的六个核心阶段设计了完整的工作流框架，每个阶段都有对应的激活命令和核心技能：</p>
+        <table>
+            <tr><th>阶段</th><th>激活命令</th><th>核心理念</th></tr>
+            <tr><td><strong>DEFINE（定义）</strong></td><td><code>/spec</code></td><td>规约优先，在写代码之前定义清楚要做什么</td></tr>
+            <tr><td><strong>PLAN（规划）</strong></td><td><code>/plan</code></td><td>小的原子化任务，确保每个任务都可验证</td></tr>
+            <tr><td><strong>BUILD（构建）</strong></td><td><code>/build</code></td><td>一次只做一块，薄垂直切片实现</td></tr>
+            <tr><td><strong>VERIFY（验证）</strong></td><td><code>/test</code></td><td>测试就是证明，TDD 红-绿-重构</td></tr>
+            <tr><td><strong>REVIEW（评审）</strong></td><td><code>/review</code></td><td>五轴代码审查（功能/安全/可维护/性能/风格）</td></tr>
+            <tr><td><strong>SHIP（发布）</strong></td><td><code>/ship</code></td><td>CI/CD 流水线，质量门禁保障</td></tr>
+        </table>
+
+        <h3 style="font-size:15px;color:#2d6a9f;margin:24px 0 10px">2. 20 个核心技能模块</h3>
+        <p>覆盖软件开发全生命周期的 20 个结构化技能，分为三大层：</p>
+        <ul>
+            <li><strong>Define 层</strong>：`idea-refine`（想法精炼）、`spec-driven-development`（PRD 编写）</li>
+            <li><strong>Build 层</strong>：`planning-and-task-breakdown`（任务拆解）、`incremental-implementation`（增量实现）、`test-driven-development`（TDD）、`context-engineering`（上下文工程）、`source-driven-development`（源码驱动）、`frontend-ui-engineering`（前端工程）、`api-and-interface-design`（API 设计）</li>
+            <li><strong>Ship 层</strong>：`browser-testing-with-devtools`（浏览器测试）、`debugging-and-error-recovery`（调试）、`code-review-and-quality`（代码评审）、`code-simplification`（代码简化）、`security-and-hardening`（安全加固）、`performance-optimization`（性能优化）、`git-workflow-and-versioning`（Git 工作流）、`ci-cd-and-automation`（CI/CD）、`deprecation-and-migration`（废弃迁移）、`documentation-and-adrs`（文档）、`shipping-and-launch`（发布）</li>
+        </ul>
+
+        <h3 style="font-size:15px;color:#2d6a9f;margin:24px 0 10px">3. 创新设计：反合理化机制（Anti-Rationalization）</h3>
+        <p>这是 Agent Skills 最具创新性的设计——为每个技能配备的"常见借口表"，从根本上解决 AI 代理"偷懒"的问题：</p>
+        <table>
+            <tr><th>AI 常见借口</th><th>正确反驳</th></tr>
+            <tr><td>"功能很简单，不需要测试"</td><td>测试的目的是证明代码能做它应该做的事，不是证明代码"简单"</td></tr>
+            <tr><td>"我会在后面加上测试"</td><td>后续测试的覆盖率平均只有 TDD 的 30%，且测试质量显著更低</td></tr>
+            <tr><td>"手动测试过了"</td><td>手动测试不能防止未来的回归，是一次性消耗</td></tr>
+        </table>
+
+        <h3 style="font-size:15px;color:#2d6a9f;margin:24px 0 10px">4. 多平台无缝集成</h3>
+        <p>Agent Skills 采用通用 Markdown 格式，可在多个 AI 编程工具中使用：</p>
+        <table>
+            <tr><th>平台</th><th>支持方式</th></tr>
+            <tr><td><strong>Claude Code</strong></td><td>原生 7 个 Slash 命令支持（推荐）</td></tr>
+            <tr><td><strong>Cursor</strong></td><td>通过 <code>.cursor/rules/</code> 引用 Skill</td></tr>
+            <tr><td><strong>Gemini CLI</strong></td><td>原生 skills 命令</td></tr>
+            <tr><td><strong>Windsurf</strong></td><td>rules 配置</td></tr>
+            <tr><td><strong>其他 Agent</strong></td><td>通用 Markdown 格式，任意支持系统提示的 Agent 均可使用</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>技术亮点</h2>
+        <ul>
+            <li><strong>标准化技能 Anatomy</strong>：每个 Skill.md 遵循统一的结构（name / description / Overview / When to Use / Process / Rationalizations / Red Flags / Verification），确保可扩展性和一致性，任何人都可以按照模板贡献新技能</li>
+            <li><strong>质量量化提升</strong>：根据项目 README 引用的用户报告，Agent Skills 可将单元测试覆盖率从 18% 提升至 67%（+272%），PR 包含测试的比率从 23% 提升至 81%（+252%），Review 轮次中位数从 4.2 轮降至 1.8 轮（-57%）</li>
+            <li><strong>完整的工程实践封装</strong>：Agent Skills 不仅仅是代码规范，而是将 Google 的工程文化完整封装——Hyrum 定律、Beyonce 规则（"If it doesn't work, that's on you"）、测试金字塔（80% 单元 / 15% 集成 / 5% E2E）、主干开发、原子提交、代码即负债思维</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>适用人群</h2>
+        <ul>
+            <li><strong>AI 编程初学者</strong>：不知道如何规范 AI 输出质量，Agent Skills 提供完整的工程框架</li>
+            <li><strong>开发团队</strong>：AI 生成代码质量参差不齐，通过六阶段流程确保质量一致性</li>
+            <li><strong>技术负责人</strong>：希望将高级工程师的经验固化为可复用的工作流</li>
+            <li><strong>安全敏感项目</strong>：担心 AI 代码的安全漏洞，OWASP 防护技能强制执行</li>
+            <li><strong>追求工程化的团队</strong>：希望 AI 遵循 Google 级别的工程标准</li>
+            <li><strong>项目经理</strong>：缺乏代码评审和文档规范，通过结构化流程可视化进度</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>快速上手</h2>
+
+        <p style="font-weight:600;margin-bottom:8px">Claude Code 安装（推荐）</p>
+        <div class="quickstart"># Marketplace 安装
+/plugin marketplace add addyosmani/agent-skills
+/plugin install agent-skills@addy-agent-skills
+
+# 验证安装
+/help  # 确认 7 个新命令可用</div>
+
+        <p style="font-weight:600;margin:16px 0 8px">Cursor 安装</p>
+        <div class="quickstart"># 在项目根目录创建规则文件夹
+mkdir -p .cursor/rules
+
+# 将需要的 Skill 复制到 rules 目录
+cp -r agent-skills/skills/test-driven-development .cursor/rules/</div>
+
+        <p style="font-weight:600;margin:16px 0 8px">Gemini CLI 安装</p>
+        <div class="quickstart">gemini skills install https://github.com/addyosmani/agent-skills.git --path skills</div>
+
+        <p style="font-weight:600;margin:16px 0 8px">快速体验</p>
+        <div class="quickstart"># 体验六阶段流程的第一步
+/spec 为我的个人博客写一个图片懒加载功能
+
+# 体验 TDD 开发
+/test 实现邮箱验证功能</div>
+    </div>
+
+    <div class="card">
+        <h2>对比分析</h2>
+        <p>Agent Skills 的核心价值在于让 AI "更有纪律"，而非"更聪明"。与 Cursor Rules 和其他 AI 编程工具的对比：</p>
+        <table>
+            <tr><th>维度</th><th>Agent Skills</th><th>Cursor Rules</th><th>其他 Agent 工具</th></tr>
+            <tr><td>设计目标</td><td>工程流程标准化</td><td>代码风格约束</td><td>单点执行</td></tr>
+            <tr><td>覆盖范围</td><td>完整开发周期（需求→发布）</td><td>单点代码规范</td><td>任务自动化</td></tr>
+            <tr><td>执行方式</td><td>主动引导（Slash 命令）</td><td>被动检查</td><td>自由执行</td></tr>
+            <tr><td>工程实践</td><td>✅ 20 个 Google 技能</td><td>❌ 无内置</td><td>❌ 无</td></tr>
+            <tr><td>验证机制</td><td>明确的退出标准 + 证据要求</td><td>无</td><td>无</td></tr>
+            <tr><td>质量门禁</td><td>内置五轴 Review</td><td>无</td><td>无</td></tr>
+        </table>
+        <p><strong>核心差异</strong>：Cursor Rules 本质上是代码约束规则，用于保持代码风格一致；Agent Skills 是工程工作流框架，覆盖需求分析→代码实现→测试验证→发布上线的完整闭环。它强调的是"让 AI 像 Google Senior Engineer 一样思考工程问题，而不只是生成代码"。</p>
+    </div>
+
+    <div class="card">
+        <h2>注意事项</h2>
+        <ul>
+            <li>Agent Skills 当前主要围绕 Claude Code 生态设计，其他工具的支持程度略有差异</li>
+            <li>需要团队对六阶段开发流程有基本认知，流程有一定学习成本</li>
+            <li>技能文件的维护需要持续投入，建议建立内部贡献流程</li>
+            <li>快速原型验证场景下，完整流程可能显得过于"重"，需要灵活取舍</li>
+        </ul>
+    </div>
+
+    <div class="cta">
+        <a class="github" href="https://github.com/addyosmani/agent-skills" target="_blank">GitHub 项目主页</a>
+        <a class="deepwiki" href="https://deepwiki.com/addyosmani/agent-skills" target="_blank">DeepWiki 项目解析</a>
+    </div>
+
+    <div class="footer">
+        <p>本报告由 GitHub AI 项目日报自动生成 · 每日早 9:00 更新</p>
+        <p>项目推荐 &amp; 文章编辑：fly的AI学习 · GitHub Pages: <a href="https://flystray.github.io/ai-news/ai-github-reports/" style="color:#aaa">https://flystray.github.io/ai-news/ai-github-reports/</a></p>
+    </div>
+</div>
+</body>
+</html>

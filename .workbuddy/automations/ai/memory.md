@@ -9,6 +9,43 @@
 
 ## 执行记录
 
+### 2026-05-13
+- 执行时间: 2026-05-13 10:43
+- 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.7.35；GitHub网络不可达，本地commit已保存）
+- 报告路径: reports/2026-05-13-with-links.html
+- 新闻来源: 量子位 / 腾讯新闻 / 新浪财经 / AI快讯 / AIToolsRecap / 36氪
+- 步骤1: ✅ 生成精美HTML日报（重磅4条 + 行业5条 + 洞察4条）
+- 步骤2: ✅ HTML已生成（wechat_article.html + article_2026-05-13.md），推送失败（errcode 40164: IP 115.200.7.35 未在微信白名单）
+- 步骤3: ✅ Git commit成功（commit 34ff93b），⚠️ push网络超时（GitHub不可达，需稍后重试）
+- 步骤4: 📋 简报摘要在下方输出（无个人微信API直连能力）
+- 今日重磅:
+  - 快手官宣分拆可灵AI：估值200亿美元、融资20亿美元，腾讯领投
+  - 何恺明首个语言模型发布：CV大佬不走GPT路线，扩散模型另起炉灶（仅105M参数）
+  - Cerebras冲刺350亿美元IPO：OpenAI签200亿美元算力大单
+  - 浙大校友突破32年拉姆齐数下界，AI再次攻克数学圣杯
+- 行业动态:
+  - OpenAI与Anthropic同日牵手华尔街，驻场AI时代正式开启
+  - OpenClaw重磅更新（可操作屏幕/鼠标）+ 360发现23个安全漏洞
+  - 阿里千问与淘宝全面打通，业界首个AI购物全链路闭环落地
+  - 中国移动连发三大AI产品（MoMA平台+MobileClaw+AI云电脑）
+  - 火山引擎Agent Plan：Doubao+Seedance+Seedream一站聚合
+- 核心洞察:
+  - AI大厂「分拆潮」来袭，估值重塑成为2026年主旋律
+  - OpenClaw「长手长脚」标志AI Agent从工具进化为员工
+  - 何恺明「扩散LLM」挑战自回归正统，CV天才倒逼NLP革命
+  - 从「卖API」到「卖驻场」，AI商业化进入执行力竞争时代
+- GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-13-with-links.html
+
+### ⚠️ 待处理1：微信IP白名单（持续，需用户手动添加）
+- 需在 mp.weixin.qq.com 后台添加 IP 115.200.7.35 到白名单（注意：IP已多次变更！）
+- 添加后重新运行: /c/Users/YF/.workbuddy/binaries/python/versions/3.13.12/python.exe /c/Users/YF/.workbuddy/skills/wechat-mp/push_draft.py 2026-05-13
+
+### ⚠️ 待处理2：GitHub push（本地commit已保存，网络恢复后重试）
+- commit ID: 34ff93b（需确认push成功以更新GitHub Pages）
+- GitHub Pages URL: https://flystray.github.io/ai-news/reports/2026-05-13-with-links.html
+
+---
+
 ### 2026-05-12
 - 执行时间: 2026-05-12 10:22
 - 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.18.219）
