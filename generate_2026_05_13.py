@@ -1,0 +1,288 @@
+# -*- coding: utf-8 -*-
+import sys, io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+from datetime import datetime
+
+date_str = datetime.now().strftime("%Y-%m-%d")
+
+# 今日新闻数据（2026-05-13）
+breaking_news = [
+    {
+        "title": "🔥 快手官宣分拆可灵AI：估值200亿美元、融资20亿美元，腾讯领投",
+        "tag": "AI视频 · 融资",
+        "highlights": [
+            "5月11日《晚点LatePost》爆料后，快手于5月12日发布港交所正式公告，证实正评估可灵AI资产重组及引入外部融资方案",
+            "可灵AI目标估值200亿美元，已比肩快手市值的70%；当前ARR约5亿美元，春节以来翻倍增长",
+            "融资规模20亿美元，腾讯将领投；快手此举意在将AI业务从低PE主业中解放出来，释放独立估值",
+            "AI视频生成赛道2026年正式进入烧钱阶段，可灵与OpenAI Sora、Runway的三角战争全面升级",
+        ],
+        "links": [
+            {"url": "https://news.qq.com/rain/a/20260512A059W300", "source": "腾讯新闻"},
+            {"url": "https://finance.sina.com.cn/jjxw/2026-05-13/doc-inhxsxzx4712792.shtml", "source": "新浪财经"},
+        ]
+    },
+    {
+        "title": "🔥 何恺明首个语言模型发布：CV大佬不走GPT路线，扩散模型另起炉灶",
+        "tag": "学术突破 · 跨界",
+        "highlights": [
+            "Facebook AI Research（FAIR）研究科学家何恺明（ResNet作者）发布其首个LLM：仅105M参数，剑走偏锋",
+            "不走GPT自回归路线，采用扩散模型（Diffusion Model）架构，为小参数语言模型开辟新范式",
+            "这是CV领域最高产作者跨界LLM的标志性事件，顶级AI天才正以完全不同视角重塑语言模型设计",
+            "CV与NLP的边界正在加速消融，扩散模型+LLM或将成为端侧部署的新主流技术路线",
+        ],
+        "links": [
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
+            {"url": "https://zhuanlan.zhihu.com/p/2010476815681071043", "source": "知乎"},
+        ]
+    },
+    {
+        "title": "🔥 Cerebras冲刺350亿美元估值IPO：OpenAI签200亿美元算力大单力挺",
+        "tag": "AI芯片 · 资本",
+        "highlights": [
+            "英伟达最强挑战者Cerebras（股票代码CBRS）IPO定价区间一路上调，最新目标融资48亿美元，估值直奔350亿美元",
+            "OpenAI与Cerebras签署750兆瓦算力合同（相当于一座中型核电站），交易总价值超200亿美元",
+            "英伟达在中国AI加速器市场份额已从两年前80%跌至0%，而黄仁勋正通过投资AI御三家（日均烧钱20亿美元）维持生态",
+            "Cerebras若成功IPO，将成为2026年全球最大IPO，标志着AI算力从英伟达一家独大走向多元竞争",
+        ],
+        "links": [
+            {"url": "https://news.qq.com/rain/a/20260511A05ROX00", "source": "腾讯新闻"},
+            {"url": "https://news.qq.com/rain/a/20260509A04A7H00", "source": "腾讯新闻"},
+        ]
+    },
+    {
+        "title": "🔥 浙大校友突破32年拉姆齐数下界：AI再次攻克数学圣杯",
+        "tag": "AI for Science",
+        "highlights": [
+            "浙江大学校友团队利用AI成功突破困扰数学界长达32年的经典难题——拉姆齐数下界",
+            "这是继AlphaProof解决IMO竞赛题后，AI在纯数学领域的又一次里程碑式突破",
+            "拉姆齐数问题被称为组合数学「皇冠上的明珠」，其求解难度极高，此次突破为AI for Science再添重量级注脚",
+            "AI正在从「辅助工具」升级为「数学合作者」，理论与算法的共生关系正在被AI重新定义",
+        ],
+        "links": [
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
+        ]
+    },
+]
+
+industry_news = [
+    {
+        "title": "🤖 OpenAI与Anthropic同日牵手华尔街：驻场AI时代正式开启",
+        "tag": "企业服务 · 资本",
+        "highlights": [
+            "OpenAI获TPG、博枫、Advent、贝恩资本逾40亿美元，成立部署公司，收购Tomoro引入150名工程师派驻企业",
+            "Anthropic同日牵手黑石、Hellman & Friedman、高盛，成立类似公司，合资总额15亿美元",
+            "AI巨头战略路径收敛：从卖API升级为卖「驻场解决方案」，Palantir模式成为新模板",
+            "这一转变意味着AI的商业化从「技术授权」进入「执行力交付」阶段，工程师驻场服务成标配",
+        ],
+        "links": [
+            {"url": "https://news.qq.com/rain/a/20260505A06ARJ00", "source": "腾讯新闻"},
+            {"url": "https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml", "source": "新浪财经"},
+        ]
+    },
+    {
+        "title": "🤖 OpenClaw重磅更新：可看屏幕、操作鼠标键盘，360发现23个安全漏洞",
+        "tag": "AI Agent · 安全",
+        "highlights": [
+            "OpenClaw低调更新重磅版本，AI Agent首次具备完整屏幕感知和鼠标键盘操作能力，真正成为「数字员工」",
+            "荣耀宣布为OpenClaw打造硬件生态宇宙，补足AI Agent长期生长的硬件短板，形成软硬一体化闭环",
+            "360安全团队发布OpenClaw生态安全报告，累计发现23个独立安全漏洞，AI Agent风险进入自动化审计阶段",
+            "AI Agent正从「聊天助手」进化为「执行代理」，但安全边界的划定已成为行业迫在眉睫的挑战",
+        ],
+        "links": [
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
+            {"url": "https://aitoolsrecap.com/Blog/ai-news-may-2026", "source": "AIToolsRecap"},
+        ]
+    },
+    {
+        "title": "🤖 阿里千问与淘宝全面打通：业界首个AI购物全链路闭环落地",
+        "tag": "电商 · AI落地",
+        "highlights": [
+            "通义千问App更新至6.9.1版本，内置AI购物助手，用户可直接在千问内完成商品挑选、对比、下单全流程",
+            "支持复杂条件精准筛选、模糊需求智能理解、场景化组合推荐，甚至能主动识别「智商税」商品",
+            "这是国内大厂首次在C端App中实现从「搜索→决策→购买」的全链路AI购物体验",
+            "电商竞争从「平台流量」进入「AI决策代理」时代，用户只需表达需求，AI全程代劳",
+        ],
+        "links": [
+            {"url": "https://find-aiverse.com/zh/news/", "source": "AI快讯"},
+            {"url": "https://ai-bot.cn/daily-ai-news/", "source": "AI工具集"},
+        ]
+    },
+    {
+        "title": "🤖 中国移动连发三大AI产品：MoMA聚合平台+MobileClaw+AI云电脑",
+        "tag": "运营商 · 平台",
+        "highlights": [
+            "中国移动一口气发布MobileClaw桌面AI办公智能体、MoMA大模型聚合平台及移动AI云电脑",
+            "MobileClaw支持电话交互式AI，首次将运营商核心能力（语音/短信/电话）与大模型深度融合",
+            "同步推出AI-eSIM卡及万亿级Token服务体验包，运营商正式以「AI基础设施」角色入局",
+            "运营商手握用户通信数据、计费通道和网络资源，在AI时代找到了差异化卡位",
+        ],
+        "links": [
+            {"url": "https://find-aiverse.com/zh/news/", "source": "AI快讯"},
+        ]
+    },
+    {
+        "title": "🤖 火山引擎推出Agent套餐包：Doubao+Seedance+Seedream一站聚合",
+        "tag": "字节 · 生态",
+        "highlights": [
+            "火山引擎Agent Plan首次将字节自研Doubao-Seed、Seedance（视频）、Seedream（图像）全系列模型打包",
+            "同时聚合GLM-5.1、Kimi-K2.6等主流模型，内置联网搜索、Embedding等工具，适配Claude Code、OpenClaw等平台",
+            "字节正以「模型超市+工具链」模式正面竞争阿里云和百度智能云的企业Agent市场",
+            "国内云厂商正式进入「模型全家桶」竞争时代，企业选型从比单模型性能转向比生态完整性",
+        ],
+        "links": [
+            {"url": "https://find-aiverse.com/zh/news/", "source": "AI快讯"},
+        ]
+    },
+]
+
+insights = [
+    {
+        "title": "💡 洞察一：AI大厂「分拆潮」来袭，估值重塑成为2026年主旋律",
+        "tag": "资本趋势",
+        "content": "快手分拆可灵AI、百度递表昆仑芯、阶跃星辰和月之暗面竞相融资——中国AI大厂正批量将高估值AI业务从低PE主业中剥离。这一模式本质上是对「AI估值溢价」的争夺：当母公司被资本市场以传统互联网公司定价时，将AI业务独立后，便能在另一套估值体系（收入倍数而非用户增长）中获得更高定价。2026年将是AI分拆上市元年。",
+        "links": [
+            {"url": "https://news.qq.com/rain/a/20260512A05J8M00", "source": "腾讯新闻"},
+        ]
+    },
+    {
+        "title": "💡 洞察二：OpenClaw「长手长脚」标志AI Agent从工具进化为员工",
+        "tag": "产品趋势",
+        "content": "OpenClaw最新版本具备屏幕感知和键鼠操作能力，配合荣耀的硬件生态，标志着AI Agent从「对话助手」进化为真正的「数字员工」。360安全报告发现23个漏洞则揭示硬币的另一面：当AI能自主操作电脑时，安全边界必须从模型层扩展到行为层。2026年下半年，AI Agent安全审计将成为与代码安全同等重要的行业标配。",
+        "links": [
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
+        ]
+    },
+    {
+        "title": "💡 洞察三：何恺明「扩散LLM」挑战自回归正统，CV天才倒逼NLP革命",
+        "tag": "技术范式",
+        "content": "ResNet作者何恺明不走GPT路线、用扩散模型做语言建模，是2026年最具符号意义的技术事件。它意味着NLP领域正在被「外部视角」重新审视——当CV领域的顶级天才以完全不同的第一性原理切入LLM，自回归一家独大的格局或将动摇。若扩散LLM能在低参数下实现接近GPT的能力，端侧部署的格局将被彻底改写。",
+        "links": [
+            {"url": "https://www.qbitai.com/", "source": "量子位"},
+        ]
+    },
+    {
+        "title": "💡 洞察四：从「卖API」到「卖驻场」，AI商业化进入执行力竞争时代",
+        "tag": "商业模式",
+        "content": "OpenAI和Anthropic同日成立部署合资公司、招募驻场工程师，标志着AI商业化从「技术授权」时代进入「执行力交付」时代。API是让客户自己用好AI；驻场服务是帮客户用好AI——两者之间隔着一整个执行力鸿沟。这意味着AI巨头需要从「模型公司」转型为「咨询+执行」公司，Palantir正是他们参照的模板。",
+        "links": [
+            {"url": "https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml", "source": "新浪财经"},
+        ]
+    },
+]
+
+# ========== HTML生成 ==========
+import os
+
+def build_links_html(links):
+    html = '<div class="news-links">'
+    for link in links:
+        html += f'<a href="{link["url"]}" target="_blank" class="news-link">🔗 {link["source"]}</a>'
+    html += '</div>'
+    return html
+
+def build_highlights_html(highlights):
+    html = '<ul class="highlights">'
+    for h in highlights:
+        html += f'<li>{h}</li>'
+    html += '</ul>'
+    return html
+
+html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Daily · {date_str} · 每日AI大模型动态</title>
+<style>
+* {{ margin: 0; padding: 0; box-sizing: border-box; }}
+body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }}
+.container {{ max-width: 860px; margin: 0 auto; padding: 40px 20px; }}
+.header {{ text-align: center; margin-bottom: 48px; padding: 32px; background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%); border-radius: 16px; border: 1px solid #30363d; }}
+.header .date {{ font-size: 13px; color: #7d8590; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }}
+.header h1 {{ font-size: 28px; font-weight: 800; background: linear-gradient(90deg, #58a6ff, #a371f7, #f778ba); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }}
+.header .subtitle {{ color: #7d8590; font-size: 14px; }}
+.section {{ margin-bottom: 40px; }}
+.section-title {{ display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #30363d; }}
+.section-title .emoji {{ font-size: 20px; }}
+.section-title.breaking {{ border-bottom-color: #f85149; color: #f85149; }}
+.section-title.industry {{ border-bottom-color: #3fb950; color: #3fb950; }}
+.section-title.insight {{ border-bottom-color: #d29922; color: #d29922; }}
+.news-card {{ background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: all 0.2s; }}
+.news-card:hover {{ border-color: #58a6ff; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(88,166,255,0.1); }}
+.card-title {{ font-size: 17px; font-weight: 700; color: #e6edf3; margin-bottom: 8px; line-height: 1.5; }}
+.card-tag {{ display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: rgba(88,166,255,0.15); color: #58a6ff; margin-bottom: 14px; letter-spacing: 0.5px; }}
+.highlights {{ list-style: none; margin-bottom: 16px; }}
+.highlights li {{ position: relative; padding-left: 20px; margin-bottom: 10px; color: #b1bac4; font-size: 14px; line-height: 1.7; }}
+.highlights li::before {{ content: "▸"; position: absolute; left: 0; color: #58a6ff; font-size: 12px; top: 3px; }}
+.news-links {{ display: flex; flex-wrap: wrap; gap: 8px; }}
+.news-link {{ display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #58a6ff; text-decoration: none; padding: 4px 12px; border: 1px solid rgba(88,166,255,0.3); border-radius: 6px; transition: all 0.2s; }}
+.news-link:hover {{ background: rgba(88,166,255,0.1); border-color: #58a6ff; }}
+.insight-card {{ background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; margin-bottom: 16px; }}
+.insight-card .card-tag {{ background: rgba(210,153,34,0.15); color: #d29922; }}
+.insight-content {{ color: #b1bac4; font-size: 14px; line-height: 1.9; }}
+.footer {{ text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #30363d; color: #7d8590; font-size: 12px; }}
+.footer a {{ color: #58a6ff; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="date">AI Daily Report</div>
+    <h1>🤖 每日AI大模型动态</h1>
+    <div class="subtitle">{date_str} · OpenAI · Anthropic · Google DeepMind · DeepSeek · 通义千问 · 豆包 · 文心一言</div>
+  </div>
+'''
+
+# 今日重磅
+html += '<div class="section">\n<div class="section-title breaking"><span class="emoji">🔥</span>今日重磅</div>\n'
+for item in breaking_news:
+    html += f'''
+  <div class="news-card">
+    <div class="card-tag">{item["tag"]}</div>
+    <div class="card-title">{item["title"]}</div>
+    {build_highlights_html(item["highlights"])}
+    {build_links_html(item["links"])}
+  </div>
+'''
+html += '</div>\n'
+
+# 行业动态
+html += '<div class="section">\n<div class="section-title industry"><span class="emoji">🤖</span>行业动态</div>\n'
+for item in industry_news:
+    html += f'''
+  <div class="news-card">
+    <div class="card-tag">{item["tag"]}</div>
+    <div class="card-title">{item["title"]}</div>
+    {build_highlights_html(item["highlights"])}
+    {build_links_html(item["links"])}
+  </div>
+'''
+html += '</div>\n'
+
+# 核心洞察
+html += '<div class="section">\n<div class="section-title insight"><span class="emoji">💡</span>核心洞察</div>\n'
+for item in insights:
+    html += f'''
+  <div class="insight-card">
+    <div class="card-tag">{item["tag"]}</div>
+    <div class="card-title">{item["title"]}</div>
+    <div class="insight-content">{item["content"]}</div>
+    {build_links_html(item["links"])}
+  </div>
+'''
+html += '</div>\n'
+
+html += f'''
+  <div class="footer">
+    <p>📡 数据来源：量子位 · 36氪 · 腾讯新闻 · 新浪财经 · AI快讯 · AIToolsRecap · 机器之心</p>
+    <p style="margin-top:8px;">📺 <a href="https://flystray.github.io/ai-news/reports/{date_str}-with-links.html" target="_blank">在线阅读：https://flystray.github.io/ai-news/reports/{date_str}-with-links.html</a></p>
+  </div>
+</div>
+</body>
+</html>'''
+
+out_path = f"reports/{date_str}-with-links.html"
+with open(out_path, 'w', encoding='utf-8') as f:
+    f.write(html)
+print(f"✅ 报告已生成: {out_path}")
