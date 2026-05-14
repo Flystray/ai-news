@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Daily Report - 2026年5月14日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%);
+    min-height: 100vh;
+    color: #e8e8f0;
+    padding: 40px 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 42px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .header .date {
+    font-size: 15px;
+    color: #8888aa;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .section {
+    margin-bottom: 44px;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .section-title .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .section-title h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .section-breathing .icon { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+  .section-industry .icon { background: linear-gradient(135deg, #54a0ff, #2e86de); }
+  .section-insight .icon { background: linear-gradient(135deg, #f9ca24, #f0932b); }
+  .news-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .news-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+  }
+  .news-card.breaking::before { background: linear-gradient(180deg, #ff6b6b, #ee5a24); }
+  .news-card.industry::before { background: linear-gradient(180deg, #54a0ff, #2e86de); }
+  .news-card.insight::before { background: linear-gradient(180deg, #f9ca24, #f0932b); }
+  .news-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+  .news-card.breaking:hover { box-shadow: 0 8px 32px rgba(255,107,107,0.15); }
+  .news-card.industry:hover { box-shadow: 0 8px 32px rgba(84,160,255,0.15); }
+  .news-card.insight:hover { box-shadow: 0 8px 32px rgba(249,202,36,0.15); }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .card-header .tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .breaking .tag { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+  .industry .tag { background: rgba(84,160,255,0.2); color: #54a0ff; }
+  .insight .tag { background: rgba(249,202,36,0.2); color: #f9ca24; }
+  .news-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .news-card p {
+    font-size: 14px;
+    color: #9999bb;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .news-card .meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #6666888;
+  }
+  .news-card .source {
+    background: rgba(255,255,255,0.06);
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #8888aa;
+  }
+  .news-card a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+    font-size: 12px;
+  }
+  .news-card a:hover { color: #8fa0ff; text-decoration: underline; }
+  .highlight-box {
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .highlight-box h4 {
+    color: #667eea;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .highlight-box p {
+    color: #aaaacc;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: #555577;
+    font-size: 12px;
+  }
+  .footer a {
+    color: #667eea;
+    text-decoration: none;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) {
+    .header h1 { font-size: 28px; }
+    .news-card h3 { font-size: 16px; }
+    .news-card { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-badge">AI Daily Report</div>
+    <h1>AI 每日动态</h1>
+    <p class="date">📅 2026 年 5 月 14 日 · 周四</p>
+  </div>
+
+  <!-- 今日重磅 -->
+  <div class="section section-breathing">
+    <div class="section-title">
+      <div class="icon">🔥</div>
+      <h2>今日重磅</h2>
+    </div>
+
+    <div class="news-card breaking">
+      <div class="card-header">
+        <span class="tag">重磅</span>
+      </div>
+      <h3>谷歌 Android Show 发布 Gemini Intelligence：AI 深度重构 Android 17</h3>
+      <p>在 Google I/O 2026（5月19日）前夕，谷歌举办 Android Show 线上发布会，正式推出统一 AI 品牌 <strong>Gemini Intelligence</strong>，将旗下所有 AI 能力打包并与高端硬件绑定——首批仅支持最新 Pixel 和三星 Galaxy 系列。核心功能包括：<strong>Chrome Auto Browse</strong>（AI 自动操作网页订餐、填表）、<strong>Rambler</strong>（Gboard AI 语音降噪输出）、<strong>Create My Widget</strong>（自然语言生成自定义桌面组件）。同时推出全新笔电品类 Googlebooks，搭载 Magic Pointer 指向交互功能，合作厂商包括 Acer、华硕、戴尔、惠普、联想。Android 17 正式版同期发布。这是 Android 历史上 AI 整合最深度的一次，标志操作系统从"被动工具"向"主动智能系统"的战略转型。</p>
+      <div class="meta">
+        <span class="source">来源：新浪财经 / TechNode</span>
+        <a href="https://finance.sina.com.cn/stock/t/2026-05-13/doc-inhxspmy9683544.shtml" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card breaking">
+      <div class="card-header">
+        <span class="tag">重磅</span>
+      </div>
+      <h3>腾讯 Q1 财报：AI 投入 370 亿、混元 Hy3 霸榜，马化腾称"乱抢地盘会失败"</h3>
+      <p>腾讯发布 2026 年 Q1 财报，总营收 1964.58 亿元同比增 9%，净利润 594 亿元同比增 19%。<strong>AI 相关资本开支高达 370 亿元</strong>（约占净利润的 62%），多款新 AI 产品本季度亏损约 88 亿元，但 ToB 营收接近 600 亿。马化腾在财报电话会上表示："一年前上的 AI 船漏水了，乱抢地盘会失败"——强调聚焦与执行力而非盲目扩张。技术层面，混元 Hy3 Preview 已连续三周登顶 OpenRouter 全球榜单，成为中国大模型出海标杆。</p>
+      <div class="meta">
+        <span class="source">来源：新浪财经 / 新智元</span>
+        <a href="https://finance.sina.com.cn/headline/2026-05-14/doc-inhxvayx4161581.shtml" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card breaking">
+      <div class="card-header">
+        <span class="tag">重磅</span>
+      </div>
+      <h3>田渊栋创办 Recursive Superintelligence：融资 6.5 亿美元、估值 46.5 亿美元</h3>
+      <p>Facebook AI 研究院（FAIR）前研究科学家田渊栋联合 7 位顶尖研究者创办 AI 公司 <strong>Recursive Superintelligence</strong>，宣布完成 6.5 亿美元种子轮融资，公司投前估值达 46.5 亿美元（约 315 亿元人民币）。英伟达、AMD 均参投，团队目前不足 30 人，但姚班出身的施天麟等明星成员加盟。公司主攻 AI 递归自我改进（Recursive Self-Improvement）技术，目标是实现 AI 自动化科研。这是 2026 年 AI 学术界创业的最大手笔融资，也是中国背景研究者在 AI 基础研究领域的标志性突破。</p>
+      <div class="meta">
+        <span class="source">来源：AITNT / 新智元</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card breaking">
+      <div class="card-header">
+        <span class="tag">重磅</span>
+      </div>
+      <<h3>中国 AI 六小虎千亿估值竞赛：智谱破 5000 亿港元，DeepSeek 估值 3500 亿</h3>
+      <p>2026 年 5 月，中国大模型头部企业估值全面飙升。智谱（Zhipu AI）港股收盘市值首次突破 <strong>5000 亿港元</strong>，MiniMax 市值达 2566 亿港元，DeepSeek 传估值 3500 亿元人民币。与此同时，Anthropic 正寻求新一轮至少 300 亿美元融资，投前估值超过 9000 亿美元。英伟达同期宣布 2026 年对 AI 产业承诺总投资超 453 亿美元（3080 亿元人民币），投资覆盖 AI 基础设施、新云和大模型三大领域，接近 DeepSeek 整体估值。全球 AI 资本军备竞赛进入白热化阶段。</p>
+      <div class="meta">
+        <span class="source">来源：新浪财经 / 凤凰财经</span>
+        <a href="https://finance.ifeng.com/c/8t54jt65I40" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 行业动态 -->
+  <div class="section section-industry">
+    <div class="section-title">
+      <div class="icon">⚡</div>
+      <h2>行业动态</h2>
+    </div>
+
+    <div class="news-card industry">
+      <div class="card-header">
+        <span class="tag">产品</span>
+      </div>
+      <h3>GPT-5.6 曝光：OpenAI 下月发布、Codex ultrafast 提速 2-3 倍</h3>
+      <p>据多方爆料，OpenAI GPT-5.6 已进入内部测试阶段，预计将于下月正式发布。同时，OpenAI 本周四将上线 <strong>Codex ultrafast 模式</strong>，推理速度提升 2-3 倍。为争夺开发者市场，OpenAI 推出换平台奖励计划——迁移自 Claude Code 等竞品可获 2 个月免费使用权，已吸引 2000 名开发者响应。Claude Code 同期紧急推出 goal 模式，不完成任务不许停止，逼平 AI 编程工具终极痛点。</p>
+      <div class="meta">
+        <span class="source">来源：AITNT</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card industry">
+      <div class="card-header">
+        <span class="tag">开源</span>
+      </div>
+      <h3>高德 × 阿里千问开源 AGenUI：业内首个 iOS/Android/鸿蒙三端原生 AI 生成框架</h3>
+      <p>高德与阿里千问 C 端应用团队联合开源 <strong>AGenUI</strong>——业界首个支持 iOS、Android、鸿蒙三端融合的端云一体原生 AI 界面生成框架。该框架实现"一套代码适配多端"，让 AI 可直接生成可交互的原生界面，开发者无需编写 UI 代码即可通过自然语言描述生成完整 App 页面。目前已在 GitHub 开源，被认为是中国大厂在 AI 原生开发工具链上的重要突破。</p>
+      <div class="meta">
+        <span class="source">来源：AITNT</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card industry">
+      <div class="card-header">
+        <span class="tag">产品</span>
+      </div>
+      <h3>微信聊天记录可喂给 AI 元宝：支持整理信息、规划旅行、生成回复</h3>
+      <p>腾讯宣布微信支持一键转发最多 100 条聊天记录给 AI 助手元宝，AI 可帮助用户整理信息、规划旅行、生成回复、梳理工作，对话结束后不保存记录。这是腾讯首次将微信核心社交数据与 AI 助手深度打通，也是中国超级 App 中最具代表性的"AI + 社交"融合尝试，标志着 AI 开始全面嵌入中国最大社交平台的日常使用场景。</p>
+      <div class="meta">
+        <span class="source">来源：新浪AI热点</span>
+        <a href="https://k.sina.com.cn/article_7857201856_1d45362c001905frok.html" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card industry">
+      <div class="card-header">
+        <span class="tag">开源</span>
+      </div>
+      <h3>蚂蚁灵波开源 LingBot-VLA：150 条示教数据即可适配新机器人</h3>
+      <p>蚂蚁集团旗下灵波科技开源具身基座模型 <strong>LingBot-VLA</strong> 的真机后训练工具链，核心技术突破在于：仅需 150 条示教数据即可完成新机器人的技能适配，训练效率是主流框架的 1.5-2.8 倍，大幅降低人形机器人从实验室到实际场景的部署成本。该工具链代码已在 GitHub 发布，标志着中国科技大厂在具身智能开源生态建设上迈出关键一步。</p>
+      <div class="meta">
+        <span class="source">来源：AITNT</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card industry">
+      <div class="card-header">
+        <span class="tag">产品</span>
+      </div>
+      <h3>阿里健康发布「氢离子」：面向 500 万中国医生的低幻觉循证医学 AI</h3>
+      <p>阿里健康于 5 月 13 日正式发布面向临床医生的医学 AI 产品「<strong>氢离子</strong>」，主打低幻觉率、高循证医学，所有回答均提供权威出处并支持一键溯源。产品发布后增长迅猛，有医生 88 天内登录 193 次。阿里健康计划将氢离子服务覆盖中国 500 万执业医师，将其打造为临床辅助决策的"AI 神助攻"，标志着医疗 AI 从通用助手向专业垂直场景的深度落地。</p>
+      <div class="meta">
+        <span class="source">来源：新浪AI热点 / AITNT</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 核心洞察 -->
+  <div class="section section-insight">
+    <div class="section-title">
+      <div class="icon">💡</div>
+      <h2>核心洞察</h2>
+    </div>
+
+    <div class="news-card insight">
+      <div class="card-header">
+        <span class="tag">洞察</span>
+      </div>
+      <h3>AI 商业价值度量标准重构：李彦宏首提 DAA（日活智能体数）概念</h3>
+      <p>百度创始人李彦宏在 Create 2026 大会上公开提出 <strong>DAA（Daily Agent Actions）</strong>概念，认为在 AI 时代，传统的 DAU（日活用户数）和 Token 消耗量已不能准确衡量 AI 产品价值，真正重要的是"智能体每日实际完成任务数"。大会后百度美股上涨超 7%，反映出市场对 AI 价值量化新范式的高度关注。这一概念的提出，标志 AI 行业从"比参数规模"到"比实际产出"的价值评判体系转变。</p>
+      <div class="meta">
+        <span class="source">来源：AITNT / 36氪</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card insight">
+      <div class="card-header">
+        <span class="tag">洞察</span>
+      </div>
+      <h3>超级 App 全面 AI 化：微信聊天记录喂 AI 标志"AI 原生社交"时代开启</h3>
+      <p>腾讯将微信聊天记录与元宝 AI 打通，是中国 AI 行业一个标志性事件。微信作为中国日活 10 亿+ 的超级 App，此次 AI 升级意味着：AI 不再是独立应用，而是深度嵌入日常社交、信息整理和决策辅助的底层能力。这也呼应了马化腾"AI 船漏水"的判断——大厂们正在从"做 AI 产品"转向"让现有产品 AI 化"，以既有流量优势建立 AI 时代的护城河。</p>
+      <div class="meta">
+        <span class="source">来源：新浪AI热点</span>
+        <a href="https://k.sina.com.cn/article_7857201856_1d45362c001905frok.html" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card insight">
+      <div class="card-header">
+        <span class="tag">洞察</span>
+      </div>
+      <h3>百度秒哒 3.0 让 8 岁小学生做 App：AI 开发进入"全民时代"</h3>
+      <p>百度在 Create 2026 大会上发布的秒哒 3.0，实现自然语言生成 iOS/Android 完整 App，甚至有 8 岁小学生使用后成功将创意变成可运行应用。这一进展标志着 AI 应用开发门槛已降至历史最低点。与此前需要专业开发者的模式相比，AI 原生开发工具正在重塑整个软件行业的生产关系，推动"AI 时代人人都可以是开发者"从概念走向现实。</p>
+      <div class="meta">
+        <span class="source">来源：AITNT</span>
+        <a href="https://www.aitntnews.com/ainews/zh-CN" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+    <div class="news-card insight">
+      <div class="card-header">
+        <span class="tag">洞察</span>
+      </div>
+      <h3>从"比模型"到"比干活"：医院 AI Agent 数据洞察效率提升 92%</h3>
+      <p>近期多地医院密集上线 AI Agent 形态的运营管理系统，实现数据洞察效率提升 92%，从"有没有大模型"转向"能不能干活"的采购逻辑。这一趋势不仅在医疗领域出现，在金融、政务、零售等多个行业同步展开。AI 采购评估标准正从技术指标（参数、基准测试分数）转向实际业务指标（任务完成率、成本节省、决策效率），预示着 AI 企业服务市场进入深水区。</p>
+      <div class="meta">
+        <span class="source">来源：新浪AI热点</span>
+        <a href="https://k.sina.com.cn/article_7857201856_1d45362c001905frok.html" target="_blank">查看原文 →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>📡 AI 每日动态 · 2026年5月14日</p>
+    <p style="margin-top: 6px;">
+      Powered by <a href="https://Flystray.github.io/ai-news" target="_blank">AI News</a>
+      · <a href="https://Flystray.github.io/ai-news/reports/2026-05-14-with-links.html">在线阅读</a>
+      · 每早 9:00 自动更新
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
