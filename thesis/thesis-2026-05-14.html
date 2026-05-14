@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.5.14｜When2Tool · LLM Agent 其实知道什么时候该调用工具</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;color:#333;line-height:1.8;">
+
+  <div style="max-width:680px;margin:0 auto;padding:20px 16px;">
+
+    <!-- 文章标题 -->
+    <div style="background:#fff;border-radius:12px;padding:28px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 16px 0;line-height:1.5;">
+        2026.5.14｜When2Tool · LLM Agent 其实知道什么时候该调用工具
+      </h1>
+      <div style="font-size:13px;color:#888;margin-bottom:4px;">✍️ fly的AI学习</div>
+      <div style="font-size:13px;color:#aaa;">论文解读 · 国外 · 阅读时长 8 分钟</div>
+    </div>
+
+    <!-- 论文信息表 -->
+    <div style="background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <tr>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#666;width:90px;">论文标题</td>
+          <td style="padding:8px 0;border-top:1px solid #eee;color:#333;font-weight:600;">LLM Agents Already Know When to Call Tools -- Even Without Reasoning</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#666;">作者</td>
+          <td style="padding:8px 0;color:#333;">Chung-En Sun, Linbo Liu, Ge Yan, Zimo Wang, Tsui-Wei Weng（UC San Diego、Amazon AWS）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#666;">发表日期</td>
+          <td style="padding:8px 0;color:#333;">2026-05-10</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#666;">来源</td>
+          <td style="padding:8px 0;color:#333;"><a href="https://arxiv.org/abs/2605.09252" style="color:#4a90d9;text-decoration:none;">arXiv cs.CL →</a></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#666;">代码</td>
+          <td style="padding:8px 0;color:#333;"><a href="https://github.com/Trustworthy-ML-Lab/when2tool" style="color:#4a90d9;text-decoration:none;">GitHub →</a></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#666;border-bottom:1px solid #eee;">标签</td>
+          <td style="padding:8px 0;color:#333;border-bottom:1px solid #eee;">LLM Agent · 工具调用 · 隐藏状态 · 线性探针 · 效率优化</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 这篇论文在说什么？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 14px 0;padding-left:12px;border-left:4px solid #e74c3c;">这篇论文在说什么？</h2>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">你有没有发现一个现象：给 LLM 接上工具之后，它变得特别"爱用工具"——哪怕问它"1+1等于几"，它都可能先调一下计算器再回答。</p>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">来自 UC San Diego 和 Amazon AWS 的团队研究了这个问题，他们的结论很直接：<strong>模型其实心里清楚该不该调工具，只是嘴上说不好</strong>。</p>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">具体来说，他们做了三件事：</p>
+      <ol style="margin:0 0 14px 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:6px;"><strong>造了个基准测试叫 When2Tool</strong>——18 个环境、3 个难度级别，专门测试"什么时候该用工具"这个决策</li>
+        <li style="margin-bottom:6px;"><strong>发现现有方法都不行</strong>——不管是改提示词还是让它先推理再行动，效果都很粗糙</li>
+        <li><strong>提出 Probe&Prefill 方法</strong>——从模型的隐藏状态里直接读出"要不要用工具"的信号。结果：减少 48% 的无效工具调用，准确率只掉了 1.7%</li>
+      </ol>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2605.09252v1/x1.png" alt="When2Tool总览图" style="max-width:100%;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <p style="font-size:12px;color:#999;margin-top:8px;">*图源：原文 Figure 1 — 基准设计（左）、基线对比（中）、Probe&Prefill 方法（右）*</p>
+      </div>
+    </div>
+
+    <!-- 为什么要关注？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 14px 0;padding-left:12px;border-left:4px solid #f39c12;">为什么要关注？</h2>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">这个问题太真实了。现在几乎所有 AI Agent 产品都接了工具——搜索、计算器、API 调用、数据库查询……但每次工具调用都有成本：</p>
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:6px;"><strong>API 费用</strong>——GPT-4o 每次调用几美分到几十美分不等</li>
+        <li style="margin-bottom:6px;"><strong>延迟开销</strong>——多一次网络往返就是多几百毫秒到几秒等待</li>
+        <li><strong>Token 消耗</strong>——工具返回的结果要塞进上下文</li>
+      </ul>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">更麻烦的是，现有的工具调用 benchmark 基本都只测"能不能正确使用工具"，完全不关心<strong>"是不是该用工具"</strong>。这导致一个问题被长期忽视：模型在能直接回答的问题上乱调工具，白白浪费资源。</p>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">这篇论文是<strong>第一个系统性研究这个问题的工作</strong>，而且给出的方案极其轻量——不需要微调、不需要额外训练模型、推理开销不到 1ms。对任何做 Agent 产品的人来说，这都是实打实的省钱利器。</p>
+    </div>
+
+    <!-- 核心方法 -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 14px 0;padding-left:12px;border-left:4px solid #3498db;">核心方法</h2>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">关键思路：模型"心里有数"</h3>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">整篇论文最核心的发现可以用一句话概括：</p>
+
+      <blockquote style="margin:14px 0;padding:12px 16px;background:#f8f9fa;border-left:4px solid #3498db;font-style:italic;font-size:14px;color:#555;border-radius:0 6px 6px 0;">
+        工具必要性（要不要调工具）的信息，已经编码在 LLM 生成第一个 token 之前的隐藏状态里了，而且可以被一个简单的线性分类器以 0.89-0.96 的 AUROC 解码出来。
+      </blockquote>
+
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">换句话说，模型在还没开口说话的时候就已经"知道"了答案——但它生成的时候不一定按这个知识行动。</p>
+
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;font-weight:600;">他们设计了 When2Tool 基准测试，包含 18 个环境，分为三大类：</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+        <thead>
+          <tr style="background:#f0f4f8;">
+            <th style="padding:10px 12px;text-align:left;border:1px solid #ddd;color:#2c3e50;">类别</th>
+            <th style="padding:10px 12px;text-align:left;border:1px solid #ddd;color:#2c3e50;">核心问题</th>
+            <th style="padding:10px 12px;text-align:left;border:1px solid #ddd;color:#2c3e50;">典型例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;font-weight:600;">A: 计算规模</td>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#444;">我能心算出来吗？</td>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#444;">Easy: 20+20 → Hard: 10¹² × 10¹¹</td>
+          </tr>
+          <tr style="background:#fafbfc;">
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;font-weight:600;">B: 知识边界</td>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#444;">我训练数据里有这个吗？</td>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#444;">Easy: 法国首都 → Hard: 合成虚构实体查询</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;font-weight:600;">C: 执行追踪</td>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#444;">我能可靠追踪执行过程吗？</td>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#444;">Easy: print(2+3) → Hard: 20次迭代DP追踪</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">为什么 Prompt-only 和 Reasoning 都不行？</h3>
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;">他们先试了两大类朴素方法：</p>
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;"><strong>Prompt-only</strong>：在提示词里告诉模型"尽量别用工具"。结果简单任务确实少调了，但困难任务也跟着少调——因为模型分不清哪些该省哪些不该省。</p>
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;"><strong>Reason-then-Act</strong>：让模型先写一段推理分析需不需要工具再决定是否调用。听起来很合理？实际效果很差——特别是在 Llama-3.3-70B 上，Reason-then-Act 让准确率从 83.1% 直接跌到 47.9%。模型推理完了反而更乱了。</p>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2605.09252v1/figures/fig3_baselines_manuallabel.png" alt="基线方法对比" style="max-width:100%;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <p style="font-size:12px;color:#999;margin-top:8px;">*图源：原文 Figure 3 — 不同难度下准确率 vs 工具调用次数，Reason-then-Act（红色）在Hard任务表现糟糕*</p>
+      </div>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">Probe&Prefill：从隐藏状态"读心"</h3>
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;">既然模型隐藏状态里已经有信号了，为什么不直接读出来？Probe&Prefill 分三步走：</p>
+      <ol style="margin:0 0 14px 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:8px;"><strong>Step 1 提取隐藏状态</strong>：对输入跑一次前向传播，取最后一个 token 在所有层的隐藏状态（和获取 KV cache 同步完成）</li>
+        <li style="margin-bottom:8px;"><strong>Step 2 线性探针预测</strong>：训练一个带 L2 正则的逻辑回归，输出"需要工具"的概率 p，900 个样本 CPU 秒级训练完</li>
+        <li><strong>Step 3 预填充引导</strong>：根据探针结果塞一句引导句（如 "I can solve this directly without using a tool."），模型顺着引导继续生成</li>
+      </ol>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">探针到底有多准？</h3>
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;">AUROC 0.89-0.96 是什么概念？基本上意味着探针猜得比模型自己说的还准：</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+        <thead>
+          <tr style="background:#f0f4f8;">
+            <th style="padding:8px 12px;text-align:left;border:1px solid #ddd;color:#2c3e50;">模型</th>
+            <th style="padding:8px 12px;text-align:center;border:1px solid #ddd;color:#2c3e50;">AUROC</th>
+            <th style="padding:8px 12px;text-align:center;border:1px solid #ddd;color:#2c3e50;">准确率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:8px 12px;border:1px solid #ddd;color:#333;">Qwen3-1.7B</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;">0.894</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;">0.847</td></tr>
+          <tr style="background:#fafbfc;"><td style="padding:8px 12px;border:1px solid #ddd;color:#333;">Qwen3-4B-Inst.</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;font-weight:600;">0.948</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;">0.877</td></tr>
+          <tr><td style="padding:8px 12px;border:1px solid #ddd;color:#333;">Qwen3-14B</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;font-weight:600;">0.957</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;font-weight:600;">0.892</td></tr>
+          <tr style="background:#fafbfc;"><td style="padding:8px 12px;border:1px solid #ddd;color:#333;">Llama-3.3-70B-Inst.</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;">0.936</td><td style="padding:8px 12px;text-align:center;border:1px solid #ddd;">0.872</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 效果怎么样？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 14px 0;padding-left:12px;border-left:4px solid #27ae60;">效果怎么样？</h2>
+
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;font-weight:600;">每次节省一次工具调用，你要付出多少准确率的代价？（数字越接近 0 越好）</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+        <thead>
+          <tr style="background:#f0f4f8;">
+            <th style="padding:10px 12px;text-align:left;border:1px solid #ddd;color:#2c3e50;">方法</th>
+            <th style="padding:10px 12px;text-align:center;border:1px solid #ddd;color:#2c3e50;">Easy 成本比</th>
+            <th style="padding:10px 12px;text-align:center;border:1px solid #ddd;color:#2c3e50;">Medium 成本比</th>
+            <th style="padding:10px 12px;text-align:center;border:1px solid #ddd;color:#2c3e50;">Hard 成本比</th>
+            <th style="padding:10px 12px;text-align:center;border:1px solid #ddd;color:#2c3e50;">Overall 成本比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;">Necessary (全调用)</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-3.5</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-17.9</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-44.4</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-16.8</td>
+          </tr>
+          <tr style="background:#fafbfc;">
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;">No Tool (禁用工具)</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-25.2</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-36.9</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-60.4</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">-40.5</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;">Prompt-only (最优)</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">~ -17.3</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">~ -24.3</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">~ -58.4</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;">~ -33.3</td>
+          </tr>
+          <tr style="background:#e8f5e9;">
+            <td style="padding:10px 12px;border:1px solid #ddd;color:#333;font-weight:600;">Probe&Prefill</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;font-weight:600;">-1.6</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;font-weight:600;">-6.2</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;font-weight:600;">-3.4</td>
+            <td style="padding:10px 12px;text-align:center;border:1px solid #ddd;font-weight:600;background:#c8e6c9;">**-3.6**</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin:14px 0 10px 0;font-size:15px;color:#444;">Probe&Prefill 的 overall 成本比只有 <strong>-3.6</strong>，最好的 Prompt-only 基线大概 -17——<strong>差距接近 5 倍</strong>。换个角度说：</p>
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:6px;">想让工具调用减半 → 用 Probe&Prefill 只丢 <strong>1.7%</strong> 准确率</li>
+        <li>用其他方法 → 要么减不到一半，要么准确率暴跌</li>
+      </ul>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2605.09252v1/x2.png" alt="Qwen权衡曲线" style="max-width:100%;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <p style="font-size:12px;color:#999;margin-top:8px;">*图源：原文 Figure 4 — Qwen 系列，绿色为 Probe&Prefill 显著优于灰色 Prompt-only 基线*</p>
+      </div>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2605.09252v1/x3.png" alt="Llama权衡曲线" style="max-width:100%;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <p style="font-size:12px;color:#999;margin-top:8px;">*图源：原图 Figure 5 — Llama 系列（8B/70B），紫色 hard prefill 完全恢复了权衡控制能力*</p>
+      </div>
+
+      <p style="margin:14px 0 0 0;font-size:15px;color:#444;"><strong>额外好消息：</strong>多跳任务中工具调用减少高达 75% 且准确率略有提升；迁移到 Search-o1 搜索引擎基准时减少 20-56% 调用且零准确率损失。</p>
+    </div>
+
+    <!-- 和其他方案比有什么不同？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 14px 0;padding-left:12px;border-left:4px solid #9b59b6;">和其他方案比有什么不同？</h2>
+
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin:14px 0;">
+        <thead>
+          <tr style="background:#f0f4f8;">
+            <th style="padding:9px 10px;text-align:left;border:1px solid #ddd;color:#2c3e50;">维度</th>
+            <th style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#2c3e50;">Prompt 工程</th>
+            <th style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#2c3e50;">SFT 微调</th>
+            <th style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#2c3e50;">Reason-then-Act</th>
+            <th style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#2c3e50;background:#ede7f6;font-weight:600;">Probe&amp;Prefill</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:9px 10px;border:1px solid #ddd;color:#333;">需要训练？</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#e74c3c;">❌</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#e74c3c;">✅ 全量微调</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#e74c3c;">❌</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;background:#ede7f6;">✅ 仅线性探针</td>
+          </tr>
+          <tr style="background:#fafbfc;">
+            <td style="padding:9px 10px;border:1px solid #ddd;color:#333;">修改权重？</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">❌</td>
+            <td style="padding:9px 10px:text-align:center;border:1px solid #ddd;">✅</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">❌</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;background:#ede7f6;">❌</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 10px;border:1px solid #ddd;color:#333;">推理额外开销</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">~0</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">~0</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#e74c3c;">高</td>
+            <td style="padding:9px 10px:text-align:center;border:1px solid #ddd;background:#ede7f6;color:#27ae60;font-weight:600;">&lt; 1ms</td>
+          </tr>
+          <tr style="background:#fafbfc;">
+            <td style="padding:9px 10px;border:1px solid #ddd;color:#333;">工具调用减少</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">~20-30%</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">不稳定</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">~15-25%</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;background:#ede7f6;font-weight:600;">48%</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 10px;border:1px solid #ddd;color:#333;">准确率损失</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;color:#e74c3c;">高</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;">可能提升</td>
+            <td style="padding:9px 10px:text-align:center;border:1px solid #ddd;color:#e74c3c;">高(Llama崩溃)</td>
+            <td style="padding:9px 10px;text-align:center;border:1px solid #ddd;background:#ede7f6;color:#27ae60;font-weight:600;">1.7%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin:14px 0 0 0;font-size:15px;color:#444;">最大的区别在于：<strong>Probe&Prefill 不碰模型本身</strong>。它只是在模型外面挂了一个极小的线性探测器，读取模型本来就有的内部信号。即插即用到任何 LLM 上，不影响原有能力，探针可随时更换。</p>
+    </div>
+
+    <!-- 对开发者意味着什么？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 14px 0;padding-left:12px;border-left:4px solid #1abc9c;">对开发者意味着什么？</h2>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">能不能用？怎么用？</h3>
+      <p style="margin:0 0 10px 0;font-size:15px;color:#444;"><strong>完全可以，而且非常实用。</strong>代码已开源，实现起来也很简单：</p>
+      <ol style="margin:0 0 14px 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:6px;">收集约 1000 个标注样本（模型在无工具条件下能否正确答题）</li>
+        <li style="margin-bottom:6px;">训练一个逻辑回归探针——CPU 秒级完成</li>
+        <li>在你的 Agent pipeline 加一步：输入 → 前向传播 → 探针判断 → 条件性预填充</li>
+      </ol>
+      <p style="margin:0 0 14px 0;font-size:15px;color:#444;">整个流程和获取 KV cache 完全兼容，<strong>不会增加额外的模型前向传播</strong>。</p>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">适用场景</h3>
+      <ul style="margin:0 0 14px 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:6px;"><strong>高频 API 调用的 Agent</strong>——客服机器人、代码助手、数据分析 Agent，每省一次都是真金白银</li>
+        <li style="margin-bottom:6px;"><strong>低延迟要求场景</strong>——减少不必要的网络往返</li>
+        <li style="margin-bottom:6px;"><strong>Token 预算敏感的应用</strong>——长对话下工具返回占大量上下文窗口</li>
+        <li><strong>多步 Agent 流程</strong>——多跳任务中减少中间冗余调用</li>
+      </ul>
+
+      <h3 style="font-size:16px;font-weight:600;color:#2c3e50;margin:18px 0 10px 0;">局限性</h3>
+      <ul style="margin:0 0 0 0;padding-left:20px;font-size:15px;color:#444;">
+        <li style="margin-bottom:6px;">探针依赖针对自己工具集和任务分布的 ~1000 条标注数据</li>
+        <li style="margin-bottom:6px;">当前仅在计算/检索/代码执行类工具上验证，多模态工具待验证</li>
+        <li style="margin-bottom:6px;">Soft prefill 在某些模型上可能被忽略（Llama 需要 hard prefill）</li>
+        <li>仅针对"要不要调工具"决策，不涉及选哪个工具、参数传递等下游问题</li>
+      </ul>
+    </div>
+
+    <!-- 底部署名 -->
+    <div style="text-align:center;padding:20px 0;font-size:14px;color:#999;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </div>
+
+  </div>
+</body>
+</html>
