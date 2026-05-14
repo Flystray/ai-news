@@ -9,6 +9,39 @@
 
 ## 执行记录
 
+### 2026-05-14
+- 执行时间: 2026-05-14 11:37
+- 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.0.121；GitHub push成功）
+- 报告路径: reports/2026-05-14-with-links.html
+- 新闻来源: AITNT / 新浪财经 / 新浪AI热点 / TechNode / 凤凰财经 / 机器之心
+- 步骤1: ✅ 生成精美HTML日报（重磅4条 + 行业5条 + 洞察4条）
+- 步骤2: ✅ HTML已生成（wechat_article.html），推送失败（errcode 40164: IP 115.200.0.121 未在微信白名单）
+- 步骤3: ✅ Git add/commit/push（commit c0de01e）
+- 步骤4: 📋 简报摘要在下方输出（无个人微信API直连能力）
+- 今日重磅:
+  - 谷歌 Android Show 发布 Gemini Intelligence，Android 17 深度 AI 化（Auto Browse/Rambler/Create My Widget/Googlebooks）
+  - 腾讯 Q1 财报：AI 投入 370 亿（占净利润62%），混元 Hy3 Preview 三周霸榜 OpenRouter，马化腾称"乱抢地盘会失败"
+  - 田渊栋创办 Recursive Superintelligence 融资 6.5 亿美元、估值 46.5 亿美元，英伟达/AMD 参投，主攻 AI 递归自我改进
+  - 中国 AI 六小虎千亿竞赛：智谱破 5000 亿港元，DeepSeek 估值 3500 亿，Anthropic 寻求 300 亿美元融资
+- 行业动态:
+  - GPT-5.6 曝光下月发布，Codex ultrafast 提速 2-3 倍，Claude Code 紧急推出 goal 模式
+  - 高德 × 阿里千问开源 AGenUI：业内首个 iOS/Android/鸿蒙三端原生 AI 界面生成框架
+  - 微信聊天记录可一键喂给 AI 元宝，超级 App 全面 AI 化
+  - 蚂蚁灵波开源 LingBot-VLA：150 条示教数据即可适配新机器人
+  - 阿里健康发布「氢离子」：面向 500 万中国医生的低幻觉循证医学 AI
+- 核心洞察:
+  - AI 商业价值度量重构：李彦宏首提 DAA（日活智能体数）概念，百度美股涨超7%
+  - 超级 App 全面 AI 化：微信聊天记录喂 AI 标志"AI 原生社交"时代开启
+  - 百度秒哒 3.0 让 8 岁小学生做 App，AI 开发进入"全民时代"
+  - AI 行业从"比模型"到"比干活"：医院 AI Agent 数据洞察效率提升 92%
+- GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-14-with-links.html
+
+### ⚠️ 待处理：微信IP白名单（持续，需用户手动添加）
+- 需在 mp.weixin.qq.com 后台添加 IP 115.200.0.121 到白名单（注意：IP已多次变更！）
+- 添加后重新运行: C:/Users/YF/.workbuddy/binaries/python/versions/3.13.12/python.exe C:/Users/YF/.workbuddy/skills/wechat-mp/push_draft.py 2026-05-14
+
+---
+
 ### 2026-05-13
 - 执行时间: 2026-05-13 10:43
 - 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.7.35；GitHub网络不可达，本地commit已保存）

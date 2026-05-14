@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tencent/WeKnora · GitHub AI 项目深度介绍 · 2026年05月14日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
+        .container { max-width: 860px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
+        .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card ul { padding-left: 20px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; }
+        .cta { text-align: center; margin-top: 30px; }
+        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a:hover { background: #1e3a5f; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9ff; color: #2d6a9f; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 13px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date-badge">GitHub AI 项目 · 2026年05月14日</div>
+        <h1>Tencent/WeKnora</h1>
+        <p class="subtitle">RAG + Agent + Wiki 三位一体的企业级知识管理框架</p>
+    </div>
+
+    <div class="meta-bar">
+        <span>⭐ 14.9k</span>
+        <span>📝 Go</span>
+        <span>🕐 活跃于 0 天前</span>
+        <span>🔗 <a href="https://github.com/Tencent/WeKnora" target="_blank" style="color:#2d6a9f">Tencent/WeKnora</a></span>
+    </div>
+
+    <div class="topics">
+        <span class="topic">agent</span>
+        <span class="topic">agentic</span>
+        <span class="topic">rag</span>
+        <span class="topic">llm</span>
+        <span class="topic">knowledge-base</span>
+        <span class="topic">vector-search</span>
+        <span class="topic">wiki</span>
+        <span class="topic">golang</span>
+    </div>
+
+    <div class="desc-card">
+        <p>腾讯开源的企业级知识管理框架，将原始文档转换为可查询 RAG、自主推理 Agent 和自维护 Wiki 的一体化解决方案。</p>
+    </div>
+
+    <div class="card">
+        <h2>🚀 核心功能</h2>
+        <ul>
+            <li><strong>三大交互模式</strong>：RAG 快速问答（日常查询）、ReAct Agent（复杂推理）、Wiki Mode（自动生成知识库）</li>
+            <li><strong>多格式文档解析</strong>：支持 PDF、Word、Excel、图片（VLM）、音频（ASR）等 15+ 格式</li>
+            <li><strong>自适应三层分块</strong>：标题感知 / 启发式 / 递归三种策略，文档自动路由</li>
+            <li><strong>MCP 工具集成</strong>：支持 MCP Server 扩展，敏感操作可配置人机审批（Human-in-the-Loop）</li>
+            <li><strong>多源数据同步</strong>：飞书、Notion、语雀等外部平台自动同步</li>
+            <li><strong>多租户隔离</strong>：企业级权限管理，支持按知识库独立配置索引策略</li>
+            <li><strong>全渠道推送</strong>：企业微信、飞书、Slack、Telegram 等 IM 渠道直接问答</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ 技术亮点</h2>
+        <ul>
+            <li><strong>Go 语言后端</strong>：goroutine 轻量级协程，高并发低内存占用，适合企业级高负载场景</li>
+            <li><strong>依赖注入架构</strong>：使用 uber-go/dig 容器，LLM/向量库/存储均可热插拔替换</li>
+            <li><strong>Wiki Mode 独家功能</strong>：从原始文档自动生成 Markdown 知识库 + Neo4j 交互式知识图谱</li>
+            <li><strong>Langfuse 全链路追踪</strong>：Agent 运行、Token 使用、任务流水线可视化监控</li>
+            <li><strong>多向量引擎支持</strong>：pgvector、Qdrant、Milvus、Weaviate 可自由切换</li>
+            <li><strong>20+ 模型厂商</strong>：OpenAI、DeepSeek、Qwen、智谱、混元、Gemini、Ollama 等全面兼容</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>👥 适用人群</h2>
+        <ul>
+            <li><strong>企业知识管理团队</strong>：构建内部知识库、文档问答系统</li>
+            <li><strong>RAG 应用开发者</strong>：快速搭建企业级 RAG 系统，无需从零开发</li>
+            <li><strong>AI 应用集成商</strong>：为客户提供私有化部署的智能知识服务</li>
+            <li><strong>技术团队负责人</strong>：评估开源知识管理方案，选择高性价比技术栈</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>📊 对比分析（WeKnora vs 主流框架）</h2>
+        <table>
+            <tr><th>框架</th><th>WeKnora</th><th>LangChain</th><th>LlamaIndex</th></tr>
+            <tr><td>定位</td><td>RAG + Agent + Wiki</td><td>通用 LLM 应用框架</td><td>索引构建框架</td></tr>
+            <tr><td>部署难度</td><td>⭐⭐ 一键部署</td><td>⭐⭐⭐⭐ 需自行集成</td><td>⭐⭐⭐ 需额外开发</td></tr>
+            <tr><td>文档解析</td><td>⭐⭐⭐⭐⭐ 15+ 格式</td><td>⭐⭐⭐ 需自行实现</td><td>⭐⭐⭐ 基础支持</td></tr>
+            <tr><td>Wiki Mode</td><td>✅ 独家功能</td><td>❌ 不支持</td><td>❌ 不支持</td></tr>
+            <tr><td>Go 后端</td><td>✅ 高并发低内存</td><td>❌ Python only</td><td>❌ Python only</td></tr>
+            <tr><td>前端 UI</td><td>✅ Vue.js 3 完整前端</td><td>❌ 无官方 UI</td><td>❌ 无官方 UI</td></tr>
+            <tr><td>多租户</td><td>✅ 内置支持</td><td>❌ 需自行实现</td><td>❌ 需自行实现</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>⚡ 快速上手</h2>
+        <p><strong>环境要求</strong>：Docker &amp; Docker Compose，4核 CPU / 8GB RAM</p>
+        <div class="quickstart">
+# 克隆项目
+git clone https://github.com/Tencent/WeKnora.git
+cd WeKnora
+
+# 启动所有服务
+docker-compose up -d
+
+# 访问 Web UI
+open http://localhost:3000
+        </div>
+    </div>
+
+    <div class="cta">
+        <a href="https://github.com/Tencent/WeKnora" target="_blank">前往 GitHub 查看完整项目 →</a>
+    </div>
+
+    <div class="footer">
+        <p>fly的AI学习 · 每日精选一个有价值的开源 AI 项目</p>
+    </div>
+</div>
+</body>
+</html>
