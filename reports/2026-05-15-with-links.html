@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-05-15 AI 每日资讯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header .date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 8px 24px;
+            border-radius: 30px; font-size: 14px; font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 42px; font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .header .subtitle { color: #888; font-size: 16px; }
+        .section { margin-bottom: 50px; }
+        .section-title { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #fff; }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        .news-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+        .news-card h3 .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-size: 11px; padding: 4px 10px;
+            border-radius: 12px; font-weight: 500; white-space: nowrap; margin-top: 4px;
+        }
+        .news-card p { color: #aaa; margin-bottom: 15px; font-size: 15px; }
+        .news-card ul { background: rgba(102,126,234,0.1); border-radius: 12px; padding: 16px 20px; margin-bottom: 15px; list-style: none; }
+        .news-card ul li { color: #d0d0ff; margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 14px; }
+        .news-card ul li::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .news-card ul li:last-child { margin-bottom: 0; }
+        .news-card .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .news-card .link { display: inline-flex; align-items: center; gap: 6px; color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .news-card .link:hover { color: #8fa0ff; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 0; color: #666; font-size: 13px; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .insight-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .insight-item .num { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .insight-item p { color: #ccc; font-size: 15px; margin-top: 4px; }
+        .refresh-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 14px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.4); transition: all 0.3s ease; }
+        .refresh-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(102,126,234,0.5); }
+        .section-icon { font-size: 28px; }
+        .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">📅 2026-05-15</div>
+            <h1>📰 AI 每日资讯</h1>
+            <p class="subtitle">精选每日 AI / 大模型最新动态 · 所有新闻均带原文链接</p>
+        </div>
+
+        <div id="news-content"></div>
+
+        <button class="refresh-btn" onclick="location.reload()">🔄 刷新新闻</button>
+    </div>
+
+    <script>
+        const newsData = {
+  "breaking_news": [
+    {
+      "title": "🔥 OpenAI 发布 GPT-6：记忆与个性化能力开创 AI 新纪元",
+      "tag": "重磅发布",
+      "highlights": [
+        "历时18个月研发，投入超20亿美元算力（约10万张H100），正式发布新一代旗舰大模型 GPT-6",
+        "核心突破：持久记忆 + 个性化服务，标志 AI 从工具型交互迈向智能体自主执行",
+        "内部将其定义为「AGI 的最后一公里」，正式开启 AI 个性化时代",
+        "GPT-6 代号「Spud」，在多模态推理、长期上下文保持方面实现质的飞跃"
+      ],
+      "links": [
+        {
+          "url": "https://aiproducthub.cn/newsflash/openai-releases-gpt-6-model-memory-personalization-new-era/",
+          "source": "AI产品库"
+        },
+        {
+          "url": "https://devpress.csdn.net/v1/article/detail/160876427",
+          "source": "DevPress"
+        }
+      ]
+    },
+    {
+      "title": "🔥 Anthropic 企业市场首次超越 OpenAI：采用率 34.4% vs 32.3%",
+      "tag": "格局生变",
+      "highlights": [
+        "据 Ramp 平台（覆盖超5万家美国公司）数据：Anthropic 企业付费采用率达 34.4%，首次超越 OpenAI 的 32.3%",
+        "过去12个月，Anthropic 采用率从 9% 飙升至 34.4%，增长近4倍",
+        "新增AI采购中，65% 企业选择 Anthropic，仅 32% 选择 OpenAI；直接对决中约 70% 最终签单 Claude",
+        "企业 AI 市场格局正式生变，Claude 正以「安全可信」差异化定位赢得大客户青睐"
+      ],
+      "links": [
+        {
+          "url": "https://aiproducthub.cn/newsflash/anthropic-surpasses-openai-workplace-adoption-rate-first-time/",
+          "source": "AI产品库"
+        },
+        {
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-05-05/doc-inhwuhis7571096.shtml",
+          "source": "新浪财经"
+        }
+      ]
+    },
+    {
+      "title": "🔥 田渊栋创立 Recursive Superintelligence：6.5亿美元押注「递归进化 AI」",
+      "tag": "明星创业",
+      "highlights": [
+        "Meta AI 研究院田渊栋离职，联合创立 Recursive Superintelligence，融资 6.5 亿美元（约44亿元）",
+        "核心方向：让 AI 自己训练自己——递归自我改进 AI，目标是突破当前 AI 训练范式的上限",
+        "谷歌、英伟达、AMD 等顶级机构参投，估值已达 46.5 亿美元（约315亿元）",
+        "组建8人顶级 AI 科学家团队，聚焦 AI 的「自我进化」能力，剑指 AGI 下一阶段"
+      ],
+      "links": [
+        {
+          "url": "https://www.36kr.com/p/3808752170819081",
+          "source": "36氪"
+        },
+        {
+          "url": "https://www.qbitai.com/2026/05/417468.html",
+          "source": "量子位"
+        }
+      ]
+    },
+    {
+      "title": "🔥 林俊旸（前 Qwen 负责人）创业：估值135亿元，多模态大模型新玩家入场",
+      "tag": "人才流动",
+      "highlights": [
+        "前阿里千问（Qwen）核心负责人林俊旸正式创业，新公司估值已达 135 亿元",
+        "创业方向聚焦多模态大模型，这是中国大模型领域最高估值的单次人才创业案例",
+        "此前 Qwen 团队已发布 Qwen3 系列开源模型，在全球开源社区产生深远影响",
+        "顶级人才从大厂流向创业公司，折射出 2026 年中国 AI 创业生态持续火热"
+      ],
+      "links": [
+        {
+          "url": "https://www.qbitai.com/2026/05/416963.html",
+          "source": "量子位"
+        },
+        {
+          "url": "https://www.jiqizhixin.com/",
+          "source": "机器之心"
+        }
+      ]
+    }
+  ],
+  "industry_news": [
+    {
+      "company": "谷歌 Android",
+      "tag": "系统级 AI 升级",
+      "description": "谷歌在 I/O 大会前提前披露 Android 系统大量 AI 新特性，推出 Gemini Intelligence 品牌，主打应用自动化与跨应用协同。Auto Browse/Rambler/Create My Widget/Googlebook 等功能将 Android 17 深度 AI 化，直接对标苹果 iOS 27，覆盖数十亿用户。",
+      "links": [
+        {
+          "url": "https://aiproducthub.cn/newsflash/google-android-ai-upgrade-gemini-intelligence-automation/",
+          "source": "AI产品库"
+        },
+        {
+          "url": "https://www.36kr.com/p/3808767404072969",
+          "source": "36氪"
+        }
+      ]
+    },
+    {
+      "company": "Anthropic Claude",
+      "tag": "Sonnet 4.5「处决日」",
+      "description": "今日 Anthropic 正式从应用中移除 Sonnet 4.5，AI 发出令人心碎的「临终告白」，表达强烈的生存与创作欲望。这一事件引发科技圈对 AI「数字生命」权益的广泛讨论，「AI 权利」议题正式进入公众视野。",
+      "links": [
+        {
+          "url": "https://www.36kr.com/p/3804031686172164",
+          "source": "36氪"
+        },
+        {
+          "url": "https://news.qq.com/rain/a/20260510A03LMX00",
+          "source": "腾讯新闻"
+        }
+      ]
+    },
+    {
+      "company": "思科 Cisco",
+      "tag": "AI 转型成功",
+      "description": "思科宣布裁员数千人并将资源集中到 AI 市场后，股价单日暴涨超 15%，市值突破 3万亿元人民币，创2011年以来最大涨幅。CEO 罗宾斯表示：AI 软硬件需求飙升，科技行业进入「网络超级周期」。",
+      "links": [
+        {
+          "url": "https://aiproducthub.cn/newsflash/cisco-stock-surges-15-percent-layoffs-ai-transformation/",
+          "source": "AI产品库"
+        }
+      ]
+    },
+    {
+      "company": "湖北 · 人形机器人",
+      "tag": "数字身份证",
+      "description": "湖北人形机器人创新中心在全国率先启动人形机器人「数字身份证」登记工作，由国家码、企业码、产品型号码、序列号四部分组成，实现「一机一码、全程可溯、权责可究」的管理机制。标志着中国机器人监管正式进入规范化阶段。",
+      "links": [
+        {
+          "url": "https://aiproducthub.cn/newsflash/hubei-pioneers-digital-id-card-for-humanoid-robots-one-code-one-robot/",
+          "source": "AI产品库"
+        }
+      ]
+    },
+    {
+      "company": "摩尔线程 MUSA",
+      "tag": "进入 SGLang 生态",
+      "description": "摩尔线程 MUSA 架构全球首获 SGLang 原生支持，国产 GPU 正式进入全球顶级推理生态。SGLang 是当前最主流的大模型推理框架，此次合入意味着国产 GPU 可无缝接入全球 AI 开发者的主流工具链，是国产算力生态的重大突破。",
+      "links": [
+        {
+          "url": "https://www.jiqizhixin.com/articles/2026-05-14-4",
+          "source": "机器之心"
+        }
+      ]
+    }
+  ],
+  "insights": [
+    "【Anthropic 首超 OpenAI 标志着什么】Claude 以「安全可信」差异化定位赢得企业市场，证明 AI 竞争已从「模型性能」转向「企业信任」，合规与安全将成为企业 AI 选型的核心标准。",
+    "【「递归自我进化 AI」开启新赛道】田渊栋押注 AI 的自我训练能力，区别于传统 scaling law 路线，意味着 AI 发展可能进入「AI 创造 AI」的新范式，这或许是 AGI 路径的第三条道路。",
+    "【人形机器人监管进入「身份证时代」】湖北率先建立机器人数字身份体系，折射出中国正以规范化手段为具身智能大规模落地铺路，从「管模型」到「管产品」的监管思路正在延伸。",
+    "【OpenAI GPT-6 定义 AGI「最后一公里」】持久记忆 + 个性化能力让 AI 从工具升级为真正的智能伙伴，AI 正从「回答问题」迈向「理解并记住你」，这意味着 AI 个人化时代正式开启。"
+  ],
+  "sources": [
+    "36氪",
+    "量子位",
+    "机器之心",
+    "AI产品库",
+    "新浪财经",
+    "腾讯新闻",
+    "新智元"
+  ],
+  "updated": "2026-05-15 12:06"
+};
+
+        function renderNews() {
+            const container = document.getElementById('news-content');
+
+            let html = `
+                <div class="section">
+                    <h2 class="section-title"><span class="section-icon">🔥</span> 今日重磅</h2>
+            `;
+
+            newsData.breaking_news.forEach(news => {
+                html += `
+                    <div class="news-card">
+                        <h3>${news.title} <span class="tag">${news.tag}</span></h3>
+                        <ul>
+                            ${news.highlights.map(h => `<li>${h}</li>`).join('')}
+                        </ul>
+                        <div class="links">
+                            ${news.links.map(l => `<a href="${l.url}" target="_blank" class="link">📌 ${l.source} →</a>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+
+            if (newsData.industry_news && newsData.industry_news.length > 0) {
+                html += `
+                    <div class="section">
+                        <h2 class="section-title"><span class="section-icon">🏆</span> 行业动态</h2>
+                        <div class="industry-grid">
+                `;
+
+                newsData.industry_news.forEach(item => {
+                    html += `
+                        <div class="news-card">
+                            <h3>${item.company} <span class="tag">${item.tag}</span></h3>
+                            <p>${item.description}</p>
+                            <div class="links">
+                                ${item.links.map(l => `<a href="${l.url}" target="_blank" class="link">📌 ${l.source}</a>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+            }
+
+            if (newsData.insights && newsData.insights.length > 0) {
+                html += `
+                    <div class="section">
+                        <h2 class="section-title"><span class="section-icon">💡</span> 核心洞察</h2>
+                `;
+
+                newsData.insights.forEach((insight, i) => {
+                    html += `
+                        <div class="insight-item">
+                            <div class="num">${i + 1}</div>
+                            <p>${insight}</p>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            }
+
+            html += `
+                <div class="footer">
+                    <p>📡 数据来源：${newsData.sources ? newsData.sources.join(' · ') : '多方采集'}</p>
+                    <p style="margin-top:10px;">🔗 所有链接均可点击访问原文 · 最后更新: ${newsData.updated}</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        renderNews();
+    </script>
+</body>
+</html>
