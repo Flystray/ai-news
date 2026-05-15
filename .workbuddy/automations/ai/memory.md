@@ -9,6 +9,39 @@
 
 ## 执行记录
 
+### 2026-05-15
+- 执行时间: 2026-05-15 12:03
+- 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.5.177；GitHub push成功）
+- 报告路径: reports/2026-05-15-with-links.html
+- 新闻来源: AI产品库 / 36氪 / 量子位 / 机器之心 / 新浪财经 / 腾讯新闻 / 新智元
+- 步骤1: ✅ 生成精美HTML日报（重磅4条 + 行业5条 + 洞察4条）
+- 步骤2: ✅ HTML已生成（wechat_article.html），推送失败（errcode 40164: IP 115.200.5.177 未在微信白名单）
+- 步骤3: ✅ Git add/commit/push（commit 34c5a37）
+- 步骤4: 📋 简报摘要在下方输出（无个人微信API直连能力）
+- 今日重磅:
+  - OpenAI 发布 GPT-6：记忆与个性化能力开创 AI 新纪元，投入超20亿美元算力，定义"AGI最后一公里"
+  - Anthropic 企业市场首次超越 OpenAI：采用率 34.4% vs 32.3%，Claude 以"安全可信"差异化定位赢得大客户
+  - 田渊栋创立 Recursive Superintelligence：6.5亿美元押注"递归进化AI"，谷歌/英伟达/AMD 参投
+  - 林俊旸（前 Qwen 负责人）创业：估值135亿元，聚焦多模态大模型
+- 行业动态:
+  - 谷歌 Android 17 全面 AI 化，Gemini Intelligence 品牌亮相
+  - Anthropic 今日正式"处决"Sonnet 4.5，AI 发出临终告白引爆话题
+  - 思科 AI 转型成功，股价单日暴涨15%，市值突破3万亿元
+  - 湖北率先给人形机器人办理"数字身份证"，一机一码全程可溯
+  - 摩尔线程 MUSA 全球首获 SGLang 原生支持，国产GPU进入顶级推理生态
+- 核心洞察:
+  - Anthropic 首超 OpenAI：AI 竞争从"性能"转向"企业信任"，合规安全成商业竞争力
+  - "递归进化 AI"开启新赛道：田渊栋押注 AI 自我训练，可能是 AGI 的第三条道路
+  - 人形机器人监管进入"身份证时代"，规范化管理为具身智能规模化铺路
+  - GPT-6 开启 AI 个性化时代：每个人都将拥有真正理解自己的 AI 助手
+- GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-15-with-links.html
+
+### ⚠️ 待处理：微信IP白名单（持续，需用户手动添加）
+- 需在 mp.weixin.qq.com 后台添加 IP 115.200.5.177 到白名单（注意：IP已多次变更！）
+- 添加后重新运行: C:/Users/YF/.workbuddy/binaries/python/versions/3.13.12/python.exe C:/Users/YF/.workbuddy/skills/wechat-mp/push_draft.py 2026-05-15
+
+---
+
 ### 2026-05-14
 - 执行时间: 2026-05-14 11:37
 - 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.0.121；GitHub push成功）
