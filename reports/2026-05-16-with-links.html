@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI日报 - 2026年5月16日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            color: white;
+        }
+        .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+        .header p { opacity: 0.9; font-size: 15px; }
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .section-title .icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: white;
+            flex-shrink: 0;
+        }
+        .section-title h2 { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+        .section-title.hot .icon { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+        .section-title.industry .icon { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .section-title.insight .icon { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .news-item {
+            margin-bottom: 26px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fafbff;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .news-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(102,126,234,0.12); }
+        .news-item:last-child { margin-bottom: 0; }
+        .news-item h3 {
+            font-size: 17px; font-weight: 600;
+            margin-bottom: 10px; line-height: 1.5;
+            color: #1a1a1a;
+        }
+        .news-item h3 a {
+            color: #667eea; text-decoration: none;
+            transition: color 0.2s;
+        }
+        .news-item h3 a:hover { color: #764ba2; text-decoration: underline; }
+        .news-item p {
+            font-size: 14.5px; color: #555;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 13px;
+            color: #999;
+            flex-wrap: wrap;
+        }
+        .source-tag {
+            display: inline-block;
+            background: #eef0ff;
+            color: #667eea;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .link-btn {
+            display: inline-block;
+            color: #667eea;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .link-btn:hover { color: #764ba2; }
+        .link-btn::before { content: "🔗 "; }
+        .footer {
+            text-align: center;
+            padding: 28px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+
+        /* 今日重磅特殊样式 */
+        .hot .news-item { border-left-color: #ff416c; }
+        .hot .news-item h3 a { color: #ff416c; }
+        .hot .news-item:hover { box-shadow: 0 4px 16px rgba(255,65,108,0.12); }
+        .industry .news-item { border-left-color: #11998e; }
+        .industry .news-item h3 a { color: #11998e; }
+        .insight .news-item { border-left-color: #764ba2; }
+        .insight .news-item h3 a { color: #764ba2; }
+
+        @media (max-width: 600px) {
+            .container { padding: 12px; }
+            .section { padding: 18px; }
+            .header h1 { font-size: 23px; }
+            .news-item { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>🤖 AI日报 · 2026年5月16日</h1>
+    <p>覆盖全球47+信息源 | 每日精选AI前沿动态</p>
+</div>
+
+<!-- ==================== 今日重磅 ==================== -->
+<section class="section hot">
+<div class="section-title hot">
+    <div class="icon">🔥</div>
+    <h2>今日重磅</h2>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25139" target="_blank">蚂蚁百灵开源万亿参数模型 Ring-2.6-1T：养"龙虾"实力超 GPT-5.4</a></h3>
+    <p>蚂蚁集团旗下百灵大模型团队宣布正式开源旗舰级思考模型 <strong>Ring-2.6-1T</strong>，这是目前国产首个开源的万亿参数级别思考模型。该模型引入可调节推理强度机制，支持 high 与 xhigh 两档推理强度，采用异步强化学习架构显著提升 GPU 利用率。模型权重已同步上架 Hugging Face 和 ModelScope 平台。实测显示其在 AIME 数学推理、Agent 执行等任务上表现优异，被社区称为"养龙虾"（Ring 系列昵称）实力已逼近甚至超越 GPT-5.4。</p>
+    <div class="news-meta">
+        <span class="source-tag">蚂蚁百灵</span>
+        <span class="source-tag">开源模型</span>
+        <span class="source-tag">万亿参数</span>
+        <a href="https://news.qq.com/rain/a/20260515A07U4B00" target="_blank" class="link-btn">腾讯新闻原文</a>
+        <a href="https://www.infoq.cn/article/rtbXo0YG1cQ0kFwd2ueK" target="_blank" class="link-btn">InfoQ 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25136" target="_blank">Gemini 3.5 Pro 全网首曝：编程能力追平 GPT-5.5，Spark 全时智能体同步亮相</a></h3>
+    <p>Google DeepMind 意外提前曝光 <strong>Gemini 3.5 Pro</strong>，其编程能力据称已追平 OpenAI 当前旗舰 GPT-5.5。同时曝光的还有轻量版 <strong>Gemini 3.2 Flash</strong>，成本较前代降低 15-20%。更值得关注的是谷歌同步披露的全时 AI 智能体 <strong>Gemini Spark</strong>——一个可 24 小时不间断处理日常任务的自动化 Agent。这一组合拳标志着谷歌在 AI 编程和全时 Agent 两大赛道同时发力，直接对标 OpenAI Codex 和 Anthropic 的 Agent 产品线。</p>
+    <div class="news-meta">
+        <span class="source-tag">Google DeepMind</span>
+        <span class="source-tag">大模型</span>
+        <span class="source-tag">AI Agent</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25136" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.36kr.com/p/3809821430619653" target="_blank">OpenAI Codex 登陆 ChatGPT 手机 App：所有用户可用，随时随地写代码</a></h3>
+    <p>OpenAI 正式宣布将编码工具 <strong>Codex</strong> 集成到 ChatGPT 移动端应用中，iOS 和 Android 版本均已开启预览功能，<strong>面向所有用户开放（包括免费用户）</strong>。这意味着开发者可以在地铁上远程指挥运行在 Mac 上的 Codex 执行代码任务。目前 Codex 已有每周超 400 万活跃用户，此次手机端上线被视为 AI 编程工具从桌面走向移动端的关键里程碑，也是 OpenAI 在与 Anthropic Claude Code 激烈竞争中抢占移动入口的重要举措。</p>
+    <div class="news-meta">
+        <span class="source-tag">OpenAI</span>
+        <span class="source-tag">AI编程</span>
+        <span class="source-tag">移动端</span>
+        <a href="https://finance.sina.com.cn/stock/t/2026-05-15/doc-inhxxnfv3534218.shtml" target="_blank" class="link-btn">新浪财经原文</a>
+        <a href="https://news.qq.com/rain/a/20260515A02UYC00" target="_blank" class="link-btn">腾讯新闻原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25138" target="_blank">Anthropic 呼吁美国 2028 年前锁死中国 AI 追赶路径</a></h3>
+    <p>就在美国批准约 10 家中国公司购买英伟达 H200 芯片的同一天（5 月 15 日），Anthropic 发布重磅政策文章，<strong>强烈呼吁美国政府于 2028 年前封堵中国获取先进算力及蒸馏美国模型的通道</strong>，试图从根本上锁死中国在 AI 领域的追赶路径。这一立场引发了广泛争议：一边是芯片解禁的商业现实，一边是顶级 AI 公司的政治游说，中美 AI 竞赛的"技术-政治"双重博弈进入新阶段。</p>
+    <div class="news-meta">
+        <span class="source-tag">Anthropic</span>
+        <span class="source-tag">政策</span>
+        <span class="source-tag">地缘政治</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25138" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+</section>
+
+<!-- ==================== 行业动态 ==================== -->
+<section class="section industry">
+<div class="section-title industry">
+    <div class="icon">📡</div>
+    <h2>行业动态</h2>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25133" target="_blank">马斯克人在北京，xAI 发布首款 Coding Agent Grok Build</a></h3>
+    <p>xAI 正式发布其首款编程智能体 <strong>Grok Build</strong>，面向 SuperGrok Heavy 订阅用户开放测试，支持并行子智能体协作编程。订阅费用为 300 美元/月（前 6 个月优惠价 99 美元/月）。值得注意的是，马斯克本人正在北京访问，此次产品发布的时机耐人寻味，被视为 xAI 在 AI 编程赛道对 OpenAI Codex 和 Anthropic Claude Code 的正面挑战。</p>
+    <div class="news-meta">
+        <span class="source-tag">xAI</span>
+        <span class="source-tag">AI编程</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25133" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25132" target="_blank">阿里 Qoder 1.0 发布：从 AI IDE 迈向智能体自主开发工作台</a></h3>
+    <p>阿里云发布 <strong>Qoder 1.0</strong>，完成从传统 AI IDE 到智能体自主开发工作台的升级转型。新版本支持多任务并行开发、团队知识共享等企业级能力。官方数据显示，相比上一代产品代码保留率提升 11%，Token 消耗降低 40%，目前已服务超 500 万用户。这标志着国内 AI 编程工具从"辅助编辑器"向"自主开发者"演进。</p>
+    <div class="news-meta">
+        <span class="source-tag">阿里云</span>
+        <span class="source-tag">AI编程</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25132" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25137" target="_blank">苹果与 OpenAI 关系紧张：合作未达预期，或诉诸法律</a></h3>
+    <p>据彭博社报道，苹果与 OpenAI 的两年合作关系出现严重裂痕。<strong>OpenAI 认为 ChatGPT 集成到 Siri 的合作未达预期收益</strong>，正准备采取包括法律行动在内的措施，但当前仍希望庭外解决。受此消息影响，苹果股价当日出现波动。这一事件揭示了 AI 大厂与传统科技公司合作中的深层利益冲突——当 Siri 变成 ChatGPT 的"壳"，谁拥有用户？</p>
+    <div class="news-meta">
+        <span class="source-tag">苹果</span>
+        <span class="source-tag">OpenAI</span>
+        <span class="source-tag">商业纠纷</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25137" target="_blank" class="link-btn">AITNT 原文</a>
+        <a href="https://www.ifanr.com/1665963" target="_blank" class="link-btn">爱范儿原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25102" target="_blank">美国批准约 10 家中国公司购买 H200 芯片，英伟达显卡重新上架京东</a></h3>
+    <p>5 月 15 日，<strong>美国批准约 10 家中国公司购买英伟达 H200 芯片</strong>，多款此前受限的英伟达 AI 显卡已重新上架京东官方自营店。这一政策调整有望缓解中国 AI 行业的算力压力，但具体获批公司名单尚未公开。与此同时，Anthropic 同日呼吁封锁中国 AI——两则消息形成鲜明对比，折射出美国内部在对华 AI 政策上的分歧与拉锯。</p>
+    <div class="news-meta">
+        <span class="source-tag">英伟达</span>
+        <span class="source-tag">芯片</span>
+        <span class="source-tag">出口管制</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25102" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.leiphone.com/category/zaobao/rod6WpUrAa8maOpv.html" target="_blank">宇树科技发布全球首款量产版载人变形机甲 GD01：起售价 390 万元</a></h3>
+    <p>宇树科技正式发布全球首款量产版载人变形机甲 <strong>GD01</strong>，起售价 390 万元人民币，支持人形与四足双形态变形切换。这款产品的发布标志着人形机器人从"实验室demo"向"商业化商品"的关键跨越。结合此前宇树开放的全球首个人形机器人任务动作应用商店，具身智能产业正加速驶入规模化落地阶段。</p>
+    <div class="news-meta">
+        <span class="source-tag">宇树科技</span>
+        <span class="source-tag">人形机器人</span>
+        <span class="source-tag">具身智能</span>
+        <a href="https://www.leiphone.com/category/zaobao/rod6WpUrAa8maOpv.html" target="_blank" class="link-btn">雷锋网原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25135" target="_blank">AI 首次在科研竞赛中击败人类！Opus 4.7 狂飙 2930 步创世界纪录</a></h3>
+    <p>Prime Intellect 实验室测试结果显示：<strong>Anthropic Opus 4.7 以 2930 步、OpenAI Codex 以 2950 步打破 nanoGPT 优化的人类世界纪录（2990 步）</strong>。这是 AI 历史上首次在结构化科研竞赛中击败人类顶尖研究者，项目完全开源可复现。这一成果的意义远超 benchmark 数字本身——它证明了 AI 已具备在复杂科学研究中进行长链推理和自主优化的能力。</p>
+    <div class="news-meta">
+        <span class="source-tag">Prime Intellect</span>
+        <span class="source-tag">科研AI</span>
+        <span class="source-tag">里程碑</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25135" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25131" target="_blank">微软 MDASH 多 Agent 安全系统登顶 CyberGym 黑客榜，发现 Win11 共 16 个高危漏洞</a></h3>
+    <p>微软发布多 Agent 协作 AI 安全系统 <strong>MDASH</strong>，通过调度百余个专业安全 Agent 协同工作，以 <strong>88.45% 的成绩登顶 CyberGym 黑客能力测试榜首</strong>。该系统已在实际部署中发现 Windows 11 共计 16 个高危漏洞。这标志着 AI 驱动的自动化安全攻防已经达到实用化水平，"最强黑客大模型"不再是单一模型的竞争，而是多 Agent 协作的系统工程。</p>
+    <div class="news-meta">
+        <span class="source-tag">微软</span>
+        <span class="source-tag">AI安全</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25131" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25118" target="_blank">Claude 新政震动 Agent 社区：SDK 改为月度固定额度，重度用量缩水近十倍</a></h3>
+    <p>Anthropic 宣布自 <strong>6 月 15 日起</strong>，将 Agent SDK 等程序化调用方式从按量付费<strong>调整为按 API 零售价提供月度固定额度</strong>。对于重度 Agent 用户而言，可用 Token 量预计缩水近十倍。这一政策在开发者社区引发强烈反响。OpenAI 敏捷响应，随即推出 Codex 企业用户两个月免费迁移计划，支持从 Claude 一键迁移。Agent 生态的"定价权之争"正式开打。</p>
+    <div class="news-meta">
+        <span class="source-tag">Anthropic</span>
+        <span class="source-tag">定价策略</span>
+        <span class="source-tag">Agent</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25118" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.aitntnews.com/newDetail.html?newId=25119" target="_blank">腾讯开源 TencentDB Agent Memory：最高降 61.38% Token 消耗</a></h3>
+    <p>腾讯云开源 <strong>TencentDB Agent Memory</strong>（MIT 协议），这是一款专为 AI Agent 设计的分层记忆引擎。实测数据显示，该方案最高可降低 <strong>61.38% 的 Token 消耗</strong>，同时将任务成功率提升 <strong>51.52%</strong>。在 Agent 普遍面临上下文窗口限制和记忆管理难题的当下，这一开源方案为业界提供了经过大规模验证的工程实践参考。</p>
+    <div class="news-meta">
+        <span class="source-tag">腾讯云</span>
+        <span class="source-tag">开源</span>
+        <span class="source-tag">Agent</span>
+        <a href="https://www.aitntnews.com/newDetail.html?newId=25119" target="_blank" class="link-btn">AITNT 原文</a>
+    </div>
+</div>
+
+<div class="news-item">
+    <h3><a href="https://www.ifanr.com/1665672" target="_blank">Google 推出"魔法指针"：鼠标装上"眼睛"，所指即所控</a></h3>
+    <p>Google 推出名为 <strong>Magic Pointer（魔法指针）</strong>的创新交互功能，为鼠标光标赋予"视觉理解"能力——AI 能实时识别用户指向的屏幕内容并提供语境化操作建议，无需手动输入提示词。该功能已在 Chrome 浏览器和 Googlebook 中落地，实现"所见即所得、所指即所控"。这标志着 AI 从独立应用向操作系统级基础设施演进的重要一步。</p>
+    <div class="news-meta">
+        <span class="source-tag">Google</span>
+        <span class="source-tag">人机交互</span>
+        <a href="https://www.ifanr.com/1665672" target="_blank" class="link-btn">爱范儿原文</a>
+    </div>
+</div>
+
+</section>
+
+<!-- ==================== 核心洞察 ==================== -->
+<section class="section insight">
+<div class="section-title insight">
+    <div class="icon">💡</div>
+    <h2>核心洞察</h2>
+</div>
+
+<div class="news-item">
+    <h3><a href="#" onclick="return false;" style="cursor:default;">国产大模型进入"万亿开源时代"：蚂蚁 Ring-2.6-1T 重写竞争格局</a></h3>
+    <p>蚂蚁百灵开源 Ring-2.6-1T 是一个标志性事件。万亿参数级别的思考模型实现开源，意味着中国 AI 社区首次拥有了可与 GPT-5.x 级别正面抗衡的开源基础设施。更重要的是，该模型并非追求纸面 benchmark，而是聚焦 Agent 执行能力——这正是 2026 年 AI 从"对话"转向"干活"的核心战场。配合阿里 Qoder、腾讯 Agent Memory 等配套工具的开源，国产 AI 正在构建从基础模型到开发工具到记忆系统的完整开源技术栈。</p>
+</div>
+
+<div class="news-item">
+    <h3><a href="#" onclick="return false;" style="cursor:default;">AI 编程"三国杀"全面升级：移动端成为新战场</a></h3>
+    <p>短短一天之内，三大动态重塑了 AI 编程竞争格局：<strong>Codex 登陆手机端</strong>（所有用户免费可用）、<strong>xAI 发布 Grok Build</strong>（马斯克在北京亲自站台）、<strong>阿里 Qoder 1.0 升级为 Agent 工作台</strong>。加上 Anthropic 此前的 Claude Code Goal Mode 和 Google 曝光的 Gemini Spark，AI 编程已从单一的"代码补全"工具演变为集移动端、多 Agent 并行、自主开发于一体的综合生产力平台。谁能赢得开发者习惯，谁就掌握下一个操作系统的入场券。</p>
+</div>
+
+<div class="news-item">
+    <h3><a href="#" onclick="return false;" style="cursor:default;">AI 地缘政治进入"矛盾期"：芯片解禁 vs 政策封锁并存</a></h3>
+    <p>5 月 15 日呈现了极具戏剧性的两面：一面是美国政府批准中国公司购买 H200 芯片（算力松绑），另一面是 Anthropic 公开呼吁 2028 年前锁死中国 AI（技术封锁）。这种"左手松绑、右手封堵"的矛盾状态，反映了美国内部在 AI 对华策略上的深层分裂——商业利益倾向于开放，安全焦虑倾向于封闭。对中国 AI 行业而言，这意味着既要抓住算力缓解的窗口期加速追赶，也要为长期的技术脱钩做好准备。</p>
+</div>
+
+<div class="news-item">
+    <h3><a href="#" onclick="return false;" style="cursor:default;">Agent 定价模式遭遇"信任危机"：Claude 新政倒逼生态重构</a></h3>
+    <p>Anthropic 将 Agent SDK 从按量付费改为固定额度，表面上是商业模式调整，实质上暴露了一个行业性困境：<strong>当 AI Agent 真的开始"干活"时，按 Token 计费的旧模式彻底失效</strong>。重度 Agent 用户调用频率高、单次消耗大，按 API 零售价换算的固定额度根本不够用。OpenAI 敏捷推出迁移补贴抢人，说明巨头们早已预判到这场"定价革命"。未来 Agent 的计费方式大概率会转向"按结果付费"或"订阅制"，整个 AI 商业模式的底层逻辑正在重写。</p>
+</div>
+
+<div class="news-item">
+    <h3><a href="#" onclick="return false;" style="cursor:default;">AI 科研突破临界点：首次在竞赛中战胜人类意味着什么</a></h3>
+    <p>Opus 4.7 和 Codex 打破 nanoGPT 优化世界纪录，看似只是一个 benchmark 数字，但其象征意义不可低估。这是 <strong>AI 首次在需要数千步长链决策的结构化科研任务中超越人类专家</strong>。如果说 AlphaGo 解决的是"有限信息完美博弈"，那么这次突破证明 AI 可以处理"高维空间中的复杂优化问题"——而这正是科学研究的核心方法论。从药物设计到材料科学，从代码编译到芯片布局，AI 作为"研究伙伴"而非"工具"的时代正在到来。</p>
+</div>
+
+</section>
+
+<div class="footer">
+    <p>📮 AI日报 · 由 <a href="https://Flystray.github.io/ai-news/" target="_blank">Flystray/ai-news</a> 自动生成</p>
+    <p>数据来源：AITNT / 36氪 / 腾讯新闻 / 新浪财经 / InfoQ / 彭博社 / 爱范儿 / 雷锋网 等 47+ 信息源</p>
+    <p>📅 2026年5月16日 | 🕐 自动生成于 10:33 (GMT+8)</p>
+</div>
+
+</div>
+
+</body>
+</html>
