@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.5.16｜Video2GUI · 从5亿条视频里自动合成1200万条GUI训练数据</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: #f5f6fa; margin: 0; padding: 16px; color: #2c3e50;">
+
+  <div style="max-width: 800px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+
+    <!-- 标题 -->
+    <h1 style="font-size: 22px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px 0; line-height: 1.4;">
+      2026.5.16｜Video2GUI · 从5亿条视频里自动合成1200万条GUI训练数据
+    </h1>
+    <div style="font-size: 13px; color: #888; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+      ✍️ fly的AI学习 &nbsp;|&nbsp; 论文解读 · 国内 · 阅读时长 8 分钟
+    </div>
+
+    <!-- 论文信息表 -->
+    <table style="width: 100%; border-collapse: collapse; background: #f8f9fe; border-radius: 8px; overflow: hidden; margin-bottom: 28px; font-size: 14px;">
+      <tr style="background: #eef0fa;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; width: 100px; border-bottom: 1px solid #e0e0f0;">论文标题</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Video2GUI: Synthesizing Large-Scale Interaction Trajectories for Generalized GUI Agent Pretraining</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">作者</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Weimin Xiong, Shuhao Gu, Bowen Ye, Zihao Yue, Lei Li, Feifan Song, Sujian Li, Hao Tian</td>
+      </tr>
+      <tr style="background: #f8f9fe;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">发表日期</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">2026-05-14</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">来源</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">ICML 2026</td>
+      </tr>
+      <tr style="background: #f8f9fe;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">论文链接</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://arxiv.org/abs/2605.14747" style="color: #4361ee; text-decoration: none;">点击查看原文 arXiv:2605.14747</a></td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">代码</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://github.com/WeiminXiong/Video2GUI" style="color: #4361ee; text-decoration: none;">GitHub 仓库</a></td>
+      </tr>
+      <tr style="background: #f8f9fe;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a;">标签</td>
+        <td style="padding: 10px 14px;"><span style="background: #e8f4fd; color: #2196f3; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">GUI Agent</span><span style="background: #e8f5e9; color: #4caf50; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">数据合成</span><span style="background: #fff3e0; color: #ff9800; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">多模态</span><span style="background: #f3e5f5; color: #9c27b0; padding: 2px 8px; border-radius: 4px; font-size: 12px;">预训练</span></td>
+      </tr>
+    </table>
+
+    <!-- 这篇论文在说什么？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #4361ee; padding-left: 12px; margin-bottom: 14px;">这篇论文在说什么？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        多模态大语言模型最近在 GUI 智能体方向上进展很快，但有个致命问题：<strong>泛化能力差</strong>，根本原因就是训练数据太少了。现有数据集靠人工标注，费时费力还覆盖不了多少场景。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        北大和小米团队这次提出了一个很巧的办法——<strong>Video2GUI</strong>，直接从互联网上现成的 GUI 教程视频里自动提取交互轨迹，全程不需要人工参与。他们用这套流程处理了 5 亿条视频元数据，最终构建了 <strong>WildGUI</strong> 数据集，包含 <strong>1200 万条交互轨迹</strong>，覆盖 <strong>1500 多款应用和网站</strong>。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        在 WildGUI 上对 Qwen2.5-VL 和 Mimo-VL 做预训练，在多个 GUI 定位和动作基准上取得了 <strong>5%~20% 的一致提升</strong>，追平甚至超过了当前最优水平。
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://weiminxiong.github.io/Video2GUI/static/images/teaser_figure.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="Video2GUI 流程概览">
+        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：项目主页 teaser figure*</div>
+      </div>
+    </div>
+
+    <!-- 为什么要关注？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #e74c3c; padding-left: 12px; margin-bottom: 14px;">为什么要关注？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        GUI 智能体这个方向最近真的很热。OpenAI 的 Operator、Anthropic 的 Computer Use、谷歌的 Project Mariner——大厂都在抢这块。核心逻辑很简单：如果 AI 能像人一样操作任意软件界面，那"让 AI 帮你干活"就不再是空话。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        但现实很骨感。训练一个靠谱的 GUI Agent 需要大量「指令-动作-界面」三元组，这种数据现在基本靠人工标注，一条条录屏、对齐、质检，成本高到离谱。而且人工标注覆盖的场景非常有限，导致训练出来的模型在真实场景中泛化能力很差。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        这个痛点其实整个社区都意识到了，但一直没找到好的解决办法。Video2GUI 的切入点很聪明：互联网上有大量 GUI 教程视频（比如「如何用 Photoshop 抠图」「Excel 数据透视表教程」），这些视频天然包含了完整的操作轨迹，只是没有被结构化地利用起来。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
+        把这批「免费数据」利用起来，就能低成本地构建大规模、多样化的 GUI 训练数据集——这个思路一旦跑通，对整个人工智能社区都有实际价值。
+      </p>
+    </div>
+
+    <!-- 核心方法 -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #2ecc71; padding-left: 12px; margin-bottom: 14px;">核心方法</h2>
+      
+      <h3 style="font-size: 15px; font-weight: 600; color: #27ae60; margin: 0 0 10px 0;">关键思路</h3>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        Video2GUI 的本质是一个<strong>三阶段全自动流水线</strong>，把「原始互联网视频」变成「结构化 GUI 交互轨迹」：
+      </p>
+      <div style="background: #f0faf4; border-radius: 8px; padding: 16px 18px; margin-bottom: 16px; border-left: 3px solid #2ecc71;">
+        <p style="font-size: 14px; line-height: 1.8; color: #2d5a3d; margin: 0 0 8px 0;"><strong>第一阶段：由粗到细的视频过滤</strong></p>
+        <p style="font-size: 14px; line-height: 1.8; color: #2d5a3d; margin: 0 0 8px 0;">从 5 亿条视频元数据出发，先训练一个基于 DeepSeek-V3 标注数据微调过的 Qwen2.5-7B 分类器，筛出约 2000 万条候选 GUI 教程视频。再用细粒度内容评分器（指令清晰度、主题相关性、录屏质量三个维度）进一步筛选，最终得到 <strong>420 万条高质量 GUI 教程视频</strong>（总时长约 30 万小时）。</p>
+        <p style="font-size: 14px; line-height: 1.8; color: #2d5a3d; margin: 0 0 8px 0;"><strong>第二阶段：轨迹提取</strong></p>
+        <p style="font-size: 14px; line-height: 1.8; color: #2d5a3d; margin: 0 0 8px 0;">把过滤后的视频切割成单段不超过 4 分钟的片段，然后用 <strong>Gemini-3-Pro</strong> 逐个处理。采用带历史上下文的滑动窗口策略，模型需要同时理解视频画面、字幕指令和之前的操作历史，最终输出结构化的「指令-轨迹」对。</p>
+        <p style="font-size: 14px; line-height: 1.8; color: #2d5a3d; margin: 0;"><strong>第三阶段：动作空间定位</strong></p>
+        <p style="font-size: 14px; line-height: 1.8; color: #2d5a3d; margin: 0;">对每条交互动作，取动作发生前 0.5 秒、发生时、发生后 0.5 秒的三张高分辨率截图 + 对应的低层级指令，输入 Gemini-3-Pro 预测精确的交互目标边界框坐标。人工校验 200 条采样动作，超过 95% 的定位结果是正确的。</p>
+      </div>
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://weiminxiong.github.io/Video2GUI/static/images/method_diagram.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="Video2GUI 三阶段流水线">
+        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.2 方法流程图*</div>
+      </div>
+
+      <h3 style="font-size: 15px; font-weight: 600; color: #27ae60; margin: 20px 0 10px 0;">技术细节</h3>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>为什么用 Gemini-3-Pro 而不是开源模型？</strong> 轨迹提取需要同时理解视频帧序列、语音/字幕文本和 UI 元素，这个多模态理解任务对模型能力要求很高。作者尝试过用开源模型，但效果差距明显，最终选择 Gemini-3-Pro 作为核心标注模型。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>如何处理视频中的「噪音」？</strong> 教程视频里经常有与 GUI 操作无关的内容（比如作者闲聊、广告片段）。Video2GUI 的细过滤阶段用三个维度评分来排除这些噪音，同时滑动窗口策略也能在一定程度上过滤掉不相关的视频片段。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>数据质量如何保证？</strong> 除了 95% 定位准确率的人工校验外，作者还做了数据缩放实验——随着预训练数据量增加，下游基准精度平滑提升，没有出现饱和或能力下降，说明数据质量整体是可靠的。
+      </p>
+      <blockquote style="background: #f8f9fe; border-left: 4px solid #bdc3c7; margin: 16px 0; padding: 12px 16px; color: #7f8c8d; font-style: italic; font-size: 14px; border-radius: 0 8px 8px 0;">
+        "Applying this pipeline to 500 million video metadata entries, we construct WildGUI, a large-scale dataset containing 12 million interaction trajectories spanning over 1,500 applications and websites."
+        <br><br>
+        <span style="color: #2c3e50; font-style: normal; font-weight: 500;">一句话：5 亿进 420 万进 1200 万，数据金字塔的每一层都有明确的质量门槛。</span>
+      </blockquote>
+    </div>
+
+    <!-- 效果怎么样？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #f39c12; padding-left: 12px; margin-bottom: 14px;">效果怎么样？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 16px 0;">
+        作者在 GUI 定位、动作预测、在线交互三类任务上做了全面评估：
+      </p>
+      
+      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">GUI 定位基准（ScreenSpot-Pro、OSWorld-G）</p>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+        <tr style="background: #4361ee; color: white;">
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">模型</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">ScreenSpot-Pro</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">OSWorld-G</th>
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">备注</th>
+        </tr>
+        <tr style="background: #f8f9fe;">
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">Qwen2.5-VL-7B（基线）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">31.2</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">18.3</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; color: #999; font-size: 12px;">未用 WildGUI</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600; color: #4361ee;">Qwen2.5-VL-7B（+WildGUI）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #27ae60;">46.9</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #27ae60;">44.7</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; color: #999; font-size: 12px;">+15.7 / +26.4</td>
+        </tr>
+        <tr style="background: #f8f9fe;">
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">Mimo-VL-7B（基线）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">28.7</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">16.1</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; color: #999; font-size: 12px;">未用 WildGUI</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 12px; font-weight: 600; color: #4361ee;">Mimo-VL-7B（+WildGUI）</td>
+          <td style="padding: 9px 12px; text-align: center; font-weight: 700; color: #27ae60;">44.4</td>
+          <td style="padding: 9px 12px; text-align: center; font-weight: 700; color: #27ae60;">29.0</td>
+          <td style="padding: 9px 12px; color: #999; font-size: 12px;">+15.7 / +12.9</td>
+        </tr>
+      </table>
+
+      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">移动端 GUI 动作基准（AndroidControl、CAGUI）</p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 16px 0;">
+        在 WildGUI 上持续预训练后，两类模型在两个基准上均获得一致性能提升，说明从教程视频中合成的轨迹可有效从定位任务迁移到完整动作预测任务。
+      </p>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://weiminxiong.github.io/Video2GUI/static/images/main_results.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="ScreenSpot-Pro 和 OSWorld-G 核心结果">
+        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文主结果图*</div>
+      </div>
+
+      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">预训练数据缩放特性</p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
+        模型性能随 WildGUI 预训练数据量的增加<strong>平滑提升</strong>，没有出现饱和现象。这意味着只要继续往流程里加视频，性能还能进一步提升——这是一个非常理想的缩放曲线。
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://weiminxiong.github.io/Video2GUI/static/images/figure3_scaling.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="预训练数据缩放对性能的影响">
+        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.3 缩放曲线*</div>
+      </div>
+    </div>
+
+    <!-- 和其他方案比有什么不同？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #9b59b6; padding-left: 12px; margin-bottom: 14px;">和其他方案比有什么不同？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 16px 0;">
+        现有 GUI 数据集大致可以分为三类，WildGUI 在每个维度上都有明显优势：
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+        <tr style="background: #9b59b6; color: white;">
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">对比维度</th>
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">人工标注数据集</th>
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">合成数据（模拟器）</th>
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">WildGUI（Video2GUI）</th>
+        </tr>
+        <tr style="background: #f8f9fe;">
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">数据规模</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">千-万级</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">十万-百万级</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 700; color: #9b59b6;">1200 万级</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">覆盖场景</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">窄（特定应用）</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">中（模拟器支持范围）</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 700; color: #9b59b6;">宽（1500+ 真实应用）</td>
+        </tr>
+        <tr style="background: #f8f9fe;">
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">构建成本</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">极高（人工）</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">中（需开发模拟器）</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 700; color: #9b59b6;">低（全自动）</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">真实度</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">高</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">低-中（模拟器偏差）</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 700; color: #9b59b6;">高（真实用户操作）</td>
+        </tr>
+        <tr style="background: #f8f9fe;">
+          <td style="padding: 9px 12px; font-weight: 600;">可扩展性</td>
+          <td style="padding: 9px 12px;">差</td>
+          <td style="padding: 9px 12px;">中</td>
+          <td style="padding: 9px 12px; font-weight: 700; color: #9b59b6;">好（视频数据源源不断）</td>
+        </tr>
+      </table>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
+        最重要的区别是：<strong>WildGUI 的数据来自真实用户操作</strong>，而不是模拟器合成。这意味着模型在 WildGUI 上预训练后，学到的交互模式更接近真实人类行为，泛化到新应用的能力也更强。当然，这个方法也有局限性。比如教程视频里的操作不一定是最优的（用户可能走弯路），而且某些专业软件的教程视频非常少，会导致数据分布不均衡。作者在论文里也坦诚地讨论了这些问题。
+      </p>
+    </div>
+
+    <!-- 对开发者意味着什么？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #e67e22; padding-left: 12px; margin-bottom: 14px;">对开发者意味着什么？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>最直接的价值：数据集要开源了。</strong> 论文明确说会发布 WildGUI 数据集和 Video2GUI 全流程代码。对做 GUI Agent 研究的开发者来说，这相当于白送了一套千万级训练数据——不管是用来预训练自己的模型，还是用来做基准测试，都有实际价值。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>对工程落地的启发：</strong> Video2GUI 的核心思路（从互联网视频中提取结构化训练数据）并不局限于 GUI 场景。类似的方法可以扩展到其他需要「过程数据」的任务——比如从烹饪视频中提取机器人操作轨迹，从教学视频中提取代码编辑过程等等。这个范式一旦泛化，能解锁很多之前因为数据稀缺而做不了的方向。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>对国内 AI 开发者的意义：</strong> 这篇论文是北大+小米联合完成的，已经被 ICML 2026 接收。这说明国内团队在 GUI Agent 这个热门方向上，不仅能跟上，还能做出有全球影响力的系统性贡献。WildGUI 开源后，国内开发者做 GUI Agent 就有了和国外团队站在同一起跑线上的机会。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
+        如果你正在做 GUI 自动化相关的工作，这个数据集值得密切关注。<a href="https://github.com/WeiminXiong/Video2GUI" style="color: #4361ee; text-decoration: none;">GitHub 仓库</a>已经建好了，代码和数据集应该近期就会发布。
+      </p>
+    </div>
+
+    <!-- 页脚 -->
+    <div style="text-align: center; padding-top: 24px; border-top: 1px solid #f0f0f0; color: #999; font-size: 13px;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </div>
+
+  </div>
+</body>
+</html>
