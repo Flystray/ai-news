@@ -9,6 +9,44 @@
 
 ## 执行记录
 
+### 2026-05-16
+- 执行时间: 2026-05-16 10:33
+- 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.6.168；GitHub push成功）
+- 报告路径: reports/2026-05-16-with-links.html
+- 新闻来源: AITNT / 36氪 / 腾讯新闻 / 新浪财经 / InfoQ / 彭博社 / 爱范儿 / 雷锋网 等 47+ 信息源
+- 步骤1: ✅ 生成精美HTML日报（重磅4条 + 行业10条 + 洞察5条）
+- 步骤2: ✅ HTML已生成（wechat_article.html），推送失败（errcode 40164: IP 115.200.6.168 未在微信白名单）
+- 步骤3: ✅ Git add/commit/push（commit aa9a81d）
+- 步骤4: 📋 简报摘要在下方输出（无个人微信API直连能力）
+- 今日重磅:
+  - 蚂蚁百灵开源万亿参数模型 Ring-2.6-1T：养"龙虾"实力超GPT-5.4，国产首个开源万亿参数思考模型
+  - Gemini 3.5 Pro全网首曝：编程追平GPT-5.5，Spark全时智能体同步亮相
+  - OpenAI Codex登陆ChatGPT手机App：所有用户可用，AI编程从桌面走向移动端
+  - Anthropic呼吁美国2028年前锁死中国AI：H200解禁与政策封锁形成矛盾信号
+- 行业动态:
+  - xAI发布Grok Build编程Agent（马斯克人在北京亲自站台）
+  - 阿里Qoder 1.0发布：从AI IDE迈向智能体自主开发工作台
+  - 苹果OpenAI关系破裂：Siri合作未达预期或诉诸法律
+  - 美国批准约10家中国公司购买H200芯片，英伟达显卡重新上架京东
+  - 宇树科技发布全球首款量产版载人变形机甲GD01（起售价390万）
+  - AI首次科研竞赛击败人类！Opus 4.7打破nanoGPT优化世界纪录
+  - 微软MDASH登顶CyberGym黑客榜，发现Win11共16个高危漏洞
+  - Claude新政震动Agent社区：SDK改为固定额度，重度用量缩水近十倍
+  - 腾讯开源Agent Memory引擎：最高降61% Token消耗
+  - Google推出"魔法指针"Magic Pointer：鼠标装上眼睛所指即所控
+- 核心洞察:
+  - 国产大模型进入万亿开源时代：蚂蚁Ring-2.6-1T重写竞争格局
+  - AI编程三国杀全面升级：移动端成为新战场
+  - AI地缘政治进入矛盾期：芯片解禁vs政策封锁并存
+  - Agent定价模式遭遇信任危机：Claude新政倒逼生态重构
+  - AI科研突破临界点：首次在竞赛中战胜人类意味着什么
+- GitHub链接: https://flystray.github.io/ai-news/reports/2026-05-16-with-links.html
+
+### ⚠️ 待处理：微信IP白名单（持续，需用户手动添加）
+- 需在 mp.weixin.qq.com 后台添加 IP 115.200.6.168 到白名单（注意：IP已多次变更！）
+- 添加后重新运行: C:/Users/YF/.workbuddy/binaries/python/versions/3.13.12/python.exe C:/Users/YF/.workbuddy/skills/wechat-mp/push_draft.py 2026-05-16
+
+---
 ### 2026-05-15
 - 执行时间: 2026-05-15 12:03
 - 状态: ⚠️ 部分成功（微信公众号推送失败 - IP白名单问题持续，IP已变更为 115.200.5.177；GitHub push成功）

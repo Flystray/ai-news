@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG-Anything：港大开源多模态RAG框架 | GitHub AI 项目日报 2026-05-16</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --secondary: #0891b2;
+            --accent: #0284c7;
+            --bg: #f0fdf4;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #bbf7d0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            color: white;
+        }
+        .date-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .subtitle { opacity: 0.9; font-size: 1rem; }
+        .highlight-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+        h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        h3 { font-size: 1.1rem; color: var(--text); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid var(--border); }
+        th { background: var(--bg); font-weight: 600; color: var(--text); }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .code-block code { color: #e2e8f0; }
+        .comparison-table td:nth-child(4) { background: #fef3c7; font-weight: 600; }
+        .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+        .pros { border-left: 4px solid var(--success); }
+        .cons { border-left: 4px solid var(--danger); }
+        .pros, .cons { padding-left: 1rem; }
+        .pros li::marker { color: var(--success); }
+        .cons li::marker { color: var(--danger); }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .pros-cons { grid-template-columns: 1fr; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="date-badge">2026-05-16</span>
+            <h1>RAG-Anything：港大开源多模态RAG框架</h1>
+            <p class="subtitle">统一处理文本 / 图像 / 表格 / 公式</p>
+            <div class="highlight-badge">
+                <span>⭐ 项目亮点</span>
+                <span>•</span>
+                <span>20,241 Stars</span>
+                <span>•</span>
+                <span>跨模态知识图谱</span>
+            </div>
+        </header>
+
+        <div class="card">
+            <h2>📋 项目背景</h2>
+            <p>RAG（检索增强生成）技术在过去两年高速发展，从最初简单的向量检索，进化到知识图谱增强（GraphRAG、LightRAG）。但现有方案有一个共同局限：<strong>只处理文本</strong>。</p>
+            <p>现实中的文档远不止文字。一篇学术论文包含：摘要（文本）、实验图表（图像）、数据表格、数学公式；一份财务报告包含：分析文字、趋势折线图、财务数据表。传统RAG系统的做法是把图像/表格做OCR，强行转成文本——这<strong>丢失了视觉布局、颜色编码、空间关系</strong>等关键信息。</p>
+            <p><strong>RAG-Anything 的核心思路</strong>：把文档中的文本、图像、表格、公式统一建模为知识图谱中的实体和关系，用多模态方式做检索和问答。该项目由<strong>香港大学数据科学团队（HKUDS）</strong>开发，2025年6月首次开源，截至2026年5月已收获 <strong>20,241 Stars</strong>，并有对应的 arXiv 论文（ID: 2510.12323）支撑。</p>
+        </div>
+
+        <div class="card">
+            <h2>🎯 核心功能</h2>
+
+            <h3>1. 统一多模态文档解析</h3>
+            <p>支持 <strong>10+ 种文档格式</strong>的原生解析：PDF、Word、PowerPoint、Excel、图像（.jpg/.png/.tiff/.webp）、Markdown、纯文本、HTML。</p>
+            <ul>
+                <li>使用 <strong>MinerU</strong> 作为默认解析后端，可切换为 <strong>Docling</strong> 或 <strong>PaddleOCR</strong></li>
+                <li>解析输出标准化的 <code>content_list</code> 结构，每条记录带类型标签（<code>text</code> / <code>image</code> / <code>table</code> / <code>equation</code>））</li>
+            </ul>
+
+            <h3>2. 多模态内容智能分析</h3>
+            <p>针对不同类型内容，RAG-Anything 内置三个专用分析器：</p>
+            <table>
+                <thead><tr><th>分析器</th><th>功能</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>图像分析器</strong></td><td>调用视觉大模型（VLM）生成高质量图像描述，提取空间关系和视觉要素</td></tr>
+                    <tr><td><strong>表格分析器</strong></td><td>深度理解表格层次结构，自动识别表头关系、数据类型和逻辑联系</td></tr>
+                    <tr><td><strong>公式分析器</strong></td><td>精确识别 LaTeX 格式数学表达式，分析变量含义和公式结构</td></tr>
+                </tbody>
+            </table>
+
+            <h3>3. 跨模态知识图谱构建</h3>
+            <p>系统将文本段落、图像描述、表格数据、公式全部抽象为知识实体，并自动构建<strong>跨模态的语义关系图谱</strong>。</p>
+
+            <h3>4. 双层次混合检索</h3>
+            <p>支持两种检索粒度，并可将两者结果融合：</p>
+            <ul>
+                <li><strong>细粒度关键词检索</strong>：精准定位具体实体（某个图表、某条公式）</li>
+                <li><strong>概念级语义检索</strong>：把握主题脉络（"这个文档关于什么研究方向"）</li>
+            </ul>
+            <p>检索策略同时利用知识图谱的结构化关系和向量数据库的语义相似度，比纯向量检索更精准。</p>
+
+            <h3>5. 多模态问答（VLM 增强）</h3>
+            <p>用户提问可以涉及非文本内容，系统自动识别问题涉及的多模态元素，调用对应的分析器：</p>
+            <div class="code-block"><code>Q: "文档中的图3展示了什么趋势？"
+A: 自动调用图像分析器 + VLM，返回图表趋势描述
+
+Q: "表2中哪个方法性能最好？"
+A: 自动调用表格分析器，返回对比结论</code></div>
+
+            <h3>6. 灵活的输入模式</h3>
+            <ul>
+                <li><strong>端到端模式</strong>：直接丢进去一个 PDF/PPT，全自动处理</li>
+                <li><strong>精细控制模式</strong>：手动构造 <code>content_list</code>，精确控制每个内容块的处理方式</li>
+                <li><strong>增量更新</strong>：基于 Merkle 树检测文件变更，只重新索引修改过的部分</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ 技术亮点</h2>
+
+            <h3>亮点一：基于 LightRAG 的三层架构</h3>
+            <p>RAG-Anything 并不是从零重构，而是<strong>组合式架构</strong>：在 LightRAG（负责知识图谱+向量存储）之上，增加了多模态处理层。</p>
+            <div class="code-block"><code>┌──────── RAG-Anything 处理层 ────────┐
+│  (文档解析 + 多模态分析 + 内容注入)    │
+├──────── LightRAG 核心层 ────────────┤
+│  (知识图谱构建 + 向量存储 + 检索排序)   │
+├──────── 存储层 ─────────────────────┤
+│  (Neo4j / Milvus / Chroma 等可插拔)  │
+└───────────────────────────────────────┘</code></div>
+            <p>这种架构设计意味着：如果你已经部署了 LightRAG，可以<strong>无缝升级</strong>到多模态版本，复用已有的知识图谱和向量存储。</p>
+
+            <h3>亮点二：智能分块与上下文保留</h3>
+            <p>传统 RAG 的固定长度分块（如每500字一切）会切断表格、公式的完整性。RAG-Anything 的做法是：</p>
+            <ul>
+                <li>用 MinerU/Docling 做<strong>结构感知分块</strong>，按文档的逻辑结构（段落、章节、列表）切分</li>
+                <li>对多模态内容，自动提取<strong>周围文本上下文</strong>（可配置上下文页数和 token 上限），保证检索时能看到"这张图伴随着什么文字说明"</li>
+            </ul>
+
+            <h3>亮点三：可扩展的插件化架构</h3>
+            <p>系统设计充分考虑到不同领域的扩展需求：</p>
+            <ul>
+                <li><strong>自定义模态处理器</strong>：继承 <code>BaseModalProcessor</code>，只需实现 <code>process_multimodal_content()</code> 方法，就能支持新的内容类型（如化学结构式、乐谱符号）</li>
+                <li><strong>自定义解析器</strong>：继承 <code>Parser</code> 基类，接入新的文档解析引擎（如 Tesseract OCR）</li>
+                <li><strong>直接内容注入</strong>：不需要文件，直接往系统里插入构造好的 <code>content_list</code></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🚀 快速上手</h2>
+
+            <h3>安装</h3>
+            <div class="code-block"><code># 前提：Python 3.10+
+pip install raganything
+
+# 或使用 uv（推荐，更快）
+uv pip install raganything</code></div>
+
+            <h3>最小可运行示例</h3>
+            <div class="code-block"><code>import asyncio
+from raganything import RAGAnything, RAGAnythingConfig
+
+# 1. 配置
+config = RAGAnythingConfig(
+    working_dir="./my_rag_data",
+    parser="mineru",
+    enable_image_processing=True,
+    enable_table_processing=True,
+    enable_equation_processing=True,
+)
+
+# 2. 初始化（需要传入 LLM 和 Embedding 函数）
+rag = RAGAnything(
+    config=config,
+    llm_model_func=your_llm_func,
+    embedding_func=your_embedding_func,
+    vision_model_func=your_vlm_func,  # 可选
+)
+
+# 3. 处理文档
+asyncio.run(rag.process_document_complete("paper.pdf"))
+
+# 4. 提问（支持多模态）
+answer = asyncio.run(
+    rag.aquery("图3展示了哪些方法的性能对比？", use_vlm=True)
+)
+print(answer)</code></div>
+
+            <h3>部署模式选择</h3>
+            <table>
+                <thead><tr><th>模式</th><th>Embedding</th><th>向量数据库</th><th>适用场景</th></tr></thead>
+                <tbody>
+                    <tr><td>云端托管</td><td>OpenAI/VoyageAI/Gemini API</td><td>Zilliz Cloud</td><td>快速上手，免运维</td></tr>
+                    <tr><td>本地优先</td><td>Ollama（本地运行）</td><td>Milvus（Docker）</td><td>数据隐私要求高</td></tr>
+                    <tr><td>混合模式</td><td>OpenAI API</td><td>Milvus（本地）</td><td>嵌入质量与存储成本平衡</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>📊 对比分析</h2>
+            <p>RAG-Anything vs. 主流 RAG 框架：</p>
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>对比维度</th><th>传统RAG</th><th>GraphRAG（微软）</th><th>LightRAG（港大）</th><th>RAG-Anything</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>知识组织</strong></td><td>向量数据库（扁平）</td><td>知识图谱（社区摘要）</td><td>知识图谱（实体关系）</td><td>多模态知识图谱</td></tr>
+                    <tr><td><strong>多模态支持</strong></td><td>❌ 不支持</td><td>❌ 不支持</td><td>❌ 不支持</td><td>✅ 原生支持</td></tr>
+                    <tr><td><strong>文档解析</strong></td><td>简单分块</td><td>简单分块</td><td>简单分块</td><td>MinerU/Docling</td></tr>
+                    <tr><td><strong>图谱构建成本</strong></td><td>N/A</td><td>高（需要社区检测）</td><td>低（直接提取实体）</td><td>低（复用LightRAG）</td></tr>
+                    <tr><td><strong>检索方式</strong></td><td>向量相似度</td><td>社区摘要+向量</td><td>图谱+向量</td><td>跨模态图谱+向量</td></tr>
+                    <tr><td><strong>端到端流水线</strong></td><td>需自行搭建</td><td>部分提供</td><td>部分提供</td><td>✅ 全内置</td></tr>
+                    <tr><td><strong>与LightRAG关系</strong></td><td>N/A</td><td>N/A</td><td>基础框架</td><td>✅ 无缝兼容/可升级</td></tr>
+                </tbody>
+            </table>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>✅ 优势</h3>
+                    <ul>
+                        <li>真正多模态，图文表公式全覆盖</li>
+                        <li>基于 LightRAG，升级成本低</li>
+                        <li>MinerU 解析，保留文档结构</li>
+                        <li>插件化架构，扩展性强</li>
+                        <li>MIT 协议，商业友好</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h3>⚠️ 局限</h3>
+                    <ul>
+                        <li>VLM 调用增加处理耗时</li>
+                        <li>多模态向量存储开销增加约30-50%</li>
+                        <li>需要自行准备 LLM/VLM/Embedding 服务</li>
+                        <li>社区规模较 LightRAG 小</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>👥 适用人群</h2>
+            <ul>
+                <li><strong>AI 研究员</strong> — 快速从大量论文中提取多模态信息，跨模态检索</li>
+                <li><strong>金融分析师</strong> — 处理年报/研报（文字+图表+数据表），自动理解图表趋势</li>
+                <li><strong>技术文档撰写者</strong> — 将产品文档转为可检索知识库，用户提问时可同时命中文字和图表</li>
+                <li><strong>RAG 工程师</strong> — 在现有 LightRAG 基础上扩展多模态能力，复用已有部署</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p><strong>GitHub 地址</strong>：<a href="https://github.com/HKUDS/RAG-Anything">HKUDS/RAG-Anything</a>（⭐ 20,241）</p>
+            <p><strong>PyPI 包</strong>：<code>pip install raganything</code></p>
+            <p><strong>arXiv 论文</strong>：<a href="https://arxiv.org/abs/2510.12323">2510.12323</a></p>
+            <p><strong>License</strong>：MIT</p>
+            <p style="margin-top: 1rem;">本文为 GitHub AI 项目日报，每日更新</p>
+        </footer>
+    </div>
+</body>
+</html>
