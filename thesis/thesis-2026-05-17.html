@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>2026.5.17｜SU-01论文解读 · 30B模型拿下奥赛金牌的简化训练配方</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background-color: #ffffff;
+      color: #333;
+      line-height: 1.8;
+      font-size: 15px;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+    .article-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #111;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .meta .author {
+      color: #666;
+    }
+    .paper-info {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+    .paper-info table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .paper-info td {
+      padding: 4px 0;
+      vertical-align: top;
+    }
+    .paper-info td:first-child {
+      color: #888;
+      width: 70px;
+      font-weight: 500;
+    }
+    .paper-info a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .paper-info a:hover {
+      text-decoration: underline;
+    }
+    .tags {
+      margin-top: 10px;
+    }
+    .tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a56db;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+    h2 {
+      font-size: 18px;
+      color: #111;
+      border-left: 4px solid #4a90e2;
+      padding-left: 12px;
+      margin-top: 36px;
+      margin-bottom: 14px;
+    }
+    p {
+      margin: 12px 0;
+      color: #333;
+      text-align: justify;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 20px auto;
+      border-radius: 6px;
+    }
+    .img-caption {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: -12px;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .highlight-box {
+      background: #f0f7ff;
+      border-left: 4px solid #4a90e2;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    .quote {
+      background: #f5f5f5;
+      border-left: 4px solid #bbb;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-style: italic;
+      color: #555;
+      font-size: 14px;
+    }
+    .quote-author {
+      font-style: normal;
+      font-weight: bold;
+      color: #888;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    th {
+      background: #f0f7ff;
+      color: #333;
+      font-weight: 600;
+      text-align: left;
+      padding: 8px 10px;
+      border: 1px solid #dde3f0;
+    }
+    td {
+      padding: 8px 10px;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+    .highlight-row td {
+      background: #e8f4fd !important;
+      font-weight: 600;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 32px 0;
+    }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .key-point {
+      display: inline-block;
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+    .key-point strong {
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="article-title">2026.5.17｜SU-01论文解读 · 30B模型拿下奥赛金牌的简化训练配方</div>
+  <div class="meta">✍️ fly的AI学习 · 论文解读 · 国外 · 阅读时长 8 分钟</div>
+
+  <!-- 论文信息表 -->
+  <div class="paper-info">
+    <table>
+      <tr><td>论文标题</td><td>Achieving Gold-Medal-Level Olympiad Reasoning via Simple and Unified Scaling</td></tr>
+      <tr><td>作者</td><td>Yafu Li, Runzhe Zhan 等（上海人工智能实验室、港中文、清华、上交、北大）</td></tr>
+      <tr><td>发表日期</td><td>2026-05-17</td></tr>
+      <tr><td>来源</td><td>arXiv</td></tr>
+      <tr><td>论文链接</td><td><a href="https://arxiv.org/abs/2605.13301" target="_blank">点击查看原文</a></td></tr>
+      <tr><td>代码</td><td><a href="https://github.com/Simplified-Reasoning/SU-01" target="_blank">GitHub</a> · <a href="https://huggingface.co/Simplified-Reasoning/SU-01" target="_blank">HuggingFace</a></td></tr>
+    </table>
+    <div class="tags">
+      <span class="tag">奥赛推理</span>
+      <span class="tag">强化学习</span>
+      <span class="tag">测试时扩展</span>
+      <span class="tag">数学推理</span>
+    </div>
+  </div>
+
+  <h2>这篇论文在说什么？</h2>
+  <p>数学奥赛金牌——IMO（国际数学奥林匹克）最高奖，通常只有全球最顶尖的高中生花数年时间精心准备才能拿到。但现在，一个 <strong>30B 参数</strong>的模型，在 200 步强化学习之后，在 IMO 2025 和 USAMO 2026 上都达到了金牌分数线。</p>
+  <p>这篇论文来自上海人工智能实验室、港中文、清华、上交、北大等机构，发布了一个叫 <strong>SU-01</strong> 的模型。他们的核心发现很反直觉：<strong>把模型变强的关键，不在于更大的规模或更多的数据，而在于训练顺序——先让模型死磕最难的题，再慢慢过渡到简单题。</strong></p>
+  <p>他们管这个叫"反向困惑度课程"（Reverse-Perplexity Curriculum）。配合两阶段强化学习和测试时扩展，一个 30B-A3B 的"小"模型，就能和几千亿参数的系统同台竞技。</p>
+
+  <img src="https://arxiv.org/pdf/2605.13301v1/x2.png" alt="SU-01训练推理流程总览" style="max-width:100%;border-radius:6px;margin:20px auto;">
+  <p class="img-caption">图源：原文 Fig.2 — SU-01 训练和推理流程总览</p>
+
+  <hr class="section-divider">
+
+  <h2>为什么要关注？</h2>
+  <p>推理模型在过去两年突飞猛进。从 GPT-4o 到 o1，再到 o3，各大厂商都在竞争"谁能把数学题做对"。但主流方案普遍存在两个问题：</p>
+
+  <div class="key-point"><strong>问题一：太依赖外部工具。</strong> 很多推理系统靠 Python 代码执行、形式化验证器、甚至专门的符号求解器——这些本质上是在"作弊"，把模型做不了的部分外包给了外部系统。真正意义上"自己推理"的模型其实很少。</div>
+
+  <div class="key-point"><strong>问题二：规模大到离谱。</strong> AlphaProof 用了上千万条形式化证明数据、几千步强化学习，才能达到金牌水平。普通研究者根本复现不了。</div>
+
+  <p>SU-01 想回答一个问题：<strong>能不能用更小的规模、更少的数据、更简单的 pipeline，做到同样甚至更好的效果？</strong></p>
+  <p>答案是能。他们的整个训练 pipeline 大概是：</p>
+  <ul>
+    <li>340K 条 SFT 轨迹（全部小于 8K tokens）</li>
+    <li>200 步强化学习</li>
+    <li>无需外部验证器或代码执行</li>
+    <li>就能稳定推理超过 100K tokens 的超长轨迹</li>
+  </ul>
+
+  <img src="https://arxiv.org/pdf/2605.13301v1/x4.png" alt="训练阶段性能进展" style="max-width:100%;border-radius:6px;margin:20px auto;">
+  <p class="img-caption">图源：原文 Fig.4 — 训练各阶段性能进展曲线</p>
+
+  <hr class="section-divider">
+
+  <h2>核心方法</h2>
+
+  <h3 style="font-size:16px;color:#555;margin-top:24px;">关键思路</h3>
+  <p>整个方案分三步，听起来简单，做起来很讲究。</p>
+
+  <p><strong>第一步：反向困惑度课程 SFT。</strong></p>
+  <p>常规做法是按难度从低到高喂数据——先做简单题再做难题。这相当于考试时先让学生拿满分建立信心。</p>
+  <p>但 SU-01 偏偏反过来：<strong>先喂高困惑度（难）的样本，再逐步过渡到低困惑度（简单）的样本。</strong></p>
+
+  <div class="quote">
+    "This order repeatedly starts each pass from teacher trajectories that are most mismatched with the current policy, providing the strongest learning signal."
+    <div class="quote-author">— 原文</div>
+  </div>
+
+  <p>说白了：模型每次训练周期开始时，都从"老师最会但学生最不会"的地方重新出发。这个信号最强，梯度最陡，模型学得最快。</p>
+  <p>实验也验证了这个设计的价值。用同样的数据、不同的排序方式，反向困惑度排序在 ProofBench-Advanced 上比随机排序提升了 <strong>8.3 个百分点</strong>。</p>
+
+  <p><strong>第二步：两阶段强化学习。</strong></p>
+  <p>SFT 注入能力，RL 放大能力。但他们没有一股脑全扔进去 RL，而是分了两个阶段：</p>
+  <ul>
+    <li><strong>粗粒度 RL（Coarse RL）</strong>：用可验证奖励（答案对不对），训练模型的基本搜索和自我检查能力。数据量大（8967 个可验证提示），训练 96 步。</li>
+    <li><strong>精细 RL（Refined RL）</strong>：切换到证明级生成奖励——不是只判断答案对错，还要评估证明过程的严谨性。同时引入自我改进机制和经验回放。训练 104 步。</li>
+  </ul>
+  <p>这个两阶段设计解决了一个实际问题：<strong>证明级别的奖励信号很难获取，直接从零训练 RL 很容易崩溃。</strong> 先用粗粒度 RL 打好基础，再精细化调整，成功率更高。</p>
+
+  <p><strong>第三步：测试时扩展（TTS）。</strong></p>
+  <p>这是最后一步，也是在 IMO/USAMO 上把分数从 21 分拉到 35 分的关键。</p>
+  <p>流程很简单：<strong>生成 → 验证 → 批评 → 改进 → 循环</strong>，直到通过验证或超出预算。</p>
+  <p>测试时一个题可以生成超过 100K tokens 的推理轨迹，中间的验证和修正循环是模型自己驱动的，不需要外部工具。</p>
+
+  <img src="https://arxiv.org/pdf/2605.13301v1/x5.png" alt="TTS管道生成长度分布" style="max-width:100%;border-radius:6px;margin:20px auto;">
+  <p class="img-caption">图源：原文 Fig.5 — 测试时扩展各阶段 token 生成长度分布</p>
+
+  <hr class="section-divider">
+
+  <h2>效果怎么样？</h2>
+  <p>先看最重要的：奥赛真实竞赛成绩。</p>
+
+  <h3 style="font-size:15px;color:#555;margin-top:24px;">IMO 2025（国际数学奥林匹克 2025）金牌线：35 分</h3>
+  <table>
+    <tr><th>题目</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th><th>P6</th><th>总分</th></tr>
+    <tr><td>SU-01（直接）</td><td>1</td><td>7</td><td>1</td><td>6</td><td>6</td><td>0</td><td>21</td></tr>
+    <tr class="highlight-row"><td><strong>SU-01 + TTS</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>0</strong></td><td><strong>35 🏅</strong></td></tr>
+  </table>
+  <p>P2、P4、P5 全部满分，P3 拿到满分，P6 为 0 分。最终刚好达到金牌线，一分不差。</p>
+
+  <h3 style="font-size:15px;color:#555;margin-top:24px;">USAMO 2026（美国数学奥林匹克 2026）金牌线：25 分</h3>
+  <table>
+    <tr><th>题目</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th><th>P6</th><th>总分</th></tr>
+    <tr><td>SU-01（直接）</td><td>7</td><td>0</td><td>0</td><td>7</td><td>0</td><td>1</td><td>15</td></tr>
+    <tr class="highlight-row"><td><strong>SU-01 + TTS</strong></td><td><strong>7</strong></td><td><strong>0</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>7</strong></td><td><strong>35 🏅</strong></td></tr>
+  </table>
+  <p>有趣的是，直接推理时拿 0 分的 P2、P3、P5，经过 TTS 的自我修正之后全部拿到了满分。说明测试时扩展对于"差一点就能做对"的题特别有效。</p>
+
+  <h3 style="font-size:15px;color:#555;margin-top:24px;">IPhO（国际物理奥林匹克）</h3>
+  <table>
+    <tr><th>年份</th><th>SU-01</th><th>SU-01 + TTS</th><th>金牌线</th></tr>
+    <tr><td>IPhO 2024</td><td>23.5</td><td><strong>25.3</strong></td><td>20.8</td></tr>
+    <tr><td>IPhO 2025</td><td>20.3</td><td><strong>21.7</strong></td><td>19.7</td></tr>
+  </table>
+  <p>连续两年超过金牌线。值得注意的是 IPhO 2024 的直接分数（23.5）就已经超过金牌线了，TTS 进一步拉高到 25.3。</p>
+
+  <h3 style="font-size:15px;color:#555;margin-top:24px;">IMO-ProofBench 严格证明 benchmark 对比</h3>
+  <table>
+    <tr><th>模型</th><th>Basic</th><th>Advanced</th><th>Overall</th></tr>
+    <tr><td>P1-30B（基座）</td><td>33.8%</td><td>6.2%</td><td>20.0%</td></tr>
+    <tr><td>Qwen3.6-35B-A3B</td><td>39.1%</td><td>7.1%</td><td>23.1%</td></tr>
+    <tr><td>GPT-5.5-High（大型）</td><td>96.7%</td><td>64.8%</td><td>80.7%</td></tr>
+    <tr><td><strong>SU-01（直接）</strong></td><td><strong>77.1%</strong></td><td><strong>38.1%</strong></td><td><strong>57.6%</strong></td></tr>
+    <tr class="highlight-row"><td><strong>SU-01 + TTS</strong></td><td><strong>91.0%</strong></td><td><strong>49.5%</strong></td><td><strong>70.2%</strong></td></tr>
+  </table>
+  <p>和基座模型相比，SU-01 直接提升了 <strong>37.6 个百分点</strong>。TTS 之后进一步提升到 70.2%，逼近 GPT-5.5-High 的水平——而 SU-01 参数量只有 GPT-5.5 的几十分之一。</p>
+
+  <hr class="section-divider">
+
+  <h2>和其他方案比有什么不同？</h2>
+  <table>
+    <tr><th>方案</th><th>参数量</th><th>数据量</th><th>外部工具</th><th>TTS</th><th>IMO金牌</th></tr>
+    <tr><td>AlphaProof</td><td>极大（未公开）</td><td>数千万形式化证明</td><td>需要形式化验证器</td><td>无</td><td>是</td></tr>
+    <tr><td>o3（高计算版）</td><td>极大</td><td>未公开</td><td>不确定</td><td>是</td><td>是</td></tr>
+    <tr class="highlight-row"><td><strong>SU-01</strong></td><td><strong>30B-A3B</strong></td><td><strong>340K轨迹</strong></td><td><strong>不需要</strong></td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+  </table>
+  <p>最大的差异在于：<strong>SU-01 不依赖任何外部工具或形式化验证器。</strong> 它的证明评估完全依赖模型自身的判断能力。这意味着部署门槛大幅降低，也意味着它能在更广泛的任务上工作——因为现实世界中的大多数问题没有"标准答案验证器"。</p>
+  <p>另一个关键差异是训练效率。200 步 RL、340K 条轨迹，这个量级在学术界是可复现的。不需要数千 GPU 小时，不需要自研的 AlphaCode 级别的数据生成流水线。</p>
+
+  <img src="https://arxiv.org/pdf/2605.13301v1/x3.png" alt="SFT数据组成" style="max-width:100%;border-radius:6px;margin:20px auto;">
+  <p class="img-caption">图源：原文 Fig.3 — SFT 数据组成（数学、科学、指令跟随、自我验证等）</p>
+
+  <hr class="section-divider">
+
+  <h2>对开发者意味着什么？</h2>
+  <p><strong>可以直接试了。</strong> 模型已经开源在 HuggingFace：<code>Simplified-Reasoning/SU-01</code>，Apache-2.0 许可证。</p>
+  <p><strong>规模友好。</strong> 30B-A3B 对应的是活跃参数（experts 路由后每次只激活 3B 参数），大多数 8×A100 的机器能跑起来。这比动辄几百 B 的大模型亲民得多。</p>
+  <p><strong>三阶段训练流程有参考价值。</strong> 即使你不做奥赛推理，反向困惑度课程 + 两阶段 RL 的设计思路，完全可以用在别的地方。核心洞察是：<strong>让模型先直面最难的样本，比从简单到复杂更高效。</strong></p>
+  <p><strong>测试时扩展值得关注。</strong> SU-01 + TTS 把 IMO 分数从 21 拉到 35——同样的模型，不同的推理预算，差距是 14 分。如果你有场景需要模型在复杂问题上少出错，可以考虑在推理阶段加入验证-修正循环。</p>
+
+  <div class="highlight-box">
+    <strong>不过也要清醒一点。</strong> IMO P6（最难的压轴题）始终是 0 分，连 TTS 都救不了。这说明当前模型对"需要原创性洞察"的问题，依然有天花板。
+  </div>
+
+  <p>📄 技术报告：<a href="https://arxiv.org/abs/2605.13301" target="_blank">arXiv:2605.13301</a></p>
+  <p>💻 代码：<a href="https://github.com/Simplified-Reasoning/SU-01" target="_blank">GitHub</a> · <a href="https://huggingface.co/Simplified-Reasoning/SU-01" target="_blank">HuggingFace 模型</a></p>
+
+  <div class="footer">👤 fly的AI学习 | 每日更新 AI 大模型最新动态</div>
+</div>
+</body>
+</html>
