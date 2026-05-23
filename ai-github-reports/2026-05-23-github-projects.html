@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIS · GitHub AI 项目深度介绍 · 2026年05月23日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
+        .container { max-width: 860px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
+        .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card ul { padding-left: 20px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #e8f0fe; color: #1e3a5f; padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #2d6a9f; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
+        tr:last-child td { border-bottom: none; }
+        .highlight { background: linear-gradient(180deg, transparent 60%, #fef9c3 60%); font-weight: 600; }
+        .cta { text-align: center; margin-top: 30px; }
+        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a:hover { background: #1e3a5f; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .insight { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 20px; margin-top: 20px; font-size: 14px; color: #92400e; }
+        .tag-new { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+        .workflow-step { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; }
+        .workflow-step .step-title { font-weight: 600; color: #1e3a5f; font-size: 14px; margin-bottom: 4px; }
+        .workflow-step .step-desc { font-size: 13px; color: #64748b; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date-badge">GitHub AI 项目 · 2026年05月23日</div>
+        <h1>ARIS ⚔️ Auto-Research-In-Sleep</h1>
+        <p class="subtitle">让 Claude Code 睡着做研究，醒来论文写好了。跨模型对抗协作 + 三层架构 + 纯 Markdown Skills。</p>
+    </div>
+
+    <div class="meta-bar">
+        <span>⭐ ~9.9k</span>
+        <span>📝 Markdown (SKILL.md)</span>
+        <span>📜 MIT</span>
+        <span>📅 2026年3月创建</span>
+        <span>🔗 <a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep" target="_blank" style="color:#2d6a9f">GitHub</a></span>
+        <span>📄 <a href="https://arxiv.org/abs/2605.03042" target="_blank" style="color:#2d6a9f">论文</a></span>
+    </div>
+
+    <div class="topics">
+        <span class="topic">autonomous-research</span>
+        <span class="topic">multi-agent</span>
+        <span class="topic">claude-code</span>
+        <span class="topic">cross-model</span>
+        <span class="topic">adversarial-collaboration</span>
+        <span class="topic">paper-writing</span>
+        <span class="topic">ml-research</span>
+    </div>
+
+    <div class="desc-card">
+        <p>ARIS（Auto-Research-In-Sleep）是上海交通大学开源的自主 ML 研究框架，通过跨模型对抗协作解决长程 Agent 的"虚假合理性"问题。核心理念：让 Claude Code 执行研究，让 GPT-5.4 审查挑刺，两个不同家族的模型互相对抗，把分歧暴露出来。整个系统由 74 个 Markdown 文件组成，零依赖、零锁定。</p>
+    </div>
+
+    <div class="card">
+        <h2>📌 项目背景</h2>
+        <p>当 AI Agent 尝试自主完成长周期科研任务时，最大的问题不是"跑不下去"——而是<strong>"看起来很对，其实全错"</strong>。长时间运行的 Agent 会产生表面合理但证据不完整或暗含执行模型自身预设偏见的结论，这种"虚假合理性"（Plausible Hallucination）是自主科研领域的核心瓶颈。</p>
+        <br>
+        <p>ARIS 由上海交大李帅课题组（杨若枫、李永灿、李帅）开发，2026 年 5 月上传 arXiv 论文（<a href="https://arxiv.org/abs/2605.03042" target="_blank" style="color:#2d6a9f">2605.03042</a>），当天登上 Hugging Face Daily Papers 第一名（68 赞）。arXiv 编号末尾的 <strong>.03042</strong> 意味着这是 5 月 6 日当天的第 42 篇投稿——当天竞争最激烈的一天之一。</p>
+        <div class="insight">
+            <strong>核心洞察</strong>：长周期 Agent 的瓶颈不是能力，是可信度。ARIS 不追求"让 Agent 跑得更远"，而专攻"如何发现并纠正 Agent 在长程研究中产生的虚假合理性"。
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔧 核心功能</h2>
+
+        <div class="workflow-step">
+            <div class="step-title">W1 创意发现 — /idea-discovery "direction"</div>
+            <div class="step-desc">文献调研（Zotero+Obsidian+arXiv+Scholar） → GPT-5.4 xhigh 头脑风暴 8-12 个想法 → 新颖性检查 → GPU 试点实验（最多并行 3 个，总预算 8 GPU-hours） → 排序报告</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-title">W1.5 实验桥接 — /experiment-bridge</div>
+            <div class="step-desc">解析实验计划 → 代码实现 → GPT-5.4 代码审查（部署前抓逻辑 Bug） → Sanity Check → GPU 部署 → 结果回收</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-title">W2 自动审查循环 — /auto-review-loop "topic" <span class="tag-new">实测 5.0→7.5/10</span></div>
+            <div class="step-desc">跨模型评分 → 提取行动项 → 触发 GPU 实验 → 修订 → 收敛检查。4 轮循环，8 小时隔夜运行，触发 20+ 次 GPU 实验。内置安全机制：MAX_ROUNDS=4、>4h 实验自动跳过、禁止隐藏弱点</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-title">W3 论文写作 — /paper-writing "NARRATIVE.md" <span class="tag-new">实测 4→8.5/10</span></div>
+            <div class="step-desc">Claims-Evidence Matrix → 逐节 LaTeX 生成 → PDF 编译 → 2 轮自动改进。端到端测试：从 NARRATIVE_REPORT.md 生成 9 页 ICLR 2026 理论论文（7 节、29 引用、4 图、2 对比表），零编译错误、零未定义引用</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-title">W4 Rebuttal — /rebuttal "paper/" — venue: ICML</div>
+            <div class="step-desc">解析审稿意见 → 拆问题 → 策略规划 → 起草回复 → 6 道安全检查（防捏造/防过度承诺/全覆盖） → GPT-5.4 压力测试 → 定稿</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>💡 技术亮点</h2>
+        <ul>
+            <li><strong>"分歧即真相"跨模型对抗</strong>：强制执行模型（Claude）和审查模型（GPT）来自不同家族。类比随机 Bandit vs 对抗 Bandit——两人博弈比 n 人博弈更高效收敛到 Nash 均衡。审查者可自己跑代码、读数据、写测试用例</li>
+            <li><strong>三阶段证据-主张审计级联</strong>：实验审计（伪标签/幽灵结果/未执行指标） → 结果到主张映射（支持度判定） → 全新审查者终审（无上下文，只看原始结果 vs 论文定量主张）</li>
+            <li><strong>纯 Markdown Skills（零依赖哲学）</strong>：74 个 SKILL.md 文件，无框架/数据库/Docker/守护进程。热替换、跨模型通用、30 分钟通读全部逻辑。"方法论，不是平台"——可移植到 Codex CLI、Cursor、Trae、Antigravity</li>
+            <li><strong>持久 Research Wiki</strong>：失败进禁试清单、成功进起点池，螺旋式累积学习。Meta-Optimization 外循环自动分析日志改进 Skills</li>
+            <li><strong>五轮科学编辑流水线</strong>：冗余→主动语态→局部连贯→术语一致→数字一致，确保论文质量</li>
+            <li><strong>9+ 种模型组合</strong>：含全免费方案（ModelScope 2000 次/天）、国内方案（阿里 Coding Plan 一键四模型）</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>📊 实测数据</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>场景</th><th>初始评分</th><th>最终评分</th><th>轮次</th><th>耗时</th><th>GPU 实验</th></tr>
+                <tr><td>自动审查循环（隔夜运行）</td><td>5.0/10</td><td class="highlight">7.5/10</td><td>4 轮</td><td>8 小时</td><td>20+ 次</td></tr>
+                <tr><td>论文写作（ICLR 2026）</td><td>4/10</td><td class="highlight">8.5/10</td><td>3 轮</td><td>—</td><td>—</td></tr>
+                <tr><td>社区论文 A（CS 会议）</td><td>—</td><td class="highlight">8/10 "clear accept"</td><td>—</td><td>—</td><td>—</td></tr>
+                <tr><td>社区论文 B（AAAI 2026）</td><td>—</td><td class="highlight">7/10 "accept"</td><td>—</td><td>—</td><td>纯 Codex CLI</td></tr>
+            </table>
+        </div>
+        <div class="insight">
+            <strong>值得注意</strong>：评分到 7.5 就停了，没有继续推到 8.5 或 9——作者的学术克制。Round 3 大规模种子研究"杀死"了主要改进声称，系统选择了坦诚报告而非粉饰。
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔄 对比分析</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>维度</th><th>AutoGPT</th><th>AI Scientist (Sakana)</th><th>MetaGPT</th><th><strong>ARIS</strong></th></tr>
+                <tr><td>核心机制</td><td>单 Agent 递归</td><td>多阶段 + 自打分</td><td>多角色 SOP</td><td class="highlight">跨模型对抗</td></tr>
+                <tr><td>对抗审查</td><td>✗</td><td>✗（自打分）</td><td>✗（同模型角色扮演）</td><td class="highlight">✓ Claude vs GPT</td></tr>
+                <tr><td>持久记忆</td><td>✗</td><td>部分</td><td>✗</td><td class="highlight">✓ Wiki 螺旋积累</td></tr>
+                <tr><td>证据-主张审计</td><td>✗</td><td>部分</td><td>✗</td><td class="highlight">✓ 三阶段级联</td></tr>
+                <tr><td>依赖复杂度</td><td>重</td><td>重</td><td>中</td><td class="highlight">极轻（纯 MD）</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 适用人群</h2>
+        <ul>
+            <li><strong>ML 研究者</strong>：加速文献调研→想法验证→实验迭代→论文写作全流程</li>
+            <li><strong>博士生 / 博后</strong>：隔夜运行自动审查循环，早上发现弱点已被修正</li>
+            <li><strong>研究组负责人</strong>：统一研究流程，减少人为审阅遗漏</li>
+            <li><strong>AI 工程师</strong>：学习极简 Markdown Skills 架构设计范式</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🚀 快速上手</h2>
+        <div class="quickstart"># 1. 安装 Claude Code + Codex CLI
+npm install -g @openai/codex
+claude mcp add codex -s user -- codex mcp-server
+
+# 2. 克隆并安装 Skills
+git clone https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep.git
+cp -r Auto-claude-code-research-in-sleep/skills/* ~/.claude/skills/
+
+# 3. 初始化研究 Wiki
+claude
+> /research-wiki init
+
+# 4. 轻量文献调研
+> /research-lit "your direction" — effort: lite
+
+# 5. 全流程一键启动
+> /research-pipeline "your direction" — effort: balanced</div>
+        <p style="margin-top:10px;font-size:13px;color:#888;">国内免费方案可通过 ModelScope 免费层零成本运行，详见 docs/MODELSCOPE_GUIDE.md</p>
+    </div>
+
+    <div class="card">
+        <h2>⚠️ 局限性（作者自述）</h2>
+        <ul>
+            <li>观察性证据 ≠ 因果证据，不能严格证明跨家族审查一定优于同家族</li>
+            <li>可能 3 个、4 个 Reviewer 效果更好，当前只验证了双模型</li>
+            <li>降低幻觉概率，但不消除幻觉</li>
+            <li>仓库级审查需把代码给外部 API，本地审查路由仍在规划中</li>
+        </ul>
+    </div>
+
+    <div class="cta">
+        <a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep" target="_blank">⭐ 访问 GitHub 仓库</a>
+    </div>
+
+    <div class="footer">
+        <p>AI日课 · GitHub AI 项目日报 · 2026年05月23日</p>
+    </div>
+</div>
+</body>
+</html>
