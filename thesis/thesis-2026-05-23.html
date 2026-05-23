@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2026.5.23｜SR²AM 解读 · 30B 模型干翻 1T 参数，推理 token 减少 95%</title>
+  <title>2026.5.23｜让Agent自己改代码 · MOSS让AI系统学会「自我进化」</title>
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: #f5f6fa; margin: 0; padding: 16px; color: #2c3e50;">
 
@@ -11,21 +11,21 @@
 
     <!-- 标题 -->
     <h1 style="font-size: 22px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px 0; line-height: 1.4;">
-      2026.5.23｜SR²AM 解读 · 30B 模型干翻 1T 参数，推理 token 减少 95%
+      2026.5.23｜让Agent自己改代码 · MOSS让AI系统学会「自我进化」
     </h1>
     <div style="font-size: 13px; color: #888; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
-      ✍️ fly的AI学习 &nbsp;|&nbsp; 论文解读 · 国外 · 阅读时长约 8 分钟
+      ✍️ fly的AI学习 &nbsp;|&nbsp; 论文解读 · 国内 · 阅读时长 8 分钟
     </div>
 
     <!-- 论文信息表 -->
     <table style="width: 100%; border-collapse: collapse; background: #f8f9fe; border-radius: 8px; overflow: hidden; margin-bottom: 28px; font-size: 14px;">
       <tr style="background: #eef0fa;">
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; width: 100px; border-bottom: 1px solid #e0e0f0;">论文标题</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Efficient Agentic Reasoning Through Self-Regulated Simulative Planning</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems</td>
       </tr>
       <tr>
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">作者</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Mingkai Deng, Jinyu Hou, Lara Sá Neves 等（CMU）</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Qianshu Cai、Xinmei Tian（中科大）; Yike Guo 等（港科大+港浸会）</td>
       </tr>
       <tr style="background: #f8f9fe;">
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">发表日期</td>
@@ -33,19 +33,19 @@
       </tr>
       <tr>
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">来源</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">arXiv:2605.22138</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">arXiv</td>
       </tr>
       <tr style="background: #f8f9fe;">
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">论文链接</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://arxiv.org/abs/2605.22138" style="color: #4361ee; text-decoration: none;">点击查看原文 arXiv:2605.22138</a></td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://arxiv.org/abs/2605.22794" style="color: #4361ee; text-decoration: none;">点击查看原文 arXiv:2605.22794</a></td>
       </tr>
       <tr>
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">代码</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://github.com/sailing-lab/sr2am" style="color: #4361ee; text-decoration: none;">GitHub 仓库</a></td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://github.com/dav-joy-thon/MOSS" style="color: #4361ee; text-decoration: none;">GitHub 仓库</a></td>
       </tr>
       <tr style="background: #f8f9fe;">
         <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a;">标签</td>
-        <td style="padding: 10px 14px;"><span style="background: #e8f4fd; color: #2196f3; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">Agent</span><span style="background: #e8f5e9; color: #4caf50; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">推理优化</span><span style="background: #fff3e0; color: #ff9800; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">强化学习</span><span style="background: #f3e5f5; color: #9c27b0; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">效率提升</span><span style="background: #fce4ec; color: #e91e63; padding: 2px 8px; border-radius: 4px; font-size: 12px;">CMU</span></td>
+        <td style="padding: 10px 14px;"><span style="background: #e8f4fd; color: #2196f3; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">Agent</span><span style="background: #e8f5e9; color: #4caf50; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">自我进化</span><span style="background: #fff3e0; color: #ff9800; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">源代码改写</span><span style="background: #f3e5f5; color: #9c27b0; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">故障自动修复</span><span style="background: #fce4ec; color: #e91e63; padding: 2px 8px; border-radius: 4px; font-size: 12px;">生产级AI</span></td>
       </tr>
     </table>
 
@@ -53,17 +53,14 @@
     <div style="margin-bottom: 28px;">
       <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #4361ee; padding-left: 12px; margin-bottom: 14px;">这篇论文在说什么？</h2>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        CMU 的团队做了一个很巧妙的事：他们把 Agent 的推理过程拆成了三个系统，让模型学会"什么时候该做规划、规划多远"，而不是像现在的主流方法那样无脑拉长推理链。
+        想象一下：你部署了一个 AI Agent 帮团队处理日常任务，用了两个月，它每次遇到同样的坑还是会掉进去。你只能等下一次人工更新才能修——这就是现在所有 AI Agent 系统的真实处境。
       </p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        结果很惊人：<strong>30B 的模型，性能媲美 685B~1T 的超大模型</strong>，同时推理 token 消耗减少了 25.8%~95.3%。
-      </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        核心是他们提出的 <strong>SR²AM</strong>（Self-Regulated Simulative Reasoning Agentic LLM）架构，把"要不要规划"、"规划多远"这个决策权交给了模型自己，通过强化学习训练出一个"配置器"来动态调节。
+        中科大和港科大的团队决定不走这条路。他们搞了一个叫 <strong>MOSS</strong> 的系统，<strong>让 AI Agent 部署后能自己改自己的源代码</strong>——不是改提示词、不是改技能配置，而是直接修改 agent 框架本身的核心代码（路由、状态管理、钩子顺序这些）。一次自动进化，四个任务的平均分从 0.25 暴拉到 0.61，直接翻倍还多。
       </p>
       <div style="text-align: center; margin: 20px 0;">
-        <img src="https://arxiv.org/html/2605.22138v1/x1.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="SR²AM 三系统架构示意图">
-        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.1 — SR²AM 的三系统交互架构*</div>
+        <img src="https://arxiv.org/html/2605.22794v1/x1.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="MOSS系统拓扑架构">
+        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.1 — MOSS系统拓扑架构*</div>
       </div>
     </div>
 
@@ -71,31 +68,19 @@
     <div style="margin-bottom: 28px;">
       <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #e74c3c; padding-left: 12px; margin-bottom: 14px;">为什么要关注？</h2>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        现在的 Agent 推理有个通病：训练时推理链越练越长，token 哗哗地消耗，但准确率并没有同比提升。
+        现在的"自我进化"Agent 其实都在玩文字游戏。Voyager、SkillClaw、EvoAgentX 这些系统所谓的"进化"，本质上就是让 Agent 改改技能描述文件、调调提示词——全在"文本层"打转。
       </p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        问题出在哪？现在的推理模型（比如 o1、DeepSeek-R1 这类）本质上是在做"无约束的思维链"——模型想推多久就推多久，没有任何机制来控制它"要不要规划"、"规划到什么深度"。
-      </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        这就导致：
-      </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 6px 0;">
-        • <strong>资源浪费</strong>：很多简单问题被过度推理
-      </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 6px 0;">
-        • <strong>效率低下</strong>：推理 token 暴涨，成本飙升
-      </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        • <strong>不可控</strong>：你没法预测模型会"想"多久
+        问题在哪？<strong>Agent 框架的核心代码从来没被碰过。</strong> 路由逻辑、钩子顺序、状态不变量、任务分发——这些东西活在代码里，不在任何文本文件里。一旦故障出在这层，改多少提示词都没用。
       </p>
 
       <div style="background: #f8f9fe; border-left: 4px solid #4361ee; padding: 14px 18px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.7; color: #555;">
-        <p style="margin: 0; font-style: italic;">"How should an agent decide when and how to plan? A dominant approach builds the agent as a reactive policy with adaptive computation (e.g., chain-of-thought reasoning), trained end-to-end with the expectation that planning will emerge implicitly from sufficient data and compute. Without control over the presence, structure, or horizon of planning, however, these systems typically increase reasoning length dramatically during training, leading to inefficient token consumption that does not reliably translate to accuracy gains."</p>
-        <p style="margin: 8px 0 0 0; color: #888; font-size: 13px;">— 论文原文，Abstract</p>
+        <p style="margin: 0; font-style: italic;">"Once a failure originates in this layer—mis-routed messages, hooks firing out of order, corrupted session state, atomicity bugs across concurrent skills—no update to skills, prompts, or memory can reach it: the bug is not in the prompt text, and a prompt rewrite cannot paper over it."</p>
+        <p style="margin: 8px 0 0 0; color: #888; font-size: 13px;">— 论文原文，Introduction 第2段</p>
       </div>
 
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
-        这段话把问题说得很直白：我们指望规划能力从数据和算力中"自己长出来"，但实际上它没长好——反而学会了"想废话"。
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        翻译一下：如果 bug 出在框架代码层，你改提示词就是在隔靴搔痒。而且这个问题会越来越严重——随着 Agent 系统越来越复杂，框架层的代码也在膨胀，这类"不可达"故障的比例只会越来越高。MOSS 的思路很直接——让 Agent 自己去改代码。
       </p>
     </div>
 
@@ -103,55 +88,44 @@
     <div style="margin-bottom: 28px;">
       <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #27ae60; padding-left: 12px; margin-bottom: 14px;">核心方法</h2>
 
-      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">关键思路：三系统解耦</p>
+      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">关键思路</p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        SR²AM 把 Agent 的推理过程拆成了三个系统，各司其职：
+        MOSS 做了一件很反直觉的事：<strong>它让一个 AI 系统去修改另一个 AI 系统的源代码，然后自动验证、自动部署。</strong>
       </p>
-
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-        <tr style="background: #27ae60; color: white;">
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">系统</th>
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">职责</th>
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">类比</th>
-        </tr>
-        <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">System I（反应执行）</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">细粒度推理、直接执行动作</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">直觉反应，"看到什么就干什么"</td>
-        </tr>
-        <tr>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">System II（模拟推理）</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">用世界模型预测未来状态，做规划</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">深思熟虑，"如果我这样做，会发生什么"</td>
-        </tr>
-        <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; font-weight: 600;">System III（自调节）</td>
-          <td style="padding: 9px 12px;">决定"要不要规划"、"规划多远"</td>
-          <td style="padding: 9px 12px;">元认知，"现在情况复杂，需要想远一点"</td>
-        </tr>
-      </table>
-
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        这个设计最巧妙的地方在于 <strong>System III 的存在</strong>——之前的 Agent 系统要么永远在规划（慢但准），要么完全不规划（快但容易错），没有一个"动态调节"的机制。
+        你可能会想：这不怕改崩了吗？MOSS 的设计恰好围绕"安全"做了层层关卡。它的进化流程有四个嵌套层级：
       </p>
 
       <div style="text-align: center; margin: 20px 0;">
-        <img src="https://arxiv.org/html/2605.22138v1/x2.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="SR²AM 训练流程和数据构建">
-        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.2 — v1.0 的计划重建流程*</div>
+        <img src="https://arxiv.org/html/2605.22794v1/x2.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="MOSS进化的四个嵌套层级">
+        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.2 — MOSS进化的四个嵌套层级*</div>
       </div>
 
-      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">技术细节：两阶段训练</p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        SR²AM 有两个版本，训练方式略有不同：
-      </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 6px 0;">
-        <strong>v0.1（可行性验证）</strong>：先用多个独立的提示式模块组成多模块系统，让这个系统跑任务并记录决策轨迹，再用这些轨迹去微调一个 8B 的小模型。
+        最外层（Layer 0）是进化前的基线状态。Layer 1 是迭代循环——跑完一轮，评估效果，不行再来。Layer 2 是核心：一个 <strong>7 阶段的确定性流水线</strong>。Layer 3 是阶段内的重试机制——每一关不过，就再试。
       </p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        <strong>v1.0（主要方法，可扩展）</strong>：收集预训练推理 LLM（DeepSeek-V3.2）的原始思考-行动轨迹，用标注 LLM 从轨迹中"重建"出结构化计划（当前状态 → 提议动作 → 预测未来状态），再把重建后的计划附加到原始思考内容上，先用监督学习（SFT），再用强化学习（RL）微调。
+        这 7 个阶段依次是：<strong>Locate（定位故障）</strong> → <strong>Plan（制定方案）</strong> → <strong>Plan-Review（方案审查）</strong> → <strong>Implement（执行修改）</strong> → <strong>Code-Review（代码审查）</strong> → <strong>Task-Evaluate（验证修复）</strong> → <strong>Verdict（裁决是否接受）</strong>。
       </p>
+
+      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">技术细节</p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        有两个设计特别值得展开说：
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第一，MOSS 不是"随便改"——它只改被故障证据锚定的位置。</strong> 每次进化都基于一个自动收集的"生产故障证据包"。Agent 在线上运行时，失败的 case 会被记录并打包。MOSS 只能围绕这些证据做修改——不能心血来潮重构整个代码库。这就好比医生做手术，只能动病灶，不能顺便割个阑尾。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第二，部署采用了"热替换 + 健康检查 + 自动回滚"的容器化方案。</strong> 验证通过的代码会被打包成新的容器镜像，然后原地替换旧容器。替换后，一个健康探针持续监控心跳。新版本出问题就自动回滚。整个过程只需要用户的一次确认。
+      </p>
+
+      <div style="background: #f8f9fe; border-left: 4px solid #4361ee; padding: 14px 18px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.7; color: #555;">
+        <p style="margin: 0; font-style: italic;">"Candidates are verified by replaying the batch against the candidate image in ephemeral trial workers, then promoted via user-consent-gated, in-place container swap with health-probe-gated rollback."</p>
+        <p style="margin: 8px 0 0 0; color: #888; font-size: 13px;">— 论文原文，关于部署安全机制</p>
+      </div>
+
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
-        强化学习使用 <strong>GRPO</strong>（Group Relative Policy Optimization）算法，奖励由三部分组成：答案正确性、结构遵守、最终答案可提取性。每个提示采样多条轨迹，计算组归一化优势。
+        这个部署方案的设计相当工业级——考虑到了验证、用户同意、健康检查、自动回滚每一步，不像是实验室玩具，更像是给生产环境准备的。
       </p>
     </div>
 
@@ -159,92 +133,60 @@
     <div style="margin-bottom: 28px;">
       <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #f39c12; padding-left: 12px; margin-bottom: 14px;">效果怎么样？</h2>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        实验结果相当硬核，我直接上数据：
+        MOSS 在一个真实的生产级 Agent 平台 <strong>OpenClaw</strong> 上做了验证，底层模型用的是 <strong>DeepSeek V3.2</strong>。四个运营/合规审计类任务，单次进化后的结果：
       </p>
 
-      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">主要性能对比</p>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
         <tr style="background: #f39c12; color: white;">
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">模型</th>
-          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">参数规模</th>
-          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">Pass@1</th>
-          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">推理 Token 数</th>
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">任务</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">基线分数</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">进化后</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">提升</th>
         </tr>
         <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">SR²AM-v0.1</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 600; color: #27ae60;">8B</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 600;">57.0</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">~4,000</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">SLA合规审计（中文）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.327</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.533</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 600; color: #27ae60;">+0.206</td>
         </tr>
         <tr>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">对比系统</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">120-355B</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">~57.0</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">更多</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">SLA合规审计（英文）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.253</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.545</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 600; color: #27ae60;">+0.293</td>
         </tr>
         <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600; color: #4361ee;">SR²AM-v1.0</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #27ae60;">30B</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #4361ee;">71.3</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">~5,400</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">补货链检查（中文）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.221</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.457</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 600; color: #27ae60;">+0.235</td>
         </tr>
         <tr>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">对比系统</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">685B-1T</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">~71.3</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">多 25.8%~95.3%</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">补货链检查（英文）</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">0.209</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #27ae60;">0.905</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #27ae60;">+0.696</td>
+        </tr>
+        <tr style="background: #eef0fa; font-weight: 700;">
+          <td style="padding: 9px 12px;">四任务平均</td>
+          <td style="padding: 9px 12px; text-align: center;">0.253</td>
+          <td style="padding: 9px 12px; text-align: center; color: #4361ee;">0.610</td>
+          <td style="padding: 9px 12px; text-align: center; color: #4361ee;">+0.357</td>
         </tr>
       </table>
+      <p style="font-size: 12px; color: #999; font-style: italic; text-align: center; margin: -12px 0 16px 0;">数据来源：原文 Table 2</p>
 
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        重点：<strong>SR²AM-v1.0-30B 只用了同级模型 4.7%~74.2% 的推理 token，就达到了差不多的性能。</strong>
+        几个有意思的发现：
       </p>
-
-      <p style="font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">消融实验：三系统缺一不可</p>
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-        <tr style="background: #27ae60; color: white;">
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">配置</th>
-          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">Pass@1</th>
-          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">推理 Token 数</th>
-        </tr>
-        <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600; color: #4361ee;">SR²AM-v1.0-30B (SFT+RL)</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; font-weight: 700; color: #27ae60;">72.8</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">5,414</td>
-        </tr>
-        <tr>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">移除自由形式推理（System I）</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">46.8 ↓</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">1,188</td>
-        </tr>
-        <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">移除模拟规划（System II）</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">65.2 ↓</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">4,602</td>
-        </tr>
-        <tr>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">移除选择性规划（System III）</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">65.2 ↓</td>
-          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee;">5,451</td>
-        </tr>
-        <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px;">移除计划长度控制</td>
-          <td style="padding: 9px 12px; text-align: center; color: #e74c3c;">65.3 ↓</td>
-          <td style="padding: 9px 12px; text-align: center;">4,829</td>
-        </tr>
-      </table>
-
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        <strong>1. 英文任务提升远大于中文任务。</strong> 补货链检查英文版从 0.21 直接飞到 0.90（三次测试全部超 0.75 及格线），而中文版只到了 0.46。可能原因是 DeepSeek V3.2 和 OpenClaw 的底层提示/工具链对英文支持更好。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        <strong>2. SLA 类任务提升稳健但不惊艳</strong>（+0.2~0.3）。涉及时间差计算和分级归类，属于"改了工具链但还是有认知难度"的类型。
+      </p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        这个消融实验说得很清楚：三个系统各司其职，缺了谁性能都掉。
-      </p>
-
-      <div style="text-align: center; margin: 20px 0;">
-        <img src="https://arxiv.org/html/2605.22138v1/x3.png" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="推理效率对比：SR²AM vs 无调节推理">
-        <div style="font-size: 12px; color: #999; margin-top: 8px; font-style: italic;">*图源：原文 Fig.3 — RL 训练过程中，SR²AM 的 token 消耗增长温和，而无调节推理的 token 消耗飙升*</div>
-      </div>
-
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
-        <strong>一个反直觉的发现</strong>：强化学习之后，模型的平均规划深度（horizon）增加了 <strong>22.8%</strong>，但规划频率只上升了 <strong>2.0%</strong>。意思是：模型学会了"<strong>规划得更远</strong>"而非"<strong>更频繁地规划</strong>"。这正是我们想要的——该深想的时候深想，不该想的时候别墨迹。
+        <strong>3. 进化只改了 3 个文件，177 行新增、1 行删除。</strong> 改动量极小但效果巨大——正好印证了论文的核心论点：很多故障的根因在框架代码层，改一点点就能修复一大片。
       </p>
     </div>
 
@@ -252,39 +194,59 @@
     <div style="margin-bottom: 28px;">
       <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #9b59b6; padding-left: 12px; margin-bottom: 14px;">和其他方案比有什么不同？</h2>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 16px 0;">
-        最大的不同在于：<strong>SR²AM 把"要不要规划"这个决策本身也学到了模型参数里</strong>，而不是靠人工规则或外部编排器。
+        前面提到市面上已经有不少"自我进化"Agent 系统了，但它们都在文本层操作。来看看差异：
       </p>
-
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
         <tr style="background: #9b59b6; color: white;">
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">方案类型</th>
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">代表方法</th>
-          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">缺点</th>
+          <th style="padding: 10px 12px; text-align: left; font-weight: 600;">系统</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">改技能</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">改提示词</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">改记忆</th>
+          <th style="padding: 10px 12px; text-align: center; font-weight: 600;">改框架代码</th>
         </tr>
         <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">无约束思维链</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">o1、DeepSeek-R1</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">推理长度不可控，token 浪费严重</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">Hermes Agent</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
         </tr>
         <tr>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">外部编排 Agent</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">LangGraph、CrewAI</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">依赖外部逻辑，消耗上下文窗口</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">SkillClaw</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
         </tr>
         <tr style="background: #f8f9fe;">
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">固定规划策略</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">某些 Agent 框架</td>
-          <td style="padding: 9px 12px; border-bottom: 1px solid #eee;">不管什么任务都做同样深度的规划</td>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">GenericAgent</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 12px; border-bottom: 1px solid #eee; font-weight: 600;">EvoAgentX</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #27ae60;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
+          <td style="padding: 9px 12px; text-align: center; border-bottom: 1px solid #eee; color: #e74c3c;">❌</td>
         </tr>
         <tr style="background: #f3e5f5;">
-          <td style="padding: 9px 12px; font-weight: 700; color: #9b59b6;">SR²AM（本文）</td>
-          <td style="padding: 9px 12px; font-weight: 700; color: #9b59b6;">自调节模拟推理</td>
-          <td style="padding: 9px 12px; font-weight: 700; color: #27ae60;">学会动态决策规划时机和深度</td>
+          <td style="padding: 9px 12px; font-weight: 700; color: #9b59b6;">MOSS</td>
+          <td style="padding: 9px 12px; text-align: center; color: #27ae60; font-weight: 700;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; color: #27ae60; font-weight: 700;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; color: #27ae60; font-weight: 700;">✅</td>
+          <td style="padding: 9px 12px; text-align: center; color: #27ae60; font-weight: 700;">✅</td>
         </tr>
       </table>
+      <p style="font-size: 12px; color: #999; font-style: italic; text-align: center; margin: -12px 0 16px 0;">数据来源：原文 Table 1</p>
 
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        这不是"做得更多"的差别，而是<strong>质的区别</strong>。前面那些系统的进化空间是有限的——无论怎么改提示词和技能描述，框架代码里的路由 bug、状态竞争、钩子顺序错误永远碰不到。MOSS 把进化空间从有限扩展到了<strong>图灵完备</strong>——因为编程语言是图灵完备的，而源代码改写可以产生任意程序结构。
+      </p>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
-        另外，这篇论文和前几天提到的 "Compiling Agentic Workflows into LLM Weights"（把工作流编译进模型权重）思路上有点像——都是让小模型通过微调获得原来需要外部编排或大模型才能做的事情。
+        此外，MOSS 还有一个其他系统没有的特点：<strong>确定性</strong>。改代码的效果是确定的——路由逻辑变成代码后，每次都按同样的规则执行。而改提示词的效果取决于模型当天的"心情"——模型能力波动、上下文窗口竞争、注意力稀释，都会让提示词的生效程度打折扣。
       </p>
     </div>
 
@@ -292,31 +254,21 @@
     <div style="margin-bottom: 28px;">
       <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #e67e22; padding-left: 12px; margin-bottom: 14px;">对开发者意味着什么？</h2>
       <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-        <strong>实用价值很高，几条具体建议：</strong>
+        说实话，MOSS 现在离"开箱即用"还有距离。它依赖 OpenClaw 这个特定的 Agent 平台，流水线的很多环节需要适配自己的基础设施。<strong>但如果你的团队已经在用类似 OpenClaw 的生产级 Agent 框架，MOSS 提供了一个很清晰的进化方向：</strong>
       </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
-        <strong>1. 如果你在做 Agent 系统</strong>：别再无脑让模型"多想想"了，试试给模型一个"要不要规划"的选择权。这个思路可以用提示工程先试起来——在 prompt 里加一个"是否需要制定计划"的决策步骤。
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第一，故障驱动的自动修复。</strong> 与其每次出了问题手动排查 → 改代码 → 测试 → 部署，不如让系统自己完成这个循环。MOSS 的模式是"收集故障证据 → 定位根因 → 自动修复 → 自动验证 → 一键部署"——人工只需要在最后点一下确认。
       </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
-        <strong>2. 关注推理效率</strong>：现在很多团队在卷"推理深度"，但这篇论文告诉我们，<strong>规划时机的选择</strong>可能比"规划多深"更重要。省下来的 token 就是真金白银。
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第二，代码层的自我进化比文本层有效得多。</strong> 如果你的 Agent 系统经常出一些"改提示词没用"的 bug（比如工具调用顺序错、状态丢失、并发冲突），那大概率是框架代码的问题。MOSS 的源代码级改写就是针对这类问题的。
       </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
-        <strong>3. 代码已开源</strong>：<a href="https://github.com/sailing-lab/sr2am" style="color: #4361ee; text-decoration: none;">github.com/sailing-lab/sr2am</a> —— 虽然复现需要一定资源（30B 模型 + RL 训练），但思路可以直接借鉴。
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第三，安全机制值得借鉴。</strong> 即使你不用 MOSS 本身，它的"编码权与控制权分离"（外部编码 Agent + MOSS 裁决）、"故障证据锚定修改范围"、"容器热替换 + 健康检查 + 回滚"这些设计，都是 Agent 系统自修改时必要的安全护栏。
       </p>
-      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0;">
-        <strong>4. 这个"三系统"框架有通用性</strong>：不只是 Agent 推理，任何需要"决策要不要多想一步"的场景都可以套用——比如 RAG 里决定"要不要多查一次"、代码生成里决定"要不要先写计划再写代码"。
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        最后说一句：MOSS 目前只在 4 个任务上做了验证，开源代码也比较早期。但它的思路是对的——当 AI Agent 越来越复杂，人工维护越来越跟不上时，自我进化就不是"锦上添花"，而是<strong>"不这么做就活不下去"</strong>了。
       </p>
     </div>
-
-    <!-- 引用块总结 -->
-    <div style="background: #f8f9fe; border-left: 4px solid #4361ee; padding: 14px 18px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.7; color: #555;">
-      <p style="margin: 0; font-style: italic;">"We argue that efficient agentic reasoning benefits from a decomposition of decision-making into three interacting systems: simulative reasoning (System II) that grounds deliberation in future-state prediction using a world model, self-regulation (System III) that decides when and how deeply the agent plans at each turn through a learned configurator, and reactive execution (System I) that handles fine-grained reasoning and action."</p>
-      <p style="margin: 8px 0 0 0; color: #888; font-size: 13px;">— 论文原文，Introduction 第3段</p>
-    </div>
-
-    <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
-      说的直白一点：把"想不想规划"这件事也交给模型自己判断，而不是靠人工规则定死。这个"元决策"能力，才是高效 Agent 推理的关键。
-    </p>
 
     <!-- 页脚 -->
     <div style="text-align: center; padding-top: 24px; border-top: 1px solid #f0f0f0; color: #999; font-size: 13px;">
