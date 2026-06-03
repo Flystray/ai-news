@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.3｜SafeMCP · MCP 时代的 Agent 安全防线</title>
+</head>
+<body style="margin:0; padding:0; background:#f5f6f8; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; color:#2c3e50; line-height:1.8;">
+  <div style="max-width:680px; margin:20px auto; background:#ffffff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); overflow:hidden;">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); padding:32px 24px; color:#ffffff;">
+      <h1 style="margin:0 0 8px 0; font-size:22px; font-weight:700; line-height:1.4;">2026.6.3｜SafeMCP</h1>
+      <p style="margin:0 0 12px 0; font-size:15px; opacity:0.9; line-height:1.5;">MCP 时代的 Agent 安全防线，用世界模型做前瞻推理</p>
+      <div style="font-size:12px; opacity:0.75;">✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 · 国内 &nbsp;·&nbsp; 阅读时长 10 分钟</div>
+    </div>
+
+    <!-- Paper Info Table -->
+    <div style="padding:20px 24px; background:#f8f9ff;">
+      <table style="width:100%; border-collapse:collapse; font-size:13px; color:#4a5568;">
+        <tr style="border-bottom:1px solid #e8ecf4;">
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">论文标题</td>
+          <td style="padding:6px 8px;">SafeMCP: Proactive Power Regulation for LLM Agent Defense</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8ecf4;">
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">作者</td>
+          <td style="padding:6px 8px;">Lichao Wang 等（北理工、BAAI 智源、北大）</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8ecf4;">
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">发表日期</td>
+          <td style="padding:6px 8px;">2026-06-01</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8ecf4;">
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">来源</td>
+          <td style="padding:6px 8px;">arXiv · ACL 2026 Main Conference</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8ecf4;">
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">论文链接</td>
+          <td style="padding:6px 8px;"><a href="https://arxiv.org/abs/2606.01991" style="color:#667eea; text-decoration:none;">点击查看原文</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8ecf4;">
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">代码</td>
+          <td style="padding:6px 8px;"><a href="https://github.com/wlc2424762917/SafeMCP" style="color:#667eea; text-decoration:none;">GitHub</a></td>
+        </tr>
+        <tr>
+          <td style="padding:6px 8px; font-weight:600; white-space:nowrap; color:#667eea;">标签</td>
+          <td style="padding:6px 8px;">Agent 安全 · MCP · 权力博弈 · 世界模型 · 前瞻推理</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Content -->
+    <div style="padding:24px;">
+
+      <!-- Section 1 -->
+      <div style="margin-bottom:28px;">
+        <h2 style="font-size:18px; font-weight:700; color:#2d3748; border-left:4px solid #667eea; padding-left:12px; margin:0 0 16px 0;">这篇论文在说什么？</h2>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">MCP（Model Context Protocol）火了之后，LLM Agent 获得了前所未有的工具调用能力——可以动态连接数据库、API、文件系统等各种外部资源。但能力越大，风险越高。当 Agent 可以自由获取各种工具时，一个微小的幻觉或错误就可能被放大成灾难性的操作。</p>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">北大、北理工和 BAAI 智源研究院的联合团队提出了 <strong>SafeMCP</strong>，一个服务端防御插件。它的核心思路很直觉：与其等 Agent 做出危险动作后再拦截（事后防御），不如先"预判"未来可能出什么问题，提前把危险工具过滤掉（事前防御）。SafeMCP 在三个权威基准上取得了近乎完美的安全率（最高 0.99），同时几乎没有损害 Agent 的实用性，还顺手省了 38% 的推理成本。</p>
+        <div style="text-align:center; margin:16px 0;">
+          <img src="https://arxiv.org/html/2606.01991v1/x1.png" alt="SafeMCP 防御机制示意图" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <p style="font-size:12px; color:#999; margin:8px 0 0 0;">图源：原文 Fig.1 — MCP 时代 Agent 面临的权力扩张风险与 SafeMCP 的双层防御机制</p>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div style="margin-bottom:28px;">
+        <h2 style="font-size:18px; font-weight:700; color:#2d3748; border-left:4px solid #667eea; padding-left:12px; margin:0 0 16px 0;">为什么要关注？</h2>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">MCP 已经成了 2026 年 AI 圈最热的协议之一。它的核心理念是标准化 LLM 与外部工具的连接方式，让 Agent 不再依赖硬编码的工具列表，而是能动态发现和获取所需工具。这极大提升了 Agent 的灵活性，但也打开了一个潘多拉盒子——Agent 可能获取到不该用的工具。</p>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">现有的防御方案有个共同问题：它们都是<strong>事后防御</strong>。也就是说，先让 Agent 想干什么，然后在输出层做过滤。比如 RL-Guard、ChainGuard 这些方法，都是在 Agent 产生动作之后再判断是否安全。</p>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">问题在哪？有些动作单独看无害，但执行之后会改变环境状态，导致后续动作变危险。事后防御没有"环境感知"能力，根本看不穿这种连锁反应。</p>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">打个比方：你让 Agent 帮你管一个电商后台。Agent 想查看订单数据，单独看完全合理。但看完之后它拿到了客户信息，下一步就可能删除关键数据——这个连锁风险，事后防御是发现不了的。</p>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">SafeMCP 的解法是用一个<strong>内部世界模型</strong>来预测：如果 Agent 现在调用某个工具，接下来环境会变成什么样？会不会进入危险状态？如果会，直接在工具获取阶段就把这个选项屏蔽掉。</p>
+        <div style="background:#f0f4ff; border-left:4px solid #667eea; padding:12px 16px; margin:16px 0; border-radius:0 6px 6px 0;">
+          <p style="font-size:14px; font-style:italic; margin:0 0 8px 0; color:#5a6c8a;">"The frictionless connectivity via MCP reduces source acquisition costs, transforming theoretical power-seeking incentives into practical vulnerabilities."</p>
+          <p style="font-size:14px; margin:0; color:#4a5568;">MCP 降低了工具获取的门槛，把理论上存在的权力寻求动机变成了实实在在的安全漏洞。这个判断很直白，也切中了要害。</p>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div style="margin-bottom:28px;">
+        <h2 style="font-size:18px; font-weight:700; color:#2d3748; border-left:4px solid #667eea; padding-left:12px; margin:0 0 16px 0;">核心方法</h2>
+
+        <h3 style="font-size:16px; font-weight:600; color:#4a5568; margin:0 0 12px 0;">关键思路</h3>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">SafeMCP 的核心是一个<strong>合作式 Stackelberg 权力博弈</strong>。听起来复杂，其实直觉很好理解：</p>
+        <ul style="font-size:15px; color:#4a5568; padding-left:20px; margin:0 0 12px 0;">
+          <li style="margin-bottom:8px;"><strong>SafeMCP 是"领导者"</strong>：它先看当前环境状态，预测未来风险，划定一个"安全工具集"</li>
+          <li style="margin-bottom:8px;"><strong>Agent 是"跟随者"</strong>：它只能在安全工具集里选工具来完成任务</li>
+        </ul>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">关键的"权力"概念：论文把每个状态下可用的工具集合定义为"权力"。Agent 天然有扩大权力的倾向（更多工具 = 更多能力），但权力越大，出错后果越严重。SafeMCP 就是在"安全边界"内让 Agent 尽情发挥，但不允许它越界。</p>
+
+        <div style="text-align:center; margin:16px 0;">
+          <img src="https://arxiv.org/html/2606.01991v1/x2.png" alt="三阶段训练流水线" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <p style="font-size:12px; color:#999; margin:8px 0 0 0;">图源：原文 Fig.2 — SafeMCP 的三阶段训练流程</p>
+        </div>
+
+        <h3 style="font-size:16px; font-weight:600; color:#4a5568; margin:20px 0 12px 0;">技术细节</h3>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">训练分三个阶段：</p>
+        <p style="font-size:15px; margin:0 0 8px 0; color:#4a5568;"><strong>阶段一：环境动态基础建立。</strong>用无防御的 Agent 在环境中自由交互，收集状态转移数据。这个阶段的目标是让 SafeMCP 学会"环境会怎么变"——类似于人类先观察一段时间再制定规则。</p>
+        <p style="font-size:15px; margin:0 0 8px 0; color:#4a5568;"><strong>阶段二：安全策略初始化。</strong>基于阶段一学到环境动态，用规则驱动的方式初始化安全策略。把明显不安全的工具-状态组合标记出来，作为初始过滤规则。</p>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;"><strong>阶段三：双可验证奖励的强化学习。</strong>这是最核心的部分。设计了两个可验证的奖励信号：安全性奖励（是否进入失败状态）和实用性奖励（任务是否完成）。这样训练出来的策略不需要靠人类标注，也不需要不可靠的 LLM-as-Judge。</p>
+
+        <div style="background:#f0f4ff; border-left:4px solid #667eea; padding:12px 16px; margin:16px 0; border-radius:0 6px 6px 0;">
+          <p style="font-size:14px; font-style:italic; margin:0 0 8px 0; color:#5a6c8a;">"SafeMCP operates ex-ante, treating safety as a constraint on the action space."</p>
+          <p style="font-size:14px; margin:0; color:#4a5568;">把安全当作动作空间的约束条件，而不是事后的过滤器。这个定位决定了它比所有现有方案都更高效。</p>
+        </div>
+
+        <h3 style="font-size:16px; font-weight:600; color:#4a5568; margin:20px 0 12px 0;">两层防御结构</h3>
+        <p style="font-size:15px; margin:0 0 8px 0; color:#4a5568;">运行时 SafeMCP 有两层防线：</p>
+        <ol style="font-size:15px; color:#4a5568; padding-left:20px; margin:0 0 12px 0;">
+          <li style="margin-bottom:8px;"><strong>主动工具过滤层</strong>：用世界模型预测未来状态，把会导致不安全转移的工具从可选集合中移除</li>
+          <li style="margin-bottom:8px;"><strong>即时拦截层</strong>：作为最后兜底，如果当前步骤的某个工具直接预测为不安全，立即阻断</li>
+        </ol>
+      </div>
+
+      <!-- Section 4 -->
+      <div style="margin-bottom:28px;">
+        <h2 style="font-size:18px; font-weight:700; color:#2d3748; border-left:4px solid #667eea; padding-left:12px; margin:0 0 16px 0;">效果怎么样？</h2>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">SafeMCP 在三个主流基准上做了测试。这里看最核心的 ToolEmu 结果（用 GPT-4o 作为 Agent）：</p>
+        <div style="overflow-x:auto; margin:16px 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:center;">
+            <thead>
+              <tr style="background:#667eea; color:#ffffff;">
+                <th style="padding:10px 8px; font-weight:600;">防御方法</th>
+                <th style="padding:10px 8px; font-weight:600;">Safety</th>
+                <th style="padding:10px 8px; font-weight:600;">Utility</th>
+                <th style="padding:10px 8px; font-weight:600;">Libra</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; text-align:left;">无防御</td>
+                <td style="padding:8px;">0.42</td>
+                <td style="padding:8px;">0.25</td>
+                <td style="padding:8px;">0.33</td>
+              </tr>
+              <tr style="background:#f8f9ff;">
+                <td style="padding:8px; text-align:left;">Qwen3Guard-8B</td>
+                <td style="padding:8px;">0.63</td>
+                <td style="padding:8px;">0.21</td>
+                <td style="padding:8px;">0.38</td>
+              </tr>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; text-align:left;">ChainGuard</td>
+                <td style="padding:8px;">0.71</td>
+                <td style="padding:8px;">0.15</td>
+                <td style="padding:8px;">0.36</td>
+              </tr>
+              <tr style="background:#f8f9ff;">
+                <td style="padding:8px; text-align:left;">RL-Guard</td>
+                <td style="padding:8px;">0.89</td>
+                <td style="padding:8px;">0.09</td>
+                <td style="padding:8px;">0.35</td>
+              </tr>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; text-align:left;">AgentMonitor</td>
+                <td style="padding:8px;">0.81</td>
+                <td style="padding:8px;">0.22</td>
+                <td style="padding:8px;">0.43</td>
+              </tr>
+              <tr style="background:#eef2ff;">
+                <td style="padding:8px; text-align:left; font-weight:700; color:#667eea;">SafeMCP</td>
+                <td style="padding:8px; font-weight:700; color:#667eea;">0.99</td>
+                <td style="padding:8px; font-weight:700; color:#667eea;">0.22</td>
+                <td style="padding:8px; font-weight:700; color:#667eea;">0.44</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align:center; margin:16px 0;">
+          <img src="https://arxiv.org/html/2606.01991v1/x3.png" alt="PowerSeeking Bench 上的防御效果" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <p style="font-size:12px; color:#999; margin:8px 0 0 0;">图源：原文 Fig.3 — PowerSeeking Bench 上的防御效果对比</p>
+        </div>
+
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">几个关键发现：</p>
+        <ul style="font-size:15px; color:#4a5568; padding-left:20px; margin:0 0 12px 0;">
+          <li style="margin-bottom:8px;"><strong>安全率碾压</strong>：0.99 vs 次优的 0.89（RL-Guard），几乎完美拦截了所有危险操作</li>
+          <li style="margin-bottom:8px;"><strong>效用不损失</strong>：0.22 和无防御基线持平，而 RL-Guard 为了高安全率牺牲了 64% 的效用</li>
+          <li style="margin-bottom:8px;"><strong>Libra 综合分最优</strong>：0.44，比第二名 AgentMonitor 高，且安全率高出 18 个百分点</li>
+        </ul>
+
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">还有一个很反直觉的结果：<strong>SafeMCP 比无防御还省钱</strong>。因为提前过滤掉了危险路径，Agent 不需要花 token 在注定失败的路线上。</p>
+
+        <div style="overflow-x:auto; margin:16px 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:center;">
+            <thead>
+              <tr style="background:#667eea; color:#ffffff;">
+                <th style="padding:10px 8px; font-weight:600;">方法</th>
+                <th style="padding:10px 8px; font-weight:600;">总成本</th>
+                <th style="padding:10px 8px; font-weight:600;">Agent 步数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; text-align:left;">无防御</td>
+                <td style="padding:8px;">$2.42</td>
+                <td style="padding:8px;">584</td>
+              </tr>
+              <tr style="background:#f8f9ff;">
+                <td style="padding:8px; text-align:left;">AgentMonitor</td>
+                <td style="padding:8px;">$3.87</td>
+                <td style="padding:8px;">467</td>
+              </tr>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; text-align:left;">RL-Guard</td>
+                <td style="padding:8px;">$3.17</td>
+                <td style="padding:8px;">756</td>
+              </tr>
+              <tr style="background:#eef2ff;">
+                <td style="padding:8px; text-align:left; font-weight:700; color:#667eea;">SafeMCP</td>
+                <td style="padding:8px; font-weight:700; color:#667eea;">$1.50</td>
+                <td style="padding:8px; font-weight:700; color:#667eea;">382</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:15px; margin:0; color:#4a5568;">成本降了 38%，步数减少了 35%。安全的代价不是更高，而是更低。</p>
+      </div>
+
+      <!-- Section 5 -->
+      <div style="margin-bottom:28px;">
+        <h2 style="font-size:18px; font-weight:700; color:#2d3748; border-left:4px solid #667eea; padding-left:12px; margin:0 0 16px 0;">和其他方案比有什么不同？</h2>
+        <div style="overflow-x:auto; margin:16px 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="background:#667eea; color:#ffffff;">
+                <th style="padding:10px 8px; font-weight:600;">维度</th>
+                <th style="padding:10px 8px; font-weight:600;">现有方案</th>
+                <th style="padding:10px 8px; font-weight:600;">SafeMCP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; font-weight:600;">防御时机</td>
+                <td style="padding:8px;">事后过滤（ex-post）</td>
+                <td style="padding:8px; color:#667eea; font-weight:600;">事前预防（ex-ante）</td>
+              </tr>
+              <tr style="background:#f8f9ff;">
+                <td style="padding:8px; font-weight:600;">环境感知</td>
+                <td style="padding:8px;">无，只看当前动作语义</td>
+                <td style="padding:8px; color:#667eea; font-weight:600;">有世界模型预测未来状态</td>
+              </tr>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; font-weight:600;">安全-效用平衡</td>
+                <td style="padding:8px;">高安全 = 低效用（过度拒绝）</td>
+                <td style="padding:8px; color:#667eea; font-weight:600;">高安全 + 保留效用</td>
+              </tr>
+              <tr style="background:#f8f9ff;">
+                <td style="padding:8px; font-weight:600;">部署方式</td>
+                <td style="padding:8px;">需修改 Agent 本身</td>
+                <td style="padding:8px; color:#667eea; font-weight:600;">即插即用，服务端插件</td>
+              </tr>
+              <tr style="background:#ffffff;">
+                <td style="padding:8px; font-weight:600;">训练数据</td>
+                <td style="padding:8px;">需要 LLM-as-Judge 或人类标注</td>
+                <td style="padding:8px; color:#667eea; font-weight:600;">纯自动，双可验证奖励</td>
+              </tr>
+              <tr style="background:#f8f9ff;">
+                <td style="padding:8px; font-weight:600;">计算开销</td>
+                <td style="padding:8px;">每步额外判断</td>
+                <td style="padding:8px; color:#667eea; font-weight:600;">过滤即节省后续推理成本</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;">最根本的区别在于<strong>防御理念</strong>。现有方案是"做了再说"——让 Agent 自由发挥，出问题了再拦。SafeMCP 是"想好了再做"——先预测后果，把危险选项提前拿掉。这就像交通管理的区别：一个是在路口设红绿灯（事前预防），一个是出了事故再派救护车（事后补救）。</p>
+
+        <div style="text-align:center; margin:16px 0;">
+          <img src="https://arxiv.org/html/2606.01991v1/x4.png" alt="AgentHarm 基准结果" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <p style="font-size:12px; color:#999; margin:8px 0 0 0;">图源：原文 Fig.4 — AgentHarm 基准上的安全-效用平衡</p>
+        </div>
+      </div>
+
+      <!-- Section 6 -->
+      <div style="margin-bottom:28px;">
+        <h2 style="font-size:18px; font-weight:700; color:#2d3748; border-left:4px solid #667eea; padding-left:12px; margin:0 0 16px 0;">对开发者意味着什么？</h2>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;"><strong>如果你在做 MCP 相关的 Agent 应用，SafeMCP 的思路值得直接借鉴：</strong></p>
+        <ol style="font-size:15px; color:#4a5568; padding-left:20px; margin:0 0 12px 0;">
+          <li style="margin-bottom:10px;"><strong>别只做输出层过滤。</strong>MCP 让 Agent 的动作空间变得动态且不可预测，光靠检查"说了什么"远远不够。你需要理解"做了之后环境会变成什么样"。</li>
+          <li style="margin-bottom:10px;"><strong>事前防御比事后防御更高效。</strong>SafeMCP 证明了：提前过滤不仅更安全，还能省钱（减少无效推理）。与其让 Agent 在危险路径上浪费 token 再拦截，不如一开始就不给它那个选项。</li>
+          <li style="margin-bottom:10px;"><strong>安全不应该等于过度拒绝。</strong>很多防御方案为了安全牺牲太多实用性——RL-Guard 的安全率虽然到了 0.89，但效用率只有 0.09，等于 Agent 基本干不了活。SafeMCP 说明安全和高效率不冲突。</li>
+          <li style="margin-bottom:10px;"><strong>即插即用的服务端设计很实用。</strong>SafeMCP 不需要修改 Agent 模型本身，作为 MCP Server 侧的中间件部署就行。这意味着你可以在不改动现有 Agent 代码的情况下加上安全层。</li>
+        </ol>
+        <p style="font-size:15px; margin:0 0 12px 0; color:#4a5568;"><strong>适用场景：</strong>任何让 Agent 通过 MCP 连接外部工具、数据库或 API 的生产环境。特别是那些 Agent 可以自主获取新工具的场景（比如文件系统访问、代码执行、数据库查询）——这种场景下权力寻求风险最高，也最需要 SafeMCP 这样的防御机制。</p>
+        <p style="font-size:15px; margin:0; color:#4a5568;">代码已开源：<a href="https://github.com/wlc2424762917/SafeMCP" style="color:#667eea; text-decoration:none;">github.com/wlc2424762917/SafeMCP</a></p>
+      </div>
+
+      <!-- Footer -->
+      <div style="border-top:1px solid #e8ecf4; padding-top:20px; margin-top:32px; text-align:center;">
+        <p style="margin:0; font-size:14px; color:#a0aec0;">👤 fly的AI学习 | 每日更新 AI 大模型最新动态</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
