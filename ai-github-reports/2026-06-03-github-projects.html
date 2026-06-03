@@ -18,7 +18,8 @@
         .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
         .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
         .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
-        .card p { color: #444; font-size: 15px; line-height: 1.85; }
+        .card h3 { font-size: 15px; color: #2d6a9f; margin: 20px 0 10px; font-weight: 600; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
         .card ul { padding-left: 20px; }
         .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
         .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
@@ -34,7 +35,24 @@
         .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
         .cta a:hover { background: #1e3a5f; }
         .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
-        .insight { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 20px; margin-top: 20px; font-size: 14px; color: #92400e; }
+        .insight { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 20px; margin-top: 16px; font-size: 14px; color: #92400e; }
+        .arch-layer { display: flex; align-items: flex-start; gap: 16px; margin: 12px 0; padding: 14px 18px; border-radius: 10px; }
+        .arch-01 { background: #f0f6ff; border-left: 4px solid #2d6a9f; }
+        .arch-02 { background: #f0fdf4; border-left: 4px solid #16a34a; }
+        .arch-03 { background: #fef9c3; border-left: 4px solid #ca8a04; }
+        .arch-num { font-size: 20px; font-weight: 800; min-width: 36px; }
+        .arch-01 .arch-num { color: #2d6a9f; }
+        .arch-02 .arch-num { color: #16a34a; }
+        .arch-03 .arch-num { color: #ca8a04; }
+        .arch-content strong { display: block; font-size: 14px; margin-bottom: 4px; color: #1a1a1a; }
+        .arch-content span { font-size: 13px; color: #555; }
+        .quote-card { background: #f9fafb; border-radius: 10px; padding: 16px 20px; margin: 10px 0; }
+        .quote-card blockquote { font-size: 14px; color: #444; font-style: italic; line-height: 1.7; margin-bottom: 6px; }
+        .quote-card .source { font-size: 12px; color: #888; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+        .stat-item { background: #f0f6ff; border-radius: 10px; padding: 14px 16px; text-align: center; }
+        .stat-item .num { font-size: 24px; font-weight: 700; color: #2d6a9f; }
+        .stat-item .label { font-size: 12px; color: #666; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -42,80 +60,121 @@
     <div class="header">
         <div class="date-badge">GitHub AI 项目 · 2026年06月03日</div>
         <h1>AgentMemory</h1>
-        <p class="subtitle">让 AI 编程 Agent 拥有真正可搜索的持久记忆。四层记忆架构 + 三路混合检索 + 跨 Agent 统一记忆库。</p>
+        <p class="subtitle">专为 AI 编程 Agent 设计的持久记忆引擎。四层记忆架构 · 三流混合检索 · 零外部数据库 · 支持 20+ 平台。</p>
     </div>
 
     <div class="meta-bar">
-        <span>⭐ 20,700+</span>
+        <span>⭐ 20,800+</span>
         <span>📝 TypeScript</span>
         <span>📜 Apache-2.0</span>
         <span>📅 2026-02-25 创建</span>
+        <span>🏆 Trendshift #19</span>
     </div>
 
     <div class="topics">
         <span class="topic">agentmemory</span>
-        <span class="topic">ai-agents</span>
         <span class="topic">claude-code</span>
         <span class="topic">mcp</span>
+        <span class="topic">ai-agents</span>
         <span class="topic">memory</span>
         <span class="topic">coding-agents</span>
+        <span class="topic">persistent-memory</span>
     </div>
 
     <div class="desc-card">
-        <p>AI 编程助手每次新会话都会"失忆"——你需要反复解释项目架构、编码规范、之前修复过的 Bug。AgentMemory 是一个专为编码 Agent 设计的持久记忆引擎，基于真实基准测试排名第一，让 Claude Code、Cursor、Codex 等工具拥有跨会话、跨工具的统一记忆。</p>
+        <p>AI 编程助手每次新会话都会"失忆"——你需要反复解释项目架构、编码规范、之前修复过的 Bug。AgentMemory 是一个专为编码 Agent 设计的持久记忆引擎，零外部数据库依赖，三流混合检索 R@5 达 95.2%，让 Claude Code、Cursor、Codex 等工具拥有跨会话、跨工具的统一记忆。</p>
     </div>
 
+    <!-- 数据亮点 -->
+    <div class="card">
+        <h2>核心指标一览</h2>
+        <div class="stat-grid">
+            <div class="stat-item"><div class="num">95.2%</div><div class="label">检索 R@5（LongMemEval-S）</div></div>
+            <div class="stat-item"><div class="num">94%</div><div class="label">Token 节省率（1000条记忆）</div></div>
+            <div class="stat-item"><div class="num">53</div><div class="label">MCP 工具数量</div></div>
+            <div class="stat-item"><div class="num">12</div><div class="label">自动 Hook 数量</div></div>
+            <div class="stat-item"><div class="num">126</div><div class="label">REST API 端点</div></div>
+            <div class="stat-item"><div class="num">0</div><div class="label">外部数据库依赖</div></div>
+        </div>
+    </div>
+
+    <!-- 背景 -->
     <div class="card">
         <h2>项目背景</h2>
-        <p>2026 年，AI 编程 Agent（Claude Code、Cursor、GitHub Copilot、Codex CLI 等）已成为开发者的日常工具。但它们都有一个共同的痛点：<strong>上下文窗口是临时的</strong>。每次新会话开始，Agent 就忘记了一切——你不得不反复解释项目约定、历史决策、踩过的坑。各 Agent 提供的"记忆"方案（Claude Code 的 MEMORY.md、Cursor 的 Notepad、Cline 的 Memory Bank）本质上是便签式存储，既不可搜索，也无法跨工具共享。</p>
-        <br>
-        <p><strong>AgentMemory</strong>（rohitg00/agentmemory）正是为解决这个问题而生。它于 2026 年 2 月创建，TypeScript 编写，Apache-2.0 许可证，目前已获得 20,700+ GitHub Stars。项目的核心理念是：<strong>将 Karpathy 的 LLM Wiki 模式工程化</strong>，加入置信度评分、生命周期管理、知识图谱和混合搜索，打造一个真正可搜索、可检索、可跨 Agent 共享的持久记忆系统。</p>
+        <p>2026 年，AI 编程 Agent 已成为开发者日常工具。但它们都有一个共同的痛点：<strong>上下文窗口是临时的</strong>。每次新会话开始，Agent 就忘记了一切。各 Agent 提供的"记忆"方案（Claude Code 的 MEMORY.md、Cursor 的 Notepad）本质上是便签式存储，既不可搜索，也无法跨工具共享。</p>
+        <p>随着观测量增长，MEMORY.md 的 Token 消耗线性膨胀：积累到 1,000 条时需要 5 万 Token 且只覆盖 20% 的历史；到 5,000 条时需要 25 万 Token，可达率仅剩 4%。</p>
+        <p><strong>AgentMemory</strong> 将 Karpathy 的 LLM Wiki 模式工程化，加入置信度评分、生命周期管理、知识图谱和混合搜索，打造一个真正可搜索、可检索、可跨 Agent 共享的持久记忆系统。目前获得 20,800+ Stars，在 Trendshift 进入第 19 位，获 AlphaSignal（18 万订阅）和 Linux Foundation 支持的 AAIF 关注。</p>
     </div>
 
+    <!-- 三层架构 -->
+    <div class="card">
+        <h2>三层运行时架构</h2>
+        <p>整个运行时是<strong>单进程 Node.js 应用，零外部数据库依赖</strong>（无 Redis、Kafka、Postgres、Qdrant、Neo4j），状态以 JSON 持久化到本地磁盘：</p>
+        <div class="arch-layer arch-01">
+            <div class="arch-num">01</div>
+            <div class="arch-content">
+                <strong>HOOKS 钩子层</strong>
+                <span>12 个自动捕获钩子接入每个编码 Agent，每次工具调用、每个提示词、每次停止都被压缩为观测记录。无需任何胶水代码，安装即用。</span>
+            </div>
+        </div>
+        <div class="arch-layer arch-02">
+            <div class="arch-num">02</div>
+            <div class="arch-content">
+                <strong>RECALL 召回层</strong>
+                <span>三流检索（BM25 + 向量 + 知识图谱），设备端重排序，P50 延迟低于 20ms。</span>
+            </div>
+        </div>
+        <div class="arch-layer arch-03">
+            <div class="arch-num">03</div>
+            <div class="arch-content">
+                <strong>CONSOLIDATE 整合层</strong>
+                <span>每小时扫描，将原始观测压缩为语义记忆，合并重复项，衰减过期数据，每次删除生成审计记录。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 核心功能 -->
     <div class="card">
         <h2>核心功能</h2>
-        <p><strong>1. 四层记忆整合架构</strong></p>
-        <p>AgentMemory 模仿人类记忆系统，设计了四层递进式记忆架构：</p>
-        <br>
+
+        <h3>四层记忆整合架构</h3>
         <div class="table-wrap">
             <table>
                 <tr><th>记忆层级</th><th>存储内容</th><th>解决的问题</th></tr>
                 <tr><td><strong>Working（工作记忆）</strong></td><td>工具调用产生的原始观测</td><td>保留最接近现场的短期数据</td></tr>
                 <tr><td><strong>Episodic（情节记忆）</strong></td><td>压缩后的会话摘要</td><td>"上一次发生了什么？"</td></tr>
-                <tr><td><strong>Semantic（语义记忆）</strong></td><td>抽取的事实、模式与稳定知识</td><td>"这个项目长期成立的事实是什么？"</td></tr>
-                <tr><td><strong>Procedural（程序记忆）</strong></td><td>工作流、决策套路与可复用做法</td><td>"这类事情通常怎么做？"</td></tr>
+                <tr><td><strong>Semantic（语义记忆）</strong></td><td>抽取的事实、模式与稳定知识</td><td>"项目长期成立的事实？"</td></tr>
+                <tr><td><strong>Procedural（程序记忆）</strong></td><td>工作流、决策套路</td><td>"这类事情通常怎么做？"</td></tr>
             </table>
         </div>
-        <br>
-        <p><strong>2. 三路混合检索</strong></p>
-        <p>融合 BM25 关键词检索 + Vector 语义检索 + Knowledge Graph 关系遍历，通过 Reciprocal Rank Fusion（RRF）统一排序。当搜索 "database performance optimization" 时，BM25 关键词召回率为 0%，而向量检索直接拉到 40%，两者互补而非替代。</p>
-        <br>
-        <p><strong>3. 12 个自动 Hooks + 53 个 MCP 工具</strong></p>
-        <p>通过 12 种生命周期事件（PostToolUse、SessionStart、SessionEnd 等）自动捕获 Agent 行为，配合 53+ 个 MCP 工具，覆盖记忆的存、查、删、改、导出全链路。</p>
-        <br>
-        <p><strong>4. 跨 Agent 统一记忆库</strong></p>
-        <p>所有 Agent 共享同一个记忆服务器。Claude Code 中积累的项目知识，切换到 Cursor 时同样可用。支持 Claude Code、Cursor、Codex CLI、GitHub Copilot CLI、Gemini CLI、Hermes、OpenClaw 等。</p>
-        <br>
-        <p><strong>5. 实时 Viewer + iii Console</strong></p>
-        <p>Viewer（localhost:3113）查看会话、记忆、图谱和健康仪表盘；iii Console（localhost:3114）支持函数级执行追踪、流处理监控和完整 OTEL 可观测性链路。</p>
-        <br>
-        <p><strong>6. Token 效率优化</strong></p>
+
+        <h3>三流混合检索（BM25 + 向量 + 知识图谱）</h3>
+        <p>搜索 "database performance optimization" 时，BM25 关键词召回率为 <strong>0%</strong>，向量检索达 <strong>40%</strong>——两者互补，通过 Reciprocal Rank Fusion（RRF）融合后大幅提升综合召回质量。</p>
+
+        <h3>Token 效率：按需召回 vs 全量塞入</h3>
         <div class="table-wrap">
             <table>
-                <tr><th>观测量</th><th>MEMORY.md Token</th><th>AgentMemory Token</th><th>Token 节省率</th><th>MEMORY.md 可达率</th></tr>
+                <tr><th>观测量</th><th>MEMORY.md Token</th><th>AgentMemory Token</th><th>节省率</th><th>MEMORY.md 可达率</th></tr>
                 <tr><td>240 条</td><td>12,000</td><td>3,142</td><td>74%</td><td>83%</td></tr>
                 <tr><td>1,000 条</td><td>50,000</td><td>3,142</td><td class="highlight">94%</td><td>20%</td></tr>
                 <tr><td>5,000 条</td><td>250,000</td><td>3,142</td><td class="highlight">99%</td><td>4%</td></tr>
             </table>
         </div>
+
+        <h3>更多能力亮点</h3>
+        <ul>
+            <li><strong>会话回放</strong>：支持导入 Claude Code JSONL 格式，完整还原观察、工具使用、时间线</li>
+            <li><strong>知识图谱</strong>：压缩时自动提取实体和关系，支持时序边，支持 Viewer 可视化</li>
+            <li><strong>网格联邦（P2P 同步）</strong>：多节点 agentmemory 互相推/拉记忆，Bearer Token 鉴权，支持 TEAM_ID 团队共享</li>
+            <li><strong>Obsidian 导出</strong>：将记忆镜像为带 Frontmatter 的 Markdown，兼容 Obsidian 图谱视图</li>
+            <li><strong>多 LLM 支持</strong>：Claude（默认零配置）、Anthropic API、Gemini、MiniMax、OpenRouter 五个提供商，自动检测环境变量</li>
+        </ul>
     </div>
 
+    <!-- 技术亮点 -->
     <div class="card">
         <h2>技术亮点</h2>
-        <p><strong>基于 iii-engine 的运行时架构</strong></p>
-        <p>AgentMemory 本身是一个 iii 运行时实例，提供 HTTP Triggers（事件驱动）、KV State（持久化状态）、Streams（数据流处理）三大核心原语，支持 cron 定时任务、otel 可观测性、queue 重试队列和 database 后端扩展。</p>
-        <br>
-        <p><strong>学术级基准测试</strong></p>
+        <h3>学术级基准测试</h3>
         <div class="table-wrap">
             <table>
                 <tr><th>系统</th><th>R@5</th><th>R@10</th><th>NDCG@10</th><th>MRR</th></tr>
@@ -123,39 +182,87 @@
                 <tr><td>agentmemory (BM25-only)</td><td>86.2%</td><td>94.6%</td><td>73.0%</td><td>71.5%</td></tr>
             </table>
         </div>
-        <p style="margin-top: 8px; font-size: 13px; color: #888;">LongMemEval-S 学术基准（500 题，约 115K tokens）</p>
-        <br>
-        <p><strong>Circuit Breaker + Fallback Chain</strong></p>
-        <p>内置断路器机制（3 次失败触发熔断）和回退链，确保 LLM 摘要、embedding 生成等外部依赖异常时核心记忆存取不受影响。827 个通过的测试用例提供工程保障。</p>
-    </div>
+        <p style="font-size: 13px; color: #888; margin-top: 6px;">LongMemEval-S 学术基准（500 题，约 115K tokens）。内部基准 Coding-Agent-Life-v1 中，Hybrid 精确率（P@5）是 grep 的 2.2 倍，延迟仅 14ms。</p>
 
-    <div class="card">
-        <h2>竞品对比</h2>
+        <div class="insight">
+            <strong>⚠️ 注意边界</strong>：以上数据为项目自报口径（官方 README + Benchmark 目录），非独立第三方复测。实际表现随工作流和数据量有所波动，建议结合自身场景验证。
+        </div>
+
+        <h3>双 UI 控制台</h3>
         <div class="table-wrap">
             <table>
-                <tr><th>维度</th><th>AgentMemory</th><th>Mem0</th><th>Letta (MemGPT)</th><th>Claude-Mem</th></tr>
-                <tr><td><strong>定位</strong></td><td>编码 Agent 记忆引擎</td><td>通用记忆平台</td><td>Stateful Agent 平台</td><td>Claude Code 专用</td></tr>
-                <tr><td><strong>存储方式</strong></td><td>本地，零外部依赖</td><td>SDK/API/Cloud</td><td>内置于 Agent 运行时</td><td>本地 Markdown</td></tr>
-                <tr><td><strong>检索方式</strong></td><td>BM25+向量+图谱</td><td>向量检索为主</td><td>向量检索</td><td>全文搜索</td></tr>
-                <tr><td><strong>跨 Agent</strong></td><td>所有 Agent 共享</td><td>应用级共享</td><td>Agent 内部</td><td>仅 Claude Code</td></tr>
-                <tr><td><strong>集成成本</strong></td><td>低（MCP 即插即用）</td><td>中（需 SDK 接入）</td><td>高（需切换运行时）</td><td>低（原生支持）</td></tr>
+                <tr><th>界面</th><th>端口</th><th>功能</th></tr>
+                <tr><td><strong>Viewer（记忆查看器）</strong></td><td>3113</td><td>实时观察流、会话浏览、记忆过滤、知识图谱可视化、健康仪表盘</td></tr>
+                <tr><td><strong>iii Console（引擎控制台）</strong></td><td>3114</td><td>函数/触发器/OTEL Span 管理、KV 浏览器、OTEL 瀑布图</td></tr>
             </table>
         </div>
     </div>
 
+    <!-- 竞品对比 -->
+    <div class="card">
+        <h2>竞品对比（官方 Benchmark 数据）</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>指标</th><th>AgentMemory</th><th>Mem0</th><th>Letta</th><th>Cognee</th></tr>
+                <tr><td><strong>检索 R@5</strong></td><td class="highlight">95.2%</td><td>81.4%</td><td>73.8%</td><td>78.1%</td></tr>
+                <tr><td><strong>外部依赖</strong></td><td class="highlight">0</td><td>2（Qdrant+Neo4j）</td><td>1（Postgres）</td><td>1（Neo4j）</td></tr>
+                <tr><td><strong>REST 端点</strong></td><td class="highlight">126</td><td>—</td><td>—</td><td>—</td></tr>
+                <tr><td><strong>MCP 工具</strong></td><td class="highlight">53</td><td>12</td><td>18</td><td>9</td></tr>
+                <tr><td><strong>自动 Hook</strong></td><td class="highlight">12</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td><strong>开源协议</strong></td><td>Apache-2.0</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            </table>
+        </div>
+        <p style="margin-top: 12px;"><strong>选型参考</strong>：多工具切换 → AgentMemory；面向用户的 AI 应用 → Mem0；构建 Stateful Agent 平台 → Letta；仅 Claude Code 工作流 → claude-mem。</p>
+    </div>
+
+    <!-- 开发者反馈 -->
+    <div class="card">
+        <h2>开发者真实反馈</h2>
+        <div class="quote-card">
+            <blockquote>"我把过去一个月的 Cursor 代理记录全部回填进去，准确率出乎意料地高，甚至捕捉到了我已经放弃的东西。"</blockquote>
+            <div class="source">— Peter Neyra，Product Hunt</div>
+        </div>
+        <div class="quote-card">
+            <blockquote>"解决了编码代理最大的痛点：跨会话丢失项目上下文，同时又不会撑爆上下文窗口。"</blockquote>
+            <div class="source">— Alper Tayfur，Product Hunt</div>
+        </div>
+        <div class="quote-card">
+            <blockquote>"记忆往往随时间变成噪音，AgentMemory 比同类工具更有意图感。"</blockquote>
+            <div class="source">— Thomas Hall，Product Hunt</div>
+        </div>
+        <div class="quote-card">
+            <blockquote>"专注于让记忆真正有用，而不是无止境地堆砌上下文。"</blockquote>
+            <div class="source">— Mia Taylor，Product Hunt</div>
+        </div>
+    </div>
+
+    <!-- 快速上手 -->
     <div class="card">
         <h2>快速上手</h2>
-        <div class="quickstart"># 安装（Node.js >= 20）
-npm install -g @agentmemory/agentmemory
+        <h3>全局安装（推荐）</h3>
+        <div class="quickstart">npm install -g @agentmemory/agentmemory
 
-# 启动记忆服务器（默认 :3111）
+# 启动记忆服务器（:3111，Viewer 在 :3113）
 agentmemory
 
-# 另一终端：导入演示数据
-agentmemory demo
+# 验证演示
+agentmemory demo</div>
 
-# Claude Code 深度集成（推荐）
-npx skills add rohitg00/agentmemory -y</div>
+        <h3>Claude Code 深度集成</h3>
+        <div class="quickstart"># 先启动服务，再在 Claude Code 中安装插件
+npx skills add rohitg00/agentmemory -y
+# 自动注册 12 hooks + 53 MCP 工具</div>
+
+        <h3>Cursor / Gemini CLI / Cline 等 MCP 配置</h3>
+        <div class="quickstart">{
+  "mcpServers": {
+    "agentmemory": {
+      "command": "npx",
+      "args": ["-y", "@agentmemory/mcp"],
+      "env": { "AGENTMEMORY_URL": "http://localhost:3111" }
+    }
+  }
+}</div>
     </div>
 
     <div class="cta">
