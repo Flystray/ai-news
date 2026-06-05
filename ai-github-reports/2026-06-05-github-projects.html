@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeGraph · GitHub AI 项目深度介绍 · 2026年06月05日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
+        .container { max-width: 860px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
+        .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+        .topic { background: #e8f0fe; color: #2d6a9f; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+        .card h2 { font-size: 17px; color: #1e3a5f; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card h3 { font-size: 15px; color: #2d6a9f; margin: 20px 0 10px; font-weight: 600; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
+        .card ul { padding-left: 20px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .desc-card { background: #f0f6ff; border-left: 5px solid #2d6a9f; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #e8f0fe; color: #1e3a5f; padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #2d6a9f; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
+        tr:last-child td { border-bottom: none; }
+        .highlight { background: linear-gradient(180deg, transparent 60%, #fef9c3 60%); font-weight: 600; }
+        .cta { text-align: center; margin-top: 30px; }
+        .cta a { display: inline-block; background: #2d6a9f; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a:hover { background: #1e3a5f; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .insight { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 20px; margin-top: 16px; font-size: 14px; color: #92400e; }
+        .arch-layer { display: flex; align-items: flex-start; gap: 16px; margin: 12px 0; padding: 14px 18px; border-radius: 10px; }
+        .arch-01 { background: #f0f6ff; border-left: 4px solid #2d6a9f; }
+        .arch-02 { background: #f0fdf4; border-left: 4px solid #16a34a; }
+        .arch-03 { background: #fef9c3; border-left: 4px solid #ca8a04; }
+        .arch-04 { background: #fdf2f8; border-left: 4px solid #db2777; }
+        .arch-num { font-size: 20px; font-weight: 800; min-width: 36px; }
+        .arch-01 .arch-num { color: #2d6a9f; }
+        .arch-02 .arch-num { color: #16a34a; }
+        .arch-03 .arch-num { color: #ca8a04; }
+        .arch-04 .arch-num { color: #db2777; }
+        .arch-content strong { display: block; font-size: 14px; margin-bottom: 4px; color: #1a1a1a; }
+        .arch-content span { font-size: 13px; color: #555; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+        .stat-item { background: #f0f6ff; border-radius: 10px; padding: 14px 16px; text-align: center; }
+        .stat-item .num { font-size: 24px; font-weight: 700; color: #2d6a9f; }
+        .stat-item .label { font-size: 12px; color: #666; margin-top: 4px; }
+        .lang-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+        .lang-tag { background: #f0fdf4; color: #166534; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date-badge">GitHub AI 项目 · 2026年06月05日</div>
+        <h1>CodeGraph</h1>
+        <p class="subtitle">预索引代码知识图谱工具，让 AI 编程助手告别盲目扫描文件。Tool call -71% · Token -57% · Cost -35% · 100% 本地。</p>
+    </div>
+
+    <div class="meta-bar">
+        <span>⭐ 41,300+</span>
+        <span>📝 TypeScript</span>
+        <span>📜 MIT</span>
+        <span>📅 2026-01-18 创建</span>
+        <span>📦 npm: @colbymchenry/codegraph</span>
+    </div>
+
+    <div class="topics">
+        <span class="topic">code-graph</span>
+        <span class="topic">knowledge-graph</span>
+        <span class="topic">claude-code</span>
+        <span class="topic">cursor</span>
+        <span class="topic">mcp</span>
+        <span class="topic">tree-sitter</span>
+        <span class="topic">semantic-search</span>
+        <span class="topic">developer-tools</span>
+    </div>
+
+    <div class="desc-card">
+        <p>CodeGraph 将代码库预索引为本地 SQLite 知识图谱，通过 MCP 协议为 Claude Code、Cursor、Codex CLI 等 8 款 AI 编程助手提供结构化代码查询能力。一次构建、永久受益——AI 不再每次重新扫描文件，而是直接从图中查询符号关系、调用链和影响范围。7 个真实开源项目基准测试：平均减少 71% 工具调用、57% Token 消耗、35% API 成本。</p>
+    </div>
+
+    <!-- 核心指标 -->
+    <div class="card">
+        <h2>核心指标一览</h2>
+        <div class="stat-grid">
+            <div class="stat-item"><div class="num">71%</div><div class="label">工具调用减少（均值）</div></div>
+            <div class="stat-item"><div class="num">57%</div><div class="label">Token 消耗降低（均值）</div></div>
+            <div class="stat-item"><div class="num">35%</div><div class="label">API 成本节省（均值）</div></div>
+            <div class="stat-item"><div class="num">20+</div><div class="label">支持语言数</div></div>
+            <div class="stat-item"><div class="num">14</div><div class="label">框架路由感知</div></div>
+            <div class="stat-item"><div class="num">8</div><div class="label">AI Agent 集成</div></div>
+        </div>
+    </div>
+
+    <!-- 背景 -->
+    <div class="card">
+        <h2>项目背景：AI 编程助手的"探索浪费"</h2>
+        <p>2026 年，Claude Code、Cursor、Codex CLI 等 AI 编程 Agent 已成日常标配。但每次让 AI 理解一个稍大的项目时，它都会先疯狂调用 <code>grep</code>、<code>glob</code>、<code>Read</code> 来扫描文件——这些<strong>"探索"操作</strong>不仅消耗大量 Token 和时间，而且在每个新会话中都要重复一遍。</p>
+        <p>CodeGraph 的核心洞察：<strong>把最昂贵的"答案在哪里"阶段前置为可复用的本地索引</strong>。对于上万文件的大型仓库，一次构建、永久受益——AI 不再每次重新扫描代码库，而是像查询"代码的索引卡片"一样直接定位答案。</p>
+        <p>项目由独立开发者 Colby McHenry 于 2026 年 1 月创建，短短 5 个月即获得 41,300+ Stars，在 Anthropic 开发者社区引发广泛讨论。7 个真实开源项目基准测试验证了其显著效率提升。</p>
+    </div>
+
+    <!-- 四阶段管道架构 -->
+    <div class="card">
+        <h2>四阶段数据流管道架构</h2>
+        <p>CodeGraph 将索引过程设计为一条四阶段管道，每个阶段处理不同的语义复杂度：</p>
+        <div class="arch-layer arch-01">
+            <div class="arch-num">01</div>
+            <div class="arch-content">
+                <strong>Extraction 抽取层</strong>
+                <span>tree-sitter WASM 语法解析为 AST，提取函数、类、方法、接口等符号节点及调用、导入、继承等关系边。支持 20+ 语言，重型任务分流到 parse-worker 避免阻塞交互查询。</span>
+            </div>
+        </div>
+        <div class="arch-layer arch-02">
+            <div class="arch-num">02</div>
+            <div class="arch-content">
+                <strong>Resolution 解析层</strong>
+                <span>跨文件引用解析——函数调用连回定义、导入连回源文件、继承与实现补成边、框架路由约定识别并建立 route 节点。支持泛型、Barrel 重导出、跨模块符号解析。</span>
+            </div>
+        </div>
+        <div class="arch-layer arch-03">
+            <div class="arch-num">03</div>
+            <div class="arch-content">
+                <strong>Search & Ranking 搜索排序层</strong>
+                <span>SQLite FTS5 全文索引 + 上下文协同排序。搜索结果不仅匹配关键词，还会根据 AI 当前的提问上下文加权排序，使搜索更精准。</span>
+            </div>
+        </div>
+        <div class="arch-layer arch-04">
+            <div class="arch-num">04</div>
+            <div class="arch-content">
+                <strong>Context Synthesis 上下文合成层</strong>
+                <span>多符号按文件打包返回，减少碎片化读取。codegraph_explore 单次调用返回完整源码、调用流程图和爆炸半径影响分析。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 核心功能 -->
+    <div class="card">
+        <h2>核心功能</h2>
+
+        <h3>智能上下文构建（杀手级功能）</h3>
+        <p><code>codegraph_explore</code> 单次调用返回相关符号的完整源码、调用流程图和"爆炸半径"影响分析。原本需要 10-20 次文件读取、grep 调用、glob 搜索才能收集的信息，现在一次查询全部返回。</p>
+
+        <h3>FTS5 语义 + 关键词混合搜索</h3>
+        <p>基于 SQLite FTS5 的全库即时搜索，引入上下文协同排序——搜索结果根据 AI 提问上下文加权排列。搜索 "auth" 时，如果 AI 在讨论"用户登录"，结果优先展示登录相关的认证符号。</p>
+
+        <h3>MCP 工具矩阵</h3>
+        <div class="table-wrap">
+            <table>
+                <tr><th>工具</th><th>适用场景</th><th>核心能力</th></tr>
+                <tr><td><strong>codegraph_explore</strong></td><td>"X 怎么连接到 Y？"</td><td>返回完整调用流 + 源码 + 影响范围</td></tr>
+                <tr><td><strong>codegraph_search</strong></td><td>"只知道名字，帮我定位"</td><td>FTS5 全文搜索 + 上下文排序</td></tr>
+                <tr><td><strong>codegraph_callers/callees</strong></td><td>"谁调用了这个函数？"</td><td>追踪调用关系图</td></tr>
+                <tr><td><strong>codegraph_impact</strong></td><td>"改这个会波及哪些代码？"</td><td>完整影响半径分析</td></tr>
+                <tr><td><strong>codegraph_node</strong></td><td>"给我这个符号的签名和源码"</td><td>精确符号信息（含重载）</td></tr>
+                <tr><td><strong>codegraph_status</strong></td><td>"索引现在健不健康？"</td><td>统计信息 + 同步状态</td></tr>
+            </table>
+        </div>
+
+        <h3>14 种 Web 框架路由感知</h3>
+        <p>不只理解语言语法，更理解框架语义——自动识别 URL 模式与处理器函数的关系。覆盖 Django、Flask、FastAPI、Express、NestJS、Laravel、Rails、Spring、Gin、Axum、ASP.NET、Vapor、React Router、SvelteKit。</p>
+        <div class="lang-tags">
+            <span class="lang-tag">Django</span><span class="lang-tag">Flask</span><span class="lang-tag">FastAPI</span><span class="lang-tag">Express</span><span class="lang-tag">NestJS</span><span class="lang-tag">Laravel</span><span class="lang-tag">Rails</span><span class="lang-tag">Spring</span><span class="lang-tag">Gin</span><span class="lang-tag">Axum</span><span class="lang-tag">ASP.NET</span><span class="lang-tag">Vapor</span><span class="lang-tag">React Router</span><span class="lang-tag">SvelteKit</span>
+        </div>
+
+        <h3>自动增量同步 + 零配置</h3>
+        <p>原生 OS 文件事件（FSEvents / inotify / ReadDirectoryChangesW）监听变更，2 秒防抖后自动增量同步。零配置文件——自动识别语言、尊重 .gitignore、跳过 node_modules 和 1MB+ 文件。</p>
+
+        <h3>8 款 AI Agent 全覆盖</h3>
+        <p>通过 MCP 协议与 Claude Code、Cursor、Codex CLI、OpenCode、Hermes Agent、Gemini CLI、Antigravity IDE、Kiro 深度集成。安装器自动检测已安装 Agent 并写入配置。</p>
+    </div>
+
+    <!-- Benchmark 数据 -->
+    <div class="card">
+        <h2>基准测试（7 个真实开源项目）</h2>
+        <p style="font-size:13px;color:#888;">测试条件：Claude Opus 4.8 headless 模式，每个仓库跑 4 次取中位数，对比启用/禁用 CodeGraph MCP</p>
+        <div class="table-wrap">
+            <table>
+                <tr><th>项目</th><th>语言</th><th>规模</th><th>Token ↓</th><th>工具调用 ↓</th><th>时间 ↑</th><th>成本 ↓</th></tr>
+                <tr><td>VS Code</td><td>TypeScript</td><td>~10k 文件</td><td class="highlight">78%</td><td class="highlight">85%</td><td>52%</td><td>26%</td></tr>
+                <tr><td>Excalidraw</td><td>TypeScript</td><td>~640 文件</td><td class="highlight">90%</td><td class="highlight">96%</td><td>73%</td><td class="highlight">52%</td></tr>
+                <tr><td>Django</td><td>Python</td><td>~3k 文件</td><td>36%</td><td>53%</td><td>19%</td><td>12%</td></tr>
+                <tr><td>Tokio</td><td>Rust</td><td>~790 文件</td><td class="highlight">86%</td><td class="highlight">92%</td><td>71%</td><td class="highlight">82%</td></tr>
+                <tr><td>OkHttp</td><td>Java</td><td>~645 文件</td><td>13%</td><td>45%</td><td>31%</td><td>2%</td></tr>
+                <tr><td>Gin</td><td>Go</td><td>~110 文件</td><td>34%</td><td>40%</td><td>27%</td><td>21%</td></tr>
+                <tr><td>Alamofire</td><td>Swift</td><td>~110 文件</td><td>64%</td><td class="highlight">83%</td><td>48%</td><td>47%</td></tr>
+                <tr style="font-weight:700;background:#f8fafc;"><td><strong>平均</strong></td><td>—</td><td>—</td><td><strong>57%</strong></td><td><strong>71%</strong></td><td><strong>46%</strong></td><td><strong>35%</strong></td></tr>
+            </table>
+        </div>
+        <div class="insight">
+            <strong>⚠️ 数据说明</strong>：以上为项目官方 v0.9.4 基准测试（2026-05-24 复验），非独立第三方复测。大型 TypeScript/Rust 项目收益最显著，Java 项目（OkHttp）收益相对有限（仅 2% 成本节省）。
+        </div>
+    </div>
+
+    <!-- VS Code 详细案例 -->
+    <div class="card">
+        <h2>案例深挖：VS Code（10k 文件）</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>指标</th><th>使用 CodeGraph</th><th>不使用</th><th>改善</th></tr>
+                <tr><td>执行时间</td><td>1 分 59 秒</td><td>2 分 13 秒</td><td class="highlight">11% 更快</td></tr>
+                <tr><td>文件读取</td><td>0 次</td><td>9 次</td><td>−9 次</td></tr>
+                <tr><td>Grep/Bash 调用</td><td>0 次</td><td>11 次</td><td>−11 次</td></tr>
+                <tr><td>总工具调用</td><td>4 次</td><td>21 次</td><td class="highlight">81% 减少</td></tr>
+                <tr><td>总 Token 消耗</td><td>640K</td><td>1.79M</td><td class="highlight">64% 减少</td></tr>
+                <tr><td>成本</td><td>$0.68</td><td>$0.83</td><td class="highlight">18% 节省</td></tr>
+            </table>
+        </div>
+        <p style="font-size:13px;color:#888;margin-top:8px;">在一次架构级问题（"这个功能的数据流是怎样的？"）中，传统方式需要 21 次工具调用，CodeGraph 仅需 4 次就完成了相同的分析任务。</p>
+    </div>
+
+    <!-- 竞品对比 -->
+    <div class="card">
+        <h2>竞品对比</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>维度</th><th>CodeGraph</th><th>传统 AI 编程</th><th>Sourcegraph Cody</th></tr>
+                <tr><td><strong>探索方式</strong></td><td class="highlight">预索引图谱查询</td><td>每次重新文件扫描</td><td>混合（索引+搜索）</td></tr>
+                <tr><td><strong>工具调用/任务</strong></td><td class="highlight">~3.2 次</td><td>~39 次</td><td>—</td></tr>
+                <tr><td><strong>隐私模型</strong></td><td class="highlight">100% 本地</td><td>依赖 Agent 云端</td><td>云端索引</td></tr>
+                <tr><td><strong>部署成本</strong></td><td class="highlight">零（本地 SQLite）</td><td>零</td><td>需要 Sourcegraph 实例</td></tr>
+                <tr><td><strong>框架路由感知</strong></td><td class="highlight">14 种框架</td><td>无（纯文本）</td><td>有限</td></tr>
+                <tr><td><strong>许可证</strong></td><td class="highlight">MIT</td><td>—</td><td>企业许可证</td></tr>
+                <tr><td><strong>Token 消耗</strong></td><td class="highlight">↓ 57%</td><td>基线</td><td>—</td></tr>
+            </table>
+        </div>
+        <p style="margin-top:12px;"><strong>选型建议</strong>：重度 AI 辅助开发 → CodeGraph（直接集成）；已有 Sourcegraph → Cody（复用索引）；纯文本搜索 → rg/grep 仍最佳；偶尔使用 AI → 原生搜索足够。</p>
+    </div>
+
+    <!-- 适用场景 -->
+    <div class="card">
+        <h2>适用场景与局限</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th style="background:#f0fdf4;">✅ 高收益场景</th><th style="background:#fef2f2;">❌ 收益有限</th></tr>
+                <tr>
+                    <td>大型代码库（>1000 文件）</td>
+                    <td>小型项目（<100 文件）</td>
+                </tr>
+                <tr>
+                    <td>架构级问题（请求流向、影响范围、路由绑定）</td>
+                    <td>纯文本生成任务</td>
+                </tr>
+                <tr>
+                    <td>跨语言/跨模块调用链追踪</td>
+                    <td>一次性代码查询</td>
+                </tr>
+                <tr>
+                    <td>团队重度使用 AI 编程 Agent</td>
+                    <td>非 AI 编程场景</td>
+                </tr>
+                <tr>
+                    <td>对 Token 成本敏感的团队</td>
+                    <td>问题非常局部（一两次 Read 就够）</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 快速上手 -->
+    <div class="card">
+        <h2>快速上手（5 分钟）</h2>
+        <h3>安装（无需 Node.js）</h3>
+        <div class="quickstart"># macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+
+# Windows PowerShell
+irm https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.ps1 | iex</div>
+
+        <h3>初始化并构建图谱</h3>
+        <div class="quickstart">cd your-project
+codegraph init -i    # -i：构建初始图谱 + 交互式配置 AI 工具</div>
+
+        <h3>核心命令</h3>
+        <div class="quickstart">codegraph query "auth"          # 搜索符号
+codegraph explore AuthService   # 查看调用关系
+codegraph impact calculate_tax  # 影响范围分析
+codegraph affected src/*.ts     # CI：找出受影响的测试
+codegraph status                # 索引健康状态</div>
+
+        <p style="margin-top:14px;">安装完成后重启 AI 编程 Agent，项目中有 <code>.codegraph/</code> 目录即自动启用 MCP 工具。</p>
+    </div>
+
+    <div class="cta">
+        <a href="https://github.com/colbymchenry/codegraph" target="_blank">⭐ 前往 GitHub</a>
+    </div>
+
+    <div class="footer">
+        <p>本文基于 GitHub README · DeepWiki 架构分析 · txtmix.com 深度评测 · 掘金解析 · AI-Bot 介绍编写</p>
+        <p>核心数据来自项目官方 v0.9.4 基准测试 · 实际效果因项目和 Agent 使用方式而异</p>
+    </div>
+</div>
+</body>
+</html>
