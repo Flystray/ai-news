@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.6｜Meta发现量化让推理模型"想太多" · 越省显存越爱废话</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: #f5f6fa; margin: 0; padding: 16px; color: #2c3e50;">
+
+  <div style="max-width: 800px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+
+    <!-- 标题 -->
+    <h1 style="font-size: 22px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px 0; line-height: 1.4;">
+      2026.6.6｜Meta发现量化让推理模型"想太多" · 越省显存越爱废话
+    </h1>
+    <div style="font-size: 13px; color: #888; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+      ✍️ fly的AI学习 &nbsp;|&nbsp; 论文解读 · 国外 · 阅读时长 9 分钟
+    </div>
+
+    <!-- 论文信息表 -->
+    <table style="width: 100%; border-collapse: collapse; background: #f8f9fe; border-radius: 8px; overflow: hidden; margin-bottom: 28px; font-size: 14px;">
+      <tr style="background: #eef0fa;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; width: 100px; border-bottom: 1px solid #e0e0f0;">论文标题</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Quantized Reasoning Models Think They Need to Think Longer, but They Do Not</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">作者</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">Sanae Lotfi, Polina Kirichenko, Steven Li, Zechun Liu（Meta FAIR）</td>
+      </tr>
+      <tr style="background: #f8f9fe;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">发表日期</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">2026-06-02</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">来源</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;">arXiv · Meta FAIR</td>
+      </tr>
+      <tr style="background: #f8f9fe;">
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a; border-bottom: 1px solid #e0e0f0;">论文链接</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e0e0f0;"><a href="https://arxiv.org/abs/2606.00206" style="color: #4361ee; text-decoration: none;">点击查看原文 arXiv:2606.00206</a></td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-weight: 600; color: #4a4a6a;">标签</td>
+        <td style="padding: 10px 14px;">
+          <span style="background: #e8f4fd; color: #2196f3; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">推理模型</span>
+          <span style="background: #e8f5e9; color: #4caf50; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">模型量化</span>
+          <span style="background: #fff3e0; color: #ff9800; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">过度思考</span>
+          <span style="background: #f3e5f5; color: #9c27b0; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 6px;">推理效率</span>
+          <span style="background: #fce4ec; color: #e91e63; padding: 2px 8px; border-radius: 4px; font-size: 12px;">PTQ</span>
+        </td>
+      </tr>
+    </table>
+
+    <!-- 这篇论文在说什么？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #4361ee; padding-left: 12px; margin-bottom: 14px;">这篇论文在说什么？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        Meta FAIR 团队发现了一个尴尬又扎心的事实：<strong>量化推理模型失败，很多时候不是因为能力不够，而是因为想太多停不下来。</strong>
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        他们在 5 个主流推理模型上做了大规模测试（从 1.5B 的 Qwen 蒸馏模型到 32B 的 QwQ），结果触目惊心：用 AWQ 3-bit 量化后，模型在 MATH-500 上的答案已经算对了，但又忍不住继续往下推导，在 <strong>52% 的错误里都属于"过度思考"</strong>——模型明明在中间某一步就得出了正确答案，然后自己推翻自己，开新的推理分支，越走越远，最后忘了最初那个正确的结论。
+      </p>
+      <div style="margin: 20px 0; text-align: center;">
+        <img src="https://arxiv.org/html/2606.00206v1/x1.png" alt="量化推理模型的过度思考" style="max-width: 100%; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.1);">
+        <p style="font-size: 12px; color: #999; margin-top: 8px; text-align: center;"><em>图源：原文 Fig.1 — 量化推理模型走到正确答案后因自我怀疑触发新推理分支，右侧方案通过惩罚"wait""but"等标记阻断这种循环</em></p>
+      </div>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        更妙的是，他们的解决方案简洁到让人怀疑人生：<strong>不需要重新训练，不需要加新参数，只需要在解码时对 50 个特定的"爱废话"词汇做一个极其微小的 logit 惩罚</strong>（比如 "wait""but""alternatively"），就能把推理长度缩短 12-23%，同时保持甚至提升准确率。
+      </p>
+    </div>
+
+    <!-- 为什么要关注？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #e74c3c; padding-left: 12px; margin-bottom: 14px;">为什么要关注？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        部署推理模型给生产环境的同学，可能都遇到过这个场景：同样的 prompt，全精度模型两三百 token 就给出答案，量化后动不动飙到上千 token，推理延时翻倍，而且答案还不一定对。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        过去大家很自然地觉得：这是量化丢了精度，模型"变笨了"。所以解决方案要么是更保守的量化策略（比如 W8A8），要么是微调补偿。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        Meta 这篇论文推翻了这个直觉。<strong>模型没变笨，它是变唠叨了。</strong>
+      </p>
+      <div style="margin: 16px 0; padding: 16px 20px; background: #f9f9fc; border-left: 3px solid #4361ee; border-radius: 0 8px 8px 0;">
+        <p style="font-size: 14px; color: #666; font-style: italic; margin: 0; line-height: 1.7;">
+          "Quantized reasoning models do not fail because they cannot think; they fail because they cannot <em>stop</em> thinking."
+        </p>
+        <p style="font-size: 13px; color: #999; margin: 8px 0 0 0;">
+          这句话差不多是整篇论文的题眼。量化推理模型失败的核心原因不是"想不出"，而是"停不下"。
+        </p>
+      </div>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        这个发现之所以重要，有三个层面：
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        <strong>第一，它改变了我们对量化损伤的理解。</strong>过去我们认为量化均匀地损害模型能力，现在发现它主要放大了一个特定行为模式——在高不确定性位置上，模型更容易输出那些会触发"新推理分支"的 token。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        <strong>第二，解决方案零成本。</strong>不需要重新训练、不需要校准集、不需要量化感知的蒸馏。只需要在推理时往 logit 上减一个固定值。你可以在任何已量化的模型上立刻用起来。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第三，大模型时代推理成本是核心痛点。</strong>降低 12-23% 的 CoT 长度，意味着省 12-23% 的推理算力和延迟。对已经量化到极限、GPU 显存刚好只能放下模型的场景来说，这种"免费午餐"非常有吸引力。
+      </p>
+    </div>
+
+    <!-- 核心方法 -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #27ae60; padding-left: 12px; margin-bottom: 14px;">核心方法</h2>
+
+      <h3 style="font-size: 15px; font-weight: 600; color: #2c3e50; margin: 18px 0 10px 0;">关键思路</h3>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 12px 0;">
+        论文的论证链条分四步，非常清晰：
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        <strong>第一步：发现问题。</strong>他们在 MATH-500 上仔细分析了量化模型的错误类型，把错误分成四类：<strong>过度思考</strong>（中间算对了但最终没输出）、<strong>推理错误</strong>（中间就错了）、<strong>格式/解析错误</strong>、<strong>幻觉/其他</strong>。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        结果惊人：BF16 模型在 MATH-500 上有 19 个过度思考错误（占 26%），AWQ 3-bit 量化后飙到 <strong>139 个（占 52%），翻了 7 倍多</strong>。
+      </p>
+      <div style="margin: 20px 0; text-align: center;">
+        <img src="https://arxiv.org/html/2606.00206v1/x4.png" alt="错误类型分析" style="max-width: 100%; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.1);">
+        <p style="font-size: 12px; color: #999; margin-top: 8px; text-align: center;"><em>图源：原文 Fig.3 — 不同量化配置下四种错误类型的分布。注意 AWQ 3-bit（最右侧红色柱）中过度思考错误暴增</em></p>
+      </div>
+
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        <strong>第二步：定位原因。</strong>他们比较了量化模型和全精度模型在每个 token 位置的输出分布差异（KL 散度），发现两个关键规律：
+      </p>
+      <ul style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0; padding-left: 20px;">
+        <li><strong>KL 散度最高的 token 是一堆"犹豫词"</strong>："Wait""But""Alternatively""maybe""however""reconsider"——这些词的作用就是开新的推理分支</li>
+        <li><strong>KL 散度最低的 token 是数学表达</strong>：数字、运算符、\boxed{}——这些承载推理内容的 token 几乎不受量化影响</li>
+      </ul>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        更关键的是：位置级的 KL 散度与全精度模型的 next-token 熵的 Spearman 相关性高达 <strong>0.92</strong>。这意味着量化噪声最严重的位置，恰好是模型本来就不确定的位置——在这些位置，小扰动就能把采样推向"等等，我是不是想错了？"这种自我怀疑的方向。
+      </p>
+
+      <div style="margin: 20px 0; text-align: center;">
+        <img src="https://arxiv.org/html/2606.00206v1/x9.png" alt="KL散度分析" style="max-width: 100%; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.1);">
+        <p style="font-size: 12px; color: #999; margin-top: 8px; text-align: center;"><em>图源：原文 Fig.4 — 左：KL散度最高的 token（"Wait""But"等犹豫词）；中：KL散度最低的 token（数学符号）；右：位置级 KL 散度与全精度模型熵的相关性（ρ=0.92）</em></p>
+      </div>
+
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        <strong>第三步：对症下药。</strong>既然"Wait""But"这些 token 是罪魁祸首，那就直接给它们降权。方法极其简单——在每个解码步骤，对 50 个预设的"过度思考标记"施加一个固定的 logit 惩罚 λ。就这么简单。不需要前向传播、不需要梯度、不需要额外内存。λ 是唯一的超参数。
+      </p>
+
+      <div style="margin: 20px 0; text-align: center;">
+        <img src="https://arxiv.org/html/2606.00206v1/x12.png" alt="惩罚效果Pareto前沿" style="max-width: 100%; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.1);">
+        <p style="font-size: 12px; color: #999; margin-top: 8px; text-align: center;"><em>图源：原文 Fig.5 — 左：不同λ值的准确率变化；中：CoT长度变化；右：准确率-推理成本的Pareto前沿</em></p>
+      </div>
+
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>第四步：消融验证。</strong>论文做了极其漂亮的对照实验来证明精准性：惩罚随机 token 完全没效果；惩罚低 KL 散度 token（数学符号）灾难性（CoT 增加 41%，准确率下降 9.5%）；只有惩罚过度思考标记在所有 λ 下都最优。
+      </p>
+
+      <h3 style="font-size: 15px; font-weight: 600; color: #2c3e50; margin: 18px 0 10px 0;">技术细节</h3>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        "过度思考标记"名单是手工筛选的英文词汇，共 50 个，主要包括三类：
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 6px 0;">
+        <strong>自我怀疑类</strong>：perhaps, maybe, possibly, might, could, uncertain, unsure, doubt, confused, wrong, mistake, error, incorrect
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 6px 0;">
+        <strong>推理回退类</strong>：wait, Wait, hold, Hmm, hmm, anyway, reconsider, rethink, backtrack, retry, recheck, revisit
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>分支重定向类</strong>：But, but, However, however, Alternatively, alternatively, Instead, instead, though, although, yet, rather, unless, otherwise, nonetheless, nevertheless, regardless, still
+      </p>
+
+      <div style="margin: 16px 0; padding: 16px 20px; background: #f9f9fc; border-left: 3px solid #4361ee; border-radius: 0 8px 8px 0;">
+        <p style="font-size: 14px; color: #666; font-style: italic; margin: 0; line-height: 1.7;">
+          "The tokens with the highest average KL divergence between quantized and full-precision models contain overthinking markers such as 'Wait,' 'But,' and 'Alternatively'."
+        </p>
+        <p style="font-size: 13px; color: #999; margin: 8px 0 0 0;">
+          说人话：量化后跟全精度模型差异最大的地方，就是这些会让模型"换个思路再想"的关键词。
+        </p>
+      </div>
+
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        有意思的是，论文还做了一组反向实验——<strong>提升</strong>这些过度思考标记的概率（λ 设为负值）。结果 CoT 暴增最高 <strong>445%</strong>（从 5.2K 飙到 23.7K tokens），准确率暴跌最高 <strong>34%</strong>。这从反方向验证了因果关系：这些 token 确实是过度思考的"开关"。
+      </p>
+    </div>
+
+    <!-- 效果怎么样？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #f39c12; padding-left: 12px; margin-bottom: 14px;">效果怎么样？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 12px 0;">
+        论文的评估矩阵非常大——5 个模型 × 5 个 benchmark × 3-4 种量化方法 × 9 个 λ 值，数据量惊人。我们直接看最关键的结果。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        <strong>最极端场景（AWQ 3-bit，对推理模型伤害最大的量化配置）：</strong>
+      </p>
+
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px;">
+        <thead>
+          <tr style="background: #f0f2fa;">
+            <th style="padding: 8px 10px; text-align: left; border-bottom: 2px solid #d0d4e0;">模型</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">配置</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">AIME</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">MATH</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">GSM8K</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">GPQA</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">LCB</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">平均Acc</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">ΔAcc</th>
+            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #d0d4e0;">ΔCoT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #ffffff;">
+            <td rowspan="3" style="padding: 8px 10px; font-weight: 600; border-bottom: 1px solid #e8e8f0;">Qwen-1.5B</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">BF16</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">24.4</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">85.6</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">84.2</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">30.8</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">17.5</td>
+            <td style="padding: 6px 10px; text-align: center; font-weight: 600; border-bottom: 1px solid #e8e8f0;">48.5</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">—</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">—</td>
+          </tr>
+          <tr style="background: #fff3f0;">
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">AWQ 3bit</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">4.4</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">47.0</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">63.5</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">25.8</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">4.5</td>
+            <td style="padding: 6px 10px; text-align: center; font-weight: 600; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">29.0</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c; font-weight: 600;">-19.5</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c; font-weight: 600;">+400%</td>
+          </tr>
+          <tr style="background: #e8f5e9;">
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">+惩罚</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">8.9</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">61.2</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">69.5</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">30.3</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">6.3</td>
+            <td style="padding: 6px 10px; text-align: center; font-weight: 600; border-bottom: 1px solid #e8e8f0; color: #27ae60;">35.2</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">+6.2</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">-28%</td>
+          </tr>
+          <tr style="background: #ffffff;">
+            <td rowspan="3" style="padding: 8px 10px; font-weight: 600; border-bottom: 1px solid #e8e8f0;">QwQ-32B</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">BF16</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">76.7</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">97.2</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">95.7</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">63.1</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">62.3</td>
+            <td style="padding: 6px 10px; text-align: center; font-weight: 600; border-bottom: 1px solid #e8e8f0;">79.0</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">—</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0;">—</td>
+          </tr>
+          <tr style="background: #fff3f0;">
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">AWQ 3bit</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">60.0</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">96.0</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">95.9</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">61.1</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">51.5</td>
+            <td style="padding: 6px 10px; text-align: center; font-weight: 600; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">72.9</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c; font-weight: 600;">-6.1</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #e74c3c; font-weight: 600;">+6%</td>
+          </tr>
+          <tr style="background: #e8f5e9;">
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">+惩罚</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">62.2</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">96.6</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">95.5</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60;">60.6</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">53.4</td>
+            <td style="padding: 6px 10px; text-align: center; font-weight: 600; border-bottom: 1px solid #e8e8f0; color: #27ae60;">73.7</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">+0.7</td>
+            <td style="padding: 6px 10px; text-align: center; border-bottom: 1px solid #e8e8f0; color: #27ae60; font-weight: 600;">-10%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 12px; color: #999; margin: 0 0 16px 0; text-align: center;"><em>数据来源：原文 Table 1。Acc = 准确率（%），LCB = LiveCodeBench。完整数据含 5 模型 × 4 量化配置</em></p>
+
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 8px 0;">
+        几个关键观察：
+      </p>
+      <ol style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0; padding-left: 20px;">
+        <li><strong>Qwen-1.5B 受益最大</strong>：在 AWQ 3-bit 下准确率从 29.0% 升至 35.2%（<strong>+6.2 个百分点</strong>），同时 CoT 长度缩短了 28%。小模型对量化更敏感，所以惩罚效果更明显。</li>
+        <li><strong>全精度模型也有效</strong>：即使 BF16 模型，惩罚也能减少 5.6%~10.0% 的 CoT 长度，同时准确率不变或微升。</li>
+        <li><strong>一致性惊人</strong>：跨所有模型、所有量化方法、所有 benchmark，CoT 长度平均缩短 12-23%，且从未出现过 CoT 缩短但准确率大幅下降的情况。</li>
+        <li><strong>GPTQ 比 AWQ 更鲁棒</strong>：GPTQ 3-bit 在 MATH-500 上保持 71.6% 准确率，而 AWQ 3-bit 暴跌到 47.0%。这意味着选量化方法时也值得关注过度思考倾向。</li>
+      </ol>
+    </div>
+
+    <!-- 和其他方案比有什么不同？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #9b59b6; padding-left: 12px; margin-bottom: 14px;">和其他方案比有什么不同？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        目前业界控制推理模型的 CoT 长度主要有三条路：
+      </p>
+
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px;">
+        <thead>
+          <tr style="background: #f0f2fa;">
+            <th style="padding: 8px 10px; text-align: left; border-bottom: 2px solid #d0d4e0;">思路</th>
+            <th style="padding: 8px 10px; text-align: left; border-bottom: 2px solid #d0d4e0;">代表方法</th>
+            <th style="padding: 8px 10px; text-align: left; border-bottom: 2px solid #d0d4e0;">代价</th>
+            <th style="padding: 8px 10px; text-align: left; border-bottom: 2px solid #d0d4e0;">和本文对比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #ffffff;">
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; font-weight: 600;">预算控制</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0;">限制最大 token 数</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">可能切断有效推理</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; color: #27ae60;">本文不封顶，靠抑制废话自然缩短</td>
+          </tr>
+          <tr style="background: #f8f9fe;">
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; font-weight: 600;">微调蒸馏</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0;">DPO/RL 缩短推理</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">需要训练数据和 GPU</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; color: #27ae60;">本文免训练，即插即用</td>
+          </tr>
+          <tr style="background: #ffffff;">
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; font-weight: 600;">推理时剪枝</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0;">注意力压缩/KV cache 管理</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; color: #e74c3c;">可能丢失上下文</td>
+            <td style="padding: 8px 10px; border-bottom: 1px solid #e8e8f0; color: #27ae60;">从源头减少废话，与其他方法正交</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 12px 0;">
+        这篇论文的方法最独特的地方在于<strong>发现了问题的根源</strong>而不是做表面功夫。它没有试图让模型"变得更聪明"，而是发现模型本来就很聪明（中间步骤已经算对了），只是量化噪声让它"变得不自信"。
+      </p>
+      <div style="margin: 16px 0; padding: 16px 20px; background: #f9f9fc; border-left: 3px solid #4361ee; border-radius: 0 8px 8px 0;">
+        <p style="font-size: 14px; color: #666; font-style: italic; margin: 0; line-height: 1.7;">
+          "Our KL divergence analysis is also not specific to quantization: any perturbation to a model's weights or activations, from pruning, distillation, or low-rank approximation, may similarly affect uncertain positions."
+        </p>
+        <p style="font-size: 13px; color: #999; margin: 8px 0 0 0;">
+          论文最后这段展望非常关键：过度思考不只会被量化触发。剪枝、蒸馏、低秩近似都可能引发类似问题。这个分析方法——比较压缩前后模型的 token 级 KL 散度——可以作为一种通用的诊断工具。
+        </p>
+      </div>
+    </div>
+
+    <!-- 对开发者意味着什么？ -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #1abc9c; padding-left: 12px; margin-bottom: 14px;">对开发者意味着什么？</h2>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        <strong>第一，如果你在本地部署量化推理模型，强烈建议试试。</strong>实现成本接近于零：维护一个 50 个 token 的小名单，推理时每个 step 做一次 logit 减法。在 vLLM 或 llama.cpp 里加一个 logit bias 配置就能搞定。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        <strong>第二，小模型更容易"过度思考"。</strong>从论文数据看，1.5B 的模型在 AWQ 3-bit 下 CoT 暴涨了 400%，而 32B 的 QwQ 只涨了 6%。所以越是资源受限的场景（只能用小模型 + 激进量化），这个方法的收益越大。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        <strong>第三，这是个诊断框架，不只是个修复方案。</strong>论文提出的 KL 散度分析方法，可以用来检查任何模型压缩手段（剪枝、蒸馏、量化）对你的推理模型的哪部分输出影响最大。你可以生成自己的"过度思考标记名单"，针对性地加惩罚。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 10px 0;">
+        <strong>第四，对量化工具链也有启示。</strong>GPTQ 和 AWQ 在"引发过度思考"的程度上差异巨大（GPTQ 3-bit 比 AWQ 3-bit 稳定得多），这说明传统的"困惑度"指标不够——未来量化方法的评估应该加入"是否会诱发过度思考"这个维度。
+      </p>
+      <p style="font-size: 15px; line-height: 1.8; color: #34495e; margin: 0 0 14px 0;">
+        一个值得注意的限制是：论文的"过度思考标记"名单是针对英文推理模型手工筛选的。如果你用的是中文推理模型或代码推理模型，需要自行构建对应的 token 名单。不过方法本身完全通用。
+      </p>
+    </div>
+
+    <!-- 页脚 -->
+    <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #f0f0f0; text-align: center;">
+      <p style="font-size: 13px; color: #999; margin: 0;">👤 fly的AI学习 | 每日更新 AI 大模型最新动态</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
