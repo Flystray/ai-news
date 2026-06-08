@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headroom · GitHub AI 项目深度介绍 · 2026年06月08日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
+        .container { max-width: 860px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
+        .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+        .topic { background: #e8f0fe; color: #0f3460; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+        .card h2 { font-size: 17px; color: #16213e; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card h3 { font-size: 15px; color: #0f3460; margin: 20px 0 10px; font-weight: 600; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
+        .card ul { padding-left: 20px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .desc-card { background: #f0f6ff; border-left: 5px solid #0f3460; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #e8f0fe; color: #16213e; padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #0f3460; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
+        tr:last-child td { border-bottom: none; }
+        .highlight { background: linear-gradient(180deg, transparent 60%, #fef9c3 60%); font-weight: 600; }
+        .cta { text-align: center; margin-top: 30px; }
+        .cta a { display: inline-block; background: #0f3460; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a:hover { background: #16213e; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .insight { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 20px; margin-top: 16px; font-size: 14px; color: #92400e; }
+        .arch-layer { display: flex; align-items: flex-start; gap: 16px; margin: 12px 0; padding: 14px 18px; border-radius: 10px; }
+        .arch-01 { background: #f0f6ff; border-left: 4px solid #0f3460; }
+        .arch-02 { background: #f0fdf4; border-left: 4px solid #16a34a; }
+        .arch-03 { background: #fef9c3; border-left: 4px solid #ca8a04; }
+        .arch-num { font-size: 20px; font-weight: 800; min-width: 36px; }
+        .arch-01 .arch-num { color: #0f3460; }
+        .arch-02 .arch-num { color: #16a34a; }
+        .arch-03 .arch-num { color: #ca8a04; }
+        .arch-content strong { display: block; font-size: 14px; margin-bottom: 4px; color: #1a1a1a; }
+        .arch-content span { font-size: 13px; color: #555; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+        .stat-item { background: #f0f6ff; border-radius: 10px; padding: 14px 16px; text-align: center; }
+        .stat-item .num { font-size: 24px; font-weight: 700; color: #0f3460; }
+        .stat-item .label { font-size: 12px; color: #666; margin-top: 4px; }
+        .pipe-flow { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+        .pipe-step { background: #0f3460; color: white; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+        .pipe-arrow { color: #0f3460; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date-badge">GitHub AI 项目 · 2026年06月08日</div>
+        <h1>Headroom</h1>
+        <p class="subtitle">AI Agent 上下文可逆压缩层。Token 减少 60-95%，答案一字不差。Library · Proxy · MCP · 6 种压缩算法 · 本地优先 · 完全可逆。</p>
+    </div>
+
+    <div class="meta-bar">
+        <span>⭐ 17,008</span>
+        <span>🍴 1,084</span>
+        <span>🐍 Python 77% + Rust 18% + TS 3%</span>
+        <span>📜 Apache 2.0</span>
+        <span>📅 2026-01-07 创建</span>
+        <span>🏷️ v0.23.0</span>
+    </div>
+
+    <div class="topics">
+        <span class="topic">compression</span><span class="topic">context-engineering</span><span class="topic">token-optimization</span><span class="topic">mcp</span>
+        <span class="topic">claude-code</span><span class="topic">cursor</span><span class="topic">agent</span><span class="topic">rag</span>
+        <span class="topic">python</span><span class="topic">rust</span><span class="topic">typescript</span><span class="topic">llm</span>
+    </div>
+
+    <div class="desc-card">
+        <p>Headroom 在 AI Agent 调用 LLM 之前，把 prompt 里的工具输出、日志、RAG chunks、文件内容进行智能压缩。Token 减少 <strong>60-95%</strong>，但答案质量完全不变——因为它不是有损截断，而是可逆压缩。CCR 系统确保 <strong>原始内容永不丢失</strong>，LLM 随时可以取回。</p>
+    </div>
+
+    <!-- 核心功能 -->
+    <div class="card">
+        <h2>🔧 核心功能</h2>
+
+        <h3>1. 四合一接入形态</h3>
+        <div class="table-wrap">
+        <table>
+            <tr><th>模式</th><th>命令</th><th>代码改动</th><th>适用场景</th></tr>
+            <tr><td><strong>Agent Wrap</strong></td><td><code>headroom wrap claude</code></td><td>零</td><td>已有编码 Agent</td></tr>
+            <tr><td><strong>透明代理</strong></td><td><code>headroom proxy --port 8787</code></td><td>改环境变量</td><td>不想改代码</td></tr>
+            <tr><td><strong>Library SDK</strong></td><td><code>compress(messages)</code></td><td>1 行</td><td>自研 AI 应用</td></tr>
+            <tr><td><strong>MCP Server</strong></td><td><code>headroom mcp install</code></td><td>1 行配置</td><td>MCP 客户端</td></tr>
+        </table>
+        </div>
+
+        <h3>2. 三路专用压缩引擎</h3>
+        <div class="pipe-flow">
+            <div class="pipe-step">输入内容</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">ContentRouter 类型检测</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">SmartCrusher JSON (Rust)</div>
+            <div class="pipe-step">CodeCompressor AST</div>
+            <div class="pipe-step">Kompress-base ML (8B)</div>
+        </div>
+        <p>不同内容走不同压缩器——<strong>不让 LLM 总结 JSON</strong>，规则压缩比模型生成更高效、更稳定、零幻觉风险。</p>
+
+        <h3>3. CCR 可逆压缩系统</h3>
+        <p>压缩后的原文 <strong>永不删除</strong>，存储在本地磁盘。LLM 需要细节时调用 <code>headroom_retrieve(ref_id)</code>，直接从本地取回原文——零 API 调用成本、零延迟。</p>
+
+        <h3>4. CacheAligner · 账单降幅 20×</h3>
+        <p>稳定 prompt 前缀，最大化 Anthropic/OpenAI 的 KV cache 命中率。cache 命中 vs 未命中有 <strong>10 倍成本差距</strong>，CacheAligner 让 token 压缩和 cache 命中协同增效。</p>
+
+        <h3>5. 跨 Agent 共享记忆</h3>
+        <p>Claude Code、Cursor、Codex 共用的上下文去重后跨 Agent 共享。后续 Agent 可节省 <strong>40-60%</strong> 的初始扫描 token。</p>
+
+        <h3>6. headroom learn · 自学习改进</h3>
+        <p>扫描失败 session，自动将 <strong>"哪条命令错了、为什么错"</strong> 写入 CLAUDE.md，Agent 越用越聪明。</p>
+    </div>
+
+    <!-- 技术架构 -->
+    <div class="card">
+        <h2>🏗️ 技术架构</h2>
+
+        <div class="arch-layer arch-01">
+            <div class="arch-num">01</div>
+            <div class="arch-content">
+                <strong>ContentRouter — 内容类型智能分发</strong>
+                <span>JSON → SmartCrusher | 代码 → CodeCompressor | 自然语言 → Kompress-base。通过 json.loads + 文件扩展名 + shebang 匹配做多信号类型判断，不做"统一 LLM 处理"的省力捷径。</span>
+            </div>
+        </div>
+
+        <div class="arch-layer arch-02">
+            <div class="arch-num">02</div>
+            <div class="arch-content">
+                <strong>CCR — 完整可逆架构保障</strong>
+                <span>原始内容存入 CompressionStore（本地），压缩后生成短哈希 ref_id。LLM 可主动调用 headroom_retrieve 取回原文，信息精度 100%，展开成本为零。这是 Headroom 敢于追求 90%+ 压缩率的底气。</span>
+            </div>
+        </div>
+
+        <div class="arch-layer arch-03">
+            <div class="arch-num">03</div>
+            <div class="arch-content">
+                <strong>Rust 核心 + TOIN 联邦学习</strong>
+                <span>SmartCrusher / Tokenizer / Relevance Engine 用 Rust 重写，压缩延迟 &lt;50ms。TOIN 通过结构指纹和联邦学习跨用户共享压缩模式，但<strong>不共享原始数据</strong>，隐私保护到位。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 性能数据 -->
+    <div class="card">
+        <h2>📊 实测性能数据</h2>
+
+        <h3>Token 压缩率（真实工作负载）</h3>
+        <div class="table-wrap">
+        <table>
+            <tr><th>工作负载</th><th>压缩前</th><th>压缩后</th><th>节省</th></tr>
+            <tr><td>代码搜索（100 条结果）</td><td>17,765</td><td>1,408</td><td class="highlight">92%</td></tr>
+            <tr><td>SRE 事故调试</td><td>65,694</td><td>5,118</td><td class="highlight">92%</td></tr>
+            <tr><td>日志分析（演示案例）</td><td>10,144</td><td>1,260</td><td class="highlight">88%</td></tr>
+            <tr><td>GitHub Issue 分类</td><td>54,174</td><td>14,761</td><td class="highlight">73%</td></tr>
+            <tr><td>代码库探索</td><td>78,502</td><td>41,254</td><td class="highlight">47%</td></tr>
+        </table>
+        </div>
+
+        <h3>准确性验证（基准测试）</h3>
+        <div class="table-wrap">
+        <table>
+            <tr><th>基准</th><th>类别</th><th>基线</th><th>Headroom</th><th>差异</th></tr>
+            <tr><td>GSM8K</td><td>数学推理</td><td>0.870</td><td>0.870</td><td class="highlight">±0.000 无损</td></tr>
+            <tr><td>TruthfulQA</td><td>事实性</td><td>0.530</td><td>0.560</td><td class="highlight">+0.030 提升</td></tr>
+            <tr><td>SQuAD v2</td><td>问答</td><td>—</td><td>97%</td><td>压缩率 19%</td></tr>
+            <tr><td>BFCL</td><td>工具调用</td><td>—</td><td>97%</td><td>压缩率 32%</td></tr>
+        </table>
+        </div>
+    </div>
+
+    <!-- 竞品对比 -->
+    <div class="card">
+        <h2>⚔️ 竞品对比分析</h2>
+        <div class="table-wrap">
+        <table>
+            <tr><th>维度</th><th>Headroom</th><th>RTK</th><th>lean-ctx</th><th>Compresr</th><th>OpenAI Compaction</th></tr>
+            <tr><td>覆盖范围</td><td class="highlight">工具+RAG+日志+文件+历史</td><td>仅 CLI 输出</td><td>CLI+MCP+规则</td><td>API 文本</td><td>仅对话历史</td></tr>
+            <tr><td>本地运行</td><td class="highlight">✅</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+            <tr><td>可逆压缩</td><td class="highlight">✅ CCR</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>KV Cache 保护</td><td class="highlight">✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>跨 Agent 记忆</td><td class="highlight">✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>部署方式</td><td class="highlight">代理+SDK+MCP+Wrap</td><td>CLI</td><td>CLI+MCP</td><td>托管 API</td><td>Provider 原生</td></tr>
+        </table>
+        </div>
+        <div class="insight">
+            💡 <strong>核心差异</strong>：其他方案都是在"省 token"这一个维度上优化，Headroom 通过 CCR+CacheAligner+Cross-agent Memory 构建了<strong>完整的上下文优化基础设施</strong>，不仅省 token，还保护 cache 命中率、支持跨 Agent 协作、确保压缩安全性。
+        </div>
+    </div>
+
+    <!-- 适用人群 -->
+    <div class="card">
+        <h2>👥 适用人群</h2>
+
+        <h3>🎯 强烈推荐</h3>
+        <ul>
+            <li><strong>AI 编码助手重度用户</strong>：每天使用 Claude Code / Cursor / Codex，token 消耗大</li>
+            <li><strong>LLM 应用开发者</strong>：月 API 支出 &gt; $20，希望系统性降低成本</li>
+            <li><strong>多 Agent 协作场景</strong>：同项目多人多 Agent 并行开发，需要共享上下文</li>
+            <li><strong>SRE/运维自动化</strong>：大量日志和 JSON 需要交给 LLM 分析</li>
+        </ul>
+
+        <h3>⚠️ 需要评估</h3>
+        <ul>
+            <li>无状态/分布式部署：CCR 本地存储需额外适配</li>
+            <li>资源受限环境：Kompress-base 模型约 500MB</li>
+        </ul>
+    </div>
+
+    <!-- 快速上手 -->
+    <div class="card">
+        <h2>🚀 快速上手（60 秒）</h2>
+        <div class="quickstart"># 安装
+pip install "headroom-ai[all]"              # Python 3.10+
+
+# 方式一：包装现有 Agent（最简单）
+headroom wrap claude                         # 一条命令接入
+headroom wrap codex
+headroom wrap cursor
+
+# 方式二：透明代理（零代码改动）
+headroom proxy --port 8787
+# 然后设置 OPENAI_BASE_URL=http://localhost:8787
+
+# 方式三：Library SDK
+from headroom import compress
+compressed = compress(messages)
+
+# 查看效果
+headroom perf
+
+# 多 Agent 共享记忆
+headroom wrap claude --memory
+headroom wrap codex --memory                # 复用 Claude 缓存</div>
+    </div>
+
+    <div class="cta">
+        <a href="https://github.com/chopratejas/headroom" target="_blank">🔗 访问 Headroom GitHub 仓库</a>
+    </div>
+
+    <div class="footer">
+        <p>GitHub AI 项目日报 · 2026年06月08日 · 公众号「AI日课」</p>
+        <p style="margin-top: 4px;">信息来源：DeepWiki 架构解析 · GitHub README · txtmix 深度解析 · 大成科技实测</p>
+    </div>
+</div>
+</body>
+</html>
