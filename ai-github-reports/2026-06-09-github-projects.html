@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understand-Anything · GitHub AI 项目深度介绍 · 2026年06月09日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.85; padding: 24px; }
+        .container { max-width: 860px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
+        .header .date-badge { font-size: 12px; opacity: 0.75; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header .subtitle { font-size: 15px; opacity: 0.85; }
+        .meta-bar { display: flex; gap: 18px; flex-wrap: wrap; background: white; border-radius: 10px; padding: 14px 22px; margin-bottom: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); font-size: 13px; color: #555; }
+        .meta-bar span { display: flex; align-items: center; gap: 5px; }
+        .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+        .topic { background: #e8f0fe; color: #0f3460; padding: 3px 11px; border-radius: 20px; font-size: 12px; }
+        .card { background: white; border-radius: 12px; padding: 26px 32px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+        .card h2 { font-size: 17px; color: #16213e; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f0fe; }
+        .card h3 { font-size: 15px; color: #0f3460; margin: 20px 0 10px; font-weight: 600; }
+        .card p { color: #444; font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
+        .card ul { padding-left: 20px; }
+        .card ul li { color: #444; font-size: 15px; margin-bottom: 7px; line-height: 1.7; }
+        .desc-card { background: #f0f6ff; border-left: 5px solid #0f3460; border-radius: 0 12px 12px 0; padding: 18px 24px; margin-bottom: 20px; }
+        .desc-card p { font-size: 16px; color: #1a1a1a; font-style: italic; }
+        .quickstart { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 14px 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 14px; margin-top: 10px; word-break: break-all; white-space: pre-wrap; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #e8f0fe; color: #16213e; padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #0f3460; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; color: #444; }
+        tr:last-child td { border-bottom: none; }
+        .highlight { background: linear-gradient(180deg, transparent 60%, #fef9c3 60%); font-weight: 600; }
+        .cta { text-align: center; margin-top: 30px; }
+        .cta a { display: inline-block; background: #0f3460; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; }
+        .cta a:hover { background: #16213e; }
+        .footer { text-align: center; margin-top: 36px; color: #aaa; font-size: 12px; }
+        .insight { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 20px; margin-top: 16px; font-size: 14px; color: #92400e; }
+        .arch-layer { display: flex; align-items: flex-start; gap: 16px; margin: 12px 0; padding: 14px 18px; border-radius: 10px; }
+        .arch-01 { background: #f0f6ff; border-left: 4px solid #0f3460; }
+        .arch-02 { background: #f0fdf4; border-left: 4px solid #16a34a; }
+        .arch-03 { background: #fef9c3; border-left: 4px solid #ca8a04; }
+        .arch-num { font-size: 20px; font-weight: 800; min-width: 36px; }
+        .arch-01 .arch-num { color: #0f3460; }
+        .arch-02 .arch-num { color: #16a34a; }
+        .arch-03 .arch-num { color: #ca8a04; }
+        .arch-content strong { display: block; font-size: 14px; margin-bottom: 4px; color: #1a1a1a; }
+        .arch-content span { font-size: 13px; color: #555; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+        .stat-item { background: #f0f6ff; border-radius: 10px; padding: 14px 16px; text-align: center; }
+        .stat-item .num { font-size: 24px; font-weight: 700; color: #0f3460; }
+        .stat-item .label { font-size: 12px; color: #666; margin-top: 4px; }
+        .pipe-flow { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+        .pipe-step { background: #0f3460; color: white; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+        .pipe-arrow { color: #0f3460; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date-badge">GitHub AI 项目 · 2026年06月09日</div>
+        <h1>Understand-Anything</h1>
+        <p class="subtitle">把 20 万行代码变成一张可交互的知识地图。Tree-Sitter + LLM 双引擎 · 多 Agent 流水线 · 15 平台全覆盖 · 业务语义映射。</p>
+    </div>
+
+    <div class="meta-bar">
+        <span>⭐ 55,297</span>
+        <span>🍴 4,577</span>
+        <span>📘 TypeScript</span>
+        <span>📜 MIT</span>
+        <span>📅 2026-03-15 创建</span>
+        <span>🌐 15 平台支持</span>
+    </div>
+
+    <div class="topics">
+        <span class="topic">knowledge-graph</span><span class="topic">codebase-analysis</span><span class="topic">claude-code</span><span class="topic">tree-sitter</span>
+        <span class="topic">multi-agent</span><span class="topic">codex</span><span class="topic">cursor</span><span class="topic">visualization</span>
+        <span class="topic">typescript</span><span class="topic">developer-tools</span><span class="topic">llm</span><span class="topic">knowledge-base</span>
+    </div>
+
+    <div class="desc-card">
+        <p>Understand-Anything 通过 <strong>Tree-Sitter 语法解析 + LLM 语义理解</strong> 双引擎架构，将任意代码库转化为可交互的知识图谱。每个文件、函数、类都是图谱上的节点，你可以像逛地图一样探索代码。核心理念：<strong>"Graphs that teach > graphs that impress"</strong>——图谱教你理解，而非炫技。</p>
+    </div>
+
+    <!-- 统计概览 -->
+    <div class="card">
+        <h2>📊 项目概览</h2>
+        <div class="stat-grid">
+            <div class="stat-item"><div class="num">55.3k</div><div class="label">Stars</div></div>
+            <div class="stat-item"><div class="num">3 个月</div><div class="label">项目年龄</div></div>
+            <div class="stat-item"><div class="num">5~7</div><div class="label">专用 Agent</div></div>
+            <div class="stat-item"><div class="num">15</div><div class="label">支持平台</div></div>
+            <div class="stat-item"><div class="num">5~10min</div><div class="label">10 万行首次分析</div></div>
+            <div class="stat-item"><div class="num">&lt;30s</div><div class="label">增量更新</div></div>
+        </div>
+    </div>
+
+    <!-- 核心功能 -->
+    <div class="card">
+        <h2>🔧 核心功能</h2>
+
+        <h3>1. 结构化代码知识图谱</h3>
+        <p>运行 <code>/understand</code> 后，<strong>5~7 个专用 Agent</strong> 流水线自动启动：project-scanner 扫描项目 → file-analyzer 提取函数/类/依赖 → architecture-analyzer 识别架构分层（API/Service/Data/UI/Utility）→ graph-reviewer 验证图谱完整性 → 输出 knowledge-graph.json。Dashboard 以力导向布局（Force Layout）渲染，每个节点可点击查看自然语言摘要和关联关系。</p>
+
+        <div class="pipe-flow">
+            <div class="pipe-step">代码库</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">project-scanner</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">file-analyzer</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">graph-reviewer</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">knowledge-graph.json</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">Dashboard 可视化</div>
+        </div>
+
+        <h3>2. 业务领域视图</h3>
+        <p><code>/understand-domain</code> 调用 domain-analyzer Agent，将技术代码映射到<strong>领域 → 流程 → 步骤</strong>的横版图。接手遗留系统时，不再困惑"这段代码到底属于哪个业务"。这对于业务与技术之间存在巨大鸿沟的团队尤其有价值。</p>
+
+        <h3>3. 交互式 Dashboard</h3>
+        <p><code>/understand-dashboard</code> 启动本地 Web 界面，基于 Zustand 状态管理 + Force Layout 布局引擎。支持节点搜索、按架构层着色、点击查看自然语言摘要和依赖关系。大图谱管理建议使用 git-lfs。</p>
+
+        <h3>4. Diff 影响分析</h3>
+        <p><code>/understand-diff</code> 可视化展示<strong>改动涟漪效应</strong>——一个看似简单的修改实际波及了 3 个 Service 层和 2 个 API 路由。在 PR Review 中彻底改变 Code Review 方式：从凭经验猜测到工具有确证。</p>
+
+        <h3>5. 知识库分析</h3>
+        <p><code>/understand-knowledge</code> 分析 Karpathy 模式的 LLM Wiki（Markdown + WikiLinks），将个人知识库转化为可导航的关系图谱。article-analyzer Agent 自动发现你写 Wiki 时未曾意识到的文章间隐含关联。</p>
+
+        <h3>6. 更多消费方式</h3>
+        <p><strong>角色适配 UI</strong>（新人/PM/资深开发者自动调整图谱详细度）、<strong>对话式查询</strong>（/understand-chat「支付流程是怎么走的？」）、<strong>导览模式</strong>（/understand-onboard 自动生成新成员学习路径）、<strong>深度解读</strong>（/understand-explain 文件/函数级别分析）。</p>
+    </div>
+
+    <!-- 技术架构 -->
+    <div class="card">
+        <h2>🏗️ 核心技术亮点</h2>
+
+        <div class="arch-layer arch-01">
+            <div class="arch-num">01</div>
+            <div class="arch-content">
+                <strong>Tree-Sitter + LLM 双引擎混合架构</strong>
+                <span><strong>Tree-Sitter（确定性层）</strong>：解析语法树，提取 imports/exports、函数定义、调用点——同样输入永远同样输出。 <strong>LLM（语义层）</strong>：在语法树基础上生成摘要、分架构层、识别业务域——智能但不影响图谱骨架。即使 LLM 版本升级，图谱结构本身仍然稳定。</span>
+            </div>
+        </div>
+
+        <div class="arch-layer arch-02">
+            <div class="arch-num">02</div>
+            <div class="arch-content">
+                <strong>代码理解"资产化"——从临时推理到持久基础设施</strong>
+                <span>分析结果以 JSON 持久化为 knowledge-graph.json，可提交 Git 仓库、全团队共享。AI 编程助手先读图谱获得全局视图再局部深入源码，避免每次会话都"盲读"。从"单机临时工具"升级为"团队协作基础设施"。</span>
+            </div>
+        </div>
+
+        <div class="arch-layer arch-03">
+            <div class="arch-num">03</div>
+            <div class="arch-content">
+                <strong>增量更新 + 并发批处理 + Monorepo 多平台</strong>
+                <span>file-analyzer 最多 5 并发、每批 20~30 文件。增量更新只分析变更文件，通过 /understand --auto-update 自动触发。pnpm monorepo + Plugin 模式：一套代码适配 Claude Code / Cursor / Copilot / Codex / Gemini CLI 等 15 个平台。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 性能数据 -->
+    <div class="card">
+        <h2>📊 实测性能数据</h2>
+
+        <div class="table-wrap">
+        <table>
+            <tr><th>指标</th><th>数值</th><th>说明</th></tr>
+            <tr><td>首次分析（10 万行）</td><td class="highlight">5~10 分钟</td><td>全量分析，生成完整知识图谱</td></tr>
+            <tr><td>增量更新</td><td class="highlight">&lt; 30 秒</td><td>仅重新分析变更文件</td></tr>
+            <tr><td>文件分析并发</td><td class="highlight">5 并发，每批 20~30 文件</td><td>并行加速大代码库分析</td></tr>
+            <tr><td>图谱输出格式</td><td>JSON</td><td>.understand-anything/knowledge-graph.json</td></tr>
+            <tr><td>大图谱建议</td><td>git-lfs</td><td>超过 10MB 的图谱文件</td></tr>
+            <tr><td>支持语言</td><td>zh/en/ja/ko/ru/...</td><td>多语言 README + 中文节点描述</td></tr>
+        </table>
+        </div>
+    </div>
+
+    <!-- 竞品对比 -->
+    <div class="card">
+        <h2>⚔️ 竞品对比分析</h2>
+        <div class="table-wrap">
+        <table>
+            <tr><th>维度</th><th>Understand-Anything</th><th>CodeGraph</th><th>Sourcegraph</th><th>DepTree</th></tr>
+            <tr><td>语义理解</td><td class="highlight">✅ LLM 增强</td><td>✅ LLM 增强</td><td>❌ 纯静态</td><td>❌ 纯静态</td></tr>
+            <tr><td>知识图谱</td><td class="highlight">✅ Force Layout 交互式</td><td>✅ 预索引图谱</td><td>⚠️ 搜索导向</td><td>⚠️ 依赖树</td></tr>
+            <tr><td>业务语义映射</td><td class="highlight">✅ 领域/流程/步骤</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Diff 影响分析</td><td class="highlight">✅ 涟漪效应可视化</td><td>⚠️ 部分支持</td><td>✅ 引用跳转</td><td>❌</td></tr>
+            <tr><td>主动导览 (Onboarding)</td><td class="highlight">✅ 自动生成</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>平台覆盖</td><td class="highlight">15 个 AI 编程平台</td><td>8 个 MCP 集成</td><td>Web + IDE</td><td>VS Code</td></tr>
+            <tr><td>图谱资产化</td><td class="highlight">✅ Git 可提交共享</td><td>✅ 本地 SQLite</td><td>❌ 云端</td><td>❌ 临时</td></tr>
+            <tr><td>知识库分析</td><td class="highlight">✅ Wiki 图谱化</td><td>❌</td><td>❌</td><td>❌</td></tr>
+        </table>
+        </div>
+        <div class="insight">
+            💡 <strong>核心差异</strong>：Understand-Anything 的独特优势在于<strong>语义理解 + 业务映射 + 知识资产化</strong>三位一体。不同于 CodeGraph 侧重 Agent 工具调用优化、Sourcegraph 侧重代码搜索，它构建了一条从"代码读不懂"到"团队知识可积累"的完整链路。业务域抽取和 Onboarding 导览是其独有的差异化能力。
+        </div>
+    </div>
+
+    <!-- 适用人群 -->
+    <div class="card">
+        <h2>👥 适用人群</h2>
+
+        <h3>🎯 强烈推荐</h3>
+        <ul>
+            <li><strong>刚入职的开发者</strong>：/understand-onboard 自动生成学习路径，上手时间从两周缩短到两天</li>
+            <li><strong>项目维护者</strong>：/understand-diff 快速判断改动影响范围，不再凭经验猜测</li>
+            <li><strong>技术 Leader</strong>：架构展示、团队知识共享，图谱可提交仓库全员使用</li>
+            <li><strong>开源项目学习者</strong>：分析优秀开源项目的代码结构，理解架构设计的精妙</li>
+            <li><strong>AI 编码助手重度用户</strong>：先读图谱再局部深入源码，大幅减少 Token 消耗和探索时间</li>
+        </ul>
+
+        <h3>⚠️ 需要评估</h3>
+        <ul>
+            <li>小项目（几十个文件）：图谱价值有限</li>
+            <li>高度动态语言项目（PHP/Ruby）：Tree-sitter 精度有差距</li>
+            <li>超大型图谱（>5000 节点）：Dashboard 渲染需优化</li>
+            <li>增量更新 CI 成本：大型 monorepo 需评估每次提交的分析开销</li>
+        </ul>
+    </div>
+
+    <!-- 快速上手 -->
+    <div class="card">
+        <h2>🚀 快速上手（60 秒）</h2>
+        <div class="quickstart"># 1. Claude Code 一键安装
+/plugin marketplace add Lum1104/Understand-Anything
+/plugin install understand-anything
+
+# 2. 分析项目（中文输出）
+/understand --language zh
+
+# 3. 打开可视化 Dashboard
+/understand-dashboard
+
+# 4. 对话式查询
+/understand-chat 支付流程是怎么走的？
+
+# 5. 分析改动影响
+/understand-diff
+
+# 6. 新成员引导
+/understand-onboard
+
+# 其他平台通用安装
+# macOS / Linux:
+curl -fsSL https://raw.githubusercontent.com/Lum1104/Understand-Anything/main/install.sh | bash
+# Windows:
+iwr -useb https://raw.githubusercontent.com/Lum1104/Understand-Anything/main/install.ps1 | iex</div>
+    </div>
+
+    <div class="cta">
+        <a href="https://github.com/Egonex-AI/Understand-Anything" target="_blank">🔗 访问 Understand-Anything GitHub 仓库</a>
+        <br><small style="color:#888;">在线 Demo：<a href="https://understand-anything.com/demo/" target="_blank">understand-anything.com/demo</a></small>
+    </div>
+
+    <div class="footer">
+        <p>GitHub AI 项目日报 · 2026年06月09日 · 公众号「AI日课」</p>
+        <p style="margin-top: 4px;">信息来源：DeepWiki 架构解析 · txtmix 深度技术分析 · 掘金社区功能评测 · zwt0204 深入解读</p>
+    </div>
+</div>
+</body>
+</html>
