@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.9｜MLEvolve · 上海AI Lab 让多个 Agent 自己学会做 AutoML</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333;">
+
+<div style="max-width:680px;margin:0 auto;background:#fff;">
+
+  <!-- 头部 -->
+  <div style="padding:30px 24px 16px 24px;">
+    <h1 style="font-size:22px;line-height:1.5;color:#1a1a1a;margin:0 0 12px 0;font-weight:700;">
+      2026.6.9｜MLEvolve · 上海AI Lab 让多个 Agent 自己学会做 AutoML，12 小时拿下 MLE-Bench SOTA
+    </h1>
+    <div style="font-size:13px;color:#999;margin-bottom:20px;">
+      ✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 &nbsp;·&nbsp; 国内 &nbsp;·&nbsp; 阅读时长 7 分钟
+    </div>
+  </div>
+
+  <!-- 论文信息表 -->
+  <div style="padding:0 24px 24px 24px;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;">
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;width:80px;border-bottom:1px solid #e8e8e8;">论文标题</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">MLEvolve: A Self-Evolving Framework for Automated Machine Learning Algorithm Discovery</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">作者</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">Shangheng Du, Xiangchao Yan 等 14 人（上海人工智能实验室、华东师范大学）</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">发表日期</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">2026-06-04</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">来源</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">arXiv (2606.06473)</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">论文链接</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;"><a href="https://arxiv.org/abs/2606.06473" style="color:#576b95;text-decoration:none;">点击查看原文</a></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">代码</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;"><a href="https://github.com/InternScience/MLEvolve" style="color:#576b95;text-decoration:none;">InternScience/MLEvolve</a></td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;">标签</td>
+        <td style="padding:8px 14px;">Multi-Agent · 自进化 · AutoML · 图搜索 · MLE-Bench</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 章节：这篇论文在说什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #4A90D9;font-weight:700;">这篇论文在说什么？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      一句话：他们搭了一个多 Agent 协作系统，不用人管，自己就能完成从方案搜索到代码实现、再到效果验证的全流程机器学习算法开发。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      具体来说，MLEvolve 是一个"自己会进化"的 Agent 框架。它接手一个 ML 竞赛任务后，会同时派多个 Agent 去尝试不同的解法，然后把各自的经验汇总到一个"群体记忆"里，后面的 Agent 就能站在前人肩膀上继续优化。整个过程像一个逐渐收紧的漏斗——前期广泛探索，后期集中突破。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      在 MLE-Bench 的 75 个 ML 竞赛任务上，MLEvolve 只用 12 小时（标准预算的一半）就拿到了 65.3% 的平均奖牌率，超过了所有现有方法，包括用 Gemini-3-Pro 的 MARS+（62.7%）和 Claude-Opus-4.6 的 AIBuildAI（63.1%），而且有效提交率直接干到了 100%。
+    </p>
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.06473v1/x1.png" alt="MLEvolve概览图" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.1</em></p>
+  </div>
+
+  <!-- 章节：为什么要关注 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #E8A838;font-weight:700;">为什么要关注？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      自动做机器学习不是新概念——AutoML 已经搞了好多年了。但之前的方案有几个很要命的毛病。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>第一个毛病：信息孤岛。</strong>典型的 AutoML Agent（比如 AIDE、ML-Master）用的是树状搜索——像一个分支一个分支地试，A 分支试出来的经验不能传给 B 分支。这就很蠢，相当于一个团队里每个人都在闷头干活，谁也不跟谁交流。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>第二个毛病：没有记忆。</strong>这轮搜索做完，下一轮从零开始。上次实验暴露出某个数据预处理的问题，下次照样踩坑。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>第三个毛病：规划和执行绑太死。</strong>策略规划和代码生成耦合在一起，一旦规划改了，代码大概率得重写，稳定性很差。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 0 0;">
+      MLEvolve 的核心思路就是解决这三个问题。ML Agent 正处在一个"临界点"：从"能写代码"到"自己做实验、积累经验、迭代优化"，MLEvolve 给出了一个具体的答案。
+    </p>
+  </div>
+
+  <!-- 章节：核心方法 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #6EC05A;font-weight:700;">核心方法</h2>
+
+    <h3 style="font-size:16px;line-height:1.5;color:#333;margin:0 0 8px 0;font-weight:600;">关键思路</h3>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 10px 0;">
+      <strong>第一块：Progressive MCGS（渐进式蒙特卡洛图搜索）</strong><br/>
+      传统的树搜索每个分支独立运行。MLEvolve 把"树"改成了"图"——不同分支之间可以通过"参考边"互相通信。搜索策略不是一成不变的：前期用高"温度"鼓励随机探索，时间推移逐渐收敛到最有潜力的方向。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 10px 0;">
+      <strong>第二块：Retrospective Memory（回溯记忆）</strong><br/>
+      两层记忆：一层是"冷启动知识库"（领域基础知识，相当于教科书），另一层是"动态全局记忆"（每次实验的经验提炼）。Agent 接手新任务时先翻"全局记忆"，看有没有前人趟过的路。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 16px 0;">
+      <strong>第三块：Hierarchical Planning + Adaptive Code Generation</strong><br/>
+      策略规划和代码生成是分开的两层。上层定"大方向"，下层写"具体代码"。三种编码模式：快速原型（先跑通）、精细调优（深入优化关键部分）、补丁修复（增量改，不动整体架构）。
+    </p>
+
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.06473v1/x2.png" alt="MLEvolve框架图" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 16px 0;"><em>图源：原文 Fig.2</em></p>
+
+    <h3 style="font-size:16px;line-height:1.5;color:#333;margin:0 0 8px 0;font-weight:600;">技术细节</h3>
+
+    <div style="background:#f7f8fa;border-left:3px solid #bbb;padding:12px 16px;margin:0 0 12px 0;border-radius:0 4px 4px 0;">
+      <p style="font-size:14px;line-height:1.7;color:#666;margin:0;font-style:italic;">
+        "Progressive MCGS enables cross-branch information flow through graph-based reference edges and gradually shifts the search from broad exploration to focused exploitation with an entropy-inspired progressive schedule."
+      </p>
+    </div>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 16px 0;">
+      说得直白一点：用图的边打通了分支间的通信，用熵驱动的时间衰减策略控制了"探索 vs 利用"的节奏。搜索调度公式是 <code style="background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:13px;">选择概率 ∝ 验证分数 + λ(t) × 潜在价值</code>，其中 λ(t) 随时间衰减。早期 λ 大，Agent 更愿意冒险；后期 λ 趋近零，只选已验证有效的方向。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0;">
+      记忆的存储和检索都用"语义子目标"做键。比如"为表格数据做特征选择"就是一条经验的键。检索时用 embedding 做语义匹配——即使任务描述不完全一样，经验也能被复用。这套设计在工程上很实用，有点像给 Agent 装了一个"团队 Wiki"。
+    </p>
+  </div>
+
+  <!-- 章节：效果怎么样 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #D96C4A;font-weight:700;">效果怎么样？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 16px 0;">
+      核心实验在 MLE-Bench 上跑，这是目前 ML Agent 领域最严格的测试集——75 个真实的 Kaggle 风格竞赛任务，按难度分 Low / Medium / High 三档。
+    </p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.8;margin:0 0 12px 0;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;">
+      <tr style="background:#4A90D9;color:#fff;">
+        <th style="padding:10px 8px;text-align:left;font-weight:600;">Agent</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">时间(h)</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">Low(%)</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">Med(%)</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">High(%)</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">All(%)</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">Valid(%)</th>
+        <th style="padding:10px 8px;text-align:center;font-weight:600;">Gold(%)</th>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-size:12px;">AIDE (o1-preview)</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">24</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">35.9</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">8.5</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">11.7</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">17.1</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">82.8</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">9.4</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-size:12px;">ML-Master 2.0 (DeepSeek)</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">24</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">75.8</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">50.9</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">42.2</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">56.4</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">95.6</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">19.6</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-size:12px;">MARS+ (Gemini-3-Pro)</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">24</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">78.8</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">60.5</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">44.4</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">62.7</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">100.0</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">33.8</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-size:12px;">AIBuildAI (Claude-Opus)</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">24</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">77.3</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">61.4</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">46.7</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">63.1</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">100.0</td>
+        <td style="padding:8px;text-align:center;border-bottom:1px solid #e8e8e8;">25.8</td>
+      </tr>
+      <tr style="background:#e8f4e8;">
+        <td style="padding:8px;font-size:12px;font-weight:700;">MLEvolve (ours)</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">12</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">80.3</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">64.0</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">46.7</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">65.3</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">100.0</td>
+        <td style="padding:8px;text-align:center;font-weight:700;">34.7</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0;">
+      几个值得注意的点：<strong>12 小时预算</strong>就把所有 24 小时预算的对手全超了；<strong>100% 有效提交率</strong>——生成的方案没有一个因为语法错误或格式问题被拒；<strong>Gold 率 34.7%</strong>——每 3 个任务就有一个达到金牌水平。另外在数学算法优化任务上，MLEvolve 也超过了专为此设计的 AlphaEvolve 和 AlphaEvolve-v2，展现了跨域泛化能力。
+    </p>
+  </div>
+
+  <!-- 章节：和其他方案比有什么不同 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #9B6EC0;font-weight:700;">和其他方案比有什么不同？</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.8;margin:0 0 16px 0;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;">
+      <tr style="background:#f0f0f0;">
+        <th style="padding:10px 8px;text-align:left;font-weight:600;">维度</th>
+        <th style="padding:10px 8px;text-align:left;font-weight:600;">传统 AutoML Agent</th>
+        <th style="padding:10px 8px;text-align:left;font-weight:600;color:#4A90D9;">MLEvolve</th>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-weight:600;">搜索结构</td>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;">线性/树状，分支独立</td>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;color:#4A90D9;">图状，分支间通过"参考边"通信</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-weight:600;">经验积累</td>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;">无记忆，每轮从零开始</td>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;color:#4A90D9;">双层记忆系统，越跑越聪明</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;font-weight:600;">探索策略</td>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;">固定（贪心/MCTS）</td>
+        <td style="padding:8px;border-bottom:1px solid #e8e8e8;color:#4A90D9;">渐进式：前期探索 → 后期聚焦</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px;font-weight:600;">规划与编码</td>
+        <td style="padding:8px;">耦合，改动成本高</td>
+        <td style="padding:8px;color:#4A90D9;">分层解耦，三种自适应编码模式</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0;">
+      最核心的差异是"自进化"的概念。大部分 Agent 是你给它一个任务跑、跑完就结束。MLEvolve 的设计是让它"越跑越强"——每次跑完都把经验存进群体记忆，长期来看整个系统会持续改进。跟同样是图搜索的 AlphaEvolve 比，MLEvolve 多了一个 Retrospective Memory 层，从"一次性搜索"变成了"带记忆的持续性搜索"。
+    </p>
+  </div>
+
+  <!-- 章节：对开发者意味着什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #E05A5A;font-weight:700;">对开发者意味着什么？</h2>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>能不能直接用？</strong>代码已开源（InternScience/MLEvolve），需要配置 LLM API + 计算资源。目前支持表格型数据为主，图像和 NLP 任务的支持还在开发中。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>什么场景适用？</strong>如果你经常需要"试试哪个模型效果最好"、"调一调特征工程方案"、"对比几种训练策略"这类工作，MLEvolve 可以帮你省掉大量手动实验的时间。它本质上是一个"会自己写实验代码、自己跑、自己总结经验"的自动化实验助手。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>局限性要清楚：</strong>依赖强 LLM（论文用 DeepSeek-V3.2-Speciale），模型能力直接影响搜索质量；12 小时对个人开发者来说仍不短；群体记忆刚部署时效果不如跑了几百个任务之后。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0;">
+      <strong>一个有意思的展望：</strong>MLEvolve 的"自进化"思路可能比它当前的具体表现更重要。如果把这套机制接到一个持续运行的 CI/CD 管道里，每次模型上线后自动收集反馈、自动做实验优化、自动更新模型——这才是"真正的 MLOps 自动化"。这种"越用越好"的系统，才是 Agent 真正区别于传统 AutoML 的地方。
+    </p>
+  </div>
+
+  <!-- 底部 -->
+  <div style="padding:20px 24px;border-top:1px solid #eee;text-align:center;">
+    <p style="font-size:13px;color:#999;margin:0;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>
