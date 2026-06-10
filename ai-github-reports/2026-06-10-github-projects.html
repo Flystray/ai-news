@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 — 2026-06-10</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --tag-bg: #1c2128;
+    --code-bg: #0d1117;
+    --warn-bg: #1a1510;
+    --warn-border: #bb8009;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #58a6ff, #3fb950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: .5rem;
+  }
+  .header .date {
+    color: var(--text-dim);
+    font-size: .9rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .project-card h2 a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  .project-card h2 a:hover { text-decoration: underline; }
+  .quote {
+    font-style: italic;
+    color: var(--text-dim);
+    border-left: 3px solid var(--accent2);
+    padding-left: 1rem;
+    margin: 1rem 0;
+  }
+  .stars {
+    display: inline-flex; align-items: center; gap: 1rem;
+    color: var(--text-dim); font-size: .9rem; margin: .5rem 0 1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+  .tags span {
+    background: var(--tag-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: .2rem .8rem; font-size: .8rem;
+    color: var(--accent);
+  }
+  h3 {
+    color: var(--accent2);
+    font-size: 1.15rem;
+    margin: 2rem 0 .8rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h4 { color: var(--accent); margin: 1.2rem 0 .5rem; }
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: .8rem 0 1.2rem 1.5rem; }
+  li { margin-bottom: .4rem; }
+  code {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: .15rem .4rem; font-size: .85rem;
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem; overflow-x: auto;
+    font-size: .85rem; margin-bottom: 1rem;
+  }
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0;
+    font-size: .85rem;
+  }
+  .compare-table th {
+    background: var(--tag-bg); padding: .6rem .8rem;
+    text-align: left; border: 1px solid var(--border); color: var(--accent);
+  }
+  .compare-table td {
+    padding: .5rem .8rem; border: 1px solid var(--border);
+  }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .warn {
+    background: var(--warn-bg); border: 1px solid var(--warn-border);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0;
+  }
+  .warn::before { content: "⚠️ "; }
+  .footer {
+    text-align: center; color: var(--text-dim); font-size: .85rem;
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); }
+  .highlight-num {
+    font-weight: 700; color: var(--accent2);
+  }
+  .time-badge {
+    display: inline-block; background: #1a1a3a; color: #a78bfa;
+    border-radius: 4px; padding: 0 .5rem; font-size: .8rem; margin: 0 .2rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GitHub AI 项目日报</h1>
+  <div class="date">2026年6月10日 · 星期三</div>
+</div>
+
+<div class="project-card">
+  <h2><a href="https://github.com/getzep/graphiti" target="_blank">Graphiti</a></h2>
+  <div class="quote">When AI Agent can't remember when facts changed, it can't truly understand the world. Graphiti gives knowledge graphs a time dimension.</div>
+
+  <div class="stars">
+    ⭐ 27,200+ · 🍴 2,700+ · 📝 Python 99.4% · 🕐 2024 · 📄 Apache-2.0 · 🔄 v0.29.2
+  </div>
+
+  <div class="tags">
+    <span>temporal-knowledge-graph</span><span>ai-agent-memory</span><span>bi-temporal</span>
+    <span>edge-invalidation</span><span>mcp-server</span><span>neo4j</span>
+  </div>
+
+  <!-- 项目背景 -->
+  <h3>📌 项目背景</h3>
+  <p>当前 AI Agent 面临一个根本性困境：<strong>传统记忆系统是静态的</strong>。无论是向量数据库做 RAG，还是 GraphRAG 做全局摘要，它们都把知识视为"一成不变的快照"。但现实世界并非如此——用户的偏好会改变，公司的架构会调整，股价会波动，政策会更新。</p>
+  <p>试想一个客服 Agent：用户上周说"我不喜欢短信通知"，这周却说"请用短信通知我"。传统 RAG 系统会同时检索到这两条矛盾信息，然后 Agent 就陷入了困惑。更糟糕的是，它完全不知道哪条是当前有效的。</p>
+  <p><strong>Graphiti</strong> 正是为此而生。它由 <a href="https://www.getzep.com/" target="_blank">Zep</a> 团队开源（背后有 arXiv 论文 <a href="https://arxiv.org/abs/2501.13956" target="_blank">2501.13956</a> 支撑），专门为 AI Agent 构建具有<strong>时间感知能力</strong>的知识图谱。与静态知识图谱不同，Graphiti 的 Context Graph 追踪事实随时间的演变，维护数据溯源，并在事实矛盾时自动失效旧信息——让 Agent 拥有"知道什么现在为真"的能力。</p>
+
+  <!-- 核心功能 -->
+  <h3>🚀 核心功能</h3>
+
+  <h4>1. 双时态模型（Bi-Temporal Model）</h4>
+  <p>每条关系/事实边携带四个时间维度：</p>
+  <p>
+    <span class="time-badge">created_at</span>系统摄入时间
+    <span class="time-badge">valid_at</span>事实生效时间
+    <span class="time-badge">invalid_at</span>事实失效时间
+    <span class="time-badge">expired_at</span>系统过期时间
+  </p>
+  <p>知识图谱不只记录"什么为真"，更记录"<strong>从何时到何时为真</strong>"。这是从三维（实体-关系-实体）到四维（实体-关系-实体-时间）的升维。</p>
+
+  <h4>2. 时序边失效机制（Temporal Edge Invalidation）</h4>
+  <p>当新事实与旧事实矛盾时，系统不会删除旧数据，而是为旧边添加 <code>invalid_at</code> 时间戳标记其失效。检索时自动过滤掉已失效的边，确保 Agent 只看到当前有效的事实——<strong>永远不被矛盾信息困扰</strong>。</p>
+
+  <h4>3. 多阶段数据处理管道</h4>
+  <p>通过 <code>add_episode()</code> 添加数据时经历完整管道：</p>
+  <ul>
+    <li><strong>提取</strong>：LLM 从文本识别实体和关系</li>
+    <li><strong>解析去重</strong>：全文检索+语义相似度+BFS 三路检索进行实体消歧</li>
+    <li><strong>矛盾检测</strong>：新旧事实冲突时触发时序边失效</li>
+    <li><strong>属性提取</strong>：根据自定义本体抽取属性值</li>
+    <li><strong>社区构建</strong>：Leiden 聚类算法生成社区摘要，提供全局视角</li>
+  </ul>
+
+  <h4>4. 混合检索系统</h4>
+  <p><code>Graphiti.search()</code> 融合四种检索策略：</p>
+  <ul>
+    <li><strong>语义搜索</strong>：嵌入向量相似度</li>
+    <li><strong>关键词搜索</strong>：BM25 全文检索</li>
+    <li><strong>图遍历</strong>：BFS 从中心节点展开关联上下文</li>
+    <li><strong>重排序</strong>：RRF / Cross-Encoder / Graph Distance 三选一</li>
+  </ul>
+
+  <h4>5. 多提供商插件架构</h4>
+  <p>数据库支持 <strong>Neo4j / FalkorDB / Kuzu / Amazon Neptune</strong>；LLM 支持 <strong>OpenAI / Anthropic / Gemini / Groq</strong>；嵌入支持 <strong>Voyage AI / Sentence Transformers / OpenAI</strong>——全部通过抽象基类解耦，切换只需改配置。</p>
+
+  <h4>6. MCP Server + REST API + Docker</h4>
+  <p>提供 MCP Server（SSE 传输，8000 端口）可直接接入 Cursor/Claude Code 等 AI 工具，REST API 便于外部服务调用，Docker 容器化一键部署。</p>
+
+  <h4>7. 自定义本体与实体类型</h4>
+  <p>支持预定义本体（Prescribed Ontologies）和学习型本体（Learned Ontologies）双模式。可定义结构化实体（如 Podcast、Person、Event）和语义关系（如 BELONGS_TO、MENTIONS），让图谱适应你的领域。</p>
+
+  <!-- 技术亮点 -->
+  <h3>⚙️ 技术亮点</h3>
+
+  <h4>1. 双时态模型——知识图谱的"4D 升维"</h4>
+  <p>传统知识图谱只回答"实体 A 和实体 B 是什么关系"，Graphiti 还能回答"这个关系从何时到何时成立"。在 DMR（Deep Memory Retrieval）基准测试中，Zep/Graphiti 达到 <span class="highlight-num">94.8%</span> 准确率（标准），使用 GPT-4o Mini 时更是创下 <span class="highlight-num">98.2% SOTA</span>。</p>
+
+  <h4>2. 三路混合实体消歧——解决"同名不同物"</h4>
+  <p>实体去重是知识图谱构建的著名难题。Graphiti 创新性地使用<strong>全文检索 + 语义相似度 + BFS 图遍历</strong>三路检索候选实体，再由 LLM 判断是否为同一实体。这种"检索+推理"的混合方案，比纯向量匹配的准确率显著更高。</p>
+
+  <h4>3. Leiden 社区检测——从局部到全局的认知跃迁</h4>
+  <p>借鉴微软 GraphRAG 的思路，用 Leiden 聚类算法将相同主题的实体聚类为社区，生成社区摘要和嵌入。让 Agent 不仅能在局部做精确检索，还能在全局层面理解知识结构——从"见树木"到"见森林"。</p>
+
+  <!-- 对比分析 -->
+  <h3>📊 对比分析</h3>
+  <table class="compare-table">
+    <tr><th>维度</th><th>Graphiti</th><th>GraphRAG（微软）</th><th>传统向量 RAG</th><th>Mem0</th></tr>
+    <tr><td>时序感知</td><td><strong>✅ 双时态+边失效</strong></td><td>❌ 静态快照</td><td>❌ 无时间维度</td><td>⚠️ 简单时间戳</td></tr>
+    <tr><td>更新方式</td><td><strong>持续增量</strong></td><td>批量重建</td><td>批量索引</td><td>增量更新</td></tr>
+    <tr><td>矛盾处理</td><td><strong>自动边失效</strong></td><td>❌ 不支持</td><td>❌ 不支持</td><td>⚠️ 部分支持</td></tr>
+    <tr><td>检索策略</td><td><strong>语义+关键词+图+重排序</strong></td><td>全文+社区摘要</td><td>纯向量</td><td>向量+关键词</td></tr>
+    <tr><td>DMR 准确率</td><td><strong>94.8%（98.2% w/GPT-4o Mini）</strong></td><td>—</td><td>~85%</td><td>~88%</td></tr>
+    <tr><td>LongMemEval</td><td><strong>63.8%（同行评审）</strong></td><td>—</td><td>—</td><td>49.0%</td></tr>
+    <tr><td>图谱能力</td><td><strong>✅ 动态时序图</strong></td><td>✅ 静态社区图</td><td>❌ 无图</td><td>⚠️ 付费版</td></tr>
+    <tr><td>开源协议</td><td><strong>Apache-2.0</strong></td><td>MIT</td><td>各异</td><td>Apache-2.0</td></tr>
+    <tr><td>GitHub Stars</td><td>27.2k</td><td>20k+</td><td>—</td><td>48k</td></tr>
+    <tr><td>自托管</td><td><strong>✅ Graphiti+Neo4j</strong></td><td>✅</td><td>✅</td><td>✅</td></tr>
+  </table>
+  <p>关键数据：LongMemEval 基准上比 Mem0 高 <span class="highlight-num">+15 个百分点</span>（63.8% vs 49.0%）；时序推理任务比全上下文基线提升 <span class="highlight-num">+38.4%</span>；偏好类问题检索提升 <span class="highlight-num">+184%</span>；推理延迟比全上下文填充降低 <span class="highlight-num">最多 90%</span>。</p>
+
+  <!-- 适用人群 -->
+  <h3>👥 适用人群</h3>
+  <ul>
+    <li><strong>AI Agent 开发者</strong>：需要为 Agent 配备长期记忆，特别是追踪用户偏好变化、会话历史和动态事实</li>
+    <li><strong>企业级 AI 应用架构师</strong>：客服系统、知识管理系统等需要精确事实追踪的场景</li>
+    <li><strong>RAG 系统优化者</strong>：现有 RAG 在矛盾信息处理上遇到瓶颈，需要时序感知能力</li>
+    <li><strong>知识图谱研究者</strong>：对时序知识图谱、动态本体和图推理感兴趣</li>
+    <li><strong>MCP 生态开发者</strong>：需要为 AI 工具链增加持久化记忆层</li>
+  </ul>
+
+  <!-- 快速上手 -->
+  <h3>⚡ 快速上手</h3>
+  <pre><code># 1. 安装 Graphiti
+pip install graphiti-core
+
+# 2. 启动 Neo4j（Docker 一键启动）
+docker run -d --name neo4j \
+  -p 7474:7474 -p 7687:7687 \
+  -e NEO4J_AUTH=neo4j/yourpassword \
+  neo4j:latest
+
+# 3. Python 使用
+from graphiti_core import Graphiti
+graphiti = Graphiti(uri="bolt://localhost:7687",
+                    user="neo4j", password="yourpassword")
+
+# 添加数据（自动提取实体、关系、检测矛盾）
+await graphiti.add_episode(
+    name="user_conversation",
+    episode_body="小明说他现在更喜欢用 Python 写代码"
+)
+
+# 搜索当前有效事实
+results = await graphiti.search(
+    query="小明喜欢什么编程语言"
+)
+
+# 4. MCP Server 模式（接入 Cursor/Claude Code）
+python graphiti_mcp_server.py  # SSE 传输，默认 8000 端口</code></pre>
+
+  <!-- 注意事项 -->
+  <h3>⚠️ 使用注意</h3>
+  <div class="warn">LLM 调用成本高：实体提取、去重、属性抽取全流程依赖 LLM，构建大规模图谱的 Token 消耗不低，建议先用小数据集验证本体设计。</div>
+  <ul>
+    <li><strong>Pydantic 强绑定</strong>：自定义实体/关系后必须同步修改 Prompt，否则 LLM 输出格式无法通过校验——新手最常见的坑</li>
+    <li><strong>社区版已弃用</strong>：Zep Cloud Community Edition 于 2025 年 4 月弃用，自托管需直接使用 Graphiti + Neo4j/FalkorDB</li>
+    <li><strong>领域本体设计至关重要</strong>：通用提取往往不够深入，领域专家参与定义本体结构是保证图谱精度的关键</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>fly的AI学习 · 2026-06-10 · <a href="https://github.com/getzep/graphiti" target="_blank">GitHub 原文</a></p>
+  <p>Powered by <a href="https://flystray.github.io/ai-news/" target="_blank">AI News</a></p>
+</div>
+
+</body>
+</html>
