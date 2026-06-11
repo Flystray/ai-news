@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.11｜HORMA：给 AI Agent 装一个「文件系统」大脑，token 消耗暴降 80%</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333;line-height:1.8;">
+
+<div style="max-width:680px;margin:0 auto;background:#fff;">
+
+  <!-- Header -->
+  <div style="padding:32px 24px 20px;border-bottom:1px solid #eee;">
+    <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 12px;line-height:1.5;">
+      2026.6.11｜HORMA：给 AI Agent 装一个「文件系统」大脑，token 消耗暴降 80%
+    </h1>
+    <div style="font-size:14px;color:#999;margin-bottom:16px;">
+      ✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 &nbsp;·&nbsp; 国外 &nbsp;·&nbsp; 阅读时长 8 分钟
+    </div>
+    <!-- Paper Info Table -->
+    <table style="width:100%;border-collapse:collapse;font-size:14px;background:#fafafa;border-radius:8px;overflow:hidden;">
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;width:80px;border-bottom:1px solid #f0f0f0;">论文标题</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">Organize then Retrieve: Hierarchical Memory Navigation for Efficient Agents</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">作者</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">Hao-Lun Hsu (Duke University)、Nikki Lijing Kuang、Boyi Liu、Zhewei Yao、Yuxiong He（Snowflake AI Research）</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">发表日期</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">2026-06-10</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">来源</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">arXiv</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">论文链接</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;"><a href="https://arxiv.org/abs/2606.11680" style="color:#576b95;text-decoration:none;">点击查看原文</a></td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;">标签</td><td style="padding:8px 12px;">Agent · 记忆管理 · 强化学习 · 层次化检索 · 长程任务</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 1 -->
+  <div style="padding:24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">这篇论文在说什么？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      现在的 AI Agent（智能体）处理长任务有一个很尴尬的问题：它们本质上是"失忆"的。每做一步，都得把之前发生的所有事情重新塞进上下文窗口，导致上下文越来越长、推理越来越慢、成本越来越高。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      Snowflake AI Research 和杜克大学的研究者想了一个很妙的办法——给 Agent 装一个"文件系统"大脑。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      他们提出的 HORMA（Hierarchical Organize-and-Retrieve Memory Agent），把 Agent 的经验像电脑文件系统一样按层级组织起来：有目录、有文件、有引用链接。用的时候，不是把所有东西一股脑塞进上下文，而是让一个经过强化学习（RL）训练的"导航员"去文件系统里精准找到需要的信息。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      效果有多好？在三个长程任务基准测试中，HORMA 在保持甚至提升任务性能的同时，token 消耗最多降到基线方法的 22.17%——也就是说，省了将近 80% 的 token。
+    </p>
+    <div style="text-align:center;margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.11680v1/x1.png" alt="HORMA 框架概览" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.1 · HORMA 框架概览</p>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">为什么要关注？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      这个问题比你想象的要普遍得多。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      现在每当你想让 Agent 做一个复杂任务——比如说"帮我研究一下最近 AI 论文的进展，写一份报告"——Agent 需要搜索、阅读、比较、组织。每一步产生的信息都会被追加到上下文里。10 步之后，上下文已经撑满了，推理质量开始下降，成本直线上升。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      现有方案基本分两派："囤积派"什么都不扔，全部保留，结果就是上下文过载、token 成本爆炸；"压缩派"把历史总结成一段摘要，但压缩永远是有损的，那些被丢弃的细节往往是后续推理的关键信息。
+    </p>
+    <div style="background:#f8f8f8;border-left:3px solid #ddd;padding:12px 16px;margin:16px 0;font-size:14px;color:#666;font-style:italic;line-height:1.7;">
+      "agents either act as history hoarders, retaining large amounts of history, leading to context overload, information dilution, prohibitive latency and high inference cost, or rely on lossy compression mechanisms which irreversibly discard fine-grained information necessary for downstream reasoning"
+    </div>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      翻译一下：要么当囤积狂，要么当健忘鬼，都不靠谱。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      还有一个更深层的问题——即使你用外部记忆系统（比如向量数据库），传统做法是把记忆存成扁平的独立条目，检索全靠语义相似度。语义相似度匹配经常找出"感觉相关但其实不相关"的信息，甚至可能拉出来时间线上已经过时的内容。
+    </p>
+  </div>
+
+  <!-- Section 3 -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">核心方法</h2>
+
+    <h3 style="font-size:16px;font-weight:600;color:#333;margin:20px 0 12px;">关键思路</h3>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      HORMA 的设计哲学其实非常朴素——你看看自己电脑里的文件系统就明白了。你的电脑不会把所有文件堆在一个文件夹里，你会建目录、起有意义的名字、用路径来表达层级关系。HORMA 给 Agent 的记忆也做了同样的事。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      整个框架分成两个独立模块：
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>① 记忆管理模块（Construction）——"建文件系统的人"</strong><br>
+      负责把 Agent 每次交互的经验组织成层次化"文件系统"：实体日志、事件摘要、状态追踪器……每个"文件"不是孤立的——它们之间有关联引用，并且保留了指向原始轨迹的"溯源链接"。关键创新在于它对比"成功轨迹 vs 失败轨迹"，分析失败是因为信息缺失还是信息误导，然后迭代优化自己的组织策略。四轮优化下来，能积累出 63 个专门的记忆管理"技能"。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>② 记忆检索模块（Retrieval）——"找文件的人"</strong><br>
+      一个经过 RL 训练的轻量级智能体，用真正的 Bash 命令（ls、grep、cd、cat）在文件系统里导航。先在紧凑的结构化摘要里找，只在必要时才深入到原始轨迹，大幅减少了不必要的上下文加载。
+    </p>
+
+    <h3 style="font-size:16px;font-weight:600;color:#333;margin:20px 0 12px;">技术细节</h3>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      为什么要把"建文件系统"和"找文件"分成两个独立模块？
+    </p>
+    <div style="background:#f8f8f8;border-left:3px solid #ddd;padding:12px 16px;margin:16px 0;font-size:14px;color:#666;font-style:italic;line-height:1.7;">
+      "Jointly optimizing memory construction and retrieval through sparse task-level rewards introduces a severe credit assignment gap: when an agent fails a long-horizon task, it becomes unclear whether the failure originates from poor memory organization, inaccurate retrieval, or downstream reasoning"
+    </div>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      如果一个长任务失败了，你根本分不清是"文件没建好"还是"文件没找对"还是"推理本身不行"。把两者解耦后，各管各的，责任清晰，优化也更高效。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      检索模块的 RL 奖励设计也很有意思：用检索到的上下文与"真实需要的证据"之间的 Jaccard 相似度作为奖励信号，迫使检索器学习"拿少拿准"，而不是"多拿赌命中"。
+    </p>
+  </div>
+
+  <!-- Section 4 -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">效果怎么样？</h2>
+
+    <div style="text-align:center;margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.11680v1/x2.png" alt="各基准的效率-性能权衡" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.2 · 各基准的效率-性能权衡</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;color:#333;margin:20px 0 12px;">ALFWorld（具身交互任务）</h3>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">这是在受限上下文下的表现——Small budget 只有 1950 token，也就半页纸的量。</p>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
+      <thead>
+        <tr style="background:#f5f7fa;">
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">方法</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">Small (1950 tokens)</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">Large (2200 tokens)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Truncation</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">17.9</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">34.3</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Slide Window</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">29.1</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">70.1</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Embedding</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">14.2</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">42.5</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">ReSum</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">18.7</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">71.6</td>
+        </tr>
+        <tr style="background:#e8f0fe;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:700;">HORMA</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">56.7</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">73.9</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      在仅 1950 token 的极端约束下，所有基线方法基本都崩了（最好的 Slide Window 才 29.1%），HORMA 却还能拿到 56.7%。这说明它的"精取"策略在资源极度受限时优势最大。
+    </p>
+
+    <h3 style="font-size:16px;font-weight:600;color:#333;margin:20px 0 12px;">长程对话基准</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
+      <thead>
+        <tr style="background:#f5f7fa;">
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">方法</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">LoCoMo</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">LongMemEval</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">No limit</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">55.9</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">20.4</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Mem0</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">43.4</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">43.6</td>
+        </tr>
+        <tr style="background:#e8f0fe;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:700;">HORMA</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">51.6</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">55.9</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px;font-weight:600;color:#333;margin:20px 0 12px;">Token 效率（最震撼的数字）</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
+      <thead>
+        <tr style="background:#f5f7fa;">
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">基准</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">HORMA 相对基线 token 用量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#e8f0fe;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:700;">LoCoMo</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">3.07% ~ 22.17%</td>
+        </tr>
+        <tr style="background:#e8f0fe;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:700;">LongMemEval</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">1.24% ~ 16.19%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px;font-weight:600;color:#333;margin:20px 0 12px;">消融实验：RL 训练的威力</h3>
+    <div style="text-align:center;margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.11680v1/x3.png" alt="检索可靠性与技能获取分析" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.3 · 检索可靠性与技能获取分析</p>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
+      <thead>
+        <tr style="background:#f5f7fa;">
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">配置</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">ALFWorld</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">LoCoMo</th>
+          <th style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">LongMemEval</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Claude + 无技能</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">51.5</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">42.2</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">43.6</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Claude + 有技能</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">73.9</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">51.6</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">55.9</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Qwen 4B + 无技能</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">35.8</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">27.0</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">30.8</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">Qwen 4B + 有技能</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">40.3</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">32.6</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;">40.6</td>
+        </tr>
+        <tr style="background:#e8f0fe;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:700;">Qwen 4B + 技能 + RL</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">64.9</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">42.2</td>
+          <td style="padding:10px 12px;text-align:center;border:1px solid #e8e8e8;font-weight:700;color:#576b95;">58.0</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      最值得关注的是右下角：一个 4B 参数的小模型 Qwen 3.5，经过技能进化 + RL 训练后，在 LongMemEval 上达到 58.0%，甚至超越了 Claude Sonnet 4.5 作为检索器的配置（55.9%）。而且 RL 训练只在 LoCoMo 训练集上做的，其他两个基准是零样本迁移。
+    </p>
+  </div>
+
+  <!-- Section 5 -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">和其他方案比有什么不同？</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
+      <thead>
+        <tr style="background:#f5f7fa;">
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">维度</th>
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">传统方案</th>
+          <th style="padding:10px 12px;text-align:left;border:1px solid #e8e8e8;">HORMA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:600;">记忆结构</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">扁平条目 / 向量</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">文件系统式层级结构</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:600;">检索方式</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">语义相似度</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">RL 驱动的层次导航</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:600;">记忆构建</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">一次性 / 固定规则</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">迭代技能演化</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:600;">信息损失</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">有损压缩</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">无损（摘要+溯源链接）</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:600;">构建与检索</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">耦合</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">解耦，独立模块</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;font-weight:600;">信用分配</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">模糊</td>
+          <td style="padding:10px 12px;border:1px solid #e8e8e8;">清晰（分开优化）</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:15px;margin:0;color:#333;">
+      一句话：现有方案把记忆当成"数据库"来管理，HORMA 把记忆当成"文件系统"来管理。前者适合检索孤立事实，后者适合管理有时间结构、有因果关系的经验。
+    </p>
+  </div>
+
+  <!-- Section 6 -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">对开发者意味着什么？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      HORMA 不是一个"玩具级"的研究原型，它有几个非常务实的特点：
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>① 不需要改模型参数。</strong>记忆管理技能演化是非参数化的——生成的是提示策略和文件系统操作，不需要微调底层 LLM。你可以直接用现有 API，把 HORMA 作为"外挂记忆层"加上去。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>② Token 省得吓人。</strong>如果你在用 Agent 做长程任务（客服对话、代码审查、研究报告），上下文成本可能是最大开销。HORMA 把 token 消耗降到基线的 1/80 ~ 1/5，成本节省立竿见影。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>③ 小模型也能干活。</strong>Qwen 3.5 4B + RL 的结果说明，不需要昂贵的超大模型做记忆检索。专门训练一个轻量级检索器，性价比可能更高。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>④ 模块化好集成。</strong>构建和检索解耦，各管各的。已有记忆方案可以单独换检索模块，反之亦然。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>⑤ 适用场景：</strong>长程对话 Agent、多步工具调用 Agent、需要记住用户偏好的个性化 Agent，任何需要在有限上下文预算下处理长序列的场景。
+    </p>
+    <p style="font-size:15px;margin:0;color:#999;">
+      局限也要说清楚：HORMA 目前主要验证在文本任务上，多模态场景的支持还没看到。文件系统的初始结构设计还需要领域知识，不是完全自动化的。但"文件系统式记忆"这个思路，可能是解决 Agent 长程记忆问题的关键方向。
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding:24px;border-top:1px solid #eee;font-size:14px;color:#999;">
+    👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+  </div>
+
+</div>
+
+</body>
+</html>
