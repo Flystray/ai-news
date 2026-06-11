@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 — 2026-06-11</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --tag-bg: #1c2128;
+    --code-bg: #0d1117;
+    --warn-bg: #1a1510;
+    --warn-border: #bb8009;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #58a6ff, #3fb950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: .5rem;
+  }
+  .header .date {
+    color: var(--text-dim);
+    font-size: .9rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .project-card h2 a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  .project-card h2 a:hover { text-decoration: underline; }
+  .quote {
+    font-style: italic;
+    color: var(--text-dim);
+    border-left: 3px solid var(--accent2);
+    padding-left: 1rem;
+    margin: 1rem 0;
+  }
+  .stars {
+    display: inline-flex; align-items: center; gap: 1rem;
+    color: var(--text-dim); font-size: .9rem; margin: .5rem 0 1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+  .tags span {
+    background: var(--tag-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: .2rem .8rem; font-size: .8rem;
+    color: var(--accent);
+  }
+  h3 {
+    color: var(--accent2);
+    font-size: 1.15rem;
+    margin: 2rem 0 .8rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h4 { color: var(--accent); margin: 1.2rem 0 .5rem; }
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: .8rem 0 1.2rem 1.5rem; }
+  li { margin-bottom: .4rem; }
+  code {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: .15rem .4rem; font-size: .85rem;
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem; overflow-x: auto;
+    font-size: .85rem; margin-bottom: 1rem;
+  }
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0;
+    font-size: .85rem;
+  }
+  .compare-table th {
+    background: var(--tag-bg); padding: .6rem .8rem;
+    text-align: left; border: 1px solid var(--border); color: var(--accent);
+  }
+  .compare-table td {
+    padding: .5rem .8rem; border: 1px solid var(--border);
+  }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .warn {
+    background: var(--warn-bg); border: 1px solid var(--warn-border);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0;
+  }
+  .warn::before { content: "⚠️ "; }
+  .footer {
+    text-align: center; color: var(--text-dim); font-size: .85rem;
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); }
+  .highlight-num {
+    font-weight: 700; color: var(--accent2);
+  }
+  .badge {
+    display: inline-block; background: #1a1a3a; color: #a78bfa;
+    border-radius: 4px; padding: 0 .5rem; font-size: .8rem; margin: 0 .2rem;
+  }
+  .file-card {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0;
+  }
+  .file-card .file-name {
+    color: var(--accent); font-weight: 600; margin-bottom: .5rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GitHub AI 项目日报</h1>
+  <div class="date">2026年6月11日 · 星期四</div>
+</div>
+
+<div class="project-card">
+  <h2><a href="https://github.com/OthmanAdi/planning-with-files" target="_blank">planning-with-files</a></h2>
+  <div class="quote">把 AI 的"工作记忆"从易失的 RAM 转移到持久的 Disk——这就是 Manus 20 亿美元收购的核心秘诀。现在它开源了。</div>
+
+  <div class="stars">
+    ⭐ 23,012 · 🍴 2,031 · 📝 Python · 🕐 2026-01 · 📄 MIT · 🔄 v3.0.0
+  </div>
+
+  <div class="tags">
+    <span>agent-planning</span><span>persistent-memory</span><span>claude-code</span>
+    <span>context-engineering</span><span>multi-agent</span><span>hooks</span>
+    <span>completion-gate</span>
+  </div>
+
+  <!-- 项目背景 -->
+  <h3>📌 项目背景</h3>
+  <p>你在用 Claude Code、Cursor 等AI编程助手时，是不是经常遇到这些尴尬场景：</p>
+  <ul>
+    <li>聊着聊着，它就忘了最开始说的目标</li>
+    <li>运行 <code>/clear</code> 清上下文，它又得重新理解项目</li>
+    <li>50次工具调用后，它已经偏到不知哪去了</li>
+    <li>同一个报错试了三遍——因为它不记得之前已经失败了</li>
+  </ul>
+  <p>这些问题的根源都是同一个：<strong>AI的记忆是临时的，没有持久化</strong>。上下文窗口就像RAM——快但容量有限，重启就丢。</p>
+  <p><strong>planning-with-files</strong> 就是为解决这个问题而生的。它的核心思路来自 <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank">Manus AI</a>——那个8个月内从启动到1亿美元营收、2025年12月被Meta以20亿美元收购的AI Agent公司。Manus的核心秘诀就是：<em>"Markdown是我的'工作记忆'磁盘。由于我迭代式处理复杂任务，上下文窗口不可避免地会被压缩，所以我把任何重要信息都写入磁盘。"</em></p>
+  <p>planning-with-files 将这套思路在 Claude Code 生态中开源实现，通过持久化的文件系统替代易失的上下文窗口，让AI编程助手从"重启即忘"变成"永久记忆"。截至2026年6月，项目已获得 <span class="highlight-num">23k+ Stars</span>，支持 <span class="highlight-num">60+</span> AI编程平台，v3.0.0新增了autonomous和gated两种运行模式。</p>
+
+  <!-- 核心功能 -->
+  <h3>🚀 核心功能</h3>
+
+  <h4>1. 三文件持久化记忆系统</h4>
+  <p>将AI的"工作记忆"从易失的RAM转移到持久的磁盘，通过三个职责分明的Markdown文件构成完整的任务执行元认知框架：</p>
+  <table class="compare-table">
+    <tr><th>文件</th><th>职责</th><th>更新时机</th><th>对应问题</th></tr>
+    <tr><td><code>task_plan.md</code></td><td>做什么——任务路线图、阶段划分、进度checkbox</td><td>每个阶段完成后</td><td>目标漂移</td></tr>
+    <tr><td><code>findings.md</code></td><td>发现了什么——技术决策、代码库分析、踩坑记录</td><td>每2次浏览/搜索操作后</td><td>重复研究</td></tr>
+    <tr><td><code>progress.md</code></td><td>做了什么——会话日志、测试结果、操作时间线</td><td>整个会话期间</td><td>上下文断裂</td></tr>
+  </table>
+  <p>三文件设计的关键智慧在于"各司其职"：计划管进度，笔记管知识，日志管时间线。下次接手任务时，先看task_plan知道进度，再看findings知道背景——信息检索效率远高于在冗长上下文中翻找。</p>
+
+  <h4>2. 五钩子自动化生命周期</h4>
+  <p>项目利用Claude Code的Hook系统，在关键节点自动触发特定行为，形成闭环：</p>
+  <table class="compare-table">
+    <tr><th>Hook</th><th>触发时机</th><th>核心动作</th></tr>
+    <tr><td><code>SessionStart</code></td><td>启动时</td><td>注入计划文件内容为系统背景</td></tr>
+    <tr><td><code>UserPromptSubmit</code></td><td>用户提交指令前</td><td>静默注入task_plan前50行 + progress末20行</td></tr>
+    <tr><td><code>PreToolUse</code> ⭐</td><td>每次工具调用前</td><td>截取task_plan前30行，通过stderr"耳语"目标提醒（非阻塞）</td></tr>
+    <tr><td><code>PostToolUse</code></td><td>文件修改后</td><td>提醒更新progress.md并勾选checkbox</td></tr>
+    <tr><td><code>Stop</code> ⭐</td><td>想停止时</td><td>运行check-complete.sh正则扫描，发现未完成则阻断退出（最多3次）</td></tr>
+  </table>
+  <p><strong>PreToolUse是防止"目标漂移"的核心武器</strong>：每次动手之前先看计划，就像导航每到路口都提醒方向。而Stop钩子则是"完成守门员"——不允许AI在任务没做完时擅自停止。</p>
+
+  <h4>3. 会话恢复系统（session-catchup）</h4>
+  <p>当上下文窗口满了执行 <code>/clear</code> 或开启新对话时，系统自动检测并生成恢复报告：</p>
+  <div class="file-card">
+    <pre style="border:none;padding:0;margin:0;background:none;">📋 会话恢复报告
+上次活动: 2小时前 | 任务进度: ████████░░ 40%
+✅ 已完成: Phase 1, Phase 2
+🔄 进行中: Phase 3 (2/4)
+💡 最近发现: next-mdx-enhanced 已停止维护
+🚧 未解决问题: rehype 插件与 Next.js 冲突</pre>
+  </div>
+  <p>session-catchup.py脚本从JSONL会话日志中深层扫描，智能截取自上次task_plan变动后的新对话，以不超过100行的精华摘要重新注入新会话——实现跨会话无缝接续。</p>
+
+  <h4>4. v3.0 新增：autonomous 与 gated 模式</h4>
+  <ul>
+    <li><strong>autonomous模式</strong>：AI自主规划并执行，适合长周期自动化任务</li>
+    <li><strong>gated模式</strong>：引入确定性完成守门员（Completion Gate），AI必须等到计划所有阶段都真正标记为complete才能停止</li>
+    <li>默认模式不变，现有设置无需任何更改，两种新模式均为opt-in</li>
+  </ul>
+
+  <h4>5. SHA-256 计划认证（attest-plan）</h4>
+  <p>v2.37.0引入的安全机制：对task_plan.md生成SHA-256哈希值，提供密码学保证——防止计划在执行过程中被悄无声息地篡改。将安全机制直接嵌入AI Agent工作流，这是非常前沿的独特实践。</p>
+
+  <h4>6. 多智能体并行计划管理</h4>
+  <p>支持多智能体同时维护不同计划，通过三级优先级级联解析：</p>
+  <pre><code>$MANUS_PROJECT (环境变量，最高优先级)
+    ↓
+.planning/.active.override.$SESSION_ID (会话级隔离)
+    ↓
+.planning/index.md 中的 active: 字段 (工作区默认)</code></pre>
+  <p>利用终端唯一会话ID实现天然沙箱隔离，支持自然语言切换（如"switch to backend-api"）。</p>
+
+  <h4>7. 四条黄金行为守则</h4>
+  <table class="compare-table">
+    <tr><th>守则</th><th>机制</th></tr>
+    <tr><td>强制优先规划</td><td>未创建task_plan.md前禁止写代码</td></tr>
+    <tr><td>读而后决</td><td>架构决策前强制重读task_plan.md</td></tr>
+    <tr><td>双重行动法则</td><td>每2次浏览/搜索后必须写入findings.md</td></tr>
+    <tr><td>三击错误防范</td><td>错误记录 + 根因分析 + 变异解决方案</td></tr>
+  </table>
+
+  <!-- 技术亮点 -->
+  <h3>⚙️ 技术亮点</h3>
+
+  <h4>1. 文件系统即外部工作记忆的架构范式</h4>
+  <p>将计算机体系结构的内存层次模型映射到AI Agent工作上下文：上下文窗口=RAM（易失、有限、快），文件系统=Disk（持久、无限、稍慢）。核心原则"任何重要信息都写入磁盘"看似朴素，实则是对AI编程最核心痛点的精准打击。对比传统做法——把所有信息塞进上下文窗口导致Token爆炸——planning-with-files的Hooks只在关键时刻读取，反而更节省Token。</p>
+
+  <h4>2. PreToolUse stderr"耳语"注入机制</h4>
+  <p>不同于UserPromptSubmit的静默注入（占上下文空间），PreToolUse采用了一个巧妙的技术实现：通过标准错误流（stderr）以非阻塞方式注入目标提醒。这种方式<strong>不占用正式上下文窗口空间</strong>，决策始终为allow（不阻止工具调用），只在AI的"注意力后台"轻声提醒当前目标——实现了真正的<strong>注意力刷新而非注意力堆砌</strong>。</p>
+
+  <h4>3. 60+ 平台的标准化技能适配</h4>
+  <p>项目通过SKILL.md标准实现了跨平台技能分发，覆盖Claude Code、Codex CLI、Cursor、Gemini CLI、Hermes Agent、Pi Agent、Kiro、OpenCode等60+ AI编程平台。同时提供Unix Shell脚本和Windows PowerShell脚本双版本支持，以及5种语言的国际化。</p>
+
+  <!-- 对比分析 -->
+  <h3>📊 对比分析</h3>
+  <table class="compare-table">
+    <tr><th>维度</th><th>planning-with-files</th><th>Claude Code TodoWrite</th><th>Manus AI</th></tr>
+    <tr><td>存储位置</td><td><strong>文件系统（持久）</strong></td><td>上下文（易失）</td><td>SaaS平台</td></tr>
+    <tr><td>跨会话</td><td><strong>✅ 无缝恢复</strong></td><td>❌ 清除即丢</td><td>✅ 云端持久</td></tr>
+    <tr><td>目标漂移防护</td><td><strong>✅ PreToolUse Hook自动提醒</strong></td><td>❌ 无机制</td><td>✅ 内置</td></tr>
+    <tr><td>错误追踪</td><td><strong>✅ 专门错误表+三击防范</strong></td><td>❌ 无记录</td><td>✅ 内置</td></tr>
+    <tr><td>研究存储</td><td><strong>✅ findings.md知识库</strong></td><td>❌ 无机制</td><td>✅ 内置</td></tr>
+    <tr><td>安全认证</td><td><strong>✅ SHA-256计划哈希</strong></td><td>❌ 无</td><td>✅ 企业级</td></tr>
+    <tr><td>完成守门</td><td><strong>✅ Stop Hook+gated模式</strong></td><td>❌ 无</td><td>✅ 内置</td></tr>
+    <tr><td>多智能体</td><td><strong>✅ 会话级计划隔离</strong></td><td>❌ 单会话</td><td>✅ 多代理</td></tr>
+    <tr><td>成本</td><td><strong>免费（开源MIT）</strong></td><td>免费（内置）</td><td>SaaS付费</td></tr>
+    <tr><td>Benchmark</td><td><strong>96.7% pass rate (v2.21.0)</strong></td><td>无公开数据</td><td>无公开数据</td></tr>
+  </table>
+  <p>关键数据：A/B盲测 <span class="highlight-num">3/3 获胜</span>；SkillCheck验证通过；安全审计通过（v2.21.0）；Benchmark通过率 <span class="highlight-num">96.7%</span>（sonnet-4-6模型）。</p>
+
+  <!-- 适用人群 -->
+  <h3>👥 适用人群</h3>
+  <ul>
+    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：经常处理多步骤复杂任务的开发者、需要收集整理大量信息的研究人员、大型重构任务爱好者</li>
+    <li><strong>⭐⭐⭐⭐ 推荐</strong>：团队协作（计划文件可作为沟通文档）、个人知识管理爱好者</li>
+    <li><strong>⭐⭐⭐ 可选</strong>：新手开发者（有学习成本但值得投入）、偶尔使用者</li>
+    <li><strong>⭐⭐ 不推荐</strong>：只做简单任务的用户（杀鸡用牛刀）、追求极速的人</li>
+  </ul>
+  <p><strong>判断标准</strong>：预计工具调用 &gt; 5次 → 用；&lt; 5次 → 不用。</p>
+
+  <!-- 快速上手 -->
+  <h3>⚡ 快速上手</h3>
+  <pre><code># 方法一：插件市场安装（推荐）
+/plugin marketplace add OthmanAdi/planning-with-files
+/plugin install planning-with-files@planning-with-files
+
+# 方法二：手动安装
+mkdir -p .claude/plugins
+git clone https://github.com/OthmanAdi/planning-with-files.git \
+  .claude/plugins/planning-with-files</code></pre>
+  <p>安装后，在处理复杂任务前运行 <code>/plan</code> 即可启动三文件模式。核心命令：</p>
+  <table class="compare-table">
+    <tr><th>命令</th><th>用途</th></tr>
+    <tr><td><code>/plan</code></td><td>初始化或恢复规划会话</td></tr>
+    <tr><td><code>/plan:status</code></td><td>查看当前进度报告</td></tr>
+    <tr><td><code>/plan-attest</code></td><td>SHA-256锁定当前计划</td></tr>
+  </table>
+
+  <!-- 注意事项 -->
+  <h3>⚠️ 使用注意</h3>
+  <div class="warn">简单任务别用！对于"改个变量名"这种2分钟就能搞定的事，三个文件反而增加开销。判断标准：工具调用 > 5次才值得用。</div>
+  <ul>
+    <li><strong>阶段别切太细也别太粗</strong>：10-30分钟一个阶段最合适。太细导致计划文件很长，太粗失去追踪意义</li>
+    <li><strong>有重要发现就更新findings</strong>：别等2次操作后才整理，临时记忆不可靠</li>
+    <li><strong>定期归档</strong>：完成的文件移到 <code>.archive/</code> 目录，避免项目根目录变乱</li>
+    <li><strong>钩子版本要求</strong>：完整的Hook功能需要 Claude Code v2.1.0+</li>
+    <li><strong>计划不是死的</strong>：随时可以调整阶段——发现某阶段比预期复杂就拆分，不需要就删掉</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>fly的AI学习 · 2026-06-11 · <a href="https://github.com/OthmanAdi/planning-with-files" target="_blank">GitHub 原文</a></p>
+  <p>Powered by <a href="https://flystray.github.io/ai-news/" target="_blank">AI News</a></p>
+</div>
+
+</body>
+</html>
