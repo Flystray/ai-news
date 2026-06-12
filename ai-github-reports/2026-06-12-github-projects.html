@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 — 2026-06-12</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --tag-bg: #1c2128;
+    --code-bg: #0d1117;
+    --warn-bg: #1a1510;
+    --warn-border: #bb8009;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #58a6ff, #3fb950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: .5rem;
+  }
+  .header .date {
+    color: var(--text-dim);
+    font-size: .9rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .project-card h2 a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  .project-card h2 a:hover { text-decoration: underline; }
+  .quote {
+    font-style: italic;
+    color: var(--text-dim);
+    border-left: 3px solid var(--accent2);
+    padding-left: 1rem;
+    margin: 1rem 0;
+  }
+  .stars {
+    display: inline-flex; align-items: center; gap: 1rem;
+    color: var(--text-dim); font-size: .9rem; margin: .5rem 0 1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+  .tags span {
+    background: var(--tag-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: .2rem .8rem; font-size: .8rem;
+    color: var(--accent);
+  }
+  h3 {
+    color: var(--accent2);
+    font-size: 1.15rem;
+    margin: 2rem 0 .8rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h4 { color: var(--accent); margin: 1.2rem 0 .5rem; }
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: .8rem 0 1.2rem 1.5rem; }
+  li { margin-bottom: .4rem; }
+  code {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: .15rem .4rem; font-size: .85rem;
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem; overflow-x: auto;
+    font-size: .85rem; margin-bottom: 1rem;
+  }
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0;
+    font-size: .85rem;
+  }
+  .compare-table th {
+    background: var(--tag-bg); padding: .6rem .8rem;
+    text-align: left; border: 1px solid var(--border); color: var(--accent);
+  }
+  .compare-table td {
+    padding: .5rem .8rem; border: 1px solid var(--border);
+  }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .warn {
+    background: var(--warn-bg); border: 1px solid var(--warn-border);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0;
+  }
+  .warn::before { content: "⚠️ "; }
+  .footer {
+    text-align: center; color: var(--text-dim); font-size: .85rem;
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); }
+  .highlight-num {
+    font-weight: 700; color: var(--accent2);
+  }
+  .badge {
+    display: inline-block; background: #1a1a3a; color: #a78bfa;
+    border-radius: 4px; padding: 0 .5rem; font-size: .8rem; margin: 0 .2rem;
+  }
+  .file-card {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0;
+  }
+  .file-card .file-name {
+    color: var(--accent); font-weight: 600; margin-bottom: .5rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GitHub AI 项目日报</h1>
+  <div class="date">2026年6月12日 · 星期五</div>
+</div>
+
+<div class="project-card">
+  <h2><a href="https://github.com/rasbt/reasoning-from-scratch" target="_blank">reasoning-from-scratch</a></h2>
+  <div class="quote">"理解推理技术的最佳方式，就是从零开始编码实现它。" —— Sebastian Raschka 博士</div>
+
+  <div class="stars">
+    ⭐ 4,474 · 🍴 659 · 📝 Jupyter Notebook / Python · 🕐 2025-03 · 📄 Apache 2.0 · 🏷️ Manning 出版
+  </div>
+
+  <div class="tags">
+    <span>reasoning-models</span><span>GRPO</span><span>deep-learning</span>
+    <span>PyTorch</span><span>distillation</span><span>Qwen3</span>
+    <span>reinforcement-learning</span><span>inference-time-scaling</span><span>chain-of-thought</span>
+  </div>
+
+  <!-- 项目背景 -->
+  <h3>📌 项目背景</h3>
+  <p>2025年初，DeepSeek R1 的发布震动了整个 AI 界——一个开源模型通过"推理时思考"实现了与闭源模型媲美的能力。随后 OpenAI o1/o3、GPT-5 Thinking 等现象级产品的涌现，让"推理模型"成为 LLM 领域最炙手可热的方向。</p>
+  <p>但问题来了：<strong>大多数开发者只能调用 API，对推理模型内部机制一知半解</strong>。GRPO 强化学习、推理时扩展、知识蒸馏——这些术语满天飞，但真正理解并能亲手实现的人少之又少。</p>
+  <p><strong>reasoning-from-scratch</strong> 正是为解决这个痛点而生。它由世界级 AI 教育者 <strong>Sebastian Raschka</strong> 博士撰写，是 Manning 出版社发行的《Build a Reasoning Model (From Scratch)》一书的官方配套代码仓库。项目的核心哲学简单直接：<em>最好的学习方法就是亲手构建</em>。</p>
+  
+  <div class="quote">
+    "这本书不仅解释推理模型，还让你能够从第一性原理构建、测试和真正理解它们。"<br>
+    —— Aman Chadha, Google DeepMind 高级技术主管
+  </div>
+  <div class="quote">
+    "我见过的关于推理模型最好的资源之一。"<br>
+    —— Ivan Leo, Google DeepMind 技术团队
+  </div>
+
+  <p>Raschka 此前已凭借《Build a Large Language Model (From Scratch)》（⭐ 34k+）成为 LLM 教育领域的标杆人物。这本新书是他的进阶之作——在 LLM 基础上叠加推理能力。截至2026年6月，项目已获得 <span class="highlight-num">4,474 Stars</span>、<span class="highlight-num">659 Forks</span>，<span class="highlight-num">288</span> 次提交，配套 PyPI 包可一键安装。</p>
+
+  <!-- 核心功能 -->
+  <h3>🚀 核心功能</h3>
+
+  <h4>1. 渐进式八章学习路径</h4>
+  <p>以交互式 Jupyter Notebook 为载体，从零开始逐步培养推理模型开发能力：</p>
+  <table class="compare-table">
+    <tr><th>章节</th><th>主题</th><th>核心收获</th></tr>
+    <tr><td>Ch1</td><td>理解推理模型</td><td>建立完整技术路线图认知</td></tr>
+    <tr><td>Ch2</td><td>文本生成基础</td><td>使用 Qwen3 进行文本生成，搭建环境</td></tr>
+    <tr><td>Ch3</td><td>评估推理模型</td><td>构建 MATH-500 评估框架</td></tr>
+    <tr><td>Ch4</td><td>推理时扩展基础</td><td>思维链、自一致性、多数投票</td></tr>
+    <tr><td>Ch5</td><td>高级推理时扩展</td><td>自我优化、Best-of-N 采样</td></tr>
+    <tr><td>Ch6</td><td>GRPO 强化学习基础</td><td>从零实现 GRPO 训练循环</td></tr>
+    <tr><td>Ch7</td><td>高级 GRPO 优化</td><td>DeepSeek-V3.2/Olmo3 风格多变体实现</td></tr>
+    <tr><td>Ch8</td><td>知识蒸馏</td><td>推理模型蒸馏数据生成与训练</td></tr>
+  </table>
+  <p>每章配有习题解答，形成"阅读→编码→练习"三步学习闭环。</p>
+
+  <h4>2. 六大附录——从源码到生产</h4>
+  <ul>
+    <li><strong>附录 C：Qwen3 完整源码</strong>——从零构建 Transformer，连接教学代码与真实开源模型</li>
+    <li><strong>附录 D：使用更大规模 LLM</strong>——将推理方法扩展到更大模型</li>
+    <li><strong>附录 E：批处理与吞吐量优化</strong>——生产环境性能调优</li>
+    <li><strong>附录 F：LLM 评估方法大全</strong>——MMLU、排行榜、LLM-as-a-Judge</li>
+    <li><strong>附录 G：构建聊天界面</strong>——为推理模型搭建 Chat UI</li>
+  </ul>
+
+  <h4>3. GRPO 强化学习——DeepSeek R1 核心技术完整实现</h4>
+  <p>GRPO 是 DeepSeek R1 取得突破性推理能力的关键技术。本书用整整两章（Ch6 + Ch7）从零实现：</p>
+  <ul>
+    <li><strong>Ch6</strong>：基础 GRPO 训练循环，奖励函数设计、策略优化基础</li>
+    <li><strong>Ch7</strong>：高级 GRPO 技巧，KL 散度约束、DeepSeek-V3.2 和 Olmo3 风格多变体</li>
+    <li><strong>配套资源</strong>：HuggingFace 上提供 GRPO 训练检查点供直接下载实验</li>
+  </ul>
+
+  <h4>4. 推理时扩展全景覆盖</h4>
+  <p>Ch4-Ch5 系统覆盖推理时扩展的完整技术栈：</p>
+  <ul>
+    <li><strong>思维链（CoT）</strong>：引导模型生成中间推理步骤</li>
+    <li><strong>自一致性（Self-Consistency）</strong>：多路径投票选出最佳答案</li>
+    <li><strong>自我优化（Self-Refinement）</strong>：模型审视并迭代改进自己的输出</li>
+    <li><strong>Best-of-N</strong>：N 个候选结果选择最优解</li>
+  </ul>
+  <p>这些方法在不改变模型权重的前提下，通过"多想一想"显著提升数学推理能力。</p>
+
+  <h4>5. 知识蒸馏——把小模型变成推理高手</h4>
+  <p>第 8 章聚焦推理模型蒸馏：使用大型推理模型（教师）生成高质量推理数据集，通过蒸馏训练将推理能力迁移到小型模型（学生）。蒸馏后模型在保持小体积的同时获得远超同规模的推理能力。</p>
+
+  <!-- 技术亮点 -->
+  <h3>⚙️ 技术亮点</h3>
+
+  <h4>1. 三层架构：教学性 × 生产级代码质量</h4>
+  <p>项目在"易于理解"和"代码规范"之间取得精妙平衡：</p>
+  <ul>
+    <li><strong>教育内容层</strong>（.ipynb）：逐行解释每一步操作和原理</li>
+    <li><strong>核心实现层</strong>（Python 模块）：Qwen3、分词器、GRPO 循环独立可复用</li>
+    <li><strong>质量保障层</strong>：CI 流水线覆盖三平台 + Python 3.10-3.13</li>
+  </ul>
+
+  <h4>2. 消费级硬件友好——人人可复现</h4>
+  <p>项目设计底线是消费级硬件可运行：Ch2-Ch4 纯 CPU 可执行；Ch5-Ch7 推荐 GPU 但自动回退；基础模型选用 Qwen3 而非超大模型；所有代码在生产级硬件上验证可运行。</p>
+
+  <h4>3. 与前沿模型的"原理对齐，非复现"</h4>
+  <p>项目<strong>不是</strong>去复现 DeepSeek R1 的完整训练，而是通过亲手实践让你真正理解驱动这些前沿模型的核心原理：</p>
+  <table class="compare-table">
+    <tr><th>前沿模型</th><th>本书覆盖的核心技术</th></tr>
+    <tr><td>DeepSeek R1</td><td>GRPO 强化学习、推理时扩展</td></tr>
+    <tr><td>GPT-5 Thinking</td><td>推理时扩展、自我优化</td></tr>
+    <tr><td>DeepSeek R1 蒸馏版</td><td>知识蒸馏</td></tr>
+  </table>
+
+  <!-- 对比分析 -->
+  <h3>📊 对比分析</h3>
+  <table class="compare-table">
+    <tr><th>维度</th><th>reasoning-from-scratch</th><th>DeepSeek R1 论文</th><th>OpenAI o1 报告</th><th>在线课程</th></tr>
+    <tr><td>学习深度</td><td><strong>⭐⭐⭐⭐⭐ 从零编码</strong></td><td>⭐⭐⭐ 论文阅读</td><td>⭐⭐ 技术概述</td><td>⭐⭐⭐ 视频+Notebook</td></tr>
+    <tr><td>代码完整性</td><td><strong>✅ 9章完整可运行</strong></td><td>❌ 无教学代码</td><td>❌ 代码未公开</td><td>✅ 有配套代码</td></tr>
+    <tr><td>硬件要求</td><td><strong>消费级 GPU/CPU</strong></td><td>企业级集群</td><td>N/A</td><td>云端 GPU</td></tr>
+    <tr><td>GRPO 训练</td><td><strong>✅ 两章从零实现</strong></td><td>✅ 论文描述</td><td>❌ 未公开</td><td>⭐ 简单介绍</td></tr>
+    <tr><td>知识蒸馏</td><td><strong>✅ 完整蒸馏流程</strong></td><td>✅ 有提及</td><td>❌ 未公开</td><td>⭐ 简单介绍</td></tr>
+    <tr><td>评估框架</td><td><strong>✅ MATH-500/MMLU</strong></td><td>⭐ 部分指标</td><td>❌ 未公开</td><td>✅ 有基准</td></tr>
+    <tr><td>许可证</td><td><strong>Apache 2.0</strong></td><td>MIT</td><td>闭源</td><td>课程付费</td></tr>
+    <tr><td>上手难度</td><td>中等（需LLM基础）</td><td>高（需读论文）</td><td>高（信息有限）</td><td>低（视频教学）</td></tr>
+  </table>
+  <p>核心差异：reasoning-from-scratch 是唯一让你<strong>在消费级硬件上亲手训练推理模型</strong>的完整资源。论文告诉你"做了什么"，这本书让你自己"做一遍"。</p>
+
+  <!-- 适用人群 -->
+  <h3>👥 适用人群</h3>
+  <ul>
+    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：希望深入理解推理模型内部机制的 AI/ML 工程师和研究员</li>
+    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：已完成《LLMs-from-scratch》的进阶学习者</li>
+    <li><strong>⭐⭐⭐⭐ 推荐</strong>：对 DeepSeek R1/OpenAI o1 技术原理好奇的开发者</li>
+    <li><strong>⭐⭐⭐⭐ 推荐</strong>：硬件资源有限但仍想实践的深度学习学生</li>
+    <li><strong>⭐⭐⭐ 可选</strong>：仅需要调用推理模型 API 的用户（建议先读论文）</li>
+  </ul>
+  <p><strong>前置要求</strong>：熟悉 Python 和 PyTorch，了解 Transformer 架构、注意力机制等 LLM 基础知识。</p>
+
+  <!-- 快速上手 -->
+  <h3>⚡ 快速上手</h3>
+  <pre><code># 1. 克隆仓库
+git clone --depth 1 https://github.com/rasbt/reasoning-from-scratch.git
+cd reasoning-from-scratch
+
+# 2. 安装依赖
+pip install -r requirements.txt
+
+# 3. 安装 PyPI 包（可选）
+pip install reasoning-from-scratch
+
+# 4. 从 Ch2 开始学习
+jupyter notebook ch02/ch02_main.ipynb</code></pre>
+  <p><strong>硬件建议</strong>：前4章 CPU 即可；GrPO 训练（Ch6-Ch7）推荐 GPU。代码自动检测可用设备。</p>
+
+  <h3>⚠️ 使用注意</h3>
+  <div class="warn">建议先完成 Raschka 的《LLMs-from-scratch》或具备同等 LLM 基础再上手本书，否则在 Transformer 架构、注意力机制等前置知识上会卡住。</div>
+  <ul>
+    <li><strong>建议按章节顺序学习</strong>：每章都建立在前一章基础上，跳章可能导致概念断层</li>
+    <li><strong>Notebook 可能较大</strong>：Ch6-Ch7 的 GRPO 训练章节建议在 Colab 或云 GPU 上运行</li>
+    <li><strong>不接收主线代码 PR</strong>：因代码与纸质书籍强绑定，作者暂不接收修改主章节代码的贡献</li>
+    <li><strong>配套书籍推荐购买</strong>：代码仓库虽有完整实现，但书籍中的详细解释和原理阐述无可替代</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>fly的AI学习 · 2026-06-12 · <a href="https://github.com/rasbt/reasoning-from-scratch" target="_blank">GitHub 原文</a></p>
+  <p>Powered by <a href="https://flystray.github.io/ai-news/" target="_blank">AI News</a></p>
+</div>
+
+</body>
+</html>
