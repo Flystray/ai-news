@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.13｜HyperTool · 把多次工具调用折叠成一个代码块，Agent 准确率直接翻 3 倍</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333;">
+
+<div style="max-width:680px;margin:0 auto;background:#fff;">
+
+  <!-- 头部 -->
+  <div style="padding:30px 24px 16px 24px;">
+    <h1 style="font-size:22px;line-height:1.5;color:#1a1a1a;margin:0 0 12px 0;font-weight:700;">
+      2026.6.13｜HyperTool · 把多次工具调用折叠成一个代码块，Agent 准确率直接翻 3 倍
+    </h1>
+    <div style="font-size:13px;color:#999;margin-bottom:20px;">
+      ✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 &nbsp;·&nbsp; 国内 &nbsp;·&nbsp; 阅读时长 7 分钟
+    </div>
+  </div>
+
+  <!-- 论文信息表 -->
+  <div style="padding:0 24px 24px 24px;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;">
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;width:80px;border-bottom:1px solid #e8e8e8;">论文标题</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">HyperTool: Beyond Step-Wise Tool Calls for Tool-Augmented Agents</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">作者</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">Yaxin Du*, Yifan Zhou* 等 10 人（上海交通大学、IQuest Research、北京航空航天大学）</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">发表日期</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">2026-06-11</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">来源</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">arXiv (2606.13663)</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">论文链接</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;"><a href="https://arxiv.org/abs/2606.13663" style="color:#576b95;text-decoration:none;">点击查看原文</a></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;">标签</td>
+        <td style="padding:8px 14px;">Agent · 工具调用 · MCP · 上下文压缩 · 代码生成</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 章节：这篇论文在说什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #4A90D9;font-weight:700;">这篇论文在说什么？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      一句话：现在的 LLM Agent 用工具太啰嗦了，每调一次 API 都要在对话里打一行字、等一次返回，看起来像你跟 ChatGPT 一问一答的方式去查数据库——效率极低。HyperTool 换了个思路：让模型直接写一小段代码，在这段代码里批量调用工具、处理中间结果，最后只把最终答案丢回对话轨迹。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      打个比方，你让 Agent "查一下从杭州到上海的高铁和飞机的价格差"。传统做法是：Agent 先调高铁 API → 拿到结果 → 再调飞机 API → 拿到结果 → 再算差价。每个步骤都要"说一句、等一句"，整个对话历史塞满了中间返回的 JSON 数据。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      HyperTool 的做法是：Agent 写一段 Python 代码，在代码里先查高铁、再查飞机、内部算好差价，最后只返回一句话："差价 328 元"。中间那些 JSON 全藏代码块里，不污染推理链。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      效果很直接——Qwen3-8B 在 MCP-Universe 基准上，准确率从 <strong>9.93%</strong> 飙到 <strong>33.33%</strong>，翻了 3 倍多；Qwen3-32B 从 <strong>15.69%</strong> 涨到 <strong>35.29%</strong>。更重要的是，模型实际执行的工具调用数从 27 次涨到了 48 次（说明敢用更多工具了），但模型"看到"的交互轮次反而从 29 轮降到 22 轮（上下文更干净了）。
+    </p>
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.13663v1/x1.png" alt="HyperTool 与传统逐步工具调用的范式对比" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.1</em></p>
+  </div>
+
+  <!-- 章节：为什么要关注 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #E8A838;font-weight:700;">为什么要关注？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      MCP（Model Context Protocol）现在是 AI Agent 圈最火的协议之一，几乎所有 Agent 框架都在用它。但 MCP 有个天然的设计痛点：它定义的是"原子工具调用"——每次调用是一个独立的请求-响应周期。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      这个设计在简单场景下没问题，但一旦任务需要组合多个工具，问题就来了：
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>上下文膨胀。</strong> 每次工具调用的返回值都原样塞进对话历史。一个查天气的工具可能返回 500 行的 JSON，Agent 只用了其中 3 行。这些冗余信息不断堆积，不仅浪费 token，还容易把模型注意力带偏。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>推理碎片化。</strong> 确定性的工具操作（比如"先查 A 再查 B 再算 C"）不需要模型反复推理，但传统接口强制每一步都暴露给模型。相当于你让一个人去楼下拿快递，但他每走一步都要跟你报告：我到电梯了、我在一楼了、我到快递柜了……他的大脑被这些琐碎的"汇报"占满了。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      之前解决这个问题的方案要么是"事后压缩"（任务跑完了再精简上下文），要么是"子 Agent 代理"（把脏活丢给另一个 Agent）。前者可能丢掉关键信息，后者增加了系统复杂度。HyperTool 换了一个维度思考：不是怎么压缩已有的冗余，而是从源头就不让冗余进到对话里来。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      而且 HyperTool <strong>完全兼容 MCP</strong>。它不要求换掉现有工具，只是在外面包了一层"代码块接口"。现有的 MCP 工具该咋用咋用，只是调用方式从"一次一个"变成了"写段代码批量搞定"。
+    </p>
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.13663v1/x2.png" alt="HyperTool 框架和数据构建流水线" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.2</em></p>
+  </div>
+
+  <!-- 章节：核心方法 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #67C23A;font-weight:700;">核心方法</h2>
+
+    <h3 style="font-size:16px;line-height:1.5;color:#333;margin:0 0 8px 0;">关键思路</h3>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      HyperTool 的核心设计极其简洁：<strong>把"模型调用工具"变成"模型写代码"</strong>。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      传统的 Agent 工具调用流程是：模型输出工具名和参数 → 环境执行 → 返回结果 → 模型再决定下一步。每一步都是一个独立的"思考-执行-观察"循环。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      HyperTool 把这个循环"折叠"了。模型不再一个一个调工具，而是写一段自包含的代码块，这段代码内部可以：通过原始 schema 调用现有 MCP 工具、把返回结果存到变量里、解析过滤转换中间值、跨调用直接传递数据、批量计算排序聚合。代码块执行完后，只把最终需要的 result 返回给对话轨迹。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      可以把它类比为"函数调用"和"内联展开"的区别。传统做法是把每个工具调用都内联展开到推理链中；HyperTool 是把一组相关的工具调用封装成一个函数，推理链里只看到函数调用和返回值。
+    </p>
+
+    <h3 style="font-size:16px;line-height:1.5;color:#333;margin:0 0 8px 0;">技术细节</h3>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      HyperTool 的另一个巧妙之处是训练数据怎么来。不是找人类标注——那太贵了。他们设计了一个三阶段自动流水线：
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>1. 组合任务构建。</strong> 让教师模型和真实 MCP 环境交互，基于真实实体（地点、公司、股票等）生成跨工具的复合问题。比如"找出总部在加州的、市值超过 1000 亿美元的科技公司"，这需要同时用到多个工具的返回结果才能回答。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>2. HyperTool 轨迹 Rollout。</strong> 让模型在真实 MCP 环境中按 HyperTool 格式执行这些任务。如果代码块因为语法错误或 schema 不匹配失败了，系统会自动诊断并修复，修复成功才加入轨迹。同时用"双轨制"管理上下文：完整轨迹存档，去噪轨迹用于后续提示。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>3. 双重验证。</strong> 生成的轨迹必须过两关——执行正确性过滤和证据一致性验证。只有两关都过的轨迹才拿来微调模型。
+    </p>
+
+    <div style="background:#f8f9fa;border-left:4px solid #ddd;padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0;">
+      <p style="font-size:14px;line-height:1.8;color:#666;margin:0;font-style:italic;">
+        "HyperTool changes the model-visible unit of tool execution. Instead of exposing every atomic MCP tool operation as a separate transition, it provides a unified executable interface where the model writes a self-contained code block that can compose multiple tool calls, manipulate return values, and perform local computation — returning only the final result to the main trace."
+      </p>
+      <p style="font-size:13px;color:#999;margin:8px 0 0 0;">翻译：HyperTool 改的不是工具本身，而是"模型看到什么"。它让模型用写代码的方式组合工具，中间过程藏黑盒里，只给外部看结果。这个设计思路跟 Unix 管道的哲学很像——输入输出明确，内部实现不关心。</p>
+    </div>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      数据合成的另一个细节：他们统计了 Qwen3-8B 在 SFT 前后的工具使用行为变化：
+    </p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;border:1px solid #e8e8e8;margin:12px 0;">
+      <tr style="background:#f0f5ff;">
+        <td style="padding:8px 14px;font-weight:600;border-bottom:1px solid #e8e8e8;">指标</td>
+        <td style="padding:8px 14px;font-weight:600;border-bottom:1px solid #e8e8e8;">SFT 前（ReAct）</td>
+        <td style="padding:8px 14px;font-weight:600;border-bottom:1px solid #e8e8e8;">SFT 后（HyperTool）</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">实际执行的原始工具调用数</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">26.92</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;color:#67C23A;font-weight:700;">47.55</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">模型可见的动作数</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">26.92</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;color:#4A90D9;font-weight:700;">20.76</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;">总交互轮次</td>
+        <td style="padding:8px 14px;">28.81</td>
+        <td style="padding:8px 14px;color:#4A90D9;font-weight:700;">21.76</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 0 0;">
+      实际调用的工具反而更多了（+77%），但模型需要"看"的东西反而更少了（-23% 的动作数，-25% 的轮次）。
+    </p>
+  </div>
+
+  <!-- 章节：效果怎么样 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #E86C4A;font-weight:700;">效果怎么样？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      在 MCP-Universe 基准上，HyperTool 在 Qwen3-8B 和 Qwen3-32B 两个骨干上的表现远超所有同骨干基线：
+    </p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.6;border:1px solid #e8e8e8;margin:12px 0;">
+      <tr style="background:#f0f5ff;">
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">模型</td>
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">方法</td>
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">金融</td>
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">仓库</td>
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">导航</td>
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">搜索</td>
+        <td style="padding:6px 8px;font-weight:600;border-bottom:1px solid #e8e8e8;">平均</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:6px 8px;color:#999;border-bottom:1px solid #e8e8e8;">GPT-OSS</td>
+        <td style="padding:6px 8px;color:#999;border-bottom:1px solid #e8e8e8;">-</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">62.50</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">14.28</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">25.71</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">26.00</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">32.13</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">Qwen3-8B</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">Base</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">17.14</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">3.57</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">17.14</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">4.00</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">9.93</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">Qwen3-8B</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">ReAct</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">32.50</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">7.14</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">25.71</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">16.00</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">20.92</td>
+      </tr>
+      <tr style="background:#f0fff0;">
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">Qwen3-8B</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">HyperTool</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">62.50</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">25.00</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">28.57</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">18.00</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;color:#67C23A;">33.33</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">Qwen3-32B</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">Base</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">35.00</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">3.57</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">20.00</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">4.00</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;">15.69</td>
+      </tr>
+      <tr style="background:#f0fff0;">
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">Qwen3-32B</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">HyperTool</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">62.50</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">21.43</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">34.29</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;">22.00</td>
+        <td style="padding:6px 8px;font-weight:700;border-bottom:1px solid #e8e8e8;color:#67C23A;">35.29</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      几个值得关注的细节：
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 4px 0;">
+      · Qwen3-8B + HyperTool 在金融分析上拿到 62.50%，和 GPT-OSS 持平。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 4px 0;">
+      · 仓库管理从 3.57% → 25.00%，7 倍提升。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      · Qwen3-32B + HyperTool 追平甚至超过了 GPT-OSS 和 Kimi-k2.5。
+    </p>
+
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.13663v1/x4.png" alt="HyperTool 与 ReAct 的任务准确率和 Token 消耗对比" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.4 — 准确率更高、Token 更省</em></p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:16px 0 12px 0;">
+      消融实验也证明了 HyperTool 是"接口设计 + 训练数据"共同作用：
+    </p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;border:1px solid #e8e8e8;margin:12px 0;">
+      <tr style="background:#f0f5ff;">
+        <td style="padding:8px 14px;font-weight:600;border-bottom:1px solid #e8e8e8;">SFT 数据类型</td>
+        <td style="padding:8px 14px;font-weight:600;border-bottom:1px solid #e8e8e8;">平均准确率</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">无 SFT（ReAct）</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">20.92</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">混合（原子调用 + HyperTool）</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">26.85</td>
+      </tr>
+      <tr style="background:#f0fff0;">
+        <td style="padding:8px 14px;font-weight:700;">HyperTool-only</td>
+        <td style="padding:8px 14px;font-weight:700;color:#67C23A;">33.33</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 章节：和其他方案比有什么不同 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #9C7CF4;font-weight:700;">和其他方案比有什么不同？</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.6;border:1px solid #e8e8e8;margin:12px 0;">
+      <tr style="background:#f0f5ff;">
+        <td style="padding:8px 10px;font-weight:600;border-bottom:1px solid #e8e8e8;">方案</td>
+        <td style="padding:8px 10px;font-weight:600;border-bottom:1px solid #e8e8e8;">思路</td>
+        <td style="padding:8px 10px;font-weight:600;border-bottom:1px solid #e8e8e8;">优点</td>
+        <td style="padding:8px 10px;font-weight:600;border-bottom:1px solid #e8e8e8;">缺点</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">上下文压缩</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">工具返回后精简上下文</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">简单直接</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">可能丢掉关键值</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">缓存/摘要</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">结构化缓存替换原始返回</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">保留关键信息</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">依赖任务假设、泛化差</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">子 Agent 代理</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">底层操作封装到另一个 Agent</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">隐藏复杂性</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">不透明、难排查</td>
+      </tr>
+      <tr style="background:#f0fff0;">
+        <td style="padding:8px 10px;font-weight:700;">HyperTool</td>
+        <td style="padding:8px 10px;font-weight:700;">执行时编码控制粒度</td>
+        <td style="padding:8px 10px;font-weight:700;">不丢信息、不改架构</td>
+        <td style="padding:8px 10px;">需要合成训练数据</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 0 0;">
+      HyperTool 和其他方案最大的区别在于：它不是在"事后处理冗余"，而是在"<strong>事前消除冗余</strong>"。上下文压缩是"写完长篇大论后再删减"，子 Agent 是"让秘书替你干活但你看不到过程"，HyperTool 是"一开始就用模块化的方式思考，不说废话"。
+    </p>
+  </div>
+
+  <!-- 章节：对开发者意味着什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #E86C4A;font-weight:700;">对开发者意味着什么？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      如果你在用 MCP 协议搭 Agent，HyperTool 给了三个特别实在的启发：
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>1. 工具的粒度可以不等于认知的粒度。</strong> 传统思维是"一个按钮对应一个功能"，但 Agent 需要的是"一个意图对应一组操作"。HyperTool 证明了，让模型通过代码来组合工具，比让它逐个调用工具再自己拼结果，效果好得多。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>2. 上下文窗口的隐性成本比你想象的大。</strong> HyperTool 的实验里，模型实际调用的工具从 27 次涨到了 48 次（敢用更多工具了），但对话轮次从 29 轮降到了 22 轮。这说明不是模型不想多用工具，是上下文太长把它"吓到了"。精简上下文，模型反而更敢放手干。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>3. "执行即代码"可能是 Agent 接口的进化方向。</strong> 人类给计算机下指令的终极形态是写代码——精确、可组合、可复用。Agent 给工具下指令也应该朝这个方向走，而不是退化到"一问一答"的聊天模式。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 0 0;">
+      当然，HyperTool 最适合的场景是"局部确定性的工具工作流"——那些不需要模型反复语义判断的操作。如果中间某个步骤的结果可能完全改变任务方向，那就应该回到传统的逐步交互模式。关键在于平衡——HyperTool 不是要替代所有逐步调用，而是要替掉那些"<strong>不需要思考但很占地方</strong>"的部分。
+    </p>
+  </div>
+
+  <!-- 底部署名 -->
+  <div style="padding:24px 24px 32px 24px;text-align:center;font-size:13px;color:#999;border-top:1px solid #eee;">
+    👤 fly的AI学习 &nbsp;|&nbsp; 每日更新 AI 大模型最新动态
+  </div>
+
+</div>
+</body>
+</html>
