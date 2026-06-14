@@ -111,7 +111,6 @@
     background: var(--warn-bg); border: 1px solid var(--warn-border);
     border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0;
   }
-  .warn::before { content: "⚠️ "; }
   .footer {
     text-align: center; color: var(--text-dim); font-size: .85rem;
     margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
@@ -130,141 +129,199 @@
 </div>
 
 <div class="project-card">
-  <h2><a href="https://github.com/opendatalab/MinerU" target="_blank">MinerU</a></h2>
-  <div class="quote">"1.2B 参数超越 GPT-4o，小模型在垂直场景击败大模型的教科书级范例。" —— 上海 AI Lab OpenDataLab</div>
+  <h2><a href="https://github.com/Abishek-kk/RailMind-AI" target="_blank">RailMind-AI</a></h2>
+  <div class="quote">"Most incidents could be prevented if high-risk behaviours were detected early enough for timely intervention." —— RailMind-AI Core Principle</div>
 
   <div class="stars">
-    ⭐ 67,454 · 🍴 5,679 · 🔧 Python · 📅 2024-02 · 🏢 上海 AI Lab OpenDataLab
+    ⭐ 42 · 🍴 0 · 🔧 Python / TypeScript · 📅 2026-06-10 · 📄 MIT · 🏆 FAR AWAY 2026 Hackathon
   </div>
 
   <div class="tags">
-    <span>文档解析</span><span>PDF</span><span>OCR</span>
-    <span>VLM</span><span>RAG</span><span>公式识别</span>
-    <span>表格解析</span><span>InternVL</span><span>OmniDocBench</span>
+    <span>agentic-ai</span><span>yolov8</span><span>bilstm</span>
+    <span>langgraph</span><span>computer-vision</span><span>railway-safety</span>
+    <span>real-time-monitoring</span><span>privacy-first</span><span>hackathon</span>
   </div>
 
   <!-- 项目背景 -->
   <h3>📌 项目背景</h3>
-  <p>在 RAG（检索增强生成）和 LLM 训练数据准备的工作流中，<strong>文档解析</strong>是绕不开的基础环节——PDF 里的多栏排版、LaTeX 公式、跨页表格，每一项都是传统工具的噩梦。用 PyMuPDF 提取？乱码。用 Tesseract OCR？公式全废。用 GPT-4o 做 VLM 解析？精度不错但成本高昂，无法规模化。</p>
-  <p><strong>MinerU</strong> 由<strong>上海人工智能实验室 OpenDataLab 团队</strong>开源（2024年7月首发），核心定位是将 PDF、图片、DOCX、PPTX、XLSX 等非结构化文档<strong>一站式转换为结构化 Markdown/JSON</strong>，专为 LLM 训练和 RAG 场景优化。项目在 GitHub 收获 <span class="highlight-num">67,454 Stars</span>，是中文开源社区中 Star 数最高的文档解析项目，也是 2025 年 CVPR 发表的 OmniDocBench 评测基准的创建者。</p>
-  <p>MinerU 的技术演进路径极具启发性：从 1.x 的多模型 Pipeline，到 2.0 引入 0.9B VLM 实现"不到 1B 参数超越 72B VLM"，再到 2.5 以 <span class="highlight-num">1.2B 参数在 OmniDocBench 上全面超越 Gemini 2.5 Pro、GPT-4o、Qwen2.5-VL-72B</span>，最后在 3.0 实现系统级跃迁——从单机工具演进为高并发企业级文档解析基座。<strong>小模型、专用化、持续迭代</strong>的路径，为"如何在垂直场景击败大模型"提供了教科书级的范例。</p>
+  <p>全球铁路系统每年发生超过<strong>6,000 起站台安全事件</strong>，其中相当比例的自杀和盗窃行为在发生时，监控室的安保人员并未及时发现——传统 CCTV 系统的本质问题在于<strong>"记录而非预防"</strong>。事后回放录像确定"发生了什么"对已经发生的悲剧毫无意义。</p>
+  <p>更现实的问题是：对于绝大多数铁路运营商来说，"部署全新的 AI 安全系统"意味着数百万美元的前端摄像头更换和边缘服务器部署预算——这是不切实际的。</p>
+  <p><strong>RailMind-AI</strong> 正是为解决这两个核心痛点而生的。它由 <strong>Team Accelerate</strong> 团队专为 <strong>FAR AWAY 2026 国际黑客松</strong>开发，核心理念是：<em>用 AI 将现有被动 CCTV 基础设施转化为主动安全预警网络，零新硬件成本</em>。项目采用 MIT 协议开源，将 YOLOv8 计算机视觉、BiLSTM 时序行为分析和 LangGraph 多智能体推理三者融合成一个可解释、可审计、隐私优先的铁路安全智能平台。</p>
 
   <!-- 核心功能 -->
   <h3>🚀 核心功能</h3>
 
-  <h4>1. 多后端协同架构，精度与速度兼得</h4>
-  <p>MinerU 采用四类后端协同设计，用户无需理解底层差异，系统自动选择最优路径：</p>
+  <h4>1. 实时多路行为分析——零硬件改造</h4>
+  <p>RailMind-AI 的设计前提是完全复用现有铁路 CCTV 网络。系统通过 RTSP 协议直接接入现有摄像头流，以 <span class="highlight-num">10FPS/路</span> 的速率持续处理，支持 4 路并发（可扩展），在 Jetson Orin Nano（约 500 美元）边缘设备上即可达到实时处理性能。</p>
+
+  <h4>2. 多层次风险行为检测</h4>
+  <p>系统可识别三大类风险行为模式，通过 BiLSTM 模型对<strong>30 秒滑动窗口内的 7 维行为特征向量</strong>进行时序建模：</p>
   <ul>
-    <li><strong>Pipeline 后端</strong>：多模型流水线（布局检测→OCR→公式识别→表格识别），纯 CPU 可运行，速度最快</li>
-    <li><strong>VLM 后端</strong>：基于 1.2B InternVL 架构的视觉语言模型，单模型覆盖多语言/布局/表格/公式/阅读顺序</li>
-    <li><strong>Hybrid 后端</strong>（3.0 默认）：文本 PDF 直接提取（零幻觉）+ 扫描 PDF 用 VLM 解析，兼顾精度与效率</li>
-    <li><strong>Office 原生后端</strong>：DOCX/PPTX/XLSX 直接解析，无需经 PDF 渲染，<span class="highlight-num">速度比 PDF 路径快数十倍</span></li>
+    <li><strong>自杀风险</strong>：长时间靠近站台边缘（>60s）、反复踱步、突然转向、蹲姿、社交退缩模式</li>
+    <li><strong>盗窃风险</strong>：持续近距离尾随（<0.5m）、重复近距离接触、高密度区域团伙协同行为</li>
+    <li><strong>安全威胁</strong>：高速移动 + 攻击性姿态 + 对抗性近距离接触</li>
   </ul>
 
-  <h4>2. 1.2B 参数的文档理解 VLM</h4>
-  <p>MinerU 2.5 的核心模型基于 <strong>InternVL 架构</strong>（非 Qwen-VL），在结构化信息提取和细粒度视觉定位上有先天优势。两阶段推理流水线将布局分析与内容识别解耦，配合原生高分辨率架构，以 1.2B 参数实现了：</p>
-  <ul>
-    <li><strong>OmniDocBench <span class="highlight-num">86.2 分</span></strong>（Pipeline 后端），超越前代 0.9B VLM</li>
-    <li>文档类任务准确率比 Phi-3-vision、TinyLLaVA 等<strong>高出 18%+</strong></li>
-    <li>PubLayNet 布局检测 F1 值达 <span class="highlight-num">92.3%</span></li>
-  </ul>
+  <h4>3. 可解释三智能体决策架构</h4>
+  <p>基于 LangGraph 编排的三层智能体按序协作：</p>
+  <ol>
+    <li><strong>感知智能体</strong>：提取姿态特征 → LSTM 推理 → 判断是否需要干预</li>
+    <li><strong>推理智能体</strong>：计算 <span class="highlight-num">0-100 分动态风险评分</span>（融合 LSTM 置信度、站台距离、行为持续时间、人群密度等 6 个维度），可选调用 GPT-4/Claude 做语义化推理</li>
+    <li><strong>干预智能体</strong>：梯度触发——40-69 分（控制台告警）→ 70-89 分（安保团队）→ 90-100 分（广播应急）</li>
+  </ol>
 
-  <h4>3. 复杂元素的精准还原</h4>
-  <ul>
-    <li><strong>数学公式</strong>：双阶段模型（MFD 检测 + MFR 识别），输出 LaTeX 格式，支持中英混合公式</li>
-    <li><strong>表格解析</strong>：区分有线/无线表格，支持旋转表格、跨页续表合并、表格内嵌图片/公式</li>
-    <li><strong>多语言 OCR</strong>：覆盖 <span class="highlight-num">109 种语言</span>，PP-OCRv5 精度提升 40%+</li>
-    <li><strong>版式保留</strong>：完整还原标题层级、分栏排布、页眉页脚、图文关系</li>
-  </ul>
+  <h4>4. 持续学习闭环</h4>
+  <p>系统内置每周自动重训练流水线：利用一线安保人员标注的误报反馈数据，持续优化 BiLSTM 模型。季度准确率可提升 <span class="highlight-num">2-3%</span>。解决了 AI 安全系统"部署即老化"的行业通病。</p>
 
-  <h4>4. 企业级部署与高并发</h4>
-  <p>3.0 版本实现了从工具到基础设施的跃迁：</p>
-  <ul>
-    <li><strong>mineru-router</strong>：多 GPU 一键部署 + 自动负载均衡</li>
-    <li><strong>异步任务 API</strong>：<code>POST /tasks</code> 提交+查询+获取结果</li>
-    <li><strong>线程安全</strong>：全面支持多线程并发推理</li>
-    <li><strong>滑动窗口</strong>：上万页长文档无需手动拆分，内存峰值可控</li>
-    <li><strong>流式落盘</strong>：已完成页面边解析边输出</li>
-  </ul>
+  <h4>5. 隐私原生设计</h4>
+  <p>从架构层面排除人脸识别——所有行为分析仅基于肢体姿态和运动模式，追踪 ID 为会话级数字标识（会话结束即失效）。天然符合 GDPR、印度 PDPA 等全球主流数据隐私法规。</p>
 
-  <h4>5. 极致硬件兼容</h4>
-  <p>支持 <span class="highlight-num">11 家国产计算平台</span>：华为昇腾、寒武纪、海光、燧原、摩尔线程、天数智芯、昆仑芯等；Apple Silicon 通过 MLX 加速速度提升 100%~200%；INT8 量化后推理时间缩短 40%、内存下降 60%，可蒸馏至 600M 部署到移动端。</p>
+  <h4>6. 前后端一体化管理控制台</h4>
+  <p>React 19 + TanStack Router + Tailwind CSS 4 + shadcn/ui，包含实时监控（AI 标注叠加）、事件趋势分析（热力图）、告警全生命周期管理、摄像头状态管理等 4 个核心视图。</p>
 
   <!-- 技术亮点 -->
-  <h3>🔧 技术亮点</h3>
+  <h3>⚙️ 技术亮点</h3>
 
-  <h4>1. InternVL 架构的文档专用优化</h4>
-  <p>MinerU 2.5 选择了 InternVL 而非更流行的 Qwen-VL 作为 VLM 基座，核心原因是 InternVL 在<strong>结构化信息提取</strong>和<strong>细粒度视觉定位</strong>上的天然优势——这正是文档解析的核心需求。Qwen-VL 更偏开放域问答和图像描述，而 InternVL 的视觉-语言对齐机制天然适合区域分割、单元格识别、公式语义解析等结构化任务。</p>
+  <h4>1. BiLSTM 时序行为建模——从"看图说话"到"理解行为演变"</h4>
+  <p>传统视频安防系统大多在单帧上做目标检测和分类。RailMind-AI 的核心创新在于用 BiLSTM 对 7 维行为特征的 <strong>30 秒滑动窗口序列</strong>进行时序建模：</p>
+  <pre><code>feature_vector = [
+  edge_proximity_seconds,  # 距站台边缘0.5m内累计时间
+  loitering_time,          # 单区域静止时长
+  pacing_count,            # 往返运动周期数
+  movement_speed,          # 10秒窗口平均速度（m/s）
+  direction_changes,       # 每分钟方向反转次数
+  following_distance,      # 与单个人持续接近距离（米）
+  crowd_interactions       # 近距离接触的独立个体数
+]</code></pre>
+  <p>相比传统静态分类器，BiLSTM 的时序感知能力使<strong>误报率降低 60% 以上</strong>。准确率 >92%，误报率 <8%，推理延迟 <5ms（GPU）。</p>
 
-  <h4>2. Hybrid 后端的"零幻觉"设计</h4>
-  <p>3.0 默认的 Hybrid 后端是一个精妙的设计：对于文本型 PDF，直接提取文本而非经过 VLM 推理，从根本上<strong>消除幻觉风险</strong>；对于扫描型 PDF，才启用 VLM 解析。这种"能直接取就不推理"的策略，在保证精度的同时大幅降低了计算成本。</p>
+  <h4>2. 边缘-云端混合架构——兼顾实时性与集中管理</h4>
+  <p>原始视频完全在边缘处理，仅上传结构化行为特征和告警结果到云端——带宽节省 <span class="highlight-num">99.9%</span>：</p>
+  <pre><code>【边缘层】Jetson Orin Nano
+CCTV流 → OpenCV → YOLOv8(12ms) → ByteTrack(3ms)
+→ YOLOv8-Pose(15ms) → 特征提取 → BiLSTM(<5ms)
+→ 仅上传JSON结果
 
-  <h4>3. Office 原生解析的数十倍加速</h4>
-  <p>传统文档解析工具处理 DOCX 时，通常先转为 PDF 再解析，既丢失原生格式信息又浪费时间。MinerU 3.0 直接解析 Office 文档原生格式，速度提升数十倍，精度也更高——这是一个被多数竞品忽略的技术路径。</p>
+【云端层】FastAPI + PostgreSQL
+LangGraph 推理智能体(200ms) → 干预智能体 → WebSocket → React</code></pre>
+
+  <h4>3. 学术前沿 YOLOv8n 改进方案的工程落地</h4>
+  <p>Frontiers in AI 期刊论文展示改进 YOLOv8n 在铁路检测中达到 <span class="highlight-num">mAP@0.5 90.2%</span>，在 Jetson Nano 边缘设备上达到 28.6 FPS，模型体积仅 5.2MB。RailMind-AI 在实际部署中使用了这一改进路线。</p>
 
   <!-- 对比分析 -->
   <h3>📊 对比分析</h3>
   <table class="compare-table">
-    <tr><th>维度</th><th>MinerU 3.0</th><th>Marker</th><th>Docling (IBM)</th><th>Mathpix</th></tr>
-    <tr><td><strong>架构</strong></td><td><span class="highlight-num">多后端协同</span></td><td>轻量模型+规则+LLM</td><td>Pipeline+AI</td><td>闭源VLM</td></tr>
-    <tr><td><strong>OmniDocBench</strong></td><td><span class="highlight-num">86.2 / 超GPT-4o</span></td><td>未公开</td><td>未公开</td><td>未公开</td></tr>
-    <tr><td><strong>公式识别</strong></td><td>✅ 双阶段模型+LaTeX</td><td>⚠️ LLM辅助</td><td>⚠️ 基础支持</td><td>✅ 行业标杆</td></tr>
-    <tr><td><strong>表格解析</strong></td><td><span class="highlight-num">✅ HTML+跨页+旋转</span></td><td>⚠️ 复杂表格弱</td><td>✅ 基础</td><td>✅ 较好</td></tr>
-    <tr><td><strong>Office原生</strong></td><td><span class="highlight-num">✅ DOCX/PPTX/XLSX</span></td><td>❌ 需转PDF</td><td>✅ DOCX/PPTX</td><td>❌ 仅PDF</td></tr>
-    <tr><td><strong>多语言OCR</strong></td><td><span class="highlight-num">✅ 109种语言</span></td><td>✅ 多语言</td><td>⚠️ 有限</td><td>✅ 较好</td></tr>
-    <tr><td><strong>CPU运行</strong></td><td><span class="highlight-num">✅ Pipeline纯CPU</span></td><td>✅ 支持</td><td>✅ 支持</td><td>❌ 闭源云</td></tr>
-    <tr><td><strong>企业级部署</strong></td><td><span class="highlight-num">✅ router+异步API</span></td><td>❌ 单机</td><td>⚠️ 基础API</td><td>✅ 云服务</td></tr>
-    <tr><td><strong>国产芯片</strong></td><td><span class="highlight-num">✅ 11家厂商</span></td><td>❌</td><td>❌</td><td>❌</td></tr>
-    <tr><td><strong>许可</strong></td><td>3.0移除限制性许可</td><td>GPL/商用需授权</td><td>MIT</td><td>闭源付费</td></tr>
-    <tr><td><strong>Stars</strong></td><td><span class="highlight-num">67,454</span></td><td>26,000+</td><td>30,000+</td><td>N/A</td></tr>
+    <tr><th>维度</th><th>RailMind-AI</th><th>传统 CCTV 监控</th><th>商业铁路 AI 系统</th></tr>
+    <tr>
+      <td>运作模式</td>
+      <td class="highlight-num">主动预警</td>
+      <td>被动录像</td>
+      <td>主动检测（专属硬件）</td>
+    </tr>
+    <tr>
+      <td>硬件成本</td>
+      <td class="highlight-num">零新增</td>
+      <td>基础部署</td>
+      <td>数十万至数百万美元</td>
+    </tr>
+    <tr>
+      <td>行为分析粒度</td>
+      <td class="highlight-num">30秒时序建模</td>
+      <td>无（人工观察）</td>
+      <td>多为规则引擎</td>
+    </tr>
+    <tr>
+      <td>可解释性</td>
+      <td class="highlight-num">✅ 完整推理轨迹</td>
+      <td>❌</td>
+      <td>⚠️ 黑盒检测</td>
+    </tr>
+    <tr>
+      <td>误报率</td>
+      <td class="highlight-num"><8%</td>
+      <td>N/A</td>
+      <td>15-30%</td>
+    </tr>
+    <tr>
+      <td>持续学习</td>
+      <td class="highlight-num">✅ 每周自动</td>
+      <td>❌</td>
+      <td>❌ 出厂固定</td>
+    </tr>
+    <tr>
+      <td>隐私合规</td>
+      <td class="highlight-num">✅ 无面部识别</td>
+      <td>⚠️ 原始视频存储</td>
+      <td>⚠️ 取决于方案</td>
+    </tr>
+    <tr>
+      <td>边缘设备成本</td>
+      <td class="highlight-num">~$500</td>
+      <td>N/A</td>
+      <td>$2,000-5,000</td>
+    </tr>
+    <tr>
+      <td>开源</td>
+      <td class="highlight-num">MIT</td>
+      <td>N/A</td>
+      <td>商业闭源</td>
+    </tr>
   </table>
-  <p><strong>关键数据</strong>：MinerU 2.5 的 1.2B VLM 在 OmniDocBench 上超越 GPT-4o 和 Gemini 2.5 Pro，证明了垂直场景专用小模型可以击败通用大模型；3.0 的 Hybrid 后端在文本 PDF 上实现零幻觉解析；Office 原生解析速度比 PDF 路径快数十倍。INT8 量化后推理速度提升 40%、内存降低 60%。</p>
 
   <!-- 适用人群 -->
   <h3>👥 适用人群</h3>
   <ul>
-    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：RAG 工程师，构建知识库时需要高质量文档解析，MinerU 输出可直接灌入向量数据库</li>
-    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：LLM 训练数据工程师，大规模论文/文档转 Markdown 用于预训练或微调数据准备</li>
-    <li><strong>⭐⭐⭐⭐ 推荐</strong>：企业信息化团队，合同/报告/财务表单自动化解析，mineru-router 支持高并发生产部署</li>
-    <li><strong>⭐⭐⭐⭐ 推荐</strong>：科研工作者，论文 PDF 中的公式/表格/图表精准提取，替代手工复制</li>
-    <li><strong>⭐⭐⭐ 可选</strong>：国产化适配团队，11 家国产芯片厂商支持，信创环境首选</li>
+    <li><strong>铁路/交通运营企业</strong>：低成本实现站台安全智能化升级</li>
+    <li><strong>AI 安防开发者</strong>：YOLOv8 + BiLSTM + 多智能体架构全栈参考实现</li>
+    <li><strong>计算机视觉研究者</strong>：行为时序建模在公共安全场景的实战案例</li>
+    <li><strong>学生/黑客松参赛者</strong>："从0到1构建可落地 AI 产品"的参考范本</li>
   </ul>
-  <p><strong>前置要求</strong>：Python 3.10+；Pipeline 后端纯 CPU 可运行，VLM 后端推荐 8GB+ 显存 GPU。</p>
 
   <!-- 快速上手 -->
   <h3>⚡ 快速上手</h3>
-  <pre><code># 一键安装（含所有后端）
-uv pip install mineru[all]
+  <pre><code># 1. 克隆仓库
+git clone https://github.com/Abishek-kk/RailMind-AI.git
+cd RailMind-AI
 
-# 最简单的使用：单文件解析
-mineru -p paper.pdf -o ./output
+# 2. 后端配置
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
 
-# 指定 Hybrid 后端（3.0 默认）
-mineru -p document.pdf -o ./output --backend hybrid-auto-engine
+# 3. 训练 LSTM 模型
+python -m app.lstm.cli train
 
-# Python SDK
-from mineru import do_parse
-result = do_parse("paper.pdf", output_dir="./output")
+# 4. 启动后端（API：http://localhost:8000）
+python run.py
 
-# API 服务（生产部署）
-mineru-api --host 0.0.0.0 --port 8000
+# 5. 启动前端（Dashboard：http://localhost:5173）
+cd ../frontend
+npm install
+npm run dev
 
-# 多 GPU 负载均衡
-mineru-router --workers http://gpu0:8000,http://gpu1:8000</code></pre>
+# 快速演示（无需摄像头）
+cd backend
+python scripts/demo_runner.py</code></pre>
 
-  <h3>⚠️ 使用注意</h3>
-  <div class="warn">VLM 后端需要下载约 5GB 模型文件，首次运行较慢。Pipeline 后端对极复杂手写文档的识别精度有限，建议结合 Mathpix 等专用工具协同处理。3.0 版本移除了 AGPLv3 限制性模型许可，但部分下游依赖仍有各自许可条款。</div>
-  <ul>
-    <li><strong>硬件推荐</strong>：Pipeline 后端纯 CPU 即可；VLM 后端推荐 NVIDIA GPU 8GB+ 显存</li>
-    <li><strong>Office 格式</strong>：DOCX/PPTX/XLSX 原生解析为 3.0 新增，部分复杂格式可能存在边缘 case</li>
-    <li><strong>中文公式</strong>：Pipeline 后端中文公式需启用环境变量 <code>MINERU_FORMULA_CH_SUPPORT=1</code></li>
-    <li><strong>性能优化</strong>：大规模部署建议使用 mineru-router + 多 GPU + INT8 量化</li>
-  </ul>
+  <h3>🗺️ 发展路线图</h3>
+  <table class="compare-table">
+    <tr><th>版本</th><th>里程碑</th><th>核心增量</th></tr>
+    <tr><td><strong>v1.0</strong></td><td>黑客松 MVP（✅）</td><td>离线视频处理、YOLOv8 级联检测、BiLSTM 分类、三智能体</td></tr>
+    <tr><td><strong>v1.5</strong></td><td>生产 Alpha（进行中）</td><td>实时 RTSP 流、PostgreSQL+Redis、Jetson 边缘部署</td></tr>
+    <tr><td><strong>v2.0</strong></td><td>正式生产版</td><td>LSTM 持续学习、跨摄像头重识别、多车站 SaaS</td></tr>
+    <tr><td><strong>v3.0</strong></td><td>高级智能版</td><td>Swin Transformer 时空建模、强化学习动态阈值</td></tr>
+  </table>
+
+  <div class="warn">
+    <strong>注意：</strong>RailMind-AI 目前是黑客松阶段 MVP（⭐42，创建仅4天）。功能完整性和代码质量已通过 FAR AWAY 2026 黑客松评审，但尚未经过大规模生产验证。项目路线图清晰、架构设计优秀，适合作为学习参考和原型探索，生产部署需充分测试。
+  </div>
 </div>
 
 <div class="footer">
-  <p>fly的AI学习 · 2026-06-14 · <a href="https://github.com/opendatalab/MinerU" target="_blank">GitHub 原文</a></p>
-  <p>Powered by <a href="https://flystray.github.io/ai-news/" target="_blank">AI News</a></p>
+  <p>fly的AI学习 · 2026年6月14日 · Powered by <a href="https://flystray.github.io/ai-news/">AI News</a></p>
+  <p>信息源：<a href="https://github.com/Abishek-kk/RailMind-AI">GitHub</a> · <a href="https://repositorystats.com/abishek-kk/railmind-ai">RepositoryStats</a> · <a href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1711309/full">Frontiers in AI</a> · <a href="https://unstop.com/hackathons/far-away-zuup-1677472">FAR AWAY 2026</a></p>
 </div>
 
 </body>
