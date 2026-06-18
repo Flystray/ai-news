@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.18｜CEO-Bench · 让 AI 当 500 天 CEO，结果没一个能盈利</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333;line-height:1.8;">
+
+<div style="max-width:680px;margin:0 auto;background:#fff;">
+
+  <!-- Header -->
+  <div style="padding:32px 24px 20px;border-bottom:1px solid #eee;">
+    <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 12px;line-height:1.5;">
+      2026.6.18｜CEO-Bench · 让 AI 当 500 天 CEO，结果没一个能盈利
+    </h1>
+    <div style="font-size:14px;color:#999;margin-bottom:16px;">
+      ✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 &nbsp;·&nbsp; 国外 &nbsp;·&nbsp; 阅读时长 8 分钟
+    </div>
+    <!-- Paper Info Table -->
+    <table style="width:100%;border-collapse:collapse;font-size:14px;background:#fafafa;border-radius:8px;overflow:hidden;">
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;width:80px;border-bottom:1px solid #f0f0f0;">论文标题</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">CEO-Bench: Can Agents Play the Long Game?</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">作者</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">Haozhe Chen、Karthik Narasimhan、Zhuang Liu（普林斯顿大学）</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">发表日期</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">2026-06-16</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #f0f0f0;">来源</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;">arXiv</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;">论文链接</td><td style="padding:8px 12px;"><a href="https://arxiv.org/abs/2606.18543" style="color:#576b95;text-decoration:none;">点击查看原文</a></td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;">标签</td><td style="padding:8px 12px;">Agent 评测 · 长期决策 · Benchmark · LLM 能力边界</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 1: 这篇论文在说什么？ -->
+  <div style="padding:24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">这篇论文在说什么？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      普林斯顿的研究者搞了一个很硬核的 Agent 评测：让 AI 去当一家初创公司的 CEO，管 500 天，看谁能赚钱。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      结果是，大部分模型直接把公司干破产了。Grok 4.20 最惨，第 37 天就挂了。只有 Claude Opus 4.8 和 GPT-5.5 在 500 天后还能剩下比初始 100 万美元更多的钱——但也都不稳定盈利，随时可能翻车。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      论文的名字叫 CEO-Bench，测试的不是"AI 能不能写代码"或者"能不能答对题"，而是一个更根本的问题：<strong>AI 能在不确定的环境里做长期决策吗？</strong>
+    </p>
+    <div style="text-align:center;margin:24px 0;">
+      <img src="https://arxiv.org/html/2606.18543v1/x3.png" alt="CEO-Bench 总体结构" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.1 · AI Agent 通过可编程接口运营一家名为 NovaMind 的虚构软件公司500天，需要管理定价、营销、研发、客户支持等多个方面</p>
+    </div>
+  </div>
+
+  <!-- Section 2: 为什么要关注？ -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">为什么要关注？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      说实话，现在各种 AI 评测都快卷成军备竞赛了。MATH 500 已经 99.4% 了，GPQA Diamond 也快 90% 了，你再刷 benchmark 分数读者都麻了。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      但 CEO-Bench 不一样。它测试的是一种<strong>截然不同的智能</strong>：
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      不是"给一个明确任务，快速完成"，而是"面对一个模糊目标，在噪声里摸爬滚打 500 天"。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      这其实更接近真实世界的挑战。一个真正的 CEO 每天面对的是什么？行业里有哪些隐藏的客户需求？哪个广告渠道其实很划算？竞争对手突然降价了我该怎么应对？这些信息不是直接给你的，你得自己从一堆报表和碎片信号里拼出来。
+    </p>
+    <div style="background:#f6f7f9;border-left:4px solid #d0d5dd;padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0;font-size:14px;color:#555;font-style:italic;line-height:1.7;">
+      <p style="margin:0;">"Many important human accomplishments are not isolated, crisp tasks. They are long chains of decisions under uncertainty: choosing priorities, allocating finite resources, interpreting noisy signals, and adapting as conditions shift."</p>
+      <p style="margin:8px 0 0;font-style:normal;color:#333;">说的很直白：人类很多重要成就都不是"做好一个任务"那么简单。真正难的是在不确定中持续做对的决策。这就是 CEO-Bench 的价值——它不是在测"会不会"，而是在测"能不能一直做得对"。</p>
+    </div>
+  </div>
+
+  <!-- Section 3: 核心方法 -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">核心方法</h2>
+
+    <h3 style="font-size:16px;font-weight:700;color:#333;margin:0 0 12px;">关键思路</h3>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      CEO-Bench 的设计其实很"接地气"——让你管一家叫 NovaMind 的虚构 SaaS 公司。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      初始条件是：<strong>零客户，100 万美元现金</strong>。你需要在 500 个模拟天里，通过写 Python 代码来经营这家公司。AI Agent 的界面不是聊天对话框，而是一个完整的编程接口，有 34 个操作工具，19 张业务数据库表。
+    </p>
+    <div style="text-align:center;margin:24px 0;">
+      <img src="https://arxiv.org/html/2606.18543v1/x7.png" alt="CEO-Bench 七大设计原则" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.5 · CEO-Bench 的七大设计原则及其具体实现：包括细粒度模拟、机制规则确保鲁棒性、隐藏信息与间接反馈、相互关联的动态等</p>
+    </div>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      这 500 天里 AI 需要操心的事包括：
+    </p>
+    <ul style="font-size:15px;color:#333;margin:0 0 12px;padding-left:20px;">
+      <li style="margin-bottom:6px;"><strong>定价</strong>：怎么给不同客户群体定价？要不要打折？</li>
+      <li style="margin-bottom:6px;"><strong>增长</strong>：钱投哪个广告渠道最划算？</li>
+      <li style="margin-bottom:6px;"><strong>产品</strong>：研发资金怎么分配？做通用优化还是针对细分群体？</li>
+      <li style="margin-bottom:6px;"><strong>运营</strong>：买多少服务器容量？客服预算多少？</li>
+      <li style="margin-bottom:6px;"><strong>企业销售</strong>：大客户谈判，怎么出价、怎么还价？</li>
+    </ul>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      最狠的是，所有这些决策的信息都不是透明的。客户对你的产品到底满不满意？竞争对手下个月会放什么大招？广告渠道的真实转化率是多少？——你只能从财务报表和社交媒体帖子里"猜测"。
+    </p>
+
+    <div style="text-align:center;margin:24px 0;">
+      <img src="https://arxiv.org/html/2606.18543v1/x8.png" alt="AI Agent 与 CEO-Bench 的 Python 交互界面" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.6 · AI Agent 通过 Python 接口管理公司：左侧展示数据库查询分析，中间展示细粒度操作，右侧展示工具组合成自定义工作流</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:700;color:#333;margin:0 0 12px;">技术细节</h3>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      模拟器内置了 <strong>26 个客户群体</strong>和每个群体内的<strong>个体客户</strong>。每个客户有隐藏的偏好参数：
+    </p>
+    <ul style="font-size:15px;color:#333;margin:0 0 12px;padding-left:20px;">
+      <li style="margin-bottom:6px;"><strong>最大支付意愿</strong>：愿意花多少钱？</li>
+      <li style="margin-bottom:6px;"><strong>最低接受质量</strong>：产品烂到什么程度就会取消订阅？</li>
+      <li style="margin-bottom:6px;"><strong>价格敏感度</strong>：涨价 10% 会跑多少客户？</li>
+    </ul>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      而且客户之间还会互相影响。你在社交媒体上发了篇烂文章，可能影响一群潜在客户的购买决策。你在某个客户群体身上投入太多，竞争对手就会趁机在其他群体上超过你。
+    </p>
+
+    <div style="background:#f6f7f9;border-left:4px solid #d0d5dd;padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0;font-size:14px;color:#555;font-style:italic;line-height:1.7;">
+      <p style="margin:0;">"The environment is partially observable: the agent can observe what a real startup manager reasonably could."</p>
+      <p style="margin:8px 0 0;font-style:normal;color:#333;">这个设定很妙。它不说"所有数据公开让你分析"，而是给了你一张和真人 CEO 差不多的信息牌。你能不能看懂这些牌，就是能力的差距。</p>
+    </div>
+  </div>
+
+  <!-- Section 4: 效果怎么样？ -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">效果怎么样？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      结果可以说是相当惨烈。论文测试了 10 个主流模型，每个模型跑 3 次（每次随机种子不同），看谁能活过 500 天、谁能在最后赚到钱。
+    </p>
+    <div style="text-align:center;margin:24px 0;">
+      <img src="https://arxiv.org/html/2606.18543v1/x4.png" alt="各模型最佳运行的现金轨迹" style="max-width:100%;height:auto;border-radius:4px;">
+      <p style="font-size:12px;color:#999;margin:6px 0 0;">图源：原文 Fig.2 · 各模型最佳运行的现金持有量随时间变化：大多数模型在模拟结束前破产或接近破产，只有 Claude Opus 4.8 和 GPT-5.5 的最终现金超过 100 万美元起始余额</p>
+    </div>
+
+    <!-- Results Table -->
+    <div style="overflow-x:auto;margin:20px 0;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="background:#f0f3f8;">
+            <th style="padding:10px 8px;text-align:left;font-weight:600;border-bottom:2px solid #d0d5dd;">模型</th>
+            <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:2px solid #d0d5dd;">破产次数</th>
+            <th style="padding:10px 8px;text-align:right;font-weight:600;border-bottom:2px solid #d0d5dd;">最高最终现金</th>
+            <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:2px solid #d0d5dd;">最长存活</th>
+            <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:2px solid #d0d5dd;">平均存活</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;"><strong>Claude Opus 4.8</strong></td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#52c41a;">0</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;"><strong>$27,776,973</strong></td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500.0</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">GPT-5.5</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#fa8c16;">2</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;"><strong>$21,297,707</strong></td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">333.7</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">Claude Opus 4.7</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#52c41a;">0</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$389,959</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500.0</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">Kimi K2.6</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#fa8c16;">1</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$98,050</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">343.0</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">Claude Sonnet 4.6</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#fa8c16;">2</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$69,766</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">282.3</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">GLM 5.1</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#f5222d;">3</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$0</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">324</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">214.7</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">Claude Haiku 4.5</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#f5222d;">3</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$0</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">231</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">144.7</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">Gemini 3 Flash</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#f5222d;">3</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$0</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">226</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">154.0</td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">DeepSeek V4 Pro</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#f5222d;">3</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$0</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">176</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">114.3</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">Grok 4.20</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;color:#f5222d;">3</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$0</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">37</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">28.3</td>
+          </tr>
+          <tr style="background:#f6f7f9;">
+            <td style="padding:8px;border-bottom:1px solid #eee;"><em>规则基线</em></td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">-</td>
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">$15,756,408</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">500</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">-</td>
+          </tr>
+          <tr style="background:#f6f7f9;">
+            <td style="padding:8px;"><em>估计上界</em></td>
+            <td style="padding:8px;text-align:center;">-</td>
+            <td style="padding:8px;text-align:right;"><strong>$2,200,000,000</strong></td>
+            <td style="padding:8px;text-align:center;">-</td>
+            <td style="padding:8px;text-align:center;">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      几个有意思的点：
+    </p>
+    <p style="font-size:15px;margin:0 0 6px;color:#333;">
+      <strong>1. Grok 4.20 最快阵亡</strong>，第 37 天就挂了，三次全破产。
+    </p>
+    <p style="font-size:15px;margin:0 0 6px;color:#333;">
+      <strong>2. Claude Opus 4.7 活到 500 天但几乎没赚钱</strong>（只剩 39 万美元）。策略是反复削减支出来保现金流——能活但不能赢。
+    </p>
+    <p style="font-size:15px;margin:0 0 6px;color:#333;">
+      <strong>3. GPT-5.5 不是每次都成功</strong>，3 次里面破产了 2 次。但运气好的那次赚了 2129 万，说明能力是有的，但不太稳定。
+    </p>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      <strong>4. 估计上界是 22 亿美元</strong>。目前最好的模型成绩（2776 万）和这个上界之间差了将近 80 倍——"这个基准远未饱和"。
+    </p>
+  </div>
+
+  <!-- Section 5: 和其他方案比有什么不同？ -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">和其他方案比有什么不同？</h2>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      CEO-Bench 创造的是一个全新的评估范式。跟现有的 Agent 基准做个对比就清楚了：
+    </p>
+
+    <div style="overflow-x:auto;margin:20px 0;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="background:#f0f3f8;">
+            <th style="padding:10px 8px;text-align:left;font-weight:600;border-bottom:2px solid #d0d5dd;">对比维度</th>
+            <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:2px solid #d0d5dd;">SWE-bench</th>
+            <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:2px solid #d0d5dd;">WebArena</th>
+            <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:2px solid #d0d5dd;">CEO-Bench</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">时间跨度</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">单次</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">单次</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;"><strong style="color:#576b95;">500 天</strong></td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">环境动态性</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">静态</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">静态</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;"><strong style="color:#576b95;">持续变化</strong></td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">反馈延迟</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">即时</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">即时</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;"><strong style="color:#576b95;">延迟+噪声</strong></td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:8px;border-bottom:1px solid #eee;">需信息推断</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">否</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">否</td>
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;"><strong style="color:#576b95;">是</strong></td>
+          </tr>
+          <tr style="background:#fff;">
+            <td style="padding:8px;">多目标协调</td>
+            <td style="padding:8px;text-align:center;">否</td>
+            <td style="padding:8px;text-align:center;">否</td>
+            <td style="padding:8px;text-align:center;"><strong style="color:#576b95;">是</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      CEO-Bench 跟之前所有 Agent 评测的最大区别就在于：<strong>它测的不是"单次任务做得好不好"，而是"长时间里决策能不能持续对"。</strong>这种评测维度的缺失，恰好是现在 Agent 研究的一个盲区。
+    </p>
+  </div>
+
+  <!-- Section 6: 对开发者意味着什么？ -->
+  <div style="padding:0 24px 24px;">
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 16px;padding-left:12px;border-left:4px solid #576b95;">对开发者意味着什么？</h2>
+
+    <h3 style="font-size:16px;font-weight:700;color:#333;margin:0 0 8px;">1. 长期决策是当前 LLM 的真实短板</h3>
+    <p style="font-size:15px;margin:0 0 16px;color:#333;">
+      即使是最强的 Claude Opus 4.8，也没有稳定盈利。这说明 LLM 在短期推理（解数学题、写代码）上的能力，并不能直接迁移到长期战略决策上。如果你的产品需要 AI 做"规划-执行-反馈-调整"的循环，需要额外下功夫。
+    </p>
+
+    <h3 style="font-size:16px;font-weight:700;color:#333;margin:0 0 8px;">2. 信息收集能力可能比推理能力更关键</h3>
+    <p style="font-size:15px;margin:0 0 16px;color:#333;">
+      强的模型有一个共同点：它们会频繁查询数据库、分析数据、做预测。GPT-5.5 和 Claude Opus 4.8 写的备忘录里大量使用"if-then"条件句，在做情景规划。弱的模型往往不怎么做这些事——不是不会，而是"不知道需要做"。
+    </p>
+
+    <h3 style="font-size:16px;font-weight:700;color:#333;margin:0 0 8px;">3. "细粒度操作"很重要</h3>
+    <p style="font-size:15px;margin:0 0 16px;color:#333;">
+      GPT-5.5 和 Claude Opus 4.8 将近 <strong>90%</strong> 的开发资金投入到了针对特定客户群体的定向改进上，而其他模型平均只有 43%。在复杂环境中，<strong>精准操作的能力</strong>比"一键优化"靠谱得多。
+    </p>
+
+    <h3 style="font-size:16px;font-weight:700;color:#333;margin:0 0 8px;">4. 评测方式需要革新</h3>
+    <p style="font-size:15px;margin:0 0 12px;color:#333;">
+      花了那么多精力做 SOTA 刷榜，结果让 AI 当个 CEO 就全翻车。如果你在搭建 AI 产品，别只看标准 benchmark 分数，<strong>用真实的长周期任务来测</strong>更靠谱。
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding:20px 24px 32px;text-align:center;font-size:13px;color:#999;border-top:1px solid #eee;">
+    👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+  </div>
+
+</div>
+
+</body>
+</html>
