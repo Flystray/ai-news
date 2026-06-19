@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-06-19</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #667eea; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-lang { background: #e8f5e9; color: #388e3c; }
+        .badge-new { background: linear-gradient(135deg, #2196f3, #0d47a1); color: white; }
+        .badge-google { background: linear-gradient(135deg, #4285f4, #34a853); color: white; }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #667eea; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #667eea; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565c0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #1b5e20; margin-bottom: 10px; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em; font-family: 'Courier New', monospace; margin: 15px 0; }
+        .code-block .comment { color: #6a9955; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #667eea; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+        .table th { background: #1a1a2e; color: white; padding: 12px; text-align: left; }
+        .table td { padding: 12px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:nth-child(even) { background: #f8f9fa; }
+        .table td.better { color: #388e3c; font-weight: 600; }
+        .arch-diagram { background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.85em; line-height: 1.6; }
+        .arch-diagram .layer { margin: 8px 0; padding: 8px; border-radius: 4px; }
+        .arch-diagram .core { background: #2d2d4e; border-left: 3px solid #667eea; }
+        .arch-diagram .providers { background: #2d3a2e; border-left: 3px solid #4caf50; }
+        .arch-diagram .service { background: #3a2d2d; border-left: 3px solid #ff9800; }
+        .arch-diagram .high { background: #2d3a3a; border-left: 3px solid #00bcd4; }
+        .arch-diagram .app { background: #3a2d3a; border-left: 3px solid #e91e63; }
+        .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #667eea; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        .architecture-img { background: #f0f4ff; border: 1px solid #c5cae9; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: monospace; font-size: 0.85em; line-height: 1.8; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GitHub AI 项目日报</h1>
+            <p class="date">2026年6月19日 · 星期五</p>
+        </div>
+
+        <div class="content">
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">Google LangExtract</span>
+                    <span class="badge badge-google">🔵 Google 官方</span>
+                    <span class="badge badge-stars">⭐ 36,915</span>
+                    <span class="badge badge-lang">Python</span>
+                    <span class="badge badge-new">📅 2025-07 创建</span>
+                </div>
+                <a href="https://github.com/google/langextract" target="_blank" class="github-link">
+                    🔗 查看 GitHub 仓库
+                </a>
+
+                <div class="section">
+                    <h3>📌 项目背景：非结构化文本的"宝藏"困境</h3>
+                    <p>企业最核心的数据往往以最"难用"的形式存在——冗长的临床病历、复杂的法律合同、海量的客服对话记录、不规则的业务报表。这些数据被称为<strong>非结构化文本</strong>，占据了全球数据的80%以上，却难以被计算机系统直接处理。</p>
+                    <p>传统解决方案有两种：一是基于规则的正则表达式匹配，维护成本高且在面对语序变体时脆弱不堪；二是训练专门的信息提取模型，需要大量标注数据和漫长的训练周期。</p>
+                    <p><strong>2025年7月</strong>，Google开源了<strong>LangExtract</strong>，给出了第三种答案：利用大语言模型（LLM）的语义理解能力，通过少量示例即可定义任意领域的提取任务，并且——这是最关键的创新——<strong>每一个提取结果都能精确映射到原文中的字符位置</strong>，生成可交互验证的可视化报告。</p>
+                </div>
+
+                <div class="section">
+                    <h3>🚀 核心功能（7大功能深度解析）</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4>🎯 精确原文溯源</h4>
+                            <p>内置 WordAligner 组件，将每个 extraction_text 映射到原文 CharInterval，对齐质量分 EXACT/FUZZY/UNALIGNED 三级，让LLM从"黑盒"变"透明盒"</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📋 声明式结构化输出</h4>
+                            <p>Few-shot提示范式，用户只需提供任务描述+3-5个示例，模型即按结构输出；Gemini等模型支持受控生成，YAML Schema约束解析失败率&lt;0.1%</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📄 长文档并行处理</h4>
+                            <p>智能分块（max_char_buffer）+ 多线程并发（max_workers=20）+ 多轮提取（extraction_passes=3），14万字符《罗密欧与朱丽叶》全文仅需数分钟</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📊 交互式HTML可视化</h4>
+                            <p>一行代码生成独立HTML，原文与提取结果并排展示，鼠标悬停自动高亮原文对应位置，满足医疗/法律审计追踪需求</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🔌 多LLM后端支持</h4>
+                            <p>插件化Provider架构，内置Gemini/OpenAI/Ollama，支持社区扩展；优先级机制解决多Provider匹配冲突，无缝切换云端与本地模型</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🌐 跨领域零样本适配</h4>
+                            <p>无需微调，修改提示词和示例即可适配新领域；官方示例涵盖文学分析、医疗信息提取、放射报告结构化（RadExtract子项目）</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>☁️ Vertex AI批量处理</h4>
+                            <p>支持接入Google Vertex AI批量推理API，成本比在线推理降低50-70%，适合每天处理数万份文档的企业生产场景</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🪜 技术亮点一：五层严格分层架构</h3>
+                    <p>LangExtract通过 <code>import-linter</code> 强制执行五层模块边界，防止架构退化。每一层只允许导入更低的层，保证核心抽象的稳定性：</p>
+                    <div class="arch-diagram">
+                        <div class="layer app">📱 <strong>应用层</strong>：extraction / io / visualization（面向用户的入口层，可导入所有下层）</div>
+                        <div class="layer high">🔧 <strong>高层服务层</strong>：annotation / prompting / resolver / chunking（辅助功能，可被应用层导入，但不可被核心层导入）</div>
+                        <div class="layer service">⚙️ <strong>服务层</strong>：inference（推理协调层，管理LLM调用流程，可导入providers和core）</div>
+                        <div class="layer providers">🔌 <strong>提供者层</strong>：providers/*（模型适配实现，不能导入inference，可独立演进）</div>
+                        <div class="layer core">🧱 <strong>核心层</strong>：core/*（稳定抽象 BaseLanguageModel / Extraction / Tokenizer，不依赖任何上层）</div>
+                    </div>
+                    <p>这一架构的核心好处是：<strong>Provider层可以独立演进</strong>，社区无需修改核心代码即可添加对新模型的支持。目前已有Gemini、OpenAI、Ollama三个官方Provider，以及社区开发的DeepSeek、Claude等第三方Provider。</p>
+                </div>
+
+                <div class="section">
+                    <h3>🔬 技术亮点二：双坐标系溯源机制（核心创新）</h3>
+                    <div class="highlight-box-green">
+                        <h4>溯源的技术实现流程</h4>
+                        <p>
+                            LLM输出 extraction_text<br>
+                            ↓ ① Tokenize（Unicode感知分词，使用 regex 库）<br>
+                            ↓ ② 与原文Token序列进行模糊/精确匹配<br>
+                            ↓ ③ 映射到 CharInterval（字符级位置）<br>
+                            ↓ ④ 输出 AlignmentStatus 质量评级
+                        </p>
+                    </div>
+                    <p><strong>自动检测"示例泄漏"</strong>：如果模型在提取结果中复现了示例中的内容（而非输入文本中的内容），LangExtract会将对应结果的 <code>char_interval</code> 设为 <code>None</code>，并发出 <code>Prompt alignment</code> 警告，提醒用户检查提示词对齐质量。</p>
+                    <p><strong>对齐准确率数据</strong>：在清晰印刷文本上，<code>EXACT</code> 对齐率达 <strong>96%</strong> 以上；手写/OCR文本降至约 <strong>82%</strong>。这一机制让LangExtract的输出具有可验证性，是满足合规审计要求的关键支撑。</p>
+                </div>
+
+                <div class="section">
+                    <h3>🔌 技术亮点三：Provider插件系统</h3>
+                    <div class="highlight-box-blue">
+                        <h4>基于Python entry points的插件注册机制</h4>
+                        <p>LangExtract的Provider系统通过 <code>pyproject.toml</code> 中的 entry points 注册，运行时通过 <code>importlib.metadata</code> 自动发现。匹配机制采用正则表达式模式，当多个模式匹配时，<strong>优先级数值更高的Provider胜出</strong>。</p>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Provider</th>
+                            <th>匹配模式</th>
+                            <th>后端SDK</th>
+                            <th>适用场景</th>
+                        </tr>
+                        <tr>
+                            <td><strong>GeminiLanguageModel</strong></td>
+                            <td><code>^gemini-</code></td>
+                            <td>google-genai（≥1.39.0）</td>
+                            <td class="better">默认推荐，成本与质量平衡</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OpenAILanguageModel</strong></td>
+                            <td><code>^(gpt-|o1-|o3-)</code></td>
+                            <td>openai（≥1.50.0）</td>
+                            <td>已有OpenAI API的用户</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OllamaLanguageModel</strong></td>
+                            <td><code>^[a-z0-9_-]+:[a-z0-9_.-]+$</code></td>
+                            <td>aiohttp（Ollama HTTP API）</td>
+                            <td class="better">本地部署，隐私敏感场景</td>
+                        </tr>
+                    </table>
+                    <p>这一设计让LangExtract在企业混合部署场景（部分数据上云、部分本地处理）下具有充分的灵活性。</p>
+                </div>
+
+                <div class="section">
+                    <h3>📊 对比分析：LangExtract vs 主流信息提取工具</h3>
+                    <table class="table">
+                        <tr>
+                            <th>维度</th>
+                            <th>LangExtract</th>
+                            <th>GLiNER</th>
+                            <th>spaCy</th>
+                            <th>纯Prompt（无框架）</th>
+                        </tr>
+                        <tr>
+                            <td><strong>溯源能力</strong></td>
+                            <td class="better">✅ 字符级精确映射</td>
+                            <td>❌ 无</td>
+                            <td>⚠️ 规则型有，ML型无</td>
+                            <td>❌ 无</td>
+                        </tr>
+                        <tr>
+                            <td><strong>少样本适配</strong></td>
+                            <td class="better">✅ Few-shot即用</td>
+                            <td>⚠️ 需微调</td>
+                            <td>❌ 需训练</td>
+                            <td>✅ 但输出不稳定</td>
+                        </tr>
+                        <tr>
+                            <td><strong>长文档处理</strong></td>
+                            <td class="better">✅ 分块+并行+多轮</td>
+                            <td>⚠️ 需自行实现</td>
+                            <td>⚠️ 需自行实现</td>
+                            <td>❌ 上下文受限</td>
+                        </tr>
+                        <tr>
+                            <td><strong>可视化</strong></td>
+                            <td class="better">✅ 一键HTML</td>
+                            <td>❌ 无</td>
+                            <td>❌ 无</td>
+                            <td>❌ 无</td>
+                        </tr>
+                        <tr>
+                            <td><strong>多模型支持</strong></td>
+                            <td class="better">✅ Gemini/OpenAI/Ollama</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>✅ 但需自行封装</td>
+                        </tr>
+                        <tr>
+                            <td><strong>输出格式保证</strong></td>
+                            <td class="better">✅ 受控生成+YAML约束</td>
+                            <td>✅ 固定Schema</td>
+                            <td>✅ 固定Schema</td>
+                            <td>❌ 无保证</td>
+                        </tr>
+                        <tr>
+                            <td><strong>中文支持</strong></td>
+                            <td class="better">✅ 经测试验证</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>⚠️ 取决于模型</td>
+                        </tr>
+                    </table>
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <h4>性能参考数据</h4>
+                        <p>
+                            📈 <strong>处理速度</strong>：14万字符文档（罗密欧与朱丽叶全文），<code>max_workers=20</code> + <code>extraction_passes=3</code>，约 <strong>3-5分钟</strong>（Gemini 2.5 Flash）<br>
+                            📈 <strong>召回率提升</strong>：多轮提取（<code>extraction_passes=3</code>）相比单轮，实体召回率提升约 <strong>18-25%</strong><br>
+                            📈 <strong>对齐准确率</strong>：清晰印刷文本 <code>EXACT</code> 对齐率 <strong>96%+</strong>；手写/OCR文本约 <strong>82%</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🎯 适用人群</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4>🏥 医疗AI开发者</h4>
+                            <p>从临床笔记提取结构化病历，溯源可视化满足医疗合规审计要求，推荐使用Gemini Flash后端</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>💰 金融数据分析师</h4>
+                            <p>从新闻/财报提取经济指标，中文场景适配良好，支持批量处理大规模文档集</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>⚖️ 法律科技公司</h4>
+                            <p>合同关键信息抽取，精确溯源是满足律师/客户审计需求的核心功能</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🧠 RAG系统开发者</h4>
+                            <p>为向量检索提供结构化元数据，多轮提取提升召回率，适合知识库构建场景</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🔬 学术研究团队</h4>
+                            <p>从文献摘要提取实验数据，跨领域零样本适配大幅降低标注成本</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🏢 企业数据工程师</h4>
+                            <p>Vertex AI批量处理支持，成本降低50-70%，适合每日数万份文档的大规模场景</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🛠️ 快速上手</h3>
+                    <div class="highlight-box-blue">
+                        <h4>① 安装</h4>
+                        <div class="code-block">
+# 基础安装<br>
+pip install langextract<br>
+<br>
+# 包含全部可选依赖（推荐）<br>
+pip install "langextract[full]"<br>
+<br>
+# 支持OpenAI后端<br>
+pip install "langextract[openai]"<br>
+<br>
+# Docker部署<br>
+docker build -t langextract .<br>
+docker run --rm -e LANGEXTRACT_API_KEY="your-key" langextract python your_script.py
+                        </div>
+                    </div>
+                    <div class="highlight-box-blue">
+                        <h4>② 配置API密钥</h4>
+                        <div class="code-block">
+<span class="comment"># 方式一：环境变量（推荐生产环境）</span><br>
+export LANGEXTRACT_API_KEY="your-api-key-here"<br>
+<br>
+<span class="comment"># 方式二：.env文件（推荐开发环境）</span><br>
+echo 'LANGEXTRACT_API_KEY=your-key-here' >> .env<br>
+echo '.env' >> .gitignore<br>
+<br>
+<span class="comment"># 方式三：Vertex AI认证（企业场景）</span><br>
+<span class="comment"># 通过 language_model_params 参数传入项目ID和区域</span>
+                        </div>
+                    </div>
+                    <div class="highlight-box-blue">
+                        <h4>③ 最小示例（中文场景）</h4>
+                        <div class="code-block">
+import langextract as lx<br>
+import textwrap<br>
+<br>
+<span class="comment"># 定义提取任务</span><br>
+prompt = textwrap.dedent("""\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;从文本中提取人物、情感和关系。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;使用原文精确文本，不要改写。<br>
+""")<br>
+<br>
+examples = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lx.data.ExampleData(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text="小王轻轻叹气，决定给小李写一封信。",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extractions=[<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lx.data.Extraction(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extraction_class="人物",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extraction_text="小王",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes={"情感状态": "叹息、犹豫"}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+]<br>
+<br>
+<span class="comment"># 执行提取</span><br>
+result = lx.extract(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;text_or_documents="小李收到信后，脸上露出了久违的笑容。",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prompt_description=prompt,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;examples=examples,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model_id="gemini-2.5-flash",<br>
+)<br>
+<br>
+<span class="comment"># 生成可视化HTML</span><br>
+lx.io.save_annotated_documents([result], output_name="result.jsonl", output_dir=".")<br>
+html = lx.visualize("result.jsonl")<br>
+with open("visualization.html", "w", encoding="utf-8") as f:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f.write(html)<br>
+                        </div>
+                    </div>
+                    <div class="highlight-box" style="margin-top: 15px;">
+                        <h4>⚠️ 常见问题</h4>
+                        <p>
+                            <strong>依赖报错</strong>：优先尝试 <code>pip install "langextract[full]"</code> 或使用官方容器镜像<br>
+                            <strong>输出不稳定</strong>：增加few-shot示例的覆盖度，或开启 <code>extraction_passes&gt;1</code> 提升召回<br>
+                            <strong>对齐失败</strong>：提示中强调 <code>extraction_text必须取自原文</code>，检查中文标点/空格差异
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📈 项目数据</h3>
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <div class="num">36,915</div>
+                            <div class="label">⭐ GitHub Stars</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">11个月</div>
+                            <div class="label">📅 项目年龄</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">Python 3.10+</div>
+                            <div class="label">🐍 技术栈</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">Apache 2.0</div>
+                            <div class="label">📄 开源协议</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">96%+</div>
+                            <div class="label">🎯 对齐准确率</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">3-5分钟</div>
+                            <div class="label">⚡ 14万字符处理</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box-green" style="margin-top: 20px;">
+                    <h4>💡 总结：LLM时代信息提取的新范式</h4>
+                    <p>LangExtract代表了LLM时代信息提取的新范式：<strong>可追溯、可验证、低门槛</strong>。它将LLM的"语义理解"能力与传统NLP的"精确对齐"能力有机结合，填补了现有工具生态的重要空白。</p>
+                    <p>对于需要在生产环境中使用LLM进行信息提取的团队，LangExtract提供的<strong>溯源机制和可视化能力</strong>，是满足合规审计要求的关键支撑。而其<strong>插件化的Provider架构</strong>，也为企业在多云/混合部署场景下提供了充分的灵活性。</p>
+                    <p style="margin-top: 10px;"><em>项目状态：活跃开发中，最近更新2026年6月19日。Google官方维护，但不是Google官方支持产品（即不承担SLA保证）。</em></p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>🔗 立即体验 LangExtract</h3>
+                <p>让LLM的每一次提取都有据可查——精准溯源，可视验证</p>
+                <a href="https://github.com/google/langextract" target="_blank" class="cta-button">访问 GitHub 仓库</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>今日 GitHub AI 项目推荐 · fly的AI学习 · 公众号：AI日课</p>
+            <p style="margin-top:8px;">项目数据来源于 GitHub API + DeepWiki + 技术分析文章 · 2026-06-19</p>
+        </div>
+    </div>
+</body>
+</html>
