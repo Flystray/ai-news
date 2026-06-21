@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.21｜VIMPO：不用 Critic 也能精细算账的强化学习 · 数学推理全面超越 GRPO</title>
+</head>
+<body style="margin:0; padding:0; background:#f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;">
+
+<div style="max-width:680px; margin:0 auto; background:#fff; padding:0;">
+
+  <!-- 标题区 -->
+  <div style="padding:32px 24px 16px 24px;">
+    <h1 style="font-size:22px; line-height:1.5; color:#1a1a1a; margin:0 0 12px 0; font-weight:700;">
+      2026.6.21｜VIMPO：不用 Critic 也能精细算账的强化学习 · 数学推理全面超越 GRPO
+    </h1>
+    <div style="font-size:14px; color:#999; line-height:1.6;">
+      ✍️ fly的AI学习<br>
+      论文解读 · 国外 · 阅读时长 8 分钟
+    </div>
+  </div>
+
+  <!-- 论文信息表 -->
+  <div style="padding:0 24px 24px 24px;">
+    <table style="width:100%; border-collapse:collapse; font-size:14px; line-height:1.8; border:1px solid #e8e8e8; border-radius:6px; overflow:hidden;">
+      <tr style="background:#f0f5ff;">
+        <td style="padding:8px 12px; font-weight:700; color:#333; width:80px; border-bottom:1px solid #e8e8e8;">论文标题</td>
+        <td style="padding:8px 12px; color:#444; border-bottom:1px solid #e8e8e8;">VIMPO: Value-Implicit Policy Optimization for LLMs<br><span style="color:#888; font-size:13px;">基于策略隐含价值函数的 LLM 策略优化</span></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px; font-weight:700; color:#333; border-bottom:1px solid #e8e8e8;">作者</td>
+        <td style="padding:8px 12px; color:#444; border-bottom:1px solid #e8e8e8;">Zhewei Kang, Aosong Feng, Sergey Levine, Dawn Song, Xuandong Zhao（UC Berkeley）</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 12px; font-weight:700; color:#333; border-bottom:1px solid #e8e8e8;">发表日期</td>
+        <td style="padding:8px 12px; color:#444; border-bottom:1px solid #e8e8e8;">2026-06-18</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px; font-weight:700; color:#333; border-bottom:1px solid #e8e8e8;">来源</td>
+        <td style="padding:8px 12px; color:#444; border-bottom:1px solid #e8e8e8;">arXiv (cs.LG)</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 12px; font-weight:700; color:#333; border-bottom:1px solid #e8e8e8;">论文链接</td>
+        <td style="padding:8px 12px; color:#1a73e8; border-bottom:1px solid #e8e8e8;"><a href="https://arxiv.org/abs/2606.20008" style="color:#1a73e8; text-decoration:none;">arXiv:2606.20008</a></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px; font-weight:700; color:#333;">标签</td>
+        <td style="padding:8px 12px; color:#f57c00; font-size:13px;">强化学习 · LLM 后训练 · 数学推理 · GRPO 改进 · Critic-Free</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 这篇论文在说什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:17px; color:#1a1a1a; margin:0 0 16px 0; padding-left:12px; border-left:4px solid #4a90d9; line-height:1.4;">这篇论文在说什么？</h2>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      如果你关心大模型的推理能力是怎么训练出来的，大概率听过 GRPO——DeepSeek-R1 用这个方法把模型的数学能力拉到了新高度。GRPO 的方便之处在于它不需要额外训练一个"裁判网络"（Critic），实现起来简单。但代价是，它把一整段回复当成一个整体打分，每个 token 得到的信号完全一样——就好像裁判只看你整场比赛的输赢，却不管你每个球是怎么打的。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      UC Berkeley 的 Sergey Levine 和 Dawn Song 团队显然觉得这不是最优解。他们发了一篇新论文，提出 <strong>VIMPO</strong>（Value-Implicit Policy Optimization），核心思路很有意思：<strong>从数学上推导出一个由策略自身隐含的价值函数，不训练 Critic，却能做到 token 级别的精细信用分配。</strong>
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      说人话就是——不用多训练一个模型，就能知道你的推理链里哪几步走得对、哪几步是蒙的，然后有针对性地优化。
+    </p>
+
+    <div style="text-align:center; margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.20008v1/x1.png" alt="VIMPO 整体流程架构图" style="max-width:100%; height:auto; border-radius:4px;">
+      <div style="font-size:13px; color:#999; margin-top:8px; font-style:italic;">图源：原文 Fig.1 — VIMPO 整体流程架构</div>
+    </div>
+  </div>
+
+  <!-- 为什么要关注 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:17px; color:#1a1a1a; margin:0 0 16px 0; padding-left:12px; border-left:4px solid #e67e22; line-height:1.4;">为什么要关注？</h2>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>2026 年，基于可验证奖励的强化学习（RLVR）已经默认成为 LLM 后训练的核心范式。</strong> DeepSeek-R1 带火的 GRPO，几乎所有做推理模型的团队都在用或改着用。但 GRPO 有一个越来越难忽视的问题：
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      它把整个回复的轨迹级优势平均分配到所有 token 上。一句话总结就是：<strong>"你整段答对了，所有 token 都有功；答错了，所有 token 都背锅。"</strong> 这对长文本推理任务来说尤其粗糙——关键推理步骤和普通连接词被一视同仁。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      那为什么大家不直接用 Actor-Critic 方法（比如 PPO）呢？因为 Critic 网络自己训练起来很不稳定——随着策略更新，Critic 需要不断重新校准，一不小心就炸了。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>VIMPO 的野心就在这：它想同时吃掉两条路的好处——像 GRPO 一样简单（不用训 Critic），像 Actor-Critic 一样精细（token 级信用分配）。</strong>
+    </p>
+  </div>
+
+  <!-- 核心方法 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:17px; color:#1a1a1a; margin:0 0 16px 0; padding-left:12px; border-left:4px solid #27ae60; line-height:1.4;">核心方法</h2>
+
+    <h3 style="font-size:15px; color:#555; margin:0 0 12px 0;">关键思路</h3>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      VIMPO 最核心的 insight 可以用一个等式来理解：最优价值函数可以通过策略相对于冻结参考模型的 log 似然比来隐式表示。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      什么概念？传统的 RL 里，价值函数告诉你"当前状态下，未来还能拿多少分"，需要单独训练一个网络来估计。但 VIMPO 发现，在 KL 正则化的 RL 框架下，这个价值函数其实已经藏在你的策略里了——就是当前策略和冻结参考策略在每个 token 上的 log 概率差。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      你可以把这个过程想象成三步：
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      ① 你有一个正在训练的模型（策略 π）和一个冻结的参考模型（π_ref）<br>
+      ② π 和 π_ref 对每个 token 给出不同概率，两者的 log 比 + 贝尔曼递归 = 隐式价值函数<br>
+      ③ 到轨迹结束时未来奖励为 0——"终端条件"锚定整个递归链
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      于是 VIMPO 不需要训练 Critic，只需要同时优化一个<strong>价值损失</strong>（让策略隐含价值与真实奖励对齐）和一个 <strong>PPO 风格的演员更新</strong>（用 token 级 TD 信号指导策略改进）。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>最关键的设计：这两个过程是解耦的。</strong> 奖励融入通过价值损失完成，策略改进通过演员更新完成。比 GRPO 那种"一笔糊涂账"精细得多，比 PPO 那种"Critic 随时可能崩"稳定得多。
+    </p>
+
+    <div style="text-align:center; margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.20008v1/x2.png" alt="VIMPO 在 RL 方法中的定位" style="max-width:100%; height:auto; border-radius:4px;">
+      <div style="font-size:13px; color:#999; margin-top:8px; font-style:italic;">图源：原文 Fig.2 — VIMPO 是无 Critic 但具有 token 级信用分配能力的 RL 方法</div>
+    </div>
+
+    <h3 style="font-size:15px; color:#555; margin:0 0 12px 0;">技术细节</h3>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      对于想深入理解的同学，VIMPO 的推导可以概括为三步：
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>第一步：把自回归生成建模为 MDP。</strong> 将 token-by-token 的生成过程看作确定性转移的马尔可夫决策过程，每个 token 是一个状态，下一个 token 是唯一的后续状态。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>第二步：从 KL 正则化目标推导价值恒等式。</strong> 在最大化期望奖励的同时限制与参考策略的 KL 散度，最优策略满足一个著名关系式——最优价值函数等于策略与参考策略的 log 似然比加上归一化常数。
+    </p>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>第三步：蒙特卡洛估计 + 终端条件锚定。</strong> 价值损失的核心是贝尔曼一致性，VIMPO 用训练时采样的 rollout 来估计这个一致性，然后用"轨迹结束时没有未来奖励"锚定递归。整个过程不需要额外训练的 Critic 网络。
+    </p>
+
+    <div style="background:#f7f9fc; border-left:4px solid #4a90d9; padding:12px 16px; margin:16px 0; border-radius:0 4px 4px 0;">
+      <p style="font-size:15px; line-height:1.8; color:#555; margin:0; font-style:italic;">
+        "Rather than learning a separate critic, we bootstrap the initial values from the same set of Monte-Carlo rollouts used in RLVR, and anchor the recurrence with the terminal condition that no future reward remains at the end of a trajectory."
+      </p>
+      <p style="font-size:14px; color:#888; margin:8px 0 0 0;">
+        —— 不是重新训一个 Critic，而是直接用同一批采样结果来引导初始价值，再用"轨迹结束就没人给分了"来锚定递归。思路干净利落。
+      </p>
+    </div>
+  </div>
+
+  <!-- 效果怎么样 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:17px; color:#1a1a1a; margin:0 0 16px 0; padding-left:12px; border-left:4px solid #9b59b6; line-height:1.4;">效果怎么样？</h2>
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      VIMPO 在 Qwen3-4B-Base 上用 54.4K 条数学训练样本进行 RL 后训练，四个基准全面领先 GRPO：
+    </p>
+
+    <table style="width:100%; border-collapse:collapse; font-size:14px; line-height:1.8; margin:16px 0; border:1px solid #e8e8e8; border-radius:6px; overflow:hidden;">
+      <thead>
+        <tr style="background:#4a90d9; color:#fff;">
+          <th style="padding:10px 12px; text-align:left; font-weight:600;">方法</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">MATH-500</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">AIME 2024</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">AIME 2025</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">OlympiadBench</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">平均分</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px; color:#888;">Qwen3-4B-Base</td>
+          <td style="padding:10px 12px; text-align:center; color:#888;">54.0</td>
+          <td style="padding:10px 12px; text-align:center; color:#888;">8.6</td>
+          <td style="padding:10px 12px; text-align:center; color:#888;">3.6</td>
+          <td style="padding:10px 12px; text-align:center; color:#888;">18.0</td>
+          <td style="padding:10px 12px; text-align:center; color:#888;">21.1</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;">Naive GRPO</td>
+          <td style="padding:10px 12px; text-align:center;">80.4</td>
+          <td style="padding:10px 12px; text-align:center;">20.0</td>
+          <td style="padding:10px 12px; text-align:center;">14.6</td>
+          <td style="padding:10px 12px; text-align:center;">31.3</td>
+          <td style="padding:10px 12px; text-align:center;">36.6</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;">GRPO</td>
+          <td style="padding:10px 12px; text-align:center;">79.6</td>
+          <td style="padding:10px 12px; text-align:center;">19.3</td>
+          <td style="padding:10px 12px; text-align:center;">17.6</td>
+          <td style="padding:10px 12px; text-align:center;">33.2</td>
+          <td style="padding:10px 12px; text-align:center;">37.4</td>
+        </tr>
+        <tr style="background:#e8f4e8;">
+          <td style="padding:10px 12px; font-weight:700; color:#1a7a1a;">VIMPO</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">81.6</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">21.7</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">20.8</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">34.0</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">39.5</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:#999; margin:0 0 16px 0; text-align:center;">数据来源：原文 Table 1。AIME 为 avg@32，其余为 avg@1</p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>竞赛级别的提升最大。</strong> AIME 2025 上 VIMPO 比 GRPO 高出 3.2 个百分点——竞赛题推理链长、步骤多，token 级信用分配的价值就体现出来了。
+    </p>
+
+    <div style="text-align:center; margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.20008v1/x3.png" alt="VIMPO vs GRPO 训练曲线" style="max-width:100%; height:auto; border-radius:4px;">
+      <div style="font-size:13px; color:#999; margin-top:8px; font-style:italic;">图源：原文 Fig.3 — 干净奖励下 VIMPO vs GRPO 训练曲线对比</div>
+    </div>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      更惊喜的是<strong>噪声鲁棒性</strong>。论文把 25% 的训练奖励随机翻转，结果如下：
+    </p>
+
+    <table style="width:100%; border-collapse:collapse; font-size:14px; line-height:1.8; margin:16px 0; border:1px solid #e8e8e8; border-radius:6px; overflow:hidden;">
+      <thead>
+        <tr style="background:#e67e22; color:#fff;">
+          <th style="padding:10px 12px; text-align:left; font-weight:600;">方法</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">MATH-500</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">AIME 2024</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">AIME 2025</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">OlympiadBench</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">平均分</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;">GRPO（噪声）</td>
+          <td style="padding:10px 12px; text-align:center;">75.2</td>
+          <td style="padding:10px 12px; text-align:center; color:#c0392b;">13.0</td>
+          <td style="padding:10px 12px; text-align:center; color:#c0392b;">11.7</td>
+          <td style="padding:10px 12px; text-align:center;">28.9</td>
+          <td style="padding:10px 12px; text-align:center;">32.2</td>
+        </tr>
+        <tr style="background:#e8f4e8;">
+          <td style="padding:10px 12px; font-weight:700; color:#1a7a1a;">VIMPO（噪声）</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">78.2</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">18.3</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">14.9</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">32.3</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">35.9</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:#999; margin:0 0 16px 0; text-align:center;">25% 奖励翻转条件下，VIMPO 领先 GRPO 3.7 个平均分</p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      AIME 2024 噪声条件下 GRPO 跌到 13.0，VIMPO 还保持在 18.3——精细的 token 级信号天然抗噪，即使最终奖励被污染，对中间步骤的判断仍有区分力。
+    </p>
+
+    <div style="text-align:center; margin:20px 0;">
+      <img src="https://arxiv.org/html/2606.20008v1/x4.png" alt="噪声奖励压力测试" style="max-width:100%; height:auto; border-radius:4px;">
+      <div style="font-size:13px; color:#999; margin-top:8px; font-style:italic;">图源：原文 Fig.4 — 25% 奖励翻转下的训练对比</div>
+    </div>
+  </div>
+
+  <!-- 和其他方案比有什么不同 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:17px; color:#1a1a1a; margin:0 0 16px 0; padding-left:12px; border-left:4px solid #e74c3c; line-height:1.4;">和其他方案比有什么不同？</h2>
+
+    <table style="width:100%; border-collapse:collapse; font-size:14px; line-height:1.8; margin:16px 0; border:1px solid #e8e8e8; border-radius:6px; overflow:hidden;">
+      <thead>
+        <tr style="background:#555; color:#fff;">
+          <th style="padding:10px 12px; text-align:left; font-weight:600;">方案</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">需要 Critic？</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">信用分配粒度</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">训练稳定性</th>
+          <th style="padding:10px 12px; text-align:center; font-weight:600;">实现复杂度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;">PPO / Actor-Critic</td>
+          <td style="padding:10px 12px; text-align:center; color:#c0392b;">需要</td>
+          <td style="padding:10px 12px; text-align:center;">Token 级</td>
+          <td style="padding:10px 12px; text-align:center; color:#c0392b;">不稳定</td>
+          <td style="padding:10px 12px; text-align:center; color:#c0392b;">高</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;">GRPO（DeepSeek-R1）</td>
+          <td style="padding:10px 12px; text-align:center; color:#27ae60;">不需要</td>
+          <td style="padding:10px 12px; text-align:center; color:#c0392b;">轨迹级（粗）</td>
+          <td style="padding:10px 12px; text-align:center; color:#27ae60;">稳定</td>
+          <td style="padding:10px 12px; text-align:center; color:#27ae60;">低</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:10px 12px;">FIPO / 注意力锚点法</td>
+          <td style="padding:10px 12px; text-align:center; color:#27ae60;">不需要</td>
+          <td style="padding:10px 12px; text-align:center; color:#f39c12;">近似 Token 级</td>
+          <td style="padding:10px 12px; text-align:center; color:#27ae60;">稳定</td>
+          <td style="padding:10px 12px; text-align:center; color:#f39c12;">中</td>
+        </tr>
+        <tr style="background:#e8f4e8;">
+          <td style="padding:10px 12px; font-weight:700; color:#1a7a1a;">VIMPO</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">不需要</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">Token 级</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">稳定</td>
+          <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1a7a1a;">中</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      VIMPO 是目前<strong>唯一同时做到"不用 Critic"和"token 级信用分配"</strong>的方法。FIPO 这类改进虽然也试图恢复 token 级粒度，但本质还是在 GRPO 框架上打补丁，没有从目标函数层面重新设计。
+    </p>
+
+    <div style="background:#f7f9fc; border-left:4px solid #4a90d9; padding:12px 16px; margin:16px 0; border-radius:0 4px 4px 0;">
+      <p style="font-size:15px; line-height:1.8; color:#555; margin:0; font-style:italic;">
+        "These augmentation approaches retrofit fine-grained credit assignment onto an objective that was not designed for it."
+      </p>
+      <p style="font-size:14px; color:#888; margin:8px 0 0 0;">
+        —— 这些改进是在一个本来不是为细粒度信用分配设计的目标函数上打补丁。VIMPO 的做法是从头推导适合细粒度信号的目标。
+      </p>
+    </div>
+  </div>
+
+  <!-- 对开发者意味着什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:17px; color:#1a1a1a; margin:0 0 16px 0; padding-left:12px; border-left:4px solid #2c3e50; line-height:1.4;">对开发者意味着什么？</h2>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      如果你的团队在做 LLM 的 RL 后训练，VIMPO 值得认真关注，三个理由：
+    </p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 12px 0;">
+      <strong>① 实现成本不高。</strong> 不需要额外训练 Critic 网络，核心只需要计算策略和参考模型的 log-ratio，然后维护两个损失。论文实验和 GRPO 共享了大部分超参数，迁移成本可控。
+    </p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 12px 0;">
+      <strong>② 噪声环境下更稳定。</strong> 如果你的奖励函数不够完美（LLM-as-Judge 打分、数据标注噪音），VIMPO 的 token 级信号天然有更好的容错能力。25% 奖励翻转测试中 GRPO 掉了 5 分，VIMPO 只掉了不到 4 分。
+    </p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      <strong>③ 长推理链场景收益更大。</strong> 竞赛题、复杂代码调试、多步推理——这些场景"关键步骤"和"普通连接"的区别最明显，VIMPO 的 token 级优势估计价值最大。
+    </p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      局限也要说清楚：目前实验基于 Qwen3-4B，规模不算大；训练数据是数学题，代码、对话等场景效果待验证；PPO 风格演员更新会带来策略偏移，需要根据任务调参。
+    </p>
+
+    <p style="font-size:16px; line-height:1.8; color:#333; margin:0 0 16px 0;">
+      但总体而言，这是一个<strong>方向性的改进</strong>——VIMPO 证明了"不用 Critic 也能做精细信用分配"是完全可行的，且不需要额外训练代价。对于正被 GRPO 各种限制困扰的团队，多了一个重要的新选择。
+    </p>
+  </div>
+
+  <!-- 底部签名 -->
+  <div style="padding:32px 24px; text-align:center; border-top:1px solid #f0f0f0; margin-top:8px;">
+    <div style="font-size:14px; color:#999; line-height:1.8;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
