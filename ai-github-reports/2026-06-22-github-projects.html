@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-06-22</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #1565c0; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-lang { background: #e8f5e9; color: #388e3c; }
+        .badge-new { background: linear-gradient(135deg, #2196f3, #0d47a1); color: white; }
+        .badge-mit { background: linear-gradient(135deg, #9c27b0, #6a1b9a); color: white; }
+        .badge-apache { background: linear-gradient(135deg, #ff6f00, #e65100); color: white; }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #1565c0; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #1565c0; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565c0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #1b5e20; margin-bottom: 10px; }
+        .highlight-box-red { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border-left: 4px solid #e53935; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-red h4 { color: #b71c1c; margin-bottom: 10px; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85em; font-family: 'Courier New', monospace; margin: 15px 0; white-space: pre; }
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .string { color: #ce9178; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
+        .table th { background: #1a1a2e; color: white; padding: 10px; text-align: left; }
+        .table td { padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:nth-child(even) { background: #f8f9fa; }
+        .table td.better { color: #388e3c; font-weight: 600; }
+        .table td.no { color: #e53935; }
+        .arch-diagram { background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.82em; line-height: 1.6; }
+        .arch-diagram .layer { margin: 8px 0; padding: 8px; border-radius: 4px; }
+        .arch-diagram .ingest { background: #2d2d4e; border-left: 3px solid #7b2cbf; }
+        .arch-diagram .process { background: #2d3a2e; border-left: 3px solid #4caf50; }
+        .arch-diagram .intel { background: #3a2d2d; border-left: 3px solid #ff9800; }
+        .arch-diagram .app { background: #2d3a3a; border-left: 3px solid #00bcd4; }
+        .cta-section { background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #1565c0; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        .framework-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 20px 0; }
+        .framework-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; text-align: center; }
+        .framework-item .icon { font-size: 1.5em; margin-bottom: 8px; }
+        .framework-item .name { font-weight: 600; color: #1a1a2e; font-size: 0.9em; }
+        .framework-item .desc { font-size: 0.8em; color: #666; margin-top: 5px; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+            .table { font-size: 0.75em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GitHub AI 项目日报</h1>
+            <p class="date">2026年6月22日 · 星期日</p>
+        </div>
+
+        <div class="content">
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">Anthropic-Cybersecurity-Skills</span>
+                    <span class="badge badge-apache">📜 Apache-2.0</span>
+                    <span class="badge badge-stars">⭐ 17,877</span>
+                    <span class="badge badge-forks">🍴 2,142</span>
+                    <span class="badge badge-lang">Python</span>
+                    <span class="badge badge-new">📅 2026-02-25 创建</span>
+                </div>
+                <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" class="github-link">
+                    🔗 查看 GitHub 仓库
+                </a>
+
+                <div class="section">
+                    <h3>📌 项目背景：480万安全人才缺口的AI解法</h3>
+                    <p>2024年全球网络安全人才缺口已攀升至<strong>480万</strong>（ISC2数据），而AI大模型虽然在文本理解和代码生成方面表现惊艳，但在执行专业安全任务时却面临一个核心痛点：<strong>缺乏结构化的领域知识</strong>。通用LLM可以谈论安全概念，但无法像资深安全分析师那样按照标准流程一步步执行内存取证、凭证窃取检测或威胁狩猎。</p>
+                    <p><strong>Anthropic-Cybersecurity-Skills</strong> 正是为此而生——它不是又一个安全工具脚本集合，而是一套<strong>AI原生的安全操作知识库</strong>，将734个结构化网络安全技能编码为AI智能体可直接理解、发现和执行的工作流，每个技能严格映射到五大权威安全框架。</p>
+                </div>
+
+                <div class="section">
+                    <h3>🚀 核心功能</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4>🛡️ 734个结构化安全技能</h4>
+                            <p>覆盖36个子领域，从云安全(60)、威胁狩猎(55)、威胁情报(50)到数字取证(37)、恶意软件分析(39)、Web应用安全(42)等，每个技能含YAML元数据+Markdown工作流+参考标准+自动化脚本+报告模板</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📐 五大权威框架深度映射</h4>
+                            <p>MITRE ATT&CK v15、NIST CSF 2.0、MITRE ATLAS、D3FEND、NIST AI RMF，每个技能同时存在于五个框架坐标系中</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📋 agentskills.io开放标准</h4>
+                            <p>8个必填元数据字段，确保技能在不同AI系统间的通用性和可解释性</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🔍 渐进式披露架构</h4>
+                            <p>发现阶段30-50 tokens/技能，执行阶段300-800 tokens，734技能索引仅25KB，token消耗降低100倍+</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🌐 26+平台广泛兼容</h4>
+                            <p>Claude Code、GitHub Copilot、Cursor、Codex CLI、Gemini CLI等20+平台，所有能读Markdown的AI均可消费</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>⚙️ 自动化CI/CD管道</h4>
+                            <p>validate-skills.yml验证YAML语法+必填字段+重复检测，update-index.yml自动生成索引</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>💡 技术亮点</h3>
+                    <div class="highlight-box">
+                        <h4>🔍 渐进式披露：解决LLM上下文窗口瓶颈</h4>
+                        <div class="arch-diagram">
+                            <div class="layer ingest">传统方式 │ 734技能 × 500-800 tokens = 37万+ tokens → 远超任何模型上下文窗口</div>
+                            <div class="layer process">发现阶段 │ 扫描index.json frontmatter → 30-50 tokens/技能 → 总消耗仅~37KB</div>
+                            <div class="layer intel">过滤阶段 │ 按domain/subdomain/tags筛选 → 定位2-5个相关技能</div>
+                            <div class="layer app">执行阶段 │ 仅加载匹配技能完整SKILL.md → 300-800 tokens/技能 → 总消耗<3000</div>
+                        </div>
+                        <p style="margin-top:10px;"><strong>实战示例</strong>："分析内存转储中的凭证窃取迹象" → AI扫描734个frontmatter → 定位<code>performing-memory-forensics-with-volatility3</code>、<code>hunting-for-credential-dumping-lsass</code>、<code>analyzing-windows-event-logs-for-credential-access</code> → 执行Volatility3插件→检查LSASS→关联事件日志→映射MITRE ATT&CK T1003。Token从37万降至<3000，效率提升100倍+。</p>
+                    </div>
+                    <div class="highlight-box-blue">
+                        <h4>🌐 五框架统一映射：让AI同时"说五种安全语言"</h4>
+                        <div class="framework-grid">
+                            <div class="framework-item">
+                                <div class="icon">🎯</div>
+                                <div class="name">MITRE ATT&CK</div>
+                                <div class="desc">攻击技术ID标注于tags字段，输出Navigator Layer</div>
+                            </div>
+                            <div class="framework-item">
+                                <div class="icon">🏛️</div>
+                                <div class="name">NIST CSF 2.0</div>
+                                <div class="desc">子领域→六大核心函数(GV/ID/PR/DE/RS/RC)</div>
+                            </div>
+                            <div class="framework-item">
+                                <div class="icon">🤖</div>
+                                <div class="name">MITRE ATLAS</div>
+                                <div class="desc">AI系统威胁框架，对抗性攻击防御</div>
+                            </div>
+                            <div class="framework-item">
+                                <div class="icon">🛡️</div>
+                                <div class="name">D3FEND</div>
+                                <div class="desc">防御对策知识图谱，战术级映射</div>
+                            </div>
+                            <div class="framework-item">
+                                <div class="icon">📊</div>
+                                <div class="name">NIST AI RMF</div>
+                                <div class="desc">AI风险管理框架，MEASURE函数评估</div>
+                            </div>
+                        </div>
+                        <p>同一个"检测凭证转储"技能，在ATT&CK视角下是T1003.001，在NIST CSF下属于Detect函数异常监测，在ATLAS下是对抗性AI攻击防御，在D3FEND下是凭证硬化战术，在AI RMF下是MEASURE函数风险评估——AI智能体因此能在合规审查、攻击分析、防御设计等不同场景中灵活切换语境。</p>
+                    </div>
+                    <div class="highlight-box-green">
+                        <h4>🧠 可执行知识而非脚本集合：从"工具"到"分析师"的质变</h4>
+                        <p>与传统安全工具库不同，核心创新在于编码的是<strong>决策工作流</strong>而非执行脚本。每个SKILL.md不仅告诉AI"做什么"，更通过结构化步骤定义"怎么做"和"为什么这样做"，包含验证检查点、IOC确认标准和框架映射——这是将资深分析师的隐性知识显性化、结构化的工程化实践。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>👥 适用人群</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4>🖥️ SOC分析师</h4>
+                            <p>734个技能作为响应手册，AI辅助执行标准化威胁狩猎和事件响应</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🤖 AI安全工程师</h4>
+                            <p>构建安全AI智能体时，直接集成结构化技能库作为领域知识层</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🎯 渗透测试/红队</h4>
+                            <p>快速调用特定攻击技术工作流，确保覆盖ATT&CK矩阵</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🔧 DevSecOps工程师</h4>
+                            <p>CI/CD管道集成安全检查技能，实现安全左移自动化</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>📋 合规审计人员</h4>
+                            <p>五框架映射能力，自动生成合规覆盖度报告和差距分析</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🎓 安全培训教育</h4>
+                            <p>结构化学习路径，每个技能就是一节实操课</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>⚡ 快速上手</h3>
+                    <div class="code-block"><span class="comment"># 方式1：npx安装（推荐）</span>
+npx skills add mukul975/Anthropic-Cybersecurity-Skills
+
+<span class="comment"># 方式2：Claude Code插件</span>
+/plugin marketplace add mukul975/Anthropic-Cybersecurity-Skills
+
+<span class="comment"># 方式3：Git克隆（全平台）</span>
+git clone https://github.com/mukul975/Anthropic-Cybersecurity-Skills.git
+cd Anthropic-Cybersecurity-Skills</div>
+                    <p><strong>实战示例——内存取证分析：</strong>向AI发出"分析这个内存转储文件中的凭证窃取迹象"，AI将自动：①扫描index.json定位相关技能 → ②加载<code>performing-memory-forensics-with-volatility3</code>等3个匹配技能 → ③按工作流执行Volatility3插件→检查LSASS→关联Windows事件日志 → ④映射MITRE ATT&CK T1003，输出IOC和防御建议</p>
+                </div>
+
+                <div class="section">
+                    <h3>📊 对比分析</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>Anthropic-Cybersecurity-Skills</th>
+                                <th>MITRE CALDERA</th>
+                                <th>Infection Monkey</th>
+                                <th>Metasploit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>定位</td>
+                                <td class="better">AI智能体技能知识库</td>
+                                <td>对抗仿真平台</td>
+                                <td>自动化渗透测试</td>
+                                <td>渗透测试框架</td>
+                            </tr>
+                            <tr>
+                                <td>技能/插件数</td>
+                                <td class="better">734</td>
+                                <td>~200</td>
+                                <td>~50</td>
+                                <td>~2000</td>
+                            </tr>
+                            <tr>
+                                <td>框架映射</td>
+                                <td class="better">5大框架</td>
+                                <td>ATT&CK</td>
+                                <td class="no">无</td>
+                                <td class="no">无</td>
+                            </tr>
+                            <tr>
+                                <td>AI原生</td>
+                                <td class="better">agentskills.io标准</td>
+                                <td class="no">需API集成</td>
+                                <td class="no">否</td>
+                                <td class="no">否</td>
+                            </tr>
+                            <tr>
+                                <td>跨平台</td>
+                                <td class="better">26+ AI平台</td>
+                                <td>独立部署</td>
+                                <td>独立部署</td>
+                                <td>独立部署</td>
+                            </tr>
+                            <tr>
+                                <td>知识类型</td>
+                                <td class="better">可执行决策工作流</td>
+                                <td>攻击链模拟</td>
+                                <td>自动化攻击</td>
+                                <td>利用模块</td>
+                            </tr>
+                            <tr>
+                                <td>Token效率</td>
+                                <td class="better">渐进式(30→800)</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="highlight-box-red">
+                        <h4>📈 行业缺口量化</h4>
+                        <p>全球480万安全岗位空缺，亚太地区占约210万。假设每个AI智能体通过该技能库能辅助1名分析师提升3倍效率，734个覆盖全领域的工作流理论上可抵消约<strong>15%的技能缺口</strong>——不是替代人类，而是让有限的人力覆盖更广的安全面。</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>探索 Anthropic-Cybersecurity-Skills</h3>
+                    <p>Apache-2.0 开源 · 734个结构化安全技能 · 5大权威框架映射</p>
+                    <p>26+ AI平台兼容 · agentskills.io开放标准 · 渐进式披露架构</p>
+                    <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" class="cta-button">🔗 GitHub 仓库</a>
+                    <a href="https://agentskills.io" target="_blank" class="cta-button">📖 agentskills.io 标准</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>本文由 AI 日课公众号自动生成 · 每日精选 GitHub 上有启发意义的 AI 开源项目</p>
+            <p>关注公众号「AI 日课」，每日获取最新 AI 项目推荐</p>
+        </div>
+    </div>
+</body>
+</html>
