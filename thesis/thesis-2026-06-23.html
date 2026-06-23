@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.23｜CLI-Universe · 给终端Agent造"教科书"</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;">
+  <div style="max-width:680px;margin:0 auto;padding:20px 16px 40px;">
+
+    <!-- 标题 -->
+    <h1 style="font-size:22px;line-height:1.5;color:#1a1a1a;margin:0 0 6px 0;font-weight:700;">
+      2026.6.23｜CLI-Universe · 给终端Agent造"教科书"，南大+阶跃星辰6000条精品轨迹碾压强10倍大模型
+    </h1>
+    <div style="font-size:13px;color:#999;margin-bottom:20px;">
+      ✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 &nbsp;·&nbsp; 国内 &nbsp;·&nbsp; 阅读时长 8 分钟
+    </div>
+
+    <!-- 论文信息表 -->
+    <table style="width:100%;border-collapse:collapse;margin-bottom:28px;font-size:14px;background:#f8f9fb;border-radius:8px;overflow:hidden;">
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;width:72px;border-bottom:1px solid #eef0f4;">论文标题</td><td style="padding:8px 12px;color:#333;border-bottom:1px solid #eef0f4;">CLI-Universe: Towards Verifiable Task Synthesis Engine for Terminal Agents</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #eef0f4;">作者</td><td style="padding:8px 12px;color:#333;border-bottom:1px solid #eef0f4;">Zhanbo Hua*, Yifan Yao* 等 17 人（南京大学、阶跃星辰 StepFun、上海AI Lab、华中科大）</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #eef0f4;">发表日期</td><td style="padding:8px 12px;color:#333;border-bottom:1px solid #eef0f4;">2026-06-22</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #eef0f4;">来源</td><td style="padding:8px 12px;color:#333;border-bottom:1px solid #eef0f4;">arXiv:2606.22883</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;border-bottom:1px solid #eef0f4;">论文链接</td><td style="padding:8px 12px;border-bottom:1px solid #eef0f4;"><a href="https://arxiv.org/abs/2606.22883" style="color:#576b95;text-decoration:none;">点击查看原文</a></td></tr>
+      <tr><td style="padding:8px 12px;color:#666;font-weight:600;">标签</td><td style="padding:8px 12px;color:#576b95;">Agent · 数据合成 · 终端智能体 · 可验证管线</td></tr>
+    </table>
+
+    <!-- 这篇论文在说什么？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #576b95;line-height:1.4;">
+        这篇论文在说什么？
+      </h2>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        一句话概括：<strong>他们造了一套"教科书工厂"，能自动批量生产高质量的终端Agent训练数据——不是简单抓几个例子凑数，而是从能力维度出发、经过层层验证、最终只留下最精华的三分之一。</strong>
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        CLI-Universe 是一个终端Agent任务合成引擎。它先定义了一个四维能力分类体系（领域×技能类型×能力×工程支柱），按组合采样生成任务创意，再用真实技术文档做"证据引导式深度研究"把创意变成可执行蓝图，最后经过三层可验证筛选——rubric把关的测试构建、有/无提示的双条件过滤、以及从失败到通过的严格状态转换检查。
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 16px 0;">
+        最终能通过所有关卡的比例只有 <strong>33.6%</strong>。但就是这三分之一，用 6000 条精品轨迹微调 Qwen3-32B，在 Terminal-Bench 2.0 上拿下了 <strong>33.4%</strong> 的分数——这个成绩超过了所有 32B 以下用开源数据训练的模型，甚至碾压了好几个几百B的巨型模型。
+      </p>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2606.22883v1/x1.png" alt="CLI-Universe 数据合成管线概览" style="max-width:100%;height:auto;border-radius:6px;">
+        <p style="font-size:12px;color:#999;margin:6px 0 0 0;">▲ 图源：原文 Fig.1 — CLI-Universe 三阶段合成管线</p>
+      </div>
+    </div>
+
+    <!-- 为什么要关注？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #576b95;line-height:1.4;">
+        为什么要关注？
+      </h2>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        终端Agent（Terminal Agent）是当前AI应用最热门的方向之一。从 OpenAI 的 Codex CLI 到 Google 的 Gemini CLI，从字节的 MarsCode 到腾讯的 CloudStudio，所有人都在让AI学会操作命令行。但有个尴尬的问题一直没解决好——<strong>训练数据不够，而且现有的合成方式问题很大。</strong>
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        市面上主流的终端Agent训练数据怎么来的？基本是两条路：一是从GitHub抓代码片段，拼凑成任务——但很多代码本身就不是"可执行任务"，Agent在上面练到的是假把式；二是用LLM反向工程一个"看起来像任务"的东西——但生成的指令往往模糊、执行路径浅、测试用例脆弱，给模型的训练信号很弱。
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 0 0;">
+        CLI-Universe 的核心思路可以用一句话说清楚：<strong>与其从表面制品里拼凑任务，不如从能力定义出发，"由内而外"地构建任务，确保每个任务在设计上就有锻炼价值。</strong>他们把合成测试和 Terminal-Bench 2 的官方测试对比，91% 的任务上官方解决方案能通过合成测试，语义匹配度 88%——说明生成的测试不是"自己玩自己的"。
+      </p>
+    </div>
+
+    <!-- 核心方法 -->
+    <div style="background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #576b95;line-height:1.4;">
+        核心方法
+      </h2>
+
+      <h3 style="font-size:16px;color:#333;margin:0 0 12px 0;">关键思路</h3>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        你可以把 CLI-Universe 理解为一个<strong>三级精炼工厂</strong>：
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 8px 0;">
+        <strong>第一级：从"能力配方"出发构思任务。</strong>四维正交分类体系——
+      </p>
+      <ul style="font-size:14px;line-height:1.8;color:#555;margin:0 0 12px 0;padding-left:20px;">
+        <li><strong>领域（Domain）</strong>：15个，从软件工程到机器学习到视频处理</li>
+        <li><strong>技能类型（Skill Type）</strong>：8种，如算法设计、系统编程、密码学推理</li>
+        <li><strong>能力（Capability）</strong>：11种，如长程规划（>10轮）、工作记忆（跨10+轮维持≥5个事实）、逆向工程</li>
+        <li><strong>工程支柱（Engineering Pillar）</strong>：6种，如新功能创建、大规模重构、DevOps</li>
+      </ul>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        每次合成随机采样组合作为"锚点"，让模型基于组合构思任务。这样同一个"领域"的任务不会千篇一律。
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 12px 0;">
+        <strong>第二级：证据引导式深度研究。</strong>拿到任务创意后，不是直接让模型凭空编，而是先搜索真实技术文档、手册、StackOverflow，把创意"锚定"到真实世界的技术知识上。
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 16px 0;">
+        <strong>第三级：三层漏斗验证。</strong>这是整篇论文最硬核的部分——rubric把关的测试构建 → 有/无提示双条件过滤 → 失败→通过状态转换检查。每一步都在淘汰不合格的数据，最终只有33.6%能通过。
+      </p>
+
+      <div style="background:#f8f9fb;border-left:3px solid #576b95;padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0;">
+        <p style="font-size:14px;line-height:1.8;color:#555;margin:0;font-style:italic;">
+          "Unlike pipelines that retrofit tasks from surface artifacts, this inside-out design ensures that tasks exercise meaningful capability patterns by construction."
+        </p>
+        <p style="font-size:13px;color:#999;margin:4px 0 0 0;">
+          —— 原文 Introduction。和那些从表面制品拼凑任务的管线不同，这种"由内而外"的设计确保了每个任务本身就在锻炼有意义的能力模式。
+        </p>
+      </div>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2606.22883v1/x7.png" alt="消融实验" style="max-width:100%;height:auto;border-radius:6px;">
+        <p style="font-size:12px;color:#999;margin:6px 0 0 0;">▲ 图源：原文 Fig.3(a) — 消融实验，完整管线（All components）最优</p>
+      </div>
+    </div>
+
+    <!-- 效果怎么样？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #576b95;line-height:1.4;">
+        效果怎么样？
+      </h2>
+
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+        <thead>
+          <tr style="background:#f0f3f8;">
+            <th style="padding:10px 8px;text-align:left;color:#333;font-weight:600;border-bottom:2px solid #d0d5dd;">模型</th>
+            <th style="padding:10px 8px;text-align:center;color:#333;font-weight:600;border-bottom:2px solid #d0d5dd;">规模</th>
+            <th style="padding:10px 8px;text-align:center;color:#333;font-weight:600;border-bottom:2px solid #d0d5dd;">TB 1.0</th>
+            <th style="padding:10px 8px;text-align:center;color:#333;font-weight:600;border-bottom:2px solid #d0d5dd;">TB 2.0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fafbfc;"><td style="padding:8px;color:#999;border-bottom:1px solid #eef0f4;">GPT-5.2（闭源）</td><td style="padding:8px;text-align:center;color:#999;border-bottom:1px solid #eef0f4;">–</td><td style="padding:8px;text-align:center;color:#999;border-bottom:1px solid #eef0f4;">54.4</td><td style="padding:8px;text-align:center;color:#999;border-bottom:1px solid #eef0f4;">54.0</td></tr>
+          <tr><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">Claude-Opus-4.5</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">–</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">47.5</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">57.8</td></tr>
+          <tr style="background:#fafbfc;"><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">GLM-4.7</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">358B</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">48.8</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">41.0</td></tr>
+          <tr><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">Kimi-K2-Instruct</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">1T</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">44.6</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">27.8</td></tr>
+          <tr style="background:#fafbfc;"><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">Minimax-M2.1</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">229B</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">42.5</td><td style="padding:8px;text-align:center;color:#666;border-bottom:1px solid #eef0f4;">29.2</td></tr>
+          <tr style="background:#f0f3f8;"><td style="padding:8px;color:#999;border-bottom:1px solid #eef0f4;">Qwen3-32B（基线）</td><td style="padding:8px;text-align:center;color:#999;border-bottom:1px solid #eef0f4;">32B</td><td style="padding:8px;text-align:center;color:#999;border-bottom:1px solid #eef0f4;">11.2</td><td style="padding:8px;text-align:center;color:#999;border-bottom:1px solid #eef0f4;">3.4</td></tr>
+          <tr style="background:#e8f4e8;"><td style="padding:8px;color:#2d6a2d;font-weight:700;border-bottom:1px solid #d0e8d0;">CLI-Universe-32B</td><td style="padding:8px;text-align:center;color:#2d6a2d;font-weight:700;border-bottom:1px solid #d0e8d0;">32B</td><td style="padding:8px;text-align:center;color:#2d6a2d;font-weight:700;border-bottom:1px solid #d0e8d0;">38.8</td><td style="padding:8px;text-align:center;color:#2d6a2d;font-weight:700;border-bottom:1px solid #d0e8d0;">33.4</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;color:#999;margin:0 0 16px 0;">数据来源：原文 Table 1。CLI-Universe-32B 在 TB 2.0 上超过 Kimi-K2-Instruct（1T参数）5.6个百分点。</p>
+
+      <div style="text-align:center;margin:20px 0;">
+        <img src="https://arxiv.org/html/2606.22883v1/x8.png" alt="模型缩放曲线" style="max-width:100%;height:auto;border-radius:6px;">
+        <p style="font-size:12px;color:#999;margin:6px 0 0 0;">▲ 图源：原文 Fig.3(b) — Qwen3基线在各规模几乎不增长，CLI-Universe增益随规模单调递增</p>
+      </div>
+
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 0 0;">
+        这张缩放曲线非常说明问题。Qwen3原始模型在 8B、14B、32B 三个规模上 TB 2.0 分数几乎不变（2.5 → 4.0 → 3.4），说明<strong>单纯扩大模型规模不能提升终端操作能力</strong>。但用 CLI-Universe 数据训练后，增益随规模单调递增（+8.4 → +19.0 → +30.0）——好数据能把更大模型的潜力真正激发出来。同数据量下，CLI-Universe 提升（+30.0）远超 Nemotron（+25.5）和 TerminalTraj（+14.6）。
+      </p>
+    </div>
+
+    <!-- 和其他方案比有什么不同？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #576b95;line-height:1.4;">
+        和其他方案比有什么不同？
+      </h2>
+
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px;">
+        <thead>
+          <tr style="background:#f0f3f8;">
+            <th style="padding:10px 8px;text-align:left;color:#333;font-weight:600;border-bottom:2px solid #d0d5dd;width:22%;">维度</th>
+            <th style="padding:10px 8px;text-align:left;color:#333;font-weight:600;border-bottom:2px solid #d0d5dd;width:39%;">传统方案</th>
+            <th style="padding:10px 8px;text-align:left;color:#576b95;font-weight:600;border-bottom:2px solid #576b95;width:39%;">CLI-Universe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fafbfc;"><td style="padding:8px;color:#333;font-weight:600;border-bottom:1px solid #eef0f4;">任务来源</td><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">从GitHub/网页抓取表面制品，逆向拼凑</td><td style="padding:8px;color:#2d6a2d;border-bottom:1px solid #eef0f4;"><strong>从四维能力分类体系"由内而外"构建</strong></td></tr>
+          <tr><td style="padding:8px;color:#333;font-weight:600;border-bottom:1px solid #eef0f4;">质量保证</td><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">依赖人工筛选或LLM打分</td><td style="padding:8px;color:#2d6a2d;border-bottom:1px solid #eef0f4;"><strong>三层可验证漏斗，33.6%保留率</strong></td></tr>
+          <tr style="background:#fafbfc;"><td style="padding:8px;color:#333;font-weight:600;border-bottom:1px solid #eef0f4;">数据效率</td><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">Qwen3-32B增益：+14.6~+25.5</td><td style="padding:8px;color:#2d6a2d;border-bottom:1px solid #eef0f4;"><strong>Qwen3-32B增益：+30.0</strong></td></tr>
+          <tr><td style="padding:8px;color:#333;font-weight:600;border-bottom:1px solid #eef0f4;">测试可靠性</td><td style="padding:8px;color:#666;border-bottom:1px solid #eef0f4;">脆弱的regex匹配或简单断言</td><td style="padding:8px;color:#2d6a2d;border-bottom:1px solid #eef0f4;"><strong>rubric-gated测试构建，91%官方通过率</strong></td></tr>
+          <tr style="background:#fafbfc;"><td style="padding:8px;color:#333;font-weight:600;">任务多样性</td><td style="padding:8px;color:#666;">按表面主题分类</td><td style="padding:8px;color:#2d6a2d;"><strong>四维正交分类，15×8×11×6组合</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 对开发者意味着什么？ -->
+    <div style="background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #576b95;line-height:1.4;">
+        对开发者意味着什么？
+      </h2>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 8px 0;">
+        <strong>第一，6000条就能做到SOTA，这对小团队是天大的好事。</strong>不需要海量数据、不需要几百B的模型——高质量数据+32B模型就能打出超越1T模型的成绩。
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 8px 0;">
+        <strong>第二，四维能力分类体系值得所有做Agent训练的人参考。</strong>新领域、新技能类型可以不断加入，而不需要改变合成管线的核心逻辑。
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#333;margin:0 0 8px 0;">
+        <strong>第三，三层漏斗验证是一种通用的数据质量保证范式。</strong>rubric把关 + 双条件过滤 + fail-to-pass检查这套流程，不管是终端Agent、GUI Agent还是代码Agent都可以复用。
+      </p>
+      <p style="font-size:14px;line-height:1.8;color:#888;margin:0 0 0 0;">
+        ⚠️ 目前论文未公开 GitHub 仓库和数据集下载链接（提及 CLI-Universe-6K 将开源），训练任务集中在终端操作场景，能否泛化到更复杂的 GUI 任务、多Agent协作任务还需验证。
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:20px 0 0;color:#bbb;font-size:13px;line-height:1.6;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </div>
+
+  </div>
+</body>
+</html>
