@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-06-24</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #1565c0; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-lang { background: #e8f5e9; color: #388e3c; }
+        .badge-new { background: linear-gradient(135deg, #2196f3, #0d47a1); color: white; }
+        .badge-agpl { background: linear-gradient(135deg, #e53935, #b71c1c); color: white; }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #1565c0; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #1565c0; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565c0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #1b5e20; margin-bottom: 10px; }
+        .highlight-box-purple { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-left: 4px solid #7b1fa2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-purple h4 { color: #4a148c; margin-bottom: 10px; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85em; font-family: 'Courier New', monospace; margin: 15px 0; white-space: pre; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
+        .table th { background: #1a1a2e; color: white; padding: 10px; text-align: left; }
+        .table td { padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:nth-child(even) { background: #f8f9fa; }
+        .table td.better { color: #388e3c; font-weight: 600; }
+        .table td.warn { color: #ff9800; }
+        .table td.no { color: #e53935; }
+        .arch-diagram { background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.82em; line-height: 1.6; }
+        .arch-diagram .layer { margin: 8px 0; padding: 8px; border-radius: 4px; }
+        .arch-diagram .ingest { background: #2d2d4e; border-left: 3px solid #7b2cbf; }
+        .arch-diagram .process { background: #2d3a2e; border-left: 3px solid #4caf50; }
+        .arch-diagram .intel { background: #3a2d2d; border-left: 3px solid #ff9800; }
+        .arch-diagram .app { background: #2d3a3a; border-left: 3px solid #00bcd4; }
+        .cta-section { background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #1565c0; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+            .table { font-size: 0.75em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OpenMontage：AI 编程助手变身视频工作室</h1>
+            <div class="date">GitHub AI 项目日报 · 2026-06-24</div>
+        </div>
+        <div class="content">
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">calesthio/OpenMontage</span>
+                    <span class="badge badge-stars">⭐ 17,302</span>
+                    <span class="badge badge-forks">🍴 2,023</span>
+                    <span class="badge badge-lang">🐍 Python</span>
+                    <span class="badge badge-new">🆕 2026-03-29</span>
+                    <span class="badge badge-agpl">📜 AGPL-3.0</span>
+                </div>
+                <a class="github-link" href="https://github.com/calesthio/OpenMontage">🔗 查看项目</a>
+
+                <div class="section">
+                    <h3>📌 项目背景</h3>
+                    <p>AI 视频生成工具遍地开花——Sora、Kling、Veo、Runway——但本质上都是「输入一句话，吐出一段片段」的单步生成器。真正做视频从来不是这么简单：你需要选题调研、写脚本、做分镜、找素材、配音配乐、上字幕、剪辑渲染，最后还要检查黑帧、音量、画面是不是像 PPT。</p>
+                    <p><strong>OpenMontage</strong> 提出截然不同的思路：它不是再造一个网页生成器，而是把 Claude Code、Cursor、Copilot、Windsurf 这类 AI 编程助手当作「导演」，让它读 Pipeline 清单、按阶段执行 Skill、调用 Python 工具、写检查点、自审质量——完成从调研到成片的端到端自动化。项目 3 个月斩获 17,300+ Stars、2,000+ Forks，源码超 3.4M 字符。</p>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-box"><div class="num">12</div><div class="label">生产 Pipeline</div></div>
+                    <div class="stat-box"><div class="num">52+</div><div class="label">生产工具</div></div>
+                    <div class="stat-box"><div class="num">500+</div><div class="label">Agent Skills</div></div>
+                    <div class="stat-box"><div class="num">30+</div><div class="label">Provider</div></div>
+                    <div class="stat-box"><div class="num">$0.15</div><div class="label">最低成本案例</div></div>
+                </div>
+
+                <div class="section">
+                    <h3>🚀 七大核心功能</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4>1. Agent-First 架构</h4>
+                            <p>没有 Python 编排器——AI Agent 本身就是控制平面。Python 只提供工具层、注册表和检查点，生产规则写在 YAML 和 Markdown 中。一切可读可审计。</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>2. 12 条生产 Pipeline</h4>
+                            <p>Animated Explainer、Cinematic、Documentary Montage、Clip Factory、Podcast Repurpose 等，每条有独立 8 阶段流程 + 专属 Stage Director + 审查重点。</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>3. Provider Selector 智能路由</h4>
+                            <p>7 维度加权评分引擎（task_fit 30%、quality 20%、control 15%、reliability 15%、cost 10%、latency 5%、continuity 5%），动态选最优 Provider。</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>4. 52+ 工具 × 30+ Provider</h4>
+                            <p>视频生成 14+ Provider、图像生成 10+ Provider、TTS 5+ Provider、分析增强字幕等。全部 BaseTool 统一契约，ToolRegistry 自动发现。</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>5. 双渲染引擎 + 真实素材路径</h4>
+                            <p>Remotion（React 数据驱动）+ HyperFrames（HTML/GSAP 动态排版）。支持 Archive.org/NASA/Wikimedia 真实素材时间线，不是「动画 PPT」。</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>6. 质量治理四层门禁</h4>
+                            <p>Pre-compose validation + Slideshow risk scoring + Post-render self-review + Source media inspection。防止「看起来像视频的 PPT」。</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>7. 零成本可用路径</h4>
+                            <p>Piper TTS（离线免费）+ Pexels/Pixabay/Unsplash（免费素材）+ WAN 2.1/Hunyuan/CogVideo（本地 GPU）+ Remotion/HyperFrames。两条免费路径。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>💡 三大技术亮点</h3>
+                    <div class="highlight-box-blue">
+                        <h4>1. 三层知识架构：意图 → 约定 → 技术</h4>
+                        <p>Layer 1（pipeline_defs + tools）定义「有哪些能力」，Layer 2（skills）定义「如何使用 + OpenMontage 质量标准」，Layer 3（.agents/skills）定义「外部技术怎么工作」。工具通过 agent_skills[] 自动关联知识包——Agent 从不临场发挥："The intelligence is in the skills, not in improvised code"。</p>
+                    </div>
+                    <div class="highlight-box-green">
+                        <h4>2. Checkpoint 状态机：可恢复、可审计、可移交</h4>
+                        <p>每阶段完成写 checkpoint.json，包含规范产物（research_brief、edit_decisions 等），JSON Schema 验证。LLM 上下文重置、Agent 换人、生产中断——都可从最近 checkpoint 恢复。</p>
+                    </div>
+                    <div class="highlight-box-purple">
+                        <h4>3. 跨 IDE 统一配置</h4>
+                        <p>CLAUDE.md、CURSOR.md、COPILOT.md、CODEX.md、.windsurfrules 全指向共享 AGENT_GUIDE.md 和 PROJECT_CONTEXT.md，无论用哪个 AI 编程助手，Pipeline/Skill/工具逻辑完全一致。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🏗️ 架构概览</h3>
+                    <div class="arch-diagram">
+                        <div class="layer ingest">👤 用户自然语言需求 → Agent 读 AGENT_GUIDE.md</div>
+                        <div class="layer process">📋 Pipeline YAML 清单 → 选择 Pipeline → 读取 Stage Director Skill</div>
+                        <div class="layer intel">🔧 调用 Python Tools → BaseTool 统一契约 → ToolRegistry 自动发现 → Provider Selector 7维评分</div>
+                        <div class="layer app">✅ 写 Checkpoint → 自审质量门禁 → 人工确认 → Remotion/HyperFrames 渲染</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>💰 成本案例</h3>
+                    <div class="highlight-box">
+                        <h4>代表性作品成本</h4>
+                        <p>🎬 "THE LAST BANANA"（Pixar 风格 60 秒动画）：6 个 Kling v3 片段 + Google Chirp3-HD 配音 → <strong>$1.33</strong></p>
+                        <p>🎬 "VOID — Neural Interface"（产品广告）：仅 OpenAI Key，4 张 AI 图像 + TTS + Remotion → <strong>$0.69</strong></p>
+                        <p>🎬 "Afternoon in Candyland"（Ghibli 风格动画）：12 张 FLUX 图像 + Ken Burns + 粒子叠加 → <strong>$0.15</strong></p>
+                        <p>🎬 零成本路径：Piper TTS + 免费素材 + 本地 GPU → <strong>$0.00</strong></p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📊 对比同类</h3>
+                    <table class="table">
+                        <thead><tr><th>维度</th><th>OpenMontage</th><th>Runway/Pika</th><th>MoviePy+LLM</th><th>ComfyUI+Video</th></tr></thead>
+                        <tbody>
+                            <tr><td>编排方式</td><td class="better">✅ Agent-First</td><td>单步 API</td><td>脚本硬编码</td><td>图节点硬编码</td></tr>
+                            <tr><td>生产覆盖</td><td class="better">✅ 12 Pipeline×8 阶段</td><td>仅片段生成</td><td>仅后期剪辑</td><td>仅生成+合成</td></tr>
+                            <tr><td>Provider 路由</td><td class="better">✅ 7 维评分自动选</td><td>固定单一</td><td class="no">❌ 手动</td><td class="no">❌ 手动</td></tr>
+                            <tr><td>成本控制</td><td class="better">✅ estimate-reserve-reconcile</td><td>按量无预警</td><td class="no">❌ 无</td><td class="no">❌ 无</td></tr>
+                            <tr><td>质量自检</td><td class="better">✅ 4 层门禁</td><td class="no">❌ 无</td><td class="no">❌ 无</td><td class="no">❌ 无</td></tr>
+                            <tr><td>零成本路径</td><td class="better">✅ Piper+免费素材+本地</td><td class="no">❌ 无</td><td>有但手动</td><td>有但配置</td></tr>
+                            <tr><td>可恢复性</td><td class="better">✅ Checkpoint 状态机</td><td class="no">❌ 无</td><td>脚本重启</td><td class="no">❌ 无</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>⚡ 快速上手</h3>
+                    <div class="code-block"># 前置：Python 3.10+、Node.js 18+、FFmpeg
+git clone https://github.com/calesthio/OpenMontage.git
+cd OpenMontage
+make setup
+cp .env.example .env   # 先不加 API Key，零成本验证
+
+# 打开到 AI Coding Assistant，先让它读规则：
+# "Read AGENT_GUIDE.md and PROJECT_CONTEXT.md first."
+
+# 零成本 Prompt：
+# "制作一个 45 秒动画讲解，解释为什么天空是蓝色的。"
