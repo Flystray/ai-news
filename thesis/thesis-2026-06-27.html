@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.6.27｜PEEU · 7B模型做GUI Agent超32B，靠的竟是"事后诸葛亮"</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333;">
+
+<div style="max-width:680px;margin:0 auto;background:#fff;">
+
+  <!-- 头部 -->
+  <div style="padding:30px 24px 16px 24px;">
+    <h1 style="font-size:22px;line-height:1.5;color:#1a1a1a;margin:0 0 12px 0;font-weight:700;">
+      2026.6.27｜PEEU · 7B模型做GUI Agent超32B，靠的竟是"事后诸葛亮"
+    </h1>
+    <div style="font-size:13px;color:#999;margin-bottom:20px;">
+      ✍️ fly的AI学习 &nbsp;·&nbsp; 论文解读 &nbsp;·&nbsp; 国内 &nbsp;·&nbsp; 阅读时长 7 分钟
+    </div>
+  </div>
+
+  <!-- 论文信息表 -->
+  <div style="padding:0 24px 24px 24px;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;">
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;width:80px;border-bottom:1px solid #e8e8e8;">论文标题</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">Empowering GUI Agents via Autonomous Experience Exploration and Hindsight Experience Utilization for Task Planning</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">作者</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">Tianyi Men, Zhuoran Jin, Pengfei Cao 等（中科院自动化所）</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">发表日期</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">2026-06-25</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">来源</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;">arXiv · ACL 2026 Main</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 14px;color:#666;font-weight:600;border-bottom:1px solid #e8e8e8;">论文链接</td>
+        <td style="padding:8px 14px;border-bottom:1px solid #e8e8e8;"><a href="https://arxiv.org/abs/2606.27330" style="color:#576b95;text-decoration:none;">点击查看原文</a></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 14px;color:#666;font-weight:600;">标签</td>
+        <td style="padding:8px 14px;">GUI Agent · 任务规划 · 经验利用 · 后验学习 · 小模型泛化</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 章节：这篇论文在说什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #4A90D9;font-weight:700;">这篇论文在说什么？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      一句话总结：中科院自动化所的团队让一个 7B 的小多模态模型学会了"先探索环境、再用事后诸葛亮的方式总结经验"，最后在真实网站的 GUI 操作任务上跑出了 <strong>30.6% 的成功率</strong>，直接超过了 32B 的大模型（22.7%）。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      核心 idea 很直白：人是怎么学会操作一个新网站的？先到处点点看看，然后回想"刚才我做了哪些事、每个操作有什么用"，下次遇到类似任务就能举一反三。这个团队把同样的思路用在了训练小模型上——让模型自己去网站里自主探索，然后用"事后回顾"的方式把探索轨迹变成高质量训练数据。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      更妙的是，他们还用一个精心设计的分析框架（TDHAF）证明了一件事：<strong>只练"点击按钮""输入文字"这种原子操作，根本学不会复杂规划</strong>。真正有效的做法是练高级任务——比如"帮我在这个网站上找到评分最高的意面食谱"。
+    </p>
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.27330v1/x1.png" alt="PEEU方法总览" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.1</em></p>
+  </div>
+
+  <!-- 章节：为什么要关注 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #E8A838;font-weight:700;">为什么要关注？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      现在大家都在聊 AI Agent——让 AI 替你在网页上填表、订票、比价、搜资料。OpenAI 有 Operator，Google 有 Mariner，但这些都是闭源大模型在云端帮你跑，交互成本高不说，还有隐私问题。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      用开源小模型跑本地 Agent 才是正经方向——成本低、数据不出本地。但问题是：<strong>小模型的规划能力太弱了</strong>。你让它"帮我买张下周三去上海的机票"，它可能在第一步就不知道该点什么。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      之前有人试过两种方案：一种是把操作拆成原子动作（点这里、输那里）来训练，但效果不好——会点按钮不代表会规划。另一种是用粗粒度的"高级任务"来训练，但探索时收集到的轨迹往往和任务目标对不上——比如任务要求找 4.5 星的餐厅，实际轨迹里只找到了 4 星的。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      PEEU 的做法巧妙在：<strong>不纠结轨迹和任务是否对齐，而是反过来，用"事后诸葛亮"的方式让任务去适配轨迹</strong>。探索到了什么，就基于这些经验重新定义任务。这样一来，每条探索轨迹都能变成高质量的训练数据。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      另外，这篇论文还是 <strong>ACL 2026 Main</strong> 的正式论文，审稿质量有保证。
+    </p>
+  </div>
+
+  <!-- 章节：核心方法 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #7B68EE;font-weight:700;">核心方法</h2>
+
+    <h3 style="font-size:16px;color:#333;margin:0 0 12px 0;">关键思路</h3>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      PEEU 分为两个阶段，思路极其清晰：
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 8px 0;">
+      <strong>第一阶段：让模型自己去网站里逛。</strong>
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      给模型一个网址（比如 Allrecipes.com），让它自己生成一系列"探索任务"——"找找有没有意面食谱""看看甜点分类里有什么""搜一下鸡肉做法"。然后模型真的去网站上执行这些任务，点来点去，把每一步的截图和动作记录下来，形成一棵"探索树"。你可以把它理解为：让一个好奇的小孩走进一家超市，自己决定要逛哪些货架、摸哪些商品，而不是大人告诉他"先去第三排拿酱油"。
+    </p>
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.27330v1/x2.png" alt="PEEU两阶段方法详细流程图" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.2</em></p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:16px 0 8px 0;">
+      <strong>第二阶段：用"事后诸葛亮"的方式提炼经验。</strong>
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      探索完了，手里有一堆轨迹数据。传统做法是直接把这些轨迹当训练数据。但这里有个问题：原始探索任务往往和轨迹不完全对齐。PEEU 的做法是反过来的：先让一个大模型（GPT-4o）分析每条轨迹中的每一步——"这一步做了什么？页面发生了什么变化？"——提取出原子经验。然后把这些原子经验串起来，融合成一个更精准、更严格的任务描述。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      举个例子：探索时任务是"找高评分食谱"，轨迹里实际只找到了 4 星，但过程中经过了"筛选→排序→查看评分"这些操作。事后回顾时，就会把任务改写成"通过筛选和排序功能，找到评分 4 星以上的意面食谱"——既对齐了实际轨迹，又加入了更严格的约束。
+    </p>
+
+    <div style="background:#f7f8fa;border-left:3px solid #7B68EE;padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0;">
+      <p style="font-size:14px;line-height:1.8;color:#555;margin:0;font-style:italic;">
+        "We leverage hindsight to inversely align tasks to the collected trajectories, thereby significantly enhancing the quality of high-level data."
+      </p>
+      <p style="font-size:13px;line-height:1.6;color:#888;margin:8px 0 0 0;">
+        ——大白话：不纠结探索到的轨迹是否满足最初的任务目标，而是反过来让任务目标去贴合实际探索到的内容。这个思路说实话很聪明，有点像"先开枪再画靶子"，但在这里是完全合理的——因为环境本身就是部分可观察的，你不可能提前知道所有约束条件。
+      </p>
+    </div>
+
+    <h3 style="font-size:16px;color:#333;margin:24px 0 12px 0;">技术细节</h3>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      训练分为两个阶段：先用高质量数据做 SFT（监督微调），再用 GRPO（Group Relative Policy Optimization）做强化学习。所有实验都在 4 块 A800 上跑，严格控制数据量相同以保证公平对比。强化学习的奖励设计也很简洁：格式对了给 1 分，答案对了再给 1 分，满分 2 分。不搞复杂的 reward shaping，简单有效。
+    </p>
+
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.27330v1/x3.png" alt="TDHAF分析框架示意图" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.3 — TDHAF 分析框架：三种任务粒度 × 两种泛化场景</em></p>
+  </div>
+
+  <!-- 章节：效果怎么样 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #4CAF50;font-weight:700;">效果怎么样？</h2>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      先看最核心的结果——在 7 个完全没见过的真实网站上测试：
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>用 Qwen2.5-VL-7B 做基座，2000 条轨迹训练：</strong>
+    </p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:16px;">
+      <tr style="background:#f5f5f5;">
+        <td style="padding:10px 14px;font-weight:600;border-bottom:1px solid #e8e8e8;">方法</td>
+        <td style="padding:10px 14px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;">整体成功率</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 14px;border-bottom:1px solid #e8e8e8;">原始 7B Instruct（不训练）</td>
+        <td style="padding:10px 14px;text-align:center;border-bottom:1px solid #e8e8e8;">7.8%</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:10px 14px;border-bottom:1px solid #e8e8e8;">Coarse-SFT（粗粒度任务训练）</td>
+        <td style="padding:10px 14px;text-align:center;border-bottom:1px solid #e8e8e8;">19.0%</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 14px;border-bottom:1px solid #e8e8e8;">Atomic-SFT（原子操作训练）</td>
+        <td style="padding:10px 14px;text-align:center;border-bottom:1px solid #e8e8e8;">21.7%</td>
+      </tr>
+      <tr style="background:#f0f7ff;">
+        <td style="padding:10px 14px;font-weight:700;color:#4A90D9;">PEEU-SFT（本方法）</td>
+        <td style="padding:10px 14px;text-align:center;font-weight:700;font-size:16px;color:#4A90D9;">30.6%</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:10px 14px;color:#999;">Qwen2.5-VL-32B Instruct（参考）</td>
+        <td style="padding:10px 14px;text-align:center;color:#999;">22.7%</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      PEEU 不仅远超所有同数据量级的训练方法，而且 <strong>30.6% 的成绩已经超过了 Qwen2.5-VL-32B Instruct 的 22.7%</strong>。用 7B 打败 32B，这在 Agent 任务上相当罕见。
+    </p>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      再放大到八个测试网站逐个看：
+    </p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.8;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:16px;">
+      <tr style="background:#f5f5f5;">
+        <td style="padding:8px 10px;font-weight:600;border-bottom:1px solid #e8e8e8;">网站</td>
+        <td style="padding:8px 10px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;color:#4A90D9;">PEEU-SFT (7B)</td>
+        <td style="padding:8px 10px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;">Atomic-SFT (7B)</td>
+        <td style="padding:8px 10px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;">Coarse-SFT (7B)</td>
+        <td style="padding:8px 10px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;color:#999;">32B</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">Allrecipes</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">17.7</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">13.3</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">6.6</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">0.0</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">Amazon</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">53.6</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">51.2</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">34.1</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">39.0</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">Apple</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">16.2</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">6.9</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">20.9</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">16.2</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">Arxiv</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">25.2</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">25.5</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">20.9</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">32.5</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">GitHub</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">19.5</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">0.0</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">17.0</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">21.9</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">Coursera</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">35.7</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">9.5</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">14.2</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">19.0</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e8e8e8;">Map</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;border-bottom:1px solid #e8e8e8;">48.7</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">39.0</td>
+        <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;">17.0</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;border-bottom:1px solid #e8e8e8;">34.1</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:8px 10px;">Wolfram</td>
+        <td style="padding:8px 10px;text-align:center;font-weight:700;color:#4A90D9;">28.2</td>
+        <td style="padding:8px 10px;text-align:center;">28.2</td>
+        <td style="padding:8px 10px;text-align:center;">21.7</td>
+        <td style="padding:8px 10px;text-align:center;color:#999;">19.5</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      可以看到，在 Amazon、Coursera、Map 这三个网站上，PEEU 的优势尤其明显——Coursera 上甚至比原子训练高出 26 个百分点。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      另外还有一个非常反直觉的发现：<strong>对于小模型，把经验放进 prompt 里让它参考（检索方式）反而更差</strong>。7B 模型用 Atomic-Prompt 和 Trajectory-Prompt 都是 3.7%，甚至不如不训练的 7.8%。这说明小模型根本没有能力在推理时理解并利用这些"参考经验"——还是得老老实实训进参数里。
+    </p>
+
+    <div style="text-align:center;margin:20px 0 8px 0;">
+      <img src="https://arxiv.org/html/2606.27330v1/x4.png" alt="泛化分布饼图" style="max-width:100%;height:auto;border-radius:4px;" />
+    </div>
+    <p style="font-size:12px;color:#999;text-align:center;margin:4px 0 0 0;"><em>图源：原文 Fig.4 — 高级任务训练的泛化覆盖率（44.8%）远超低级任务（3.2%）</em></p>
+  </div>
+
+  <!-- 章节：和其他方案比有什么不同 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #FF7043;font-weight:700;">和其他方案比有什么不同？</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.8;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:16px;">
+      <tr style="background:#f5f5f5;">
+        <td style="padding:10px 12px;font-weight:600;border-bottom:1px solid #e8e8e8;">维度</td>
+        <td style="padding:10px 12px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;">原子操作训练</td>
+        <td style="padding:10px 12px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;">粗粒度任务训练</td>
+        <td style="padding:10px 12px;font-weight:600;text-align:center;border-bottom:1px solid #e8e8e8;color:#4A90D9;">PEEU（本文）</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;border-bottom:1px solid #e8e8e8;">训练任务来源</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;">环境变化差分</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;">探索时预设目标</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;font-weight:600;color:#4A90D9;">后验融合经验重写</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:10px 12px;border-bottom:1px solid #e8e8e8;">任务-轨迹对齐</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;">天然对齐</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;">经常不对齐</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;font-weight:600;color:#4A90D9;">强制对齐</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;border-bottom:1px solid #e8e8e8;">约束严格度</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;">无约束</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;">约束宽松</td>
+        <td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e8e8e8;font-weight:600;color:#4A90D9;">从真实探索推导</td>
+      </tr>
+      <tr style="background:#fafafa;">
+        <td style="padding:10px 12px;">泛化方向</td>
+        <td style="padding:10px 12px;text-align:center;">仅底层技能</td>
+        <td style="padding:10px 12px;text-align:center;">有限泛化</td>
+        <td style="padding:10px 12px;text-align:center;font-weight:600;color:#4A90D9;">多层级泛化</td>
+      </tr>
+    </table>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      最关键的差异在第三行：约束。粗粒度任务训练的问题是——任务是在探索前设定的，而网站环境是部分可观察的，你根本不知道真实环境中有什么限制。PEEU 的约束是从"真的探索到了什么"反推出来的，所以又准又严。
+    </p>
+  </div>
+
+  <!-- 章节：对开发者意味着什么 -->
+  <div style="padding:0 24px 24px 24px;">
+    <h2 style="font-size:18px;line-height:1.4;color:#1a1a1a;margin:0 0 16px 0;padding-left:12px;border-left:4px solid #009688;font-weight:700;">对开发者意味着什么？</h2>
+
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>第一，小模型做 Agent 的门槛在快速降低。</strong> 一个 7B 模型，4 块 A800 训练，就能在 GUI Agent 任务上超过 32B 模型。这对于想做本地 Agent 产品的团队来说是个好消息——不用非得部署 70B+ 的大模型才能用。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>第二，"事后回顾"这个训练范式值得关注。</strong> PEEU 的核心理念——不纠结初始目标，用实际探索结果来反推任务——其实不只适用于 GUI Agent。任何需要模型在环境中自主探索、收集经验的场景，都可以试试这个思路。RL 里的 hindsight experience replay 是经典方法，但 PEEU 把它用在了 LLM 的训练数据构造上，而且效果显著。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>第三，别指望 prompt 能解决一切。</strong> 论文很清楚地表明：对于 7B 这个级别的小模型，把经验塞进 prompt 不仅没用，反而会干扰模型。想让小模型学会复杂推理，训练才是正道。
+    </p>
+    <p style="font-size:15px;line-height:1.8;color:#444;margin:0 0 12px 0;">
+      <strong>第四，代码开源了吗？</strong> 论文没有提到代码仓库，但方法描述得很清楚，核心流程也不复杂——探索（GPT-4o 驱动）+ 经验提取（GPT-4o）+ SFT + GRPO。有能力的话自己复现也不难。
+    </p>
+  </div>
+
+  <!-- 底部 -->
+  <div style="padding:24px 24px 32px 24px;text-align:center;border-top:1px solid #f0f0f0;">
+    <p style="font-size:13px;color:#999;margin:0;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>
