@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-06-29</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #1565c0; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-lang { background: #e8f5e9; color: #388e3c; }
+        .badge-new { background: linear-gradient(135deg, #2196f3, #0d47a1); color: white; }
+        .badge-mit { background: #e8f5e9; color: #2e7d32; }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #1565c0; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #1565c0; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565c0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #1b5e20; margin-bottom: 10px; }
+        .highlight-box-purple { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-left: 4px solid #7b1fa2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-purple h4 { color: #4a148c; margin-bottom: 10px; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85em; font-family: 'Courier New', monospace; margin: 15px 0; white-space: pre; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
+        .table th { background: #1a1a2e; color: white; padding: 10px; text-align: left; }
+        .table td { padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:nth-child(even) { background: #f8f9fa; }
+        .table td.better { color: #388e3c; font-weight: 600; }
+        .table td.warn { color: #ff9800; }
+        .table td.no { color: #e53935; }
+        .arch-diagram { background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.82em; line-height: 1.6; }
+        .arch-diagram .layer { margin: 8px 0; padding: 8px; border-radius: 4px; }
+        .arch-diagram .ingest { background: #2d2d4e; border-left: 3px solid #7b2cbf; }
+        .arch-diagram .process { background: #2d3a2e; border-left: 3px solid #4caf50; }
+        .arch-diagram .intel { background: #3a2d2d; border-left: 3px solid #ff9800; }
+        .arch-diagram .app { background: #2d3a3a; border-left: 3px solid #00bcd4; }
+        .cta-section { background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #1565c0; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+            .table { font-size: 0.75em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>codebase-memory-mcp</h1>
+            <div class="date">GitHub AI 项目日报 · 2026-06-29</div>
+            <p style="color:#aaa; margin-top:10px;">让 AI 编程助手告别「逐文件搜索」的代码知识图谱引擎</p>
+        </div>
+        <div class="content">
+            <!-- 项目卡片 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">DeusData/codebase-memory-mcp</span>
+                    <span class="badge badge-stars">⭐ 20,248</span>
+                    <span class="badge badge-forks">🍴 1,457</span>
+                    <span class="badge badge-lang">C 语言</span>
+                    <span class="badge badge-new">2026 新项目</span>
+                    <span class="badge badge-mit">MIT 许可</span>
+                </div>
+                <a href="https://github.com/DeusData/codebase-memory-mcp" class="github-link" target="_blank">
+                    🔗 查看项目 →
+                </a>
+            </div>
+
+            <!-- 核心统计 -->
+            <div class="stat-row">
+                <div class="stat-box"><div class="num">158</div><div class="label">编程语言语法解析</div></div>
+                <div class="stat-box"><div class="num">9</div><div class="label">Hybrid LSP 语义家族</div></div>
+                <div class="stat-box"><div class="num">14</div><div class="label">MCP 工具</div></div>
+                <div class="stat-box"><div class="num">120x</div><div class="label">Token 缩减倍数</div></div>
+            </div>
+
+            <!-- 项目背景 -->
+            <div class="section">
+                <h3>📌 项目背景</h3>
+                <p>AI 编程助手（Claude Code、Cursor、Copilot 等）理解代码时有个致命短板：<strong>只能逐文件搜索</strong>。想知道「谁调用了 processOrder」，就得先 grep 搜一遍，再挨个文件读，再 grep 再读……5 次结构查询能吃掉 412,000 个 Token，而结果还常常遗漏跨文件的类型推断和接口实现关系。</p>
+                <p>在 $3-15/M Token 的定价下，探索成本是真金白银；在「中间遗忘」效应下，信息噪声是真真切切的答案质量下降。</p>
+                <p><strong>codebase-memory-mcp</strong> 提出了根本性解法：把整个代码库<strong>索引为一张持久化的 SQLite 知识图谱</strong>，Agent 直接对图谱做结构查询——亚毫秒响应、99.2% Token 缩减、83% 答案准确率（31 个真实代码库评测，arXiv:2603.27277）。整个系统编译为<strong>单个纯 C 静态二进制文件</strong>，零运行时依赖，所有数据本地处理，代码不出机器。</p>
+            </div>
+
+            <!-- 核心功能 -->
+            <div class="section">
+                <h3>🚀 核心功能</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>⚡ 极速索引</h4>
+                        <p>Linux 内核（28M LOC / 75K 文件）完整索引 3 分钟 → 481万节点 + 772万边。Django 约 6 秒。内存优先策略：LZ4 + 内存版 SQLite + Aho-Corasick。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🧠 双层语义解析</h4>
+                        <p>第一层 Tree-sitter 158 语言语法解析；第二层 Hybrid LSP 9 语言家族类型推断（Python/TS/Go/Rust 等）——解析泛型、继承、标准库追踪。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔗 丰富边类型</h4>
+                        <p>CALLS/ASYNC_CALLS、HTTP_CALLS（跨服务路由匹配）、EMITS/LISTENS_ON（通道检测）、DATA_FLOWS（数据流追踪）、SIMILAR_TO（克隆检测）、SEMANTICALLY_RELATED（语义关联）。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔍 语义向量搜索</h4>
+                        <p>nomic-embed-code 768维 int8 向量编译进二进制——搜索「retry」能找到 publish/emit/dispatch。融合 11 种信号排名，无需 API Key。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📊 变更影响分析</h4>
+                        <p>detect_changes 将 git diff 映射到受影响符号及爆炸半径，附带风险分类。后台 Watcher 自动增量索引，Louvain 社区发现生成架构视图。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🛠️ 14 MCP 工具 + Cypher</h4>
+                        <p>search_graph、trace_path、query_graph（Cypher 子集）、get_architecture、get_code_snippet、manage_adr 等。可选 3D 图可视化（localhost:9749）。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术亮点 -->
+            <div class="section">
+                <h3>💡 技术亮点</h3>
+                <div class="highlight-box-blue">
+                    <h4>1. 纯 C 单二进制架构，零依赖无服务器</h4>
+                    <p>所有库（yyjson、SQLite、LZ4、tree-sitter 158语言语法、nomic-embed-code 向量）编译时静态内嵌进一个二进制。MCP Server 单线程事件循环 + stdio JSON-RPC 2.0，Pipeline 异步执行不阻塞响应，Watcher 独立线程监听文件变更，SQLite WAL 模式支持并发读写。</p>
+                </div>
+                <div class="highlight-box-green">
+                    <h4>2. 知识图谱存储：SQLite + WAL + FTS5 + 预编译语句缓存</h4>
+                    <p>每项目独立数据库，节点按 Qualified Name 全局唯一寻址并支持后缀匹配。FTS5 虚拟表对节点名建全文索引，预编译语句缓存实现亚毫秒查询。Upsert 语义保证增量索引幂等性。</p>
+                </div>
+                <div class="highlight-box-purple">
+                    <h4>3. 安全链：SLSA Level 3 + VirusTotal + CodeQL + Sigstore</h4>
+                    <p>每次发布经 70+ 杀毒引擎扫描（零检出要求），GitHub Actions 加密构建来源证明（SLSA 3），Sigstore cosign 无密钥签名，CodeQL SAST 阻断存在未解决告警的发布——工业级安全标准。</p>
+                </div>
+            </div>
+
+            <!-- 架构图 -->
+            <div class="arch-diagram">
+                <div class="layer ingest">📥 索引管线：源文件 → Tree-sitter AST → graph_buffer → SQLite Store</div>
+                <div class="layer process">🔄 Hybrid LSP：类型推断 → CALLS/RESOLVED_CALLS/IMPLEMENTS/SEMANTICALLY_RELATED 边</div>
+                <div class="layer intel">🧠 语义层：nomic-embed-code 向量 → SIMILAR_TO + SEMANTICALLY_RELATED 边</div>
+                <div class="layer intel">📊 Louvain 社区发现 → 架构视图 + 3D 可视化</div>
+                <div class="layer app">🛠️ MCP Server：14 工具 → JSON-RPC 2.0 → stdio → AI Agent</div>
+                <div class="layer app">👀 Watcher 线程：sha256+mtime → 增量索引 → 自动更新图谱</div>
+            </div>
+
+            <!-- 对比表 -->
+            <div class="section">
+                <h3>📊 对比分析</h3>
+                <table class="table">
+                    <tr><th>维度</th><th>codebase-memory-mcp</th><th>Sourcegraph / 传统搜索</th><th>LSP（gopls/pyright）</th><th>AST 工具（Semgrep）</th></tr>
+                    <tr><td>索引速度</td><td class="better">Linux 内核 3 分钟</td><td>数小时建索引</td><td class="warn">冷启动 30-60s</td><td class="no">无全库索引</td></tr>
+                    <tr><td>Token 效率</td><td class="better">~3,400（120x 缩减）</td><td>~412,000</td><td class="warn">需逐文件跳转</td><td class="no">不解决探索成本</td></tr>
+                    <tr><td>语言覆盖</td><td class="better">158 语法 + 9 深度语义</td><td class="warn">有限语言索引</td><td>每语言独立 Server</td><td class="no">有限规则集</td></tr>
+                    <tr><td>部署方式</td><td class="better">单静态二进制，零依赖</td><td>需 Docker / 多服务</td><td class="warn">每语言独立进程</td><td>需服务部署</td></tr>
+                    <tr><td>跨服务追踪</td><td class="better">HTTP/gRPC/GraphQL/tRPC</td><td class="no">仅文本搜索</td><td class="no">不支持</td><td class="no">不支持</td></tr>
+                    <tr><td>语义搜索</td><td class="better">内嵌向量，按含义搜索</td><td class="no">仅关键词/正则</td><td class="no">不支持</td><td class="no">仅规则模式</td></tr>
+                    <tr><td>数据流追踪</td><td class="better">DATA_FLOWS 边</td><td class="no">不支持</td><td class="warn">类型推断无图谱</td><td class="no">不支持</td></tr>
+                    <tr><td>安全性</td><td class="better">SLSA 3 + VirusTotal + 本地</td><td class="warn">部分需上传</td><td class="warn">本地但无供应链安全</td><td>企业级但需部署</td></tr>
+                </table>
+            </div>
+
+            <!-- Token 对比数据 -->
+            <div class="highlight-box">
+                <h4>🔥 Token 效率实测（5 次典型结构查询）</h4>
+                <table class="table">
+                    <tr><th>查询类型</th><th>图谱查询</th><th>逐文件搜索</th><th>缩减倍数</th></tr>
+                    <tr><td>按模式找函数</td><td class="better">~200</td><td>~45,000</td><td class="better">225x</td></tr>
+                    <tr><td>追踪调用链 (depth 3)</td><td class="better">~800</td><td>~120,000</td><td class="better">150x</td></tr>
+                    <tr><td>死代码检测</td><td class="better">~500</td><td>~85,000</td><td class="better">170x</td></tr>
+                    <tr><td>列出路由</td><td class="better">~400</td><td>~62,000</td><td class="better">155x</td></tr>
+                    <tr><td>架构概览</td><td class="better">~1,500</td><td>~100,000</td><td class="better">67x</td></tr>
+                    <tr><td>总计</td><td class="better">~3,400</td><td>~412,000</td><td class="better">~121x</td></tr>
+                </table>
+            </div>
+
+            <!-- 快速上手 -->
+            <div class="section">
+                <h3>🚀 快速上手</h3>
+                <div class="code-block"># macOS/Linux 一行安装（加 --ui 启用 3D 图可视化）
+curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
+
+# Windows PowerShell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.ps1 -OutFile install.ps1
+.\install.ps1
+
+# 安装器自动检测并配置所有已安装的 Agent
+# 重启 Agent 后说："Index this project"</div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h3>一行命令，让 AI Agent 从跑迷宫升级为精准查询</h3>
+                <p>120x Token 缩减 · 83% 答案准确率 · 亚毫秒响应 · 纯 C 零依赖 · 158 语言</p>
+                <a href="https://github.com/DeusData/codebase-memory-mcp" class="cta-button" target="_blank">查看项目 →</a>
+            </div>
+        </div>
+        <div class="footer">
+            GitHub AI 项目日报 · 每日推荐有启发意义的开源项目 · fly的AI学习
+        </div>
+    </div>
+</body>
+</html>
