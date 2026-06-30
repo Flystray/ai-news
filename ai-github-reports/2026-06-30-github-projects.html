@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-06-30</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #1565c0; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-lang { background: #e8f5e9; color: #388e3c; }
+        .badge-new { background: linear-gradient(135deg, #2196f3, #0d47a1); color: white; }
+        .badge-mit { background: #e8f5e9; color: #2e7d32; }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #1565c0; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #1565c0; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565c0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #1b5e20; margin-bottom: 10px; }
+        .highlight-box-purple { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-left: 4px solid #7b1fa2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-purple h4 { color: #4a148c; margin-bottom: 10px; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85em; font-family: 'Courier New', monospace; margin: 15px 0; white-space: pre; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
+        .table th { background: #1a1a2e; color: white; padding: 10px; text-align: left; }
+        .table td { padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:nth-child(even) { background: #f8f9fa; }
+        .table td.better { color: #388e3c; font-weight: 600; }
+        .table td.warn { color: #ff9800; }
+        .table td.no { color: #e53935; }
+        .arch-diagram { background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.82em; line-height: 1.6; }
+        .arch-diagram .layer { margin: 8px 0; padding: 8px; border-radius: 4px; }
+        .arch-diagram .body { background: #2d3a2e; border-left: 3px solid #4caf50; }
+        .arch-diagram .brain { background: #3a2d2d; border-left: 3px solid #ff9800; }
+        .arch-diagram .link { background: #2d2d4e; border-left: 3px solid #7b2cbf; }
+        .cta-section { background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #1565c0; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+            .table { font-size: 0.75em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>neomjs/neo</h1>
+            <div class="date">GitHub AI 项目日报 · 2026-06-30</div>
+            <p style="color:#aaa; margin-top:10px;">让 AI Agent 真正"住进"应用里 —— 跨模型蜂群 × 自演化软件有机体</p>
+        </div>
+        <div class="content">
+            <!-- 项目卡片 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">neomjs/neo</span>
+                    <span class="badge badge-stars">⭐ 3,220</span>
+                    <span class="badge badge-forks">🍴 214</span>
+                    <span class="badge badge-lang">JavaScript</span>
+                    <span class="badge badge-new">自演化工程机构</span>
+                    <span class="badge badge-mit">MIT 许可</span>
+                </div>
+                <a href="https://github.com/neomjs/neo" class="github-link" target="_blank">
+                    🔗 查看项目 →
+                </a>
+            </div>
+
+            <!-- 核心统计 -->
+            <div class="stat-row">
+                <div class="stat-box"><div class="num">706</div><div class="label">2026-05 合并 PR</div></div>
+                <div class="stat-box"><div class="num">800</div><div class="label">2026-05 关闭 Issue</div></div>
+                <div class="stat-box"><div class="num">5+</div><div class="label">Web Worker 多线程</div></div>
+                <div class="stat-box"><div class="num">REM</div><div class="label">Dream 周期自演化</div></div>
+            </div>
+
+            <!-- 项目背景 -->
+            <div class="section">
+                <h3>📌 项目背景</h3>
+                <p>今天绝大多数 AI Agent 项目还停留在"代码生成器"层面：LLM 读 README、写 diff、提 PR。但 Neo.mjs 的设计者认为这远远不够——</p>
+                <p style="background:#f5f5f5; padding:15px; border-left:3px solid #7b2cbf; font-style:italic;">"Where the industry runs one AI agent and gets slop, Neo.mjs runs a swarm of minds from rival labs — Claude, Gemini, GPT — that read each other's reasoning through shared memory."</p>
+                <p>它要解决三个真正棘手的问题：</p>
+                <p><strong>① 单 Agent 的盲区</strong>：单个模型对自己的失误往往视而不见，需要"异源交叉审查"才能暴露。</p>
+                <p><strong>② 静态代码 vs 活运行时</strong>：传统 Agent 只能"读代码"，但运行时状态、用户实际操作路径、生产 bug 现场，这些在代码里看不到。</p>
+                <p><strong>③ 战术噪声 vs 战略方向</strong>：Agent 每天生成大量会话、调试记录、PR 评论，需要一个"做梦"机制把它们消化成长期路线图。</p>
+                <p>为此，Neo.mjs 提出了极其独特的<strong>两半球架构（Body/Brain Split）</strong>：浏览器里跑 UI 引擎（Body），Node.js 里跑跨模型 AI 蜂群（Brain），两者通过 <strong>Neural Link</strong>（JSON-RPC WebSocket）实时相连，让 AI 直接"住进"应用，操控活的运行时而非静态代码。</p>
+            </div>
+
+            <!-- 架构图 -->
+            <div class="arch-diagram">
+                <div class="layer body">🌐 <strong>Body（身体）</strong>：浏览器 · App Worker / VDom Worker / Data Worker / Canvas Worker / Service Worker</div>
+                <div class="layer body">📦 零编译 ESM · JSON VDOM · Web Workers 隔离 · 主线程仅 DOM 操作</div>
+                <div class="layer link">🔗 <strong>Neural Link</strong>：JSON-RPC over WebSocket · 对象级引用图谱 · 双向状态同步</div>
+                <div class="layer brain">🧠 <strong>Brain（大脑）</strong>：Node.js · AgentOrchestrator · 跨模型蜂群（Claude/GPT/Gemini）</div>
+                <div class="layer brain">💾 Memory Core（ChromaDB）+ Knowledge Base + Native Edge Graph（SQLite）</div>
+                <div class="layer brain">🌙 DreamService REM Cycle → 战术噪声消化为 Golden Path 拓扑</div>
+            </div>
+
+            <!-- 核心功能 -->
+            <div class="section">
+                <h3>🚀 核心功能</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🌐 Body：真多线程引擎</h4>
+                        <p>App/VDom/Data/Canvas/Service 五类 Web Worker 隔离，主线程仅 DOM 操作。零编译开发模式，浏览器直跑 .mjs 无 transpile 延迟。VDOM 用纯 JS 对象表示，无模板引擎开销。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🐝 Brain：跨模型蜂群</h4>
+                        <p>Claude、GPT、Gemini 在同一仓库里互相审阅 PR。Verify-Before-Assert 强制准则（AGENTS.md 硬约束），Ticket Gate 校验工单 ID，No Direct Merges 保留人类合并权。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🕸️ Active Hybrid GraphRAG</h4>
+                        <p>SQLite Native Edge Graph + ChromaDB 向量库双路召回。Semantic + Structural 融合结果，能回答"哪个文件历史上出过最多自愈修复"等带时间维度的复杂查询。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🌙 DreamService（做梦）</h4>
+                        <p>REM cycle 把过去所有 session、PR 评论、运行时崩溃、ticket 摘要消化为新图谱边、skill、priority 列表。本质是"持续反思"管道（Continuous Reflection）。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔗 Neural Link（神经链）</h4>
+                        <p>AI 操控活应用的关键通道。Brain 订阅 Body 中任意 VDom 节点变化，可直接 mutate 客户端 UI；Body 反向 push 用户轨迹给 Brain 分析。"聊天面板"→"应用内协作体"。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📚 Progressive Disclosure Skills</h4>
+                        <p>.agents/skills/ 目录里挂着几十个 skill 文件，按需 lazy-load。pull-request、ticket-intake 等工作流被触发时，对应 instructions 才被加载进 prompt。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术亮点 -->
+            <div class="section">
+                <h3>💡 技术亮点</h3>
+                <div class="highlight-box-blue">
+                    <h4>1. 跨模型异源审查（Cross-Model Review）</h4>
+                    <p>让 GPT 审 Claude 的 PR、让 Gemini 审 GPT 的实现 —— 真的能抓到单模型盲区。ReputAgent 把它列为"Semantic Capability Matching Pattern"代表案例，纳入 AI Agent 学术研究的对比基线。</p>
+                </div>
+                <div class="highlight-box-green">
+                    <h4>2. 活运行时操控（Neural Link）</h4>
+                    <p>通过 Neural Link，agent 不再是"读代码"而是"在应用里协作"，是 Agent OS 概念的具体落地。订阅 VDom 状态变化、直接 mutate UI、反向 push 用户轨迹 —— 把 Agent 协作界面从侧栏升级为应用内协作体。</p>
+                </div>
+                <div class="highlight-box-purple">
+                    <h4>3. REM Dream Pipeline：持续反思而非持续集成</h4>
+                    <p>用"做梦"机制把战术噪声消化成战略图谱。每当 swarm 不忙时，DreamService 自动触发 REM cycle，把短期 session 整合为长期拓扑 —— 借鉴人脑 REM 睡眠的记忆整合机制。</p>
+                </div>
+            </div>
+
+            <!-- 对比表 -->
+            <div class="section">
+                <h3>📊 对比分析</h3>
+                <table class="table">
+                    <tr><th>维度</th><th>neomjs/neo</th><th>Devin / AutoGPT</th><th>MetaGPT / ChatDev</th><th>Copilot Workspace</th></tr>
+                    <tr><td>多模型异源审查</td><td class="better">✅ Claude/GPT/Gemini 互审</td><td class="no">❌ 单模型</td><td class="no">❌ 同源</td><td class="no">❌ 同源</td></tr>
+                    <tr><td>活运行时操控</td><td class="better">✅ Neural Link 实时附着</td><td class="warn">⚠️ 仅 IDE/Shell</td><td class="no">❌ 仅文件</td><td class="warn">⚠️ 仅编辑器</td></tr>
+                    <tr><td>跨 session 记忆</td><td class="better">✅ Memory Core + 图谱</td><td class="warn">⚠️ 短期</td><td class="warn">⚠️ 文件级</td><td class="warn">⚠️ 工作区级</td></tr>
+                    <tr><td>自我演化机制</td><td class="better">✅ DreamService + REM</td><td class="no">❌</td><td class="no">❌</td><td class="no">❌</td></tr>
+                    <tr><td>零编译前端</td><td class="better">✅ 原生 ESM</td><td>—</td><td>—</td><td>—</td></tr>
+                    <tr><td>可观测的活动数据</td><td class="better">✅ Agent trace 长程记录</td><td class="no">❌ 一次性 benchmark</td><td class="warn">⚠️ 流程结束即丢</td><td class="warn">⚠️ 编辑历史</td></tr>
+                    <tr><td>多线程 UI</td><td class="better">✅ 5+ Web Worker 隔离</td><td>—</td><td>—</td><td>—</td></tr>
+                </table>
+            </div>
+
+            <!-- 关键差异说明 -->
+            <div class="highlight-box">
+                <h4>🔥 关键差异：蜂群 vs 流水线</h4>
+                <p>其他 Agent 项目的"协作"基本是<strong>"流水线工人"</strong>模式（拆任务 → 各自完成 → 拼装），而 Neo.mjs 更接近<strong>"蜂群"</strong>模式 —— 不同模型互相 review、互相指正、共享 memory，把"单模型幻觉"的根本问题从工程上拆解掉。</p>
+            </div>
+
+            <!-- 快速上手 -->
+            <div class="section">
+                <h3>🚀 快速上手</h3>
+                <div class="code-block"># 创建新应用（脚手架）
+npx neo-app
+
+# 或克隆主仓库参与贡献
+git clone https://github.com/neomjs/neo
+cd neo
+npm install
+npm run dev
+
+# 零编译模式下，修改源码后刷新浏览器即可看到效果
+# AI 协作部分需要配置 LLM API key（OpenAI / Anthropic / Google 任选）
+
+# 启动 Brain 与 DreamService
+npm run ai:start    # 启动 AgentOrchestrator
+npm run dream:run   # 手动触发一次 DreamService REM cycle</div>
+            </div>
+
+            <!-- 客观评估 -->
+            <div class="section">
+                <h3>⚖️ 客观评估</h3>
+                <div class="highlight-box">
+                    <h4>需要理性看待的地方</h4>
+                    <p>① <strong>velocity score 仅 0.49/10</strong>（[beamforai](https://www.beamforai.com/tools/neomjs/neo) 评级），主要因为贡献者高度集中在核心团队；<br>
+                    ② <strong>13K+ 行的巨型 README</strong>也意味着新贡献者 onboarding 曲线较陡；<br>
+                    ③ <strong>3.2k stars</strong> 的体量相比 RAGFlow / LangChain 还有数量级差距，但"自演化工程机构"这个范式本身值得关注。</p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h3>让 AI 蜂群"住进"你的应用，开启自演化工程新范式</h3>
+                <p>跨模型异源审查 · Neural Link 活运行时操控 · DreamService REM 自演化 · MCP 一等公民</p>
+                <a href="https://github.com/neomjs/neo" class="cta-button" target="_blank">查看项目 →</a>
+            </div>
+        </div>
+        <div class="footer">
+            GitHub AI 项目日报 · 每日推荐有启发意义的开源项目 · fly的AI学习
+        </div>
+    </div>
+</body>
+</html>
