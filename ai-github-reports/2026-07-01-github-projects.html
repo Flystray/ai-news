@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub AI 项目日报 - 2026-07-01</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #c62828 0%, #8e24aa 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #4a148c 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; background: linear-gradient(90deg, #ff6f00, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header .date { color: #888; font-size: 1.1em; }
+        .content { padding: 40px; }
+        .project-card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #8e24aa; }
+        .project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .project-name { font-size: 1.8em; color: #1a1a2e; font-weight: bold; }
+        .badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-stars { background: #ffd700; color: #333; }
+        .badge-forks { background: #e3f2fd; color: #1976d2; }
+        .badge-lang { background: #fff3e0; color: #e65100; }
+        .badge-new { background: linear-gradient(135deg, #c62828, #8e24aa); color: white; }
+        .badge-mit { background: #e8f5e9; color: #2e7d32; }
+        .github-link { display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .github-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(36,41,46,0.4); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #1a1a2e; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #8e24aa; }
+        .section p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .feature-item h4 { color: #8e24aa; font-size: 1em; margin-bottom: 8px; }
+        .feature-item p { font-size: 0.9em; color: #666; margin: 0; }
+        .highlight-box { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box h4 { color: #e65100; margin-bottom: 10px; }
+        .highlight-box-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 4px solid #1976d2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-blue h4 { color: #1565c0; margin-bottom: 10px; }
+        .highlight-box-green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-green h4 { color: #1b5e20; margin-bottom: 10px; }
+        .highlight-box-purple { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-left: 4px solid #7b1fa2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .highlight-box-purple h4 { color: #4a148c; margin-bottom: 10px; }
+        .code-block { background: #1a1a2e; color: #00d4ff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85em; font-family: 'Courier New', monospace; margin: 15px 0; white-space: pre; }
+        .stat-row { display: flex; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 120px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; }
+        .stat-box .num { font-size: 1.8em; font-weight: bold; color: #8e24aa; }
+        .stat-box .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
+        .table th { background: #1a1a2e; color: white; padding: 10px; text-align: left; }
+        .table td { padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:nth-child(even) { background: #f8f9fa; }
+        .table td.better { color: #388e3c; font-weight: 600; }
+        .table td.warn { color: #ff9800; }
+        .table td.no { color: #e53935; }
+        .arch-diagram { background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.82em; line-height: 1.6; }
+        .arch-diagram .layer { margin: 8px 0; padding: 8px; border-radius: 4px; }
+        .arch-diagram .body { background: #2d3a2e; border-left: 3px solid #4caf50; }
+        .arch-diagram .brain { background: #3a2d2d; border-left: 3px solid #ff9800; }
+        .arch-diagram .link { background: #2d2d4e; border-left: 3px solid #7b2cbf; }
+        .cta-section { background: linear-gradient(135deg, #c62828 0%, #8e24aa 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin-top: 30px; }
+        .cta-section h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .cta-button { display: inline-block; background: white; color: #8e24aa; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); }
+        .footer { background: #1a1a2e; color: #888; text-align: center; padding: 20px; font-size: 0.9em; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+            .table { font-size: 0.75em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>jnMetaCode/agency-agents-zh</h1>
+            <div class="date">GitHub AI 项目日报 · 2026-07-01</div>
+            <p style="color:#aaa; margin-top:10px;">把 266 个"中国本土化"AI 专家塞进任意编码工具</p>
+        </div>
+        <div class="content">
+            <!-- 项目卡片 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">jnMetaCode/agency-agents-zh</span>
+                    <span class="badge badge-stars">⭐ 16.2k</span>
+                    <span class="badge badge-forks">🍴 2.8k</span>
+                    <span class="badge badge-lang">Shell / Markdown</span>
+                    <span class="badge badge-new">角色即代码</span>
+                    <span class="badge badge-mit">MIT 许可</span>
+                </div>
+                <a href="https://github.com/jnMetaCode/agency-agents-zh" class="github-link" target="_blank">
+                    🔗 查看项目 →
+                </a>
+            </div>
+
+            <!-- 核心统计 -->
+            <div class="stat-row">
+                <div class="stat-box"><div class="num">266</div><div class="label">AI 专家角色</div></div>
+                <div class="stat-box"><div class="num">50</div><div class="label">中国原创角色</div></div>
+                <div class="stat-box"><div class="num">17</div><div class="label">支持的 AI 工具</div></div>
+                <div class="stat-box"><div class="num">7</div><div class="label">NEXUS 编排阶段</div></div>
+            </div>
+
+            <!-- 项目背景 -->
+            <div class="section">
+                <h3>📌 项目背景</h3>
+                <p>在 2025–2026 年大模型 Agent 浪潮中，"提示词"逐渐演化为"可被工程化调度的角色资产"。GitHub 上英文圈最火的项目是 <strong>msitarzewski/agency-agents</strong>，但其角色全部围绕北美 SaaS 场景：CRM、SEO、SaaS 增长、Stripe 集成……<span style="background:#fff3e0; padding:2px 6px; border-radius:4px;"><strong>对中国开发者来说，"小红书种草"、"抖音电商"、"飞书机器人"、"政务 ToG 投标准备"、"医疗合规审查"等高频场景完全缺失</strong></span>。</p>
+                <p><strong>agency-agents-zh</strong> 正是为填补这一空缺而诞生的中文社区版。它做的事情有三件：</p>
+                <p>① <strong>完整翻译上游 215 个英文角色</strong>（保留原文专业度，附中文 SOP）</p>
+                <p>② <strong>原创 50 个中国市场专属角色</strong>（小红书 / 抖音 / 微信 / B 站 / 飞书 / 钉钉 / 跨境电商 / 政务 ToG / 医疗合规 / Qt 工业上位机 / 高考志愿填报等）</p>
+                <p>③ <strong>构建 NEXUS 多智能体编排框架</strong>，把"专家库 + 工具链 + 生命周期管理"打包成一个可持续演进的开源生态</p>
+            </div>
+
+            <!-- 架构图 -->
+            <div class="arch-diagram">
+                <div class="layer body">📚 <strong>Layer 1 · Agent Library</strong>：18 个部门 / 266 个 .md 角色定义（YAML frontmatter + 结构化正文）</div>
+                <div class="layer body">⚙️ <strong>Layer 2 · Conversion & Installation Pipeline</strong>：convert.sh 解析 → 工具专属格式 / install.sh 检测本地环境 → 智能部署</div>
+                <div class="layer link">🔗 <strong>Layer 3 · NEXUS Orchestration Framework</strong>：7 阶段生命周期 + 3 激活模式 + 4 套场景剧本</div>
+                <div class="layer brain">🎯 <strong>NEXUS 7 阶段</strong>：Discovery → Strategy → Foundation → Build → Hardening → Launch → Operate</div>
+                <div class="layer brain">🧠 <strong>质量门禁</strong>：Evidence Over Words 原则 · Dev-QA Evidence Loop · Pipeline Integrity</div>
+                <div class="layer brain">🌐 <strong>17 工具适配</strong>：OpenClaw / Claude Code / Cursor / Copilot / WorkBuddy / Hermes Agent / DeerFlow 2.0…</div>
+            </div>
+
+            <!-- 核心功能 -->
+            <div class="section">
+                <h3>🚀 核心功能</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🎭 266 个即插即用专家</h4>
+                        <p>每个角色都带"身份 + 工作流 + 交付物 + 红线"四件套，远超"你是一个 X 专家"的浅层提示词。覆盖工程/设计/营销/金融/法律/供应链/游戏/空间计算等 18 个部门。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🛠️ 17 工具一键安装</h4>
+                        <p>install.sh --tool &lt;name&gt; 自动检测本地 IDE/CLI（Claude Code、Cursor、Copilot、Trae、Windsurf、Codex、WorkBuddy、Hermes Agent、DeerFlow 2.0 等），部署到对应配置目录。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🎯 NEXUS 7 阶段编排</h4>
+                        <p>Discovery → Strategy → Foundation → Build → Hardening → Launch → Operate，配合 "Evidence Over Words" 质量门禁，不达标不能进入下一阶段。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⚡ 三种激活模式</h4>
+                        <p>NEXUS-Full（190+ 智能体，12-24 周企业级）/ NEXUS-Sprint（15-25 个，2-6 周 MVP）/ NEXUS-Micro（5-10 个，1-5 天单任务）。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📜 4 套场景剧本</h4>
+                        <p>创业 MVP、企业级 Feature、营销 Campaign、Incident Response 标准化 runbook，提供"开箱即用"的多 Agent 协作模板。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🧩 Agency Orchestrator</h4>
+                        <p>配套 npm 包，支持 ao compose "&lt;任务&gt;" --run 一句话调度多 Agent。10 家 LLM / 7 免费模型可选。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术亮点 -->
+            <div class="section">
+                <h3>✨ 技术亮点</h3>
+
+                <div class="highlight-box">
+                    <h4>1. Role-as-Code 工程化</h4>
+                    <p>每个 .md 文件有严格 YAML frontmatter（name / department / role / tools 等字段），由 <code>scripts/lint-agents.sh</code> 自动校验字段完整性，从源头杜绝"半成品 prompt"。</p>
+                </div>
+
+                <div class="highlight-box-blue">
+                    <h4>2. 两层流水线架构</h4>
+                    <p><strong>convert.sh</strong>：解析 Markdown → AST → 工具专属格式（.mdc / .json / CONVENTIONS.md）。<br><strong>install.sh</strong>：检测本地环境（~/.claude/agents/、.cursor/rules/ 等）→ 智能复制到目标目录。</p>
+                </div>
+
+                <div class="highlight-box-green">
+                    <h4>3. NEXUS 编排协议</h4>
+                    <p>通过 "Pipeline Integrity" 原则保证阶段间不丢失上下文；Dev-QA Evidence Loop 让工程类智能体与 reality-checker 配对运行，避免"看起来对但实际坏掉"的交付。</p>
+                </div>
+
+                <div class="highlight-box-purple">
+                    <h4>4. OpenClaw 优先适配</h4>
+                    <p>将每个角色拆为 SOUL.md（人设）+ AGENTS.md（业务能力）+ IDENTITY.md（简介）三件套，与 OpenClaw 的子代理调度深度协同。</p>
+                </div>
+            </div>
+
+            <!-- 适用人群 -->
+            <div class="section">
+                <h3>👥 适用人群</h3>
+                <ul style="line-height:2; color:#555; padding-left:25px;">
+                    <li><strong>个人开发者 / 独立创业者</strong>：1 个人想当 10 个人用，按需调用前端 / 后端 / 运营 / 法务专家</li>
+                    <li><strong>国内 ToB / ToG 团队</strong>：需要快速搭建"小红书运营 + 抖音投放 + 飞书集成 + 合规审查"组合工作流</li>
+                    <li><strong>AI 编程工具重度用户</strong>：Claude Code / Cursor / Copilot / WorkBuddy 用户，希望给 AI 装上"专业大脑"</li>
+                    <li><strong>高校学生 / 应试家庭</strong>：内置"高考志愿填报顾问"、"留学规划顾问"角色，2026 年高考季刚需</li>
+                    <li><strong>内容创作者 / 跨境电商</strong>：需要持续输出小红书笔记 / 短视频脚本 / TikTok 投流策略</li>
+                    <li><strong>多 Agent 研究者</strong>：相比 LangGraph / AutoGen / CrewAI，NEXUS 提供更轻量的中文生态方案</li>
+                </ul>
+            </div>
+
+            <!-- 快速上手 -->
+            <div class="section">
+                <h3>⚡ 快速上手</h3>
+                <div class="code-block"># 1. 安装 npm 包
+npm install -g agency-agents-zh
+
+# 2. 克隆仓库（获取安装脚本）
+git clone --depth 1 https://github.com/jnMetaCode/agency-agents-zh.git
+cd agency-agents-zh
+
+# 3. 选择目标工具并安装（推荐 OpenClaw）
+./scripts/convert.sh --tool openclaw
+./scripts/install.sh --tool openclaw
+
+# 4. 重启 OpenClaw 网关
+openclaw gateway restart
+
+# 5. 一句话调用专家
+# 在 OpenClaw 中说：
+# "启动 marketing-xiaohongshu-operator 帮我写防晒霜种草文案"</div>
+                <p style="color:#666; font-size:0.9em;">其他工具（Claude Code / Cursor / Copilot / WorkBuddy）只需把 <code>--tool openclaw</code> 改为对应名称即可。</p>
+            </div>
+
+            <!-- 对比分析 -->
+            <div class="section">
+                <h3>📊 对比分析</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>维度</th>
+                            <th>agency-agents-zh</th>
+                            <th>msitarzewski/agency-agents</th>
+                            <th>LangGraph / AutoGen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>角色数</strong></td>
+                            <td class="better">266（中文优先）</td>
+                            <td>215（北美场景）</td>
+                            <td>无预设角色</td>
+                        </tr>
+                        <tr>
+                            <td><strong>中国本土化</strong></td>
+                            <td class="better">50 个原创角色</td>
+                            <td class="no">0</td>
+                            <td class="no">无</td>
+                        </tr>
+                        <tr>
+                            <td><strong>工具兼容</strong></td>
+                            <td class="better">17 种 IDE / CLI</td>
+                            <td>7-8 种</td>
+                            <td>LangChain / OpenAI SDK</td>
+                        </tr>
+                        <tr>
+                            <td><strong>编排框架</strong></td>
+                            <td class="better">NEXUS 7 阶段 + 3 模式</td>
+                            <td>无（仅角色）</td>
+                            <td>DAG / State Machine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>部署门槛</strong></td>
+                            <td class="better">install.sh 一键</td>
+                            <td>手动复制</td>
+                            <td>需要写 Python 代码</td>
+                        </tr>
+                        <tr>
+                            <td><strong>学习曲线</strong></td>
+                            <td class="better">极低</td>
+                            <td>极低</td>
+                            <td>高（图编程）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>许可证</strong></td>
+                            <td>MIT</td>
+                            <td>MIT</td>
+                            <td>MIT / Apache</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stars</strong></td>
+                            <td>16.2k</td>
+                            <td>~6k</td>
+                            <td>12k+</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>结论</strong>：如果你的目标用户是中文市场、需要"开箱即用"、希望避免重造 NEXUS 这种轻量编排器，<strong>agency-agents-zh 是当前最优解</strong>；如果做北美 SaaS + 想要高度自定义的图编排，则上游 <code>agency-agents</code> + LangGraph 组合更灵活。</p>
+            </div>
+
+            <!-- 典型场景 -->
+            <div class="section">
+                <h3>🎯 典型应用场景</h3>
+                <ul style="line-height:2; color:#555; padding-left:25px;">
+                    <li><strong>出海 SaaS MVP 4-6 周冲刺</strong>：NEXUS-Sprint 模式调 15-25 个智能体，覆盖市场调研 → PRD → 前后端开发 → 合规审查 → 增长策略</li>
+                    <li><strong>小红书品牌种草 Campaign</strong>：小红书运营专家 + 内容创作者 + 品牌守护者 + 数据分析师 + 增长黑客，5 步闭环</li>
+                    <li><strong>创业公司合规融资</strong>：合同审查专家 + 财务预测分析师 + 法务制度撰写 + 政务 ToG 投标准备</li>
+                    <li><strong>企业内部知识库搭建</strong>：用 SOUL.md + AGENTS.md 三件套给部门知识沉淀到 RAG 流程</li>
+                    <li><strong>学生高考志愿填报</strong>：专项部内置的"高考志愿填报顾问"角色，结合一分一段表换算同位分（2026 新高考省份刚需）</li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h3>🎭 1 个人 = 1 个专家团队</h3>
+                <p>266 个角色 / 17 工具 / MIT 协议 / 永久免费</p>
+                <a href="https://github.com/jnMetaCode/agency-agents-zh" class="cta-button" target="_blank">
+                    ⭐ 立即 Star →
+                </a>
+                <a href="https://ao.aiolaola.com/experts" class="cta-button" target="_blank" style="margin-left:10px;">
+                    🔍 在线浏览专家库
+                </a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>AI 日课 · fly的AI学习 · 2026-07-01 · 推荐指数 ★★★★★</p>
+        </div>
+    </div>
+</body>
+</html>
