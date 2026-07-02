@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-02 · everything-claude-code (ECC)</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #0969da 0%, #218bff 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(9, 105, 218, 0.15);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .meta span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge.green { background: #aff5b4; color: #1a7f37; }
+  .badge.blue { background: #ddf4ff; color: #0969da; }
+  .badge.purple { background: #fbefff; color: #8250df; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--code-bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #cf222e;
+  }
+  pre {
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaeef2;
+    color: var(--text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 2px 4px 2px 0;
+  }
+  .tag.react { background: #ddf4ff; color: #0969da; }
+  .tag.go { background: #dafbe1; color: #1a7f37; }
+  .tag.ai { background: #fbefff; color: #8250df; }
+  .tag.lang { background: #fff8c5; color: #9a6700; }
+  .emoji-title { font-size: 1.3em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><span class="emoji-title">📅</span> GitHub AI 项目日报</h1>
+    <div class="subtitle">2026-07-02 · 第三十七期</div>
+    <div class="meta">
+      <span>⭐ 22.5 万 stars</span>
+      <span>🍴 3.4 万 forks</span>
+      <span>👥 230+ 贡献者</span>
+      <span>🏆 Anthropic 黑客松冠军</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🚀 今日推荐：everything-claude-code (ECC)</h2>
+    <p>
+      <a href="https://github.com/affaan-m/everything-claude-code">affaan-m/everything-claude-code</a>
+      是 GitHub 上最热门的 AI Agent Harness 性能优化系统，斩获 <span class="badge">Anthropic 黑客松冠军</span>。由 <strong>affaan-m</strong> 单人 10 个月高强度迭代打磨，已突破 <strong>22.5 万 star / 3.4 万 fork / 230+ 贡献者</strong>。
+    </p>
+    <p>
+      2026 年 6 月发布的 <strong>v2.0.0</strong> 正式重命名为"agent harness 操作系统"，从"Claude Code 配置包"进化为支持 <strong>13+ AI 编程工具</strong>（Claude Code、Codex、Cursor、OpenCode、Gemini CLI、Zed、Kiro、Qwen、Trae、CodeBuddy、VS Code、Antigravity、GitHub Copilot）的跨平台工程化框架。
+    </p>
+    <div class="highlight">
+      <strong>🎯 一句话定位</strong>：原生 Claude Code 是"聪明但无约束的实习生"，ECC 为其配备完整的规划师、架构师、测试专家、安全审计员、构建修复师，让 AI 开发从"自由发挥"走向"标准化工程化"。
+    </div>
+    <div>
+      <span class="tag react">claude-code</span>
+      <span class="tag ai">ai-agents</span>
+      <span class="tag ai">MCP</span>
+      <span class="tag lang">developer-tools</span>
+      <span class="tag">productivity</span>
+      <span class="tag">Anthropic</span>
+      <span class="tag">LLM</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📊 核心数据</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">22.5万</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">3.4万</div>
+        <div class="label">Forks</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">230+</div>
+        <div class="label">贡献者</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2,055</div>
+        <div class="label">Commits</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">64</div>
+        <div class="label">专业 Agents</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">261</div>
+        <div class="label">领域 Skills</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">84</div>
+        <div class="label">Slash Commands</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">13+</div>
+        <div class="label">Harness 适配</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 核心功能</h2>
+
+    <h3>1. 64+ 专业子代理（Agents）</h3>
+    <p>覆盖规划（planner）、架构（architect）、TDD 指导、代码审查、安全扫描、构建错误修复、E2E 测试、死代码清理、文档同步、Go/Python/TypeScript 语言专项审查等全流程角色，每个代理绑定特定工具权限与模型（Haiku/Sonnet/Opus）。</p>
+
+    <h3>2. 261+ 领域技能（Skills）</h3>
+    <p>12 种编程语言（TypeScript、Python、Go、Java、Kotlin、C++、Rust、PHP、Perl、Shell、Swift、Markdown）最佳实践合集；框架级 Skills 覆盖 NestJS、Django、Laravel、SpringBoot、React、Next.js；MCP 相关 18 个专项技能。</p>
+
+    <h3>3. 68+ 斜杠命令（Commands）</h3>
+    <p>提供 <code>/plan</code>、<code>/tdd</code>、<code>/code-review</code>、<code>/security-audit</code>、<code>/e2e-test</code>、<code>/build-fix</code>、<code>/refactor-clean</code>、<code>/learn</code>、<code>/checkpoint</code>、<code>/verify</code> 等一键工作流入口。</p>
+
+    <h3>4. 8 类 Hook 事件</h3>
+    <p>PreToolUse、PostToolUse、SessionStart、SessionEnd、Stop、PreCompact 等生命周期钩子，覆盖质量门禁、记忆加载/保存、会话摘要提取、后台进程管理。</p>
+
+    <h3>5. AgentShield 安全审计系统</h3>
+    <p>命令净化（拦截 <code>rm -rf /</code>、SSH 配置修改等危险操作）、CVE 数据库实时扫描、敏感数据边界控制（拒绝访问 <code>~/.ssh/</code>、<code>~/.aws/credentials</code>）、102 条安全规则 + 1282 个测试用例的"红蓝对抗"防护。</p>
+
+    <h3>6. 跨会话记忆与持续学习（Instinct 系统）</h3>
+    <p>SessionStart 自动加载历史上下文，SessionEnd 提取新模式为可重用 Skill；Instinct 系统带置信度评分，行为越用越适配；SQLite 状态存储 + CLI 查询工具。</p>
+
+    <h3>7. 并行编排（Git Worktree + 子代理）</h3>
+    <p>通过 <code>git worktree add</code> 拆分大型重构为多个独立工作树并行处理；iterative-retrieval 模式解决子代理上下文稀释问题（仅传递最相关的 top-5 上下文片段，最大 2000 token）。</p>
+
+    <h3>8. 跨平台适配（13+ Harness）</h3>
+    <p>原生支持 Claude Code、Codex、Cursor、OpenCode、Gemini CLI、Zed、Kiro、Qwen、Trae、CodeBuddy、VS Code、Antigravity、GitHub Copilot；通过 <code>install-modules.json</code> 清单驱动选择性安装。</p>
+  </div>
+
+  <div class="card">
+    <h2>💡 技术亮点</h2>
+
+    <h3>1. 六层架构设计</h3>
+    <p>从入口（<code>.claude-plugin/plugin.json</code>）→ 子代理层（<code>agents/*.md</code>）→ 工作流层（<code>skills/</code>）→ 命令层（<code>commands/</code>）→ 规则层（<code>rules/</code>）→ 钩子层（<code>hooks/hooks.json</code>）分层解耦；每一层都有独立 schema 校验。</p>
+
+    <h3>2. Manifest-driven 安装管线</h3>
+    <p><code>install-modules.json</code> 映射组件到不同 harness 目标（claude/cursor/opencode/codex），避免配置冲突；用户可按需勾选组件安装。</p>
+
+    <h3>3. 包管理器自动检测级联</h3>
+    <p>优先级：环境变量 <code>CLAUDE_PACKAGE_MANAGER</code> → 项目 <code>.claude/package-manager.json</code> → <code>package.json</code> 的 <code>packageManager</code> 字段 → 锁文件检测 → 全局配置 → 回退默认。</p>
+
+    <h3>4. Rust 控制平面原型（ECC 2.0 alpha）</h3>
+    <p><code>ecc2/</code> 目录用 Rust 重写控制面，已实现 <code>dashboard</code>、<code>start</code>、<code>sessions</code>、<code>status</code>、<code>stop</code>、<code>resume</code>、<code>daemon</code> 子命令；状态不可变快照设计，每次关键操作后打快照支持回滚。</p>
+
+    <h3>5. 双层技术栈</h3>
+    <p>JavaScript 3.94M（外壳/插件层）+ Rust 1.82M（内核/控制面）+ Python 331K（Dashboard + 辅助）+ Shell 190K（安装器）；Rust 占比 22%，标志着向原生二进制迁移的长期路线。</p>
+
+    <h3>6. Hermes operator 集成（v2.0）</h3>
+    <p>与 Hermes Agent 互补——Hermes 学"用户在做什么"（运营/市场场景），ECC 学"代码应该怎么写"（工程化场景）；Instinct 系统（带置信度）vs Memory 系统（叙事性）的差异化定位。</p>
+
+    <h3>7. 研究优先（Research-First）方法论</h3>
+    <p>配套三套完整指南——精简指南（30 分钟入门）、详细指南（Token 预算/记忆系统/评估框架/并行化原理）、安全指南（攻击向量/沙箱技术/CVE 防护）。</p>
+  </div>
+
+  <div class="card">
+    <h2>👥 适用人群</h2>
+    <ul>
+      <li><strong>AI 编程重度用户</strong>：每天用 Claude Code/Cursor/Codex 写代码 2 小时以上的工程师</li>
+      <li><strong>追求工程化标准化的团队</strong>：希望统一代码审查、安全规范、测试覆盖率的研发团队</li>
+      <li><strong>跨语言全栈开发者</strong>：在 TypeScript、Python、Go、Java、Rust 等多语言项目间切换</li>
+      <li><strong>企业 AI 安全合规负责人</strong>：需要 Agent 操作审计、敏感数据防护、CVE 扫描能力</li>
+      <li><strong>AI 编程工具链研究者</strong>：希望理解 Harness 层优化的底层机制（Token 管理、记忆持久化、验证循环）</li>
+      <li><strong>Anthropic 生态深度玩家</strong>：希望把 Claude Code 用到极致（不止"装上"而是"用出生产力"）</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 快速上手</h2>
+
+    <h3>1. 通过插件市场安装（推荐，30 秒）</h3>
+<pre><code># 添加市场源
+/plugin marketplace add affaan-m/everything-claude-code
+
+# 安装插件
+/plugin install everything-claude-code@everything-claude-code
+
+# 重启 Claude Code
+</code></pre>
+
+    <h3>2. 手动克隆（用于自定义修改）</h3>
+<pre><code>git clone https://github.com/affaan-m/everything-claude-code.git
+mkdir -p ~/.claude/rules/
+cp -r everything-claude-code/rules/* ~/.claude/rules/
+</code></pre>
+
+    <h3>3. 典型工作流（以 Todo 后端为例）</h3>
+    <ol>
+      <li>用户说："开发一个 Todo 后端 API，支持增删改查"</li>
+      <li><code>/plan</code> → Planner 拆解为用户/商品/订单/支付模块</li>
+      <li>Architect 设计 RESTful API + 数据库表结构</li>
+      <li>TDD Guide 编写测试（RED 阶段）</li>
+      <li>Code Agent 生成业务代码（GREEN 阶段）</li>
+      <li>Code Reviewer 审查可读性与性能</li>
+      <li>Security Reviewer 扫描 SQL 注入/XSS</li>
+      <li>Build Error Resolver 修复依赖冲突</li>
+      <li>E2E Runner 执行 Playwright 全链路验证</li>
+      <li>Doc Updater 生成 API 文档</li>
+    </ol>
+    <p>全程无需人工干预，自动交付可部署的完整后端系统。</p>
+  </div>
+
+  <div class="card">
+    <h2>📈 对比分析</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>ECC</th>
+          <th>claude-code-templates</th>
+          <th>awesome-claude-code</th>
+          <th>addyosmani/agent-skills</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stars</strong></td>
+          <td><strong>225k</strong></td>
+          <td>18k</td>
+          <td>19k</td>
+          <td>68k</td>
+        </tr>
+        <tr>
+          <td><strong>维护者</strong></td>
+          <td>单人 affaan-m</td>
+          <td>社区驱动</td>
+          <td>awesome-list</td>
+          <td>Addy Osmani（Google）</td>
+        </tr>
+        <tr>
+          <td><strong>核心定位</strong></td>
+          <td><strong>完整 OS</strong></td>
+          <td>模板集合</td>
+          <td>资源汇总</td>
+          <td>8 步工作流</td>
+        </tr>
+        <tr>
+          <td><strong>Agents 数量</strong></td>
+          <td><strong>64</strong></td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td><strong>Skills 数量</strong></td>
+          <td><strong>261</strong></td>
+          <td>50+</td>
+          <td>0（仅索引）</td>
+          <td>30+</td>
+        </tr>
+        <tr>
+          <td><strong>跨平台 Harness</strong></td>
+          <td><strong>13+</strong></td>
+          <td>Claude Code 为主</td>
+          <td>N/A</td>
+          <td>3-4</td>
+        </tr>
+        <tr>
+          <td><strong>安全系统</strong></td>
+          <td><strong>AgentShield 红蓝对抗</strong></td>
+          <td>基础</td>
+          <td>无</td>
+          <td>基础</td>
+        </tr>
+        <tr>
+          <td><strong>持续学习</strong></td>
+          <td><strong>Instinct + Memory</strong></td>
+          <td>无</td>
+          <td>无</td>
+          <td>无</td>
+        </tr>
+        <tr>
+          <td><strong>并行化</strong></td>
+          <td><strong>Git Worktree + 子代理</strong></td>
+          <td>无</td>
+          <td>无</td>
+          <td>无</td>
+        </tr>
+        <tr>
+          <td><strong>成熟度</strong></td>
+          <td><strong>10+ 月生产打磨</strong></td>
+          <td>早期</td>
+          <td>列表</td>
+          <td>早期</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <strong>关键差异化</strong>：ECC 不只是"配置模板"，而是"工程操作系统"；提供完整 Agents/Skills/Commands 矩阵 + 持续学习 + 安全审计 + 并行编排。
+    </div>
+
+    <h3>性能数据（社区报告）</h3>
+    <ul>
+      <li><strong>Token 消耗</strong>：通过任务分级模型选择 + 系统提示精简，平均节省 30-50% Token</li>
+      <li><strong>代码质量</strong>：强制 TDD + 80% 测试覆盖率，bug 率显著降低</li>
+      <li><strong>开发速度</strong>：复杂任务自动拆解 + 并行处理，单人产出接近小型团队</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ 风险与局限</h2>
+    <ul>
+      <li><strong>单维护者风险</strong>：项目高度依赖 affaan-m 一人，bus factor 为 1；社区正在迁移部分组件到独立组织</li>
+      <li><strong>入门曲线陡峭</strong>：261 个 Skills + 64 个 Agents 对新手过载，建议从"精简指南"入手</li>
+      <li><strong>配置冲突</strong>：跨 Harness 适配时可能出现 rules 冲突，需要 manifest-driven 选择性安装</li>
+      <li><strong>依赖 Node.js</strong>：Hook 脚本用 Node.js 实现，Windows 环境需注意 PATH 配置</li>
+      <li><strong>企业版付费</strong>：核心功能 MIT 免费，但 Pro 版（$19/座位/月）提供仪表盘 + 高级安全审计</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>✨ 一句话总结</h2>
+    <div class="highlight">
+      <strong>ECC 把 Claude Code 从"聪明的实习生"升级为"虚拟工程团队"——如果你每天用 AI 写代码超过 2 小时，花一个下午把它装上，是今天最值得的工程投资。</strong>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 项目信息</h2>
+    <ul>
+      <li><strong>GitHub</strong>：<a href="https://github.com/affaan-m/everything-claude-code">github.com/affaan-m/everything-claude-code</a></li>
+      <li><strong>DeepWiki</strong>：<a href="https://deepwiki.com/affaan-m/everything-claude-code">deepwiki.com/affaan-m/everything-claude-code</a></li>
+      <li><strong>作者</strong>：Affaan Mustafa（<a href="https://x.com/affaanmustafa">@affaanmustafa</a>）</li>
+      <li><strong>许可证</strong>：MIT（OSS 永久免费）</li>
+      <li><strong>当前版本</strong>：v2.0.0（2026 年 6 月）</li>
+      <li><strong>数据快照</strong>：22.5 万 star / 3.4 万 fork / 230+ 贡献者（截至 2026-07-02）</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <p>📮 公众号：<strong>AI 日课</strong> · 作者署名：fly 的 AI 学习</p>
+    <p style="margin-top: 8px;">GitHub: <a href="https://github.com/Flystray/ai-news">Flystray/ai-news</a> · Pages: <a href="https://flystray.github.io/ai-news/ai-github-reports/">flystray.github.io/ai-news</a></p>
+    <p style="margin-top: 8px; font-size: 12px;">© 2026 AI 日课 · 每日精选 GitHub 上最有启发的 AI 项目</p>
+  </div>
+
+</div>
+</body>
+</html>
