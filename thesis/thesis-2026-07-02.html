@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>状态-预测分离假设 · Transformer 内部角色的解耦革命</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #333; line-height: 1.8; font-size: 16px;">
+  <div style="max-width: 680px; margin: 0 auto; padding: 30px 20px; background-color: #ffffff;">
+
+    <!-- 标题区 -->
+    <h1 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.4;">状态-预测分离假设 · Transformer 内部角色的解耦革命</h1>
+    <div style="font-size: 14px; color: #888; margin-bottom: 20px;">
+      ✍️ fly的AI学习&nbsp;&nbsp;|&nbsp;&nbsp;论文解读 · 国外&nbsp;&nbsp;|&nbsp;&nbsp;阅读时长 8 分钟
+    </div>
+
+    <!-- 论文信息表 -->
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #f8f9fa; font-size: 14px;">
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 10px 12px; font-weight: 600; color: #555; width: 80px;">论文标题</td>
+        <td style="padding: 10px 12px; color: #333;">The State-Prediction Separation Hypothesis（状态-预测分离假设）</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 10px 12px; font-weight: 600; color: #555;">作者</td>
+        <td style="padding: 10px 12px; color: #333;">Giovanni Monea, Nathan Godey, Kianté Brantley, Yoav Artzi</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 10px 12px; font-weight: 600; color: #555;">机构</td>
+        <td style="padding: 10px 12px; color: #333;">Cornell University LIL Lab</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 10px 12px; font-weight: 600; color: #555;">发表日期</td>
+        <td style="padding: 10px 12px; color: #333;">2026-07-01</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 10px 12px; font-weight: 600; color: #555;">来源</td>
+        <td style="padding: 10px 12px; color: #333;">arXiv (cs.CL, cs.AI, cs.LG)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 10px 12px; font-weight: 600; color: #555;">链接</td>
+        <td style="padding: 10px 12px; color: #333;"><a href="https://arxiv.org/abs/2607.01218" style="color: #4a90d9;">arxiv.org/abs/2607.01218</a></td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 12px; font-weight: 600; color: #555;">标签</td>
+        <td style="padding: 10px 12px; color: #333;">Transformer架构 · 表示分离 · 语言模型预训练 · 数据效率</td>
+      </tr>
+    </table>
+
+    <!-- 这篇论文在说什么 -->
+    <div style="margin-bottom: 35px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; padding-left: 12px; border-left: 4px solid #e74c3c;">这篇论文在说什么？</h2>
+      <p style="margin-bottom: 15px;">Transformer 每处理一个 token，隐藏状态同时干两件事：一是预测下一个 token，二是把状态信息存下来给后面的 token 用。这两个角色搅在一起，就像一个人同时当记账员和预言家——账记得乱，预言也不够准。</p>
+      <p style="margin-bottom: 15px;">Cornell 的研究团队提出了一个大胆的假设：<strong>把"存状态"和"做预测"这两个角色拆开，语言模型会更好</strong>。他们设计了一个叫 SPS（State-Prediction Separation）的 Transformer 变体——每个 token 后面插入一个虚拟的 &lt;predict&gt; 步骤，让原始 token 专职存状态，虚拟 token 专职做预测。结果？在 53M 到 1.678B 五个规模上，SPS 一致性地赢了标准 Transformer：验证损失更低，下游任务平均提升 2-3 个百分点，而且用一半的训练数据就能达到同样的质量。</p>
+
+      <!-- Figure 1 上半部分 -->
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://arxiv.org/html/2607.01218v1/x1.png" alt="Standard Transformer vs SPS Transformer 架构对比" style="max-width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 13px; color: #888; margin-top: 8px; text-align: center;">图源：原文 Figure 1（上半部分）——Standard vs SPS Transformer 架构对比</p>
+      </div>
+    </div>
+
+    <!-- 为什么要关注 -->
+    <div style="margin-bottom: 35px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; padding-left: 12px; border-left: 4px solid #3498db;">为什么要关注？</h2>
+      <p style="margin-bottom: 15px;">Transformer 自 2017 年诞生以来，几乎没人质疑过它的一个底层设计：<strong>每个位置的隐藏状态同时是"记忆载体"和"预测输出"</strong>。这就像一本书的每一页，既要记录前面发生的故事（给后面的页参考），又要直接告诉读者"下一页会发生什么"。两种需求冲突时，模型只能妥协。</p>
+      <p style="margin-bottom: 15px;">这个问题在实践中意味着什么？标准 Transformer 在训练时，梯度信号既要优化当前 token 的预测准确性，又要优化未来 token 需要的状态质量。两个目标互相拉扯，导致模型效率打折——你要用更多数据、更多算力才能达到某个质量水平。</p>
+      <p style="margin-bottom: 15px;">之前有人试过增加模型宽度、增加计算步数这类方法来缓解，但都没从根本上解决问题。这篇论文的核心贡献是：<strong>不是给 Transformer 加更多东西，而是重新分配它已有东西的职责</strong>。思路非常干净——同样的参数量，同样的推理开销，只是换了一种组织方式，就拿到了一致的提升。</p>
+
+      <!-- Figure 1 下半部分 -->
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://arxiv.org/html/2607.01218v1/x2.png" alt="SPS 在1.6B参数下的数据效率对比" style="max-width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 13px; color: #888; margin-top: 8px; text-align: center;">图源：原文 Figure 1（下半部分）——SPS 用 2.6× 更少的 token 达到了标准 Transformer 的质量</p>
+      </div>
+    </div>
+
+    <!-- 核心方法 -->
+    <div style="margin-bottom: 35px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; padding-left: 12px; border-left: 4px solid #2ecc71;">核心方法</h2>
+
+      <h3 style="font-size: 17px; font-weight: 600; color: #2c3e50; margin-bottom: 12px;">关键思路：双流解耦</h3>
+      <p style="margin-bottom: 15px;">SPS 的核心设计很直观：在输入序列的每个 token 后面，插入一个 &lt;predict&gt; 虚拟 token。序列从 (x₁, x₂, ..., x_T) 变成 (x₁, ρ₁, x₂, ρ₂, ..., x_T, ρ_T)，其中 ρᵢ 就是 &lt;predict&gt;。</p>
+      <p style="margin-bottom: 15px;">两个流各自有明确分工：</p>
+      <ul style="margin-bottom: 15px; padding-left: 20px;">
+        <li style="margin-bottom: 8px;"><strong>输入流 {xᵢ}</strong>（State Stream）：专职存储持久状态。它的 KV cache 条目全部保留，后续所有位置都可以读取。就像一个靠谱的档案管理员，把重要文件永远归档。</li>
+        <li style="margin-bottom: 8px;"><strong>预测流 {ρᵢ}</strong>（Prediction Stream）：专职预测下一个 token。它的 KV cache 条目只在滑动窗口（默认 w=64）内保留，超出窗口就丢弃。就像一个临时笔记本，只保留最近的草稿。</li>
+      </ul>
+
+      <!-- Figure 2 -->
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://arxiv.org/html/2607.01218v1/x3.png" alt="各规模训练曲线对比" style="max-width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 13px; color: #888; margin-top: 8px; text-align: center;">图源：原文 Figure 2——SPS 在所有规模上训练更快、损失更低</p>
+      </div>
+
+      <h3 style="font-size: 17px; font-weight: 600; color: #2c3e50; margin-bottom: 12px;">技术细节：注意力掩码与损失函数</h3>
+      <p style="margin-bottom: 15px;">SPS 的注意力掩码设计很精巧。对于输入流中的 xᵢ，它可以读取所有之前的输入 token，加上窗口内的预测 token；对于预测流中的 ρᵢ，同样可以读取之前的所有输入 token 和窗口内的预测 token。关键是——输入流的 KV 永久保留，预测流的 KV 只在窗口内存活。</p>
+      <p style="margin-bottom: 15px;">损失函数只在 ρᵢ 位置计算，不在 xᵢ 位置计算：</p>
+
+      <div style="background-color: #f8f9fa; padding: 15px 18px; border-left: 3px solid #999; font-style: italic; color: #555; margin-bottom: 15px;">
+        L = (1/(T-1)) Σ_{i=1}^{T-1} -log p(x_{i+1} | x₁, ρ₁, ..., x_i, ρ_i)<br><br>
+        这个设计让梯度信号变得干净——预测流的梯度只优化预测质量，输入流的梯度只优化状态存储质量。两种梯度不再互相干扰。
+      </div>
+
+      <p style="margin-bottom: 15px;">还有一个值得注意的细节：xᵢ 和 ρᵢ 共享相同的位置编码。这意味着模型不会因为插入额外 token 而搞乱位置信息，虚拟步骤在位置维度上是"隐形"的。</p>
+    </div>
+
+    <!-- 效果怎么样 -->
+    <div style="margin-bottom: 35px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; padding-left: 12px; border-left: 4px solid #e67e22;">效果怎么样？</h2>
+      <p style="margin-bottom: 15px;">数据说话。在 53M 到 1.678B 五个规模上，SPS 一致性地超越标准 Transformer：</p>
+
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+        <thead>
+          <tr style="background-color: #2c3e50; color: #fff;">
+            <th style="padding: 10px 8px; text-align: left;">规模</th>
+            <th style="padding: 10px 8px; text-align: left;">方法</th>
+            <th style="padding: 10px 8px; text-align: center;">验证损失 ↓</th>
+            <th style="padding: 10px 8px; text-align: center;">NLL ↓</th>
+            <th style="padding: 10px 8px; text-align: center;">准确率 ↑</th>
+            <th style="padding: 10px 8px; text-align: center;">吞吐量</th>
+            <th style="padding: 10px 8px; text-align: center;">内存</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px 8px;">XS (53M)</td>
+            <td style="padding: 10px 8px;">Standard</td>
+            <td style="padding: 10px 8px; text-align: center;">3.107</td>
+            <td style="padding: 10px 8px; text-align: center;">4.335</td>
+            <td style="padding: 10px 8px; text-align: center;">44.9%</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+          </tr>
+          <tr style="background-color: #e8f5e9;">
+            <td style="padding: 10px 8px;"></td>
+            <td style="padding: 10px 8px; font-weight: 700; color: #2e7d32;">SPS</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">3.065</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">4.243</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">47.3%</td>
+            <td style="padding: 10px 8px; text-align: center;">0.94×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.01×</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+            <td style="padding: 10px 8px;">S (131M)</td>
+            <td style="padding: 10px 8px;">Standard</td>
+            <td style="padding: 10px 8px; text-align: center;">2.858</td>
+            <td style="padding: 10px 8px; text-align: center;">4.018</td>
+            <td style="padding: 10px 8px; text-align: center;">49.5%</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+          </tr>
+          <tr style="background-color: #e8f5e9;">
+            <td style="padding: 10px 8px;"></td>
+            <td style="padding: 10px 8px; font-weight: 700; color: #2e7d32;">SPS</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">2.810</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">3.913</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">51.8%</td>
+            <td style="padding: 10px 8px; text-align: center;">0.94×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.01×</td>
+          </tr>
+          <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px 8px;">M (379M)</td>
+            <td style="padding: 10px 8px;">Standard</td>
+            <td style="padding: 10px 8px; text-align: center;">2.648</td>
+            <td style="padding: 10px 8px; text-align: center;">3.732</td>
+            <td style="padding: 10px 8px; text-align: center;">55.8%</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+          </tr>
+          <tr style="background-color: #e8f5e9;">
+            <td style="padding: 10px 8px;"></td>
+            <td style="padding: 10px 8px; font-weight: 700; color: #2e7d32;">SPS</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">2.591</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">3.627</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">58.7%</td>
+            <td style="padding: 10px 8px; text-align: center;">0.95×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.01×</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+            <td style="padding: 10px 8px;">L (831M)</td>
+            <td style="padding: 10px 8px;">Standard</td>
+            <td style="padding: 10px 8px; text-align: center;">2.537</td>
+            <td style="padding: 10px 8px; text-align: center;">3.598</td>
+            <td style="padding: 10px 8px; text-align: center;">60.1%</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+          </tr>
+          <tr style="background-color: #e8f5e9;">
+            <td style="padding: 10px 8px;"></td>
+            <td style="padding: 10px 8px; font-weight: 700; color: #2e7d32;">SPS</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">2.470</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">3.484</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">62.6%</td>
+            <td style="padding: 10px 8px; text-align: center;">0.90×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.01×</td>
+          </tr>
+          <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px 8px;">XL (1.678B)</td>
+            <td style="padding: 10px 8px;">Standard</td>
+            <td style="padding: 10px 8px; text-align: center;">2.458</td>
+            <td style="padding: 10px 8px; text-align: center;">3.487</td>
+            <td style="padding: 10px 8px; text-align: center;">63.2%</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.00×</td>
+          </tr>
+          <tr style="background-color: #e8f5e9;">
+            <td style="padding: 10px 8px;"></td>
+            <td style="padding: 10px 8px; font-weight: 700; color: #2e7d32;">SPS</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">2.390</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">3.338</td>
+            <td style="padding: 10px 8px; text-align: center; font-weight: 700; color: #2e7d32;">66.3%</td>
+            <td style="padding: 10px 8px; text-align: center;">0.94×</td>
+            <td style="padding: 10px 8px; text-align: center;">1.01×</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-bottom: 15px;">几个关键数字值得单独拎出来：</p>
+      <ul style="margin-bottom: 15px; padding-left: 20px;">
+        <li style="margin-bottom: 8px;"><strong>数据效率</strong>：在 XL 规模（1.678B 参数）下，SPS 用 18B token 就达到了标准 Transformer 用 47B token 才能达到的质量——<strong>节省 2.6× 训练数据</strong>。</li>
+        <li style="margin-bottom: 8px;"><strong>推理开销</strong>：吞吐量只降低 6-10%，峰值内存几乎不变（1.01×）。因为 SPS 的持久 KV cache 只存输入 token，跟标准 Transformer 的 KV cache 大小一模一样。</li>
+        <li style="margin-bottom: 8px;"><strong>统计显著性</strong>：所有对比 p &lt; 0.005，不是随机波动。</li>
+      </ul>
+
+      <!-- Figure 5 -->
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://arxiv.org/html/2607.01218v1/x5.png" alt="梯度流向分析与持久状态重要性分析" style="max-width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 13px; color: #888; margin-top: 8px; text-align: center;">图源：原文 Figure 5——左图显示 SPS 输入流持续携带更多未来损失梯度；右图显示删除 SPS 持久状态的损伤是 Delayed State 的 1.4-2.2 倍</p>
+      </div>
+    </div>
+
+    <!-- 和其他方案比有什么不同 -->
+    <div style="margin-bottom: 35px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; padding-left: 12px; border-left: 4px solid #9b59b6;">和其他方案比有什么不同？</h2>
+      <p style="margin-bottom: 15px;">论文设计了三个对照方案来证明 SPS 的增益确实来自"角色分离"，而不是其他原因：</p>
+
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+        <thead>
+          <tr style="background-color: #2c3e50; color: #fff;">
+            <th style="padding: 10px 8px; text-align: left;">对照方法</th>
+            <th style="padding: 10px 8px; text-align: left;">设计</th>
+            <th style="padding: 10px 8px; text-align: left;">与 SPS 的差异</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px 8px;"><strong>2x Memory</strong></td>
+            <td style="padding: 10px 8px;">保留所有 &lt;predict&gt; 的 KV 条目（不丢弃）</td>
+            <td style="padding: 10px 8px;">容量翻倍，但增益不如 SPS。证明 SPS 的提升不来自"更多记忆容量"</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+            <td style="padding: 10px 8px;"><strong>Delayed State</strong></td>
+            <td style="padding: 10px 8px;">额外计算步骤但不分离角色——两个步骤都做预测+存状态</td>
+            <td style="padding: 10px 8px;">有改进但显著低于 SPS。证明"加计算步"有用，但"分离角色"才是关键</td>
+          </tr>
+          <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px 8px;"><strong>Reverse SPS</strong></td>
+            <td style="padding: 10px 8px;">交换角色——让 &lt;predict&gt; 流存持久状态，输入流做预测</td>
+            <td style="padding: 10px 8px;">小窗口时性能急剧下降。证明"哪个流存状态"不是随意分配的</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background-color: #f8f9fa; padding: 15px 18px; border-left: 3px solid #999; font-style: italic; color: #555; margin-bottom: 15px;">
+        "Our key insight is that disentangling the two roles yields better language modeling performance."<br><br>
+        直白地说：不是多给模型一些资源就行的，关键是把已有的资源用对方向。同样是多一步计算，"各司其职"比"各干各半"效果好得多。
+      </div>
+
+      <!-- Figure 4 -->
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://arxiv.org/html/2607.01218v1/x4.png" alt="窗口大小消融实验与 Reverse SPS 对比" style="max-width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 13px; color: #888; margin-top: 8px; text-align: center;">图源：原文 Figure 4——SPS 在小窗口（w&gt;0）时最优，Reverse SPS 在任何窗口下都不如 SPS</p>
+      </div>
+
+      <p style="margin-bottom: 15px;">还有一个有意思的发现：梯度分析显示，SPS 的输入流比标准 Transformer 携带更多"未来损失梯度"——说明输入流确实更专注于为未来存储有用的信息。而预测流的梯度则几乎不含状态信息——两种梯度被成功路由到不同的 token，不再打架。</p>
+    </div>
+
+    <!-- 对开发者意味着什么 -->
+    <div style="margin-bottom: 30px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; padding-left: 12px; border-left: 4px solid #1abc9c;">对开发者意味着什么？</h2>
+
+      <p style="margin-bottom: 15px;"><strong>1. 如果你正在预训练语言模型</strong>：SPS 是一个值得认真考虑的架构改动。同样的参数量、几乎相同的推理成本，数据效率提升 2.6×。在大规模预训练中，这意味着你可以用更少的数据和算力达到目标质量，或者用同样的资源达到更高的质量天花板。</p>
+
+      <p style="margin-bottom: 15px;"><strong>2. 如果你关心推理部署</strong>：SPS 的推理开销几乎可忽略——持久 KV cache 大小与标准 Transformer 相同，吞吐量只降 6-10%。这比多数"加宽模型"或"加层"的方案友好得多。</p>
+
+      <p style="margin-bottom: 15px;"><strong>3. 如果你研究表示空间优化</strong>：这篇论文给了一个很清晰的信号——Transformer 内部表示的角色冲突是一个真实存在的问题，解耦它能拿到实际收益。这与 LoRA、量化等方法优化"效率"不同，SPS 优化的是"表示质量本身"。</p>
+
+      <p style="margin-bottom: 15px;"><strong>4. 实际落地建议</strong>：</p>
+      <ul style="margin-bottom: 15px; padding-left: 20px;">
+        <li style="margin-bottom: 8px;">目前 SPS 只在 1.678B 以下规模验证，更大规模的适用性还需要确认</li>
+        <li style="margin-bottom: 8px;">训练阶段上下文长度翻倍（因为插入虚拟 token），训练计算量会增加约一倍——但数据效率的增益可以补偿</li>
+        <li style="margin-bottom: 8px;">实现需要定制 FlashAttention（Triton 实现）来支持混合持久/滑动窗口注意力模式</li>
+        <li style="margin-bottom: 8px;">如果你是用 HuggingFace Transformers 这类框架，需要自己实现 SPS 的注意力掩码逻辑</li>
+      </ul>
+
+      <p style="margin-bottom: 10px; font-size: 16px; font-weight: 600; color: #2c3e50;"><strong>一句话总结</strong>：SPS 不是给 Transformer 加翅膀，而是给它一个更好的分工制度。同样的部件，换了组织方式，效率翻倍。这种"不加量、改结构"的思路，可能是 Transformer 下一代演进的重要方向。</p>
+    </div>
+
+    <!-- 底部签名 -->
+    <div style="border-top: 1px solid #e0e0e0; padding-top: 15px; font-size: 14px; color: #888; text-align: center;">
+      👤 fly的AI学习 | 每日更新 AI 大模型最新动态
+    </div>
+
+  </div>
+</body>
+</html>
