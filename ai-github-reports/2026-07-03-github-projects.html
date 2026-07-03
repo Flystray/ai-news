@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 — 2026-07-03</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --tag-bg: #1c2128;
+    --code-bg: #0d1117;
+    --warn-bg: #1a1510;
+    --warn-border: #bb8009;
+  }
+  * { margin:0; padding:0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #58a6ff, #3fb950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: .5rem;
+  }
+  .header .date {
+    color: var(--text-dim);
+    font-size: .9rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .project-card h2 a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  .project-card h2 a:hover { text-decoration: underline; }
+  .quote {
+    font-style: italic;
+    color: var(--text-dim);
+    border-left: 3px solid var(--accent2);
+    padding-left: 1rem;
+    margin: 1rem 0;
+  }
+  .stars {
+    display: inline-flex; align-items: center; gap: 1rem;
+    color: var(--text-dim); font-size: .9rem; margin: .5rem 0 1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+  .tags span {
+    background: var(--tag-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: .2rem .8rem; font-size: .8rem;
+    color: var(--accent);
+  }
+  h3 {
+    color: var(--accent2);
+    font-size: 1.15rem;
+    margin: 2rem 0 .8rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h4 { color: var(--accent); margin: 1.2rem 0 .5rem; }
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: .8rem 0 1.2rem 1.5rem; }
+  li { margin-bottom: .4rem; }
+  code {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: .15rem .4rem; font-size: .85rem;
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem; overflow-x: auto;
+    font-size: .85rem; margin-bottom: 1rem;
+  }
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0;
+    font-size: .85rem;
+  }
+  .compare-table th {
+    background: var(--tag-bg); padding: .6rem .8rem;
+    text-align: left; border: 1px solid var(--border); color: var(--accent);
+  }
+  .compare-table td {
+    padding: .5rem .8rem; border: 1px solid var(--border);
+  }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .warn {
+    background: var(--warn-bg); border: 1px solid var(--warn-border);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0;
+  }
+  .warn::before { content: "⚠️ "; }
+  .footer {
+    text-align: center; color: var(--text-dim); font-size: .85rem;
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); }
+  .highlight-num {
+    font-weight: 700; color: var(--accent2);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GitHub AI 项目日报</h1>
+  <div class="date">2026年7月3日 · 星期五</div>
+</div>
+
+<div class="project-card">
+  <h2><a href="https://github.com/nextlevelbuilder/goclaw" target="_blank">GoClaw</a></h2>
+  <div class="quote">"OpenClaw rebuilt in Go — with multi-tenant isolation, 5-layer security, and native concurrency."</div>
+
+  <div class="stars">
+    ⭐ 3,380+ · 🍴 952+ · 🔧 Go 1.26 · 📅 2026-02 · 🏢 NextLevelBuilder
+  </div>
+
+  <div class="tags">
+    <span>ai-agent</span><span>agent-orchestration</span><span>multi-agent</span>
+    <span>ai-gateway</span><span>golang</span><span>multi-tenant</span>
+    <span>mcp</span><span>postgresql</span><span>llm</span>
+  </div>
+
+  <h3>📌 项目背景</h3>
+  <p>2026 年的 AI Agent 赛道已经明显从"做一个能聊天的 Demo"转向"如何把它安全、稳定、可扩展地跑在生产环境"。当多智能体系统开始承担真正的业务任务时，开发者很快会遇到三个现实问题：<strong>上下文管理混乱</strong>、<strong>多租户隔离缺失</strong>、<strong>Python/Node 运行时的性能与依赖负担</strong>。</p>
+  <p><strong>GoClaw</strong> 正是冲着这些痛点来的。它由 NextLevelBuilder 团队开源，定位是 <strong>OpenClaw 的 Go 语言重构版</strong>——在保留"Agent 网关 + 多智能体编排"核心思想的同时，用 Go 的原生并发、单二进制分发、强类型工程化能力，把平台从"脚本级工具"升级成"企业级基础设施"。</p>
+  <p>项目创建于 2026 年 2 月，目前 GitHub 收获 <span class="highlight-num">3,380+ Stars</span>、<span class="highlight-num">952+ Forks</span>，代码库已积累 <span class="highlight-num">1,882 次提交</span>，最新提交就在 2026 年 7 月 3 日，活跃度非常高。它的目标不是做一个更炫酷的聊天机器人，而是成为可以<strong>大规模部署 AI Agent 团队</strong>的安全底座。</p>
+
+  <h3>🚀 核心功能</h3>
+
+  <h4>1. 8 阶段可插拔 Agent 流水线</h4>
+  <p>GoClaw 把单次 Agent 执行拆成了 <strong>8 个独立阶段</strong>：<code>Context → Think → Prune → Tool → Observe → Checkpoint → Finalize → Memory Flush</code>。每个阶段都通过 <code>PipelineDeps</code> 暴露 17 个可插拔回调，并支持 7 种退出条件检测。</p>
+  <p>这种设计的工程价值在于：上下文裁剪（<code>Prune</code>）和检查点（<code>Checkpoint</code>）被显式化，开发者可以独立优化 Token 预算、重试策略和持久化点，而不是把所有逻辑塞进一个巨大的 "think-act" 循环里。</p>
+
+  <h4>2. 三层记忆系统（Working / Episodic / Semantic）</h4>
+  <p>GoClaw 没有简单依赖向量数据库做"长期记忆"，而是设计了一套层次化记忆架构：</p>
+  <ul>
+    <li><strong>L0 Working Memory</strong>：对话级工作记忆，自动注入会话摘要（约 200 tokens）</li>
+    <li><strong>L1 Episodic Memory</strong>：会话摘要级，LRU 缓存 500 条目、1 小时 TTL</li>
+    <li><strong>L2 Semantic Memory</strong>：知识图谱级，通过 <code>memory_expand</code> 工具深度检索</li>
+  </ul>
+  <p>记忆的巩固通过 <code>DomainEventBus</code> 异步完成，让 Agent 越用越"有记性"，而不是每次重启都从零开始。</p>
+
+  <h4>3. 多租户 PostgreSQL + 行级安全</h4>
+  <p>企业部署 AI Agent 最敏感的问题之一就是数据隔离。GoClaw 采用 <strong>PostgreSQL Row-Level Security（RLS）</strong> 实现租户级隔离：所有查询强制附加 <code>tenant_id</code>，WorkspaceContext 解析器覆盖 6 种常见场景，并提供租户级路径安全边界。</p>
+  <p>同时，项目通过 Go build tags 支持 <strong>Standalone Lite 模式</strong>（SQLite + FTS5）和 <strong>Managed 标准模式</strong>（PostgreSQL + pgvector）同一代码库共存，个人开发者与企业团队可以共用同一套接口。</p>
+
+  <h4>4. 20+ LLM 提供商与 7 大通信渠道</h4>
+  <p>GoClaw 原生集成了 Anthropic、OpenAI、Google Gemini、Groq、Mistral、Ollama、DeepSeek、Cohere、OpenRouter、AI/ML API 等 <strong>20+ 模型提供商</strong>，并在 Anthropic 上支持 prompt caching，官方宣称可带来 <span class="highlight-num">最高 90% 的成本降低</span>。</p>
+  <p>渠道侧同样原生覆盖 Telegram、Discord、Slack、Zalo、飞书/Lark、WhatsApp、WebSocket，实现"模型一次接入，随处触达用户"。</p>
+
+  <h4>5. 40+ 内置工具与 MCP 协议支持</h4>
+  <p>工具层包含 <code>exec</code>、<code>read_file</code>、<code>web_fetch</code>、<code>browser</code>、<code>tts</code>、<code>cron</code> 等 <strong>40+ 内置工具</strong>，并支持 <strong>MCP（Model Context Protocol）</strong> 扩展。开发者可以在不修改核心代码的情况下，把自定义能力像插件一样挂进 Agent 运行时。</p>
+
+  <h4>6. 单二进制、低资源、快启动</h4>
+  <p>通过 Go 的静态编译，GoClaw 的核心后端被打包成一个 <span class="highlight-num">约 25MB 的单二进制文件</span>，官方数据：<span class="highlight-num">启动时间 < 1 秒</span>。相比需要 Node.js/Python 运行时 + 多容器编排的方案，这种分发方式在边缘、私有部署和运维集成场景中优势明显。</p>
+
+  <h3>🔧 技术亮点</h3>
+
+  <h4>1. Go 原生并发与模块化架构</h4>
+  <p>项目代码组织清晰，<code>internal/</code> 下按领域拆分为 bus、eventbus、providers、tools、agent、gateway、channels、scheduler、pipeline 等模块。核心执行单元 <code>agent.Loop</code> 管理单个智能体的 think→act→observe 状态，而 <code>scheduler.Scheduler</code> 通过 lane 机制做并发管理与自适应限流。</p>
+  <p>对于网关场景——高并发、长连接、大量 IO 等待——Go 的 goroutine + channel 模型比 Python 的 asyncio 或 Node 的 event loop 更自然，也更不容易出现 GIL 或单线程阻塞问题。</p>
+
+  <h4>2. 5 层安全防护体系</h4>
+  <p>GoClaw 把安全作为一等公民：</p>
+  <ul>
+    <li><strong>速率限制</strong>：防止接口与 Token 滥用</li>
+    <li><strong>SQL / Prompt 注入检测</strong>：过滤恶意输入</li>
+    <li><strong>SSRF 防护</strong>：防御 DNS 重绑定等侧信道攻击</li>
+    <li><strong>Shell 模式匹配与路径遍历防护</strong>：27 个测试用例覆盖文件系统边界</li>
+    <li><strong>AES-256-GCM 加密</strong>：保护敏感会话与配置数据</li>
+  </ul>
+  <p>官方特别提到已修复 <strong>CVE-2026-25253</strong>，这对于需要把 Agent 暴露在企业内网或公网入口的团队来说是一个关键信任信号。</p>
+
+  <h4>3. 自进化引擎（Self-Evolution）</h4>
+  <p>GoClaw 内置了 <code>EvolutionMetricsStore</code> 和 <code>EvolutionSuggestionsEngine</code>，通过 3 条规则（低检索使用率、工具失败、重复工具调用）自动发现 Agent 的行为缺陷，并给出改进建议。系统还会设置自适应护栏：最大变更量、最小数据点、回滚机制，以及每日/每周 cron 任务触发复盘。</p>
+
+  <h3>👥 适用人群</h3>
+  <ul>
+    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：AI 平台架构师，需要为企业内部多个业务线搭建统一、安全、可扩展的 Agent 底座</li>
+    <li><strong>⭐⭐⭐⭐⭐ 强烈推荐</strong>：LLM 应用开发者，希望用一个网关同时对接多个模型提供商，避免供应商锁定</li>
+    <li><strong>⭐⭐⭐⭐ 推荐</strong>：DevOps / SRE，需要将 AI 能力集成到运维流程（cron、exec、HTTP 等工具开箱即用）</li>
+    <li><strong>⭐⭐⭐⭐ 推荐</strong>：社区/团队运营者，需要在 Telegram、Discord、Slack、飞书等平台部署可协作的 AI 助手</li>
+    <li><strong>⭐⭐⭐ 可选</strong>：多智能体研究者或个人开发者，使用 Lite 模式 + SQLite 本地启动</li>
+  </ul>
+  <p><strong>前置要求</strong>：熟悉命令行与 Docker；了解 LLM 和 Agent 基本概念；有 Go 或后端开发经验会更容易阅读源码。</p>
+
+  <h3>⚡ 快速上手</h3>
+  <pre><code># 1. 克隆仓库
+git clone https://github.com/nextlevelbuilder/goclaw.git
+cd goclaw
+
+# 2. 准备环境并启动（含 Web UI）
+cp .env.example .env
+# 编辑 .env 填入数据库、LLM API Key 等配置
+make up
+
+# 3. 访问 Web 仪表盘
+# http://localhost:18790
+
+# 4. 运行首次配置向导
+./goclaw onboard
+# 或
+./goclaw setup
+
+# 5. 部署一个 Agent 团队
+goclaw agent deploy --team research-squad.yaml</code></pre>
+
+  <p><strong>其他部署方式</strong>：</p>
+  <pre><code># 直接 go install 单二进制
+go install github.com/nextlevelbuilder/goclaw@latest
+
+# 启动多租户 PostgreSQL 模式
+goclaw server --config goclaw.yaml
+
+# 构建 Lite 桌面应用（SQLite 模式）
+make desktop-build</code></pre>
+
+  <h3>📊 对比分析</h3>
+  <table class="compare-table">
+    <tr><th>维度</th><th>GoClaw</th><th>LangGraph</th><th>Dify</th><th>AutoGPT</th></tr>
+    <tr><td><strong>设计定位</strong></td><td><strong>企业级多租户 Agent 平台</strong></td><td>智能体工作流编排框架</td><td>LLM 应用开发平台</td><td>实验性自主 Agent</td></tr>
+    <tr><td><strong>主语言</strong></td><td><span class="highlight-num">Go（单二进制）</span></td><td>Python</td><td>Python/Node</td><td>Python</td></tr>
+    <tr><td><strong>LLM 提供商</strong></td><td><span class="highlight-num">20+ 原生支持</span></td><td>通过 wrapper 适配</td><td>有限</td><td>主要 OpenAI</td></tr>
+    <tr><td><strong>多租户</strong></td><td><span class="highlight-num">✅ PostgreSQL RLS</span></td><td>❌ 无</td><td>✅ 有</td><td>❌ 无</td></tr>
+    <tr><td><strong>消息渠道</strong></td><td><span class="highlight-num">7 个原生</span></td><td>需自行开发</td><td>Web 为主</td><td>无</td></tr>
+    <tr><td><strong>记忆系统</strong></td><td><span class="highlight-num">3 层</span></td><td>基础向量存储</td><td>简单知识库</td><td>文件存储</td></tr>
+    <tr><td><strong>Agent 编排</strong></td><td><span class="highlight-num">3 种委派 + 团队看板</span></td><td>图编排</td><td>工作流</td><td>单 Agent 循环</td></tr>
+    <tr><td><strong>工具生态</strong></td><td><span class="highlight-num">40+ 内置 + MCP</span></td><td>需自行封装</td><td>有限</td><td>有限</td></tr>
+    <tr><td><strong>启动速度</strong></td><td><span class="highlight-num">< 1 秒</span></td><td>依赖 Python 环境</td><td>多容器启动</td><td>依赖 Python 环境</td></tr>
+    <tr><td><strong>二进制大小</strong></td><td><span class="highlight-num">~25MB</span></td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+    <tr><td><strong>可观测性</strong></td><td>✅ 原生 tracing + OTLP</td><td>需 LangSmith</td><td>基础日志</td><td>无</td></tr>
+    <tr><td><strong>安全体系</strong></td><td><span class="highlight-num">✅ 5 层 + CVE 修复</span></td><td>无</td><td>基础</td><td>无</td></tr>
+    <tr><td><strong>适合生产</strong></td><td><span class="highlight-num">⭐⭐⭐⭐⭐</span></td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐</td></tr>
+  </table>
+  <p><strong>核心差异总结</strong>：LangGraph 是优秀的编排框架，Dify 是易用的应用开发平台，但它们都需要额外的工程工作才能变成"企业级基础设施"。GoClaw 从第一天就把多租户、安全、可观测性、渠道集成作为内置能力，目标是让团队直接部署一个可运行的 Agent 平台。</p>
+
+  <h3>⚠️ 使用注意</h3>
+  <div class="warn">GoClaw 仍处于快速迭代期（V3 架构刚完成），API 和 schema 可能发生变更。建议先在非生产环境充分测试；PostgreSQL 模式需要合理配置 RLS 策略和租户边界。</div>
+  <ul>
+    <li><strong>Lite 模式与 Managed 模式</strong>：个人开发者可用 SQLite Lite 模式快速体验，但生产部署建议使用 PostgreSQL Managed 模式</li>
+    <li><strong>渠道配置</strong>：Telegram/WhatsApp 等渠道需要单独申请 bot token 和 webhook 配置</li>
+    <li><strong>CVE-2026-25253</strong>：如果评估的是旧版本或 OpenClaw，请确认已应用安全补丁</li>
+    <li><strong>许可证</strong>：仓库显示 NOASSERTION，商业使用前建议与维护方确认授权条款</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>fly的AI学习 · 2026-07-03 · <a href="https://github.com/nextlevelbuilder/goclaw" target="_blank">GitHub 原文</a></p>
+  <p>Powered by <a href="https://flystray.github.io/ai-news/" target="_blank">AI News</a></p>
+</div>
+
+</body>
+</html>
