@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GitHub AI 项目日报 - 2026-07-07 · Graphify</title>
+<title>GitHub AI 项目日报 - 2026-07-07 · LeanCTX</title>
 <style>
   :root {
     --bg: #fafbfc;
@@ -182,6 +182,7 @@
   .tag.go { background: #dafbe1; color: #1a7f37; }
   .tag.ai { background: #fbefff; color: #8250df; }
   .tag.lang { background: #fff8c5; color: #9a6700; }
+  .tag.rust { background: #fff1f0; color: #cf222e; }
   .emoji-title { font-size: 1.3em; }
 </style>
 </head>
@@ -192,33 +193,34 @@
     <h1><span class="emoji-title">📅</span> GitHub AI 项目日报</h1>
     <div class="subtitle">2026-07-07 · 第三十八期</div>
     <div class="meta">
-      <span>⭐ 78.8k stars</span>
-      <span>🍴 7.8k forks</span>
-      <span>🛡️ MIT 许可</span>
-      <span>🐍 Python</span>
+      <span>⭐ 3.1k stars</span>
+      <span>🍴 293 forks</span>
+      <span>🛡️ Apache-2.0</span>
+      <span>🦀 Rust</span>
     </div>
   </div>
 
   <div class="card">
-    <h2>🚀 今日推荐：Graphify</h2>
+    <h2>🚀 今日推荐：LeanCTX</h2>
     <p>
-      <a href="https://github.com/Graphify-Labs/graphify">Graphify-Labs/graphify</a>
-      是一款将任意文件夹（代码、文档、论文、图片、视频）转化为<strong>可查询知识图谱</strong>的开源工具，灵感直接来自 Andrej Karpathy 的个人知识库工作流。它不只是复现了 Karpathy 的思路——更将"扁平 Markdown wiki"推进到了<strong>结构化 NetworkX 知识图谱</strong>，让 AI 编程助手从"逐文件搜索"进化为"图谱导航"。
+      <a href="https://github.com/yvgude/lean-ctx">yvgude/lean-ctx</a>
+      是一个 AI Agent 的<strong>上下文智能层（Context Intelligence Layer）</strong>——一个本地 Rust 二进制，插在 Agent 和你的代码/Shell/数据之间，负责<strong>决定 Agent 读什么、压缩 Agent 发什么、记住 Agent 学过什么、保护 Agent 碰什么</strong>。官方实测数据：<strong>60-90% 的 Token 削减</strong>，冷启动场景最高可达 99%。
     </p>
     <p>
-      一条 <code>/graphify .</code> 命令即可映射整个项目，支持 12+ AI 编程助手即插即用（Claude Code、Codex、Cursor、Gemini CLI、Aider、OpenClaw 等），30 秒安装上手。
+      一条 <code>lean-ctx setup</code> 即可自动检测并集成 Claude Code、Cursor、Windsurf、Copilot 等 30+ AI Agent，77+ MCP 工具开箱即用。
     </p>
     <div class="highlight">
-      <strong>🎯 一句话定位</strong>：不是向量索引，是真正的图——代码文件 AST 确定性解析（零 Token），文档论文 LLM 语义提取，合并为可遍历知识图谱。问"BM25 代码在哪"，直接命中节点而非返回一堆可能相关的片段。
+      <strong>🎯 一句话定位</strong>：不是 Prompt 模板，不是向量数据库——是运行在 Agent 和文件系统之间的"上下文操作系统"，用 tree-sitter AST 提取代码骨骼、Thompson Sampling 自适应压缩、艾宾浩斯遗忘曲线管理记忆，一个二进制搞定 Token 膨胀。
     </div>
     <div>
-      <span class="tag react">claude-code</span>
-      <span class="tag ai">knowledge-graph</span>
-      <span class="tag ai">GraphRAG</span>
-      <span class="tag lang">tree-sitter</span>
-      <span class="tag go">leiden</span>
-      <span class="tag">RAG</span>
-      <span class="tag">skills</span>
+      <span class="tag rust">Rust</span>
+      <span class="tag ai">context-engineering</span>
+      <span class="tag ai">token-optimization</span>
+      <span class="tag react">MCP</span>
+      <span class="tag go">tree-sitter</span>
+      <span class="tag lang">local-first</span>
+      <span class="tag">claude-code</span>
+      <span class="tag">cursor</span>
     </div>
   </div>
 
@@ -226,219 +228,243 @@
     <h2>📊 核心数据</h2>
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="num">78.8k</div>
+        <div class="num">3.1k</div>
         <div class="label">GitHub Stars</div>
       </div>
       <div class="stat-card">
-        <div class="num">7.8k</div>
+        <div class="num">293</div>
         <div class="label">Forks</div>
       </div>
       <div class="stat-card">
-        <div class="num">36+</div>
-        <div class="label">编程语言 AST</div>
+        <div class="num">77+</div>
+        <div class="label">MCP 工具</div>
       </div>
       <div class="stat-card">
-        <div class="num">12+</div>
-        <div class="label">AI 编程助手</div>
+        <div class="num">30+</div>
+        <div class="label">AI Agent 集成</div>
       </div>
       <div class="stat-card">
-        <div class="num">0</div>
-        <div class="label">AST Token 消耗</div>
+        <div class="num">18</div>
+        <div class="label">语言 AST 解析</div>
       </div>
       <div class="stat-card">
-        <div class="num">EXTRACTED</div>
-        <div class="label">/ INFERRED 边标记</div>
+        <div class="num">60-90%</div>
+        <div class="label">Token 削减</div>
       </div>
-      <div class="stat-card">
-        <div class="num">5</div>
-        <div class="label">层架构流水线</div>
-      </div>
-      <div class="stat-card">
-        <div class="num">30s</div>
-        <div class="label">安装到上手</div>
-      </div>
+    </div>
+    <div style="margin-top: 16px;">
+      <div class="badge green">Apache-2.0 开源</div>
+      <div class="badge blue">单 Rust 二进制</div>
+      <div class="badge purple">MCP Server</div>
+      <div class="badge">本地优先</div>
     </div>
   </div>
 
   <div class="card">
-    <h2>🎯 核心功能</h2>
+    <h2>🔧 核心功能</h2>
 
-    <h3>1. 双通道提取引擎</h3>
-    <p>代码文件通过 tree-sitter AST 确定性解析（36+ 语言，<strong>零 Token 消耗</strong>），非代码文件（PDF、图片、视频）通过 LLM 语义提取。两条通道结果合并入同一 NetworkX 知识图谱，边标记为 <code>EXTRACTED</code>（源码直接提取）或 <code>INFERRED</code>（模型推断），审计轨迹清晰透明。</p>
+    <h3>1. 四层压缩引擎（Terse Engine）</h3>
+    <p>从原始文件到送入模型的上下文块，经过 4 层流水线提纯：</p>
+    <ul>
+      <li><strong>第 1 层 · 确定性过滤</strong>：剥离 badge、空行、注释、重复分隔符</li>
+      <li><strong>第 2 层 · AST 骨骼提取</strong>：tree-sitter 解析 18 种语言语法树，只保留类签名/方法签名/类型定义</li>
+      <li><strong>第 3 层 · 自适应密度</strong>：语义路由器根据上下文动态选择 10 种读取模式（map/signatures/entropy 等）</li>
+      <li><strong>第 4 层 · Agent 成型</strong>：按目标 Agent 特性（Claude 偏 JSON、Cursor 偏代码块）重新格式化</li>
+    </ul>
+    <p>最巧妙的是语义路由器内置 <strong>Thompson Sampling 多臂赌博机</strong>，根据历史压缩效果自动学习最优压缩阈值——系统越用越聪明。</p>
 
-    <h3>2. 社区发现与"上帝节点"识别</h3>
-    <p>Leiden/Louvain 算法自动将节点聚类为功能模块社区，<code>analyze.py</code> 计算中心性指标，发现高连接度的"God Nodes"和跨社区的"惊喜关联"。无需人工维护索引，算法驱动的架构发现替代了逐文件阅读。</p>
+    <h3>2. 上下文连续性协议（CCP）</h3>
+    <p>解决 AI Agent 的"会话失忆"问题：</p>
+    <ul>
+      <li><strong>跨会话记忆</strong>：自动持久化任务（Tasks）、发现（Findings）、决策（Decisions）</li>
+      <li><strong>冷启动优化</strong>：新会话从 CCP 索引恢复关键上下文，Token 降低 <strong>99%</strong></li>
+      <li><strong>属性图</strong>：维护代码实体关系（调用链/依赖/继承），<code>ctx_graph</code> 一次性获取</li>
+    </ul>
 
-    <h3>3. 12+ AI 编程助手即插即用</h3>
-    <p>通过 <code>graphify install</code> 注册为 Skill，一条 <code>/graphify</code> 命令即可在 Claude Code、Codex、OpenCode、Cursor、Gemini CLI、Aider、OpenClaw、Kiro、Trae、Devin、Copilot、AMP 等 12+ 平台使用。每个平台有专属 skill 文件，内置"快速路径"（检测已有 graph.json 则跳过提取直接查询）、环境发现、安全阈值。</p>
+    <h3>3. Token Dense Dialect（TDD）</h3>
+    <p>用数学符号速记法压缩代码签名：<code>λ</code> 替代 <code>function</code>、<code>§</code> 替代 <code>section</code>、<code>τ</code> 替代 <code>type</code>。在压缩基础上再省 <strong>8-25%</strong> Token，LLM 对数学符号有天然语义理解。</p>
 
-    <h3>4. 增量更新与语义缓存</h3>
-    <p><code>manifest.json</code> 跟踪文件哈希，<code>/graphify . update</code> 仅处理变更部分。合并 PR 后秒级同步图谱，语义缓存确保已处理文件不重复消耗 Token。</p>
+    <h3>4. Cognition v2：仿人类认知召回</h3>
+    <ul>
+      <li><strong>艾宾浩斯遗忘曲线</strong>：上下文条目保留概率随时间衰减，被"命中"后增强稳定性</li>
+      <li><strong>赫布 Eviction</strong>：经常一起访问的条目形成"关联簇"，超限时优先驱逐孤立条目</li>
+    </ul>
+    <p>让 Agent 的上下文管理从"先进先出"进化到"像人一样记住重要的、忘记无关的"。</p>
 
-    <h3>5. 跨模态知识融合</h3>
-    <p><code>add</code> 命令可直接导入 arXiv 论文 URL，自动下载、语义提取并将论文概念节点加入图谱，建立"论文概念 → 代码实现"的映射路径。实测中一篇 A-MAC 论文的 5 个核心因子被自动对齐到项目代码的对应实现与权重参数。</p>
+    <h3>5. 77+ MCP 工具生态</h3>
+    <table>
+      <thead>
+        <tr><th>工具类别</th><th>代表工具</th><th>作用</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上下文读取</td><td><code>ctx_read</code> <code>ctx_map</code> <code>ctx_signatures</code></td><td>按需读取，10 种密度模式</td></tr>
+        <tr><td>图谱探索</td><td><code>ctx_graph</code> <code>ctx_knowledge</code></td><td>查询代码关系图、知识库</td></tr>
+        <tr><td>会话管理</td><td><code>ctx_session</code> <code>ctx_remember</code></td><td>持久化/恢复会话上下文</td></tr>
+        <tr><td>安全控制</td><td><code>ctx_guard</code> <code>ctx_audit</code></td><td>路径边界检查、操作审计</td></tr>
+        <tr><td>压缩代理</td><td><code>ctx_compress</code> <code>ctx_budget</code></td><td>手动压缩、Token 预算控制</td></tr>
+      </tbody>
+    </table>
 
-    <h3>6. 多格式输出</h3>
-    <p><code>graph.html</code>（交互可视化，点击节点/搜索/过滤）、<code>GRAPH_REPORT.md</code>（架构摘要+惊喜关联+推荐问题）、<code>graph.json</code>（完整图谱）、Obsidian 知识库导出、GraphML/Neo4j 格式支持。</p>
+    <h3>6. Shell Hook：95+ CLI 工具透明压缩</h3>
+    <p>自动拦截 <code>git</code>、<code>docker</code>、<code>cargo</code>、<code>npm</code> 等 95+ 命令行工具的输出并压缩。<code>git status</code> 从 ~800 tokens → ~120 tokens，重复读文件从 ~2000 tokens → ~13 tokens（SessionCache 命中时）。</p>
 
-    <h3>7. path 路径追踪</h3>
-    <p><code>/graphify path</code> 追踪任意两节点之间的完整路径，每条边附带类型说明（语义关联、实现关系、调用关系），可用于论文复现验证、技术债务评估、代码审查和知识溯源。</p>
+    <h3>7. 安全护栏：从路径监狱到 Lean4 形式化验证</h3>
+    <ul>
+      <li><strong>路径监狱（Path Jail）</strong>：文件访问限制在白名单目录内</li>
+      <li><strong>密钥防御</strong>：自动检测并脱敏 <code>.env</code>、API Key</li>
+      <li><strong>Lean4 形式化验证</strong>：核心安全属性通过定理证明器验证——开源 AI 工具中极为罕见</li>
+    </ul>
   </div>
 
   <div class="card">
     <h2>💡 技术亮点</h2>
 
-    <h3>1. "不是向量索引，是真正的图"</h3>
-    <p>核心哲学是拒绝 Embedding + 向量存储的 RAG 模式，转而构建可遍历的知识图谱。节点是具体实体（函数、类、概念），边是显式关系（调用、依赖、语义关联），查询通过图遍历而非近似匹配。回答的精确性不受向量相似度阈值影响——问"BM25 代码在哪个文件"，直接命中节点。</p>
+    <h3>单 Rust 二进制，本地优先</h3>
+    <p>整个系统编译成一个二进制文件，无需 Node.js/Python 运行时，无需外部服务。所有压缩、缓存、记忆在本地完成，代码不离开机器。</p>
 
-    <h3>2. skillgen 幂等生成系统</h3>
-    <p>12+ 平台的 skill 文件由 <code>tools/skillgen/gen.py</code> 从统一 fragment 模板渲染，保证跨平台行为一致且幂等（不含时间戳，不会产生无意义 diff）。<code>--check</code> 检测渲染漂移，<code>--audit-coverage</code> 确保原始 skill 的每个 heading 都在 split fragment 中保留。</p>
+    <h3>SessionCache：13 Token 重新读取</h3>
+    <p>Agent 第二次读同一文件时，直接从 SessionCache 返回极简指纹——约 <strong>13 tokens</strong>（相比首次 ~2000 tokens）。缓存键基于路径 + 内容哈希，文件修改后自动失效。</p>
 
-    <h3>3. 五层架构线性阶段门模型</h3>
-    <p>File Detection → AST Extraction → Semantic LLM Extraction → Graph Assembly & Validation → Community Detection & Analysis。每层通过纯 Python dict 或 NetworkX 对象传递输出，模块边界清晰（detect.py、extract.py、llm、build.py、validate.py、cluster.py、analyze.py），便于独立测试和替换。</p>
+    <h3>实时仪表盘 + Token 预算控制</h3>
+    <p>可视化每个 Agent 会话的 Token 消耗分布：哪些文件最贵、哪些工具调用最频繁、压缩率多少。支持设定 Token 预算上限，超限时自动降级压缩级别。</p>
+
+    <h3>可配置的认知模型</h3>
+    <pre><code>[cognition]
+forgetting_model = "ebbinghaus"  # 或 "linear"
+base_stability_days = 7
+
+[security]
+mode = "enforce"  # enforce / warn / off</code></pre>
   </div>
 
   <div class="card">
-    <h2>👥 适用人群</h2>
-    <ul>
-      <li><strong>接手陌生大型代码库的开发者</strong> — 图谱全景视图比逐文件阅读高效数倍</li>
-      <li><strong>论文驱动的 AI/ML 工程师</strong> — 论文导入后自动对齐验证节省大量人工比对时间</li>
-      <li><strong>日常使用 Claude Code/Codex 等编程助手的开发者</strong> — 从"逐文件搜索"升级为"图谱导航"</li>
-      <li><strong>架构师和技术 Leader</strong> — 社区发现自动识别模块聚类和隐藏耦合</li>
-      <li><strong>知识管理爱好者</strong> — Obsidian 导出让代码知识融入个人笔记系统</li>
-    </ul>
+    <h2>🚀 快速上手</h2>
+    <pre><code># 1. 安装
+npm install -g lean-ctx-bin
+
+# 2. 一键集成（自动检测已安装的 AI Agent）
+lean-ctx setup
+
+# 3. 或指定特定 Agent
+lean-ctx init --agent claude-code
+lean-ctx init --agent cursor
+lean-ctx init --agent gemini-cli
+
+# 4. 启动 MCP Server
+lean-ctx mcp serve
+
+# 5. 查看实时仪表盘
+lean-ctx dashboard</code></pre>
+    <p style="margin-top: 12px;">手动集成 Claude Code 的 MCP 配置：</p>
+    <pre><code>{
+  "mcpServers": {
+    "lean-ctx": {
+      "command": "lean-ctx",
+      "args": ["mcp", "serve"]
+    }
+  }
+}</code></pre>
   </div>
 
   <div class="card">
-    <h2>⚡ 快速上手</h2>
-    <h3>安装 CLI（30 秒）</h3>
-<pre><code>uv tool install graphifyy    # 或: pipx install graphifyy
-graphify install              # 注册到 AI 编程助手
-</code></pre>
-
-    <h3>在项目中生成知识图谱</h3>
-<pre><code>/graphify .                  # 映射整个项目
-</code></pre>
-
-    <h3>常用命令</h3>
-<pre><code>/graphify query "BM25代码在哪"    # 精准查询
-/graphify . update                # 增量更新（PR 后）
-/graphify add https://arxiv.org/abs/xxxx  # 导入论文
-/graphify path                    # 路径追踪
-</code></pre>
-
-    <p>输出文件在 <code>graphify-out/</code>：graph.html（交互可视化）、GRAPH_REPORT.md（架构摘要）、graph.json（完整图谱）。</p>
-  </div>
-
-  <div class="card">
-    <h2>📈 对比分析</h2>
+    <h2>⚖️ 对比分析</h2>
     <table>
       <thead>
         <tr>
           <th>维度</th>
-          <th>Graphify</th>
-          <th>Karpathy Wiki</th>
-          <th>传统 RAG</th>
-          <th>codebase-memory-mcp</th>
+          <th><strong>LeanCTX</strong></th>
+          <th>LangChain Context</th>
+          <th>手动 Prompt 压缩</th>
+          <th>Aider</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>存储结构</strong></td>
-          <td>NetworkX 知识图谱</td>
-          <td>扁平 Markdown + 索引</td>
-          <td>向量索引 + 近似匹配</td>
-          <td>SQLite 知识图谱</td>
+          <td><strong>Token 削减</strong></td>
+          <td>60-90%（冷启动 99%）</td>
+          <td>无主动压缩</td>
+          <td>依赖人工</td>
+          <td>20-30%</td>
         </tr>
         <tr>
-          <td><strong>查询方式</strong></td>
-          <td>图遍历 + 社区发现</td>
-          <td>大模型维护索引</td>
-          <td>相似度阈值检索</td>
-          <td>Cypher + 语义向量</td>
-        </tr>
-        <tr>
-          <td><strong>代码解析</strong></td>
-          <td>AST 零 Token</td>
-          <td>LLM 全量编译</td>
-          <td>纯 Embedding</td>
-          <td>tree-sitter + Hybrid LSP</td>
-        </tr>
-        <tr>
-          <td><strong>边透明度</strong></td>
-          <td>EXTRACTED/INFERRED 标记</td>
-          <td>文本链接隐式</td>
-          <td>无显式关系</td>
-          <td>有边类型</td>
-        </tr>
-        <tr>
-          <td><strong>跨模态</strong></td>
-          <td>双通道后统一入图</td>
-          <td>混合存放无区分</td>
-          <td>统一 Embedding 丢结构</td>
-          <td>支持多模态</td>
-        </tr>
-        <tr>
-          <td><strong>增量更新</strong></td>
-          <td>manifest.json 增量</td>
-          <td>人工触发全量</td>
-          <td>重新 Embedding 全量</td>
-          <td>增量索引</td>
-        </tr>
-        <tr>
-          <td><strong>平台兼容</strong></td>
-          <td><strong>12+ AI 助手</strong></td>
+          <td><strong>压缩方式</strong></td>
+          <td>AST 骨骼 + 自适应密度 + TDD</td>
           <td>无</td>
-          <td>通常仅 API</td>
-          <td>MCP 协议</td>
+          <td>手动摘要</td>
+          <td>repo map</td>
         </tr>
         <tr>
-          <td><strong>语言覆盖</strong></td>
-          <td>36+ 语言</td>
-          <td>不限</td>
-          <td>不限</td>
-          <td>158 语言</td>
+          <td><strong>跨会话记忆</strong></td>
+          <td>✅ CCP 协议</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
         </tr>
         <tr>
-          <td><strong>Stars</strong></td>
-          <td>78.8k</td>
-          <td>—</td>
-          <td>—</td>
-          <td>20.2k</td>
+          <td><strong>认知模型</strong></td>
+          <td>✅ 艾宾浩斯 + 赫布</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td><strong>MCP 工具</strong></td>
+          <td>77+</td>
+          <td>无</td>
+          <td>无</td>
+          <td>无</td>
+        </tr>
+        <tr>
+          <td><strong>Shell Hook</strong></td>
+          <td>95+ CLI 工具</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>部分</td>
+        </tr>
+        <tr>
+          <td><strong>安全护栏</strong></td>
+          <td>路径监狱 + 脱敏 + Lean4</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td><strong>语言</strong></td>
+          <td>Rust（单二进制）</td>
+          <td>Python</td>
+          <td>N/A</td>
+          <td>Python</td>
+        </tr>
+        <tr>
+          <td><strong>本地优先</strong></td>
+          <td>✅</td>
+          <td>需服务端</td>
+          <td>✅</td>
+          <td>✅</td>
         </tr>
       </tbody>
     </table>
-
     <div class="highlight">
-      <strong>关键差异化</strong>：Graphify 代表了一种不同于主流 RAG 的代码理解范式——用图而非向量来表达代码知识。AST 零 Token + 语义缓存 + 12+ 平台即插即用，让"图谱导航"成为 AI 编程助手的标配认知层。
+      <strong>关键差异化</strong>：大多数方案要么只做"文件摘要"（Aider repo map），要么完全不管理（LangChain）。LeanCTX 把上下文当作一等工程问题——从 AST 级压缩到认知科学模型，从安全护栏到形式化验证，构建了完整的"上下文操作系统"。
     </div>
-
-    <h3>实测数据（腾讯云开发者社区评测）</h3>
-    <ul>
-      <li><strong>代码定位</strong>：BM25 查询精准定位到文件+行号，附带功能说明</li>
-      <li><strong>逻辑解释</strong>：输出完整流程图、设计决策、核心公式，而非逐行代码注释</li>
-      <li><strong>参数查询</strong>：直接返回 Gemini Embedding 3072 维具体数值</li>
-      <li><strong>增量更新</strong>：合并 PR 后秒级同步，生成修复前后对比分析</li>
-      <li><strong>论文对齐</strong>：A-MAC 论文 5 个因子自动映射到代码实现与权重参数</li>
-    </ul>
   </div>
 
   <div class="card">
     <h2>✨ 一句话总结</h2>
     <div class="highlight">
-      <strong>Graphify 把 AI 编程助手从"逐文件阅读"升级为"图谱导航"——如果你经常接手陌生代码库或需要论文与代码的对齐验证，花 30 秒装上它，是今天最值得的工具投资。</strong>
+      <strong>LeanCTX 抓住了 AI Agent 时代被忽视但成本巨大的问题——上下文膨胀。tree-sitter AST 压缩 + Thompson Sampling 自适应 + 艾宾浩斯遗忘曲线 + Lean4 安全验证，一个 Rust 二进制省下 60-90% Token。如果你每天和 Claude Code、Cursor 打交道，这是今天最值得装的工具。</strong>
     </div>
   </div>
 
   <div class="card">
     <h2>🔗 项目信息</h2>
     <ul>
-      <li><strong>GitHub</strong>：<a href="https://github.com/Graphify-Labs/graphify">github.com/Graphify-Labs/graphify</a></li>
-      <li><strong>DeepWiki</strong>：<a href="https://deepwiki.com/Graphify-Labs/graphify">deepwiki.com/Graphify-Labs/graphify</a></li>
-      <li><strong>官方站点</strong>：<a href="https://graphifylabs.ai/">graphifylabs.ai</a></li>
-      <li><strong>许可证</strong>：MIT（开源永久免费）</li>
-      <li><strong>创建时间</strong>：2026-04-03</li>
-      <li><strong>数据快照</strong>：78.8k star / 7.8k fork（截至 2026-07-07）</li>
+      <li><strong>GitHub</strong>：<a href="https://github.com/yvgude/lean-ctx">github.com/yvgude/lean-ctx</a></li>
+      <li><strong>DeepWiki</strong>：<a href="https://deepwiki.com/yvgude/lean-ctx">deepwiki.com/yvgude/lean-ctx</a></li>
+      <li><strong>官方站点</strong>：<a href="https://leanctx.com/">leanctx.com</a></li>
+      <li><strong>许可证</strong>：Apache-2.0（开源永久免费）</li>
+      <li><strong>创建时间</strong>：2026-03-23</li>
+      <li><strong>数据快照</strong>：3.1k star / 293 fork（截至 2026-07-07）</li>
     </ul>
   </div>
 
