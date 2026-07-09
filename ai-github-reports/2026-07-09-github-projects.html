@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-09 · MiMo Code</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #ff6700;
+    --accent-bg: #fff3e0;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #ff6700 0%, #ff8c42 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(255, 103, 0, 0.15);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .meta span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge.green { background: #aff5b4; color: #1a7f37; }
+  .badge.blue { background: #ddf4ff; color: #0969da; }
+  .badge.purple { background: #fbefff; color: #8250df; }
+  .badge.orange { background: #fff3e0; color: #ff6700; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--code-bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff6700;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #cf222e;
+  }
+  pre {
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaeef2;
+    color: var(--text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 2px 4px 2px 0;
+  }
+  .tag.ts { background: #ddf4ff; color: #0969da; }
+  .tag.sqlite { background: #dafbe1; color: #1a7f37; }
+  .tag.ai { background: #fbefff; color: #8250df; }
+  .tag.mit { background: #fff8c5; color: #9a6700; }
+  .emoji-title { font-size: 1.3em; }
+  .comparison-table th:first-child { width: 30%; }
+  .comparison-table td { vertical-align: top; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><span class="emoji-title">🤖</span> GitHub AI 项目日报</h1>
+    <div class="subtitle">2026-07-09 · 第四十期</div>
+    <div class="meta">
+      <span>⭐ 11.7k stars</span>
+      <span>🍴 1.5k+ forks</span>
+      <span>🛡️ MIT License</span>
+      <span>📘 TypeScript</span>
+    </div>
+  </div>
+
+  <!-- 项目概览 -->
+  <div class="card">
+    <h2>项目概览：XiaomiMiMo / MiMo Code</h2>
+    <div>
+      <span class="badge orange">小米官方</span>
+      <span class="badge blue">TypeScript</span>
+      <span class="badge green">MIT</span>
+      <span class="badge purple">2026-06-10</span>
+    </div>
+    <p style="margin-top:14px;">
+      <strong>MiMo Code</strong> 是小米 MiMo 团队开源的终端原生 AI 编程助手，核心理念是<strong>"模型与智能体共同进化"（Where Models and Agents Co-Evolve）</strong>。
+      基于 OpenCode 深度 fork 开发，通过"计算、记忆、进化"三层架构重新定义了 Coding Agent 的长任务可靠性。
+      上线即引发 Hacker News 554 分讨论，VentureBeat 评价"beats Claude Code at 200 step tasks"。
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">11.7k</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">62%</div>
+        <div class="label">SWE-Bench Pro</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">73%</div>
+        <div class="label">Terminal Bench 2</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">65%+</div>
+        <div class="label">200+步胜率</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">75+</div>
+        <div class="label">LLM Provider</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心功能 -->
+  <div class="card">
+    <h2>核心功能</h2>
+
+    <h3>1. Max Mode：并行采样选优</h3>
+    <p>每轮并行生成 N=5 个候选方案（temperature=1），independent 推理但不执行，由同一个模型作为 judge 选出最优。SWE-Bench Pro 提升 10-20%，代价约 4-5 倍 token 消耗。</p>
+
+    <h3>2. Goal 驱动停止条件</h3>
+    <p>用户用自然语言设定停止条件（如"所有测试通过且代码已提交"），独立 verifier 模型在 Agent 每次想"收工"时审查完整对话历史，防止"乐观终止"。无限循环概率 < 0.5%。</p>
+
+    <h3>3. 四层分层记忆系统</h3>
+    <table>
+      <tr><th>层级</th><th>文件</th><th>生命周期</th><th>作用</th></tr>
+      <tr><td>L1</td><td><code>notes.md</code></td><td>会话级</td><td>主 Agent 唯一可写的草稿区</td></tr>
+      <tr><td>L2</td><td><code>checkpoint.md</code></td><td>会话级</td><td>11 字段结构化状态快照</td></tr>
+      <tr><td>L3</td><td><code>MEMORY.md</code></td><td>项目级</td><td>跨会话持久化知识</td></tr>
+      <tr><td>L4</td><td><code>tasks/*/progress.md</code></td><td>任务级</td><td>单任务进度追踪</td></tr>
+    </table>
+
+    <h3>4. Dynamic Workflow</h3>
+    <p>主 Agent 生成 JavaScript 脚本在隔离沙箱中确定性执行，通过 <code>agent()</code>/<code>parallel()</code>/<code>pipeline()</code> 控制并发——"if 不会忘分支，for 不会提前退出"。</p>
+
+    <h3>5. Dream & Distill：自我进化</h3>
+    <ul>
+      <li><strong>Dream</strong>（每 7 天）：合并、去重、压缩记忆，收敛为紧凑状态</li>
+      <li><strong>Distill</strong>（每 30 天）：识别重复工作模式，固化为可复用 skill/命令</li>
+    </ul>
+  </div>
+
+  <!-- 技术亮点 -->
+  <div class="card">
+    <h2>技术亮点</h2>
+
+    <h3>Writer Subagent 的"单写者不变式"</h3>
+    <p>主 Agent <strong>不维护自己的记忆</strong>——完全外包给独立的 writer subagent，不共享主 Agent 的注意力和 token 预算。每个结构化文件只允许一个 actor 写入，最简并发写冲突防止。</p>
+
+    <h3>Checkpoint"早触发"策略</h3>
+    <p>在上下文预算的 20%/45%/70% 处触发 checkpoint——而非直觉上的"快满了再压"。因为模型在高利用率下的结构化提取能力显著退化（lost in the middle），且压缩本身也需要空间。</p>
+
+    <h3>Rebuild：物理窗口切换时不丢语义</h3>
+    <p>上下文窗口接近上限时，Runtime 切断当前窗口、开新窗口、用持久化文件重建上下文，总注入控制在约 <strong>65K tokens</strong>。Agent 在新窗口醒过来直接干活，无需重新确认目标。</p>
+
+    <div class="highlight">
+      <strong>亮点总结：</strong>小米团队用 487 次 commits 证明了一件事——好的记忆系统、独立的 verifier、确定性的 workflow 编排，这些 Runtime 层的工程创新同样能让 Agent 的能力上一个台阶。
+    </div>
+  </div>
+
+  <!-- 对比分析 -->
+  <div class="card">
+    <h2>对比分析：200 步是分水岭</h2>
+    <table class="comparison-table">
+      <tr><th>维度</th><th>MiMo Code</th><th>Claude Code</th></tr>
+      <tr><td>200 步以内胜率</td><td>~50%</td><td style="color:#656d76">~50%</td></tr>
+      <tr><td>200 步以上胜率</td><td style="color:#ff6700;font-weight:700">65%+</td><td style="color:#656d76">~35%</td></tr>
+      <tr><td>SWE-Bench Pro</td><td style="font-weight:700">62%</td><td style="color:#656d76">低于 MiMo</td></tr>
+      <tr><td>Terminal Bench 2</td><td style="font-weight:700">73%</td><td style="color:#656d76">低于 MiMo</td></tr>
+      <tr><td>持久记忆</td><td>四层 + Writer + Dream/Distill</td><td>无自动跨会话记忆</td></tr>
+      <tr><td>上下文管理</td><td>Checkpoint + Rebuild (&lt;65K)</td><td>依赖窗口大小</td></tr>
+      <tr><td>开源协议</td><td style="color:#1a7f37;font-weight:700">MIT</td><td>非开源</td></tr>
+      <tr><td>定价</td><td>限时免费 + 自有 API</td><td>$20/月</td></tr>
+    </table>
+
+    <p style="margin-top:14px;">
+      <strong>重要说明：</strong>Benchmark 数据来自小米官方自测，A/B 测试覆盖 576 名开发者、474 个私有仓库、1,213 个配对。
+      MiMo Code 的真正优势在多轮记忆和跨会话进化，日常短任务中两者差距未拉开。
+    </p>
+  </div>
+
+  <!-- 快速上手 -->
+  <div class="card">
+    <h2>快速上手</h2>
+    <pre><code># 一行安装
+curl -fsSL https://mimo.xiaomi.com/install | bash
+
+# 或 npm
+npm install -g @mimo-ai/cli
+
+# 启动
+mimo</code></pre>
+    <p>首次启动选 "MiMo Auto"（限时免费通道），零配置直接开用。支持 DeepSeek、Kimi、GLM 等 75+ LLM Provider，可从 Claude Code 一键迁移认证。</p>
+  </div>
+
+  <!-- 适用人群 -->
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><strong>终端编程习惯者</strong>：需会终端、Node/npm、基础 Git</li>
+      <li><strong>多文件修改/重构/跨模块排查工程师</strong>：MiMo 最擅长的场景</li>
+      <li><strong>低成本尝鲜的个人开发者</strong>：MIT 开源 + 限时免费</li>
+      <li><strong>Agent 记忆与长任务研究者</strong>：四层记忆 + Dream/Distill 设计值得深入</li>
+    </ul>
+  </div>
+
+  <!-- 局限 -->
+  <div class="card">
+    <h2>局限与风险</h2>
+    <ol>
+      <li><strong>V0.1.0 早期版本</strong>：GitHub Issues 已有安装失败、WSL 异常等问题</li>
+      <li><strong>Benchmark 未独立复现</strong>：官方自测数据需第三方验证</li>
+      <li><strong>Max Mode 实验性</strong>：需手动开启，token 消耗 4-5 倍</li>
+      <li><strong>安全边界</strong>：务必在受控环境（非核心仓库、有 Git 保护）中运行</li>
+    </ol>
+  </div>
+
+  <div class="footer">
+    <p>📅 2026-07-09 · 第四十期 · 公众号「AI日课」</p>
+    <p>GitHub: <a href="https://github.com/XiaomiMiMo/MiMo-Code">XiaomiMiMo/MiMo-Code</a> | 官方博客: <a href="https://mimo.xiaomi.com/zh/blog/mimo-code-long-horizon">mimo.xiaomi.com</a></p>
+  </div>
+
+</div>
+</body>
+</html>
