@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 开源项目日报 · 2026-07-23 · herdr</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 760px; margin: 0 auto; }
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .badge {
+            background: rgba(76,175,80,0.2);
+            color: #4caf50;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(76,175,80,0.4);
+        }
+        .hero h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .hero h1 a { color: #4caf50; text-decoration: none; }
+        .hero h1 a:hover { text-decoration: underline; }
+        .hero .desc {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .meta span { display: flex; align-items: center; gap: 4px; }
+        .meta .fresh { color: #4caf50; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag {
+            background: rgba(255,255,255,0.08);
+            color: #aaa;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .section {
+            background: #111827;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h3 {
+            font-size: 16px;
+            color: #d0d0d0;
+            margin: 25px 0 12px 0;
+            font-weight: bold;
+        }
+        .section p { font-size: 15px; color: #b0b0b0; margin-bottom: 14px; }
+        .section ul { padding-left: 22px; margin: 12px 0; }
+        .section li { font-size: 15px; color: #c0c0c0; margin-bottom: 8px; line-height: 1.7; }
+        .section li strong { color: #e0e0e0; }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(76,175,80,0.1), rgba(76,175,80,0.05));
+            border: 1px solid rgba(76,175,80,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box h4 {
+            color: #4caf50;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .highlight-box p { color: #a0a0a0; margin-bottom: 0; }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 28px; font-weight: bold; color: #4caf50; }
+        .stat-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background: rgba(255,255,255,0.06); color: #d0d0d0; font-weight: bold; }
+        td { color: #b0b0b0; }
+        td strong { color: #e0e0e0; }
+        code {
+            background: rgba(76,175,80,0.15);
+            color: #81c784;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .cmd-block {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 3px solid #4caf50;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #c9d1d9;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 13px;
+        }
+        .footer a { color: #4caf50; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .ref-list { margin-top: 8px; }
+        .ref-list a { color: #4caf50; font-size: 13px; }
+        .mono { font-family: 'Courier New', monospace; }
+        .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+        .status-blocked { background: #f44336; }
+        .status-working { background: #ff9800; }
+        .status-done { background: #2196f3; }
+        .status-idle { background: #4caf50; }
+        @media (max-width: 600px) {
+            .hero { padding: 24px; }
+            .section { padding: 20px; }
+            .hero h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+    <div class="badge-row">
+        <span class="badge">⭐ 19.7k Stars</span>
+        <span class="badge">🔥 新建 118 天</span>
+        <span class="badge">⚡ Rust</span>
+        <span class="badge">🤖 Agent-Aware</span>
+        <span class="badge">📡 Socket API</span>
+    </div>
+    <h1><a href="https://github.com/ogulcancelik/herdr" target="_blank">herdr</a></h1>
+    <p class="desc">住在终端里的 Agent 多路复用器 —— 同时管理多个 AI 编码代理，一眼看清谁在干活、谁在等待、谁已完成</p>
+    <div class="meta">
+        <span>🕐 活跃于 10 小时前</span>
+        <span>📝 Rust</span>
+        <span>🍴 1.3k Forks</span>
+        <span>📄 Apache-2.0</span>
+    </div>
+    <div class="tags">
+        <span class="tag">agent</span>
+        <span class="tag">agent-orchestration</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">claude-code</span>
+        <span class="tag">codex</span>
+        <span class="tag">coding-agents</span>
+        <span class="tag">multiplexer</span>
+        <span class="tag">rust</span>
+        <span class="tag">terminal</span>
+        <span class="tag">tui</span>
+    </div>
+</div>
+
+<!-- 数据速览 -->
+<div class="section">
+    <h2>📊 核心数据</h2>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="num">19.7k</div>
+            <div class="label">GitHub Stars（4 个月）</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">4,500+</div>
+            <div class="label">每周新增 Stars</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">~10MB</div>
+            <div class="label">单二进制大小</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">&lt;15MB</div>
+            <div class="label">内存占用（6 pane + 3 agent）</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">15+</div>
+            <div class="label">内置 Agent 集成</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">287</div>
+            <div class="label">Hacker News 点数</div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目背景 -->
+<div class="section">
+    <h2>📌 项目背景</h2>
+    <p>随着 Claude Code、OpenAI Codex、GitHub Copilot CLI 等 AI 编码代理的普及，开发者桌面上同时运行多个 Agent 已成为常态。但传统终端多路复用器（tmux、screen）完全不理解"Agent 的语义状态"——它只能看到窗格里有个进程在跑，却不知道这个 Agent 是在工作、被阻塞、已完成还是空闲。</p>
+    <p>herdr 正是为解决这个痛点而生。它由土耳其开发者 <strong>Oğulcan Çelik</strong> 全职开发，2026 年 3 月底开源后迅速蹿红。Hacker News 首页讨论获 <strong>287 分</strong>，GitHub Stars 以每周 <strong>4,500+</strong> 的速度增长。它的名字是 "herder"（牧羊人）的缩写——你正在"放牧"一群 AI 代理。</p>
+    <div class="highlight-box">
+        <h4>💡 核心理念</h4>
+        <p>herdr 不是在"模拟"终端，而是真的尊重终端。每个 Agent 都拥有自己的真实 PTY 终端实例，你可以随时 detach，再从任意终端重新 attach——甚至可以拿手机通过 SSH 连回来继续看现场。</p>
+    </div>
+</div>
+
+<!-- 核心功能 -->
+<div class="section">
+    <h2>🚀 核心功能</h2>
+
+    <h3>1. Agent 状态感知（Agent-Aware）</h3>
+    <p>herdr 最大的创新是将 Agent 的语义状态可视化为四种信号，在侧边栏一目了然：</p>
+    <ul>
+        <li><span class="status-dot status-blocked"></span><strong>Blocked（红色）</strong>— Agent 等待输入或权限确认</li>
+        <li><span class="status-dot status-working"></span><strong>Working（橙色）</strong>— Agent 正在 actively 处理任务</li>
+        <li><span class="status-dot status-done"></span><strong>Done（蓝色）</strong>— 任务完成，结果待审阅</li>
+        <li><span class="status-dot status-idle"></span><strong>Idle（绿色）</strong>— Agent 空闲等待新任务</li>
+    </ul>
+    <p>传统 tmux 只能看到"窗格里有个进程在跑"，herdr 却能读懂这个进程在做什么。</p>
+
+    <h3>2. 零配置检测，开箱即用</h3>
+    <p>herdr 通过"<strong>启发式检测 + Socket API 显式报告</strong>"双重机制识别 Agent 状态：</p>
+    <ul>
+        <li><strong>启发式检测</strong>：扫描进程名和终端输出，自动推断 Claude Code、Codex、Copilot CLI 等主流 Agent 的状态，无需任何配置</li>
+        <li><strong>Socket API 钩子</strong>：支持的 Agent 可通过 <code>pane.report_agent</code> 方法发送显式生命周期报告，获得更精确的状态追踪</li>
+    </ul>
+    <p>已原生支持 <strong>15+</strong> 主流 Agent：Claude Code、OpenAI Codex、Pi、Droid、Amp、GitHub Copilot CLI、Devin CLI、Grok CLI、OpenCode、Kilo Code CLI、Hermes Agent 等。</p>
+
+    <h3>3. 持久化会话，断连不丢进度</h3>
+    <p>Agent 一次任务可能跑几十分钟，SSH 断了或终端关了容易丢进度。herdr 采用<strong>客户端-服务器架构</strong>：HeadlessServer 在后台持久化管理所有 PTY 会话，客户端可以安全分离（<code>ctrl+b q</code>），稍后从任意终端——甚至手机 SSH——重新连接恢复。会话状态可在客户端断开和服务器重启后存活。</p>
+
+    <h3>4. Agent 也能调用 herdr —— Socket API</h3>
+    <p>herdr 暴露了一套 <strong>Unix Socket JSON-RPC API</strong>，Agent 可以编程式地：创建工作区、拆分窗格、启动其他 Agent、读取任意 pane 的输出、阻塞等待某个 Agent 进入 idle 状态、订阅实时事件。</p>
+    <p>这意味着你可以构建"<strong>主控 Agent</strong>"来编排多个子 Agent：A 改代码、B 审查、C 跑测试，三个同时进行，主控 Agent 盯着状态就行。这是迈向多 Agent 自主协作的关键基础设施。</p>
+
+    <h3>5. 鼠标原生 + 键盘双模操作</h3>
+    <p>不同于 tmux 的纯键盘范式，herdr 同时支持鼠标点击切换 pane、拖拽调整大小、右键分屏，也保留了 tmux 风格的 prefix 键（<code>Ctrl+B</code>）供键盘党使用。你可以按场景选择交互方式，不用被迫适应某一种范式。</p>
+
+    <h3>6. 三层组织：Workspace → Tab → Pane</h3>
+    <ul>
+        <li><strong>Workspace（工作区）</strong>：以项目为单位，通常对应一个 Git 仓库或文件夹</li>
+        <li><strong>Tab（标签）</strong>：工作区内的标签页</li>
+        <li><strong>Pane（窗格）</strong>：真正在跑的终端进程——注意，这是<strong>真实的 PTY 终端</strong>，不是工具自己"重新解释"过的 Agent 视图</li>
+    </ul>
+</div>
+
+<!-- 技术亮点 -->
+<div class="section">
+    <h2>⚙️ 技术亮点</h2>
+
+    <h3>亮点一：混合 Agent 检测机制</h3>
+    <p>herdr 的 Agent 状态检测结合了两种策略：<strong>启发式推断</strong>（无需修改 Agent）和 <strong>Socket API 显式报告</strong>（支持更丰富的状态）。对于 screen-manifest Agent（如 Claude Code、Codex），herdr 读取实时屏幕快照并匹配已知的 UI 模式（权限提示、确认对话框、空闲状态）；对于深度集成 Agent，则通过生命周期钩子直接获取精确状态。</p>
+    <p>Blocked 检测采用保守策略——只匹配已知的 approval UI 模式，避免误报。这种"零侵入 + 渐进增强"的设计让 herdr 开箱即用，同时支持更深度的集成。</p>
+
+    <h3>亮点二：三种执行模式，覆盖全场景</h3>
+    <table>
+        <tr>
+            <th>模式</th>
+            <th>启动方式</th>
+            <th>说明</th>
+        </tr>
+        <tr>
+            <td><strong>Client/Server（默认）</strong></td>
+            <td><code>herdr</code></td>
+            <td>后台服务器持久化会话，轻量客户端负责 TUI 渲染和输入</td>
+        </tr>
+        <tr>
+            <td><strong>Monolithic</strong></td>
+            <td><code>herdr --no-session</code></td>
+            <td>单进程运行，适合快速测试和简单场景</td>
+        </tr>
+        <tr>
+            <td><strong>Headless API</strong></td>
+            <td>无 UI 模式</td>
+            <td>纯 Socket API 控制，适用于 CI/CD 自动化和脚本编排</td>
+        </tr>
+    </table>
+    <p>三种模式使 herdr 既能作为日常开发工具，也能融入自动化流水线。</p>
+
+    <h3>亮点三：Rust 实现，极致轻量</h3>
+    <ul>
+        <li><strong>单二进制 ~10MB</strong>，零依赖（无 Electron、无 Node.js、无 GUI 框架）</li>
+        <li><strong>内存占用 &lt;15MB</strong>（6 pane + 3 agent 场景实测）</li>
+        <li><strong>启动 &lt;100ms</strong></li>
+        <li><strong>事件驱动检测</strong>，非轮询，CPU 影响可忽略</li>
+        <li>客户端使用 <code>ratatui</code> 构建 TUI，服务器管理真实 PTY，终端后端基于 Ghostty</li>
+    </ul>
+    <p>对比 cmux（~50MB+ Swift 二进制、macOS 独占）和 Warp（桌面应用、非终端原生），herdr 的轻量和跨平台优势非常明显。</p>
+</div>
+
+<!-- 适用人群 -->
+<div class="section">
+    <h2>👥 适用人群</h2>
+    <ul>
+        <li><strong>多 Agent 并行开发者</strong>：同时跑 Claude Code + Codex + Copilot 等，需要统一监控状态，不用一扇扇窗口找</li>
+        <li><strong>长时任务用户</strong>：Agent 任务跑几十分钟，需要 detach/reattach 不丢进度，关闭笔记本 Agent 继续跑</li>
+        <li><strong>远程开发工程师</strong>：在 VPS 上跑 Agent，通过 SSH 管理会话，herdr 远程模式保留图片粘贴能力</li>
+        <li><strong>多 Agent 编排爱好者</strong>：想构建"主控 Agent 调度子 Agent"的高级工作流，Socket API 是实现基础</li>
+        <li><strong>终端性能敏感用户</strong>：追求轻量、快速、无 Electron 的终端工具，拒绝内存占用 100MB+ 的 GUI 应用</li>
+    </ul>
+</div>
+
+<!-- 快速上手 -->
+<div class="section">
+    <h2>🚀 快速上手</h2>
+    <div class="cmd-block"># 安装（macOS / Linux）
+brew install herdr
+# 或一键脚本
+curl -fsSL https://herdr.dev/install.sh | sh
+# Windows Beta
+powershell -ExecutionPolicy Bypass -c "irm https://herdr.dev/install.ps1 | iex"
+
+# 启动 herdr（进入项目目录）
+herdr
+
+# 在 pane 中启动 Agent
+claude
+
+# 垂直分屏
+ctrl+b v
+
+# 在另一个 pane 启动另一个 Agent
+codex
+
+# detach（Agent 继续在后台运行）
+ctrl+b q
+
+# 从任意终端重新连接
+herdr
+
+# 远程服务器使用
+herdr --remote ssh://user@server:2222
+
+# 安装 Agent 原生集成（获得更精确的状态）
+herdr integration install claude
+herdr integration install codex</div>
+</div>
+
+<!-- 对比分析 -->
+<div class="section">
+    <h2>📊 对比分析</h2>
+    <table>
+        <tr>
+            <th>维度</th>
+            <th>herdr</th>
+            <th>tmux</th>
+            <th>Zellij</th>
+            <th>cmux</th>
+        </tr>
+        <tr>
+            <td><strong>Stars</strong></td>
+            <td>19.7k</td>
+            <td>36k+</td>
+            <td>31k+</td>
+            <td>25.0k</td>
+        </tr>
+        <tr>
+            <td><strong>定位</strong></td>
+            <td>Agent 多路复用器</td>
+            <td>通用终端复用器</td>
+            <td>现代终端工作区</td>
+            <td>macOS 终端 App</td>
+        </tr>
+        <tr>
+            <td><strong>Agent 状态感知</strong></td>
+            <td>✅ 四色信号</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>部分（badge 通知）</td>
+        </tr>
+        <tr>
+            <td><strong>Socket API</strong></td>
+            <td>✅ JSON-RPC，Agent 可驱动</td>
+            <td>终端脚本</td>
+            <td>有限</td>
+            <td>App API</td>
+        </tr>
+        <tr>
+            <td><strong>鼠标原生支持</strong></td>
+            <td>✅</td>
+            <td>有限</td>
+            <td>有限</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td><strong>跨平台</strong></td>
+            <td>✅ macOS/Linux/Win β</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌ macOS only</td>
+        </tr>
+        <tr>
+            <td><strong>二进制大小</strong></td>
+            <td>~10MB</td>
+            <td>~1MB</td>
+            <td>~10MB</td>
+            <td>~50MB+</td>
+        </tr>
+        <tr>
+            <td><strong>内存占用</strong></td>
+            <td>&lt;15MB</td>
+            <td>&lt;5MB</td>
+            <td>&lt;10MB</td>
+            <td>~100MB+</td>
+        </tr>
+        <tr>
+            <td><strong>远程 SSH</strong></td>
+            <td>✅ + 图片粘贴</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>部分</td>
+        </tr>
+        <tr>
+            <td><strong>插件生态</strong></td>
+            <td>起步中</td>
+            <td>丰富（10 年+）</td>
+            <td>WASM 插件</td>
+            <td>有限</td>
+        </tr>
+        <tr>
+            <td><strong>许可</strong></td>
+            <td>Apache-2.0</td>
+            <td>ISC</td>
+            <td>MIT</td>
+            <td>GPL</td>
+        </tr>
+    </table>
+    <div class="highlight-box">
+        <h4>💡 选择建议</h4>
+        <p><strong>tmux 持久化终端，herdr 持久化 Agent 工作区并理解 Agent 状态。</strong>如果你只跑一个 Agent，tmux 够用；但如果你同时管理多个 Agent，herdr 是生产力的倍增器。cmux 是 macOS 独占的桌面终端应用，herdr 则运行在你已有的任何终端里——不替换、不锁定、尊重你的习惯。</p>
+    </div>
+</div>
+
+<!-- 为什么值得关注 -->
+<div class="section">
+    <h2>💡 为什么值得关注</h2>
+    <ul>
+        <li><strong>解决了一个真实的新痛点</strong>：AI 编码 Agent 的普及催生了一个此前不存在的工具品类——"Agent 感知型终端复用器"。herdr 是这个品类的先行者之一。</li>
+        <li><strong>增长势头凶猛</strong>：4 个月从 0 到 19.7k Stars，每周新增 4,500+，Hacker News 287 分热议，社区关注度极高。</li>
+        <li><strong>设计哲学清晰</strong>：不替换你的终端、不把你锁进 GUI、尊重终端原生体验——只是把你的工作方式组织得更适合 AI Agent 时代。</li>
+        <li><strong>递归式 Agent 编排</strong>：Socket API 让 Agent 能驱动 herdr，这意味着 Agent 可以自我编排——一个 Agent 可以 spawn 其他 Agent、等待它们完成、读取输出、继续下一步。这是迈向多 Agent 自主协作的关键基础设施。</li>
+        <li><strong>全职开发，迭代极快</strong>：作者 Oğulcan Çelik 全职维护，v0.4.0 阶段每周多个 release，功能演进迅速。</li>
+    </ul>
+</div>
+
+<!-- 注意事项 -->
+<div class="section">
+    <h2>⚠️ 注意事项</h2>
+    <ul>
+        <li><strong>v0.4.0 成熟度</strong>：项目很新，API 可能变动，配置稳定性尚未保证</li>
+        <li><strong>Blocked 检测保守</strong>：screen-manifest Agent 只匹配已知的 approval UI 模式，新或不常见的提示可能显示为 idle</li>
+        <li><strong>Windows 支持为 Beta</strong>：稳定性不如 macOS/Linux</li>
+        <li><strong>插件生态年轻</strong>：相比 tmux 十年积累的生态，herdr 的 marketplace 还在早期</li>
+    </ul>
+</div>
+
+<!-- 参考资料 -->
+<div class="section">
+    <h2>📚 参考资料</h2>
+    <div class="ref-list">
+        <p>• <a href="https://github.com/ogulcancelik/herdr" target="_blank">GitHub - ogulcancelik/herdr</a></p>
+        <p>• <a href="https://deepwiki.com/ogulcancelik/herdr" target="_blank">DeepWiki - herdr 深度架构解析</a></p>
+        <p>• <a href="https://herdr.dev" target="_blank">herdr 官网</a></p>
+        <p>• <a href="https://herdr.dev/compare" target="_blank">herdr 官方对比（vs tmux/Zellij/cmux/Warp）</a></p>
+        <p>• <a href="https://news.ycombinator.com/item?id=48816959" target="_blank">Hacker News 讨论（287 点）</a></p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📅 AI 开源项目日报 · 2026-07-23</p>
+    <p>👤 fly的AI学习 · <a href="https://flystray.github.io/ai-news/" target="_blank">查看历史日报</a></p>
+</div>
+
+</div>
+</body>
+</html>
