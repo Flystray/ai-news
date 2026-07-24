@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GitHub AI 项目日报 - 2026-07-24 · cmux</title>
+<title>GitHub AI 项目日报 - 2026-07-24 · Orca</title>
 <style>
   :root {
     --bg: #fafbfc;
@@ -179,6 +179,9 @@
     font-size: 12px;
     margin: 2px 4px 2px 0;
   }
+  .tag.ts { background: #ddf4ff; color: #0969da; }
+  .tag.mit { background: #fff8c5; color: #9a6700; }
+  .tag.ai { background: #fbefff; color: #8250df; }
   .emoji-title { font-size: 1.3em; }
   .comparison-table th:first-child { width: 30%; }
   .comparison-table td { vertical-align: top; }
@@ -188,52 +191,51 @@
 <div class="container">
 
   <div class="header">
-    <h1><span class="emoji-title">🖥️</span> GitHub AI 项目日报</h1>
+    <h1><span class="emoji-title">🐳</span> GitHub AI 项目日报</h1>
     <div class="subtitle">2026-07-24 · 第四十一期</div>
     <div class="meta">
-      <span>⭐ 25.0k stars</span>
-      <span>🍴 2.1k forks</span>
-      <span>🛡️ GPL-3.0-or-later</span>
-      <span>📘 Swift</span>
+      <span>⭐ 27.5k stars</span>
+      <span>🍴 1.9k forks</span>
+      <span>🛡️ MIT License</span>
+      <span>📘 TypeScript</span>
     </div>
   </div>
 
   <!-- 项目概览 -->
   <div class="card">
-    <h2>项目概览：manaflow-ai / cmux</h2>
+    <h2>项目概览：stablyai / orca</h2>
     <div>
-      <span class="badge orange">macOS 独占</span>
-      <span class="badge blue">Swift</span>
-      <span class="badge green">GPL</span>
-      <span class="badge purple">2026-01-28</span>
+      <span class="badge blue">ADE</span>
+      <span class="badge purple">Y Combinator</span>
+      <span class="badge green">MIT</span>
+      <span class="badge orange">2026-03</span>
     </div>
     <p style="margin-top:14px;">
-      <strong>cmux</strong> 是一个专为 AI 编码代理设计的原生 macOS 终端应用，基于 Ghostty 的底层渲染库 <code>libghostty</code> 构建。
-      它将传统"终端标签页"升级为带 Agent 状态感知的工作区指挥中心：垂直标签显示 Git 分支、PR 状态、端口和最新通知；
-      Agent 需要关注时，对应窗格会亮起蓝色光环并推送 macOS 通知。
-      Ghostty 创始人 Mitchell Hashimoto 公开称赞它是为 "terminal-based agentic workflows" 而生的创新项目。
+      <strong>Orca</strong> 是一款开源的 <strong>Agent Development Environment（ADE）</strong>，定位为"AI 编码 agent 的调度中心"。
+      它允许开发者在相互隔离的 git worktree 中并行运行 Claude Code、Codex、OpenCode、Pi 等 30+ 个 CLI agent，
+      统一监控状态、比较输出、合并最优结果，并通过移动端 App 实现远程管理。
     </p>
 
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="num">25.0k</div>
+        <div class="num">27.5k</div>
         <div class="label">GitHub Stars</div>
       </div>
       <div class="stat-card">
-        <div class="num">2.1k</div>
+        <div class="num">1.9k</div>
         <div class="label">Forks</div>
       </div>
       <div class="stat-card">
-        <div class="num">6 个月</div>
-        <div class="label">从开源到 25k Stars</div>
+        <div class="num">30+</div>
+        <div class="label">支持 Agent</div>
       </div>
       <div class="stat-card">
-        <div class="num">15+</div>
-        <div class="label">支持的 CLI Agent</div>
+        <div class="num">5</div>
+        <div class="label">并行扇出</div>
       </div>
       <div class="stat-card">
-        <div class="num">120fps+</div>
-        <div class="label">GPU 渲染能力</div>
+        <div class="num">4</div>
+        <div class="label">创建月数</div>
       </div>
     </div>
   </div>
@@ -242,92 +244,96 @@
   <div class="card">
     <h2>核心功能</h2>
 
-    <h3>1. 垂直标签工作区</h3>
-    <p>左侧边栏不仅列出会话，还直接显示每个工作区的 Git 分支、关联 PR 状态/编号、工作目录、监听端口和最新通知文本，让多任务状态一目了然。</p>
+    <h3>1. 并行 Worktree：一个 prompt 扇出多个 agent</h3>
+    <p>将同一任务同时交给多个 agent，每个 agent 在独立 git worktree 中实现，完成后并排比较、择优合并。无需 stash，无需手动切分支。</p>
 
-    <h3>2. Agent 通知环系统</h3>
-    <p>Agent 完成任务或等待确认时，窗格显示蓝色光环、侧边栏标签高亮、弹出通知面板并触发 macOS 桌面通知。支持 CLI、OSC 777 和 OSC 9/99 三种触发方式。</p>
+    <h3>2. Agent 舰队状态监控</h3>
+    <p>主界面实时显示所有 worktree 中 agent 的 working / idle / blocked / done 状态，卡住一眼可见。</p>
 
-    <h3>3. 内置可编程浏览器</h3>
-    <p>基于 WKWebView 的浏览器窗格支持 DOM 快照、点击、填表、执行 JS、读取控制台和网络活动。Agent 可直接验证网页改动，SSH 远程工作区中 localhost 也能透明路由。</p>
+    <h3>3. 移动端伴侣 App</h3>
+    <p>iOS（App Store / TestFlight）与 Android（APK）支持，出门也能查看 agent 进度、接收通知、发送 follow-up 指令。</p>
 
-    <h3>4. Claude Code Teams 原生支持</h3>
-    <p>运行 <code>cmux claude-teams</code>，每个 teammate 自动渲染为原生分屏，拥有独立侧边栏元数据和通知状态，无需 tmux 配置。</p>
+    <h3>4. Design Mode</h3>
+    <p>每个 worktree 内置 Chromium 浏览器，点击任意 UI 元素即可把 HTML、CSS 与截图直接送入 agent prompt，视觉修改反馈闭环。</p>
 
-    <h3>5. CLI + Unix Socket API</h3>
-    <p>外部脚本可通过 <code>cmux</code> CLI 或 Unix socket 创建工作区、分屏、发送按键、读取屏幕、控制浏览器、设置状态栏，实现完整自动化编排。</p>
+    <h3>5. AI Diff 批注回传</h3>
+    <p>在 diff 任意一行写 markdown 批注，批量回传给 agent 修改，把 code review 做进 agent 工作流。</p>
 
-    <h3>6. 原生 Swift + AppKit</h3>
-    <p>非 Electron/Tauri，启动快、内存占用低、GPU 渲染流畅。自动读取 <code>~/.config/ghostty/config</code>，主题字体颜色无缝迁移。</p>
+    <h3>6. GitHub & Linear 原生集成</h3>
+    <p>应用内浏览 PR、issue、Project 看板，直接从任务打开 worktree，支持 CI 检查与 PR 创建。</p>
+
+    <h3>7. SSH Worktrees</h3>
+    <p>把 agent 派到远程机器运行，支持文件编辑、git、终端，断线自动重连，带端口转发。</p>
+
+    <h3>8. Orca CLI</h3>
+    <p>提供 <code>orca worktree create</code>、<code>snapshot</code>、<code>click</code>、<code>fill</code> 等命令，agent 也能反向控制 IDE。</p>
   </div>
 
   <!-- 技术亮点 -->
   <div class="card">
     <h2>技术亮点</h2>
 
-    <h3>libghostty 作为"终端界的 WebKit"</h3>
-    <p>cmux 不是 Ghostty 的分支，而是把 <code>libghostty</code> 嵌入 Swift/AppKit 外壳中，既获得 Ghostty 的 GPU 加速渲染能力，又拥有原生 macOS GUI 的完整能力。</p>
+    <h3>Electron 三进程架构</h3>
+    <p>Main 进程负责原生集成（Git、PTY、SSH）与持久化；Preload 通过 <code>contextBridge</code> 暴露安全 API；Renderer 用 React + Zustand 渲染。系统级操作不阻塞 UI。</p>
 
-    <h3>基于标准 OSC 序列的 Agent 通知捕获</h3>
-    <p>监听标准终端转义序列 OSC 9/99/777，任何能向 stdout 输出的 Agent 或脚本都能触发通知，实现真正的 Agent 无关设计。</p>
+    <h3>Ghostty 级终端体验</h3>
+    <p>基于 xterm.js + node-pty，WebGL 渲染，支持无限分屏、重启后 scrollback 恢复、全量搜索。</p>
 
-    <h3>SwiftUI + AppKit 混合架构</h3>
-    <p>根据 DeepWiki 代码解析，项目采用分层架构：<code>cmuxApp</code> 作为入口，<code>TabManager</code> 管理全局状态，<code>BonsplitController</code> 负责复杂分屏，<code>TerminalController</code> 监听 Unix socket 供外部调用。</p>
+    <h3>版本化持久化层</h3>
+    <p><code>Store</code> 类管理 <code>orca-data.json</code>，支持 schema 版本控制与迁移，保证配置向前兼容。</p>
+
+    <h3>"自带订阅"的中立定位</h3>
+    <p>Orca 不卖模型 token，只提供编排层。用户自带 Claude / Codex 等订阅，因此能同时支持 30+ CLI agent，避免被单一厂商锁定。</p>
 
     <div class="highlight">
-      <strong>亮点总结：</strong>cmux 的聪明之处在于不重复造轮子——用 Ghostty 解决渲染性能，用原生 macOS 框架解决交互体验，用标准 OSC 协议解决 Agent 集成，三者组合成一个为 AI 编码时代重新设计的终端。
+      <strong>一句话总结：</strong>Orca 不是替代某个 agent，而是把多个 agent 组织成可监控、可比较、可合并的舰队。
     </div>
   </div>
 
   <!-- 对比分析 -->
   <div class="card">
-    <h2>对比分析：cmux  vs  传统终端工具</h2>
+    <h2>对比分析：编排层 vs 单点 agent</h2>
     <table class="comparison-table">
-      <tr><th>维度</th><th>cmux</th><th>tmux</th><th>iTerm2</th><th>Warp</th><th>herdr</th></tr>
-      <tr><td>定位</td><td>macOS Agent 终端</td><td>跨平台复用器</td><td>macOS 原生终端</td><td>现代 AI 终端</td><td>终端内 Agent 复用器</td></tr>
-      <tr><td>Agent 通知</td><td style="color:#0969da;font-weight:700">✅ 光环 + badge + 桌面通知</td><td>❌</td><td>⚠️ 通用</td><td>⚠️ 基础</td><td>✅ 四色状态</td></tr>
-      <tr><td>内置浏览器</td><td style="color:#0969da;font-weight:700">✅ 可编程</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
-      <tr><td>GPU 加速</td><td style="color:#0969da;font-weight:700">✅ libghostty</td><td>取决于宿主</td><td>❌</td><td>⚠️ 部分</td><td>✅ Ghostty</td></tr>
-      <tr><td>会话持久化</td><td>⚠️ 布局恢复</td><td style="color:#0969da;font-weight:700">✅ 极强</td><td>⚠️ 部分</td><td>⚠️ 有限</td><td>✅ 服务器持久化</td></tr>
-      <tr><td>跨平台</td><td>❌ macOS only</td><td>✅</td><td>❌ macOS only</td><td>✅</td><td>✅</td></tr>
-      <tr><td>GUI/TUI</td><td>原生 GUI</td><td>TUI</td><td>GUI</td><td>GUI</td><td>TUI</td></tr>
-      <tr><td>许可</td><td>GPL</td><td>ISC</td><td>GPL</td><td>专有</td><td>Apache-2.0</td></tr>
+      <tr><th>维度</th><th>Orca</th><th>Claude Code</th><th>Cursor</th><th>GitHub Copilot</th></tr>
+      <tr><td>多 agent 并行</td><td style="color:#0969da;font-weight:700">✅ 原生</td><td>❌ 单会话</td><td>❌ 单会话</td><td>❌ 单会话</td></tr>
+      <tr><td>git worktree 原生管理</td><td style="color:#0969da;font-weight:700">✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td>隔离环境</td><td style="color:#0969da;font-weight:700">✅ 独立 worktree</td><td>共享工作区</td><td>共享工作区</td><td>共享工作区</td></tr>
+      <tr><td>移动端监控</td><td style="color:#0969da;font-weight:700">✅ iOS/Android</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td>SSH 远程执行</td><td style="color:#0969da;font-weight:700">✅ 完整</td><td>❌</td><td>部分</td><td>❌</td></tr>
+      <tr><td>Design Mode</td><td style="color:#0969da;font-weight:700">✅ Chromium</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td>开源协议</td><td style="color:#1a7f37;font-weight:700">MIT</td><td>闭源</td><td>闭源</td><td>闭源</td></tr>
+      <tr><td>Orca 定价</td><td>免费（自带订阅）</td><td>$20/月起</td><td>$20/月起</td><td>$10/月起</td></tr>
     </table>
 
     <p style="margin-top:14px;">
-      <strong>一句话总结：</strong>tmux 是终端持久化专家，cmux 是 macOS 上为 AI Agent 时代重新设计的原生 GUI 终端。herdr 走轻量 TUI 路线，cmux 走桌面级 Agent 指挥中心路线——两者互补。
+      <strong>核心差异：</strong>主流工具竞争的是"单个 agent 的能力"，Orca 竞争的是"多个 agent 的编排效率"。
+      它适合已经持有多个 agent 订阅、希望把它们组织成并行工作流的重度用户。
     </p>
   </div>
 
   <!-- 快速上手 -->
   <div class="card">
     <h2>快速上手</h2>
-    <pre><code># Homebrew 安装
-brew tap manaflow-ai/cmux
-brew install --cask cmux
+    <pre><code># macOS
+brew install --cask stablyai/orca/orca
 
-# 配置 CLI
-sudo ln -sf "/Applications/cmux.app/Contents/Resources/bin/cmux" /usr/local/bin/cmux
+# Arch Linux
+yay -S stably-orca-bin
 
-# 验证
-cmux list-workspaces
-cmux notify --title "Hello" --body "cmux CLI is working"
-
-# 安装 Agent hooks（可选）
-cmux hooks setup
-</code></pre>
-    <p>系统要求：macOS 14.0+，Apple Silicon 或 Intel。首次启动时点击"打开"以绕过 Gatekeeper 提示。</p>
+# Windows / Linux 下载安装包
+# https://onorca.dev/download</code></pre>
+    <p>安装后登录已安装的 agent，创建 workspace，新建 worktree 并启动 agent；使用"Duplicate to N agents"把同一 prompt 扇出到多个 agent，最后比较 diff 合并最优版本。</p>
   </div>
 
   <!-- 适用人群 -->
   <div class="card">
     <h2>适用人群</h2>
     <ul>
-      <li><strong>多 Agent 并行开发者</strong>：同时跑 Claude Code、Codex、Aider 等，需要视觉化状态监控</li>
-      <li><strong>macOS 原生性能党</strong>：厌倦 Electron 终端的卡顿和高内存占用</li>
-      <li><strong>全栈/前端开发者</strong>：需要终端和浏览器并排、Agent 自动验证网页改动</li>
-      <li><strong>工具链/自动化工程师</strong>：想基于 Socket API 构建自定义 Agent 工作流</li>
-      <li><strong>追求开箱即用的团队</strong>：不想写大量 tmux 配置，希望 GUI 即开即用</li>
+      <li><strong>多 agent 订阅用户</strong>：同时持有 Claude、Codex、Cursor 等，需要统一调度</li>
+      <li><strong>并行实验型开发者</strong>：同一任务想比较多个 agent 实现，择优合并</li>
+      <li><strong>多仓库/多分支团队</strong>：需要隔离的 worktree 并行推进需求</li>
+      <li><strong>远程开发者</strong>：需要在服务器跑 agent 或出门在外监控进度</li>
+      <li><strong>终端体验敏感用户</strong>：喜欢 Ghostty/Warp 级终端，又需要 AI 工作流整合</li>
     </ul>
   </div>
 
@@ -335,16 +341,16 @@ cmux hooks setup
   <div class="card">
     <h2>局限与风险</h2>
     <ol>
-      <li><strong>macOS 独占</strong>：Windows/Linux 用户无法使用</li>
-      <li><strong>会话恢复≠进程恢复</strong>：恢复布局，但运行中的 Agent 进程不会自动复活</li>
-      <li><strong>GPL 许可</strong>：商业嵌入需联系 Manaflow 获取授权</li>
-      <li><strong>生态较年轻</strong>：插件和周边生态不如 iTerm2/tmux 成熟</li>
+      <li><strong>项目较新</strong>：2026 年 3 月创建，API 与插件生态仍在快速迭代</li>
+      <li><strong>Electron 体量</strong>：功能丰富但资源占用高于纯终端工具</li>
+      <li><strong>大厂追赶</strong>：VS Code、JetBrains、Cursor 可能将多 agent 工作流做进原生界面</li>
+      <li><strong>订阅成本</strong>：Orca 免费，但每个 agent 仍需单独付费</li>
     </ol>
   </div>
 
   <div class="footer">
     <p>📅 2026-07-24 · 第四十一期 · 公众号「AI日课」</p>
-    <p>GitHub: <a href="https://github.com/manaflow-ai/cmux">manaflow-ai/cmux</a> | 官网: <a href="https://cmux.com">cmux.com</a></p>
+    <p>GitHub: <a href="https://github.com/stablyai/orca">stablyai/orca</a> | 官网: <a href="https://onorca.dev">onorca.dev</a></p>
   </div>
 
 </div>
