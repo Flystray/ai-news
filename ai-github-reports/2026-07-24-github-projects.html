@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-24 · cmux</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #0969da 0%, #54aeff 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(9, 105, 218, 0.15);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .meta span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge.green { background: #aff5b4; color: #1a7f37; }
+  .badge.blue { background: #ddf4ff; color: #0969da; }
+  .badge.purple { background: #fbefff; color: #8250df; }
+  .badge.orange { background: #fff3e0; color: #ff6700; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--code-bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0969da;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #cf222e;
+  }
+  pre {
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaeef2;
+    color: var(--text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 2px 4px 2px 0;
+  }
+  .emoji-title { font-size: 1.3em; }
+  .comparison-table th:first-child { width: 30%; }
+  .comparison-table td { vertical-align: top; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><span class="emoji-title">🖥️</span> GitHub AI 项目日报</h1>
+    <div class="subtitle">2026-07-24 · 第四十一期</div>
+    <div class="meta">
+      <span>⭐ 25.0k stars</span>
+      <span>🍴 2.1k forks</span>
+      <span>🛡️ GPL-3.0-or-later</span>
+      <span>📘 Swift</span>
+    </div>
+  </div>
+
+  <!-- 项目概览 -->
+  <div class="card">
+    <h2>项目概览：manaflow-ai / cmux</h2>
+    <div>
+      <span class="badge orange">macOS 独占</span>
+      <span class="badge blue">Swift</span>
+      <span class="badge green">GPL</span>
+      <span class="badge purple">2026-01-28</span>
+    </div>
+    <p style="margin-top:14px;">
+      <strong>cmux</strong> 是一个专为 AI 编码代理设计的原生 macOS 终端应用，基于 Ghostty 的底层渲染库 <code>libghostty</code> 构建。
+      它将传统"终端标签页"升级为带 Agent 状态感知的工作区指挥中心：垂直标签显示 Git 分支、PR 状态、端口和最新通知；
+      Agent 需要关注时，对应窗格会亮起蓝色光环并推送 macOS 通知。
+      Ghostty 创始人 Mitchell Hashimoto 公开称赞它是为 "terminal-based agentic workflows" 而生的创新项目。
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">25.0k</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2.1k</div>
+        <div class="label">Forks</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">6 个月</div>
+        <div class="label">从开源到 25k Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">15+</div>
+        <div class="label">支持的 CLI Agent</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">120fps+</div>
+        <div class="label">GPU 渲染能力</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心功能 -->
+  <div class="card">
+    <h2>核心功能</h2>
+
+    <h3>1. 垂直标签工作区</h3>
+    <p>左侧边栏不仅列出会话，还直接显示每个工作区的 Git 分支、关联 PR 状态/编号、工作目录、监听端口和最新通知文本，让多任务状态一目了然。</p>
+
+    <h3>2. Agent 通知环系统</h3>
+    <p>Agent 完成任务或等待确认时，窗格显示蓝色光环、侧边栏标签高亮、弹出通知面板并触发 macOS 桌面通知。支持 CLI、OSC 777 和 OSC 9/99 三种触发方式。</p>
+
+    <h3>3. 内置可编程浏览器</h3>
+    <p>基于 WKWebView 的浏览器窗格支持 DOM 快照、点击、填表、执行 JS、读取控制台和网络活动。Agent 可直接验证网页改动，SSH 远程工作区中 localhost 也能透明路由。</p>
+
+    <h3>4. Claude Code Teams 原生支持</h3>
+    <p>运行 <code>cmux claude-teams</code>，每个 teammate 自动渲染为原生分屏，拥有独立侧边栏元数据和通知状态，无需 tmux 配置。</p>
+
+    <h3>5. CLI + Unix Socket API</h3>
+    <p>外部脚本可通过 <code>cmux</code> CLI 或 Unix socket 创建工作区、分屏、发送按键、读取屏幕、控制浏览器、设置状态栏，实现完整自动化编排。</p>
+
+    <h3>6. 原生 Swift + AppKit</h3>
+    <p>非 Electron/Tauri，启动快、内存占用低、GPU 渲染流畅。自动读取 <code>~/.config/ghostty/config</code>，主题字体颜色无缝迁移。</p>
+  </div>
+
+  <!-- 技术亮点 -->
+  <div class="card">
+    <h2>技术亮点</h2>
+
+    <h3>libghostty 作为"终端界的 WebKit"</h3>
+    <p>cmux 不是 Ghostty 的分支，而是把 <code>libghostty</code> 嵌入 Swift/AppKit 外壳中，既获得 Ghostty 的 GPU 加速渲染能力，又拥有原生 macOS GUI 的完整能力。</p>
+
+    <h3>基于标准 OSC 序列的 Agent 通知捕获</h3>
+    <p>监听标准终端转义序列 OSC 9/99/777，任何能向 stdout 输出的 Agent 或脚本都能触发通知，实现真正的 Agent 无关设计。</p>
+
+    <h3>SwiftUI + AppKit 混合架构</h3>
+    <p>根据 DeepWiki 代码解析，项目采用分层架构：<code>cmuxApp</code> 作为入口，<code>TabManager</code> 管理全局状态，<code>BonsplitController</code> 负责复杂分屏，<code>TerminalController</code> 监听 Unix socket 供外部调用。</p>
+
+    <div class="highlight">
+      <strong>亮点总结：</strong>cmux 的聪明之处在于不重复造轮子——用 Ghostty 解决渲染性能，用原生 macOS 框架解决交互体验，用标准 OSC 协议解决 Agent 集成，三者组合成一个为 AI 编码时代重新设计的终端。
+    </div>
+  </div>
+
+  <!-- 对比分析 -->
+  <div class="card">
+    <h2>对比分析：cmux  vs  传统终端工具</h2>
+    <table class="comparison-table">
+      <tr><th>维度</th><th>cmux</th><th>tmux</th><th>iTerm2</th><th>Warp</th><th>herdr</th></tr>
+      <tr><td>定位</td><td>macOS Agent 终端</td><td>跨平台复用器</td><td>macOS 原生终端</td><td>现代 AI 终端</td><td>终端内 Agent 复用器</td></tr>
+      <tr><td>Agent 通知</td><td style="color:#0969da;font-weight:700">✅ 光环 + badge + 桌面通知</td><td>❌</td><td>⚠️ 通用</td><td>⚠️ 基础</td><td>✅ 四色状态</td></tr>
+      <tr><td>内置浏览器</td><td style="color:#0969da;font-weight:700">✅ 可编程</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td>GPU 加速</td><td style="color:#0969da;font-weight:700">✅ libghostty</td><td>取决于宿主</td><td>❌</td><td>⚠️ 部分</td><td>✅ Ghostty</td></tr>
+      <tr><td>会话持久化</td><td>⚠️ 布局恢复</td><td style="color:#0969da;font-weight:700">✅ 极强</td><td>⚠️ 部分</td><td>⚠️ 有限</td><td>✅ 服务器持久化</td></tr>
+      <tr><td>跨平台</td><td>❌ macOS only</td><td>✅</td><td>❌ macOS only</td><td>✅</td><td>✅</td></tr>
+      <tr><td>GUI/TUI</td><td>原生 GUI</td><td>TUI</td><td>GUI</td><td>GUI</td><td>TUI</td></tr>
+      <tr><td>许可</td><td>GPL</td><td>ISC</td><td>GPL</td><td>专有</td><td>Apache-2.0</td></tr>
+    </table>
+
+    <p style="margin-top:14px;">
+      <strong>一句话总结：</strong>tmux 是终端持久化专家，cmux 是 macOS 上为 AI Agent 时代重新设计的原生 GUI 终端。herdr 走轻量 TUI 路线，cmux 走桌面级 Agent 指挥中心路线——两者互补。
+    </p>
+  </div>
+
+  <!-- 快速上手 -->
+  <div class="card">
+    <h2>快速上手</h2>
+    <pre><code># Homebrew 安装
+brew tap manaflow-ai/cmux
+brew install --cask cmux
+
+# 配置 CLI
+sudo ln -sf "/Applications/cmux.app/Contents/Resources/bin/cmux" /usr/local/bin/cmux
+
+# 验证
+cmux list-workspaces
+cmux notify --title "Hello" --body "cmux CLI is working"
+
+# 安装 Agent hooks（可选）
+cmux hooks setup
+</code></pre>
+    <p>系统要求：macOS 14.0+，Apple Silicon 或 Intel。首次启动时点击"打开"以绕过 Gatekeeper 提示。</p>
+  </div>
+
+  <!-- 适用人群 -->
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><strong>多 Agent 并行开发者</strong>：同时跑 Claude Code、Codex、Aider 等，需要视觉化状态监控</li>
+      <li><strong>macOS 原生性能党</strong>：厌倦 Electron 终端的卡顿和高内存占用</li>
+      <li><strong>全栈/前端开发者</strong>：需要终端和浏览器并排、Agent 自动验证网页改动</li>
+      <li><strong>工具链/自动化工程师</strong>：想基于 Socket API 构建自定义 Agent 工作流</li>
+      <li><strong>追求开箱即用的团队</strong>：不想写大量 tmux 配置，希望 GUI 即开即用</li>
+    </ul>
+  </div>
+
+  <!-- 局限 -->
+  <div class="card">
+    <h2>局限与风险</h2>
+    <ol>
+      <li><strong>macOS 独占</strong>：Windows/Linux 用户无法使用</li>
+      <li><strong>会话恢复≠进程恢复</strong>：恢复布局，但运行中的 Agent 进程不会自动复活</li>
+      <li><strong>GPL 许可</strong>：商业嵌入需联系 Manaflow 获取授权</li>
+      <li><strong>生态较年轻</strong>：插件和周边生态不如 iTerm2/tmux 成熟</li>
+    </ol>
+  </div>
+
+  <div class="footer">
+    <p>📅 2026-07-24 · 第四十一期 · 公众号「AI日课」</p>
+    <p>GitHub: <a href="https://github.com/manaflow-ai/cmux">manaflow-ai/cmux</a> | 官网: <a href="https://cmux.com">cmux.com</a></p>
+  </div>
+
+</div>
+</body>
+</html>
