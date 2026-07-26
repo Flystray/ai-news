@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-26 · ai-job-search</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #0969da 0%, #54aeff 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(9, 105, 218, 0.15);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .meta span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge.green { background: #aff5b4; color: #1a7f37; }
+  .badge.blue { background: #ddf4ff; color: #0969da; }
+  .badge.purple { background: #fbefff; color: #8250df; }
+  .badge.orange { background: #fff3e0; color: #ff6700; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--code-bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0969da;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #cf222e;
+  }
+  pre {
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaeef2;
+    color: var(--text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 2px 4px 2px 0;
+  }
+  .tag.ts { background: #ddf4ff; color: #0969da; }
+  .tag.mit { background: #fff8c5; color: #9a6700; }
+  .tag.ai { background: #fbefff; color: #8250df; }
+  .emoji-title { font-size: 1.3em; }
+  .comparison-table th:first-child { width: 30%; }
+  .comparison-table td { vertical-align: top; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><span class="emoji-title">💼</span> GitHub AI 项目日报</h1>
+    <div class="subtitle">2026-07-26 · 第四十二期</div>
+    <div class="meta">
+      <span>⭐ 27.1k stars</span>
+      <span>🍴 8.8k forks</span>
+      <span>🛡️ MIT License</span>
+      <span>📘 TypeScript + Python + LaTeX</span>
+    </div>
+  </div>
+
+  <!-- 项目概览 -->
+  <div class="card">
+    <h2>项目概览：MadsLorentzen / ai-job-search</h2>
+    <div>
+      <span class="badge blue">Claude Code</span>
+      <span class="badge purple">Drafter-Reviewer</span>
+      <span class="badge green">MIT</span>
+      <span class="badge orange">2026-03</span>
+    </div>
+    <p style="margin-top:14px;">
+      <strong>ai-job-search</strong> 是一个基于 <strong>Claude Code</strong> 构建的 AI 求职申请框架。地球物理学家 Mads Lorentzen 被裁员后自建此工具，
+      通过 13 条 Slash 命令将求职全流程——岗位搜索、契合度评估、LaTeX 简历/求职信起草与审查、ATS 验证、面试准备——变成可编程的流水线。
+      作者用这套框架完成 69 份定制化申请，获得 20 次面试和 1 份录用通知，2026 年 6 月正式入职 AI 工程师。
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">27.1k</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">8.8k</div>
+        <div class="label">Forks</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">13</div>
+        <div class="label">Slash 命令</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">6</div>
+        <div class="label">求职门户</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">69→20→1</div>
+        <div class="label">申请→面试→录用</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 作者故事 -->
+  <div class="card">
+    <h2>作者故事：从被裁到 AI 工程师</h2>
+    <p>2025 年底，Mads Lorentzen 的地球物理学家职位被裁减。他没有马上海投，而是花了三个月用 Claude Code 搭建了自己的求职自动化框架——相同的 <code>/scrape</code>、<code>/apply</code>、<code>/interview</code> 工作流，每周跑一遍。</p>
+    <p>他对每个交谈的雇主都坦诚地谈论这件事，这通常引发了真正的技术对话而非成为障碍。<strong>69 份定制化申请、20 次初轮面试、1 份签约合同</strong>——2026 年 6 月，他正式以 AI 工程师身份入职。他把这套工具开源了，四个月不到收获 27.1k Star。</p>
+    <div class="highlight">
+      <strong>核心理念：</strong>Fork 仓库 → 填写你的职业档案 → 让 Claude 替你评估职位、定制简历、撰写求职信、准备面试。不是"AI 帮我写简历"的浅尝辄止，而是一个完整的求职 Agent 工作台。
+    </div>
+  </div>
+
+  <!-- 核心功能 -->
+  <div class="card">
+    <h2>核心功能：13 条命令构成求职流水线</h2>
+
+    <h3>1. /setup — 个人画像建模</h3>
+    <p>三种路径自动检测已有材料：读取 documents/ 文件夹（CV PDF、LinkedIn 导出、学历证书、推荐信）、粘贴单份简历、或走结构化访谈。生成 7 个 Markdown 文件存储画像，涵盖教育、经验、技能、行为性格评估、写作风格、契合度评分框架、LaTeX 模板和 STAR 面试素材。预计 30+ 分钟，资料深度决定后续所有产出质量。</p>
+
+    <h3>2. /scrape — 多门户岗位搜索与去重</h3>
+    <p>协调 6 个 TypeScript CLI 代理搜索 Jobindex、Jobnet、Jobbank、Jobdanmark、LinkedIn 公共端点、freehire.me，使用 seen_jobs.json 去重，按契合度排序记录到 job_search_tracker.csv。</p>
+
+    <h3>3. /rank — 批量并行评分</h3>
+    <p>5 个维度（技能匹配、经验相关性、文化契合、地点匹配、职业轨迹逻辑）并行评估所有抓取结果，返回带诚实优势和差距的排名短名单。</p>
+
+    <h3>4. /apply — 起草者-审查者工作流（8步状态机）</h3>
+    <p>解析职位 → 评估五维契合度 → 起草 LaTeX 简历和求职信 → 生成审查者代理（全新上下文独立批评）→ 起草者修订 → 编译 PDF 并视觉验证（简历 2 页/求职信 1 页）→ ATS 文本层验证 → 呈现最终输出。审查者像招聘经理一样怀着敌意阅读，检查是否真正回应公司具体挑战、是否有夸大声明。</p>
+
+    <h3>5. /interview — 面试准备</h3>
+    <p>构建阶段特定准备包，研究公司和面试官，STAR 例子映射到可能问题，模拟面试。诚实桥接知识差距，绝不编造经验。</p>
+
+    <h3>6. /expand — 公开来源画像丰富</h3>
+    <p>扫描 GitHub、作品集、Kaggle、Google Scholar 等公开来源，发现你可能没提到的胜任力并添加到资料中。</p>
+
+    <h3>7. /upskill — 技能差距分析</h3>
+    <p>分析资料与岗位需求差距，生成优先级技能热图和学习计划，含网络搜索的学习资源和时间估算。</p>
+
+    <h3>8. /outcome — 结果记录与反馈闭环</h3>
+    <p>记录申请结果（面试/录用/拒绝/沉默），归档已提交材料到 documents/applications/。支持 followup 变体起草跟进邮件（仅起草不发送）。</p>
+
+    <h3>9. /add-portal & /add-template — 可扩展架构</h3>
+    <p>/add-portal 为任意本地招聘网站生成搜索技能——自动摸清搜索 URL 规律、结果结构、访问规则。/add-template 注册自定义 LaTeX 模板。</p>
+
+    <h3>10. /gmail-sync & /notion-sync — 生态集成</h3>
+    <p>读取 Gmail 获取申请状态信号，批量提议更改。发布只读管道视图到 Notion 数据库。</p>
+
+    <h3>11. /html-report — 离线仪表板</h3>
+    <p>从 job_search_tracker.csv 生成自包含 HTML 仪表板，统计卡片+漏斗图表+可过滤申请表，内联 SVG 无外部依赖。</p>
+  </div>
+
+  <!-- 技术亮点 -->
+  <div class="card">
+    <h2>技术亮点</h2>
+
+    <h3>1. 起草者-审查者对抗架构</h3>
+    <p>第一个 Claude 代理起草，第二个代理以<strong>全新上下文</strong>生成——对草稿没有"忠诚度"，像招聘经理一样怀着敌意阅读，检查是否真正回应了公司的具体挑战（而非岗位标题）、CV 是否强调了正确项目（而非最亮眼的项目）、是否有超出资料支撑的夸大声明。起草者随后修订。这个模式可推广到合同起草、基金申请、客户提案等任何高风险 agent 场景。</p>
+
+    <h3>2. PDF 验证循环 + ATS 文本层诚实检查</h3>
+    <p>系统自己编译 LaTeX、自己看渲染结果、自己修。简历必须恰好 2 页无孤行标题，求职信必须恰好 1 页签名可见。然后提取 PDF 文本层验证 ATS 可读性：联系方式作为字面文本存在、无乱码、合理阅读顺序、关键词覆盖率评分。<strong>资料不支持的关键词被承认为差距，绝不填充。</strong></p>
+
+    <h3>3. 安全加固：职位发布视为不受信任输入</h3>
+    <p>工作流不遵循职位发布中嵌入的指令，不从其正文中获取链接——针对 /apply 和 /rank 的提示注入加固。审查者研究约束于用户确认的公司身份。.gitignore 忽略任何深度的抓取器状态和面试记录，防止在公共 fork 上泄露隐私。</p>
+
+    <h3>4. 相关性加权简历切割</h3>
+    <p>当简历溢出 2 页时，按 (a) 与目标职位的相关性、(b) 文档中的独特性、(c) 求职信是否依赖它来评分每行，先切割最低总分行——智能保留最有价值的内容。</p>
+
+    <div class="highlight">
+      <strong>一句话总结：</strong>把求职材料视为对抗性文档而非表格填空，每一份简历和求职信都要经过"另一个 agent 假装是招聘经理来找茬"的审查环节。
+    </div>
+  </div>
+
+  <!-- 对比分析 -->
+  <div class="card">
+    <h2>对比分析：ai-job-search vs 其他求职工具</h2>
+    <table class="comparison-table">
+      <tr><th>维度</th><th>ai-job-search</th><th>ChatGPT/Claude 直接生成</th><th>专业简历工具 (Teal/Rezi)</th></tr>
+      <tr><td>定制深度</td><td style="color:#0969da;font-weight:700">五维契合度+相关性切割</td><td>岗位标题填空</td><td>关键词匹配</td></tr>
+      <tr><td>输出格式</td><td style="color:#0969da;font-weight:700">LaTeX → PDF 编译+视觉验证</td><td>纯文本/简单 PDF</td><td>在线编辑器导出</td></tr>
+      <tr><td>ATS 验证</td><td style="color:#0969da;font-weight:700">pdftotext 文本层+关键词评分</td><td>无</td><td>部分基础检查</td></tr>
+      <tr><td>审查机制</td><td style="color:#0969da;font-weight:700">独立审查者代理对抗批评</td><td>单次生成无审查</td><td>人工自查</td></tr>
+      <tr><td>岗位搜索</td><td style="color:#0969da;font-weight:700">6 门户并行+去重+评分</td><td>无</td><td>部分集成</td></tr>
+      <tr><td>面试准备</td><td style="color:#0969da;font-weight:700">阶段准备包+STAR+模拟</td><td>可对话无结构化素材</td><td>基础题库</td></tr>
+      <tr><td>可扩展性</td><td style="color:#0969da;font-weight:700">/add-portal+/add-template</td><td>不可扩展</td><td>封闭系统</td></tr>
+      <tr><td>隐私</td><td style="color:#1a7f37;font-weight:700">全部本地运行</td><td>数据上传云端</td><td>数据上传云端</td></tr>
+      <tr><td>成本</td><td>Claude Code API 费用</td><td>订阅制</td><td>$10-30/月</td></tr>
+      <tr><td>作者验证</td><td style="color:#1a7f37;font-weight:700">69→20→1 真实数据</td><td>无</td><td>营销话术</td></tr>
+    </table>
+
+    <p style="margin-top:14px;">
+      <strong>核心差异：</strong>大多数工具的目标是让你"快速生成"，ai-job-search 的目标是让你"经得起审查"。它把求职材料视为对抗性文档——每一份都要经过另一个 agent 的敌意批评后才能输出。
+    </p>
+  </div>
+
+  <!-- 快速上手 -->
+  <div class="card">
+    <h2>快速上手</h2>
+    <pre><code># 1. Fork 并克隆
+gh repo fork MadsLorentzen/ai-job-search --clone
+cd ai-job-search
+
+# 2. 安装求职搜索工具（以 jobindex-search 为例）
+cd .agents/skills/jobindex-search/cli && bun install && cd ../../../..
+
+# 3. 进入 Claude Code 录入资料
+claude
+# 在 Claude Code 内执行：
+/setup
+
+# 4. 搜索岗位
+/scrape
+
+# 5. 申请（URL 或粘贴 JD 全文）
+/apply https://jobindex.dk/job/1234567</code></pre>
+    <p><strong>前置依赖：</strong>Claude Code (CLI)、Python 3.10+、Bun、LaTeX 发行版（需 lualatex 和 xelatex）、可选 pdftotext（poppler，用于 ATS 检查）。</p>
+    <p><strong>关键提示：</strong>资料深度决定一切。别只写职位名称——要写具体做了什么、用了什么工具、有什么可量化成果。</p>
+  </div>
+
+  <!-- 适用人群 -->
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><strong>正在求职的人</strong>：想把重复的申请流程自动化，但要"能真投出去"的简历</li>
+      <li><strong>投海外岗位的人</strong>：尤其丹麦/北欧市场（自带 4 个门户），其他国家用 /add-portal 自定义</li>
+      <li><strong>Claude Code 用户</strong>：想探索 agent skill 在非代码场景的落地模式</li>
+      <li><strong>Agent 架构师</strong>：起草者-审查者对抗模式、验证门控、市场插件化——可直接借鉴的工程范式</li>
+      <li><strong>职业转型者</strong>：/upskill 的技能差距分析和学习计划，系统化规划转型路径</li>
+    </ul>
+  </div>
+
+  <!-- 局限 -->
+  <div class="card">
+    <h2>局限与风险</h2>
+    <ol>
+      <li><strong>Claude API 成本</strong>：/apply + 审查者 + /rank 并行代理消耗 token，频繁使用需注意费用</li>
+      <li><strong>LaTeX 依赖</strong>：深度绑定 LaTeX 简历体系，不用 LaTeX 需自行换模板</li>
+      <li><strong>LinkedIn 灰色地带</strong>：linkedin-search 走公开未认证接口，违反 ToS，仅限个人使用</li>
+      <li><strong>门户覆盖</strong>：自带的 4 个门户均为丹麦市场，其他国家需用 /add-portal 自行扩展</li>
+      <li><strong>个人框架而非 HR 软件</strong>：你对提交材料的真实性负最终责任</li>
+    </ol>
+  </div>
+
+  <div class="footer">
+    <p>📅 2026-07-26 · 第四十二期 · 公众号「AI日课」</p>
+    <p>GitHub: <a href="https://github.com/MadsLorentzen/ai-job-search">MadsLorentzen/ai-job-search</a> | DeepWiki: <a href="https://deepwiki.com/MadsLorentzen/ai-job-search">deepwiki.com/MadsLorentzen/ai-job-search</a></p>
+  </div>
+
+</div>
+</body>
+</html>
