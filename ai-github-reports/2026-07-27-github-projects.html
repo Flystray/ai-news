@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-27 · turbovec</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #0969da 0%, #54aeff 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(9, 105, 218, 0.15);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .meta span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge.green { background: #aff5b4; color: #1a7f37; }
+  .badge.blue { background: #ddf4ff; color: #0969da; }
+  .badge.purple { background: #fbefff; color: #8250df; }
+  .badge.orange { background: #fff3e0; color: #ff6700; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--code-bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0969da;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #cf222e;
+  }
+  pre {
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaeef2;
+    color: var(--text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 2px 4px 2px 0;
+  }
+  .tag.rust { background: #fff3e0; color: #ff6700; }
+  .tag.py { background: #ddf4ff; color: #0969da; }
+  .tag.mit { background: #fff8c5; color: #9a6700; }
+  .tag.ai { background: #fbefff; color: #8250df; }
+  .emoji-title { font-size: 1.3em; }
+  .comparison-table th:first-child { width: 30%; }
+  .comparison-table td { vertical-align: top; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><span class="emoji-title">⚡</span> GitHub AI 项目日报</h1>
+    <div class="subtitle">2026-07-27 · 第四十三期</div>
+    <div class="meta">
+      <span>⭐ 14.4k stars</span>
+      <span>🍴 1.3k forks</span>
+      <span>🛡️ MIT License</span>
+      <span>📅 创建于 2026-03-26</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目速览</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">31GB → 4GB</div>
+        <div class="label">1000万向量压缩</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">12-20%</div>
+        <div class="label">ARM 比FAISS快</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">0</div>
+        <div class="label">训练步骤</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">8-16x</div>
+        <div class="label">压缩倍率</div>
+      </div>
+    </div>
+    <p><strong>项目地址</strong>：<a href="https://github.com/RyanCodrai/turbovec">RyanCodrai/turbovec</a></p>
+    <p><strong>底层算法</strong>：Google Research TurboQuant（<a href="https://arxiv.org/abs/2504.19874">arXiv:2504.19874</a>，ICLR 2026 录用）</p>
+    <p><strong>语言占比</strong>：Python 54.4% + Rust 45.6%</p>
+    <p>
+      <span class="tag rust">Rust</span>
+      <span class="tag py">Python</span>
+      <span class="tag mit">MIT</span>
+      <span class="tag ai">Vector Search</span>
+      <span class="tag ai">RAG</span>
+      <span class="tag ai">SIMD</span>
+      <span class="tag ai">Quantization</span>
+    </p>
+    <div class="highlight">
+      1000 万条 1536 维文档向量，float32 存储 31 GB，turbovec 压到 4 GB——压缩 8 倍，搜索速度还比 FAISS 快 12-20%。不需要训练码本，不需要重建索引，add() 即可搜。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目背景：向量索引的"训练税"</h2>
+    <p>几乎所有生产级向量量化器——包括 FAISS 的乘积量化（PQ）——都依赖一个痛苦的前提：<strong>先训练码本，再编码数据</strong>。你需要采样、跑 k-means 聚类、生成码本、编码全量向量。语料增长？分布漂移？重新训练、重建整个索引。</p>
+    <p>在实际生产环境中，文档是持续流入的。每次停下来训练码本，意味着系统有一个"不可用窗口"。turbovec 的底牌是 Google Research 2025 年 4 月发表的 <strong>TurboQuant</strong> 算法（ICLR 2026 录用）——一个"数据无感知"量化器，量化方案完全来自数学推导，不依赖任何输入数据。</p>
+    <div class="highlight">
+      <strong>核心区别</strong>：PQ 需要数据适应码本 → TurboQuant 用随机旋转抹平数据差异 → 量化桶边界纯数学预计算 → 无训练、无码本、无重建。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>核心功能</h2>
+
+    <h3>1. 零训练在线索引</h3>
+    <p>调用 <code>index.add(vectors)</code>，向量立即被量化并进入索引。没有 <code>train()</code> 步骤，没有参数调优。TurboQuant 的量化桶边界从数学公式预计算，不随数据变化。对流式写入场景（日志、实时文档管道）是决定性优势。</p>
+
+    <h3>2. 2-4 bit 极致压缩</h3>
+    <p>1536 维 float32 向量从 6,144 字节压缩到 384 字节（2-bit，16 倍）或 768 字节（4-bit，8 倍）。1000 万条 1536 维向量：FP32 需 31 GB，4-bit 需约 4 GB，2-bit 需约 2 GB。</p>
+
+    <h3>3. 手写 SIMD 内核</h3>
+    <p>ARM 平台用 NEON 指令，x86 平台用 AVX-512BW 和 AVX2 指令。Apple M3 Max 上比 FAISS IndexPQFastScan 快 12-20%（单线程和多线程均胜）；Intel Sapphire Rapids 上 4-bit 配置匹配或超过 FAISS。</p>
+
+    <h3>4. 搜索时过滤</h3>
+    <p><code>search()</code> 接受 ID 白名单或 slot bitmask。SIMD 内核在 32 向量块粒度上执行过滤——没有允许项的块直接短路跳过。混合检索（SQL/BM25 筛选 + 向量精排）无额外开销。</p>
+
+    <h3>5. IdMapIndex 稳定 ID</h3>
+    <p>提供稳定的 uint64 外部 ID，支持 <code>add_with_ids()</code> 和 <code>remove(id)</code>——删除操作 O(1) 完成，不重建索引。</p>
+
+    <h3>6. 持久化与双语言 API</h3>
+    <p><code>write()</code>/<code>load()</code> 序列化。Python 端 PyO3 + maturin 构建 wheel，Rust 端 <code>cargo add turbovec</code>。两套 API 功能对等。</p>
+
+    <h3>7. 纯本地隐私优先</h3>
+    <p>没有托管服务，数据不离开机器或 VPC。可搭配开源 embedding 模型构建完全气隙的 RAG 栈。</p>
+  </div>
+
+  <div class="card">
+    <h2>技术亮点</h2>
+
+    <h3>TurboQuant 四步数学管道</h3>
+    <ol>
+      <li><strong>归一化</strong>：剥离范数，向量变成高维超球面上的单位方向</li>
+      <li><strong>随机旋转</strong>：乘以同一个随机正交矩阵，使坐标遵循可预测的 Beta 分布（高维下收敛到高斯 N(0, 1/d)）——<strong>无论输入数据是什么分布</strong></li>
+      <li><strong>Lloyd-Max 标量量化</strong>：旋转后分布解析已知，最优量化桶边界纯数学预计算。2-bit = 4 桶/坐标，4-bit = 16 桶/坐标</li>
+      <li><strong>位打包</strong>：量化坐标紧密打包成字节</li>
+    </ol>
+    <div class="highlight">
+      论文证明 TurboQuant 失真率与香农下界极其接近，仅差微小常数因子。LongBench 上 3.5-bit 与 FP16 完全持平（50.06 vs 50.06）；"大海捞针"测试中 4 倍压缩下检索准确率 0.997。
+    </div>
+
+    <h3>跨架构 SIMD：一份代码两种指令集</h3>
+    <p>为 ARM 和 x86 分别手写内核。NEON 处理 128-bit 寄存器，AVX-512BW 处理 512-bit 寄存器。量化向量以 32 个为一组打包成块，SIMD 内核一次处理一个完整块。过滤逻辑嵌入内核：块级短路 + 向量级丢弃。</p>
+
+    <h3>两阶段量化：MSE + QJL 残差校正</h3>
+    <p>第一阶段用比目标位宽少 1 位的 MSE 量化器压缩；第二阶段对残差向量应用 1-bit Johnson-Lindenstrauss 变换（QJL），提供无偏内积估计。d=3072 2-bit 召回率 0.912，超过 FAISS 的 0.903。</p>
+  </div>
+
+  <div class="card">
+    <h2>快速上手</h2>
+    <pre><code># Python 安装
+pip install turbovec
+
+# 创建索引并搜索
+from turbovec import TurboQuantIndex
+import numpy as np
+
+index = TurboQuantIndex(dim=1536, bit_width=4)
+index.add(np.array(vectors, dtype=np.float32))  # 无需训练，立即可搜
+scores, indices = index.search(query, k=10)
+
+# 带过滤的搜索
+scores, indices = index.search(query, k=10, filter_ids=allowed_ids)
+
+# 持久化
+index.write("my_index.tv")
+loaded = TurboQuantIndex.load("my_index.tv")
+
+# Rust 安装
+# cargo add turbovec</code></pre>
+    <p><strong>前置要求</strong>：Python ≥ 3.9，64 位平台，向量维度为 8 的正整数倍，x86 以 AVX2 为基线。</p>
+  </div>
+
+  <div class="card">
+    <h2>对比分析</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>turbovec</th>
+          <th>FAISS (PQFastScan)</th>
+          <th>Milvus/Qdrant</th>
+          <th>float32 暴力</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10M×1536d 内存</td>
+          <td><strong>4 GB (4-bit)</strong><br>2 GB (2-bit)</td>
+          <td>~6 GB (PQ 4-bit)</td>
+          <td>8-12 GB</td>
+          <td>31 GB</td>
+        </tr>
+        <tr>
+          <td>训练步骤</td>
+          <td><strong>无，add() 即可搜</strong></td>
+          <td>需 k-means</td>
+          <td>需配置参数</td>
+          <td>无</td>
+        </tr>
+        <tr>
+          <td>新增向量</td>
+          <td><strong>直接 add()，立即可搜</strong></td>
+          <td>需重新训练/增量</td>
+          <td>支持但复杂</td>
+          <td>直接追加</td>
+        </tr>
+        <tr>
+          <td>分布漂移</td>
+          <td><strong>无影响</strong></td>
+          <td>需重建索引</td>
+          <td>需重新配置</td>
+          <td>无影响</td>
+        </tr>
+        <tr>
+          <td>ARM 性能</td>
+          <td><strong>比 FAISS 快 12-20%</strong></td>
+          <td>基准线</td>
+          <td>未优化</td>
+          <td>慢 (O(n))</td>
+        </tr>
+        <tr>
+          <td>召回率 (d=3072, 2-bit)</td>
+          <td><strong>0.912</strong></td>
+          <td>0.903</td>
+          <td>N/A</td>
+          <td>1.0</td>
+        </tr>
+        <tr>
+          <td>过滤搜索</td>
+          <td><strong>SIMD 内核内，无开销</strong></td>
+          <td>有过度取数问题</td>
+          <td>支持</td>
+          <td>手动过滤</td>
+        </tr>
+        <tr>
+          <td>部署复杂度</td>
+          <td><strong>pip install</strong></td>
+          <td>编译复杂</td>
+          <td>需独立服务</td>
+          <td>最简单</td>
+        </tr>
+        <tr>
+          <td>数据隐私</td>
+          <td><strong>纯本地，气隙可用</strong></td>
+          <td>纯本地</td>
+          <td>可自托管</td>
+          <td>纯本地</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="highlight">
+      turbovec 是嵌入式向量索引库（类似 FAISS），不是向量数据库。定位：单机跑千万级向量、内存有限、数据持续流入、隐私要求高——这几乎是目前唯一的选择。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><span class="badge blue">RAG</span> 系统开发者：语料超百万级，float32 撑不住，又不想引入重量级向量数据库</li>
+      <li><span class="badge green">边缘</span> 部署团队：MacBook、边缘服务器或气隙环境，内存预算有限</li>
+      <li><span class="badge purple">隐私</span> 敏感场景：医疗、金融、法律要求数据不出内网</li>
+      <li><span class="badge orange">流式</span> 数据管道：文档持续写入，不能接受"停下来训练码本"</li>
+      <li><span class="badge">基础设施</span> 工程师：想理解 TurboQuant 如何从论文变成生产级库</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>写在最后</h2>
+    <p>turbovec 最值得关注的不是 Star 数（4 个月 14.4k），而是它代表的趋势：<strong>学术论文到生产级工具的转化周期正在急剧缩短</strong>。TurboQuant 论文 2025 年 4 月发布，turbovec 2026 年 3 月底就上线了可安装的 Python wheel 和 Rust crate——从论文到 <code>pip install</code> 不到一年。</p>
+    <p>更重要的是，turbovec 证明了一件事：在 AI 基础设施领域，最锋利的武器未必是更大的芯片或更多的显存，也可以是<strong>更聪明的数学</strong>。一个随机正交旋转 + Lloyd-Max 标量量化的四步管道，就把 31 GB 压到 4 GB，还跑得比训练了码本的 FAISS 更快。</p>
+    <div class="highlight">
+      <strong>项目地址</strong>：<a href="https://github.com/RyanCodrai/turbovec">github.com/RyanCodrai/turbovec</a><br>
+      <strong>DeepWiki</strong>：<a href="https://deepwiki.com/RyanCodrai/turbovec">deepwiki.com/RyanCodrai/turbovec</a><br>
+      <strong>TurboQuant 论文</strong>：<a href="https://arxiv.org/abs/2504.19874">arxiv.org/abs/2504.19874</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>GitHub AI 项目日报 · 公众号「AI日课」· 作者：fly的AI学习</p>
+    <p>每日精选 GitHub 上新、有启发意义的 AI 开源项目</p>
+  </div>
+
+</div>
+</body>
+</html>
