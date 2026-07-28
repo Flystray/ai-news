@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-28 · Fortémi</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #b7410e 0%, #e8590c 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(183, 65, 14, 0.2);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .meta span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--code-bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0969da;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #cf222e;
+  }
+  pre {
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaeef2;
+    color: var(--text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 2px 4px 2px 0;
+  }
+  .tag.rust { background: #fff3e0; color: #ff6700; }
+  .tag.pg { background: #ddf4ff; color: #0969da; }
+  .tag.bsl { background: #fff8c5; color: #9a6700; }
+  .tag.ai { background: #fbefff; color: #8250df; }
+  .emoji-title { font-size: 1.3em; }
+  .comparison-table th:first-child { width: 22%; }
+  .comparison-table td { vertical-align: top; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><span class="emoji-title">🧠</span> GitHub AI 项目日报</h1>
+    <div class="subtitle">2026-07-28 · 第四十四期 · Fortémi：给 AI Agent 一个真正的记忆系统</div>
+    <div class="meta">
+      <span>⭐ 26 stars（早期项目）</span>
+      <span>🦀 Rust ~160k 行</span>
+      <span>🛡️ BSL-1.1</span>
+      <span>📅 创建于 2026-02-03</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目速览</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">16万行</div>
+        <div class="label">Rust 工程代码</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">43 / 205</div>
+        <div class="label">MCP Agent 工具</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">13 种</div>
+        <div class="label">多模态提取适配器</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">131 种</div>
+        <div class="label">文档类型自动识别</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">8GB</div>
+        <div class="label">GPU 显存跑全栈</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">106 个</div>
+        <div class="label">PostgreSQL 迁移</div>
+      </div>
+    </div>
+    <p><strong>项目地址</strong>：<a href="https://github.com/Fortemi/fortemi">Fortemi/fortemi</a></p>
+    <p><strong>一句话定位</strong>：An intelligent database for AI-ready applications——为 AI 时代重新设计的智能数据库底座</p>
+    <p><strong>技术栈</strong>：Rust（7 crates）+ PostgreSQL 18（pgvector + PostGIS）+ Node.js MCP Server + Ollama</p>
+    <p>
+      <span class="tag rust">Rust</span>
+      <span class="tag pg">PostgreSQL</span>
+      <span class="tag bsl">BSL-1.1</span>
+      <span class="tag ai">Hybrid Search</span>
+      <span class="tag ai">Knowledge Graph</span>
+      <span class="tag ai">MCP Server</span>
+      <span class="tag ai">Agent Memory</span>
+      <span class="tag ai">Multimodal</span>
+    </p>
+    <div class="highlight">
+      今天不推荐爆款。这个项目只有 26 颗星，却是近期工程密度最高的自托管知识库：16 万行 Rust、43 个 MCP 工具、13 种多模态适配器、自动知识图谱、溯源追踪。它押注的命题是 2026 年最关键的一个：<strong>AI Agent 的记忆到底应该长什么样</strong>。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目背景：从"存储数据"到"理解数据"</h2>
+    <p>大多数知识系统的逻辑是"存进去，等你精确查询"。你存了 500 篇笔记、200 个 PDF、几十条录音，真要找某个结论时却想不起当时用的词——传统全文搜索直接失效。而纯向量方案（RAG 常规做法）走向另一个极端：把文档切成碎片塞进向量库，检索出来的是无上下文的片段，没有来源追踪，没有关联结构。</p>
+    <p>Fortémi 的出发点是把两者合成一个"主动理解内容"的系统：找到概念相关的结果（即使你忘了准确术语），自动发现新知识与已有知识的连接，并从图片、音频、视频、3D 模型、邮件、表格中提取可搜索的信息。</p>
+    <div class="highlight">
+      <strong>隐私优先、边缘优先</strong>：无云依赖，8GB 显存的消费级显卡（RTX 3060/4060 级别）即可运行完整栈，默认模型 qwen3.5:9b + nomic-embed-text，提供 edge / gpu-12gb / gpu-24gb 三档硬件配置。可以塞进气隙内网的完整 AI 记忆系统。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>核心功能</h2>
+
+    <h3>1. 三路混合搜索：BM25 + 向量 + RRF 融合</h3>
+    <p>PostgreSQL FTS 做 BM25 词法检索，pgvector 做稠密语义检索，知识图谱做关联检索，RRF（Reciprocal Rank Fusion）融合排名后经 MMR 重排保证多样性。支持 AND/OR/NOT/短语操作符；多语言下沉到分词层：CJK 二元/三元组、6+ 语言词干提取、emoji 三元组。中文零配置。</p>
+
+    <h3>2. 自动知识图谱：链接是"长"出来的</h3>
+    <p>新笔记入库后计算与已有内容的嵌入相似度，超过 70% 自动建立双向链接，相似度存为边权重。图质量靠 SNN 评分、PFNET 稀疏化、Louvain 社区发现三个算法维护。附带"知识健康仪表板"，专门找孤立标签、陈旧笔记、未链接的冷点内容。</p>
+
+    <h3>3. 43 个 MCP 工具：为 Agent 而生的记忆接口</h3>
+    <p>内置 Node.js MCP Server（核心 43 工具 / 完整 205 工具）：<code>capture_knowledge</code>（写入）、<code>search</code>（联邦混合搜索）、<code>record_provenance</code>（知识来源血缘）、<code>explore_graph</code>（图遍历）、<code>manage_archives</code>（多记忆切换）等。AI Agent 从此有了结构化、可溯源、可遍历的外部记忆，而不是碎片化的向量快照。</p>
+
+    <h3>4. 13 种多模态提取适配器 + 131 种文档类型</h3>
+    <p>图像走视觉 LLM 描述，音频走 Whisper 转写 + pyannote 说话人分离，视频做关键帧场景检测与转写对齐，GLB/glTF 3D 模型多视角渲染，邮件按 RFC 2822/MIME 解析，表格转 Markdown。131 种文档类型（19 大类）按文件名、扩展名和内容魔数自动检测，并按类型选择分块策略——散文语义分块、代码语法分块、文档按节分块。</p>
+
+    <h3>5. 多记忆归档 + 联邦搜索</h3>
+    <p>一个实例承载多个 schema 隔离的"记忆归档"（14 张共享表 + 41 张每记忆表），工作知识库、个人笔记、每个 Agent 的独立记忆互不污染，又能一次跨库联邦检索。配合 X25519/AES-256-GCM 公钥加密共享、OAuth2 + API Key 认证、SSE/WebSocket/webhook 实时事件。</p>
+
+    <h3>6. Matryoshka 嵌入集：12 倍存储节省</h3>
+    <p>支持 MRL 套娃表示学习：同一嵌入按维度截断使用，两阶段检索先短向量粗筛再全维精排，官方数据存储节省 12 倍。嵌入规则可自动化，换模型不需推倒重来。</p>
+  </div>
+
+  <div class="card">
+    <h2>技术亮点</h2>
+
+    <h3>1. PostgreSQL 单库承载全部检索负载的架构赌注</h3>
+    <p>不引入 Elasticsearch、Milvus、Neo4j 中的任何一个，把全文检索（FTS）、向量检索（pgvector + HNSW，O(log N)）、空间检索（PostGIS）、图遍历（递归 CTE）全部压进一个 PostgreSQL 18。7 个 Rust crate 分层清晰：</p>
+    <table>
+      <tr><th>Crate</th><th>职责</th></tr>
+      <tr><td><code>matric-api</code></td><td>Axum HTTP REST API + OpenAPI/Swagger</td></tr>
+      <tr><td><code>matric-search</code></td><td>混合检索（BM25 + 稠密 + RRF）</td></tr>
+      <tr><td><code>matric-jobs</code></td><td>异步 NLP 流水线（embed / revise / link / extract / diarize / chunk）</td></tr>
+      <tr><td><code>matric-inference</code></td><td>多提供商 LLM 抽象（Ollama / OpenAI / OpenRouter / llama.cpp 热切换）</td></tr>
+      <tr><td><code>matric-db</code></td><td>PostgreSQL 仓库（sqlx，106 迁移）</td></tr>
+      <tr><td><code>matric-crypto</code></td><td>X25519/AES-256-GCM 公钥加密</td></tr>
+      <tr><td><code>matric-core</code></td><td>核心类型、特征、错误处理</td></tr>
+    </table>
+    <p>运维面只有一个数据库，备份、迁移、监控全走 PostgreSQL 成熟工具链——对自托管用户是实打实的负担减半。</p>
+
+    <h3>2. 溯源（Provenance）作为一等公民</h3>
+    <p><code>record_provenance</code> 把"这条知识从哪来"记录为结构化数据：来源文档、提取时间、处理链路。RAG 最被诟病的"答案无法追责"问题在数据模型层面解决。W3C SKOS 标准词汇表管理层级概念标签——标签不再是随手打的字符串，而是有语义结构的受控词汇。</p>
+
+    <h3>3. 同一 schema 三端锁步</h3>
+    <p>服务端、浏览器版、HotM 桌面应用共享同一套数据 schema 和同一个 <code>matric-api</code> 二进制（HotM 打包为 sidecar），功能永远同步。单机用户下载 HotM 即用（免 Docker 免 Postgres 配置）；团队和 Agent 集群用 Docker bundle 一条命令拉起五个容器。一套代码覆盖从个人笔记本到企业内网的完整光谱。</p>
+  </div>
+
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><strong>AI Agent 开发者</strong>：需要结构化、可溯源、多归档隔离的 Agent 长期记忆</li>
+      <li><strong>隐私敏感的知识工作者</strong>：法律、医疗、研究场景，数据不出内网，8GB 显卡跑完整多模态栈</li>
+      <li><strong>重度多模态收藏者</strong>：录音、会议视频、扫描件、邮件归档统一变成可搜索资产</li>
+      <li><strong>RAG 基础设施工程师</strong>：研究"PostgreSQL 单库混合检索 + 知识图谱"技术路线</li>
+      <li><strong>Rust 学习者</strong>：16 万行生产级 Rust，Axum/sqlx/异步任务管道完整参考</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>快速上手</h2>
+    <h3>方式一：HotM 桌面版（单机用户推荐）</h3>
+    <p>从 <a href="https://git.integrolabs.net/Fortemi/HotM/releases/latest">HotM Releases</a> 下载对应平台安装包（.msi / .dmg / .deb / .AppImage），UI 与 API 打包在一起，免 Docker 免数据库配置。</p>
+    <h3>方式二：Docker Bundle（服务端 / Agent 集群）</h3>
+    <pre><code># 前置：主机安装 Ollama 并拉取模型
+ollama pull qwen3.5:9b
+ollama pull nomic-embed-text
+
+# 一条命令拉起完整栈（PostgreSQL 18 + Redis + API + MCP + Open3D）
+docker compose -f docker-compose.bundle.yml up -d
+
+# 验证
+curl http://localhost:3000/health</code></pre>
+    <p>端口：3000（REST API，Swagger 在 /docs）、3001（MCP Server）。按显卡设置 <code>COMPOSE_PROFILES=edge|gpu-12gb|gpu-24gb</code>。</p>
+    <h3>接入 Claude Desktop（MCP）</h3>
+    <pre><code>{
+  "mcpServers": {
+    "fortemi": { "url": "http://localhost:3001/mcp" }
+  }
+}</code></pre>
+    <h3>搜索 API 示例</h3>
+    <pre><code># 混合搜索（默认 RRF 融合）
+curl "http://localhost:3000/api/v1/search?q=检索增强生成"
+
+# 纯语义 / 纯词法
+curl "http://localhost:3000/api/v1/search?q=RAG&mode=semantic"
+curl "http://localhost:3000/api/v1/search?q=RAG&mode=fts"</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>对比分析</h2>
+    <table class="comparison-table">
+      <tr>
+        <th>维度</th><th>Fortémi</th><th>Khoj (⭐34k+)</th><th>AnythingLLM (⭐55k+)</th><th>Obsidian + 插件</th>
+      </tr>
+      <tr><td><strong>定位</strong></td><td>AI-ready 智能数据库底座</td><td>个人 AI 第二大脑</td><td>团队文档 RAG 平台</td><td>本地笔记 + 生态</td></tr>
+      <tr><td><strong>检索方案</strong></td><td>BM25+向量+图三路 RRF + MMR</td><td>语义搜索为主</td><td>向量 RAG 为主</td><td>插件各自为战</td></tr>
+      <tr><td><strong>知识图谱</strong></td><td>自动构建（SNN/PFNET/Louvain）</td><td>无</td><td>无</td><td>手动双链</td></tr>
+      <tr><td><strong>MCP 支持</strong></td><td>原生 43-205 个工具</td><td>无原生 MCP Server</td><td>内置 MCP 客户端</td><td>社区插件</td></tr>
+      <tr><td><strong>多模态摄取</strong></td><td>13 适配器（视频/3D/邮件/说话人分离）</td><td>PDF/图片/笔记</td><td>文档为主</td><td>基本无</td></tr>
+      <tr><td><strong>多用户/多记忆</strong></td><td>schema 隔离归档 + 联邦搜索</td><td>单用户为主</td><td>工作区 + 权限</td><td>单用户</td></tr>
+      <tr><td><strong>溯源追踪</strong></td><td>一等公民（provenance API）</td><td>无</td><td>引用级</td><td>无</td></tr>
+      <tr><td><strong>技术栈</strong></td><td>Rust + PostgreSQL 单库</td><td>Python + Postgres</td><td>Node.js + 多向量库</td><td>Electron</td></tr>
+      <tr><td><strong>许可证</strong></td><td>BSL-1.1（单用户免费商用）</td><td>AGPL-3.0</td><td>MIT</td><td>闭源 + 付费同步</td></tr>
+      <tr><td><strong>成熟度</strong></td><td>早期（26 星，5 个月）</td><td>成熟（YC 投资）</td><td>成熟</td><td>非常成熟</td></tr>
+    </table>
+    <div class="highlight">
+      Khoj 赢在多端覆盖，AnythingLLM 赢在团队开箱即用，而 Fortémi 押注的是<strong>下一层</strong>——当 AI Agent 成为知识系统的主要"用户"时，人类友好的聊天界面不再是核心，<strong>结构化、可溯源、可编程的记忆接口</strong>才是。
+    </div>
+    <p><strong>风险提示</strong>：26 星意味着社区极小，BSL-1.1 对多用户商用部署收费（2030 年转 AGPL-3.0），生态几乎为零。适合技术选型参考和早期尝鲜，暂不适合直接押注生产。</p>
+  </div>
+
+  <div class="card">
+    <h2>写在最后</h2>
+    <p>Fortémi 最有启发的地方，不是任何单一功能，而是它对一个趋势的判断：<strong>RAG 正在从"向量数据库"进化为"结构化知识平台"</strong>。碎片化向量检索解决了"找到相关内容"，但解决不了"知识从哪来、如何关联、能否审计"。Fortémi 用 PostgreSQL 单库 + 图谱 + 溯源 + MCP 的组合拳给出了自己的答案。</p>
+    <p>另一个值得玩味的细节：这个项目不做 LLM，不做 UI 竞争，只做"AI 时代的数据基础设施"。就像当年的 SQLite 之于移动应用，Fortémi 想成为 Agent 应用的默认记忆层。16 万行 Rust 砸在一个 26 星的项目上，要么是过度工程的独角戏，要么是提前卡位的基础设施——无论哪种，代码本身已经值回阅读时间。</p>
+    <p>
+      <a href="https://github.com/Fortemi/fortemi">项目地址</a> ·
+      <a href="https://deepwiki.com/Fortemi/fortemi">DeepWiki</a> ·
+      <a href="https://git.integrolabs.net/Fortemi/HotM/releases/latest">HotM 桌面版</a>
+    </p>
+  </div>
+
+  <div class="footer">
+    GitHub AI 项目日报 · 2026-07-28 · 公众号「AI日课」· 作者：fly的AI学习<br>
+    信息源：GitHub README · DeepWiki · LobeHub · Skillget · agents-report.net · Khoj/AnythingLLM 横评
+  </div>
+
+</div>
+</body>
+</html>
