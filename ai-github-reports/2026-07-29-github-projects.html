@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-29 · ai-agent-book</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #1a4d8f 0%, #2e86de 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(26, 77, 143, 0.25);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; opacity: 0.9; }
+  .header .meta span { background: rgba(255, 255, 255, 0.15); padding: 4px 12px; border-radius: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 { font-size: 17px; color: var(--accent); margin: 20px 0 10px 0; }
+  .card p { margin-bottom: 12px; }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card { background: var(--code-bg); padding: 16px; border-radius: 8px; text-align: center; }
+  .stat-card .num { font-size: 24px; font-weight: 700; color: #0969da; }
+  .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+  th { background: var(--code-bg); font-weight: 600; }
+  tr:nth-child(even) { background: #fbfcfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 32px; }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>📖 ai-agent-book：前华为"天才少年"的开源 AI Agent 全书</h1>
+    <div class="subtitle">10 章正文 + 93 个可跑实验，Agent = LLM + 上下文 + 工具 —— 一天涨 1700 星杀疯 GitHub 的中文技术书</div>
+    <div class="meta">
+      <span>📅 2026-07-29</span>
+      <span>⭐ 24,545</span>
+      <span>🍴 2,518</span>
+      <span>🐍 Python 94.8%</span>
+      <span>📜 Apache-2.0</span>
+      <span>🌐 9 种语言</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目速览</h2>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">10 章</div><div class="label">正文（308 页+）</div></div>
+      <div class="stat-card"><div class="num">93 个</div><div class="label">配套实验项目</div></div>
+      <div class="stat-card"><div class="num">70+</div><div class="label">可独立运行</div></div>
+      <div class="stat-card"><div class="num">1,734</div><div class="label">单日最高涨星</div></div>
+    </div>
+    <p><strong>项目地址</strong>：<a href="https://github.com/bojieli/ai-agent-book" target="_blank">github.com/bojieli/ai-agent-book</a> · <a href="https://bojieli.github.io/ai-agent-book/" target="_blank">在线阅读</a> · <a href="https://deepwiki.com/bojieli/ai-agent-book" target="_blank">DeepWiki</a></p>
+    <p>作者<strong>李博杰</strong>：前华为"天才少年"计划成员、中科大与 MSRA 联合培养博士、现 Pine AI 首席科学家。这本《深入理解 AI Agent：设计原理与工程实践》7 月 20 日曾以单日 +1,734 星冲上 GitHub 热榜第一，一周多时间从 7.2K 飙到 24.5K。</p>
+    <div class="highlight">💡 <strong>为什么值得关注</strong>：它把 AI Agent 从原理到生产工程的完整知识地图——正文、配图、PDF、93 个实验代码——全部开源。你不再需要从几十篇博客和各家互相矛盾的厂商文档里自己拼图。</div>
+  </div>
+
+  <div class="card">
+    <h2>项目背景：Agent 学习资源的碎片化困境</h2>
+    <p>AI Agent 学习资源的通病是<strong>不成体系</strong>：今天一篇 RAG 教程、明天一篇 MCP 介绍、后天一篇多 Agent 科普，合在一起是一盘散沙。厂商文档口径也不一致：OpenAI 讲 function calling，Anthropic 讲 tool use，Google 讲 grounding。</p>
+    <p>这本书用一个公式把碎片焊在一起：<strong>Agent = LLM + 上下文 + 工具</strong>。LLM 是大脑（推理），上下文是感知（看到什么、记得什么），工具是双手（能做什么）。Harness、Context Engineering、Agent Skills、Computer Use、评估驱动开发——半年来爆火的概念都能在这套结构里找到位置。</p>
+    <div class="highlight">🎙️ 耐人寻味的细节：作者坦承本书大部分创作没有依赖传统打字——先向语音 Agent 口述提纲，让 Agent 调研、整理初稿，再持续讨论修改。<strong>一本讲 Agent 的书，本身就是 Agent 深度参与完成的作品。</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>核心功能</h2>
+    <h3>1. 十章正文：从基础到生产的完整进阶路线</h3>
+    <p>第 1 章 ReAct 循环 → 第 2 章上下文工程（KV Cache、Agent Skills、压缩）→ 第 3 章记忆与 RAG → 第 4 章工具与 MCP → 第 5 章 Coding Agent（含 OpenClaw 参考实现）→ 第 6 章评估（ELO、沙箱）→ 第 7 章后训练（SFT/RLVR/VLA）→ 第 8 章自我进化 → 第 9 章多模态与 Computer Use → 第 10 章多 Agent 协作。</p>
+    <h3>2. 93 个配套实验：不是讲概念，是跑代码</h3>
+    <p>每章 4~16 个独立 Python 项目，70+ 个配好 API Key 即可运行，按 ✅ 可运行 / 📖 复现 / 🚧 设计三级标注。从零训 LLM（MiniMind）、提示注入攻防（3 攻击 × 4 防御 = 12 组对照实验）、SWE-bench/OSWorld/GAIA 复现，甚至 SO-100 机械臂 Sim2Real 抓取。</p>
+    <h3>3. 对照实验驱动：用数据说话，不站队</h3>
+    <p>记忆系统 mem0 vs Memobase 各实现一版；检索做稠密/稀疏/混合三版对比；讲多 Agent 时直言"<strong>大多数场景多 Agent 并不比单 Agent 好，只是徒增复杂度</strong>"——这种诚实在 AI 领域相当稀缺。</p>
+    <h3>4. 不依赖框架：直接调 LLM API</h3>
+    <p>所有实验直接调 LLM API 实现核心逻辑，不绑定 LangChain 等重型框架，学习者能看清 ReAct 循环、工具调用、记忆管理的底层实现。</p>
+    <h3>5. 出版管线本身就是工程范本</h3>
+    <p>Pandoc + XeLaTeX + ElegantBook 生成专业 PDF；自定义 Lua 过滤器处理实验框与交叉引用；配图用 Python 脚本程序化生成 SVG；GitHub Actions 每次推送自动重建在线版。一本书被当成软件产品持续交付。</p>
+    <h3>6. 九种语言社区翻译</h3>
+    <p>英/日/俄/阿拉伯/越南/泰米尔/土耳其/正体中文 8 种社区翻译，在线阅读站支持多语言切换、全文搜索、实验直达。</p>
+  </div>
+
+  <div class="card">
+    <h2>技术亮点</h2>
+    <h3>1. "Harness 工程"命题：模型之外才是竞争力</h3>
+    <p>全书核心工程主张："Model-as-an-Agent" 在生产环境远远不够。真正决定 Agent 可靠性的是模型外围的"马具"——约束、验证、记忆、沙箱、回滚。这直接回答了"为什么同样的模型，Claude Code 比裸调 API 好用得多"。</p>
+    <h3>2. 概念到代码的双向映射</h3>
+    <p>公式严格映射到代码：LLM → 第 6/7 章（评估与后训练），上下文 → 第 2/3 章，工具 → 第 4/5 章。<code>book/</code> 是正文源码，<code>chapter1-10/</code> 是可执行项目，<code>cursor-chats/</code> 甚至公开了用 Cursor 辅助开发本仓库的完整对话日志。</p>
+    <h3>3. 论文级可复现基建</h3>
+    <p>第 6/7/9/10 章的 19 个外部仓库（SWE-bench、OSWorld、GAIA、verl、MiniMind、browser-use、斯坦福 AI 小镇等）提供一键克隆脚本并标注特定 commit，保证复现一致性。</p>
+  </div>
+
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><strong>被安排"搞 Agent"的后端/全栈工程师</strong>：前三章就能建立正确心智模型</li>
+      <li><strong>AI 应用开发者</strong>：RAG、记忆、MCP、评估、注入攻防实验可直接改造复用</li>
+      <li><strong>算法工程师</strong>：第 7 章 16 个后训练实验，含从零训 LLM/VLM 完整流程</li>
+      <li><strong>技术管理者/架构师</strong>：评估驱动选型、多 Agent 决策用数据给出 trade-off</li>
+      <li><strong>学生与研究者</strong>：Apache-2.0 全开源 + 19 个基准仓库复现指南</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>快速上手</h2>
+    <h3>方式一：直接读书（零门槛）</h3>
+    <pre><code># 在线阅读（全文搜索、多语言切换）
+https://bojieli.github.io/ai-agent-book/
+
+# 或下载 PDF / EPUB
+https://github.com/bojieli/ai-agent-book/releases</code></pre>
+    <h3>方式二：跑实验</h3>
+    <pre><code>git clone https://github.com/bojieli/ai-agent-book.git
+cd ai-agent-book/chapter1
+# 配置 API Key 即可运行大部分实验
+# 国内可用 Kimi / 智谱 GLM / DeepSeek / SiliconFlow</code></pre>
+    <h3>方式三：自行编译 PDF</h3>
+    <pre><code># 需要 pandoc + xelatex + ElegantBook
+cd book && bash build_pdf.sh</code></pre>
+    <div class="highlight">📚 作者建议的阅读姿势：不要从头读到尾，<strong>一边读一边把 demo 跑起来</strong>——改参数、改提示词、故意搞破坏看它怎么出错。</div>
+  </div>
+
+  <div class="card">
+    <h2>对比分析</h2>
+    <table>
+      <tr><th>维度</th><th>ai-agent-book</th><th>HF Agents Course</th><th>LangChain 文档</th><th>厂商 Cookbook</th></tr>
+      <tr><td><strong>体系完整度</strong></td><td>10 章从原理到生产</td><td>课程式，偏入门</td><td>围绕自家框架</td><td>碎片化示例</td></tr>
+      <tr><td><strong>正文体量</strong></td><td>308 页+ 中文原创</td><td>在线单元课程</td><td>API 文档为主</td><td>单篇 notebook</td></tr>
+      <tr><td><strong>配套代码</strong></td><td>93 个项目，70+ 可运行</td><td>少量 notebook</td><td>框架示例</td><td>演示级片段</td></tr>
+      <tr><td><strong>框架依赖</strong></td><td>无，直接调 API</td><td>smolagents 绑定</td><td>LangChain 绑定</td><td>绑定自家 API</td></tr>
+      <tr><td><strong>对照实验</strong></td><td>大量消融研究</td><td>无</td><td>无</td><td>无</td></tr>
+      <tr><td><strong>后训练内容</strong></td><td>16 个实验（SFT/RLVR/VLA）</td><td>基本不涉及</td><td>不涉及</td><td>不涉及</td></tr>
+      <tr><td><strong>中文友好</strong></td><td>中文原版 + 9 语言</td><td>英文为主</td><td>英文为主</td><td>英文为主</td></tr>
+      <tr><td><strong>许可证</strong></td><td>Apache-2.0</td><td>Apache-2.0</td><td>MIT（文档）</td><td>各异</td></tr>
+    </table>
+    <p>一句话总结：厂商文档教你"怎么用我家的东西"，框架文档教你"怎么用框架"，这本书教你"<strong>Agent 系统本身应该怎么设计</strong>"——供应商中立、原理透明、实验可复现。</p>
+    <p><strong>局限</strong>：翻译可能滞后于中文原版；大量实验需真实 API Key 有费用门槛；第 6-10 章部分实验依赖外部仓库/GPU/机械臂；对伦理合规与商业落地着墨较少。</p>
+  </div>
+
+  <div class="card">
+    <h2>写在最后</h2>
+    <p>两点启发：</p>
+    <p><strong>1. "开源一切"依然是最强的传播策略。</strong>正文、PDF、配图、代码、甚至写书的 Cursor 对话日志全部公开——结果是 10 个月 24.5K Star、9 种语言社区翻译。知识产品的护城河不是封闭，而是持续迭代的速度。</p>
+    <p><strong>2. "Agent = LLM + 上下文 + 工具"的价值被低估了。</strong>它不仅是教学框架，更是工程决策框架：系统出问题时可以立刻定位是模型能力不足（换模型/后训练）、上下文缺失（改记忆/检索），还是工具设计不当（改 ACI）。在概念满天飞的 Agent 领域，一个能落地的思维模型比十个新名词都值钱。</p>
+    <div class="highlight">🏁 如果你今年只打算系统学一次 AI Agent，这本书大概率是当下中文世界的最优解。</div>
+  </div>
+
+  <div class="footer">
+    <p>GitHub AI 项目日报 · 2026-07-29 · 公众号「AI日课」· 作者：fly的AI学习</p>
+    <p><a href="https://flystray.github.io/ai-news/ai-github-reports/">历史日报</a></p>
+  </div>
+
+</div>
+</body>
+</html>
