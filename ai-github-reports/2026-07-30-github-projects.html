@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub AI 项目日报 - 2026-07-30 · Rapid-MLX</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #1a4d8f 0%, #2e86de 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(26, 77, 143, 0.25);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; }
+  .header .subtitle { font-size: 15px; opacity: 0.95; margin-bottom: 16px; }
+  .header .meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; opacity: 0.9; }
+  .header .meta span { background: rgba(255, 255, 255, 0.15); padding: 4px 12px; border-radius: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .card h3 { font-size: 17px; color: var(--accent); margin: 20px 0 10px 0; }
+  .card p { margin-bottom: 12px; }
+  .card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+  .highlight {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ffd33d;
+    color: #1f2328;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-card { background: var(--code-bg); padding: 16px; border-radius: 8px; text-align: center; }
+  .stat-card .num { font-size: 24px; font-weight: 700; color: #0969da; }
+  .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+  th { background: var(--code-bg); font-weight: 600; }
+  tr:nth-child(even) { background: #fbfcfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 32px; }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Rapid-MLX：Mac 本地 AI 引擎换代了</h1>
+    <div class="subtitle">比 Ollama 快 2-4 倍 · 0.08 秒缓存首字延迟 · 17 种工具调用解析器 · OpenAI/Anthropic 双协议</div>
+    <div class="meta">
+      <span>📅 2026-07-30</span>
+      <span>⭐ 3,449</span>
+      <span>🍴 399</span>
+      <span>🐍 Python / MLX</span>
+      <span>📜 Apache-2.0</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目速览</h2>
+    <p><strong>项目地址：</strong><a href="https://github.com/raullenchai/Rapid-MLX" target="_blank">github.com/raullenchai/Rapid-MLX</a></p>
+    <p><strong>一句话定位：</strong>把你的 M 系列 Mac 变成一台"私有 OpenAI 服务器"——Claude Code、Cursor、Aider 改一个 URL 就能直连本地模型。</p>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">2-4×</div><div class="label">比 Ollama 更快</div></div>
+      <div class="stat-card"><div class="num">0.08s</div><div class="label">缓存命中 TTFT</div></div>
+      <div class="stat-card"><div class="num">17 种</div><div class="label">工具调用解析器</div></div>
+      <div class="stat-card"><div class="num">165+</div><div class="label">模型别名 / 30+ 家族</div></div>
+    </div>
+    <div class="highlight">
+      3.4K Star 在本栏目里不算亮眼，但 Rapid-MLX 是那种<strong>用架构级优化把一件事做到极致</strong>的工程：纯 MLX 内核、连续批处理、量化 KV 缓存、投机解码——很多 vLLM 级别的服务端技术，第一次被系统性搬到 Mac 本地。项目已被阮一峰周刊收录。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目背景：Ollama 的"够用"，和 M 系芯片被浪费的带宽</h2>
+    <p>在 Mac 上跑本地大模型，Ollama 几乎是默认答案。但它的底层是 llama.cpp——一个为"CPU + 独立显卡"异构体系设计的引擎。而 Apple M 系芯片是<strong>统一内存架构（UMA）</strong>：CPU 和 GPU 共享同一块内存池，本不需要任何跨总线数据拷贝。用 llama.cpp 的思路跑 M 系芯片，等于给跑车挂了拖拉机的变速箱。</p>
+    <p>Rapid-MLX 的答案是彻底放弃 llama.cpp：<strong>纯 MLX 内核，无回退、无 Metal 垫片</strong>。MLX 是 Apple 官方的机器学习框架，为 UMA 原生设计，模型权重直接驻留在共享内存池中做零拷贝张量运算。在这个地基上再叠加连续批处理、量化 KV 缓存（int4/int8 + TurboQuant K8V4 编解码器）、radix 树提示缓存 + DeltaNet RNN 状态快照、DFlash 块扩散投机解码等一整套推理优化。</p>
+    <p>一个耐人寻味的细节：代码包名至今仍叫 <code>vllm_mlx</code>——这个项目的野心从名字就能看出来：<strong>做 Apple Silicon 上的 vLLM</strong>。</p>
+  </div>
+
+  <div class="card">
+    <h2>核心功能</h2>
+
+    <h3>1. 极速推理：实测数据全公开</h3>
+    <p>官方基准（M3 Ultra，Qwen3.5-9B）：Rapid-MLX <strong>108 tok/s</strong>，Ollama 46 tok/s，上游 mlx-lm 62 tok/s——比 Ollama 快 2.3 倍，比 Apple 自家 mlx-lm 快 1.7 倍。GPT-OSS-20B 上优势拉大到 <strong>4.2 倍</strong>（127 vs 79 tok/s）。16GB MacBook Air 跑 Qwen3.5-4B 可达 160 tok/s（仅占 2.4GB 内存）。还提供 <code>rapid-mlx bench --submit</code> 提交数据到公开天梯榜。</p>
+
+    <h3>2. 提示缓存：多轮对话"免费重启"</h3>
+    <p>为 Transformer 维护 KV 缓存，为 Qwen3.5 这类混合架构额外记录 <strong>DeltaNet 状态快照</strong>：Devstral-24B 的 TTFT 从 0.38s 降到 0.13s（2.9 倍）；Qwen3-Coder-Next 从 0.66s 降到 0.16s（4.3 倍）；Kimi-Linear-48B 缓存命中低至 <strong>0.08 秒</strong>——几乎无感。</p>
+
+    <h3>3. 17 种工具调用解析器 + 11 个 Agent CLI 实测认证</h3>
+    <p>每家模型的 function calling 格式都不一样（Qwen、Hermes、GLM、MiniMax……）。Rapid-MLX 内置 17 种模型专属解析器，按等级维护兼容矩阵：<strong>Tier-1（Claude Code、Codex CLI、Hermes、Aider）每版本端到端重验</strong>；Tier-2 覆盖 OpenCode、GitHub Copilot、Kimi Code 等 7 个。工具调用"降级为纯文本"时还能自动恢复解析。</p>
+
+    <h3>4. OpenAI + Anthropic 双协议</h3>
+    <p>实现 <code>/v1/chat/completions</code>、<code>/v1/responses</code>（Codex）、<code>/v1/messages</code>（Claude Code）、<code>/v1/embeddings</code>、<code>/v1/audio/*</code>、<code>/v1/videos</code>。一条 <code>rapid-mlx launch claude-code</code> 自动改写配置，把 Claude Code 路由到本机模型。LangChain、PydanticAI、smolagents 均做在线验证。</p>
+
+    <h3>5. 全模态：视觉、音频、视频、嵌入</h3>
+    <p>基础安装仅 460MB（纯文本），按需扩展视觉（Qwen-VL）、音频 STT/TTS（26 个别名）、甚至 LTX-2.3 文生视频。DeepSeek V4 Flash Day-0 支持——158B-A13B MoE 在 128GB Mac Studio Ultra 上以 2bit 量化跑出 56 tok/s，支持 1M 上下文。</p>
+
+    <h3>6. 一条命令分享到公网</h3>
+    <p><code>rapid-mlx share qwen3.6-27b-8bit</code> 内置 HTTPS 隧道，把 Mac Studio 上的模型安全暴露给远程设备——家里的 Mac 变成团队的私有推理服务器。</p>
+  </div>
+
+  <div class="card">
+    <h2>技术亮点</h2>
+
+    <h3>1. 自动配置引擎："模型指纹识别"</h3>
+    <p>DeepWiki 架构解析显示，<code>detect_model_config</code> 会检查模型元数据，<strong>自动选择正确的 tool_call_parser 和 reasoning_parser</strong>，自动应用缓存与量化策略。用户只需 <code>rapid-mlx serve qwen3.5-9b</code>，复杂度被引擎吃掉——这是它比裸用 mlx-lm 体验好一个量级的原因。</p>
+
+    <h3>2. 流式推理分离：&lt;think&gt; 标签实时路由</h3>
+    <p>针对 DeepSeek-R1、Qwen3 等推理模型，<code>StreamingPostProcessor</code> 与 <code>StreamingThinkRouter</code> 在流式生成中实时剥离特殊 token，把思维链路由到 reasoning 字段、正文路由到 content 字段——客户端拿到结构化的"思考/回答"分离输出。</p>
+
+    <h3>3. DFlash 投机解码：按家族验证，拒绝"静默出错"</h3>
+    <p>块扩散投机解码在 Qwen3.5/3.6 27B 上实测带来 <strong>1.31-1.49 倍</strong>吞吐增益。工程态度值得称道：<strong>opt-in 且按模型家族逐个验证</strong>——因为错误应用投机解码会产生"没有报错的错误输出"，这种克制在追求跑分的推理引擎里很稀缺。</p>
+  </div>
+
+  <div class="card">
+    <h2>适用人群</h2>
+    <ul>
+      <li><strong>Mac 上跑本地模型、嫌 Ollama 慢的开发者</strong>：改一个 URL 即可迁移，速度翻 2-4 倍</li>
+      <li><strong>Claude Code / Cursor / Aider 重度用户</strong>：0.08 秒 TTFT，隐私代码不出本机、零 token 费用</li>
+      <li><strong>本地 Agent 开发者</strong>：17 种工具解析器 + 双协议兼容，function calling 稳定性是核心卖点</li>
+      <li><strong>大内存 Mac Studio 团队</strong>：share 命令一键变身私有推理服务器，122B 级模型也能跑</li>
+      <li><strong>MLX 生态研究者</strong>：连续批处理、量化 KV、投机解码的 MLX 实现是极好的学习样本</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>快速上手</h2>
+    <pre><code># 方式一：一键安装（自动检测内存并推荐模型）
+curl -fsSL https://rapidmlx.com/install.sh | bash
+
+# 方式二：Homebrew
+brew install rapid-mlx
+
+# 启动服务（16GB Mac 推荐）
+rapid-mlx serve qwen3.5-4b-4bit
+
+# 任何 OpenAI 客户端直接调用
+curl http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model": "qwen3.5-4b", "messages": [{"role": "user", "content": "你好"}]}'
+
+# 一键接入 Claude Code
+rapid-mlx launch claude-code</code></pre>
+    <p>内存选型：8-23GB 跑 4B 级、24-47GB 跑 20B 级、48-95GB 跑 35B 级、96GB+ 可上 120B 级。</p>
+  </div>
+
+  <div class="card">
+    <h2>对比分析</h2>
+    <table>
+      <tr><th>维度</th><th>Rapid-MLX</th><th>Ollama</th><th>LM Studio</th><th>mlx-lm（上游）</th></tr>
+      <tr><td><strong>底层引擎</strong></td><td>纯 MLX（UMA 原生）</td><td>llama.cpp</td><td>llama.cpp/MLX 混合</td><td>MLX</td></tr>
+      <tr><td><strong>Qwen3.5-9B 速度</strong></td><td>108 tok/s</td><td>46 tok/s</td><td>—</td><td>62 tok/s</td></tr>
+      <tr><td><strong>缓存 TTFT</strong></td><td>0.08-0.16s</td><td>无提示缓存（~0.5s）</td><td>无</td><td>无</td></tr>
+      <tr><td><strong>工具调用</strong></td><td>17 种解析器 + 自动恢复</td><td>基础支持</td><td>基础支持</td><td>需自行处理</td></tr>
+      <tr><td><strong>连续批处理</strong></td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td><strong>API 协议</strong></td><td>OpenAI + Anthropic</td><td>OpenAI 子集</td><td>OpenAI 子集</td><td>无服务端</td></tr>
+      <tr><td><strong>平台</strong></td><td>仅 Apple Silicon</td><td>Mac/Linux/Win</td><td>Mac/Win</td><td>仅 Apple Silicon</td></tr>
+      <tr><td><strong>开源协议</strong></td><td>Apache-2.0</td><td>MIT</td><td>闭源客户端</td><td>MIT</td></tr>
+    </table>
+    <div class="highlight">
+      一句话总结：<strong>Ollama 赢在生态和跨平台，Rapid-MLX 赢在 Apple Silicon 上的绝对性能和 Agent 工程化</strong>。M 系 Mac + 编码助手场景几乎是无脑升级；需要跨平台或长尾模型仍选 Ollama。两者并不互斥。
+    </div>
+    <p><strong>局限：</strong>仅支持 Apple Silicon；模型库长尾覆盖不如 Ollama；项目仅 5 个月、迭代极快，API 可能变动；官方基准均为自测数据。</p>
+  </div>
+
+  <div class="card">
+    <h2>写在最后</h2>
+    <p>第一，<strong>"平台专用"是性能的杠杆，不是包袱</strong>。Ollama 用一套 llama.cpp 通吃三平台，代价是任何平台都拿不到极致性能；Rapid-MLX 反其道而行，赌注全押 Apple Silicon 的统一内存架构，换来 2-4 倍的性能差距。敢于收窄目标平台反而打开了优化空间。</p>
+    <p>第二，<strong>本地推理的竞争焦点正在从"能跑"转向"好用"</strong>。裸速度只是入场券，真正的护城河是那些"脏活"：17 种工具调用格式的逐一适配、11 个 Agent CLI 的端到端回归测试、投机解码的按家族验证。谁能让 Claude Code 无感切换到本地模型，谁就抓住了下一波端侧 AI 的入口。</p>
+    <p>如果你手上有一台 M 系 Mac，花 5 分钟装一个试试——<code>brew install rapid-mlx</code>，你可能会重新认识这台机器的算力。</p>
+    <p>
+      🔗 项目地址：<a href="https://github.com/raullenchai/Rapid-MLX" target="_blank">github.com/raullenchai/Rapid-MLX</a><br>
+      📦 模型目录：<a href="https://models.rapidmlx.com/" target="_blank">models.rapidmlx.com</a><br>
+      📖 DeepWiki：<a href="https://deepwiki.com/raullenchai/Rapid-MLX" target="_blank">deepwiki.com/raullenchai/Rapid-MLX</a>
+    </p>
+  </div>
+
+  <div class="footer">
+    <p>GitHub AI 项目日报 · 2026-07-30 · 公众号「AI日课」· 作者：fly的AI学习</p>
+  </div>
+
+</div>
+</body>
+</html>
