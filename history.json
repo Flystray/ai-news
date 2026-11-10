@@ -58,6 +58,16 @@
         "nexu-io/open-design",
         "TauricResearch/TradingAgents",
         "screenpipe/screenpipe",
-        "Lum1104/Understand-Anything"
+        "Lum1104/Understand-Anything",
+        "datalab-to/indra"
+    ],
+    "meta": [
+        {
+            "repo": "datalab-to/indra",
+            "date": "2026-11-10",
+            "org": "datalab-to",
+            "topic": "document-parsing",
+            "title": "1M 参数的 OCR 跑在 CPU 上，比 Tesseract 快 15 倍"
+        }
     ]
 }

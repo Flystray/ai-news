@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1M 参数的 OCR 跑在 CPU 上，比 Tesseract 快 15 倍</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e, #16213e);
+    background-attachment: fixed;
+    color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 22px 80px;
+  }
+  .article-title {
+    font-size: 30px;
+    line-height: 1.35;
+    margin: 0 0 16px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #8b93f8;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #8a8ab0;
+    letter-spacing: 0.5px;
+    margin: 0 0 34px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  h2 {
+    font-size: 21px;
+    color: #ffffff;
+    margin: 46px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid;
+    border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+    line-height: 1.5;
+  }
+  h3 {
+    font-size: 17px;
+    color: #b8bcf5;
+    margin: 28px 0 12px;
+    font-weight: 600;
+  }
+  p { margin: 0 0 18px; }
+  a { color: #8b93f8; text-decoration: none; border-bottom: 1px dotted rgba(139,147,248,0.5); }
+  a:hover { color: #a8aefb; }
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin: 0 0 30px;
+  }
+  .card ul { list-style: none; margin: 0; padding: 0; }
+  .card li {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.06);
+    font-size: 15px;
+  }
+  .card li:last-child { border-bottom: none; }
+  .card li strong { color: #b8bcf5; font-weight: 600; display: inline-block; min-width: 88px; }
+  ul.plain { padding-left: 22px; margin: 0 0 20px; }
+  ul.plain li { margin-bottom: 12px; }
+  ul.plain li strong { color: #c9ccfa; }
+  ol.plain { padding-left: 22px; margin: 0 0 20px; }
+  ol.plain li { margin-bottom: 10px; }
+  pre {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 0 0 22px;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    color: #a3e0c8;
+    font-size: 13.5px;
+  }
+  p code, li code {
+    background: rgba(255,255,255,0.06);
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 13px;
+    color: #9fe8c9;
+  }
+  pre code { background: none; padding: 0; color: #d3d7f0; }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 0 0 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 620px;
+    font-size: 13.5px;
+  }
+  th, td {
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    vertical-align: top;
+  }
+  th {
+    background: rgba(102,126,234,0.14);
+    color: #c9ccfa;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.022); }
+  tbody tr:last-child td { border-bottom: none; }
+  blockquote {
+    margin: 0 0 22px;
+    padding: 14px 20px;
+    border-left: 3px solid;
+    border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+    background: rgba(102,126,234,0.07);
+    border-radius: 0 10px 10px 0;
+    color: #b9bdda;
+    font-style: italic;
+    font-size: 14.5px;
+  }
+  blockquote a { font-style: normal; }
+  hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    margin: 40px 0;
+  }
+  .note {
+    font-size: 13px;
+    color: #7d80a3;
+    line-height: 1.9;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 26px;
+  }
+  footer {
+    margin-top: 44px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    font-size: 12.5px;
+    color: #6f7396;
+    letter-spacing: 0.4px;
+  }
+  @media (max-width: 560px) {
+    .article-title { font-size: 23px; }
+    h2 { font-size: 18px; }
+    .wrap { padding: 32px 16px 60px; }
+    .card { padding: 18px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="article-title">1M 参数的 OCR 跑在 CPU 上，比 Tesseract 快 15 倍</h1>
+  <p class="subtitle">GitHub AI 项目日报 · 2026-11-10 · 公众号「fly的AI学习」</p>
+
+  <h2>项目速览</h2>
+  <div class="card">
+    <ul>
+      <li><strong>项目地址</strong><a href="https://github.com/datalab-to/indra" target="_blank" rel="noopener">datalab-to/indra</a></li>
+      <li><strong>Star/Fork</strong>⭐ 1,725 · 🍴 176（截至 2026-11-10，创建于 2026-10-13）</li>
+      <li><strong>主要语言</strong>Python（推理走 ONNX Runtime，不用 PyTorch）</li>
+      <li><strong>开源协议</strong>代码 Apache-2.0，模型权重为修改版 OpenRAIL-M</li>
+      <li><strong>形态</strong>CLI + Python 库 + 本地 Web 查看器</li>
+      <li><strong>文档</strong>README 为主；模型托管在 <a href="https://huggingface.co/datalab-to/indra-ocr" target="_blank" rel="noopener">Hugging Face</a>，另有官方 Playground</li>
+    </ul>
+  </div>
+
+  <p>Indra OCR 是 Datalab 在 10 月 13 日开源的文档识别引擎，主识别器 rec.onnx 只有约 125 万参数，全部默认模型加起来 730 万参数、76 MB，纯 CPU 跑。它把 PDF 和图片直接转成 Markdown、纯文本或带坐标的 JSON，自带版面分析和阅读顺序。最反直觉的一点：一个百万参数级的模型，在 Datalab 自己的 OmniParseBench 上拿到 66.7，比百度 PaddleOCR 的完整文档流水线 PP-StructureV3（58.4）还高，而单页耗时是后者的约两百分之一。</p>
+
+  <hr>
+
+  <h2>项目背景：OCR 被切成了两半，中间那块一直没人做</h2>
+  <p>做文档处理的人都熟悉这个局面：一头是 Tesseract 这种老牌引擎，免费、本地、不要 GPU，但只给你一行行文字，版面、表格、阅读顺序全得自己拼；另一头是 PaddleOCR 的 PP-StructureV3、DeepSeek OCR、Chandra 这类大流水线，版面表格都能出，代价是 GPU 或者几万毫秒一页。</p>
+  <p>中间那一段需求一直存在：手上是几万页扫描件、发票、合同、旧档案，机器只有 CPU，希望一次性拿到能直接喂给 RAG 的 Markdown。这类活儿在过去要么忍受 Tesseract 的排版混乱，要么掏 GPU 的钱，要么把它们送去云端 API——后者对法务、医疗、政企基本不可行。</p>
+  <p>Datalab 这家公司在文档圈不算新人，Marker（PDF 转 Markdown）和 Surya（OCR 与版面分析）都出自他们，创始人 Vik Paruchuri 之前做的是 DataQuest。Indra 是他们产品线里最小、最快的那一档，往上还有跑在托管平台上的旗舰模型 Chandra。</p>
+  <p>README 里给了几组对比数字（均为 Datalab 自测）：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>引擎</th><th>综合分</th><th>文本分</th><th>表格分</th><th>版面分</th><th>单页中位耗时</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Indra OCR（auto）</td><td>66.7</td><td>46.7</td><td><strong>61.1</strong></td><td><strong>92.2</strong></td><td><strong>212 ms</strong></td></tr>
+        <tr><td>Indra OCR <code>--math</code></td><td><strong>71.4</strong></td><td><strong>62.7</strong></td><td>59.6</td><td>92.0</td><td>357 ms</td></tr>
+        <tr><td>PaddleOCR PP-StructureV3</td><td>58.4</td><td>55.6</td><td>47.8</td><td>71.7</td><td>40,958 ms</td></tr>
+        <tr><td>PaddleOCR PP-OCRv6 small（仅文本模型）</td><td>–</td><td>35.8</td><td>0.0</td><td>–</td><td>2,685 ms</td></tr>
+        <tr><td>Tesseract 5</td><td>–</td><td>19.3</td><td>0.0</td><td>–</td><td>5,496 ms</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:#7d80a3;margin-top:-8px;">（README 自述，x86、4 vCPU、单页串行、同一批 2,937 页测试集）</p>
+
+  <p>这张表里最值得看的是时间那一列。PP-StructureV3 是 40 秒一页，Indra 是 0.2 秒。README 自己标了个注释：PP-StructureV3 有一组分片在首页上卡了 6 小时，所以它的行里少了 19 页——这种细节反而是可信度的一部分。</p>
+  <p>项目上线第一周，Hacker News 上出现了一条 "Indra OCR: a 1M-parameter OCR model that reads 49 pages per second on CPU"，39 个点，讨论不算炸，但持续有人跟。GitNova 的 star 曲线记录显示它 16 天涨到 1,436 星，日增最高 190，被判定为"增长有机"。到 11 月 10 日，仓库是 1,725 星、176 个 fork——fork 与 star 的比例接近 1:10，说明确实有人在拿去跑，而不只是点个收藏。</p>
+
+  <hr>
+
+  <h2>核心功能</h2>
+
+  <h3>1. auto 模式：能读文字层就绝不 OCR</h3>
+  <p>大部分 PDF 是数字生成的，本来就有文字层。硬做 OCR 是浪费，直接抄文字层又常常出错——字符编码错乱、连字符断裂、双栏被拉成一行。</p>
+  <p>Indra 的默认 <code>--mode auto</code> 会先对文字层做一轮检查，通过就直接用；不通过才渲染成图去 OCR；文字层页面上嵌在图片里的字，还会单独补 OCR（<code>hybrid</code>）。每页的 <code>source</code> 字段会告诉你它走了哪条路：<code>text</code>、<code>ocr</code>、<code>hybrid</code> 还是 <code>error</code>。</p>
+<pre><code>indra-ocr paper.pdf --mode auto        # 默认
+indra-ocr paper.pdf --mode ocr         # 忽略文字层，全页 OCR
+indra-ocr paper.pdf --mode text        # 强制用文字层</code></pre>
+  <p>对混合档案（一部分是电子件、一部分是扫描件）来说，这一条省下的时间比模型提速还多。</p>
+
+  <h3>2. 四个识别器 + 一个行级分类器</h3>
+  <p>多语言 OCR 常见的做法是训一个大字符集模型，或者给每种语言配一个模型再手动切。Indra 走的是第三条：四个识别器按脚本分组，一个分类器逐行判断该交给谁。</p>
+  <ul class="plain">
+    <li><strong>rec.onnx</strong>：拉丁字母（约 50 种语言）、西里尔、希腊，以及拉丁手写</li>
+    <li><strong>rec_cjk.onnx</strong>：中文简繁、日文假名与汉字、韩文</li>
+    <li><strong>rec_rtl.onnx</strong>：阿拉伯、波斯、乌尔都、普什图、库尔德、希伯来</li>
+    <li><strong>rec_world.onnx</strong>：天城文（印地、马拉地、尼泊尔）、孟加拉、泰米尔、泰卢固、卡纳达、马拉雅拉姆、古吉拉特、果鲁穆奇、奥里亚、泰、老挝、高棉、缅甸、僧伽罗、格鲁吉亚、亚美尼亚、埃塞俄比亚</li>
+  </ul>
+  <p>分类器不确定的行，主识别器也会读一遍，谁置信度高用谁的。README 说在 95 种语言的留出印刷页上测过，83 种字符级 F1 ≥ 0.90，67 种 ≥ 0.95。</p>
+  <p>值得注意的是它连竖排也处理了。中文、日文竖排版面会先转 90 度当横向读，读完把坐标映射回原页面，<code>page.vertical</code> 标记为真。中文里有 11,749 个常用加生僻汉字在识别范围内——这个数字来自一位把 Indra 移植到 RK3566 嵌入式板子上的中文开发者，他给出的 <code>rec.onnx</code> 体积是 9.7 MB、<code>det.onnx</code> 只有 389 KB。</p>
+
+  <h3>3. 版面：给每一行一个框、一个标签、一个顺序</h3>
+  <p>输出的不只是文字。每页有 <code>blocks</code>（版面块，按阅读顺序）和 <code>lines</code>（行级框 + 置信度）。块标签一共十种：<code>Text</code>、<code>Section-Header</code>、<code>Page-Header</code>、<code>Page-Footer</code>、<code>List-Group</code>、<code>Table</code>、<code>Caption</code>、<code>Footnote</code>、<code>Table-Of-Contents</code>、<code>Form</code>。</p>
+  <p>页眉页脚默认丢掉（<code>--keep-furniture</code> 可保留），标题渲染成 <code>##</code>，列表渲染成列表，表格渲染成 HTML 表格。这些细节决定了输出能不能直接进向量库，而不是还要写一堆正则清理。</p>
+
+  <h3>4. 全套模型 76 MB，不装 PyTorch</h3>
+  <p>主识别器 1.25M 参数，默认全套 7.3M 参数、76 MB（30 MB 网络 + 46 MB 语言模型）。首跑从 Hugging Face 下载并缓存，离线环境可以用 <code>--model-dir</code> 或 <code>INDRA_OCR_MODEL_DIR</code> 指本地目录。</p>
+  <p>依赖只有 ONNX Runtime、OpenCV、pypdfium2。不装 PyTorch，不需要显卡，Python 3.10 起，Linux x86_64/aarch64 和 macOS Apple Silicon 都测过。</p>
+
+  <h3>5. 本地查看器：一页一页对着看</h3>
+<pre><code>indra-ocr-viewer --port 8765</code></pre>
+  <p>打开后拖进 PDF 或图片，页面会在原图上叠加行框、版面块、阅读顺序，旁边并排给出渲染后的 Markdown、原始 Markdown、逐行置信度、JSON 输出和各阶段耗时。装上 <code>indra-ocr[tesseract]</code> 还能左右对比 Tesseract 的结果。文件不出本机。</p>
+  <p>对决定"要不要换掉现有 OCR"这件事来说，这个 viewer 比任何 benchmark 都实用——用自己的文档跑一遍，好坏立刻清楚。</p>
+
+  <hr>
+
+  <h2>技术亮点</h2>
+
+  <h3>1. 不确定的行，用 n-gram 语言模型重新投票</h3>
+  <p>CTC 识别器是贪心解码，一步取一个最优类。遇到模糊的字，贪心很容易把 <code>rn</code> 读成 <code>m</code>、把 <code>l</code> 读成 <code>1</code>。</p>
+  <p>Indra 的做法是给置信度低于阈值的行开一条后路：CTC 前缀 beam search 保留多个候选读数，再用一个 n-gram 语言模型打分，<code>score = log P_ctc + alpha * log P_lm + beta * tokens</code>。识别器自己的概率仍占主导，所以生僻但写清楚的词不会被语言模型"纠正"掉。</p>
+  <p>那 46 MB 的"语言模型"就是给这条后路备的——每个脚本组一份回退表。这也是为什么模型从 0.3 版的 18 MB 涨到 1.1 版的 76 MB，速度也从 49 页/秒掉到 44 页/秒。用一点速度和体积换准确率，这个取舍在文档场景里是划算的。</p>
+
+  <h3>2. 不靠 GPU，靠一核一进程</h3>
+  <p>32 核上 43.9 页/秒，4 核 6.2 页/秒，基本线性。实现方式是每个核起一个单线程 worker 进程、一页一个任务——ONNX Runtime 的 session 不支持并发 Run，所以并行来自进程而不是线程。</p>
+  <p>代价是内存随核数线性涨，且 Windows/macOS 上必须写 <code>if __name__ == "__main__":</code> 守卫，否则 worker 会重复导入主模块。README 把这个坑写在了示例代码的注释里，属于少见的诚实。</p>
+
+  <h3>3. 顺手造了个基准：OmniParseBench</h3>
+  <p>各家 OCR 的"准确率"基本没法比——测试集不同、评分口径不同、有的只测文本不测版面。Datalab 干脆自己造了一个：16,288 条通过/失败测试，2,937 页，分文本、表格、版面三个族，综合分取三者均值。基准和评分器一起开源在 <a href="https://github.com/datalab-to/omni_parse_bench" target="_blank" rel="noopener">omni_parse_bench</a>，README 里给了完整的复现命令：</p>
+<pre><code>python bench/opb_indra.py --out runs/opb_auto --mode auto --procs 8</code></pre>
+  <p>自己造基准再给自己打分，天然有利益冲突。但它的价值在于把"综合分 66.7"拆成了可核对的 16,288 个单项，任何人都能拿同一批评测去质问某个数字。对第三方移植者来说这也是刚需——那个 Go 版本的作者就是照这份基准逐项对齐的。</p>
+
+  <h3>4. 生态已经长出来了</h3>
+  <p>判断一个工具能不能长期用，看有没有人愿意为它重写一遍。Indra 发布不到一个月，已经出现了一个完整的原生 Go 移植 <code>praktiskt/indra-ocr-go</code>（v0.35.0），把检测、识别、阅读顺序、RTL 重排、beam search 全部重写，模型和 ORT 库直接嵌进二进制，linux/amd64 上零依赖、零下载、零落盘。同一份基准、同一个 HF 模型目录，两边分数能对上，这种一致性只有在规范写得足够清楚时才做得到。</p>
+  <p>中文社区那边，有人把它接进了 RK3566 开发板的 OCR 项目，和 PP-OCRv5 的 NCNN 版本并列做多引擎。他的笔记里提到一个有意思的判断：Indra 的价值不在中文主力场景，而在生僻字、多语言混排这类 PP-OCR 覆盖不足的边角。</p>
+
+  <hr>
+
+  <h2>适用人群</h2>
+  <ul class="plain">
+    <li><strong>做 RAG 的工程师</strong>：手里有几千上万页 PDF，需要先变成带标题层级的 Markdown。<code>--out</code> 一条命令批量跑完，输出可直接切块入库。</li>
+    <li><strong>法务、审计、档案数字化</strong>：数据不能出内网，机器只有 CPU。76 MB 模型 + ONNX Runtime，笔记本和 ARM 服务器都能跑，完全离线。</li>
+    <li><strong>多语言内容团队</strong>：需要处理阿拉伯语、印地语、泰语、高棉语这类小语种扫描件，过去只能上云或者人工录入。</li>
+    <li><strong>嵌入式 / 边缘设备开发者</strong>：<code>det.onnx</code> 389 KB、<code>rec.onnx</code> 9.7 MB，已经有中文开发者在 RK3566 这类板子上跑通。</li>
+    <li><strong>想换掉 Tesseract 的老系统</strong>：viewer 支持左右对比，先用自己的一批文档看差距，再决定是否迁移。</li>
+  </ul>
+
+  <hr>
+
+  <h2>快速上手</h2>
+<pre><code># 1. 安装（Python &gt;= 3.10）
+pip install indra-ocr
+
+# 2. 最小可用：一页 PDF → 标准输出 Markdown
+indra-ocr paper.pdf
+
+# 3. 批量：每个输入一个 .md
+indra-ocr *.pdf --out results/
+
+# 4. 要结构化数据（行、框、版面块、置信度）
+indra-ocr scan.png --format json
+
+# 5. 表格多的文档，开公式识别（慢一些，但文本分从 46.7 涨到 62.7）
+indra-ocr paper.pdf --math
+
+# 6. 本地查看器
+indra-ocr-viewer --port 8765</code></pre>
+
+  <p>Python 侧：</p>
+<pre><code>import indra_ocr
+
+conv = indra_ocr.load(threads=4)          # mode="auto" | "ocr" | "text"
+for i, page in conv.convert("paper.pdf"):
+    print(page.source, page.timings["total_ms"])
+    print(page.markdown)
+    print(page.blocks)                     # [{"label", "bbox", "text"}] 按阅读顺序</code></pre>
+
+  <p>几个已知的坑：</p>
+  <ol class="plain">
+    <li>首跑要下 76 MB 模型，内网环境务必提前备好目录并设 <code>INDRA_OCR_MODEL_DIR</code>。</li>
+    <li><code>convert_many</code> 在多进程模型下必须写 <code>if __name__ == "__main__":</code>，否则 macOS/Windows 会出问题。</li>
+    <li><code>--dpi</code> 默认 200。超过 1 亿像素的页面会被降采样，小字会丢。</li>
+    <li>CLI 遇到读不了的文件不会中断，最后以退出码 1 结束，脚本里记得判返回值。</li>
+  </ol>
+
+  <hr>
+
+  <h2>对比分析</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>维度</th><th>Indra OCR</th><th>PaddleOCR PP-StructureV3</th><th>Tesseract 5</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>综合分（OmniParseBench）</td><td>66.7（<code>--math</code> 71.4）</td><td>58.4</td><td>仅文本 19.3</td></tr>
+        <tr><td>文本分</td><td>46.7（<code>--math</code> 62.7）</td><td><strong>55.6</strong></td><td>19.3</td></tr>
+        <tr><td>表格 / 版面</td><td><strong>61.1 / 92.2</strong></td><td>47.8 / 71.7</td><td>不输出</td></tr>
+        <tr><td>单页耗时（4 vCPU）</td><td><strong>212 ms</strong></td><td>40,958 ms</td><td>5,496 ms</td></tr>
+        <tr><td>硬件要求</td><td>CPU 即可</td><td>建议 GPU</td><td>CPU</td></tr>
+        <tr><td>中文场景</td><td>64.0，弱于 PP-OCRv5（65.4）</td><td><strong>68.4</strong></td><td>一般</td></tr>
+        <tr><td>手写</td><td>25.2%，勉强</td><td>未单独评测</td><td>差</td></tr>
+        <tr><td>许可</td><td>代码 Apache-2.0，权重 OpenRAIL-M 有商用限制</td><td>Apache-2.0</td><td>Apache-2.0</td></tr>
+        <tr><td>局限 / 风险</td><td>复杂表格、手写、退化扫描件都差；中文不是它的强项；权重许可禁止与 Datalab API 竞争</td><td>慢两个数量级，CPU 上基本不可用</td><td>无版面，输出还要大量后处理</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>表格后面得说清边界：<strong>如果你的文档以中文为主，Indra 现在并不是最优解</strong>。README 自己给了数字——136 条中文测试里 Indra 64.0，PaddleOCR 的 PP-OCRv5 移动端中文模型 65.4，PP-StructureV3 68.4。多语言混排、英文为主、追求吞吐量的场景，它才是划算的那个。</p>
+
+  <hr>
+
+  <h2>写在最后</h2>
+  <p>这个项目真正改变的不是"OCR 准确率又高了几个点"，而是把"高质量文档解析"的硬件门槛从一张显卡拉到了一台没有显卡的服务器。过去 40 秒一页的东西现在 0.2 秒一页，意味着 1 万页的批处理从 4 天变成 35 分钟——很多原本因为成本被砍掉的数字化项目，现在能重新拿出来算账。</p>
+  <p>但它也不是通用答案。手写 25.2%、退化扫描件 29.5%、复杂表格会串行串列，中文分还不如 PaddleOCR。README 自己列了 8 条局限，这在开源项目里算相当坦诚。</p>
+  <p>如果要动手，建议按这个顺序：先 <code>pip install indra-ocr</code>，用 <code>indra-ocr-viewer</code> 拿自己最刁钻的 50 页跑一遍，和现有方案并排看；确认能用，再上批量。别先看 benchmark 就替换生产管线。</p>
+
+  <blockquote>
+    项目地址：<a href="https://github.com/datalab-to/indra" target="_blank" rel="noopener">github.com/datalab-to/indra</a><br>
+    模型：<a href="https://huggingface.co/datalab-to/indra-ocr" target="_blank" rel="noopener">huggingface.co/datalab-to/indra-ocr</a><br>
+    基准：<a href="https://github.com/datalab-to/omni_parse_bench" target="_blank" rel="noopener">github.com/datalab-to/omni_parse_bench</a>
+  </blockquote>
+
+  <div class="note">
+    本文数字来源：GitHub 仓库与 README（抓取于 2026-11-10）、PyPI <code>indra-ocr</code> 1.1.2（发布 2026-10-20）、第三方报道 HuggingNews 与 Pasquale Pillitteri 的版本对比、GitNova 的 star 增长记录、dev.to 上的上手教程，以及一位中文开发者在 RK3566 上的移植笔记。除特别说明外，性能与准确率数字均为 Datalab README 自述。
+  </div>
+
+  <footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+
+</div>
+</body>
+</html>
