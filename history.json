@@ -59,7 +59,8 @@
         "TauricResearch/TradingAgents",
         "screenpipe/screenpipe",
         "Lum1104/Understand-Anything",
-        "datalab-to/indra"
+        "datalab-to/indra",
+        "microsoft/TokenEconomizer"
     ],
     "meta": [
         {
@@ -68,6 +69,13 @@
             "org": "datalab-to",
             "topic": "document-parsing",
             "title": "1M 参数的 OCR 跑在 CPU 上，比 Tesseract 快 15 倍"
+        },
+        {
+            "repo": "microsoft/TokenEconomizer",
+            "date": "2026-11-11",
+            "org": "microsoft",
+            "topic": "cost-optimization",
+            "title": "微软把 coding agent 当黑盒，六轮后账单降三成"
         }
     ]
 }

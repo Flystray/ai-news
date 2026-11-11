@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>微软把 coding agent 当黑盒，六轮后账单降三成</title>
+<style>
+  :root{
+    --bg-1:#0f0f1a; --bg-2:#1a1a2e; --bg-3:#16213e;
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;
+    line-height:1.35;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;
+    color:#a8a8b8;
+    letter-spacing:.6px;
+    margin:0 0 32px;
+    padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:24px 26px;
+    margin:0 0 34px;
+  }
+  .card h3{
+    margin:0 0 14px;
+    font-size:15px;
+    letter-spacing:1.5px;
+    color:#b9b9ff;
+    font-weight:700;
+  }
+  .card ul{margin:0;padding-left:0;list-style:none;}
+  .card li{
+    font-size:14.5px;
+    color:#cfcfdd;
+    padding:7px 0;
+    border-bottom:1px dashed rgba(255,255,255,0.05);
+  }
+  .card li:last-child{border-bottom:none;}
+  .card li b{color:#e8e8f4;font-weight:600;}
+  h2{
+    font-size:22px;
+    font-weight:700;
+    color:#f0f0f8;
+    margin:52px 0 18px;
+    padding-left:14px;
+    position:relative;
+    line-height:1.5;
+  }
+  h2::before{
+    content:"";
+    position:absolute;
+    left:0;top:6px;bottom:6px;
+    width:4px;
+    border-radius:2px;
+    background:linear-gradient(180deg,#667eea,#764ba2);
+  }
+  h3{
+    font-size:17px;
+    font-weight:650;
+    color:#dcdcf0;
+    margin:30px 0 10px;
+    line-height:1.6;
+  }
+  h3 .num{color:#8b7ce8;margin-right:6px;font-variant-numeric:tabular-nums;}
+  p{margin:0 0 18px;color:#dcdce8;}
+  strong{color:#ffffff;font-weight:700;}
+  em{color:#c9c9dd;}
+  a{color:#8ea6ff;text-decoration:none;border-bottom:1px solid rgba(142,166,255,0.28);}
+  a:hover{color:#b3c2ff;border-bottom-color:rgba(179,194,255,0.6);}
+  .src{font-size:12.5px;color:#8a8a9a;border-bottom:none;}
+  ul.plain{padding-left:22px;margin:0 0 18px;}
+  ul.plain li{margin-bottom:10px;color:#dcdce8;}
+  blockquote{
+    margin:24px 0;
+    padding:16px 20px;
+    background:rgba(102,126,234,0.07);
+    border-left:3px solid;
+    border-left-image:none;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    border-left:3px solid #764ba2;
+    border-radius:0 12px 12px 0;
+    font-style:italic;
+    color:#c3c3d8;
+    font-size:14.5px;
+  }
+  blockquote p{margin:0;color:#c3c3d8;}
+  pre{
+    background:rgba(0,0,0,0.35);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px;
+    padding:16px 18px;
+    overflow-x:auto;
+    margin:0 0 18px;
+  }
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    font-size:13.5px;
+    color:#a8e6cf;
+  }
+  p code,li code{
+    background:rgba(255,255,255,0.06);
+    padding:2px 6px;
+    border-radius:6px;
+    color:#9fe6c8;
+  }
+  pre code{background:none;padding:0;color:#c8d6ff;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:0 0 22px;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:16px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:560px;
+    font-size:14px;
+  }
+  th,td{
+    padding:12px 16px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    color:#d6d6e4;
+    vertical-align:top;
+  }
+  th{
+    background:rgba(102,126,234,0.13);
+    color:#c7cbff;
+    font-weight:700;
+    font-size:13.5px;
+    letter-spacing:.3px;
+    white-space:nowrap;
+  }
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.025);}
+  tbody tr:last-child td{border-bottom:none;}
+  td b{color:#ffffff;}
+  .note{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px;
+    padding:16px 20px;
+    margin:0 0 22px;
+    font-size:14.5px;
+    color:#c6c6d8;
+  }
+  .note b{color:#ffd08a;}
+  .divider{
+    height:1px;
+    margin:44px 0;
+    background:linear-gradient(90deg,transparent,rgba(102,126,234,0.45),transparent);
+    border:none;
+  }
+  footer{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    padding:12px 16px;
+    text-align:center;
+    font-size:13px;
+    color:#9a9aac;
+    background:rgba(15,15,26,0.92);
+    border-top:1px solid rgba(255,255,255,0.07);
+    backdrop-filter:blur(8px);
+  }
+  footer b{color:#b9b9ff;font-weight:600;}
+  @media (max-width:600px){
+    body{font-size:15.5px;padding-bottom:88px;}
+    .article-title{font-size:25px;}
+    h2{font-size:19.5px;margin-top:40px;}
+    header{padding-top:36px;}
+    .card{padding:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1 class="article-title">微软把 coding agent 当黑盒，六轮后账单降三成</h1>
+  <p class="subtitle">GitHub AI 项目日报 · 2026-11-11 &nbsp;|&nbsp; 公众号「<span>fly的AI学习</span>」</p>
+</header>
+
+<section class="card">
+  <h3>项目速览</h3>
+  <ul>
+    <li><b>项目地址</b>：<a href="https://github.com/microsoft/TokenEconomizer" target="_blank" rel="noopener">microsoft/TokenEconomizer</a></li>
+    <li><b>Star / Fork</b>：⭐ 5,664 · 🍴 353（截至 2026-11-11 抓取，创建于 2026-10-13）</li>
+    <li><b>主要语言</b>：Python（约 96%，代码约 241 万字节；另有 Shell 与 TypeScript 适配层）</li>
+    <li><b>开源协议</b>：Apache-2.0</li>
+    <li><b>形态</b>：coding agent 插件 + 纯标准库 Python 包（Claude Code / Codex / Copilot CLI / Pi）</li>
+    <li><b>文档</b>：<a href="https://tokeneconomizer.github.io" target="_blank" rel="noopener">项目主页</a>、<a href="https://arxiv.org/abs/2610.22732" target="_blank" rel="noopener">论文 arXiv:2610.22732</a></li>
+  </ul>
+</section>
+
+<p>它做的事用一句话讲完：让同一个 agent 在同一个仓库里越跑越便宜。不改模型、不改 agent 源码，只借 prompt、工具配置和事件流这三条缝，把上一次会话学到的东西塞进下一次。论文报的是 SWE-Bench 上平均成本降 <strong>18.4%–30.9%</strong>，Pass@1 五组里四组还升了。</p>
+
+<p>反直觉的地方在于省钱的第一天是亏的。多家独立实测（<a href="https://cyberq.tw/2026/11/01/microsoft-tokeneconomizer-test-claude" target="_blank" rel="noopener">CyberQ</a>、<a href="https://www.aitopic.com/microsoft-and-uc-berkeley-release-tokeneconomizer-to-cut-coding-agent-costs-by-up-to-309.html" target="_blank" rel="noopener">AITopic</a>）都指向同一条曲线：前四五个任务是学习期，装与不装几乎没差别，甚至略贵，到第六个任务才稳定低于基线。</p>
+
+<hr class="divider">
+
+<h2>项目背景：同一个仓库里，agent 每天重新学一遍怎么跑测试</h2>
+
+<p>SWE-Bench 这类基准把每个任务当独立事件，agent 一题一提交，环境干净。真实开发不是这样：你连续两周让 Claude Code 改同一个后端，它每天早上都要重新发现「这台机器上没有 pytest，得用 .venv/bin/python -m pytest」，重新试一遍「测试前要先跑 gen_rates.py」，重新加载 100 个工具的定义却只用其中 6 个。</p>
+
+<p>论文把这笔钱量了出来。作者在 6 个仓库、60 个 SWE-Bench 任务上做画像，结果三条：</p>
+
+<ul class="plain">
+  <li><strong>工具空转</strong>。每次请求都带 23 个工具 schema，实际没有一个仓库用到超过 7 个；16 个从头到尾没被调用过，3 个覆盖了 98% 的调用。</li>
+  <li><strong>事实重学</strong>。当前面已经跑了 5 个任务之后，仍有约 30% 的工具调用是在重复早前任务做过的动作。反复出现的动作占工具调用字节量的 12%–28%。</li>
+  <li><strong>失败循环</strong>。失败任务只占 17%，却吃掉 32% 的总花费。在 60 个任务里，51% 的支出发生在一段轨迹开始原地打转之后。</li>
+</ul>
+
+<p>这三条都不是「模型不够聪明」，而是「每次都从零开始」。也是现有省 token 工具的盲区：RTK 压 shell 输出、RepoMap 排符号表、Serena 换符号级检索，都是固定的、与仓库无关的策略。论文实测这三种固定策略没有一个能做到处处更便宜——RTK 在 30 个「仓库×组合」格子里有 12 格反而更贵，RepoMap 有 15 格更贵。原因是每个仓库的浪费不一样，Django 的浪费点和 SymPy 不是一回事。</p>
+
+<hr class="divider">
+
+<h2>核心功能</h2>
+
+<h3><span class="num">1.</span>Micro-skills：把「这个仓库怎么跑」写成一行事实，下次开局就注入</h3>
+
+<p>机制分两路取事实。一路是纯规则：跨会话重复出现的同一条失败，直接抽成事实，不花模型调用。另一路花钱：每 <em>k</em> 个会话（默认 3）让一个提案模型读最近几段会话摘要，提出候选事实。</p>
+
+<p>事实要过证据门槛才升级。同一条事实在<strong>编辑文件互不重叠</strong>的三个任务上被确认，才允许注入；需求率（need rate）还得 ≥ 0.4。反过来，一次反驳按 5 次确认计，所以错的事实退得很快。每条事实自带正则检测器，后续验证不花模型调用。</p>
+
+<p>CyberQ 那篇实测里，它学出来的东西长这样：</p>
+
+<blockquote>
+  <p>The project's Python environment is <code>.venv/</code> at the repo root… Canonical test command in invkit: <code>.venv/bin/python scripts/gen_rates.py &amp;&amp; APP_ENV=test .venv/bin/python -m pytest</code></p>
+</blockquote>
+
+<p>正好是他们埋在 repo 里、只写在 CONTRIBUTING.md 的三颗雷。这是这个机制真正的价值点：<strong>它学的是环境知识，不是任务知识</strong>，而环境知识恰好是每次开局最贵、最难猜的部分。</p>
+
+<h3><span class="num">2.</span>Tool pruning：不用的工具从 agent 自己的设置里摘掉</h3>
+
+<p>判定条件是双轨的：一个工具连续 <em>p</em> 个提示（默认 10）没用且跨越至少 <em>m</em> 个会话（默认 2），或者横跨 <em>s</em> 个会话（默认 5）没用过，就写进该仓库的 deny 清单。Shell、读、写、编辑这几个核心工具永远保留。全量目录每 5 个任务回扫一次，防止工具被永久埋掉。</p>
+
+<p>关键在于它<strong>不碰 agent 代码</strong>，只改 agent 自己的配置文件：</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Agent</th><th>摘掉什么</th><th>写到哪里</th></tr></thead>
+  <tbody>
+    <tr><td>Claude Code</td><td>单个工具</td><td><code>.claude/settings.local.json</code></td></tr>
+    <tr><td>Codex</td><td>capability packages</td><td><code>.codex/config.toml</code></td></tr>
+    <tr><td>Copilot CLI</td><td>整个 MCP server</td><td><code>.github/copilot/settings.local.json</code></td></tr>
+    <tr><td>Pi</td><td>无（只加载四个工具）</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>写入还有一个时点条件：<code>toolprune_quiet_minutes</code> 默认 60 分钟，要求你在这个仓库的会话闲置够久才写。原因是改了工具集之后，被恢复的会话必须把整段历史重新写进 prompt cache 而不能读缓存，而缓存本来一小时就过期。这个细节挺讲究——省 token 的工具如果让缓存失效，省的还不如赔的。</p>
+
+<p>效果上，论文给的例子是 Django 配 Claude Code，第一个请求从 <strong>43,351</strong> token 降到 <strong>16,295</strong>。</p>
+
+<h3><span class="num">3.</span>Failure-loop intervention：只提醒，不杀进程</h3>
+
+<p>它先学「这个仓库里正常一轮有多长」：等到 <em>e</em> 个（默认 5）自己跑完、且最后一次编辑之后没有失败检查的回合，建立一个回合长度包络，预算取成功回合长度的 90 分位乘 1.25。</p>
+
+<p>之后回合出现重复失败或错误密集，先走便宜的规则检查，再交给裁判模型判断是否卡住。裁判置信度 ≥ 0.7 才插一条转向提示（「换个思路」），每回合最多 <em>r</em> 次（默认 1）。如果还是卡着，它只打印一行提示你按 Esc，<strong>从不自己终止回合</strong>。</p>
+
+<p>这条边界划得很清楚：成本控制不该拥有否决权。</p>
+
+<h3><span class="num">4.</span>一个插件适配九个 agent，各按各的 hook 能力打折</h3>
+
+<p>正式支持四个（Claude Code、Codex、GitHub Copilot CLI、Pi），实验性支持五个（opencode、Cursor Agent、Grok Build、Hermes Agent、Antigravity CLI）。每个适配器不是等价翻译，而是如实标注能力缺口：Pi 只加载四个工具所以不需要剪枝，工具剪枝在 Cursor、Grok、opencode、Hermes、Antigravity 上暂时不生效，Antigravity 没有「关掉全部工具跑一次 prompt」的开关所以只能学不花钱的那部分事实，Grok 学到的事实要到会话第一次工具调用才到模型手里。</p>
+
+<p>README 里还有一张「回合卡住时提示出现在哪、怎么停」的表，逐个 agent 写清楚 Esc 之后还要不要 <code>/stop</code>、headless 模式打到 stdout 还是 stderr。这种把边角料写进主文档的做法，比一句「全面支持」有用得多。</p>
+
+<h3><span class="num">5.</span>每一步都可回退，状态全在本机</h3>
+
+<p><code>toolprune restore</code> 把工具还回去，还回去的不会再被摘；被反驳的事实直接失效；deny 清单只追加自己的条目，不碰你手写的规则，且自动进 <code>.git/info/exclude</code> 防止误提交。学到的东西存在 <code>~/.tokeneconomizer</code>，不出本机；插件自己不持有任何凭据，模型调用走你自己的 agent 登录。</p>
+
+<hr class="divider">
+
+<h2>技术亮点</h2>
+
+<h3><span class="num">1.</span>三个机制不知道 agent、也不知道领域，全靠四个接口隔离</h3>
+
+<p>这是我认为这个仓库最值得抄的部分。<code>tokeneconomizer/</code> 下不是一坨脚本，而是把变化点抽成了四个窄接口：</p>
+
+<ul class="plain">
+  <li><code>trace</code>：唯一读会话日志的地方，一个 agent 一个 reader，加新 agent 只写这里；</li>
+  <li><code>ledger</code> + <code>pricing</code>：唯一的成本定义，机制只上报自己的开销，插件和论文实验都从同一处读，<strong>保证「账上记的」和「论文报的」不可能漂移</strong>；</li>
+  <li><code>domain.DomainAdapter</code>：读会话、哪些工具要保护或排除、轨迹的循环信号、可选裁判要看的任务文本、事实词表；换领域只换 adapter；</li>
+  <li><code>stage.Stage</code>：机制对外提供的四个钩子 <code>before_task</code> / <code>build_tools</code> / <code>run_kwargs</code> / <code>after_task</code>。</li>
+</ul>
+
+<p>两个调用方（插件、benchmark harness）都不被机制 import，<code>tests/test_plugin_package.py</code> 还专门钉死这两条边界：机制不许 import 插件，<code>tokeneconomizer/</code> 不许 import <code>experiments/</code>。所以论文实验和线上插件跑的是同一套机制代码，不是两份实现各说各话——这在产学合作的项目里不常见。</p>
+
+<h3><span class="num">2.</span>成本按账单算，不按 token 数算</h3>
+
+<p>大部分省 token 工具宣传的是 token 降幅，而账单上看到的是美元。两者差得很远，因为一个会话里大部分 token 是缓存重读，按 5%–10% 计价。</p>
+
+<p>TokenEconomizer 的成本口径写死为「按实际计费方式算，含缓存价」，并且把插件自身的模型调用（提案者、裁判、转向文案）全算进去。这一点直接决定了它的可信度：省下来的钱如果不够付自己的开销，结论就是负的。CyberQ 的实测正好撞上这个坑（下面会讲）。</p>
+
+<h3><span class="num">3.</span>把「学习」做成可撤销的，而不是可信任的</h3>
+
+<p>跨会话学习最容易翻车的地方是学到错的、然后一直错。这个项目的处理方式不是提高模型能力，而是降低错误残留时间：</p>
+
+<ul class="plain">
+  <li>事实要三次非同源确认才生效，一次反驳抵五次确认；</li>
+  <li>工具的摘除需要跨会话、跨提示的双重证据，且每 5 个任务回扫一次；</li>
+  <li>回合预算来自本仓库成功回合的分位数，不是全局常数；</li>
+  <li>所有动作在会话里打印一行，出任何问题会话照常继续，等同没装。</li>
+</ul>
+
+<p>代价是冷启动慢。论文自己也承认：Claude Code 的五组跑批里，除了 xarray，每个仓库前几个任务都更贵，到第六个才全面低于基线。这套设计换的是「不会突然崩」，付的是「不会立刻见效」。</p>
+
+<hr class="divider">
+
+<h2>适用人群</h2>
+
+<ul class="plain">
+  <li><strong>每天在同一个大仓库里用 Claude Code / Codex 的工程师</strong>：连接器装得多、工具列表长（实测环境里 100 个工具），剪枝收益最直接。省的是每天重复付的那部分固定开销。</li>
+  <li><strong>给团队管 agent 预算的平台 / SRE</strong>：成本口径含缓存价、含插件自身调用，<code>te status</code> 能给出按仓库的账，比自己拿 token 数乘单价靠谱。</li>
+  <li><strong>维护环境复杂的老项目的人</strong>：monorepo、私有测试脚本、必须带环境变量的构建流程，micro-skills 学的正是这类「文档里没写、老员工才知道」的东西。</li>
+  <li><strong>做 agent 基础设施的开发者</strong>：<code>trace</code> / <code>ledger</code> / <code>domain</code> / <code>stage</code> 这套切分，是「如何让同一份策略同时跑在论文 harness 和真实插件里」的一个可复用答案。</li>
+  <li><strong>不建议</strong>：一周换八个仓库、每次都是新项目的人。学习期还没过就换地方了，省不到钱。</li>
+</ul>
+
+<hr class="divider">
+
+<h2>快速上手</h2>
+
+<p>前置条件只有两个：Python 3.10+ 在 <code>PATH</code> 里，以及一个已登录的 agent。插件不需要自己的 API key。</p>
+
+<pre><code># Claude Code
+git clone https://github.com/microsoft/TokenEconomizer.git
+claude plugin marketplace add "$PWD/TokenEconomizer"
+claude plugin install tokeneconomizer@tokeneconomizer
+# 启动 claude，信任目录后：
+#   /tokeneconomizer:status
+#   /tokeneconomizer:toolprune refresh-catalog   # 每台机器一次，Claude Code 升级后重跑</code></pre>
+
+<pre><code># Codex
+git clone https://github.com/microsoft/TokenEconomizer.git
+codex plugin marketplace add "$PWD/TokenEconomizer"
+codex plugin add tokeneconomizer@tokeneconomizer
+# 启动后选 Trust and continue -&gt; Hooks need review 选 Trust all and continue
+# 钩子下次会话生效，退出后重开，用 $tokeneconomizer:status 检查</code></pre>
+
+<pre><code># GitHub Copilot CLI
+git clone https://github.com/microsoft/TokenEconomizer.git
+copilot plugin marketplace add "$PWD/TokenEconomizer"
+copilot plugin install tokeneconomizer@tokeneconomizer</code></pre>
+
+<p>想打开 micro-skills 并指定便宜模型（强烈建议一起设，原因见下节）：</p>
+
+<pre><code>/tokeneconomizer:config set microskills=on
+/tokeneconomizer:config set paid_model=claude-haiku-5-5</code></pre>
+
+<p>几个 README 明确写了的坑：</p>
+
+<ul class="plain">
+  <li><strong>marketplace 路径要给绝对路径</strong>。Copilot CLI 会把 <code>./TokenEconomizer</code> 当成 GitHub 仓库名去解析。</li>
+  <li><strong>clone 目录别删</strong>。Claude Code、Codex、Copilot CLI、opencode 是直接从 clone 目录跑插件的。</li>
+  <li><strong>版本窗口很窄</strong>。官方验证范围是 Claude Code 2.1.300–2.1.310、Codex 0.153.1–0.164.0、Copilot CLI 1.0.83–1.0.102、Pi 1.2.0–1.3.0。agent 升级后先跑一次 <code>te status</code> 和 <code>~/.tokeneconomizer/errors.log</code>。</li>
+  <li><strong>临时关掉</strong>用环境变量：<code>TE_DISABLE=1 claude</code> 全关，<code>TE_LOOPGUARD=off codex</code> 关单个机制。</li>
+</ul>
+
+<hr class="divider">
+
+<h2>对比分析</h2>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>维度</th><th>TokenEconomizer</th><th>RTK</th><th>Aider RepoMap / Serena</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>作用层</td><td><b>会话级</b>：跨会话学策略</td><td>工具输出级：压缩 shell 输出</td><td>上下文级：符号表 / 符号检索</td></tr>
+    <tr><td>是否按仓库学习</td><td><b>是</b>（事实、工具证据、回合包络都按仓库存）</td><td>否</td><td>否</td></tr>
+    <tr><td>需要改 agent</td><td>不需要，只走 hook 与 agent 自身设置</td><td>需要接入其调用链</td><td>RepoMap 内置于 Aider；Serena 走 MCP</td></tr>
+    <tr><td>论文实测平均成本变化</td><td><b>−18.4% 到 −30.9%</b></td><td>−8.9% 到 +4.5%</td><td>未进主实验；画像阶段抬高总成本</td></tr>
+    <tr><td>30 格中反而更贵的格子</td><td><b>0</b></td><td>12</td><td>15</td></tr>
+    <tr><td>见效时点</td><td>第 6 个任务起</td><td>立即可用</td><td>立即可用</td></tr>
+    <tr><td>主要局限 / 风险</td><td>学习期倒亏、agent 版本强绑定、附加调用可能倒赔</td><td>只在输出冗长时有收益</td><td>与仓库结构强相关，跨仓库不稳定</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>表格里的成本行来自论文，许可证与接入方式来自各项目仓库。这四者不是替代关系：RTK 压的是「一条命令吐 800 行日志」，TokenEconomizer 压的是「同一个仓库重复付的固定成本」，叠着用不冲突——论文里 Opus 4.8 组合叠加 RTK 后从 −30.9% 进一步到 −33.2%。</p>
+
+<hr class="divider">
+
+<h2>局限与风险</h2>
+
+<p><strong>一、默认配置可能不省钱，甚至倒赔。</strong>CyberQ 用 288 次 Claude Code 会话做了独立实测，这是目前最值得看的一份第三方证据。结论是：默认配置（剪枝 + 循环防护）在主会话上平均省 6.2%、稳态省 10.8%；打开 micro-skills 后主会话再省一截，但<strong>总账反而多花 2.9%</strong>。原因很具体——插件调用 <code>claude -p --model haiku</code>，在他们那台机器的 Claude Code 2.1.314 上，<code>haiku</code> 这个别名实际解析到 Sonnet 5.5，单次调用约 0.27 美元，比真正的 Haiku 5.5 贵近 20 倍。把 <code>paid_model</code> 显式设成 <code>claude-haiku-5-5</code> 后，总账从 +2.9% 变成 −13.0%，稳态 −22.4%。<strong>换句话说，装完之后第一件事是核对别名解析到哪个模型。</strong></p>
+
+<p><strong>二、论文数字在你的场景大概率要打折。</strong>同一份实测里，Sonnet 5.5 省 13.0%、Fable 5.1 省 14.8%、Opus 5.5 只省 6.3%——只有论文区间的三分之一到二分之一。作者在论文里也留了两条诚实的口子：SWE-Bench 的任务流是「相关但独立」的修复，不是真实用户会话；Pi 没有参与实验。CyberQ 的归因是任务太短（每题约 7 个回合）、强模型少撞墙、prompt cache 稀释了剪枝收益。<strong>任务越长、环境越脏，论文数字越可能出现；短任务、干净仓库、文档齐全时，收益有限但确实存在。</strong></p>
+
+<p><strong>三、逐 token 省钱 ≠ 逐美元省钱。</strong>剪枝在他们环境里把首请求 prompt 从约 24,300 token 降到 17,300，少 29%；但快照缓存读取只按 5% 计价，所以美元只少 6.2%。任何拿 token 降幅做卖点的工具，都值得自己按牌价重算一遍。</p>
+
+<p><strong>四、micro-skills 是注入面。</strong>事实来自命令输出与会话摘要，而这些内容由仓库控制。在不信任的仓库上开 micro-skills，等于允许仓库往你的系统提示里写东西。官方默认关闭 micro-skills，一部分原因就是这个。裁判和转向文案会把最近动作的摘要（命令、搜索模式、被编辑文件名、错误特征）发给模型供应商，不含文件内容与任务描述，但确实出本机。</p>
+
+<p><strong>五、版本绑定紧得有点痛。</strong>支持范围精确到小版本号（2.1.300–2.1.310），因为 transcript 格式是各 agent 的内部格式，不是公开接口。agent 一升级就可能读错。Cursor、Grok、Antigravity 三个适配器还明确写着「transcript 不是公开接口」，也就意味着这条路随时可能断。</p>
+
+<p><strong>六、二手报道的质量参差。</strong>我核到的第三方文章里，至少有一篇把许可证写成 MIT（实际 Apache-2.0），还说它支持 AutoGPT 和 Devin（README 里没有）。引用这类内容当证据要小心，数字以论文表格和项目主页为准。</p>
+
+<hr class="divider">
+
+<h2>写在最后</h2>
+
+<p>这个项目真正改变的，不是某个省钱技巧，而是把「coding agent 的成本」从一次性问题变成了<strong>按环境累积的问题</strong>。此前所有省 token 的方案都在单次请求里做减法——压输出、砍上下文、换检索；它换了个坐标系，认为同一个仓库里第 20 次会话的浪费结构，和第 1 次不是一回事，所以策略应该是学出来的，不是配置出来的。这个转向本身比 30% 这个数字更值钱。</p>
+
+<p>给读者的两条具体建议。第一，如果你是重度用户，装，但只装默认配置先跑两周，看 <code>te status</code> 里的实际账再决定要不要开 micro-skills；开之前务必确认 <code>paid_model</code> 解析到的真实模型。第二，如果你是做 agent 基础设施的，别急着抄那三个机制，先看 <code>docs/ARCHITECTURE.md</code> 里那四个接口怎么切的——那才是让同一份策略既能在论文 harness 跑 benchmark、又能在真实插件里跑用户会话的原因。</p>
+
+<blockquote>
+  <p>项目地址：<a href="https://github.com/microsoft/TokenEconomizer" target="_blank" rel="noopener">github.com/microsoft/TokenEconomizer</a><br>
+  论文：<a href="https://arxiv.org/abs/2610.22732" target="_blank" rel="noopener">arXiv:2610.22732</a><br>
+  项目主页：<a href="https://tokeneconomizer.github.io" target="_blank" rel="noopener">tokeneconomizer.github.io</a></p>
+</blockquote>
+
+</div>
+
+<footer>👤 <b>fly的AI学习</b> | 每日更新 AI 大模型最新动态</footer>
+</body>
+</html>
