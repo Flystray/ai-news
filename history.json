@@ -60,7 +60,8 @@
         "screenpipe/screenpipe",
         "Lum1104/Understand-Anything",
         "datalab-to/indra",
-        "microsoft/TokenEconomizer"
+        "microsoft/TokenEconomizer",
+        "tangency-labs/solidcraft"
     ],
     "meta": [
         {
@@ -76,6 +77,13 @@
             "org": "microsoft",
             "topic": "cost-optimization",
             "title": "微软把 coding agent 当黑盒，六轮后账单降三成"
+        },
+        {
+            "repo": "tangency-labs/solidcraft",
+            "date": "2026-11-12",
+            "org": "tangency-labs",
+            "topic": "cad",
+            "title": "AI 画的 3D 零件改不了尺寸？给它一条参数化时间线"
         }
     ]
 }

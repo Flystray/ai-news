@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 画的 3D 零件改不了尺寸？给它一条参数化时间线</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;
+    line-height:1.35;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;
+    margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px 26px;
+    margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);
+    border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;
+    padding:1px 7px;
+    font-size:14px;
+    font-family:Consolas,Menlo,monospace;
+    color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px 20px;
+    overflow-x:auto;
+    margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;
+    border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);
+    border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{
+    background:rgba(102,126,234,0.16);
+    color:#dfe3ff;text-align:left;padding:11px 14px;
+    font-weight:600;white-space:nowrap;
+  }
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">AI 画的 3D 零件改不了尺寸？给它一条参数化时间线</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-12 · 公众号「fly的AI学习」</p>
+</header>
+
+<div class="card">
+  <h3>项目速览</h3>
+  <ul>
+    <li><strong>项目地址</strong>：<a href="https://github.com/tangency-labs/solidcraft" target="_blank" rel="noopener">tangency-labs/solidcraft</a></li>
+    <li><strong>Star/Fork</strong>：⭐ 15,843 · 🍴 2,155（截至 2026-11-12，GitHub API；创建于 2026-10-07）</li>
+    <li><strong>主要语言</strong>：Rust（约 97%，GitHub Languages API，2026-11-12）</li>
+    <li><strong>开源协议</strong>：MIT 或 Apache-2.0 双许可（品牌与界面素材另受 LICENSE-BRAND 约束）</li>
+    <li><strong>形态</strong>：桌面应用（Windows/macOS/Linux）+ 浏览器版 + headless CLI + MCP server</li>
+    <li><strong>文档</strong>：<a href="https://docs.solidcraft.io/" target="_blank" rel="noopener">docs.solidcraft.io</a> · 官网 <a href="https://solidcraft.io" target="_blank" rel="noopener">solidcraft.io</a></li>
+    <li><strong>最新版本</strong>：v0.40.1（2026-11-12 发布，GitHub Releases API）</li>
+  </ul>
+</div>
+
+<p>让 AI 画 3D 零件，现在的通行做法是生成一段 OpenSCAD 或者一个 STL 网格——能打印，但改不了：想把外壳高度从 24 毫米调到 32 毫米，只能让模型重新生成一遍，赌它这次没画错。SolidCraft 走的是另一条路：它本身是一个带参数化特征时间线的 3D CAD 应用，用纯 Rust 从零写了草图约束求解器和 B-rep（边界表示）内核，再内置一个 MCP（Model Context Protocol）服务器，让 Claude Code 这类 agent 像人一样在时间线上建模。AI 画出来的不是一次性网格，而是一串可以打开、可以改尺寸、可以整链重算的特征步骤。这是最反直觉的一点：<strong>它不是「AI 版 CAD」，而是「CAD 原生接上了 agent」</strong>。</p>
+
+<h2>项目背景：改一个尺寸，为什么要推倒重来</h2>
+
+<p>参数化建模是 SolidWorks、Fusion 360 这类商业软件的立身之本：先画二维草图、标尺寸、加约束，再拉伸成实体，每一步操作都记录在时间线上。改一个参数，整条链路自动重算。这套东西好用，但两头的体验都有缺口。</p>
+
+<p>商业软件这一头，是授权费和封闭。机械行业的同行对 SolidWorks 一年数万元的授权费用并不陌生（今日头条报道语，见文末来源[1]），Fusion 360 也是订阅制。免费替代品 FreeCAD 存在了十几年，但参数改动后模型重构失败是社区里抱怨多年的老毛病[1]，复杂模型的约束求解时常翻车。</p>
+
+<p>AI 这一头，问题更根本。当前让大模型「生成 3D 模型」的方案，无论输出 OpenSCAD 代码还是 STL/3MF 网格，产物都是一个「结果快照」：没有草图约束，没有特征树，没有任何可编辑的结构。dev.to 的技术分析说得很准——agent 写完一个 STL，你想改一个尺寸就得从头再来[2]。有人给 FreeCAD 接过 MCP 插件，Hacker News 用户 mijoharas 的体验是 agent 建不出干净、可编辑的草图[3]。</p>
+
+<p>SolidCraft 的判断是：问题不出在 agent 身上，出在目标产物上。与其让 AI 生成不可编辑的网格，不如给它一个真正的时间线式 CAD 作为工具——每一步都可检查、可撤销、可按参数重建。2026 年 10 月 7 日仓库创建，11 天涨到约 5,900 星[1]，截至 2026-11-12 已到 15,843 星，Hacker News 的 Show HN 帖拿到约 130 分、37 条以上讨论[4]。</p>
+
+<h2>核心功能</h2>
+
+<h3>1. 参数化特征时间线：改一个数，全模型重算</h3>
+<p>这是整个项目的支点。所有操作——拉伸、旋转、扫掠、放样、圆角、倒角、抽壳、拔模、打孔、螺纹、阵列、镜像——都记录在一条可编辑的时间线上。关键尺寸以命名变量写在参数表里，改一个值，引擎沿时间线重新求值，所有依赖它的拉伸、孔位、装配体跟着重建。README 的演示是从空白设计画一个树莓派 4 外壳：按板子实际尺寸（58×49 毫米孔位矩形）标草图、拉伸、圆角、抽壳、阵列 M2.5 螺柱、开端口和散热槽，最后把高度参数从 24 改到 32，整个模型自动重建[5]。参数还支持带单位的表达式，比如 <code>2 * width + 5 mm</code>。</p>
+
+<h3>2. 自研草图约束求解器</h3>
+<p>草图层的约束（重合、相切、平行、对称、尺寸驱动）由项目自己写的求解器处理，不依赖 OpenCASCADE 或 Sketcher。这意味着求解行为完全可控，也意味着坑要自己踩——这一点在「局限」里细说。</p>
+
+<h3>3. 内置 MCP server：agent 的建模通道</h3>
+<p><code>solidcraft-cli mcp</code> 是一个标准 MCP 服务器（stdio 上的 JSON-RPC 2.0，兼容 2025-06-18、2025-03-26、2024-11-05 三个协议版本）。接入 Claude Code 只要一行命令。两种模式：headless 模式自带独立设计会话；<code>--connect</code> 桥接模式驱动正在运行的桌面应用，你能实时看着 agent 在时间线上逐步建模。安全设计做得细：文件访问默认限制在设计文件所在文件夹内，<code>~/.ssh</code>、<code>.env</code>、<code>.git</code> 等隐藏目录天然不可达，symlink 逃逸、Windows 的 UNC 路径、备用数据流、8.3 短文件名都在解析前直接拒绝，必要时用 <code>--allow-path</code> 显式扩权。还有 <code>--param-check off|warn|strict</code> 三档参数校验，strict 模式下不符合类型契约的调用会被拒绝、设计保持原样[6]。作者曾用 agent 通过 MCP 从零建出科学探测车 SELENE，时间线上 3,323 个可编辑步骤全程无错重建（sinapti.ca 转述早期 README）[4]。</p>
+
+<h3>4. 一切皆命令：桌面、网页、CLI、MCP 走同一套指令</h3>
+<p>桌面应用、浏览器版、headless CLI、MCP 服务器跑的是同一个命令注册表。UI 上点一个按钮，和 agent 调一个工具，和脚本里写一行 JSON，执行的是同一条命令。所以脚本就是「JSON 化的 UI 操作」：</p>
+
+<pre><code>{
+  "commands": [
+    {"command": "sketch.create", "params": {"plane": "XY"}},
+    {"command": "sketch.rectangle.two_point", "params": {"p0": [0, 0], "p1": [40, 30]}},
+    {"command": "solid.extrude", "params": {"distance": 20}},
+    {"command": "solid.fillet", "params": {"edges": [[0, 0, 10]], "radius": 3}}
+  ]
+}</code></pre>
+
+<p>用 <code>solidcraft-cli run examples/bracket.json --out bracket.step</code> 就能无头重放。对工程团队的实际意义是：agent 生成的好零件，命令清单可以进版本库，在 CI 里重新生成 STEP，不依赖某个二进制文件[2]。</p>
+
+<h3>5. Oracle 参考测试：用解析解给自己对账</h3>
+<p>这是同类开源项目里少见的做法。每个测试用例是一个用 recipe.json 描述的零件，SolidCraft 重放命令生成实体，再与期望值比对体积、面积、质心、包围盒（相对容差 1e-3），部分用例还比对采样 Hausdorff 曲面距离。期望值来自两个途径：手算解析解（棱柱、圆柱、Pappus 定理、变半径圆角的精确积分），或者用 FreeCAD 的公开 Python API 独立构建同一零件做对照——FreeCAD 不是项目依赖，只当外部裁判。截至 2026-11-12 抓取的 docs/oracle.md 显示 90/90 用例通过（69 个解析解 + 21 个 FreeCAD 对照）[7]；README 正文仍写着 75/76，属于文档滞后，两处数字本文都如实标注。</p>
+
+<h3>6. 装配、钣金与多格式文件</h3>
+<p>装配体支持关节定义、运动研究、干涉检查和质量属性；钣金模块有法兰、折边、折弯/展开和平整图案；文件层面 STEP（含 AP242）、IGES、3MF、STL、OBJ、glTF 双向支持，另可导出 URDF 给机器人仿真用。</p>
+
+<h2>技术亮点</h2>
+
+<h3>1. 自研内核的取舍：把最难的活留给自己，但留了一条接缝</h3>
+<p>SolidCraft 没有像多数新 CAD 项目那样直接包 OpenCASCADE，而是自写几何层（<code>geom</code>）、草图求解器、B-rep 内核，并把内核封装成独立的 vendored <code>solidcore</code> 组件。仓库架构文档把系统分成 L0–L5 六层：几何原语 → 求解器与内核 → 文档与时间线增量求值 → 文件 IO → 命令引擎 → GPU 渲染/UI/MCP 三个前端，并规定 L5 以下任何 crate 不得触碰 UI 工具包，由 <code>cargo xtask layers</code> 强制检查[8]。代价很明确：内核成熟度要靠时间换；收益是约束求解和重建行为完全自主可控，且渲染用 wgpu 写了 GPU 路径追踪，浏览器版和桌面版共用同一视口渲染器。这属于典型的「短期慢、长期快」押注，值不值得，要看内核能扛住多复杂的零件——HN 上对此有真刀真枪的争论（见局限）。</p>
+
+<h3>2. 「一切皆命令」的架构红利</h3>
+<p>把 UI 操作、脚本、CLI、MCP 统一到一个命令注册表，是本项目对 agent 生态最有参考价值的设计。它带来三个直接后果：agent 与人用的能力完全对等，不存在「只有 UI 能做的事」；命令清单可序列化、可版本化、可在 CI 重放；给 agent 的安全边界（路径白名单、参数契约）可以在命令层统一执行，而不是散落在各个前端。做 agent 工具集成的团队可以直接把这套设计当案例研究——explainx.ai 的分析也是这么建议的[3]。</p>
+
+<h3>3. 用测试文化对冲「AI 项目不可信」的天然质疑</h3>
+<p>AI 辅助开发的项目常被质疑质量靠不住。SolidCraft 的回应是把验证做成基础设施：oracle 文档生成自 <code>cargo xtask oracle</code>，每个用例公开公式和 FreeCAD 对照方法，连「期望值来自哪些解析几何公式」都写在表格里[7]。加上 clean-room 贡献规则（禁止阅读 OpenCASCADE、FreeCAD、SolveSpace 的 GPL 源码，所有图标代码绘制并逐条登记在 ATTRIBUTION.md）[9]，项目在「独立性」这个敏感点上交代的证据链比多数同类完整。</p>
+
+<h2>适用人群</h2>
+<ul>
+  <li><strong>硬件/3D 打印爱好者</strong>：要画外壳、支架、结构件，改尺寸不用推倒重来；浏览器版免安装，先试手感再装桌面版。能省掉 Fusion 订阅费（前提是零件够简单，见局限）。</li>
+  <li><strong>agent 工具开发者</strong>：想看「怎么给 AI 一个专业软件的操作面」，MCP 工具设计、沙箱规则、参数契约三样都是现成参考实现。</li>
+  <li><strong>用 Claude Code 等编码 agent 的工程师</strong>：需要参数化实体模型而不是一次性网格时，<code>claude mcp add</code> 一行接入，产出的零件可以直接交付给加工或打印。</li>
+  <li><strong>机械/结构工程师（轻度）</strong>：预算卡在商业授权上、又嫌 FreeCAD 重构不稳的，值得实测对比；重度装配和曲面加工需求暂时别迁移。</li>
+  <li><strong>教学场景</strong>：时间线 + oracle 公式表天然适合讲参数化建模原理，每一步都能看见。</li>
+</ul>
+
+<h2>快速上手</h2>
+<p>零安装先试浏览器版：打开 <a href="https://solidcraft.io/app" target="_blank" rel="noopener">solidcraft.io/app</a>（需要支持 WebGPU 或 WebGL2 的浏览器）。</p>
+<p>桌面版安装（README 校对[5]）：</p>
+
+<pre><code># Linux（Snap）
+sudo snap install solidcraft
+
+# 从源码构建（需要 Rust 工具链）
+cargo run --release -p solidcraft -- --sample      # 桌面版，打开示例零件
+cargo run --release -p solidcraft-cli -- commands  # 查看完整命令注册表
+cargo run --release -p solidcraft-cli -- run examples/bracket.json --out bracket.step</code></pre>
+
+<p>接入 Claude Code：</p>
+
+<pre><code>claude mcp add solidcraft -- solidcraft-cli mcp</code></pre>
+
+<p>常见坑，README 明说的三条：Windows 安装包尚未签名，SmartScreen 弹窗要选「更多信息 → 仍要运行」；旧版 Windows 安装器没把 <code>solidcraft-cli</code> 放进 PATH，要用完整路径（默认 <code>"C:\Program Files\SolidCraft\solidcraft-cli.exe"</code>）；0.11–0.14 版本需要手动下载一次更新[5]。另外 Linux 发行版若有 Flatpak/Snap 版本差异问题，优先用官方 Release 页的 AppImage。</p>
+
+<h2>对比分析</h2>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>维度</th><th>SolidCraft</th><th>FreeCAD</th><th>Fusion 360</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>价格</td><td>免费开源（MIT/Apache-2.0）</td><td>免费开源</td><td>商业订阅制</td></tr>
+    <tr><td>内核</td><td>自研 Rust B-rep（vendored solidcore）</td><td>OpenCASCADE</td><td>自有内核</td></tr>
+    <tr><td>参数化时间线</td><td>有，增量求值</td><td>有，复杂模型重构易失败（媒体与用户长期抱怨[1]）</td><td>有，成熟</td></tr>
+    <tr><td>AI/agent 接入</td><td>内置 MCP server，官方维护</td><td>依赖第三方插件，HN 用户反馈体验参差[3]</td><td>无官方 agent 接口</td></tr>
+    <tr><td>曲面/工程图/CAM</td><td>未实现，路线图排期中[10]</td><td>较完整</td><td>完整</td></tr>
+    <tr><td>成熟度</td><td>早期（v0.40.1），官方自称「简单零件可用」</td><td>十余年积累</td><td>商业成熟</td></tr>
+    <tr><td><strong>局限/风险</strong></td><td><strong>内核年轻、文件格式未冻结、贡献者寿命存疑</strong></td><td><strong>学习曲线陡、性能瓶颈</strong></td><td><strong>闭源、云依赖、按订阅计费</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>一百字点评：SolidCraft 的真实位置是「agent 原生的简单零件建模器」，不是 FreeCAD 或 Fusion 的即刻替代。命令注册表和 MCP 设计是它超出 CAD 本身的贡献；而把它当主力工具前，先想清楚你的零件是否落在它的能力圈内。</p>
+
+<h2>局限：在「能用」之前，它还有多远</h2>
+
+<p>正面材料已经很多，这一段集中说问题。</p>
+
+<p><strong>内核成熟度是最大的问号。</strong> Hacker News 用户 bruckie 指出 SolidCraft 使用 Truck B-rep 内核，并认为写 B-rep 内核「工作量惊人」，担心成熟速度；SolveSpace 开发者 phkahler 直言不看好开放难题的快速进展，建议直接封装 OpenCASCADE[3]。oracle 测试目前 90/90 全过，但用例集中在解析解可覆盖的形状——变半径圆角、曲面布尔这些 CAD 里真正难的区域，测试覆盖远不如直壁零件密集。</p>
+
+<p><strong>能力边界清晰存在。</strong> 曲面建模、工程图、CAM、仿真都在路线图上但未实现[10]。有用户评价它「更偏 Tinkercad 一侧，而不是 Fusion 一侧」（@gelon1983，sudolabs 转述）[10]。</p>
+
+<p><strong>实测问题。</strong> Uptodown 编辑实测提到部分版本间存档兼容问题，且复杂曲面建模选项缺失[11]；今日头条作者的实测中，无头浏览器环境下 WebGPU 画布渲染失败，网页版只显示空壳[1]。</p>
+
+<p><strong>长期性存疑。</strong> HN 用户 zamalek 提出一个扎心的问题：CAD 文件的使用寿命以十年计，一个 AI 时代快速长出来的项目，五年后还在不在维护[3]？STEP 导出是当前的解法，但项目自己的文件格式（版本号已到 solidcraft/12）尚未冻结，explainx.ai 明确建议不要把生产设计放进 <code>.solidcraft</code> 文件[3]。</p>
+
+<p><strong>独立性争议没有完全平息。</strong> 尽管 clean-room 规则写得严密，HN 上仍有声音质疑 UI 与 Fusion 的相似度，更尖锐的意见（用户 dofm）认为「复制任何人的 CAD 程序都没有意义」，属于「AI 版重复造轮子」[9]。名字与 Solid Edge 的联想也给了批评者素材。</p>
+
+<p><strong>商业边界要看清。</strong> MIT/Apache 双许可只覆盖代码，UI 外观、图标、主题与「SolidCraft」名称由单独的 LICENSE-BRAND 约束，fork 后换皮分发需要维护者书面许可[5]。</p>
+
+<h2>写在最后</h2>
+
+<p>两点判断。</p>
+
+<p>第一，SolidCraft 真正改变的不是 CAD 市场格局——短期内核追不上 OpenCASCADE 三十年的打磨——而是「agent 与专业软件的对接范式」：不给 AI 生成权，给 AI 操作权；产物不是快照，是可回放、可编辑的命令序列。这套「一切皆命令 + MCP + 命令层安全边界」的架构，任何想把专业软件接上 agent 的团队都值得抄。</p>
+
+<p>第二，对读者的具体行动建议：先开浏览器版花十分钟画个盒子感受参数重建；如果你有 Claude Code，接入 MCP 让它照着 README 的树莓派外壳提示词建模一次，然后自己改一个参数看它是否干净重建——<strong>重建得干净，说明 agent 建对了</strong>，这是官方给的验收标准，也是判断这类工具是否可用的最短路径。生产设计继续留在 STEP。</p>
+
+<blockquote>
+  <p>项目地址：<a href="https://github.com/tangency-labs/solidcraft" target="_blank" rel="noopener">https://github.com/tangency-labs/solidcraft</a></p>
+  <p>官方文档：<a href="https://docs.solidcraft.io/" target="_blank" rel="noopener">https://docs.solidcraft.io/</a></p>
+  <p>Oracle 参考测试：<a href="https://github.com/tangency-labs/solidcraft/blob/main/docs/oracle.md" target="_blank" rel="noopener">github.com/tangency-labs/solidcraft/blob/main/docs/oracle.md</a></p>
+</blockquote>
+
+<h2>来源</h2>
+<ul class="sources">
+  <li>[1] <a href="https://www.toutiao.com/article/7698626427712832051/" target="_blank" rel="noopener">今日头条：SolidWorks 一年几万块的授权，被这个 Rust 参数化 CAD 平替了</a>（中文独立评测，含浏览器版实测）</li>
+  <li>[2] <a href="https://dev.to/dedupedai/build-parametric-3d-cad-parts-from-claude-code-with-solidcraft-mcp-2754" target="_blank" rel="noopener">dev.to：Build parametric 3D CAD parts from Claude Code with SolidCraft MCP</a></li>
+  <li>[3] <a href="https://explainx.ai/blog/solidcraft-open-source-rust-parametric-cad-mcp-agents-2026" target="_blank" rel="noopener">explainx.ai：SolidCraft — Open-Source Parametric CAD in Rust That AI Agents Can Drive Over MCP</a>（含 HN 评论整理，写于 2026-10-14 前后）</li>
+  <li>[4] <a href="https://sinapti.ca/post/en/solidcraft-parametric-cad-in-rust-with-mcp-server-1730-stars-wfc4sy7g" target="_blank" rel="noopener">Sinaptica：SolidCraft — Parametric CAD in Rust with MCP server</a></li>
+  <li>[5] <a href="https://github.com/tangency-labs/solidcraft" target="_blank" rel="noopener">仓库 README</a>（2026-11-12 抓取）</li>
+  <li>[6] <a href="https://github.com/tangency-labs/solidcraft/blob/main/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md</a>（2026-11-12 抓取）</li>
+  <li>[7] <a href="https://github.com/tangency-labs/solidcraft/blob/main/docs/oracle.md" target="_blank" rel="noopener">docs/oracle.md</a>（2026-11-12 抓取）</li>
+  <li>[8] <a href="https://github.com/tangency-labs/solidcraft/blob/main/docs/architecture.md" target="_blank" rel="noopener">docs/architecture.md</a>（2026-11-12 抓取）</li>
+  <li>[9] <a href="https://blog.gitcode.com/ee04d4072051bd21640c6fe000e202b4.html" target="_blank" rel="noopener">GitCode 博客：solidcraft 的高赞争议与质疑集中在哪</a>（HN 评论区观察）</li>
+  <li>[10] <a href="http://sudolabs.nz/blog/reverse-engineer-everything-free-alternatives-ai-clone-wave" target="_blank" rel="noopener">Sudolabs：Reverse Engineer Everything — free alternatives</a></li>
+  <li>[11] <a href="https://solidcraft.en.uptodown.com/windows" target="_blank" rel="noopener">Uptodown 编辑实测（Windows 版）</a></li>
+</ul>
+
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>
