@@ -61,7 +61,8 @@
         "Lum1104/Understand-Anything",
         "datalab-to/indra",
         "microsoft/TokenEconomizer",
-        "tangency-labs/solidcraft"
+        "tangency-labs/solidcraft",
+        "rehan-remade/universal-modder"
     ],
     "meta": [
         {
@@ -84,6 +85,13 @@
             "org": "tangency-labs",
             "topic": "cad",
             "title": "AI 画的 3D 零件改不了尺寸？给它一条参数化时间线"
+        },
+        {
+            "repo": "rehan-remade/universal-modder",
+            "date": "2026-11-13",
+            "org": "rehan-remade",
+            "topic": "game-modding",
+            "title": "AI 改游戏不难，难在把踩过的坑留给下一个 agent"
         }
     ]
 }

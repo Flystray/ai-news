@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 改游戏不难，难在把踩过的坑留给下一个 agent</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">AI 改游戏不难，难在把踩过的坑留给下一个 agent</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-13 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+</div>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/rehan-remade/universal-modder" target="_blank" rel="noopener">rehan-remade/universal-modder</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 9,660 · 🍴 1,081（截至 2026-11-13，创建于 2026-09-30）</li>
+  <li><strong>主要语言</strong>：Python（559 KB，占代码字节 94.5%）、PowerShell（22.6 KB）、TypeScript（7.5 KB）</li>
+  <li><strong>开源协议</strong>：MIT</li>
+  <li><strong>形态</strong>：Agent Skills 技能包 + Python CLI（<code>um</code>）+ 社区知识库 + fal MCP</li>
+  <li><strong>文档</strong>：仓库 README 与 <code>knowledge/INDEX.md</code>；官方站点 universalmodder.com 在 README 里标注为「即将上线」</li>
+</ul>
+<p>它给 Claude Code、Codex、Cursor 这类编码 agent 装了一套「改游戏」的手册和工具：让 agent 自己找游戏、判断引擎、选路线、读真实代码、做出一个能跑的最小改动、生成美术、进游戏里验收，最后写下这一路的坑。三个月不到攒到 9,660 星，讨论热度来自那些「Minecraft 塞进 GTA V」的短视频。</p>
+<p>最反直觉的地方不是它能改游戏。是它把「失败记录」当成一等公民：<code>knowledge/</code> 里 265 篇按游戏归档的现场笔记，写明哪一版能跑、为什么选这条路、怎么验证、坑在哪。写笔记的也是 agent。</p>
+<h2>项目背景：mod 的成本不在写代码，在确认事实</h2>
+<p>手工做 mod 的时间分布很怪。真正敲代码可能只占三成，剩下七成花在确认事实上：这游戏是什么引擎、什么版本、有没有 loader、存档在哪、反作弊是什么、美术资源的尺寸和调色板、朝向有几面、打包成什么格式。这些答案散在十几年前的论坛帖、Discord 聊天记录、某个已经 404 的 wiki 里，靠人一篇篇翻。</p>
+<p>翻到的还未必对。同一个引擎，换一个版本号，类的偏移量全变。老教程说的方法在新版本上直接崩，而崩的时候没有报错，只有黑屏。</p>
+<p>还有一个更隐蔽的陷阱：数据层允许的事情，程序层不一定允许。这一点项目自己的技能文档写得很清楚——Age of Empires II 的数据结构里放得下第 64 个文明，但选文明的列表是硬编码在 exe 里的，所以新增文明只能替换一个已有槽位，不能真的「加一个」。这类事实只能靠读代码，不能靠读文档。</p>
+<p>所以过去的 mod 圈形成了一种默认分工：老手把经验写成教程，新手照着抄，抄崩了再去问。经验在传递，但传递的是「结论」，不是「验证过程」。同一个人隔半年回来，也未必记得当时为什么放弃了 B 路线。</p>
+<p>而这个项目想改的是这一层——不是让 agent 更会写 Lua，是让 agent 在动手之前，先拿到别人（别的 agent）留下的、带版本号和验证方式的现场记录。</p>
+<h2>核心功能</h2>
+<h3>1. <code>um scan</code>：把「这游戏能不能改」变成一个可解析的报告</h3>
+<p>这是整条链路的入口，<code>um/scan.py</code> 955 行。它做三件事：找游戏、认引擎、排路线。</p>
+<p>找游戏靠解析各平台自己的清单文件——Steam 的 <code>libraryfolders.vdf</code> 和 <code>appmanifest_*.acf</code>（自带一个极简的 Valve KeyValues 解析器）、Epic 的 manifest、Xbox 的安装记录，扫描上限 80,000 个条目、6 层目录深度。认出目录之后指纹化：引擎和版本、托管代码还是原生、装了哪些 loader、存档目录在哪、有没有反作弊。</p>
+<pre><code>um scan --list                    # 列出本机装了什么
+um scan terraria                  # 模糊名或路径，输出报告
+um scan "C:\Games\Foo" --json     # 给 agent 读的机器可读版
+</code></pre>
+<p>报告第一行是 <code>host:</code>，写清 <code>um</code> 跑在什么系统、什么 CPU 上。如果 exe 是 Windows 构建、而主机既不是 Windows 也不是 WSL，它会直接警告。最后一行是排好序的候选路线，以及接下来该读哪一份引擎手册。</p>
+<h3>2. 16 份引擎手册：路线按引擎分，不按教程分</h3>
+<p><code>skills/mod-any-game/references/engines/</code> 下是 16 份文档：Unity、Unreal、Godot、Source、原生 C++、.NET/XNA（Terraria、Stardew、Celeste 这一族）、Bethesda、IW 引擎（CoD4 与 WaW）、以及 RE Engine / MT Framework / FromSoft / GTA / 赛博朋克 / BG3 这类归在 <code>big-frameworks.md</code> 里的家族，加上 Bannerlord、Minecraft、AoE2（Genie）、以撒、复古反编译。</p>
+<p>每份手册给的是一张路线表：数据替换够不够、有没有 loader API、能不能用 Harmony 打托管补丁、要不要上原生 hook。技能文档把六条路线列成表，要求 agent 在 <code>MODLOG.md</code> 里写下选了哪条、为什么。</p>
+<h3>3. <code>um render3d</code>：把「美术一致性」变成几何问题</h3>
+<p>这是整个工具链里最不像 prompt 工程的一块。逐帧用文生图做游戏单位，最大的问题是每一帧的透视、朝向、比例都在飘，拼成动画就散。这里的做法是先生成一张概念图，用图像转 3D 得到 GLB，再用 Blender 按照<strong>目标游戏自己的相机参数</strong>渲染每一面：</p>
+<pre><code>um render3d model.glb out/ --preset aoe2 --length 80 --shadows \
+  --anims idle:10:bob,walk:12:bob,attack:16:lunge,death:20:die
+</code></pre>
+<p>预设是硬编码的：<code>aoe2</code> 是正交 30°、16 个朝向、从正东顺时针；<code>trueiso</code> 是 35.264°；<code>topdown</code> 是 89.9°；<code>side</code> 是 0.01°，只出左右两面；<code>turntable</code> 是透视 20°、24 个朝向。同一个模型换预设就能进不同引擎。动作也不靠猜，<code>bob</code> / <code>walk</code> / <code>lunge</code> / <code>die</code> / <code>spin</code> 各有明确参数，走路的上下幅度是体高的 0.8，死亡是翻滚 80° 加下沉。</p>
+<p>一致性从「祈祷模型每次都画对」变成了「相机参数对不对」。</p>
+<h3>4. <code>um kb</code>：有 schema 的知识库，不是 wiki</h3>
+<p><code>knowledge/</code> 下 366 个文件，<code>INDEX.md</code> 按游戏归档 265 篇。每篇是带 YAML front matter 的 Markdown，字段固定：</p>
+<pre><code>kind, title, game, engine, route, status, date, agents
+</code></pre>
+<p><code>route</code> 只接受 10 个值（<code>data</code> / <code>asset-only</code> / <code>loader-api</code> / <code>managed-patch</code> / <code>native-hook</code> / <code>reimplementation</code> / <code>decomp-recomp</code> / <code>passthrough</code> / <code>emulator</code> / <code>other</code>），<code>status</code> 只接受 5 个（<code>idea</code> / <code>in-progress</code> / <code>working</code> / <code>released</code> / <code>abandoned</code>）。正文必须有四节：<code>setup</code>、<code>route</code>、<code>verification</code>、<code>gotchas</code>。</p>
+<pre><code>um kb search "grand theft auto"        # 动手前的先行调查
+um kb new --game "Hades II" --title "A new boon god" --from-scan hades
+um kb check knowledge/games/hades-ii/a-new-boon-god.md
+um kb pr knowledge/games/hades-ii/a-new-boon-god.md --yes
+</code></pre>
+<p><code>check</code> 会拒收：超过 150 行的代码块（60 行开始警告）、超过 120 KB 的笔记、超过 1.5 MB 的附件、密钥、粘进来的反编译代码。写完可以开 PR，<code>um kb pr</code> 直接把分支、提交、PR 全办掉。</p>
+<p>这一条是关键设计。知识库如果没有 schema，三个月就变成一堆「我试了一下好像可以」的碎片；有了 schema 和校验，下一个 agent 才能按 <code>engine</code> + <code>route</code> 精确检索，而不是全文模糊匹配。</p>
+<h3>5. <code>um publish check</code>：发之前先证明你没打包别人的东西</h3>
+<p><code>um/publish.py</code> 188 行。拿你的 mod 目录跟游戏安装目录做 SHA1 逐文件比对，字节完全相同就判 FAIL——这就是在重新分发游戏文件。同时扫密钥（fal、Anthropic、OpenAI、GitHub、AWS、私钥，各有正则）、扫反编译指纹（Ghidra 的 <code>FUN_</code> / <code>DAT_</code>、IDA 的 <code>sub_</code> / <code>loc_</code>、ILSpy 和 dnSpy 的头部注释），扫 <code>.pak</code> / <code>.bsa</code> / <code>.vpk</code> / <code>.utoc</code> 这类可能夹带原资源的归档。</p>
+<p>结果是 FAIL / WARN 两级，不是法律意见。文档里写得很直白：拿不准就发补丁或转换器，让它在用户自己的安装上跑。</p>
+<h3>6. <code>um win</code> 与 <code>um backup</code>：让 agent 能进游戏，也能全身而退</h3>
+<p><code>um win</code> 下面垫着两个 PowerShell + 内嵌 C# 的工具：<code>WinDrive.ps1</code> 只向指定进程注入输入，<code>ProcLoopback.ps1</code> 只录游戏自己的音频轨，不混进系统声音。截图有 GPU 安全的路径，<code>--scale 0.33</code> 可以先看缩略图省 token。</p>
+<p><code>um backup</code> 在动手前快照存档目录，支持 diff 和 restore。技能文档的硬规则里有两条：改存档前必须先备份；杀进程只能按 PID，不许 <code>pkill -f</code>，因为那会连自己的 shell 一起杀。</p>
+<h2>技术亮点</h2>
+<h3>1. 把「验证」写成流程里的强制节点，而不是结尾的形容词</h3>
+<p>第七步是整个循环里唯一不可跳过的一步，原文是「运行中的游戏是裁判，你对代码的理解不是」。</p>
+<p>具体做法是造一个可重复的 oracle：mod 侧加一条聊天命令、或者一个带触发器的时间线，用 <code>um win launch/drive</code> 走完启动→菜单→场景，再用 <code>um win shot</code> 截图、配合游戏日志确认。日志路径按 loader 分别列出：tModLoader 看 <code>client.log</code>，BepInEx 看 <code>LogOutput.log</code>，UE4SS 看 <code>UE4SS.log</code>，Unity 看 <code>AppData/LocalLow/&lt;company&gt;/&lt;product&gt;/Player.log</code>。</p>
+<p>还配了一个熔断器：同一个失败重复三次就停手，写清楚已知信息，换路线或问人。这个设计解决的是 agent 最常见的一种坏毛病——在一个错误假设上反复微调，每次都报告「快好了」。</p>
+<p>代价是慢。一个改动要走完截图、读日志、比对四五个环节，token 消耗远高于「生成代码就交差」。项目自己的说法是三个 agent 协作要多花几倍 token，只适合跨天的大 mod。</p>
+<h3>2. 知识库的写入门槛，就是它的可用性上限</h3>
+<p>大多数「让 AI 记住经验」的尝试都死在写入太容易：谁都能加一条，于是三个月后没人敢信。这里选了相反的方向，用 schema 换可信度。</p>
+<p><code>kb check</code> 把「一篇笔记能不能被下一个 agent 用」变成了可判定的条件：版本要写、路线要写、验证方式要写、坑要编号。少一节就不过。代码块超过 150 行直接拒——因为长代码块通常意味着在贴反编译产物，而那既没用也不合规。</p>
+<p>代价是贡献门槛高。看 issue 列表就清楚了：近两周的 PR 标题全是 <code>kb: ...</code> 开头，来自不同 agent、不同游戏，比如「Bannerlord 的天气系统」「RE4 (2005) 从 GameCube 反编译里认出 PC exe」「The Outer Worlds 2 用 Game Pass 存档恢复被删的同伴」。这些都是有具体版本和验证过程的条目。同时 <code>INDEX.md</code> 里也明摆着不少 <code>in-progress</code> 和 <code>abandoned</code>——收录失败，是这个库的设计意图，不是它的缺陷。</p>
+<h3>3. 合规做在工具层，不做在提示词里</h3>
+<p>「不要打包游戏文件」写在提示词里，等于没有。这里的做法是把它编译成一个能返回非零退出码的检查：SHA1 比对、密钥正则、反编译指纹。</p>
+<p>更值得看的是路线偏好。技能文档里反复出现的一句话是「发补丁或转换器，在用户自己的安装上跑」（bring your own game files）。这既是法律上的自我约束，也是技术上更耐久的形态——补丁跟着版本走，重打包的资源跟着律师函走。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>想给自己玩的游戏加东西、但不会逆向的开发者</strong>：你会写 Python 或 C#，能看懂报错，但不知道 RAGE 引擎怎么挂钩。这里省掉的是「找到正确入口」的那几天，<code>um scan</code> 直接告诉你该读哪份手册。</li>
+  <li><strong>做独立游戏或 mod 的美术</strong>：<code>render3d</code> 那套相机预设能省掉「画 16 个朝向还得一致」的返工。前提是你接受 3D 转 2D 的质感，纯手绘像素风格反而更慢。</li>
+  <li><strong>研究 agent 工程化的工程师</strong>：这个仓库值得读的不是技能文本，是 <code>kb check</code> 的字段设计和 <code>publish check</code> 的判定条件——把「人才能判断的事」拆成可执行规则，这类样本不多。</li>
+  <li><strong>做技术内容的人</strong>：<code>showcase-video</code> 那条链路（录窗口、选片段、按 EDL 剪带标题的短片）能省掉一半录屏剪辑时间。</li>
+  <li><strong>不适合</strong>：只想玩、不想折腾的人。前置条件里有一条是「你得拥有这款游戏的正版」，还有一条是 Windows 或 WSL。macOS 上跑不起来 Windows 游戏，这一点没有绕路。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置：Git、Python 3.10+、ffmpeg；3D 转序列帧需要 Blender；一个 fal API key（要生成美术才需要）。Windows 游戏原生驱动或走 WSL。</p>
+<pre><code># 1) Claude Code 里装插件（在 Claude Code 会话内执行，不是系统 shell）
+/plugin marketplace add rehan-remade/universal-modder
+/plugin install universal-modder@universal-modder
+
+# 2) 其他 agent：只装技能
+npx skills add https://github.com/rehan-remade/universal-modder
+
+# 3) CLI 单独装（插件之外的 Codex / Cursor / Gemini CLI 需要）
+uv tool install git+https://github.com/rehan-remade/universal-modder
+
+# 4) 存 fal key
+um fal key set
+
+# 5) 先只做侦察，不改任何东西
+um scan "C:\Program Files (x86)\Steam\steamapps\common\Terraria"
+um kb search terraria
+</code></pre>
+<p>几个实测中容易卡住的点：</p>
+<ul>
+  <li><code>um</code> 不在 PATH。Claude Code 插件靠 SessionStart hook 把它加进去，Codex / Cursor / Gemini CLI 的插件安装不会。用 <code>command -v um</code> 确认，找不到就单独 <code>uv tool install</code>。</li>
+  <li>tModLoader 会检查 Steam 库里有没有免费的 tModLoader 应用，没有就拒绝启动。正确做法是去加库，不是去 patch 那个检查——技能文档专门点了这一条。</li>
+  <li>装完之后先让 agent 只做侦察：「告诉我引擎、版本、推荐路线、你会改哪些文件，先别动手」。这一步能把大部分配置问题提前暴露。</li>
+  <li>反编译产物放在仓库外（比如 <code>~/&lt;game&gt;-decomp</code>），别提交。<code>publish check</code> 会抓，但更省事的是一开始就别放进去。</li>
+</ul>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>universal-modder</th><th>裸编码 agent + 自己摸索</th><th>传统 mod 工具链（loader + 教程 + Nexus）</th></tr></thead>
+<tbody>
+<tr><td>入口</td><td><code>um scan</code> 指纹化引擎、loader、存档</td><td>自己判断，靠搜索</td><td>先知道用哪个 loader，再找教程</td></tr>
+<tr><td>路线知识</td><td>16 份引擎手册，按引擎给路线表</td><td>无，靠模型记忆</td><td>有，但分散在 wiki 和论坛</td></tr>
+<tr><td>资源一致性</td><td>3D 转序列帧，相机参数固定</td><td>逐帧生成，朝向和比例会飘</td><td>手工绘制或外包，质量稳定但慢</td></tr>
+<tr><td>验证</td><td>强制进游戏截图 + 读日志，三次失败熔断</td><td>通常停在「代码看起来对」</td><td>人工试玩</td></tr>
+<tr><td>合规</td><td><code>publish check</code> 做 SHA1 与密钥扫描</td><td>无</td><td>平台规则约束，但靠自觉</td></tr>
+<tr><td>知识沉淀</td><td>265 篇带 schema 的现场笔记，可 PR</td><td>每次从零开始</td><td>教程更新滞后于版本</td></tr>
+<tr><td><strong>局限/风险</strong></td><td><strong>需要正版游戏 + Windows + 付费 key；无正式 release；工具链本身在反编译和驱动输入</strong></td><td><strong>产出质量不可控，容易生成看起来对但跑不起来的代码</strong></td><td><strong>学习曲线陡，跨引擎不通用，版本一升就废</strong></td></tr>
+</tbody></table></div>
+<p>边界很清楚：它优化的是「一个有正版游戏、愿意折腾、想做出东西的人」的单位时间产出。如果你的目标是把 mod 发到 Nexus 上给别人用，这套工具只帮你走到「能跑」，剩下的兼容性、性能、美术打磨还是人的活。如果你的游戏在主机上，或者你不想为 fal 和 Claude Code 付费，它基本没有可用性。</p>
+<h2>局限与风险</h2>
+<ol>
+  <li><strong>成本是双份的。</strong> Claude Code 起步 20 美元/月，fal 的生成按次计费，第三方评测（AgentGid，2026-10）明确提醒这两项是经常性支出。加上要有一台能跑 Windows 游戏的机器，实际门槛比「9,660 星」这个数字给人的印象高不少。</li>
+  <li><strong>质量评级不是绿色。</strong> 第三方技能目录 CorpusIQ 在 2026-11-06 的抽样评估里给了 🟡 Yellow：MIT 协议和 LICENSE 文件没问题，但抽样的三个技能里有两个带 Snyk 警告，理由是这条工具链会反编译二进制、读进程内存、驱动正在运行的游戏。这不是缺陷声明，是一个需要自己判断的攻击面。</li>
+  <li><strong>产出「能跑」和「能用」之间还有距离。</strong> 中文评测（CSDN 乐奇社区）的观察是 AI 生成的 mod 常常「能跑但粗糙」，Terraria 和 AoE2 的示例证明的是可行性，不是生产级质量。这一点和项目自己的定位一致：示例是 case study，不是发行版。</li>
+  <li><strong>生态争议是真的，而且不小。</strong> Eurogamer 在 2026-10-04 报道了资深 mod 作者对「vibe-coded」混搭 mod 的强烈反弹，原话包括「纯垃圾，没有任何创造性」；Nexus Mods 2023 年的政策本身就不欢迎使用无授权资产的 AI 内容，所以这批混搭至今没上主流平台。项目的硬规则（只改自己拥有的游戏、不碰有反作弊的在线游戏、不绕过 DRM）是自律，不等于法律豁免——据 CSDN 那篇评测转述，Activision 和 Bethesda 已经开始对部分作者发停止侵权函，我未能独立核实这一条。</li>
+  <li><strong>热度已经过了峰值。</strong> 9,121 星（2026-10-28，AiBoss88）→ 9,220（10-30，IndieKings）→ 9,510（11-06，CorpusIQ）→ 9,660（11-13，GitHub API）。最近一周日均增量约 25，和「45 天内破万」的曲线不是一回事。早期红利来自混搭视频的传播，剩下的增长要看知识库能不能持续长。</li>
+  <li><strong>没有正式 release。</strong> 仓库 0 个 release，意味着接口没有版本承诺，<code>um</code> 的子命令和知识库 schema 都可能变。要用在正式项目里，得自己锁 commit。</li>
+</ol>
+<h2>写在最后</h2>
+<p>第一点判断：这个项目真正改变的，不是「AI 会不会改游戏」，而是「一次尝试的副产品能不能被下一次复用」。mod 圈从来不缺聪明人，缺的是把失败写下来的机制——因为写失败没有即时回报。它用 schema 和 PR 流程硬造了一个回报路径，这是可以迁移到别的领域的部分：任何「长尾、版本敏感、经验难传」的工程领域，都缺这样一份带校验的知识库。</p>
+<p>第二点判断：如果你想试试，别从「把 Minecraft 塞进 GTA」开始。挑一个你熟的、有 loader 的游戏，做一个最小改动——加一把武器、改一个数值——把十步走完一遍。真正的学习发生在第七步：当 agent 说「已经好了」，而你去截图发现贴图是紫色的那一刻。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/rehan-remade/universal-modder" target="_blank" rel="noopener">https://github.com/rehan-remade/universal-modder</a></p>
+  <p>知识库索引：<a href="https://github.com/rehan-remade/universal-modder/blob/main/knowledge/INDEX.md" target="_blank" rel="noopener">https://github.com/rehan-remade/universal-modder/blob/main/knowledge/INDEX.md</a></p>
+</blockquote>
+<h2>来源</h2>
+<ul class="sources">
+  <li>[1] <a href="https://github.com/rehan-remade/universal-modder" target="_blank" rel="noopener">仓库 README</a>（2026-11-13 抓取）</li>
+  <li>[2] <a href="https://api.github.com/repos/rehan-remade/universal-modder" target="_blank" rel="noopener">GitHub API 仓库元数据与 Languages</a>（2026-11-13 抓取）</li>
+  <li>[3] <a href="https://github.com/rehan-remade/universal-modder/blob/main/knowledge/INDEX.md" target="_blank" rel="noopener">knowledge/INDEX.md</a>（2026-11-13 抓取，265 篇游戏笔记）</li>
+  <li>[4] <a href="https://www.indiekings.com/2026/10/universal-modder-claude-code-becomes.html" target="_blank" rel="noopener">IndieKings：Universal Modder — Claude Code Becomes a Game Modding Pipeline</a>（2026-10-30，独立技术评述）</li>
+  <li>[5] <a href="https://agentgid.com/use-cases/mod-almost-any-pc-game-with-claude-code-and-the-universal" target="_blank" rel="noopener">AgentGid：Mod almost any PC game with Claude Code and the universal-modder plugin</a>（含成本与门槛提示，明确声明未独立验证项目数据）</li>
+  <li>[6] <a href="https://www.corpusiq.io/docs/hermes/skills/catalog/universal-modder-setup" target="_blank" rel="noopener">CorpusIQ 技能目录：Universal Modder Setup Guide</a>（2026-11-06 数据，质量评级 🟡 Yellow）</li>
+  <li>[7] <a href="https://www.eurogamer.net/claude-opus-vibe-coded-mashup-mods-x-twitter-modding-backlash" target="_blank" rel="noopener">Eurogamer：Modders are furious as Claude-powered mashup mods flood social media</a>（2026-10-04，Vikki Blake）</li>
+  <li>[8] <a href="https://www.aiboss88.com/en/news/project-universal-modder" target="_blank" rel="noopener">AiBoss88：universal-modder 中文评测</a>（2026-10-28，9,121 星数据点）</li>
+  <li>[9] <a href="https://openrokid.csdn.net/6acf32093d0de04db9d33abd.html" target="_blank" rel="noopener">CSDN 乐奇社区：universal-modder 开源评测</a>（中文，含争议与法律风险转述）</li>
+  <li>[10] <a href="https://www.yeyulingfeng.com/a/1306172.html" target="_blank" rel="noopener">夜雨聆风：四家上新、两场逆向，AI 开始改造软件</a>（中文，讨论混搭 mod 的传播与工程量差距）</li>
+  <li>[11] <a href="https://universalmodder.dev/guides/claude-code" target="_blank" rel="noopener">universalmodder.dev：Claude Code 安装指南</a>（第三方指南站，安装细节与前置条件）</li>
+</ul>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>
