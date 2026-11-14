@@ -62,7 +62,8 @@
         "datalab-to/indra",
         "microsoft/TokenEconomizer",
         "tangency-labs/solidcraft",
-        "rehan-remade/universal-modder"
+        "rehan-remade/universal-modder",
+        "onehumanbeing/esp32-iphone-agent"
     ],
     "meta": [
         {
@@ -92,6 +93,13 @@
             "org": "rehan-remade",
             "topic": "game-modding",
             "title": "AI 改游戏不难，难在把踩过的坑留给下一个 agent"
+        },
+        {
+            "repo": "onehumanbeing/esp32-iphone-agent",
+            "date": "2026-11-14",
+            "org": "onehumanbeing",
+            "topic": "device-agent",
+            "title": "一块约 40 元的板子，让 AI 不越狱操控真 iPhone"
         }
     ]
 }
