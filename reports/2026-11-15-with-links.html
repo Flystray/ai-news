@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent 等拍板就退出进程，三天不回不烧一分 Token</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">Agent 等拍板就退出进程，三天不回不烧一分 Token</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-15 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+</div>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank" rel="noopener">KKKKhazix/agent-autoloop</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 5,390 · 🍴 989（截至 2026-11-15，GitHub API 抓取；创建于 2026-11-03）</li>
+  <li><strong>主要语言</strong>：TypeScript（约 98.9%，Languages API 2026-11-15）</li>
+  <li><strong>开源协议</strong>：MIT（LICENSE 文件在仓库根目录）</li>
+  <li><strong>形态</strong>：本地常驻中台 + CLI（Node 24+，零运行时依赖）</li>
+  <li><strong>文档</strong>：中英双语 README，另有 <a href="https://github.com/KKKKhazix/agent-autoloop/blob/main/docs/protocol.md" target="_blank" rel="noopener">docs/protocol.md</a>、<a href="https://github.com/KKKKhazix/agent-autoloop/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md</a></li>
+</ul>
+<p>Claude Code、Codex 这类命令行 Agent 已经很能干，但有个共同短板：人一走开，活就断在半路。agent-autoloop 是 2026-11-03 建仓的极轻量中台，让命令行 Agent 在后台自己接活、自己跟进，拿不准的事发一张卡片找你拍板。最反直觉的一点是它的等待方式：Agent 提问后进程直接退出，等你三天也不占内存、不花 Token，回答后从原对话接着干。仓库 12 天涨到 5,390 星，发了 22 个 release，迭代速度在同类项目里很少见。</p>
+<h2>项目背景：人守着终端，Agent 一问就断</h2>
+<p>命令行 Agent 的工作方式是「你输一句，它跑一段」。跑的过程中它会反问：这个文件删不删？这个服务要不要重启？这个方案选 A 还是 B？这些问题本质上是决策，需要人回答。于是实际使用变成了一场陪跑：你守在终端前，它问一句你答一句；关掉窗口、合上电脑、开会去一趟，这一轮任务就死了，前面的上下文全废。</p>
+<p>重度的 Agent 用户每天都在付这笔「陪跑税」。常见的土办法是写 cron 加脚本轮询，或者把任务扔到云端 Agent 平台托管——前者要自己处理排队、重试、状态保存这些脏活，后者要把代码和数据交出去，还要为常驻的后台 Agent 进程和 Token 买单。</p>
+<p>这个项目把问题拆成了四段：活从哪来、交给谁干、卡住了问谁、干完了怎么上线。它的答案是本机中台：事件源（定时任务、GitHub Webhook、HTTP 接口）把事情变成标准事件；规则文件决定派给哪个 Agent、在哪个目录干；Agent 需要决策时把问题写进最后一条回复，进程退出，等人点卡片；人回答后，中台拉起新一轮，接上原来的对话继续。整条链路跑在你自己电脑上，不开公网端口，不需要 GitHub 账号。</p>
+<h2>核心功能</h2>
+<h3>1. 挂起零消耗：等你拍板时进程直接退出</h3>
+<p>这是整套设计里最省钱的一条。Agent 把问题附在最后一条回复里（一段 <code>agent-autoloop</code> 代码块包着的 JSON），worker 校验后让进程结束，等待状态写进数据库。三天不回，这三天没有 Agent 进程在跑，没有 Token 消耗，只有中台在后台等。README 原话是「你一回答，它接着原来的对话继续干」。按 Token 计费的第三方网关链路里，这个差距直接体现在账单上。</p>
+<h3>2. 一份 rules.json 派活，不写胶水代码</h3>
+<p>调度规则全部集中在一个文件里，保存后几秒内自动生效：</p>
+<pre><code>{
+  "name": "处理 issue",
+  "when": { "source": "github", "types": ["issues.opened"] },
+  "to": "codex",
+  "cwd": "~/code/app",
+  "skill": "handle-issue",
+  "parallel": 3
+}
+</code></pre>
+<p>配套命令覆盖了运维细节：<code>check</code> 校验草稿、<code>rules explain</code> 看生效规则和下次触发时间、<code>emit --dry-run</code> 预演一条事件会派给谁、<code>why &lt;轮次&gt;</code> 查任意一轮的来龙去脉。规则文件改错或被删，中台按旧规则继续跑，并发卡片提醒。</p>
+<h3>3. 卡片拍板：决策通道做成插件</h3>
+<p>需要人拍板时，卡片推到桌面通知、飞书、钉钉、企微、Slack 或 Discord。通道是插件，第三方插件用 <code>agent-autoloop add &lt;git 地址&gt;</code> 安装。README 明确说了没有后台界面——看全局进展靠 <code>agent-autoloop status</code> 命令行。</p>
+<h3>4. 一行接入任意命令行 Agent</h3>
+<p>中台对 Agent 只有一个约定：最后一条回复里交代结果。内置插件已适配 Claude Code、Codex、ACP、DeepSeek Harness、ZCode 和通用命令。其他工具填一个命令数组就能接，README 整理了 Cursor、Gemini CLI、OpenCode、WorkBuddy/CodeBuddy 等十余种接法。README 同时诚实标注了实测边界：Claude Code、Codex、ACP 跑通了多轮问答和会话续接；Gemini CLI 和 OpenCode 跑通了 ACP 握手，多轮续接还没跑过。</p>
+<h3>5. 交付流水线：从 PR 跟到上线</h3>
+<p>给 GitHub PR 打上 <code>deliver</code> 标签，中台自动走完审查代码、等 CI、合并、等部署、核对线上版本五步。审查和交付配置只从 main 分支读取，绝不在接单电脑上检出或运行 PR 里的代码——这条安全边界写在 README 里。</p>
+<h2>技术亮点</h2>
+<h3>1. 事件溯源内核，不用时钟、不用随机数</h3>
+<p>kernel 目录是整个项目最硬的部分。它没有运行时依赖，不读系统时钟、不向外发请求，所有状态从一条只追加的日志（append-only log）算出来，日志和索引在同一个事务里落盘。README 给出了三个可复现的验证命令：<code>node sim/random.ts 24301 200000</code> 用固定种子模拟 20 万步断网、丢包、崩溃和重复提交；<code>node sim/crash.ts 1000 12648430</code> 强杀进程 1000 次验证已确认记录不丢。这些数字是 README 自述，但模拟脚本本身就在仓库里，任何人可以跑。</p>
+<h3>2. 指令数据分离，防提示词注入</h3>
+<p>外部文字（比如 Issue 标题和正文）只作为资料写进文件，不拼进提示词；提示词里只有校验过字符集的类型、编号和链接。用哪个 Agent、在哪个目录、什么权限，只由本机规则决定——事件里自带 <code>cwd</code>、<code>agent</code>、<code>access</code> 字段会被直接拒收。这个思路借鉴了 SQL 参数化，把「不可信数据」和「指令」隔开，是同类工具里少见的认真设计。</p>
+<h3>3. 跳数熔断，防止 Agent 自我派活失控</h3>
+<p>Agent 交回的事件可以再派给 Agent，层数一路累加，经过人工提问和定时复查也不清零，且 Agent 自己改不了。超过 8 层只记录不再派活。这相当于给递归派活加了 TTL（Time To Live，存活上限），挡住了「Agent 触发 Agent 触发 Agent」这类失控循环。</p>
+<h2>局限</h2>
+<p>写得再完整的项目也有边界，这个仓库的诚实程度值得先说一句：README 主动承认样例数据都是虚构的，脚本和回执只在本地 HTTP 与假飞书 CLI 上验证过，没有在真实账号上跑过完整业务；GitLab Webhook 按官方文档格式测试，没连过真实 GitLab；接入表里的十余种命令行 Agent「还没有逐个跑过」。腾讯云开发者社区的实测文章（2026-11-11/12，作者真实起服务验证了四个机制）也指出，真正难以在本机复现的是「接了真 Agent 之后是否省事」，那需要真实账号和几周运行时长。</p>
+<p>具体短板有四条。其一，飞书提问卡片没有文字输入，人工要补充说明的回答送不进去（issue #226，已关闭但功能尚未见发布说明）。其二，文字通道拍板依赖 <code>hub.publicUrl</code> 配成手机能打开的地址，纯内网环境用不了远程拍板。其三，历史数据变大后状态汇总变慢，格式变更后的首次启动要从日志全量重建，README 自述 110 万条事实需 43.1 秒。其四，也是最大的合规风险：高频自动化场景下，个人订阅额度跑批量任务可能违反模型厂商服务条款，README 自己引了 Anthropic 和 OpenAI 的官方说明，建议对外服务用 API Key——工具合规了，用法未必合规，这一条读者要自己掂量。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>重度 Claude Code / Codex 用户</strong>：任务队列长、不想陪跑，配一条 GitHub Issue 规则就能把「看 issue → 改代码 → 通知你」变成后台流程，省下盯终端的时间。</li>
+  <li><strong>独立开发者</strong>：一台电脑跑早报、巡检、周报模板，不用买云服务器，等拍板期间机器上没有常驻 Agent 进程。</li>
+  <li><strong>运维和值班工程师</strong>：线上告警排查模板会先查代码找原因，需要重启时发卡片问你，避免半夜人肉守着。</li>
+  <li><strong>想给团队搭 Agent 中台的人</strong>：四个方向的插件体系（事件、Agent、通道、交付）都有可运行的最小模板，二开起点比从零写低很多。</li>
+  <li><strong>不适合的人</strong>：工作流以 IDE 图形界面为主、不用命令行 Agent 的用户，这个中台没有着力点；需要多人共享看板和审批流的团队，它刻意没做后台界面。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置依赖：Node 24 或更新、Git、一个已经登录的命令行 Agent；macOS/Linux 还需要 curl。</p>
+<pre><code># Windows PowerShell
+irm https://raw.githubusercontent.com/KKKKhazix/agent-autoloop/main/install.ps1 | iex
+</code></pre>
+<pre><code># macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/KKKKhazix/agent-autoloop/main/install.sh | sh
+</code></pre>
+<p>装完先跑内置试跑，走一遍「提问 → 退出等回复 → 拍板 → 接着干完」：</p>
+<pre><code>agent-autoloop try
+</code></pre>
+<p>试跑通过后，打开 <code>~/.agent-autoloop/rules.json</code> 写第一条规则（建议从每日早报模板抄起），<code>agent-autoloop check</code> 校验后自动生效。常见坑有三个：Node 版本低于 24 装不上；飞书通道要在配置里填 <code>hub.publicUrl</code> 且手机可达；<code>update</code> 从 GitHub Release 拉版本，网络不通时走代理或手动下载。README 还专门给了一段「把安装说明交给你的 Agent」的用法——让 Claude Code 自己读文档自己装，这个细节对目标用户挺友好。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>agent-autoloop</th><th>手写 cron + 脚本</th><th>云端 Agent 平台</th></tr></thead>
+<tbody>
+<tr><td>部署位置</td><td>本机，不开公网端口</td><td>本机</td><td>云端，代码数据出域</td></tr>
+<tr><td>等决策时开销</td><td>进程退出，零 Token</td><td>需自己实现状态机</td><td>Agent 常驻，持续计费</td></tr>
+<tr><td>接新 Agent</td><td>改一行配置</td><td>每个都要封装</td><td>平台白名单决定</td></tr>
+<tr><td>状态可靠性</td><td>事件溯源 + 可复现模拟</td><td>自行保证</td><td>平台承诺，不可审计</td></tr>
+<tr><td>局限/风险</td><td>无后台界面；个人额度跑批量有合规风险</td><td>脏活全自己扛</td><td>依赖平台存续</td></tr>
+</tbody></table></div>
+<p>我的判断：这个项目卡在一个很好的位置——比手写调度省事得多，比云端平台可控得多。但它不是 Autonomous Agent（自主智能体）框架，Agent 本身的任务质量它管不了；决策卡片没人看，任务照样卡住。它的价值是把「等人的开销」从进程和 Token 变成一条数据库记录。</p>
+<h2>写在最后</h2>
+<p>这个项目真正改变的不是 Agent 能力，而是 Agent 的「待机成本」。命令行 Agent 从陪跑工具变成后台同事，中间差的就是一层调度：事件进来、干活、退出、等你、续上。agent-autoloop 用一个 1,850 行左右（aifrontierpost 评测口径）的零依赖内核把这件事做扎实了，还把验证做到模拟脚本可复现的程度，这在 12 天冲到 5,390 星的项目里属于少数。</p>
+<p>具体建议：先用 <code>agent-autoloop try</code> 跑通试跑，再拿每日早报或 GitHub Issue 巡检这类低风险场景练手；规则里的权限收紧到只读目录，等卡片机制用顺了再放开写操作；如果你用个人订阅额度跑高频任务，先读一遍 README 的用量与合规说明，必要时换成 API Key。这个仓库还很年轻（12 天），API 和规则格式都可能变，生产上用前锁住 release 版本。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank" rel="noopener">https://github.com/KKKKhazix/agent-autoloop</a></p>
+  <p>协议文档：<a href="https://github.com/KKKKhazix/agent-autoloop/blob/main/docs/protocol.md" target="_blank" rel="noopener">https://github.com/KKKKhazix/agent-autoloop/blob/main/docs/protocol.md</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>

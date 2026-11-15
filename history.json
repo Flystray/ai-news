@@ -63,7 +63,8 @@
         "microsoft/TokenEconomizer",
         "tangency-labs/solidcraft",
         "rehan-remade/universal-modder",
-        "onehumanbeing/esp32-iphone-agent"
+        "onehumanbeing/esp32-iphone-agent",
+        "KKKKhazix/agent-autoloop"
     ],
     "meta": [
         {
@@ -100,6 +101,13 @@
             "org": "onehumanbeing",
             "topic": "device-agent",
             "title": "一块约 40 元的板子，让 AI 不越狱操控真 iPhone"
+        },
+        {
+            "repo": "KKKKhazix/agent-autoloop",
+            "date": "2026-11-15",
+            "org": "KKKKhazix",
+            "topic": "agent-orchestration",
+            "title": "Agent 等拍板就退出进程，三天不回不烧一分 Token"
         }
     ]
 }
