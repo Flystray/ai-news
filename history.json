@@ -64,7 +64,8 @@
         "tangency-labs/solidcraft",
         "rehan-remade/universal-modder",
         "onehumanbeing/esp32-iphone-agent",
-        "KKKKhazix/agent-autoloop"
+        "KKKKhazix/agent-autoloop",
+        "Leonxlnx/earshot"
     ],
     "meta": [
         {
@@ -108,6 +109,13 @@
             "org": "KKKKhazix",
             "topic": "agent-orchestration",
             "title": "Agent 等拍板就退出进程，三天不回不烧一分 Token"
+        },
+        {
+            "repo": "Leonxlnx/earshot",
+            "date": "2026-11-16",
+            "org": "Leonxlnx",
+            "topic": "audio-agent",
+            "title": "AI 会写代码渲染影片，却听不见自己配的音效"
         }
     ]
 }
