@@ -65,7 +65,8 @@
         "rehan-remade/universal-modder",
         "onehumanbeing/esp32-iphone-agent",
         "KKKKhazix/agent-autoloop",
-        "Leonxlnx/earshot"
+        "Leonxlnx/earshot",
+        "wici-ai/inferssd"
     ],
     "meta": [
         {
@@ -116,6 +117,13 @@
             "org": "Leonxlnx",
             "topic": "audio-agent",
             "title": "AI 会写代码渲染影片，却听不见自己配的音效"
+        },
+        {
+            "repo": "wici-ai/inferssd",
+            "date": "2026-11-17",
+            "org": "wici-ai",
+            "topic": "local-inference",
+            "title": "763B 模型跑进 48GB 笔记本，硬盘换页赢了 mmap"
         }
     ]
 }
