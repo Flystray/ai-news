@@ -66,7 +66,8 @@
         "onehumanbeing/esp32-iphone-agent",
         "KKKKhazix/agent-autoloop",
         "Leonxlnx/earshot",
-        "wici-ai/inferssd"
+        "wici-ai/inferssd",
+        "chenxiachan/textfold"
     ],
     "meta": [
         {
@@ -124,6 +125,13 @@
             "org": "wici-ai",
             "topic": "local-inference",
             "title": "763B 模型跑进 48GB 笔记本，硬盘换页赢了 mmap"
+        },
+        {
+            "repo": "chenxiachan/textfold",
+            "date": "2026-11-18",
+            "org": "chenxiachan",
+            "topic": "reading-interface",
+            "title": "别让 AI 摘要论文，TextFold 把原文折成五层地图"
         }
     ]
 }
