@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 重写代码，rust-anything 拿原行为判卷</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">AI 重写代码，rust-anything 拿原行为判卷</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-19 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/erkamyaman/rust-anything" target="_blank" rel="noopener">erkamyaman/rust-anything</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 3,634 · 🍴 301（截至 2026-11-19，创建于 2026-11-16）</li>
+  <li><strong>主要语言</strong>：Rust（约 99%，按代码字节）</li>
+  <li><strong>开源协议</strong>：MIT</li>
+  <li><strong>形态</strong>：CLI + MCP 服务 + Agent Skill</li>
+  <li><strong>文档</strong>：仓库 <code>docs/</code>（how-it-works / whole-apps / examples / faq）</li>
+</ul>
+</div>
+<p>数据来源：仓库 README 与 <code>docs/</code> 下的工作原理文档 + 第三方评测（截至 2026-11-19）</p>
+<p>把一个跑得好好的 TypeScript 或 Python 应用整个搬进 Rust，是很多团队想了多年、试过多次、最后放弃的事。11 月 16 日出现在 GitHub 上的 rust-anything 换了条路：它不翻译代码，而是先给原程序「录像」，让 coding agent 照着重写，重写完的每一块都要和录像逐案比对，全对才准合入。三天拿了 3,634 个 star、发了 8 个 release，第三方评测已经出了四五篇——增速在近期新仓库里相当罕见。</p>
+<h2>项目背景：重写不难，敢合入才难</h2>
+<p>渐进式重写有两个经典死法。第一种是「大爆炸」：花半年把整个应用重写成新语言，上线那天没人敢赌新二进制和旧的一样，出一次事故整个项目就被叫停。第二种是「小块重写」：一次只搬一个函数，但调用方对不上——一个除零异常从 <code>ZeroDivisionError</code> 变成了 panic，一个 <code>-0.0</code> 被序列化成 <code>0</code>，都够在生产环境炸一次。</p>
+<p>手工重写的验证成本也压不下来。要保证新旧版本行为一致，得自己写 FFI 绑定，再为边界情况补测试：非 ASCII 字符串、<code>NaN</code>、整数溢出、符号除法的舍入方向。这些用例写不全，不一致就藏在没测到的分支里。全量翻译工具（比如把 C 机器翻译成 Rust 的 c2rust）能省人力，但生成的是「机器风格的 Rust」——代码能跑，人读不懂，改不动，等于把维护债务换个语言续期。</p>
+<p>coding agent 出现后，「让 AI 来写 Rust」听起来顺理成章，但 agent 最不缺的就是自信：它写完会说「测试通过了」，至于哪些行为没人测过，它不会告诉你。rust-anything 的立意就卡在这里——agent 能猜代码，猜不出「原程序对某个诡异输入到底返回了什么」，这恰恰是可以机器验证的部分。把验证做成流水线的地基，重写才从玄学变成工程。dev.to 的独立评测把它概括为「先移植行为，再移植代码」，这个定位是准的。</p>
+<h2>核心功能</h2>
+<h3>1. 五步循环：先找热点，再出考卷</h3>
+<p>入口是五个命令串成的流水线：<code>profile</code> 挂各语言的原生分析器（Node、cProfile、<code>go test</code> pprof、JFR）跑真实负载，列出最热的函数和调用方，还会标出 numba、Cython、JAX 这类「已经编译过、搬 Rust 没什么赚头」的代码；<code>analyze</code> 扫描仓库，把代码切成移植单元，按依赖分层排出移植顺序，标出风险点（UTF-16 与 UTF-8 的偏移差异、<code>regex</code> crate 不支持的反向断言等）；<code>bridge</code> 生成带绑定层的 Rust crate 和一个叫 <code>port.rs</code> 的桩文件——这就是「考卷」，agent 往里面填实现；<code>record</code> 对原函数灌边界用例，把每次的返回值和异常存成 <code>cases.jsonl</code>；<code>diff</code> 把所有案例重放到 Rust 侧，逐条比对。</p>
+<pre><code>rust-anything profile . -- node bench.mjs      # 时间花在哪、谁在调用
+rust-anything bridge . src/fuzzy.ts --batch fuzzyScore:text
+# 你或 agent 写 src/port.rs，然后：
+rust-anything record rust/fuzzy-rs &amp;&amp; rust-anything build rust/fuzzy-rs
+rust-anything diff rust/fuzzy-rs               # 每条录制案例必须一致
+rust-anything gate rust/fuzzy-rs               # 过了才算移植完成
+</code></pre>
+<h3>2. gate 门禁：移植完成的定义被写死</h3>
+<p><code>gate</code> 是整个工具的裁决者，通过条件包括：<code>fmt</code> 无 diff、<code>clippy -D warnings</code> 零告警、测试全过、<code>unsafe</code> 审计干净、原函数每条错误路径都有一条录制的失败案例对应、以及禁止 <code>unwrap</code>/<code>expect</code>/<code>panic!</code>——除非用 <code>// INFALLIBLE: &lt;理由&gt;</code> 显式豁免。这把「移植完成」从口头约定变成了可机判的清单，agent 没法用一句「看起来没问题」糊弄过去。</p>
+<h3>3. shadow 影子模式：生产环境里双跑</h3>
+<p><code>diff</code> 通过只是实验室结论。<code>shadow</code> 提供一个占位模块，同时调用原实现和 Rust 实现，返回原结果、记录不一致——<code>RUST_ANYTHING_MODE</code> 三个值切换旧路径、影子路径和新路径。重写代码可以先在生产流量里「隐身」跑一段时间，等不一致率降到零再切流量，出问题也不影响用户拿到的东西。</p>
+<h3>4. whole-app 模式：从 CLI 到纯 Rust 应用</h3>
+<p>单个函数之外，<code>app record</code> 把整个 CLI 或 HTTP 服务当黑盒录制（每个案例跑两遍以分辨随机值），<code>app front-door</code> 让 Rust 接管入口、原实现兜底，之后逐单元走标准循环，最后 <code>app lift</code> 把回退彻底摘掉，应用变成纯 Rust。全程原代码一个字节都不动。</p>
+<h3>5. --batch 批处理类：数据过桥一次</h3>
+<p>逐次调用跨 FFI 有固定开销，小函数单次搬过去甚至比 JIT 更慢。<code>--batch fn:param</code> 生成一个把数据一次性送进 Rust、每次调用在多核上跑完全量的类，配 mimalloc 分配器。这是 README 里所有「提速 20 倍」数字背后的真实机制（项目自述）。</p>
+<h2>技术亮点</h2>
+<h3>1. 语义陷阱是生成出来的，不是靠运气</h3>
+<p><code>record</code> 不是简单跑几个测试输入。它对每个参数自动构造「语义陷阱」：非 ASCII 和 emoji、<code>-0</code>、<code>NaN</code>、整数溢出边界、有符号除法、浮点打印格式、map 与 sort 的顺序；用了正则的文件还会追加正则陷阱——开尔文符号、长 s、阿拉伯-印度数字、行分隔符，专打各语言 Unicode 语义的分歧点。跨语言传值用的是生成的二进制 wire，JSON 表达不了的 <code>undefined</code>、<code>NaN</code>、<code>-0</code>、孤立代理对走 <code>{"$undefined": true}</code>、<code>{"$num": "NaN"}</code>、<code>{"$utf16": [...]}</code> 这类标记，由生成的绑定层翻译回来。相比之下 <code>record --from-tests</code> 还能把原项目自己的测试套件录进案例集，考卷覆盖面进一步扩大。</p>
+<h3>2. 指纹防漂移：原代码动了，考卷作废</h3>
+<p><code>record</code> 会给被录制的源文件存指纹（<code>recorded-from.json</code>）。原代码后来改了，<code>diff</code> 会警告、<code>gate</code> 直接失败，逼你重新录制——避免「对着三个月前的行为验证今天的代码」这种静默错位。录制时跑两遍原实现，把两次结果不同的值（时间戳、随机 id）变成通配符、乱序输出（哈希 map、并发）改成无序比较，这是把「不确定的部分」显式建模，而不是假装它们确定。</p>
+<h3>3. 不翻译代码，只出考卷和判卷</h3>
+<p>这是它和全量翻译工具最本质的分界。rust-anything 输出的是：时间在哪（profile）、先搬哪个（analyze）、桥怎么搭（bridge）、行为是什么（record）、对没对（diff/gate）。Rust 代码本身由人或 agent 写。六种语言的桥接各有实现——TS 走 napi-rs 或 wasm-bindgen、Python 走 PyO3（abi3）、C 走 <code>extern "C"</code> 加 ctypes（每个案例 fork 一个进程，防原代码崩溃连坐）、Go 走 cgo、Ruby 走 magnus、Java 走 JNI——<code>src/</code> 下 48 个 Rust 源文件约 1.26 MB，<code>codegen_java.rs</code>、<code>codegen_go.rs</code> 这些文件名本身就说明生成层是按语言逐个写的，不是通用模板套壳。</p>
+<h2>局限</h2>
+<ul>
+  <li><strong>天花板就是录制的覆盖面。</strong> 文档里「What it can't catch」一节说得直白：没人录过的输入，diff 就验证不到。建议把生产样本和 bug 报告喂给 <code>--inputs</code>，但这也意味着「通过」永远是「录制范围内一致」，不是数学意义上的等价。</li>
+  <li><strong>数字都是作者基准。</strong> 38,251 条录制案例零失配、x18n 搜索 20 倍提速，均出自仓库自带的 <code>demo/</code> 基准（项目自述）；截至目前没有第三方独立复测。MEDevel 的评测明确提醒「先在自己的硬件上跑 bench 再下结论」。</li>
+  <li><strong>正则是已知雷区。</strong> Rust 的 <code>regex</code> crate 不支持反向断言和环视，即便编译通过的 pattern，对土耳其无点 ı、零宽连接符的处理也可能和 JS/Python 不同——文档建议对真实 pattern 再做 fuzz。</li>
+  <li><strong>录制有副作用。</strong> <code>record</code> 和 <code>app record</code> 会对每个输入真实执行原代码，写文件、连数据库、发网络请求都会发生（且 whole-app 模式每案例跑两遍），必须在没有生产凭据的项目副本上跑。</li>
+  <li><strong>覆盖面与成熟度。</strong> PHP 和 C# 处于预览态（只支持整应用录制重放，单函数 FFI 桥接未完成），Kotlin 和 Swift 不支持；编译产物（EXE/JAR/APK）无法逆向移植；直连硬件、内联汇编的 C 代码会被标记「留在 C」。</li>
+  <li><strong>项目只有三天大。</strong> 单一维护者、8 个 release 全在 72 小时内发出，长期维护意愿和社区规模都待观察。</li>
+</ul>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>被 Python/Node 性能卡住的工程师</strong>：热点循环搬 Rust，调用方 API 不变，省掉手写 FFI 和补测试两大块工作。</li>
+  <li><strong>管着 coding agent 的团队</strong>：给 agent 一条机器可判的完成标准，合入判定从「agent 说好了」变成「gate 过了」，顺带把 <code>unsafe</code> 审计和错误路径覆盖也管起来。</li>
+  <li><strong>维护多语言服务栈的后端</strong>：Go、Java、Ruby 的批处理路径都能按同一套流程搬，迁移节奏由单元粒度控制，随时可停。</li>
+  <li><strong>想把老 CLI/服务彻底 Rust 化的团队</strong>：whole-app 模式的 front-door → 逐单元 → lift 提供了「永远可回退」的路径。</li>
+  <li><strong>不适合</strong>：想要全自动翻译器的人——Rust 代码得自己或 agent 写；Kotlin/Swift 项目；依赖编译产物逆向的场景。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置依赖：一个 Rust 工具链（或直接用 release 里的预编译二进制），加上你要移植语言的运行时。</p>
+<pre><code>cargo install rust-anything    # 或 npm install -g rust-anything
+rust-anything setup            # 自动注册 MCP 到 Claude Code / Codex / Cursor / Gemini CLI
+</code></pre>
+<p><code>setup</code> 会在改任何 agent 配置文件前先存 <code>.bak</code> 备份，可重复执行，<code>--remove</code> 可撤销。Claude Code 用户也可以走插件：<code>/plugin install rust-anything --marketplace erkamyaman/rust-anything</code>。常见坑有三个：录制会真实执行原代码，务必在项目副本上跑；浮点比较默认逐位一致，数值代码加 <code>--float-tolerance 1e-9</code>（只放宽舍入，不放宽格式）；逐次调用的小函数搬过去会变慢，先用 <code>profile</code> 找热点、再用 <code>--batch</code>。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>rust-anything</th><th>c2rust 类全量翻译</th><th>手工渐进重写</th></tr></thead>
+<tbody>
+<tr><td>Rust 代码来源</td><td>人或 coding agent</td><td>机器翻译</td><td>人</td></tr>
+<tr><td>行为一致性验证</td><td>录制案例逐条重放 + 门禁</td><td>依赖原测试套件</td><td>手写测试，覆盖靠人</td></tr>
+<tr><td>调用方改动</td><td>API 不变，绑定层生成</td><td>输出仍是 C 风格接口</td><td>自己设计 FFI</td></tr>
+<tr><td>代码可维护性</td><td>正常 Rust，可重构</td><td>机器风格，难读难改</td><td>好</td></tr>
+<tr><td>迁移可回退性</td><td>shadow 双跑 + 指纹校验</td><td>弱</td><td>看工程纪律</td></tr>
+<tr><td>语言覆盖</td><td>TS/Python/C/Go/Ruby/Java，PHP/C# 预览</td><td>以 C 为主</td><td>不限</td></tr>
+<tr><td>局限/风险</td><td>只验证录制过的行为；三天新项目，基准均出自作者</td><td>产物难维护</td><td>成本最高，一致性最没底</td></tr>
+</tbody></table></div>
+<p>表格之后说一句实话：rust-anything 买到的是「行为一致性」这个最难手工保证的性质，代价是你要接受「一致性」的边界止步于录制集。如果你要的是语义级重构（改数据结构、换算法），它帮不上忙——它保证的是「照原样快起来」，不是「照意图变好」。</p>
+<h2>写在最后</h2>
+<p>两点判断。第一，它把「大模型能不能安全重写老代码」这个问题从 prompt 层拉到了工程层：agent 写代码的问题从来不是写不出，而是没人能替它担保对错，录制-重放-门禁这套机制把担保变成了机器可判的东西，这个思路不限于 Rust 迁移，值得所有做 agent 工具链的人看一眼。第二，三天 3,634 star 里有多少是「演示效应」还有待时间检验，作者基准没有第三方复测，生产使用建议从单个热点函数开始，先跑 <code>shadow</code> 再谈切换。</p>
+<p>行动建议按风险从低到高排：先拿一个纯函数的热点循环练手，感受录制和比对的手感；第二步用 <code>record --from-tests</code> 把现有测试套件并进案例集，覆盖面立刻上一个台阶；第三步才考虑 whole-app 迁移，并且把 <code>shadow</code> 双跑期至少留一两周。三天八个小版本说明作者在快速迭代，跟进 <code>CHANGELOG.md</code> 比记住任何一篇教程都重要——命令和门槛的细节随时会变。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/erkamyaman/rust-anything" target="_blank" rel="noopener">https://github.com/erkamyaman/rust-anything</a></p>
+  <p>工作原理文档：<a href="https://github.com/erkamyaman/rust-anything/blob/main/docs/how-it-works.md" target="_blank" rel="noopener">https://github.com/erkamyaman/rust-anything/blob/main/docs/how-it-works.md</a></p>
+  <p>第三方评测：<a href="https://explainx.ai/blog/rust-anything-incremental-rewrite-recorded-parity-mcp-2026" target="_blank" rel="noopener">ExplainX 深度分析</a> · <a href="https://www.medevel.com/rust-anything" target="_blank" rel="noopener">MEDevel 评测</a> · <a href="https://dev.to/karleeov/ai-coding-agents-rust-migrations-and-openjdk-security-a-practical-field-guide-29f6" target="_blank" rel="noopener">dev.to 实操指南</a> · <a href="https://www.cnblogs.com/wflynn/p/23703580" target="_blank" rel="noopener">博客园中文解读</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>

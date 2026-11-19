@@ -67,7 +67,8 @@
         "KKKKhazix/agent-autoloop",
         "Leonxlnx/earshot",
         "wici-ai/inferssd",
-        "chenxiachan/textfold"
+        "chenxiachan/textfold",
+        "erkamyaman/rust-anything"
     ],
     "meta": [
         {
@@ -132,6 +133,13 @@
             "org": "chenxiachan",
             "topic": "reading-interface",
             "title": "别让 AI 摘要论文，TextFold 把原文折成五层地图"
+        },
+        {
+            "repo": "erkamyaman/rust-anything",
+            "date": "2026-11-19",
+            "org": "erkamyaman",
+            "topic": "rust-migration",
+            "title": "AI 重写代码，rust-anything 拿原行为判卷"
         }
     ]
 }
