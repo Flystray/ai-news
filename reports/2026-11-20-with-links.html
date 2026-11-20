@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>不训练一个参数，Qwenputer 把 CPU 焊进模型权重</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">不训练一个参数，Qwenputer 把 CPU 焊进模型权重</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-20 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/divagr18/qwenputer" target="_blank" rel="noopener">divagr18/qwenputer</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 835 · 🍴 116（截至 2026-11-20，创建于 2026-10）</li>
+  <li><strong>主要语言</strong>：Python（174 个 .py 文件，另有 Rust 版参考模拟器）</li>
+  <li><strong>开源协议</strong>：代码 MIT，模型权重 Apache-2.0</li>
+  <li><strong>形态</strong>：编译器 + 模型权重 + 推理驱动（需要一块约 24GB 显存的 NVIDIA GPU）</li>
+  <li><strong>文档</strong>：<a href="https://github.com/divagr18/qwenputer/tree/main/docs" target="_blank" rel="noopener">仓库 docs/</a>、<a href="https://divagr.com" target="_blank" rel="noopener">作者博客 divagr.com</a>、<a href="https://huggingface.co/divagr1925/Qwen3.5-4B-Qwenputer" target="_blank" rel="noopener">Hugging Face 模型</a></li>
+</ul>
+</div>
+<p>数据来源：仓库 README 与 docs/ 设计文档、GitHub API 与提交历史（截至 2026-11-20）+ 第三方报道：<a href="https://www.jxxy.net/ai/articles/underleveleddev-qwenputer-cpu-in-weights" target="_blank" rel="noopener">觉醒AI知识库</a>、<a href="https://byteiota.com/qwenputer-risc-v-cpu-llm-weights" target="_blank" rel="noopener">byteiota</a>、<a href="https://news.ycombinator.com/item?id=50282838" target="_blank" rel="noopener">Hacker News（709 分 / 147 评论，Algolia 数据）</a>、<a href="https://ainews.leverageai.com.au/case/qwenputer-model-internal-risc-v" target="_blank" rel="noopener">Leverage AI 案例库</a>。</p>
+<p>一个 4B 参数的语言模型，回答大数乘法题时不再心算、不再调用外部 Python，而是让一串特殊 token 在自己的前向传播里推演一颗 32 位 RISC-V CPU——从 55% 的正确率直接跳到 97.5%。这不是工具调用，没有任何沙盒、解释器或外部运行时参与执行：那颗 CPU 是编译进 Qwen3.5-4B 权重里的，一个参数都没靠训练得出。项目叫 Qwenputer，10 月底冲上 Hacker News 首页（709 分）和 Reddit r/LocalLLaMA（1035 分），是目前「把确定性计算塞进概率模型」这件事走得最远的一次公开演示。</p>
+<h2>项目背景：算术是语言模型的软肋，工具调用是创可贴</h2>
+<p>大语言模型处理精确计算，一直是用「外包」解决的：模型在输出里写一段代码，宿主机上的 Python 解释器执行，结果再以文本形式喂回去。这条路线可靠，但有三个绕不开的前提——模型体外必须有一个真实的运行环境；执行结果要经过上下文注入才能被模型读到；整个过程的正确性依赖外部系统，模型本身对「这一步算没算对」没有任何内部保证。</p>
+<p>问题在于，这三条前提在某些场景下恰恰不可接受。模型要在端侧部署，体外未必有解释器；安全监控要审查模型的思维链，可执行日志写在外部环境里，监控看到的是「调用了一个工具」这层壳；更根本的是，混合架构模型（Transformer 里混入线性 RNN 层，Qwen3.5 就是这类）的隐状态里有一块训练得来、却无法精确控制的记忆空间——模型会不会把推理藏在里面绕过监控，2026 年下半年正好是这个话题的爆发期。</p>
+<p>把程序编译进 Transformer 权重不是全新想法。DeepMind 2023 年的 Tracr 把 RASP 程序转成 Transformer；今年早些时候 Percepta 把 WebAssembly 解释器编译进过小型网络。但它们都停在小模型、玩具程序。Qwenputer 的突破在于两点：目标是真实的生产级模型（Qwen3.5-4B），并且找到了用混合架构原生的 Gated DeltaNet 层当内存的办法——这恰恰回答了「那块无法精确控制的隐状态」能不能被精确控制。</p>
+<h2>核心功能</h2>
+<h3>1. 把 DeltaNet 状态拧成确定性 RAM</h3>
+<p>整件事的地基。Qwen3.5 每 4 层有 3 层是 Gated DeltaNet（Gated DeltaNet，一种带门控的线性 RNN），每个头维护一个状态矩阵，平时靠门控衰减和增量覆盖来「记忆」。Qwenputer 把三个旋钮拧到极限：门控 α=1（历史永不衰减）、写入强度 β=1（新值 100% 替换旧行）、键用 one-hot 编码（精确指向某一行）。三者叠加，每次写入恰好覆盖一行、查询原样读回——一块固定大小、可寻址、不走样的 RAM 就出现了。内存布局也规整：地址低位选头、高位选行，每行按比特存一个字节，寄存器、程序计数器、调用栈各占独立的头。</p>
+<h3>2. 编译器算出每一个权重</h3>
+<p>CPU 的逻辑先被写成一张电路描述图（读取寄存器、加法、零值跳转），编译器再把这些动作逐个翻译成 Transformer 部件：注意力头负责查表和分支，SwiGLU MLP 做精确运算，DeltaNet 头当内存。11 个「电脑层」垫在 Qwen 原有 32 层前面，没有任何一个参数经过梯度下降。芯片层里每个中间值都被设计成不超过 8 个有效位，在 bf16 和 fp32 下都精确成立。仓库里的 <code>ir.py</code> 是一个精确求值器，会逐个中间值核对 bf16 舍入——这是「编译」和「训练」的本质区别：训练出来的能力只能测性能猜逻辑，编译出来的结构可以逐位核对。</p>
+<h3>3. 借用模型自己的工具调用语法</h3>
+<p>Qwen 被训练过输出 <code>&lt;tool_call&gt;</code> 标记，电脑层直接劫持这套语法：模型照常写出调用，芯片层读到后在自己内部跑完指令，模型再逐位写出带精确结果的 <code>&lt;tool_response&gt;</code>。全程在 <code>model.generate()</code> 里完成，不注册任何工具、不设停止条件、没有回调。执行过程在 token 流里完全可见——<code>ADDR</code> 指明写入哪一行，<code>VAL</code> 携带数值，<code>STEP</code> 结束一条指令，这串 trace token 就是 CPU 的执行日志。</p>
+<h3>4. 权重内文件系统与权重内 NPU</h3>
+<p>顺着内存思路的两个延伸。文件系统版给模型加了 <code>put/append/get/list/delete</code> 五个工具，文件名哈希到 DeltaNet 状态里的目录槽，可存 512 个文件、约 5.3 万 token，会话结束保存头部状态、下次会话加载，文件还在——跨会话事实回忆测试拿到 83.3 分，基线模型只有 7.8 分（项目自述）。NPU 版给 CPU 加了 <code>VDOT</code> 和 <code>SMAQA</code> 两条指令，Karpathy 的 stories260K（一个 26 万参数的 Llama）作为 C 程序跑在权重里写故事，每个故事 token 需要 22.5 万个 trace token，在 L4 上约 41 秒一个。</p>
+<h3>5. QwenFX：权重里的编码 agent</h3>
+<p>最「离谱」的一步：把 Vercel 的编码 agent fx 从未修改的源码编译成二进制，放进 Qwen 的权重里跑，模型就是 fx 的底座。在一组小型仓库任务上解出 15/15，并在沙盒仓库里自己开了 PR（项目自述）。芯片文件 125MB，叠在 Qwen 原 8.4GB 权重旁边，单任务显存峰值 14GB。</p>
+<h2>技术亮点</h2>
+<h3>1. 精确性是设计出来的，不是测出来的</h3>
+<p>普通注意力的 KV 缓存随上下文膨胀，DeltaNet 状态矩阵固定大小，这让权重内 RAM 又便宜又恒速。但真正难的是数值：线性层里的浮点误差会累积。仓库的做法是三层保障——电路值全部限制在 bf16 精确可表示的范围内；RMSNorm 的缩放因子被设计成精确的 2 的幂；AND 门和键查询用「半单位边距」（<code>4*(sum-n+1/2)</code>）保证假条目恰好为 0。验证手段也对得上这份严谨：CPU 通过官方 riscv-tests 指令集测试套件，约 23 万个输出位置重放比对参考机器零失配，IR 求值器在全部 119 个 CHIP-8 游戏 ROM 上与参考模拟器逐 token 一致，加回电脑层后模型正常文本与原版的 KL 散度 6e-4，落在 5e-4 的底噪内（项目自述）。</p>
+<h3>2. 顺带产出了一个 AI 安全实验台</h3>
+<p>仓库的 <code>research/hidden-reasoning</code> 目录是一项独立研究：混合架构模型能否把推理藏进 RNN 隐状态、绕过思维链监控。实验用「数灯开关」任务（翻转奇偶性）施加「只许直接作答」的训练压力：OLMo-Hybrid-7B 训练到 64 次翻转、测试 128 次仍达 0.89 准确率（6 个种子），把写入强度 β 压到 1 后跌到 0.52；机制分析还发现模型会在注意力层偷偷备份状态，只监控 RNN 状态根本抓不住。反向应用是把监管工具编译进权重：编译出来的 β=2 计数器在 10 万 token 上精确追踪，植入 Qwen3.5-4B 的已知计数器被盲测检测器在 864 个头里排在第一位。作者博客上还有后续实验，编译进权重的测谎探针抓到 91% 的谎言、在 2.8 万 token 正常文本上零误报（<a href="https://www.jxxy.net/ai/articles/underleveleddev-qwenputer-cpu-in-weights" target="_blank" rel="noopener">觉醒AI知识库</a>报道）。算术只是演示，这部分才是项目的真正野心。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>AI 安全与可解释性研究者</strong>：一套可以精确读写、逐位验证的隐状态试验台，省去从零搭混合架构实验的成本。</li>
+  <li><strong>线性注意力 / 混合架构方向的研究者</strong>：Gated DeltaNet 当精确 RAM 的构造和 β=1/α=1 的分析，比任何论文推导都直观。</li>
+  <li><strong>想真正理解 Transformer 极限的工程师</strong>：<code>docs/q35.md</code> 里「silu(K=128·x) 在电路所有取值上恰好等于 ReLU」这类细节，是最好的架构课教材。</li>
+  <li><strong>技术写作者与课程讲师</strong>：trace token 可视化了「模型内部发生了什么」，演示效果远胜 PPT。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置：一块 NVIDIA GPU（第三方报道口径约 24GB 显存）、Python 与 uv。RISC-V 版本：</p>
+<pre><code>git clone https://github.com/divagr18/qwenputer &amp;&amp; cd qwenputer/experimental/riscv
+uv sync --extra hf
+hf download divagr1925/Qwen3.5-4B-Qwenputer --local-dir qwenputer-rv
+uv run python -m chipformer.rv.chat qwenputer-rv --firmware tests/data/rv/calc-bridge.elf \
+    --ask "Use calc: what is 123456789 * 987654321?"
+</code></pre>
+<p>常见坑：模型下载约 14–19GB，多出来的体积几乎全是零填充，压缩后下载量与原版接近；RISC-V 版不能用裸 <code>generate()</code> 一键跑通，必须经 <code>RvChat</code> 驱动装固件并隔离 trace token；没有 NVIDIA GPU 的话，Hugging Face 与 ModelScope 上的模型卡提供了逐项验证步骤，可先看再跑。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>Qwenputer</th><th>外部工具调用（Python/沙盒）</th><th>Tracr / Percepta（编译进小模型）</th></tr></thead>
+<tbody>
+<tr><td>计算发生位置</td><td>模型权重内部</td><td>宿主机运行时</td><td>小模型权重内部</td></tr>
+<tr><td>正确性来源</td><td>编译电路，逐位可验证</td><td>外部解释器保证</td><td>编译电路</td></tr>
+<tr><td>目标模型</td><td>生产级 4B 混合架构</td><td>任意模型</td><td>专用小网络</td></tr>
+<tr><td>额外依赖</td><td>约 24GB 显存 GPU + 驱动</td><td>无（模型侧）</td><td>无</td></tr>
+<tr><td>速度</td><td>比外部计算器慢几个数量级</td><td>快</td><td>与模型推理同速</td></tr>
+<tr><td>局限/风险</td><td>不实用、社区未独立复现 NPU 等声明</td><td>结果经上下文注入，执行在监控盲区</td><td>未触及生产级模型与真实内存机制</td></tr>
+</tbody></table></div>
+<p>表格之后的判断：Qwenputer 不该被当工具用——它对比外部计算器毫无速度优势，比任何沙盒都重。它的对比对象不是计算器，而是「隐状态能不能被精确控制」这个此前只存在于猜想里的问题。</p>
+<h2>局限</h2>
+<ol>
+  <li><strong>实用性接近零</strong>。RISC-V 版权重约 18.8GB（原版 9.3GB），一条复杂算式要跑好几秒，几十年前的卡西欧都比它快几个数量级；GSM8K 这类应用题上与基线完全打平——卡推理的题，内嵌 CPU 帮不上。</li>
+  <li><strong>长算式链反而更差</strong>。模型拿到精确结果后会反复自我验算，直到耗尽 token 预算；<code>mixed_longer</code> 这组基准上基线仍然领先。</li>
+  <li><strong>「无外部运行时」的说法被质疑</strong>。Hacker News 上有人指出：固件由宿主驱动装进初始状态、trace token 靠驱动隔离，说「完全不需要外部运行时」有夸大成分；另外部分基准不是 100%，社区有人质疑「一台算不对的计算器有什么用」。</li>
+  <li><strong>NPU 与 QwenFX 的声明未经独立复现</strong>。Leverage AI 案例库明确标注：热度回落之后，这些声明「没有独立验证」，注意力下降不代表问题解决了。</li>
+  <li><strong>热度已明显回落</strong>。10 月底 HN 峰值后，11 月 9 日前后第三方统计为 817★，截至 11 月 20 日 835★，一周增量不足 20。</li>
+  <li><strong>安全方向是双刃剑</strong>。既证明了「监控可以编译进权重」，也证明了「推理可以藏进隐状态」——后者恰恰是防御方最不愿看到的。</li>
+</ol>
+<h2>写在最后</h2>
+<p>两点判断。其一，Qwenputer 真正改变的不是算术能力，而是把「线性 RNN 状态 = 精确可寻址内存」从 2021 年的理论证明（Schlag 等人的快权重论文）推进到了生产级模型上跑整颗 CPU 的工程实体——从此这类讨论有了可亲手检验的标准答案。其二，它同时给 AI 安全两边都递了刀：防御方多了一种「模型删不掉的内置监控」，攻击面一侧则证明了隐状态确实藏得住东西，而后者现在有了公开的实现路径。</p>
+<p>对普通读者的行动建议：没有 24GB 显存就先读 <code>docs/q35.md</code> 和 <code>research/hidden-reasoning</code> 的结果表，这两个文件的信息密度超过绝大多数论文；有卡且对 AI 安全感兴趣，把它当实验台跑通 riscv-tests 复现路径，比转发任何「模型会撒谎」的段子都有价值。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/divagr18/qwenputer" target="_blank" rel="noopener">https://github.com/divagr18/qwenputer</a></p>
+  <p>模型权重：<a href="https://huggingface.co/divagr1925/Qwen3.5-4B-Qwenputer" target="_blank" rel="noopener">https://huggingface.co/divagr1925/Qwen3.5-4B-Qwenputer</a></p>
+  <p>作者博客：<a href="https://divagr.com" target="_blank" rel="noopener">https://divagr.com</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>

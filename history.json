@@ -68,7 +68,8 @@
         "Leonxlnx/earshot",
         "wici-ai/inferssd",
         "chenxiachan/textfold",
-        "erkamyaman/rust-anything"
+        "erkamyaman/rust-anything",
+        "divagr18/qwenputer"
     ],
     "meta": [
         {
@@ -140,6 +141,13 @@
             "org": "erkamyaman",
             "topic": "rust-migration",
             "title": "AI 重写代码，rust-anything 拿原行为判卷"
+        },
+        {
+            "repo": "divagr18/qwenputer",
+            "date": "2026-11-20",
+            "org": "divagr18",
+            "topic": "in-weights-compute",
+            "title": "不训练一个参数，Qwenputer 把 CPU 焊进模型权重"
         }
     ]
 }
