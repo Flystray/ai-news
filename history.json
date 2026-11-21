@@ -69,7 +69,8 @@
         "wici-ai/inferssd",
         "chenxiachan/textfold",
         "erkamyaman/rust-anything",
-        "divagr18/qwenputer"
+        "divagr18/qwenputer",
+        "miuuyy/Octopus-SI-OS"
     ],
     "meta": [
         {
@@ -148,6 +149,13 @@
             "org": "divagr18",
             "topic": "in-weights-compute",
             "title": "不训练一个参数，Qwenputer 把 CPU 焊进模型权重"
+        },
+        {
+            "repo": "miuuyy/Octopus-SI-OS",
+            "date": "2026-11-21",
+            "org": "miuuyy",
+            "topic": "agent-os",
+            "title": "模型说了不算，Octopus 用内核重算每一步权限"
         }
     ]
 }

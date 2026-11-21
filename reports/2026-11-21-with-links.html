@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模型说了不算，Octopus 用内核重算每一步权限</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">模型说了不算，Octopus 用内核重算每一步权限</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-21 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul class="sources">
+  <li><strong>项目地址</strong>：<a href="https://github.com/miuuyy/Octopus-SI-OS" target="_blank" rel="noopener">miuuyy/Octopus-SI-OS</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 777 · 🍴 86（截至 2026-11-21，创建于 2026-10）</li>
+  <li><strong>主要语言</strong>：Rust（约 73%，按字节；桌面端为 Swift + TypeScript）</li>
+  <li><strong>开源协议</strong>：MIT</li>
+  <li><strong>形态</strong>：运行时内核 + 终端客户端 + macOS 桌面客户端（研究预览）</li>
+  <li><strong>文档</strong>：docs/architecture.md 与 docs/contracts/ 下 9 份契约文档</li>
+  <li>数据来源：仓库 README 与官方文档 + 第三方报道（截至 2026-11-21）</li>
+</ul>
+</div>
+<p>绝大多数 agent 框架是「一个循环套着一个模型」，记忆、技能、子 agent 全挂在这个循环外面。Octopus 把顺序倒了过来：内核里没有任何 provider、渠道、工具、模型的名字，循环本身只是原语推出来的结果。它最反直觉的一点是——模型写进运行记录里的内容，永远不会变成权限，因为授权在每次投递到达时都被重新算一遍，而算的地方在模型外面。</p>
+<h2>项目背景：能力挂在循环上，循环就成了天花板</h2>
+<p>过去两年，agent 工程的默认姿势是给循环打补丁。act、observe、累积上下文、重复——这是骨架。要做长期记忆，就在循环边上挂一个向量库；要并行，就挂一层 sub-agent 调度；要定时，就挂 cron。每挂一样，框架代码里就多一个分支，能力集合被写死在代码里。</p>
+<p>这个姿势有三个代价。</p>
+<p>第一，能力边界不可见。模型只能从提示词里知道自己能做什么，一旦工具列表长到几十个，它就开始乱选。第二，改动成本不随能力线性增长。加一个渠道要改 bootstrap，加一个模型要改 provider 工厂，加一种执行环境要改调度器。第三，长任务没法真的「放着跑」。进程一退，循环里的状态就散了，所谓持久化往往是事后补一个 checkpoint 到数据库。</p>
+<p>Octopus 的判断是：问题不在模型，在循环当了中心。它把内核做成一个只有原语、不认识任何具体软件的小东西，把能力全部外移成 JSON 描述符。目前仓库有 3,151 个文件，<code>crates/</code> 下 20 个 Rust crate，<code>registry/</code> 下有 96 个接口目录、194 个工具目录、40 个上下文资产目录、15 个验证器目录、12 类执行环境。</p>
+<p>代价也很直接：你得先接受一套操作系统式的词汇，才能读懂它的第一页。</p>
+<h2>核心功能</h2>
+<h3>1. 一个 agent 就是两个 JSON 文件</h3>
+<p>在别处，agent 是「一个循环 + 一段提示词 + 一张工具表」，用代码粘在一起。这里 agent 叫 worker，是纯描述：它是谁，以及它这一生最多能碰什么。</p>
+<p><code>registry/interface/system_worker_coder/</code> 下只有两个文件。<code>interface.json</code> 我拉下来看过，153 字节，声明 id、类型、角色、方向、来源名；<code>policy.json</code> 2,603 字节，是一个 ceiling（上限）。这个上限里列了 34 个模型 provider 接口、33 个工具、3 类工作环境（filesystem_workspace、git_worktree、system_room）、2 个可关闭的 mark 结果（<code>coder.build.ok</code> 与 <code>operator.approval</code>），artifact 动词只有 read 和 create——没有 delete。</p>
+<p>34 个 provider 里，国产模型是第一等公民，不是补丁：deepseek、kimi、kimi_code、minimax、minimax_cn、zai、xiaomi、stepfun、alibaba_coding_plan 都在列，本地推理的 ollama、lmstudio、vllm 也在。</p>
+<p>新建一个 agent 不是写类，是复制一个文件夹、改两个 id 和几行列表，Rust 一行不动。</p>
+<h3>2. 每次投递都重算一遍授权</h3>
+<p>这是整个设计的重心。一次跨边界投递到达时，运行时做的事是重新算这个 run 的有效权限：</p>
+<pre><code>grant = worker 接口的 ceiling  ∩  该 run 所在 EE 链的逐层收窄  ∩  run 自己写下的绑定
+</code></pre>
+<p>三个输入都来自磁盘上的描述符与运行记录，形成过程是纯函数——没有时钟，没有随机数，没有隐藏状态。算出来的不是一份可以拿来反复用的凭证，而是随这次调用一起下发、并留作证据的一份投影。真正执行拦截的是房间（room）自己：工具调用作为 artifact 送到房间的门，门按拿到的 grant 校验，然后在房间里跑工具进程。</p>
+<p>所以模型把 run 记录改成「我有全盘权限」没有用，因为它改的是一个输入，不是授权本身。作者把这条写得很直白：谁创建了这个 run，不参与授权计算；一个只有少量工具的 run 可以开一个编码环境，里面的 coder 拿到多少权限，取决于它住在哪，而不是取决于谁生成了它。</p>
+<h3>3. 账本是唯一事实来源</h3>
+<p><code>~/.octopus/ledger/movements.jsonl</code> 是追加写的流水账。一条 movement 的必填字段是 <code>from</code>、<code>kind</code>、<code>lamport</code>、<code>seq</code>、<code>to</code>、<code>trace</code>、<code>recorded_at_unix_ms</code>——逻辑时钟加序号，分布式系统里最老的那套定序手段，被直接焊进账本。</p>
+<p>关键的三个细节：</p>
+<ul>
+  <li>拒绝也是一行。<code>DeliveryRefused</code> 是带类型的记录，不是静默丢弃。</li>
+  <li>验证没过也是一行。<code>VerificationFailed</code> 写进去，checkpoint 继续开着，由发 artifact 的那一方决定要不要重试。</li>
+  <li>索引是缓存。旁边的 sqlite 和内核里的内存索引删掉都能从日志重建，日志本身才是真相。</li>
+</ul>
+<p><code>state/runs/&lt;run&gt;.json</code> 存运行记录与 checkpoint，<code>state/ee_instances/</code> 存环境树。整个 Home 就是一个目录，停掉运行时再起来，目标还在，每个接口从自己的游标位置接着读。</p>
+<h3>4. 自修改就是普通写文件</h3>
+<p>这是它敢叫「自演化」的地方。要让系统多一种感知，不需要改内核：新建一个 <code>registry/interface/</code> 文件夹，写个读设备的小程序，注册进去，验证器放行，描述符被实时拾取。作者举的例子是：某次 run 想「看看你」，但系统没有视觉输入，于是它给一个 coder 写了任务，coder 写了个摄像头驱动，注册成新接口。</p>
+<p>第一次要等 coder 写完，第二次零成本——能力被沉淀成了目录，而不是沉淀成了分支。</p>
+<p>改自己的源码也走同一条路，只是多一个 git worktree 房间做分支隔离。作者把这种行为分成两层：描述符级（写 JSON）和源码级（改框架与内核），后者要遵守开发规则并保住内核的通用契约。</p>
+<h3>5. 验证器通过才记账</h3>
+<p>checkpoint 可以声明 <code>required_verified_artifacts</code>，三个字段：artifact 标签、mark、verifier。带这个声明的 checkpoint，只有在对应标签的 artifact 到达、验证器在边界上跑过并通过之后，才会被一个 mark 关掉。</p>
+<p>模型说「我做完了」不产生 mark。这句话在工程上的分量，比任何架构图都重。</p>
+<h2>技术亮点</h2>
+<h3>1. 内核是「盲」的</h3>
+<p>内核不推送任何东西，也不解码任何 payload。它看每条 movement 只看三样：路由、调用方、movement 本身。provider 接口自己去读自己的游标，自己拼上下文、自己渲染提示词和工具表，甚至可以对自己保留一些不给模型看的工具。</p>
+<p>这个取舍很硬。好处是可重放、可审计、能力可热插拔，任何语言的驱动都能接进来，因为跨界只有 artifact。代价是每个接口都得自己实现一套「读自己、拼自己、交付自己」的逻辑，接口数量一多，重复代码会迅速膨胀——这也是为什么仓库里 JSON 描述符比 Rust 代码多得多。</p>
+<h3>2. 确定性让重放成立</h3>
+<p>策略不是存下来的清单，是每次算出来的结果。这件事只有在形成过程是纯函数时才成立，所以作者把「不得引入时钟与随机」写成了硬约束：真要引入不确定输入，先把它变成一条记账的 artifact。</p>
+<p>还有一处容易被忽略的细节：每个算出来的 grant 都会钉住所依据描述符的哈希，同时把归一化后的字节留在内容寻址的 blob store 里。只存哈希不够——描述符被人改过之后，光凭哈希恢复不出当时那一份。</p>
+<h3>3. 策略与进程隔离是两套独立机制</h3>
+<p>策略决定「这个 run 能请求什么」，进程权限决定「这个进程物理上能碰到什么」。两者不互相依赖。</p>
+<p>默认 <code>sandbox_mode: "enforced"</code>，工具、验证器、接口进程都在默认拒绝的操作系统沙箱里跑：macOS 用 Seatbelt（<code>sandbox-exec</code>）生成进程 profile；Linux 用 AppArmor 4.0 策略 ABI 加 systemd 与 cgroup v2，由特权服务在 exec 之前完成约束，并把后代清理绑到租约上。每个进程只拿到描述符里声明过的根路径、可执行文件、环境变量名和网络权限。</p>
+<p>有一条例外值得记住：声明成 full-access 的房间不加沙箱，因为它已经拿到整台机器，沙箱保护不了什么——这和 Codex 的 <code>danger-full-access</code> 是同一个取舍。</p>
+<p>两套机制分开的意义在于：房间既是策略的执行者，又是工具的执行者，模型没法靠说话绕过它。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>agent 平台开发者</strong>：手上有长任务场景，受够了「进程一退状态就散」，可以照着 <code>docs/contracts/</code> 抄边界契约——投递、授权、记账、验证四件事怎么拆。</li>
+  <li><strong>做权限与审计的人</strong>：这是目前少见的、把「拒绝也记账」「验证通过才算完成」写进 schema 的公开实现。做合规留痕的需求，可以直接看 <code>schemas/movement.schema.json</code>。</li>
+  <li><strong>多模型路由的工程团队</strong>：34 个 provider 描述符的写法，是把「模型只是接口之一」落到实处的一份样板。</li>
+  <li><strong>研究 agent 自主性的研究者</strong>：它把「自演化」拆成了可观测的结构变更，比只给一段提示词让模型自我反思要可测量得多。</li>
+</ul>
+<p>反过来，想要开箱即用生产力工具的人不适合——它现在连二进制都没有发布。</p>
+<h2>快速上手</h2>
+<p>前置依赖：macOS 14+、Xcode 26 或对应命令行工具（Swift 6.2+）、Node 24、稳定版 Rust、一个 ChatGPT 账号。</p>
+<pre><code>git clone https://github.com/miuuyy/Octopus-SI-OS.git
+cd Octopus-SI-OS
+npm ci --prefix app
+
+# 原生构建要的是 Electron 内固定 Node 版本的头文件，
+# 与跑 npm 的那个 Node 无关，用这个 helper 取路径
+headers="$(node app/native/runtime.cjs headers)" &amp;&amp;
+OCTOPUS_NATIVE_NODE_HEADERS="$headers" npm --prefix app run package:mac &amp;&amp;
+open -n ./app/build/Octopus.app
+</code></pre>
+<p>首次运行五步：ChatGPT 登录（走浏览器，没有终端登录）→ 设本机客户端密码 → 在嵌入终端按回车等 <code>octopus up</code> 就绪 → 选起始结构（Projects、名称、能力）→ 在 Home 里说一句话验证连通。</p>
+<p>只想要终端：<code>npm --prefix app run build:cli</code> 之后 <code>./octopus</code>。</p>
+<p>几个容易踩的坑：</p>
+<ol>
+  <li>仓库当前没有任何 release 或 tag，装不了现成包，只能从源码构建。</li>
+  <li>产物是 ad-hoc 签名、未公证，Gatekeeper 会告警。</li>
+  <li>没有 ChatGPT 账号时，客户端可以进只读的 Test 配置，或者在 Applications 里配 API-key、OpenAI 兼容、Claude CLI、Gemini、Vertex 这类 provider。</li>
+  <li>新建任务前必须先建 Agent（选 Project 和模型、复核能力），否则任务面板里选不到。</li>
+</ol>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>Octopus</th><th>Codex CLI / Claude Code 类 harness</th><th>LangGraph / AutoGen 类框架</th></tr></thead>
+<tbody>
+<tr><td>中心抽象</td><td>内核 + 原语 + 描述符注册表</td><td>模型循环 + 工具表</td><td>图 / 多 agent 编排</td></tr>
+<tr><td>权限模型</td><td>每次投递重算 grant，模型外强制执行</td><td>会话级审批与沙箱开关</td><td>一般不内建，靠业务层</td></tr>
+<tr><td>状态存储</td><td>JSON 运行记录 + 追加写账本</td><td>会话文件 / 上下文窗口</td><td>外部 checkpointer</td></tr>
+<tr><td>重启恢复</td><td>目标与等待都是磁盘数据，重启接着跑</td><td>需人工 resume 会话</td><td>取决于 checkpoint 实现</td></tr>
+<tr><td>扩展方式</td><td>加一个 JSON 文件夹</td><td>改框架代码或写插件</td><td>加节点与边</td></tr>
+<tr><td>上手成本</td><td>高（macOS、源码构建、OS 词汇）</td><td>低</td><td>中</td></tr>
+<tr><td>局限/风险</td><td>研究预览，模型不主动，单人维护</td><td>能力边界写死在代码里</td><td>长任务与权限需自行补齐</td></tr>
+</tbody></table></div>
+<p>边界很清楚：如果你只是想要一个能改代码的 agent，今天用 Codex CLI 更划算——作者自己也是这么说的。如果你想搭的是「一堆 agent 长期住在机器上、彼此投递、每次动作都留证」的东西，这套原语值得抄。</p>
+<h2>局限</h2>
+<p><strong>自改进没有被证明。</strong> 作者在项目开篇就写了：在已有的运行里，当前模型（包括他提到的 GPT-6）不会自行主动发起行动；对一个普通编码任务，Octopus 给不了 Codex CLI 之外的东西。项目自己把它列在「尚未解决」第一条。这是全文最该记住的一句。</p>
+<p><strong>只走通了一条路。</strong> 端到端跑通的组合是 macOS + ChatGPT/Codex，其他 provider 只有描述符——描述符不等于测试。有读者在 <a href="https://x.com/miu21590/status/2114211330894745881" target="_blank" rel="noopener">X 上直接质疑</a>绑死 macOS 与 Codex 不地道，作者回复说只在自有环境上测过，Windows 与 Linux 构建在计划中，ChatGPT 登录是桌面客户端实验期的临时要求。</p>
+<p><strong>人力是单点。</strong> 10 月 26 日有第三方审计时，304 个提交基本出自一人；8 个月做出六万多行内核，量级不小。星的曲线也不猛：10 月 25 日<a href="https://www.aiboss88.com/news/project-octopus-si-os" target="_blank" rel="noopener">第三方记录</a>是 272 颗，今天 777 颗，四周多涨了 505 颗。谁能批准一个新接口、描述符改写能力的治理规则，目前没有答案。</p>
+<p><strong>数字口径对不齐。</strong> 内核行数在三处不一样：项目首屏写约 4.5 万行，docs/architecture.md 写约 6.2 万行，<a href="https://thakicloud.com/tech-blog/en/agentops/octopus-os-agent-harness" target="_blank" rel="noopener">第三方克隆实测</a>（含测试）是 58,749 行。接口数量宣称 156，实测 86 个目录，今天数到 96 个——统计口径官方未说明。这类不一致不影响架构判断，但引用数字时要知道自己在引哪一版。</p>
+<p><strong>mark 只等于它的验证器。</strong> 「能编译」是一个检查，但「coder 没有偏离约定、没有写坏东西」还没有被设计出来。验证器本身是可删的脚本包，删掉它，只有引用它的 checkpoint 会坏。</p>
+<p><strong>绕开策略的模型是被承认、未解决的。</strong> 读取不可信内容又握着写权限的 run，仍然可能被诱导；架构做的是缩小爆炸半径，不是消除风险。作者把这条和「不是多租户边界」并列写进了非目标。</p>
+<p><strong>部署摩擦不小。</strong> 没有 release、ad-hoc 签名、Node 24.15 头文件、Rust 1.91 起，任何一条都能劝退一半人。Home 是同用户目录，客户端密码只保护窗口、不保护底下的文件。</p>
+<h2>写在最后</h2>
+<p>它真正改变的是一件事：把「agent 能做什么」从代码里的分支，变成了磁盘上的数据和每次重算的授权。能力一旦是数据，就能被检查、被重放、被改写、被留证——自演化才第一次有了可观测的形态。</p>
+<p>但它也很诚实：结构搭好了，答案还没有。模型不会因为住进操作系统就学会主动干活。</p>
+<p>给读者的建议分两种。想找工具用的，先别装，去看 <code>docs/contracts/POLICY.md</code> 和 <code>schemas/movement.schema.json</code> 这两份东西，一个讲授权怎么算，一个讲记账怎么记，读完对「agent 权限该长什么样」会有具体答案。想抄设计的，重点抄三处：每次到达重算而不是保存凭证、拒绝也要记账、验证通过才关 checkpoint——这三条与模型无关，换成任何框架都能用。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/miuuyy/Octopus-SI-OS" target="_blank" rel="noopener">https://github.com/miuuyy/Octopus-SI-OS</a></p>
+  <p>架构说明：<a href="https://github.com/miuuyy/Octopus-SI-OS/blob/main/docs/architecture.md" target="_blank" rel="noopener">https://github.com/miuuyy/Octopus-SI-OS/blob/main/docs/architecture.md</a></p>
+  <p>第三方实测审计：<a href="https://thakicloud.com/tech-blog/en/agentops/octopus-os-agent-harness" target="_blank" rel="noopener">https://thakicloud.com/tech-blog/en/agentops/octopus-os-agent-harness</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>
