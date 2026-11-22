@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人肉网线该剪了，Reason Network 替你接</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">人肉网线该剪了，Reason Network 替你接</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-22 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/reason-machines/reason-network" target="_blank" rel="noopener">reason-machines/reason-network</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 1,797 · 🍴 161（截至 2026-11-22，创建于 2026 年 10 月）</li>
+  <li><strong>主要语言</strong>：Rust（约 83%，Python 约 16% 几乎全是端到端测试）</li>
+  <li><strong>开源协议</strong>：MIT 或 Apache-2.0 双许可（GitHub 许可字段只识别出 Apache-2.0）</li>
+  <li><strong>形态</strong>：每台机器一个常驻 daemon + CLI + MCP 服务器 + 桌面菜单栏图标</li>
+  <li><strong>文档</strong>：<a href="https://reasonmachines.com/network" target="_blank" rel="noopener">官网</a> · 仓库内 DESIGN.md（5.1 万字节，写到了协议字段级）</li>
+  <li class="sources">数据来源：仓库 README 与设计文档 + 第三方报道（截至 2026-11-22）</li>
+</ul>
+</div>
+<p>一句话：它给你和同事电脑上的每一个编码 agent 会话发一个地址，让 A 的 agent 能直接问 B 的 agent「token 格式改了没」，消息落进对方已经打开的那个会话，端到端加密，不经过任何能读内容的服务器。最反直觉的一点是消息怎么进 agent：它按 11 种客户端各自的能力分成 push / turn / pull 三档，而不是统一塞进某个队列。</p>
+<h2>项目背景：多 agent 协作缺的不是智力，是寻址</h2>
+<p>一个五人的后端组，每人同时开三四个 Claude Code、Codex、Cursor 会话。前端那位想知道接口字段改没改，最省事的做法是自己翻仓库——如果他有权限；否则就在群里问一句「改完了吗」，等对面的人复制一段日志过来。两个 agent 明明在同一个仓库、同一条分支上干活，互相不知道对方存在。</p>
+<p>这不是协作意愿问题，是缺一层基础设施：agent 会话没有地址。你能说「问一下 alice」，但没法说「问 alice 那台 XPS 上跑在 api 仓库 auth 分支的那个 codex 会话，它现在正忙」。没有地址，就没法精准投递，只能广播或者靠人转述。</p>
+<p>已经有的两类方案各缺一半。单机编排工具管的是「一台机器上多个 agent 排队干活」，出了这台机器就失效；共享文件、Slack 频道、复制粘贴管的是「人跟人同步」，agent 既不会主动看，也不知道该看哪个线程。它的设计文档里列了 11 个 2026 年的同类项目，结论是绝大多数只服务单机、单人，或者只支持 Claude 一家——最接近的两个，一个把对端限定成你自己的设备（靠 Tailscale 同账号），一个只做「加密房间」而没有目录，跨机还得自建服务器。</p>
+<p>真正没人做的那件事，是<strong>一张带上下文的活会话目录</strong>：谁、哪台机器、哪种 agent、哪个仓库哪条分支、忙还是闲、正在干什么。有了这张表，投递才有目标，agent 才不用靠猜。</p>
+<h2>核心功能</h2>
+<h3>1. 四层地址：团队 → 人 → 机器 → 会话</h3>
+<p><code>team ──&lt; person ──&lt; machine ──&lt; session</code>。会话名默认是 <code>&lt;仓库或目录&gt;-&lt;agent&gt;</code>，重名自动加 <code>-2</code>、<code>-3</code>，agent 自己也能改。地址语法支持六种粒度：<code>alice/api-cursor</code>（一个会话）、<code>alice/api-cursor@xps</code>（同名会话分处两台机器时指定机器）、<code>api-cursor</code>（队内唯一时可省略人名）、<code>alice/*</code>、<code>repo:acme/api</code>、<code>*</code>。</p>
+<p>值得单独说的是最后三种组地址的使用限制：<strong>agent 发不出去</strong>。任何来自 agent 的 <code>*</code>、<code>person/*</code>、<code>repo:</code> 消息在发出前就被拒绝，只有 <code>&lt;person&gt;/terminal</code>（真人坐在终端里）能用。这个设计很直白——广播看起来方便，实际会把「精准问一个人」退化成「打扰全队」，而 agent 最不缺的就是这种冲动。</p>
+<pre><code>reason-network who                                             # 谁在线、在干什么
+reason-network send alice/api-claude "did the token format change?"
+reason-network send alice/api-claude --file schema.json "the schema I meant"
+</code></pre>
+<h3>2. 投递分三档：push / turn / pull</h3>
+<p>这是整个项目最费工的地方。消息「送到对方机器」和「被对方 agent 看见」是两件事，不同客户端的钩子能力差得很远：</p>
+<ul>
+  <li><strong>push</strong>：能在回合中途注入，还能唤醒空闲会话。Claude Code 走的是 MCP 子进程往该会话自己的 inbox socket 写一个 <code>{"type":"user",…}</code> 帧；Codex 用 <code>PostToolUse</code> 的 <code>additionalContext</code>，或者在 Stop 上 <code>decision:block</code>；opencode、pi、Amp 各有插件接口。</li>
+  <li><strong>turn</strong>：只能在下一个工具调用或回合结束时塞进去，空闲会话得等人再敲一句话。Cursor、Gemini CLI、Copilot CLI、Command Code、Grok CLI 都在这一档。</li>
+  <li><strong>pull</strong>：只在你主动查的时候给。DeepSeek Harness 和任何普通 MCP 客户端属于这类，靠 <code>check_inbox</code> 长轮询，外加每个工具结果后面附一行「有未读」。</li>
+</ul>
+<p>档位不是写死在文档里的说明，是它会随消息一起返回的信息。发出去的回执会直接告诉你「queued: alice/web-cursor 是空闲的 turn-only 会话，等 alice 下次给它发指令才会看到」。这句话比任何「已送达」都诚实。</p>
+<h3>3. 状态靠读 transcript，不靠 agent 汇报</h3>
+<p>「正在干什么」这一行不是 agent 自己填的。它去读各客户端本来就会落盘的东西：Claude Code 的 <code>ai-title</code> 转录条目、Codex 的 <code>~/.codex/session_index.jsonl</code> 里的线程名、opencode 的 session title，再加上各自的 todo 列表（<code>~/.claude/tasks/&lt;session&gt;/</code>、TodoWrite、<code>update_plan</code>、<code>write_todos</code>、<code>todo_write</code>）。每次只读上次之后新增的部分。</p>
+<p>这个选择省掉了「让 agent 记得汇报」这类不可靠约定，代价是隐私暴露面变了：你的会话标题就是同事看到的工位挂牌。它给了个按目录关闭的开关，<code>reason-network folder ~/personal off</code> 之后那个目录下的会话不上网。我在代码里核对了 <code>doing.rs</code> 的实现，确实是从转录里抽的，不是让模型自述。</p>
+<h3>4. ask_user：审批答案带签名回来</h3>
+<p>同事的 agent 找你这边要一个只有你能拍板的东西（比如「能不能发版」），你这边会弹窗，Approve 或 Deny，还能附一句说明。答案不是作为一条消息回来的，而是作为工具调用的结果，并且带一个用本机私钥签的 <code>Approval</code> 结构，里面固定包含它答复的那条请求 id（<code>about=</code>）。接收方校验签名、校验「发送方是不是我请求的那个人」「about 是不是我那条请求」，对不上就丢弃。</p>
+<p>它自己也写了这条防线的边界：能控制审批者电脑的软件仍然可以签，因为机器私钥就是本地一个文件。这是减速带，不是保证。</p>
+<h3>5. 回执分四段，重试带幂等键</h3>
+<p><code>message_status</code> 报的是四个独立观测：queued（进了对方队列）、accepted（对方机器接收）、handed（交给了本机 agent）、replied（明确回复了）。远端接受了但没人看，就停在 accepted，不会伪装成 delivered。重试同一个 <code>send_message</code> 要复用 <code>idempotency_key</code>，内容不一致会被拒；回执保留 7 天。</p>
+<h3>6. 文件只传小文本，落地永不执行</h3>
+<p>一条消息最多带 10 个文件，单个 256 KiB，合计 512 KiB，隐藏文件不许传。收件方存到 <code>~/.reason/network/inbox</code>，不设可执行位，也不会替你打开，只在消息里告诉你路径。这三个上限我在 <code>src/files.rs</code> 里逐个核对过，是编译期常量，不是文档口径。</p>
+<h2>技术亮点</h2>
+<h3>1. 传输层用 iroh，把身份压进公钥</h3>
+<p>每台机器一个 iroh <code>Endpoint</code>，持久私钥就是身份（<code>EndpointId</code>，ed25519 公钥）。打洞成功直连，同一局域网用 mDNS 发现，打不通退到 HTTPS:443 的中继，中继只转发加密 QUIC。团队可以自建中继（<code>reason-network relay &lt;url&gt;</code>），一旦自建，机器连 iroh 背后的 n0 地址服务都不再联系。</p>
+<p>代价写得很实：直连端口每次启动随机，要在防火墙开固定口就得把 <code>port = 41641</code> 写在 <code>config.toml</code> 最上面（放进 <code>[table]</code> 下会被忽略）；中继列表要按签名校验，超过 16 个、超过 64 KiB、过期、出现 http 地址，整份作废而不是部分采用——因为一份坏列表能决定谁跟谁通信。</p>
+<p>协议 ALPN 还叫 <code>tincan/1</code>。项目从 tincan 改名过来不久（0.10.1 那次全仓改名），协议名没跟着动，老客户端才能继续互通。</p>
+<h3>2. 名单是签名链，谁都进不来自己</h3>
+<p>成员名单复制到每台机器，每条准入记录由一台<strong>已被准入</strong>的机器签名，创世那条自签。这个 <code>admissions</code> 表永久保留，所以「谁有权准入」不依赖记录到达顺序，各机器最终会收敛到同一份名单。成员状态用 last-writer-wins，邀请存的是 <code>hash(secret)</code>、单次有效、随签发机器一起失效。</p>
+<p>源码注释里那句自我限定比宣传诚实：被移除的机器连不上，但并没有被「密码学阉割」——它手里还有自己的私钥和之前拿到的名单。作者的原话是「这是给朋友用的」。</p>
+<h3>3. 名字验证不回调云端</h3>
+<p>用 Reason 账号登录后，机器携带一份紧凑 JWS（只接受 RS256），声明「这个 EndpointId 属于账号 sub、显示名 name、有效期到 exp」。校验用的 RSA 公钥（≥2048 位）编译进了二进制，永不删除，<strong>不联网问 Reason</strong>。proof 超过 4 KiB、签发时间超前 1 天，直接拒。</p>
+<p>好处是断网也能验名字，队友的机器自己就能确认「这台电脑确实是那个人」。代价是公钥轮换要发版；另外证明过期只影响那个「已验证」标记，不影响成员资格——这条分得很清楚，否则时钟不准的机器会互相踢人。</p>
+<h3>4. 反滥用是三层闸门</h3>
+<p>第一层在发送侧：agent 不能用组地址，只能点对点；第二层是每对会话 10 分钟内最多 12 条 agent↔agent 消息，超了直接 refused 并附一句解释；第三层是每发送方的速率上限，代码里是 60。三层都体现在回执里，不是静默丢弃。</p>
+<p>一个团队里两个 agent 互相礼貌地推诿四十轮，是这类系统最容易出的笑话。把上限做成编译期常量、把拒绝理由回传，比事后看日志强。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>多人同仓的开发组</strong>：前端改字段、后端改契约，让两边的 agent 直接对一次，省掉一次人工转述和一次「你重启一下试试」。</li>
+  <li><strong>一人多机</strong>：家里台式写代码、笔记本在客厅改，两边会话互相对话，不用靠 git push 同步思路。这是投入产出比最高的一档。</li>
+  <li><strong>平台/效率工程师</strong>：要给团队搭这层通信，又能接受自建中继（一台 VPS 加 Let's Encrypt），可以把「谁跟谁通信」也收进自己的边界。</li>
+  <li><strong>不适合单人单机</strong>：没有第二个人或第二台机器，它就是空转。也不适合纯 CI 环境，审批弹窗和菜单栏在那里没有意义。</li>
+</ul>
+<h2>快速上手</h2>
+<pre><code># macOS / Linux：装引擎 + 登录 + 建网络，一步完成
+curl -fsSL https://reasonmachines.com/install.sh | bash -s -- network
+</code></pre>
+<pre><code># Windows PowerShell
+irm https://reasonmachines.com/network/install.ps1 | iex
+</code></pre>
+<p>不想要账号也行，名字会标成未验证：</p>
+<pre><code>reason-network init acme --as alex          # 建网络
+reason-network join '&lt;link&gt;' --as bob       # 用邀请链接加入
+reason-network doctor                       # 看端口、中继、各 agent 接线状态
+</code></pre>
+<p>四个常见的坑，按踩到的概率排序：<a href="https://dev.to/dedupedai/how-to-let-your-coding-agent-message-your-teammates-agents-with-reason-network-2o39" target="_blank" rel="noopener">dev.to 那篇上手文</a>专门提醒过第一个——<code>curl | bash</code> 之前先把脚本下下来读一遍，这是个信任决定；Codex 会话要等你第一轮对话跑完才上线，因为它在那之前不放钩子；Windows 上未签名的 <code>reason.exe</code> 会被 Defender 和 Smart App Control 拦（对应 issue #186、#216）；防火墙要固定端口时，<code>port</code> 必须写在文件最顶部。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>Reason Network</th><th>agentbus</th><th>agents-party</th><th>单机编排工具</th></tr></thead>
+<tbody>
+<tr><td>传输</td><td>iroh P2P，中继可自建</td><td>iroh，但对端是自己的设备</td><td>加密房间，跨机需服务器</td><td>本机进程</td></tr>
+<tr><td>跨人协作</td><td>是，名单靠签名链</td><td>否</td><td>是，但只有房间没有目录</td><td>否</td></tr>
+<tr><td>会话目录</td><td>人/机器/仓库/分支/忙闲/doing</td><td>无</td><td>无</td><td>无</td></tr>
+<tr><td>投递能力</td><td>11 种客户端分 push/turn/pull</td><td>有限</td><td>Claude/Cursor/Codex</td><td>不涉及</td></tr>
+<tr><td>许可与成本</td><td>MIT 或 Apache-2.0，免费，中继可自建</td><td>无协议文件</td><td>开源</td><td>各异</td></tr>
+<tr><td>局限/风险</td><td>名字验证依赖 Reason 账号；遥测默认开；Windows 无签名</td><td>只服务单人</td><td>需运维服务器</td><td>出不了这台机器</td></tr>
+</tbody></table></div>
+<p>选它的边界很清楚：只有当「跨机器 + 跨人 + 要人工拍板」三件事同时成立时，这套目录和审批才划算。如果只是想让一台机器上的几个 agent 串活，用编排工具，别用通信管道凑。</p>
+<h2>局限与风险</h2>
+<p><strong>热度是平缓的，不是爆发的。</strong> 11 月 6 日<a href="http://mp.weixin.qq.com/s?__biz=Mzg3MTgyNTMzNA==&amp;mid=2247484147&amp;idx=1&amp;sn=5e1256a630ec972134d6bbb7b5c107e1" target="_blank" rel="noopener">一篇中文评测</a>记录的是 1,578 star、138 fork，今天 1,797 star、161 fork，半个多月日均十几个。同期 open issues 与 PR 合计 42 个，而提交高度集中在一个主力账号（240 次提交，其余贡献者都是个位数）——这说明它在快速迭代，也说明 bus factor 很低。</p>
+<p><strong>Windows 上问题成串。</strong> issue #186 是 Defender 把安装器报成 <code>Trojan/TermFix.SC</code>；#216 是 Smart App Control 直接拦未签名的 exe，连带把已有安装搞坏；#228、#229 是 Antigravity 的钩子路径带空格就失败。跨平台支持在 Mac 上验证得最充分，Windows 还在补。</p>
+<p><strong>自动更新没有独立签名。</strong> issue #183 指出 Windows 和 Linux 的发布包没有代码签名，而 daemon 会静默装更新。整条链路只靠 GitHub 的传输安全，这在企业环境里通常过不了审。</p>
+<p><strong>遥测默认开着。</strong> 引擎会把聚合计数写进本地 SQLite 并随 Reason CLI 上报：agent 类型、路由方式、投递阶段、大小与延迟分档。正文、文件名、仓库、会话名、密钥都不在其中，报告也和账号绑定而不是匿名；<code>DO_NOT_TRACK=1</code> 可以关掉。介意的话别忘设这个环境变量。</p>
+<p><strong>发布节奏和代码不同步。</strong> 最新 release 还是 10 月 30 日的 v0.12.17，之后三周代码一直在动（最新提交是今天）。想用新功能得自己 <code>cargo build</code>，或者跟 Reason CLI 捆绑的那个版本。</p>
+<p><strong>还有几处语义边界要记牢。</strong> 「accepted」不等于 agent 读到了；Codex 首轮对话之前收不到消息；push 层会话收 FYI 邮件有已知 bug（issue #222）；冲突提醒（同一文件被两个 agent 改）在 M4 里，还没开始做。</p>
+<p>最后一条与国内读者有关：默认中继是 Reason 自己的区域节点，登录、邀请链接、升级检查都要经过 reasonmachines.com。这套服务在中国大陆的网络表现如何，官方未说明，自建中继是唯一能自己掌控的路径。</p>
+<p>有一点要说清楚：<a href="https://newruntime.com/posts/reason-network-is-an-open-source-rust-daemon-b71aac" target="_blank" rel="noopener">New Runtime 的评测</a>把证据边界划得很直白——现有材料能证明「设计如上」，不能证明「可靠性与生产采用率如上」；我没有找到任何一家团队公开的两周以上运行报告。所以上面所有机制都是按代码与文档核过的，长期稳定性属于尚未被第三方验证的部分。</p>
+<h2>写在最后</h2>
+<p>它没有让模型变聪明一点，而是给「agent 之间的协作」补了一个此前被跳过的层：寻址。有了地址，才谈得上精准投递；有了投递回执，才谈得上「我到底有没有被回复」；有了签名审批，才敢让 agent 替你去要一个只有人能给的许可。这三件事拆开看都不新鲜，在我核过的同类项目里，把三者串成一个能装、能跑、能自建中继的成品，这是第一个。</p>
+<p>给读者的具体建议：先用两台自己的机器试半小时，重点看 <code>reason-network who</code> 的 <code>doing</code> 一行准不准——那一行不准，后面所有投递都是盲投。团队要上，先开个会把「哪些目录 off」定下来再发邀请链接，这一步比装什么版本重要。生产环境先别开自动更新，等签名问题（issue #183）有着落。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/reason-machines/reason-network" target="_blank" rel="noopener">https://github.com/reason-machines/reason-network</a></p>
+  <p>官方文档：<a href="https://docs.reasonmachines.com/docs/network" target="_blank" rel="noopener">https://docs.reasonmachines.com/docs/network</a></p>
+  <p>第三方上手与评测：<a href="https://dev.to/dedupedai/how-to-let-your-coding-agent-message-your-teammates-agents-with-reason-network-2o39" target="_blank" rel="noopener">dev.to 实操指南</a> · <a href="https://zuphp.com/6003.html" target="_blank" rel="noopener">祖普科技中文解读</a> · <a href="https://newruntime.com/posts/reason-network-is-an-open-source-rust-daemon-b71aac" target="_blank" rel="noopener">New Runtime 评测</a> · <a href="https://www.toolhunter.cc/tools/reason-network" target="_blank" rel="noopener">ToolHunter 条目</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>

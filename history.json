@@ -70,7 +70,8 @@
         "chenxiachan/textfold",
         "erkamyaman/rust-anything",
         "divagr18/qwenputer",
-        "miuuyy/Octopus-SI-OS"
+        "miuuyy/Octopus-SI-OS",
+        "reason-machines/reason-network"
     ],
     "meta": [
         {
@@ -156,6 +157,13 @@
             "org": "miuuyy",
             "topic": "agent-os",
             "title": "模型说了不算，Octopus 用内核重算每一步权限"
+        },
+        {
+            "repo": "reason-machines/reason-network",
+            "date": "2026-11-22",
+            "org": "reason-machines",
+            "topic": "agent-messaging",
+            "title": "人肉网线该剪了，Reason Network 替你接"
         }
     ]
 }
