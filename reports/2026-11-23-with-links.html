@@ -127,7 +127,7 @@
 <p>深潜（Deep）放开全部工具：ELF、PE、Mach-O 解析，自带的反汇编与反编译，可选接 Ghidra，Android 侧接 adb、Frida、JEB，.NET 走 IL 结构，Java 走 Vineflower。适合自家遗留系统、有授权的私有软件，或者纯粹想搞清楚某个二进制在干什么。</p>
 <p>这里的边界要说清楚：净室是产品规则，不是操作系统沙箱。它管的是「Craft Anything 提供什么工具、拒绝什么工具」，不隔离你的电脑。被拉起来的 agent 仍然以你的身份、你的权限在跑，它能读写什么，取决于它自己的设置。</p>
 <h3>3. 305 个工具，一套接口三种外壳</h3>
-<p>引擎里有 305 个工具，分 17 组：核心会话与证据 36 个、原生程序 55 个、文件格式 36 个、网页 24 个、安卓设备 24 个、项目 21 个、应用比对与重建 17 个、Apple 14 个、安卓静态 14 个、运行时 14 个、Electron 与 JS 11 个、Frida 9 个、安装与设置 9 个、.NET 8 个、Java 6 个、构建 6 个、数据库 1 个。加上 AI 层和安装层自己的十几个（<code>rebuild_*</code>、<code>ai_model_*</code>、<code>setup_*</code>），合计 320 个左右；有第三方在 Linux 上拿 v0.4.0 实跑 <code>commands</code>，报出 321 个，<code>doctor</code> 自检通过（<a href="https://crazycoderslab.com/craft-anything-study-build-check-ai-agents-rust-cli-mcp-github-2026" target="_blank" rel="noopener">crazycoderslab 实测</a>）。</p>
+<p>引擎里有 305 个工具，分 17 组：核心会话与证据 36 个、原生程序 55 个、文件格式 36 个、网页 24 个、安卓设备 24 个、项目 21 个、应用比对与重建 17 个、Apple 14 个、安卓静态 14 个、运行时 14 个、Electron 与 JS 11 个、Frida 9 个、安装与设置 9 个、.NET 8 个、Java 6 个、构建 6 个、数据库 1 个。加上 AI 层和安装层自己的十几个（<code>rebuild_*</code>、<code>ai_model_*</code>、<code>setup_*</code>），合计 320 个左右；有第三方在 Linux 上拿 v0.4.0 实跑 <code>commands</code>，报出 321 个，<code>doctor</code> 自检通过（<a href="https://crazycoderslab.com/craft-anything-study-build-check-ai-agents-rust-cli-mcp-github-2026/" target="_blank" rel="noopener">crazycoderslab 实测</a>）。</p>
 <p>每个工具同时是三样东西：MCP 工具、CLI 子命令、agent 可调的函数。所以 <code>craft-anything-cli commands</code> 能列全，<code>craft-anything-cli mcp</code> 能把同一批工具挂给任意 MCP 客户端，桌面应用用的也是这一套。这个设计的好处很直接——你可以不用图形界面，让 Claude Code 自己在终端里跑完一次复刻；也可以不用 agent，纯手工一个个工具查。</p>
 <h3>4. 证据台账：每条结论都带置信度和覆盖率</h3>
 <p>这是整个项目最值得看的部分。所有工具返回同一个 <code>Evidence</code> 结构，字段包括：看了什么（subject，带目标文件的 SHA-256）、问了什么（operation 与参数）、结果是什么、有多确定（Confidence）、凭什么（Authority）、哪里没查到（Limitation、Coverage）、指向目标里的哪个位置（Location）。</p>
@@ -189,11 +189,11 @@ craft-anything-cli mcp                                         # 挂给任意 MC
 <ol>
   <li><strong>早期 alpha，接口还会动</strong>。十二天发了七个版本（v0.1.0 → v0.6.1），520 个 open issue 里大量是路线图编号条目。行为比对（应用、游戏）仍标为部分实现，除 Claude Code 外的后端多是「写完没实跑」。</li>
   <li><strong>工具实测极不均匀</strong>。<code>docs/tool-status.md</code> 那张表很诚实：Frida 9 个工具全部未验证、安卓设备 23 个未验证、运行时 5 个未验证、Apple 6 个未验证，审计主要在 Windows 11 上做，Linux 和 macOS 只有零星抽样。305 个工具的能力清单，不能当成 305 个都能用。</li>
-  <li><strong>净室不等于安全边界</strong>。它是规则层拦截，不是内核隔离。拿它跑来源不明的二进制，仍然该放虚拟机里。同理，依赖安装会执行第三方脚本。</li>
-  <li><strong>保真度缺公开基准</strong>。90 分是工具内部的收敛阈值，不是「可用」的标准；CSDN 上的一篇评测给了一个具体例子：某页与原版 87% 像，差距落在导航行高、按钮圆角和一段文案（<a href="https://blog.csdn.net/zhangfeng1133/article/details/171113943" target="_blank" rel="noopener">原文</a>）。这类样本目前只有个案，没有跨站点、跨应用的系统评测。</li>
+  <li><strong>净室不等于安全边界</strong>。它是规则层拦截，不是内核隔离。有作者在 Mac 上实测后专门提醒过这一点：净室防的是 agent 偷看源码，真跑去路不明的二进制还得靠虚拟机（<a href="https://post.smzdm.com/p/axkd35x4/" target="_blank" rel="noopener">什么值得买实测</a>）。同理，依赖安装会执行第三方脚本。</li>
+  <li><strong>保真度缺公开基准</strong>。90 分是工具内部的收敛阈值，不是「可用」的标准。到目前公开的第三方记录，多是跑通 <code>doctor</code> 与 <code>commands</code>，或者复刻一个静态页看结果，没有跨站点、跨应用的保真度评测，也没有人拿它和人工复刻做过对照。</li>
   <li><strong>成本落在自己账号上</strong>。一轮四页、最多六轮，每轮都是真实 token；复杂页面往往要人再验收一遍。</li>
   <li><strong>法律风险没有消失</strong>。净室降低了「接触源码」的风险，但不等于免责。默认提示不复制 logo、照片、文案，DRM、登录、反作弊一律不绕。复刻别人的产品，商标和不正当竞争这两条线仍在。</li>
-  <li><strong>关注度结构偏中文社区</strong>。四万一千星的同时，Hacker News 上那条发布帖只有 6 分 3 条评论（2026-11-05，<a href="https://news.ycombinator.com/item?id=50377361" target="_blank" rel="noopener">帖子</a>），英文独立评测很少，中文侧的实测与转述更多。星数涨得快，独立复现的样本还薄。</li>
+  <li><strong>关注度结构偏中文社区</strong>。四万一千星的同时，Hacker News 上那条发布帖只有 6 分 3 条评论（2026-11-05），英文独立评测很少，中文侧的实测与转述更多。星数涨得快，独立复现的样本还薄。</li>
 </ol>
 <h2>写在最后</h2>
 <p>第一点判断：它真正改的不是逆向工具的效率，而是「结论要不要留证据」这件事的门槛。以前这套做法只在取证和合规场景里出现，现在被写进了默认流程——每个工具返回带置信度、覆盖率、可校验哈希的记录。哪怕你不用这个项目，这套结构也值得抄。</p>
