@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>不读一行源码，Craft Anything 复刻到90分</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">不读一行源码，Craft Anything 复刻到90分</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-23 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/storytold/craft-anything" target="_blank" rel="noopener">storytold/craft-anything</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 41,379 · 🍴 8,219（截至 2026-11-23，创建于 2026-10-31）</li>
+  <li><strong>主要语言</strong>：Rust（约 99%，按字节计）</li>
+  <li><strong>开源协议</strong>：MIT 或 Apache-2.0（双许可，任选其一）</li>
+  <li><strong>形态</strong>：桌面应用（egui）+ CLI + MCP 服务 + 浏览器端 WebAssembly</li>
+  <li><strong>文档</strong>：getartcraft.com；仓库内 <code>docs/tools.md</code> 是按代码生成的工具清单，<code>docs/tool-status.md</code> 是逐工具的实测状态表</li>
+  <li class="sources">数据来源：仓库 README 与官方文档 + 第三方报道（截至 2026-11-23）</li>
+</ul>
+</div>
+<p>指向一个网址、一个安装包或一个游戏目录，说一句「照这个做个我自己的」，剩下的交给它：先取证，再让本机的 coding agent 动手写，写完拿原版对比，差在哪就回去改。二十三天冲到四万一千星，靠的不是模型更聪明，而是把「像不像」变成了可以复算的数字——默认模式下，它连目标的一行源码都不许看。</p>
+<h2>项目背景：逆向的瓶颈不在工具，在证据</h2>
+<p>传统逆向的开场是打开 Ghidra 或 IDA，对着一屏汇编和伪 C 啃。工具本身没问题，问题在流程：分析结论写在笔记里，靠人记住；换个人接手，得从头再走一遍；报告里的「这里应该是加密函数」既没有置信度，也没有覆盖率，错了也没人知道错在哪一步。</p>
+<p>让大模型来干这件事，多了两个新坑。第一，模型会凭记忆补齐。你说「复刻这个落地页」，它可能直接吐出一个记忆里相似的页面，看起来像，实际和原版没关系。第二，产出无法验收。截图对比肉眼看着差不多，究竟差 3% 还是差 30%，全凭感觉。</p>
+<p>法律边界是第三个变量。今年十月那波「逆向一切」的热潮之后，读别人源码这件事被讨论得很充分：能跑起来不等于能拆开看，能拆开看不等于能照着重建。多数工具的态度是「你自己负责」，把边界留给用户判断。</p>
+<p>Craft Anything 的切入点是重排这条流水线：把「看懂」拆成一系列带出处的观测动作，把「重建」交给本机的编码 agent，把「验收」变成相似度和差异清单，最后用一次次的对比把结果推到阈值之上。它假设的不是模型有多强，而是每一步都能被查。</p>
+<h2>核心功能</h2>
+<h3>1. 四步流水线：观测、构建、比对、交付</h3>
+<p>一次任务分四步。Study 阶段采集目标：网页按多档宽度截图、读取可见文本、测量布局与配色字体、展开菜单和弹窗记录状态；桌面应用和游戏则抓窗口画面、跑一遍交互路径。采集结果落成结构化证据，再压成一份 brief 和分步计划。</p>
+<p>Build 阶段不自己写代码，而是把你本机装好的 coding agent 拉起来干活，在 <code>app/</code> 目录里新建工程。Check 阶段拿新工程和原件逐项对比，列出「哪些还不一样」。Ready 阶段可以预览、试玩，或者在底部输入框里继续提要求，进入下一轮。</p>
+<p>需要人拍板的地方不会静默略过：<code>core_person_ask</code> 会抛问题卡，<code>core_action_approve</code> 会拦下规则外的命令等你点同意。每个项目目录结构是固定的——<code>craft.json</code> 存请求、目标和历史，<code>capture/</code> 存从原件采到的东西，<code>checks/</code> 存每一轮比对，<code>investigation.cany/</code> 存证据，<code>inbox/</code> 存待答问题。项目可以随时中断再续，<code>--continue-in</code> 指回目录就行。</p>
+<h3>2. 净室与深潜：默认不往里看</h3>
+<p>两种模式决定了「能看多深」。</p>
+<p>净室（Clean room）是默认档。它只允许看访客能看到的东西：截图、可见文字、实测出来的布局尺寸与间距、颜色和字体、菜单展开后的状态。任何会「往里看」的工具在这一档会被拒绝调用，并提示怎么切到深潜。这条规则写在引擎层，不是靠提示词劝模型自觉。</p>
+<p>深潜（Deep）放开全部工具：ELF、PE、Mach-O 解析，自带的反汇编与反编译，可选接 Ghidra，Android 侧接 adb、Frida、JEB，.NET 走 IL 结构，Java 走 Vineflower。适合自家遗留系统、有授权的私有软件，或者纯粹想搞清楚某个二进制在干什么。</p>
+<p>这里的边界要说清楚：净室是产品规则，不是操作系统沙箱。它管的是「Craft Anything 提供什么工具、拒绝什么工具」，不隔离你的电脑。被拉起来的 agent 仍然以你的身份、你的权限在跑，它能读写什么，取决于它自己的设置。</p>
+<h3>3. 305 个工具，一套接口三种外壳</h3>
+<p>引擎里有 305 个工具，分 17 组：核心会话与证据 36 个、原生程序 55 个、文件格式 36 个、网页 24 个、安卓设备 24 个、项目 21 个、应用比对与重建 17 个、Apple 14 个、安卓静态 14 个、运行时 14 个、Electron 与 JS 11 个、Frida 9 个、安装与设置 9 个、.NET 8 个、Java 6 个、构建 6 个、数据库 1 个。加上 AI 层和安装层自己的十几个（<code>rebuild_*</code>、<code>ai_model_*</code>、<code>setup_*</code>），对外宣称 320 个左右。</p>
+<p>每个工具同时是三样东西：MCP 工具、CLI 子命令、agent 可调的函数。所以 <code>craft-anything-cli commands</code> 能列全，<code>craft-anything-cli mcp</code> 能把同一批工具挂给任意 MCP 客户端，桌面应用用的也是这一套。这个设计的好处很直接——你可以不用图形界面，让 Claude Code 自己在终端里跑完一次复刻；也可以不用 agent，纯手工一个个工具查。</p>
+<h3>4. 证据台账：每条结论都带置信度和覆盖率</h3>
+<p>这是整个项目最值得看的部分。所有工具返回同一个 <code>Evidence</code> 结构，字段包括：看了什么（subject，带目标文件的 SHA-256）、问了什么（operation 与参数）、结果是什么、有多确定（Confidence）、凭什么（Authority）、哪里没查到（Limitation、Coverage）、指向目标里的哪个位置（Location）。</p>
+<p>Confidence 只有三档，界面上翻成人话：<code>Observed</code> 是「亲眼看到」——字节、报文头、抓到的请求；<code>Derived</code> 是「算出来的」——控制流图、调用图这类确定性推导；<code>Inferred</code> 是「猜的」——启发式命名、模型解读。Authority 记来源：原件本身、我们控制的运行、历史记录（HAR、崩溃转储）、外部服务、还是某人的推理。</p>
+<p>Coverage 记查了多少：状态是完整、部分还是未知，已查数量和总量分别是多少，下一页从哪个偏移续。所以「我看了 200 个函数中的 43 个」是写在记录里的，不会被含糊成「分析完成」。</p>
+<p>证据的 id 是它规范化 JSON 的 SHA-256。同一次观测永远得到同一个 id，记录存下来之后改一个字节都会被发现。配合导出、导入、两份证据包互比这几个工具，一次分析可以交给别人复核，也可以在两个版本之间做差集。</p>
+<p>还有一类对象容易被忽略：<code>Unknown</code>，记录「还不知道什么，以及什么能定论」。它的态度是「没找到不等于不存在」——这在一个会自动补全的行业里，算是难得的自我约束。</p>
+<h3>5. 比对是量出来的</h3>
+<p>网页复刻的默认设置写在引擎的构建配置里：比对宽度 1440、768、390 三档（可改，最多四档），最多四页，目标相似度 90 分，最多六轮，两路并行。</p>
+<p>像素比对的输出不是一个模糊的「挺像」，而是两个 0 到 1 的数：<code>layout_similarity</code> 按 16 像素的色块算有多少块平均颜色对得上，<code>perceptual_similarity</code> 算亮度 SSIM 的均值。尺寸不一致时比对两者重叠的区域，并在结果里写明。为了让两次截图可比，浏览器环境被固定：1280×720 视口、en-US、UTC、浅色、开减弱动画、关 Service Worker。</p>
+<p>游戏走另一条路：用项目自己的自测跑行为，比对两边的运行结果。应用则比对两次运行的界面与调用。</p>
+<h2>技术亮点</h2>
+<h3>1. 反汇编器和反编译器是自己写的</h3>
+<p>深潜需要的那套底层能力，Craft Anything 没外包。<code>crates/disasm</code> 提供反汇编、伪 C 反编译、调用图、交叉引用；<code>crates/formats</code> 处理 PE、ELF、Mach-O、Unity 资源包、Unreal pak 与 IoStore、固件、pcap、SQLite；<code>crates/engines</code> 只管外部工具（Ghidra、apktool、JADX、tshark、rtl_433）的探测与调用。Ghidra 是可选项，不是前置条件。</p>
+<p>代价是还原度。伪 C 对函数参数的处理依赖一张 arity 表，表外的导入函数只能显示出调用块里已经设好的那几个参数——这一点在他们自己的状态表里明确标为「部分可用」。换来的是零外部依赖、跨平台、能在浏览器里跑（<code>apps/craft-anything-web</code> 编译成 WASM，用来识别文件类型）。</p>
+<h3>2. 用证据约束模型，而不是用提示词</h3>
+<p>大多数 agent 类项目靠系统提示词约束行为：不要说谎、不要猜测、给出来源。这套写法在长任务里会衰减。Craft Anything 换了个位置——模型不是证据的生产者，只是证据的消费者：工具产出带置信度的记录，模型基于记录写 brief 和代码，比对环节再拿新记录去验证结论。</p>
+<p>好处是可审计。判错能定位到「哪一条观测的置信度被误读」，而不是笼统地怪模型。代价是每个工具都得按统一结构封装，工具越多，封装和维护成本越高；305 个工具意味着 305 份这样的契约，任何字段改动都是全量回归。</p>
+<h3>3. 一个仓库，十三块拼图</h3>
+<p>工作区拆成 13 个 crate：<code>engine</code>（工具与调度）、<code>formats</code>（文件格式）、<code>ui-egui</code>（桌面界面）、<code>ai</code>（重构流程与 agent 适配）、<code>analysis</code>、<code>engines</code>、<code>disasm</code>、<code>js</code>、<code>platform</code>、<code>setup</code>、<code>evidence</code>、<code>mcp</code>、<code>testkit</code>。仓库里 897 个 <code>.rs</code> 文件，<code>crates/</code> 自身约 12.5 MB（另有约 2 MB vendored 依赖源码）。桌面、CLI、MCP、WASM 四个入口共用同一套引擎，这是它能做到「每个工具既是界面按钮又是命令行」的前提。</p>
+<p>构建侧的接入方式也值得记一笔：它不改你装的 Claude Code，直接把你自己的 <code>claude</code> 程序当子进程跑，用你自己的登录。Codex 的适配器写了但没在真实安装上验证过，Copilot CLI 与 Grok Build 走 ACP 接入，Gemini CLI、Qwen Code、opencode、goose 等也能切过去。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>前端与全栈</strong>：想弄明白某个网站的交互动效怎么做的，净室模式下采集布局与状态流，产出一个可运行的同构版本。省的是逐个元素量尺寸、反复比对截图的时间。</li>
+  <li><strong>维护遗留系统的团队</strong>：手上只有二进制或没人敢动的老项目，深潜模式读自家代码，证据包可以当交接材料，两份证据包互比能看出两个版本之间改了什么。</li>
+  <li><strong>独立游戏开发者</strong>：想复用某款游戏的玩法机制，让它把状态机、关卡节奏、手感参数拆出来，用自己的美术重做。这条路的前提是只借机制、不搬素材。</li>
+  <li><strong>技术教学与安全审计</strong>：证据链带置信度和覆盖率，讲「这个函数为什么判定是加密」时能指到具体观测，比口头结论扎实。</li>
+  <li><strong>Agent 工具链开发者</strong>：305 个工具全部走 MCP，可以直接当自己 agent 的取证后端，不必从零搭一套二进制分析接口。</li>
+</ul>
+<h2>快速上手</h2>
+<p>最省事的是下预编译包：Windows 有 msi 与 portable，macOS 是签名并公证过的 dmg，Linux 有 AppImage、Flatpak、deb、rpm、tarball，FreeBSD 给 tar.gz。想从源码来：</p>
+<pre><code>git clone https://github.com/storytold/craft-anything &amp;&amp; cd craft-anything
+cargo run --release -p craft-anything          # 桌面应用
+cargo install --path apps/craft-anything-cli   # 装 CLI
+craft-anything-cli doctor                      # 体检：Rust、引擎、agent
+</code></pre>
+<p>然后就可以命令行直接干活：</p>
+<pre><code>craft-anything-cli commands                                    # 列出全部工具
+craft-anything-cli rebuild https://example.com "复刻这个页面"
+craft-anything-cli rebuild - "用 Rust 写个贪吃蛇" --rounds 1
+craft-anything-cli mcp                                         # 挂给任意 MCP 客户端
+</code></pre>
+<p>几个必踩的坑：Rust 需要 1.97 以上，第一次 <code>cargo build</code> 时间不短；Linux 编译桌面端要装一堆 X11、Wayland、GTK 开发包；必须本机已登录一个编码 agent，<code>doctor</code> 会告诉你缺什么；Flatpak 版本是沙箱的，起不了浏览器，学网页那部分得换别的包；构建时会执行 <code>npm install</code>、<code>cargo</code> 这类命令，安装脚本本身就在跑代码，不信任的依赖别随手点「总是允许」。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>Craft Anything</th><th>REA 系工具</th><th>Ghidra / IDA 手工</th><th>截图复刻类 agent</th></tr></thead>
+<tbody>
+<tr><td>主要动作</td><td>取证 → 构建 → 比对</td><td>拆解并解释内部实现</td><td>人工静态分析</td><td>看图写页面</td></tr>
+<tr><td>是否读目标内部</td><td>净室默认不读，深潜才读</td><td>读</td><td>读</td><td>不读</td></tr>
+<tr><td>产出物</td><td>可运行的新工程 + 证据包</td><td>分析报告</td><td>分析结论、脚本</td><td>一次性页面代码</td></tr>
+<tr><td>质量判定</td><td>相似度分数 + 差异清单</td><td>人工判断</td><td>人工判断</td><td>肉眼</td></tr>
+<tr><td>上手成本</td><td>中（要 Rust 或装包 + agent）</td><td>中</td><td>高</td><td>低</td></tr>
+<tr><td>法律姿态</td><td>净室为默认，明确不绕 DRM</td><td>用户自负</td><td>用户自负</td><td>用户自负</td></tr>
+<tr><td>局限/风险</td><td>早期 alpha，工具实测不均</td><td>产出难复核</td><td>慢，门槛高</td><td>无法验证保真度</td></tr>
+</tbody></table></div>
+<p>边界在哪：它擅长「界面与行为可观测」的目标，网站、桌面应用、小游戏这类；对需要协议逆向、加密算法还原、大规模服务端逻辑的场景，305 个工具也顶不上一个有经验的逆向工程师。跟四天前写过的 rust-anything 也不是一回事——那个是边迁移边拿原行为对拍，管的是「改写得对不对」；这个管的是「看懂了多少、复刻得像不像」。</p>
+<h2>局限与风险</h2>
+<ol>
+  <li><strong>早期 alpha，接口还会动</strong>。十二天发了七个版本（v0.1.0 → v0.6.1），520 个 open issue 里大量是路线图编号条目。行为比对（应用、游戏）仍标为部分实现，除 Claude Code 外的后端多是「写完没实跑」。</li>
+  <li><strong>工具实测极不均匀</strong>。<code>docs/tool-status.md</code> 那张表很诚实：Frida 9 个工具全部未验证、安卓设备 23 个未验证、运行时 5 个未验证、Apple 6 个未验证，审计主要在 Windows 11 上做，Linux 和 macOS 只有零星抽样。305 个工具的能力清单，不能当成 305 个都能用。</li>
+  <li><strong>净室不等于安全边界</strong>。它是规则层拦截，不是内核隔离。拿它跑来源不明的二进制，仍然该放虚拟机里。同理，依赖安装会执行第三方脚本。</li>
+  <li><strong>保真度缺公开基准</strong>。90 分是工具内部的收敛阈值，不是「可用」的标准；某篇中文评测给了一个具体例子——某页与原版 87% 像，差距落在导航行高、按钮圆角和一段文案。这类样本目前只有个案，没有跨站点、跨应用的系统评测。</li>
+  <li><strong>成本落在自己账号上</strong>。一轮四页、最多六轮，每轮都是真实 token；复杂页面往往要人再验收一遍。</li>
+  <li><strong>法律风险没有消失</strong>。净室降低了「接触源码」的风险，但不等于免责。默认提示不复制 logo、照片、文案，DRM、登录、反作弊一律不绕。复刻别人的产品，商标和不正当竞争这两条线仍在。</li>
+  <li><strong>关注度结构偏中文社区</strong>。四万一千星的同时，Hacker News 上那条发布帖只有 6 分 3 条评论（2026-11-05），英文独立评测很少，中文侧的实测与转述更多。星数涨得快，独立复现的样本还薄。</li>
+</ol>
+<h2>写在最后</h2>
+<p>第一点判断：它真正改的不是逆向工具的效率，而是「结论要不要留证据」这件事的门槛。以前这套做法只在取证和合规场景里出现，现在被写进了默认流程——每个工具返回带置信度、覆盖率、可校验哈希的记录。哪怕你不用这个项目，这套结构也值得抄。</p>
+<p>第二点判断：净室模式是个聪明的产品决策，把最容易踩线的那部分（读源码）从默认路径里拿掉，同时把深潜保留给自有资产。它解决不了版权问题，但把「我该不该看」变成了一个显式开关。</p>
+<p>想动手的话，建议这样起步：先下 release 包，<code>doctor</code> 跑通，挑一个自己写过的静态站点做净室复刻——你对原版熟悉，才看得出那 90 分是真是假。等比对逻辑摸熟了，再拿自家老项目的二进制试深潜。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/storytold/craft-anything" target="_blank" rel="noopener">https://github.com/storytold/craft-anything</a></p>
+  <p>项目主页：<a href="https://getartcraft.com/" target="_blank" rel="noopener">https://getartcraft.com/</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>
