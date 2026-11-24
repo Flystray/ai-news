@@ -72,7 +72,8 @@
         "divagr18/qwenputer",
         "miuuyy/Octopus-SI-OS",
         "reason-machines/reason-network",
-        "storytold/craft-anything"
+        "storytold/craft-anything",
+        "JuneYaooo/rea-video"
     ],
     "meta": [
         {
@@ -172,6 +173,13 @@
             "org": "storytold",
             "topic": "software-reimplementation",
             "title": "不读一行源码，Craft Anything 复刻到90分"
+        },
+        {
+            "repo": "JuneYaooo/rea-video",
+            "date": "2026-11-24",
+            "org": "JuneYaooo",
+            "topic": "video-reverse",
+            "title": "爆款视频是拍的还是 AI？rea-video 逐镜拆给你看"
         }
     ]
 }
