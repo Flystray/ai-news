@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5 美元测 20 台手机，mobile-agent-testers</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">5 美元测 20 台手机，mobile-agent-testers</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-25 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/pierridotite/mobile-agent-testers" target="_blank" rel="noopener">pierridotite/mobile-agent-testers</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 1,889 · 🍴 187（截至 2026-11-25，创建于 2026-11-16）</li>
+  <li><strong>主要语言</strong>：Python（约 74%，按字节计）</li>
+  <li><strong>开源协议</strong>：MIT</li>
+  <li><strong>形态</strong>：GitHub Actions 模板仓库 + Claude Code 插件</li>
+  <li><strong>文档</strong>：<a href="https://github.com/pierridotite/mobile-agent-testers/tree/main/docs" target="_blank" rel="noopener">官网</a>（案例、对比、FAQ、配置）</li>
+</ul>
+</div>
+<p>一个 GitHub 模板仓库，往里面塞了 20 个 AI 测试员。每个测试员是一个 Claude Code agent，独占一台 iOS 模拟器或 Android 模拟器，跑在 GitHub Actions 的免费 runner 上，扮演不同人格把你的 App 玩一遍，交回带编号截图的 bug 报告。9 天涨到 1,889 star；在 LocalSend（10 万 star 的 Flutter 应用）上的实测是：20 台手机、14 种语言、69 分钟、4.62 美元模型开销，103 份报告归并出 46 个不同 bug，其中 29 个只被一台设备发现——包括那个阻断级 bug。这件事最反直觉的地方在于：你一行测试脚本都不用写，而脚本化测试工具恰恰只能测你想到要写的东西。</p>
+<p>数据来源：仓库 README 与官方文档 + 第三方报道（截至 2026-11-25）</p>
+<h2>项目背景：手工 QA 覆盖不了 20 种设备</h2>
+<p>移动 App 的 bug 有个共同点：它藏在某一种设备上。iPhone SE 用瑞典语开到最大字号的用户发不出一条消息，Pixel 7 开 200% 字体后六个发送按钮全部截半，阿拉伯语用户的界面没有从右到左镜像——这些在开发者的旗舰机上永远看不到。</p>
+<p>现实是，绝大多数团队的手工回归测试只在一两台主力机上跑。Maestro、Appium、Detox 这类脚本化工具解决的是「让已知路径反复通过」，前提是有人为每块屏幕、每种字号、每种语言写过断言。Firebase Test Lab 的 Robo 能免脚本爬 Android 应用，但它不「读」屏幕，说不出「Get started 在日语手机上还是英文」这种事。人工众测能补一部分盲区，但要等几天，而且愿意用德语 iPad 开最大无障碍字号的测试者几乎找不到。</p>
+<p>mobile-agent-testers 的切入点就是这道缝：让 AI 以新用户的身份探索，覆盖「没人想到要测」的组合。它不要求你的代码有任何配合——agent 只看屏幕和无障碍树，Flutter、React Native、Expo、原生 Kotlin/Swift、KMP、Capacitor、.NET MAUI 都能自动识别并构建；反过来，无障碍标签写得越好的 App，agent 点得越准，这对真实读屏用户也是好事。作者 Pierre Raffalli 在 11 月 16 日开源了这个模板，一周内 star 从数百涨到近 1,900，11 月 23 日上了 Product Hunt（<a href="https://dev.to/ovulab/20-ai-testers-20-phones-5-put-your-app-through-a-crowd-test-13dc" target="_blank" rel="noopener">dev.to 报道</a>）。</p>
+<h2>核心功能</h2>
+<h3>1. 人格矩阵：20 台设备，14 种语言</h3>
+<p><code>personas.json</code> 里每个测试员是一段几行的 JSON：设备型号、系统版本、语言、字号、深浅色模式、地理位置、身份和目标。内置 20 个人格——10 台 Android、10 台 iOS，从 Nexus 5 到 iPad Pro 13 英寸，覆盖 14 种语言。有 68 岁没耐心看术语的退休教师（Nexus 5，1.3 倍字号），有 200% 字体低视力的 Pixel 7 用户，有两个要求界面镜像的阿拉伯语人格，也有一个简体中文人格：45 岁会计，逐字核对翻译、日期和数字格式。人格可以自己改，也支持传 <code>all</code> 全量上。</p>
+<h3>2. 每个agent只有三件工具，约 30 步预算</h3>
+<p>这是设计上最克制的部分。每个 agent 能做的只有：看屏幕（截图加可点坐标的无障碍树）、手势、输入。没有 API 调用，没有源码访问——它和你一样只能看界面。每台手机约 30 步动作预算，用完就写报告；中途连续 4 次卡在同一障碍也算数。工具越少，幻觉空间越小，报告里每条结论都挂着编号截图可以人肉核对。</p>
+<h3>3. 每屏自动过一遍无障碍检查</h3>
+<p>每截一屏，<code>scripts/a11y.py</code> 会扫一遍元素树，标出没有名字的控件（读屏器读不出来）和小于平台最小值的触控目标——Android 48 dp、iOS 44 pt，滚动列表边缘被裁切的元素会被跳过避免误报。这段逻辑我核过代码，和描述一致。检查结果附在元素列表下面让 agent 到截图上确认，所以无障碍问题不需要专门的人格去找，每台手机都在顺手找。</p>
+<h3>4. 五种玩法：探索只是默认项</h3>
+<ul>
+  <li><strong>探索</strong>（默认）：各人格自己找路，报路上撞到的一切；</li>
+  <li><strong>单功能端到端</strong>：一份 brief 把所有 agent 赶过同一条流程，比如多步预订；</li>
+  <li><strong>复现 bug 报告</strong>：丢一个 issue 进去，每台手机回答「能/不能/不确定」并附截图；</li>
+  <li><strong>改进报告</strong>：用完一次后按模块和影响排优先级；</li>
+  <li><strong>双版本对比</strong>：同样人格跑两个分支，出一张对照表——上线真 A/B 测试前的一道便宜预检。</li>
+</ul>
+<p>brief 是一份 Markdown 文件，<code>briefs/ankidroid.md</code> 里那条实测很有代表性：让 agent 走完「新建一张卡片」的流程，结果发现卡片的 Back 输入框被软键盘整个挡住。同一个 brief 可以抬高约 30 步的动作预算去钻深流程。所有模式共用同一套证据格式：每条发现挂编号截图、复现步骤、实际/预期结果和严重级别，报告结尾还有人格以第一人称给出的「要不要继续用这个 App」评分——一轮跑完，你拿到的不仅是 bug 列表，还有一张新用户流失地图。</p>
+<h3>5. 报告加密上传，汇总时自动归并重复</h3>
+<p>公开仓库的 Actions 日志是公开的，所以截图、报告、录屏在上传前全部用 setup 时生成的密钥对加密，私钥留在本机。测试手机内部还会屏蔽分析服务的域名，避免污染真实数据。跑完后 <code>collect.sh</code> 解密、调本地 Claude 把描述同一问题的报告归并成 <code>SUMMARY.md</code>——LocalSend 那次 103 份报告就是这么变成 46 个 bug 的，<code>SUMMARY_GROUPING=0</code> 可以跳过归并全程本地化。</p>
+<h3>6. 换模型是改一个参数的事</h3>
+<p>默认 Sonnet，<code>model=haiku</code> 直接降成本（文档口径是 4 到 20 倍）；任何说 Anthropic Messages 协议的 API 都能接，OpenRouter、DeepSeek、Kimi、GLM、MiniMax、Qwen 都在列，国内付费也方便。代价文档也写明白了：模型读不好截图，报告就是垃圾——没有图像输入的模型拿到的是文字占位符，等于盲测（项目自述）。</p>
+<h2>技术亮点</h2>
+<h3>1. CI 即设备农场：免费算力换并行度</h3>
+<p>整个方案没租一台真机。Android 模拟器跑在 Linux runner，iOS 模拟器跑在 macOS runner，公开仓库全免费。代价是排队：免费档 macOS 并发只有 5，所以 LocalSend 那次 20 台手机总共跑了 69 分钟，时间全耗在等 iOS 队列；「20 个 agent 约 15 分钟烧完 5 小时套餐额度」也写进了限制条款。这是一笔算得过来的账：一次全量跑约 5 美元模型费（单台 0.15–0.55 美元，项目自述），比一小时人工 QA 便宜两个数量级。</p>
+<h3>2. 并行不是省时间，是覆盖率本身</h3>
+<p>LocalSend 的 46 个 bug 里，29 个只被一台设备发现，阻断级 bug 也在其中；从右到左的问题只来自两个阿拉伯语人格，平板问题只来自四台平板。串行跑一台 agent 几天也未必撞上这些组合——20 个人格各自独立的探索路径，才是单点方案和矩阵方案的本质差别。重复报告只集中在所有人都撞的全局状态（比如空设备列表），归并算法负担不重。</p>
+<h3>3. 证据链闭环：可复现的基准</h3>
+<p><code>docs/examples.md</code> 里每个实测案例都附了可直接复跑的完整命令，demo 应用里埋了 11 个已知 bug 当基准——一次 4 agent 演示找到其中 9 个（约 21 分钟，0.87 美元）。第三方也在验证：<a href="https://aiaffer.com/2026/11/claude-code-agents-test-mobile-app-new-users-2026" target="_blank" rel="noopener">aiaffer.com</a> 按自己的 3 tester 小规模复现，确认机制成立；<a href="https://fervorai.dev/articles/mobile-agent-testers-ai-persona-testers-ios-android-github-actions" target="_blank" rel="noopener">fervorai</a> 逐条核了成本口径，提醒那是作者自己选的应用、当参考不当报价。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>独立开发者/小团队</strong>：发布前没有 QA，一次 5 美元换一轮 20 设备粗测，覆盖大字号、平板、RTL 这些永远不会自己遇到的配置；</li>
+  <li><strong>开源 App 维护者</strong>：公开仓库 runner 免费，直接在仓库里跑，<a href="https://github.com/pierridotite/mobile-agent-testers/blob/main/docs/runs/ankidroid-10.md" target="_blank" rel="noopener">AnkiDroid 的实测</a>就是拿 release APK 不构建直测的；</li>
+  <li><strong>QA 工程师</strong>：把探索性粗测外包给 agent，自己的时间花在写 Maestro 流程锁住已知路径——agent 找到 bug 后补一条脚本让它永远修好；</li>
+  <li><strong>多语言出海团队</strong>：14 种语言 × 平板 × RTL 的组合靠人测不现实，翻译遗漏和日期格式问题恰恰是 agent 的强项。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置依赖：<code>gh</code> CLI（已登录）、git、openssl，以及 Claude 订阅或 API key。不需要本机有 Mac。</p>
+<pre><code># 从模板建仓 + 配置密钥与凭据（Windows 用 .\setup.ps1）
+gh repo create my-testers --public --template pierridotite/mobile-agent-testers --clone
+cd my-testers &amp;&amp; ./setup.sh
+
+# 先跑 demo（2 台 Android + 2 台 iOS，约 20 分钟，$0.87）
+gh workflow run agent-testers.yml
+bash scripts/collect.sh &lt;run id&gt;   # 解密报告，生成 runs/&lt;id&gt;/SUMMARY.md
+
+# 测自己的 App，先挑 4 个人格
+gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
+  -f android_personas=anna,malik -f ios_personas=clara,jonas
+</code></pre>
+<p>常见坑：iOS agent 请排队等 macOS 并发；订阅计费的用户先跑 6–10 台，20 台并发约 15 分钟烧完 5 小时额度；闭源 App 走私有仓库或传预构建产物，注意 macOS 分钟按 10 倍计；setup 生成的私钥丢了没有任何恢复手段，报告无人能解。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>mobile-agent-testers</th><th>Maestro/Appium/Detox</th><th>Firebase Test Lab Robo</th><th>agent-device/mobile-mcp</th><th>人工众测</th></tr></thead>
+<tbody>
+<tr><td>你要写什么</td><td>不写，挑人格</td><td>流程/测试代码</td><td>不写</td><td>会话内提示词</td><td>招人+brief</td></tr>
+<tr><td>设备数</td><td>一次最多 20 台，各自语言/字号/主题</td><td>你跑几台算几台</td><td>多台（Google 机房）</td><td>一次一台</td><td>能招到多少</td></tr>
+<tr><td>能发现什么</td><td>断裂流程、静默失败、翻译缺失、大字号布局、深浅色</td><td>只查断言过的东西</td><td>崩溃+截图</td><td>你问什么答什么</td><td>一切，用人话</td></tr>
+<tr><td>结果可复现</td><td>否，每次路径不同</td><td>是</td><td>大致是</td><td>否</td><td>否</td></tr>
+<tr><td>成本</td><td>免 runner + 约 $5/次模型费</td><td>本地免费，云真机收费</td><td>有免费额度</td><td>agent 用量</td><td>时间最贵</td></tr>
+<tr><td>局限/风险</td><td>误读屏幕、不可回归、只盖主干路径</td><td>盲区=你的想象力</td><td>不理解界面语义</td><td>单点无矩阵</td><td>慢、贵、配置难凑</td></tr>
+</tbody></table></div>
+<p>表格后一句话点评：它不替代脚本回归——不可复现恰恰意味着不能当回归门禁；正确的位置是发布前的最后一轮粗测，找完 bug 再用 Maestro 锁住。</p>
+<h2>局限</h2>
+<ol>
+  <li><strong>会误读屏幕</strong>。LocalSend 那轮，20 个 agent 里有 3 个把模拟器自带的英文键盘当成了 App 的一部分。所有结论都要对着编号截图核对后再立 issue。</li>
+  <li><strong>不可复现</strong>。两次运行找到的 bug 列表不同，「同类问题会再出现，同一条不会」。别指望它告诉你上周的 bug 回没回来。</li>
+  <li><strong>深度有限</strong>。每台约 30 步动作，覆盖主干路径和设置页，深层流程（登录后、支付、多步配置）要靠 brief 定向，或者换工具。</li>
+  <li><strong>成本数字是作者自己的实测</strong>。应用是作者挑的，第三方 fervorai 明确提醒当 ballpark 看，别当报价。</li>
+  <li><strong>隐私边界在「上传」不在「观看」</strong>。报告加密了，但屏幕截图会发给模型服务商——不该出现在聊天窗口里的界面别放进测试包。</li>
+  <li><strong>项目只有 9 天大</strong>。v0.1.0 停在 11 月 19 日，作者下一站 Explore-Compile-Replay（把 agent 找到的 bug 路径变成无模型的重放测试）还是早期草稿；作者全职投入程度与后续维护节奏，官方未说明。</li>
+</ol>
+<h2>写在最后</h2>
+<p>两点判断。</p>
+<p>第一，它把「探索性测试」从一种依赖个人经验的手艺，变成了 CI 里的一条命令。真正被验证的不是 AI 能测试——Maestro 的 AI 断言早就存在——而是「20 个独立人格并行探索」这个结构：29/46 的 bug 单设备独占，说明覆盖率来自人格矩阵的多样性，不来自单个 agent 多聪明。</p>
+<p>第二，别急着全量上 20 台。先用 demo 验证报告质量和凭据，再 4 台试自己的 App，把 <code>personas.json</code> 里的虚构用户改成你的真实用户画像——工具的价值上限取决于那 20 段 JSON 有多像你的用户。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/pierridotite/mobile-agent-testers" target="_blank" rel="noopener">https://github.com/pierridotite/mobile-agent-testers</a></p>
+  <p>实测案例：<a href="https://github.com/pierridotite/mobile-agent-testers/blob/main/docs/examples.md" target="_blank" rel="noopener">https://github.com/pierridotite/mobile-agent-testers/blob/main/docs/examples.md</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>

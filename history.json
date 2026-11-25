@@ -73,7 +73,8 @@
         "miuuyy/Octopus-SI-OS",
         "reason-machines/reason-network",
         "storytold/craft-anything",
-        "JuneYaooo/rea-video"
+        "JuneYaooo/rea-video",
+        "pierridotite/mobile-agent-testers"
     ],
     "meta": [
         {
@@ -180,6 +181,13 @@
             "org": "JuneYaooo",
             "topic": "video-reverse",
             "title": "爆款视频是拍的还是 AI？rea-video 逐镜拆给你看"
+        },
+        {
+            "repo": "pierridotite/mobile-agent-testers",
+            "date": "2026-11-25",
+            "org": "pierridotite",
+            "topic": "agent-qa",
+            "title": "5 美元测 20 台手机，mobile-agent-testers"
         }
     ]
 }
