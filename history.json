@@ -74,7 +74,8 @@
         "reason-machines/reason-network",
         "storytold/craft-anything",
         "JuneYaooo/rea-video",
-        "pierridotite/mobile-agent-testers"
+        "pierridotite/mobile-agent-testers",
+        "robosimstudio/robosimstudio"
     ],
     "meta": [
         {
@@ -188,6 +189,13 @@
             "org": "pierridotite",
             "topic": "agent-qa",
             "title": "5 美元测 20 台手机，mobile-agent-testers"
+        },
+        {
+            "repo": "robosimstudio/robosimstudio",
+            "date": "2026-11-26",
+            "org": "robosimstudio",
+            "topic": "robot-real2sim",
+            "title": "拍段视频，RoboSimStudio 让 AI 造出仿真替身"
         }
     ]
 }

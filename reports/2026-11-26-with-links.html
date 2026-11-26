@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>拍段视频，RoboSimStudio 让 AI 造出仿真替身</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">拍段视频，RoboSimStudio 让 AI 造出仿真替身</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-26 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/robosimstudio/robosimstudio" target="_blank" rel="noopener">robosimstudio/robosimstudio</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 695 · 🍴 49（截至 2026-11-26，创建于 2026-10）</li>
+  <li><strong>主要语言</strong>：Python（1,176 个仓库文件中 818 个 .py，另有 340 个测试文件）</li>
+  <li><strong>开源协议</strong>：Apache-2.0</li>
+  <li><strong>形态</strong>：仿真工具包 + 浏览器 Studio + Real2Sim agent 服务</li>
+  <li><strong>文档</strong>：<a href="https://robosimstudio.github.io/" target="_blank" rel="noopener">项目页</a> · <a href="https://arxiv.org/abs/2610.18835" target="_blank" rel="noopener">技术报告 arXiv:2610.18835</a></li>
+  <li class="sources"><strong>数据来源</strong>：仓库 README 与官方文档 + arXiv 技术报告 + 第三方报道（截至 2026-11-26）</li>
+</ul>
+</div>
+<p>机器人要在仿真里练活，但仿真世界历来难造：海绵的形变、绳结的摩擦、液体的泼溅，每一个都让工程师调参调到深夜。RoboSimStudio 来自加州大学伯克利分校 AUTOLab 与 NVIDIA 的联合团队，作者名单里有 Erwin Coumans（MuJoCo/PyBullet）和 Miles Macklin（NVIDIA Warp）这样的物理仿真老兵。它换了一种造法：让编码 agent 看一段手机视频，自己挑选物理求解器、写出场景代码，人再在浏览器里调参微调。这个思路在 CoRL 2026 上拿了 PhysWM Workshop 最佳论文入围，仓库 10 月 12 日才建，11 月 13 日就带着获奖消息更新了项目说明。</p>
+<h2>项目背景：仿真造不准，真机就不敢跑</h2>
+<p>机器人操作（manipulation）的强化学习和模仿学习都依赖仿真产生数据，可仿真和现实的差距（Sim2Real Gap）主要卡在接触动力学上：布料怎么皱、缆绳怎么缠、面团怎么被压扁、标签纸怎么被撕下来。刚体求解器处理不了这些，于是社区长出了一堆专才引擎——MuJoCo 管刚体和机械臂最稳，SuperDex 的有限元法（FEM）擅长软体，Newton 的隐式 MPM 处理颗粒和液体，Genesis 的 SPH 管流体。</p>
+<p>问题来了：一个真实任务往往同时包含好几种材料。双臂擦海绵这个经典场景里，机械臂是刚体、海绵是软体，两者还在持续接触受力。传统做法要么全塞进一个引擎委屈某一方，要么人工写胶水代码做联合仿真——论文作者团队把这件事的成本量化过：为单个任务手工搭建带物理的仿真，通常以天计；而 agent 从视频到可跑仿真，报告中一个案例用了约 56 分钟（项目自述）。工业界对应的需求更直白：波士顿动力式的方法不适用普通工厂，Bosch 研究部门正在评估这条技术路线，Ambi Robotics 已用它把产线数据转成行为更新——这是行业媒体 <a href="https://theroboradar.com/news/berkeley-nvidia-robosimstudio-gap-industrial-robot-programming-3269fa" target="_blank" rel="noopener">TheRoboRadar</a> 的报道口径。</p>
+<p>Real2Sim（真实到仿真）不是新词，新的是把「选求解器、配参数、验证像不像」这件事整个交给编码 agent，同时让每个决定都摆在人和 agent 都能看见、能改的地方。</p>
+<h2>核心功能</h2>
+<h3>1. Agentic Real2Sim：视频进，场景代码出</h3>
+<p>输入是一段手机视频——人做任务、第一人称视角、机器人执行或遥操作录制都行。编码 agent（Codex、Claude Code 均可）负责三件事：从视频推断场景布局，为每个物体挑选合适的求解器，然后直接写成 <code>scene.py</code>。仓库里给了一条可直接粘贴给 agent 的提示词模板，指定仓库地址、任务描述、机器人 URDF 和视频路径即可。<code>robosimstudio_real2sim_agent/</code> 子包提供了一个实时页面，<code>scene.py</code> 每次保存就重建仿真，agent 改一轮人立刻看到一轮，不用反复重启进程。</p>
+<h3>2. 跨平台耦合器：每个控制步交换状态</h3>
+<p>这是整个系统的技术核心。Coupler 在每个控制步把不同求解器跑在一起，交换位姿、接触力和形状信息——机械臂的 MuJoCo 和海绵的 SuperDex 之间，力是双向传递的，海绵被压多少、反作用力多大，机械臂那边都算得进去。同一套接口支持 MuJoCo、VBD、MPM、SuperDex、Genesis、一个体素笼切割器，也可以挂自己的求解器。多引擎联合仿真不是没人做过，难的是把「怎么切分、怎么交换」抽象成 agent 可以用代码配置的稳定接口，这一层抽象是它的主要贡献。</p>
+<h3>3. 十五种材料，每种都有例子</h3>
+<p>绳索（含打结、缠绕记忆）、纸、袋子、刷子、胶带（含剥离和粘附两种模型）、切割、颗粒、液体、面团、水，每个材料类型在 <code>robosimstudio_materials/</code> 下有独立模块，<code>examples/03_materials/</code> 里配了可跑的脚本和动图。这些不是视觉摆设：胶带的粘附规律、切割的力学定律都有对应实现和测试（<code>test_tape_adhesion_law.py</code>、<code>test_cutting_law.py</code> 都在测试目录里）。</p>
+<h3>4. 浏览器 Studio：人机共调一个场景</h3>
+<p><code>robosimstudio_studio/</code> 基于 viser 提供浏览器界面，场景、灯光、相机、目标区域都能实时改。设计上明确是「人在环」：文档建议用 Codex Astra 建场景、Claude Code 监督，人时不时提醒 agent 重建物理和几何。agent 负责批量生成，人负责判断像不像——分工写在推荐工作流里，不是口号。</p>
+<h3>5. Graph-as-Policy：仿真里练策略，真机上执行</h3>
+<p>策略不是端到端神经网络，而是一张图：感知、抓取、无碰撞运动规划分配给不同模块，各模块生成 Python 代码，在仿真里排练、迭代改进后部署到真机，图结构可以转成 ROS 2。技术报告里的案例：双臂海绵擦拭任务，策略用仿真反馈把模拟擦拭面积指标从 0% 迭代到 100%（14 轮改进，项目自述），随后部署到真实机器人完成了擦拭。</p>
+<h2>技术亮点</h2>
+<h3>1. 评估特权边界：不许被测策略偷看答案</h3>
+<p><code>robosimstudio_policy_agent/contract.py</code> 的模块文档写得非常坦率：进程内执行器手里有图的真值——物体位姿、抓取框、粒子状态、评估判决，拿这些构建图和造数据都对，但绝不能发给正在被评估的策略，「会问锤子在哪的策略，就没有被测到找锤子」。边界不是靠自觉，是白名单硬校验：跨过桥的数据帧只允许出现 rgb、depth、相机内外参、本体感知、指令和时间戳这几个键，多一个字段都拒绝通过。想给观察加一个字段，就得显式改这个文件——文档原话是「这正是这个决定应得的摩擦力」。做 agent 评估的人会认出这是防作弊的正规做法，但把它做成带测试的强制约束，开源项目里少见。</p>
+<h3>2. 诚实的拒绝（refusal）</h3>
+<p>没有 GPU 时，系统能力是明码标价的：布料和软体照跑，绳索单向受力，而纸、胶带、刷子、颗粒、液体、面团、水会直接拒绝构建，并打印原因——比如纸的屈服铰链依赖 VBD。能力边界写进类型和异常，而不是让用户拿到一个悄悄降级的错误结果。安装文档里那张「哪种材料没有 GPU 能不能跑」的表，和代码行为一一对应，我核对过材料模块和拒绝逻辑的命名，口径一致。</p>
+<h3>3. Python-first 的注册表架构</h3>
+<p><code>robosimstudio/registry.py</code> 用一个 145 行的核心类支撑全仓库的求解器、材料、机器人注册：重名注册直接抛错（附两个定义位置）、懒加载加重入保护、注册的是实例而不是类。注释里写明了三个选择的理由——重复注册报错是因为静默覆盖会让第二个实现在没人控制的导入顺序里悄悄输掉。这套设计让「加一种新材料 = 加一个模块」成立，也是十五种材料能平行铺开的结构基础。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>机器人方向的研究者/学生</strong>：有 arXiv 技术报告和 CoRL 论文可对照，做操作任务的数据合成或 Sim2Real 实验能省掉手工建模的几天；前提是能接受 Linux 环境。</li>
+  <li><strong>给机器人公司做数据管线的工程师</strong>：遥操作或产线视频可以直接变成带物理的仿真场景，500 条演示在单张 GPU 上 4.2 分钟生成（项目自述），数据量产是它最直接的产出。</li>
+  <li><strong>做 agent 基础设施的人</strong>：特权边界白名单、拒绝式降级、注册表架构，这三样脱离机器人语境也值得抄。</li>
+  <li><strong>想用编码 agent 干重活的团队</strong>：仓库自带的提示词模板和「人机共调」工作流是一份现成的 agent 工程实践样本。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置要求：Python 3.12、Linux x86-64（macOS 和 Windows 未测试）、git/cmake/C++ 编译器。它不在 PyPI 上——依赖 PyRoKi 只能从 Git 装，所以走 Git 地址：</p>
+<pre><code>git clone https://github.com/robosimstudio/robosimstudio.git
+cd robosimstudio
+uv run examples/00_getting_started/00_hello_world.py
+</code></pre>
+<p>没有 NVIDIA GPU 就装 <code>cpu</code> extra，并挡掉默认会装的 1.8 GB 路径追踪器组：</p>
+<pre><code>export UV_NO_GROUP=rtx
+uv run --extra cpu examples/00_getting_started/00_hello_world.py
+</code></pre>
+<p>或者只装库：</p>
+<pre><code>pip install "robosimstudio @ git+https://github.com/robosimstudio/robosimstudio"
+</code></pre>
+<p>想让 agent 直接建场景，把仓库自带模板填上任务、URDF 和视频路径发给 Codex 或 Claude Code 即可。常见坑：路径追踪器需要带 RT 核心的显卡（RTX 系或 T4/A10/L4 等），A100/H100 反而画不了光追图；ARM64 上 SuperDex 没有预编译包，海绵和袋子建不了；Windows 用户得走 WSL2 或另找机器。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>RoboSimStudio</th><th>Genesis</th><th>Isaac Lab</th></tr></thead>
+<tbody>
+<tr><td>定位</td><td>多求解器 Real2Sim 工具包</td><td>全能物理仿真平台</td><td>NVIDIA 官方机器人学习框架</td></tr>
+<tr><td>场景来源</td><td>手机视频 + 编码 agent 生成</td><td>代码/资产手工搭建</td><td>代码 + USD 资产</td></tr>
+<tr><td>求解器</td><td>MuJoCo/VBD/MPM/SuperDex/Genesis 可混用耦合</td><td>自研统一求解器</td><td>PhysX 5 为主</td></tr>
+<tr><td>软体/特殊材料</td><td>十五种，含胶带、切割、面团</td><td>支持面广但调参门槛高</td><td>刚体为主，软体弱</td></tr>
+<tr><td>Agent 集成</td><td>一等公民：实时重建、白名单评估边界</td><td>需自行封装</td><td>有评测工具但非 agent 原生</td></tr>
+<tr><td>硬件门槛</td><td>CPU 可跑（部分材料除外）</td><td>GPU 建议</td><td>GPU 建议</td></tr>
+<tr><td>局限/风险</td><td>仅测过 Linux、社区小、无 PyPI 包</td><td>软体保真度争议</td><td>闭源栈依赖、锁定 NVIDIA</td></tr>
+</tbody></table></div>
+<p>一句话点评：Genesis 和 Isaac Lab 是「先有引擎，等人来用」，RoboSimStudio 是「先有 agent 工作流，引擎随取随用」。如果你的任务恰好是刚体抓取，Isaac Lab 生态更成熟；一旦涉及布料、缆绳、软体和真机迁移，混合求解器这条路的性价比开始显现。</p>
+<h2>局限</h2>
+<ol>
+  <li><strong>验证证据集中在单一任务</strong>。技术报告自己把真机迁移称为 pilot study：擦拭任务做了完整闭环，但跨任务的仿真精度、接触力误差、真机成功率没有系统定量评估。已有的第三方核对（如 <a href="https://github.com/ImChong/Robotics_Notebooks/blob/main/sources/papers/robosimstudio_arxiv_2610_18835.md" target="_blank" rel="noopener">ImChong 的论文精读笔记</a>）只做了文档级验证，未重跑仿真或真机实验。</li>
+  <li><strong>平台支持窄</strong>。只测过 Linux x86-64，macOS/Windows 未测试；ARM64 缺 SuperDex 轮子，无 GPU 时七种材料直接拒绝。对多数个人开发者的家用环境不算友好。</li>
+  <li><strong>社区还很小</strong>。695 星、49 fork，issue 区基本是团队自己的 PR，没有 release、不在 PyPI，API 稳定性没有版本承诺，生产采用要自己锁 commit。</li>
+  <li><strong>多引擎协同仿真有计算开销</strong>，论文明确把这点列为限制；实时性敏感的场景需要权衡。</li>
+  <li><strong>「数周缩到数小时」的宣传口径</strong>出自媒体报道，对应的是 Bosch/Ambi 的工业场景评估，学术论文里并无此数字，两者证据等级不同。</li>
+</ol>
+<h2>写在最后</h2>
+<p>这个项目真正值得注意的不是某一个求解器，而是它把「造仿真」变成了一个可以委托给编码 agent、又保留人工判断的流程：agent 出手速，人出手感，白名单管住评估的诚实性。对机器人从业者，它把 Real2Sim 的门槛从「会写 MuJoCo XML」降到「会拍视频」；对更广泛的 agent 工程师，它的特权边界和拒绝式降级是两份可以直接搬走的工程答案。</p>
+<p>行动建议：做机器人学习的，先跑通 <code>00_hello_world</code> 再试一条自己任务的视频；做 agent 平台的，直接去读 <code>contract.py</code> 和 <code>registry.py</code>，两百行出头的代码，比多数讲 agent 评估的文章都具体。仓库自带的提示词模板值得原样拿去试一次——agent 建仿真的手感，只有跑过才知道。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/robosimstudio/robosimstudio" target="_blank" rel="noopener">https://github.com/robosimstudio/robosimstudio</a></p>
+  <p>技术报告：<a href="https://arxiv.org/abs/2610.18835" target="_blank" rel="noopener">https://arxiv.org/abs/2610.18835</a></p>
+  <p>项目主页：<a href="https://robosimstudio.github.io/" target="_blank" rel="noopener">https://robosimstudio.github.io/</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>
