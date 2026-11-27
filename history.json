@@ -75,7 +75,8 @@
         "storytold/craft-anything",
         "JuneYaooo/rea-video",
         "pierridotite/mobile-agent-testers",
-        "robosimstudio/robosimstudio"
+        "robosimstudio/robosimstudio",
+        "alesha-pro/llm.asm"
     ],
     "meta": [
         {
@@ -196,6 +197,13 @@
             "org": "robosimstudio",
             "topic": "robot-real2sim",
             "title": "拍段视频，RoboSimStudio 让 AI 造出仿真替身"
+        },
+        {
+            "repo": "alesha-pro/llm.asm",
+            "date": "2026-11-27",
+            "org": "alesha-pro",
+            "topic": "assembly-inference",
+            "title": "不写一行 C，llm.asm 让 Qwen3 开机即聊"
         }
     ]
 }
