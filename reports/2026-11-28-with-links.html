@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>翻过的车不白翻，Songe 让本地模型睡觉时长记性</title>
+<style>
+  :root{
+    --grad-a:#667eea; --grad-b:#764ba2;
+    --text:#e0e0e0; --muted:#a8a8b8; --dim:#8a8a9a;
+    --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);
+    background-attachment:fixed;
+    color:#e0e0e0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 96px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{padding:56px 0 8px;}
+  .article-title{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.5px;margin:0 0 18px;
+    background:linear-gradient(120deg,#667eea,#764ba2 70%,#9f7aea);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#8b9cf0;
+  }
+  .subtitle{
+    font-size:14px;color:#a8a8b8;letter-spacing:.6px;margin:0 0 32px;padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .subtitle span{color:#667eea;}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:24px 26px;margin:0 0 34px;
+  }
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:1.5px;color:#b9b9ff;}
+  .card ul{margin:0;padding-left:20px;}
+  .card li{margin:7px 0;}
+  h2{
+    font-size:21px;color:#ffffff;margin:46px 0 20px;padding-left:14px;
+    border-left:4px solid;border-image:linear-gradient(180deg,#667eea,#764ba2) 1;line-height:1.5;
+  }
+  h3{font-size:17px;color:#b8bcf5;margin:28px 0 12px;font-weight:600;}
+  p{margin:0 0 18px;}
+  a{color:#8b93f8;text-decoration:none;border-bottom:1px dotted rgba(139,147,248,0.5);}
+  a:hover{color:#aeb6ff;border-bottom-color:#aeb6ff;}
+  strong{color:#f0f0f5;}
+  code{
+    background:rgba(102,126,234,0.12);border:1px solid rgba(102,126,234,0.25);
+    border-radius:6px;padding:1px 7px;font-size:14px;
+    font-family:Consolas,Menlo,monospace;color:#c3c9ff;
+  }
+  pre{
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;overflow-x:auto;margin:0 0 20px;
+  }
+  pre code{background:none;border:none;padding:0;color:#d6daff;font-size:13.5px;line-height:1.7;}
+  blockquote{
+    margin:0 0 20px;padding:14px 20px;border-left:3px solid;
+    border-image:linear-gradient(180deg,#667eea,#764ba2) 1;
+    background:rgba(255,255,255,0.04);border-radius:0 12px 12px 0;
+    color:#c9c9de;font-style:italic;
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin:0;}
+  .table-wrap{overflow-x:auto;margin:0 0 20px;border-radius:14px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px;}
+  th{background:rgba(102,126,234,0.16);color:#dfe3ff;text-align:left;padding:11px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,0.03);}
+  tbody tr:nth-child(even){background:rgba(255,255,255,0.015);}
+  td strong{color:#ffd98a;}
+  ul{margin:0 0 18px;padding-left:22px;}
+  ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:8px 0;}
+  .sources{font-size:14px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+  footer{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;color:#9a9ab8;font-size:14px;letter-spacing:.5px;
+  }
+  @media (max-width:600px){
+    .article-title{font-size:26px;}
+    h2{font-size:19px;}
+    body{padding:0 14px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="article-title">翻过的车不白翻，Songe 让本地模型睡觉时长记性</h1>
+  <p class="subtitle"><span>GitHub AI 项目日报</span> · 2026-11-28 · 公众号「fly的AI学习」</p>
+</header>
+<div class="card">
+  <h3>项目速览</h3>
+<ul>
+  <li><strong>项目地址</strong>：<a href="https://github.com/sous-labs/songe" target="_blank" rel="noopener">sous-labs/songe</a></li>
+  <li><strong>Star/Fork</strong>：⭐ 927 · 🍴 75（截至 2026-11-28，创建于 2026-11-20）</li>
+  <li><strong>主要语言</strong>：Python（约 98%，3.28MB）</li>
+  <li><strong>开源协议</strong>：Apache-2.0</li>
+  <li><strong>形态</strong>：CLI + 常驻后台服务（OpenAI 兼容代理），PyPI 包 <code>songe</code> 与 Homebrew 均可安装</li>
+  <li><strong>文档</strong>：仓库内 DESIGN.md（19KB 构建规格书）、官网 <a href="https://souslabs.ai" target="_blank" rel="noopener">souslabs.ai</a></li>
+  <li class="sources"><strong>数据来源</strong>：仓库 README 与官方文档 + 第三方报道（截至 2026-11-28）</li>
+</ul>
+</div>
+<p>你每天跟本地小模型打交道，纠正它、等它重试、看它把工具调用搞砸——这些「翻车现场」散落在对话里，第二天照样重演。Songe 做的事情只有一件：把这些后果记下来，趁机器空闲时用它们真刀真枪地微调模型权重，而且新版本只有在留出集上明确比旧版好才会被换上去。最反直觉的一点是：它不让你标注数据、不联网、不跑任何工具，训练信号全部来自「你本来就要发生的日常使用」。</p>
+<h2>项目背景：本地模型记吃不记打</h2>
+<p>本地跑 3B 级别模型的开发者都遇到过同一个循环：模型第一次调工具报错，你纠正；第二次换个姿势报同样的错；第三次你干脆自己上。记忆类工具（把偏好写进 system prompt 的方案）能缓解一部分，但 prompt 是外挂，模型本身的权重一个参数都没动——换个会话、换个任务，教训就丢了。</p>
+<p>把对话拿去微调可行吗？常规做法有两个死结。其一是数据：真正有价值的不是「你说了什么」，而是「模型做完之后发生了什么」——工具返回值、报错栈、你失望的下一句话。这些散在完整对话里，人肉整理成本高到没人做。其二是安全：拿真实对话做 SFT，模型会被你说话的风格带跑偏，老技能忘得比新技能学得快；而且在你睡觉时让训练脚本对着你的仓库重跑工具，风险没人敢担。</p>
+<p>于是这条链路一直是空白：能学到「行为后果」的训练系统，只存在于云端大厂的数据管线里。Songe 把这套管线压缩成了一个 <code>pip install</code> 的本地进程，创建于 2026-11-20，八天拿了 927 个星标，Hacker News 上 238 分 75 条评论，是近期本地 LLM 生态里讨论度最高的新面孔。</p>
+<h2>核心功能</h2>
+<h3>1. 代理层：先当证人，再当老师</h3>
+<p>Songe 在 agent 和模型服务器之间插一层 OpenAI 兼容代理：<code>agent → songe (127.0.0.1:7613) → LM Studio/vLLM/…</code>。流式请求原样转发，只做两件事——把模型名映射到当前正在服务的版本，以及把每轮交互写进本地 SQLite。仓库核心源码约 120 个文件，<code>proxy.py</code> 与 <code>log.py</code> 合计约十万字节，流式透传做到字节级一致，日志写失败时代理照常工作。</p>
+<p>它把一次助手回合拆成三段：上下文 c（之前所有消息加工具 schema）、动作 a（模型产出）、后果 h（同会话里紧随其后的工具结果或你的下一条消息，截断到 token 预算内）。请求之间靠「消息前缀哈希」串成会话——B 的消息若以 A 的消息加 A 的回复开头，B 就是 A 的延续。没有后果的回合（对话就此结束）永不参与训练：没有信号，就没有课。</p>
+<h3>2. Quick Dream：几分钟把偏好写进指令层</h3>
+<p>不是所有教训都值得动权重。你明确说过的规则（「别用 sudo」「commit message 写中文」）走 Quick Dream：几分钟内整理成偏好清单，注入模型指令，并在仪表盘里给出改动前后的答案对比。反悔可以整批撤销，也可以只删某一条。这一层本质是可验证的 prompt 工程，代价小、见效快，和 Deep Dream 的权重训练形成两级缓存。</p>
+<h3>3. Deep Dream：你睡觉，它上课</h3>
+<p>真正的重头戏。机器空闲、内存充足、电量健康三个条件全满足时，后台服务启动一次 Dream：先清洗数据（丢掉传输中断、空工具参数、被判定为新任务的回复；同一会话里连续重复的动作折叠成一条并记次数），再让空闲评审给每一步写出「哪里错了、可复用的教训是什么」，然后进入训练——细节见下一节。整个 Dream 只读日志，绝不在你的仓库里执行任何工具。</p>
+<h3>4. 门控：不比现在好就不换</h3>
+<p>每个新版本都要过三道关，全部在按会话永久切分的留出集上、对最终要上线的那份 4bit 融合产物评测：第一，在你做出反应的那些时刻，新旧两版各答一遍，提升幅度必须超过 2000 次配对 bootstrap 估计出的噪声上限（置信度 0.95，这段判定逻辑我对照过 <code>sleep/gate.py</code> 源码，连随机种子 7613 都写死了）；第二，通用行为不许漂移——工具调用有效率、空输出率、复读率任何一项变差就拒绝；第三，留出数据不够时直接报告「等待经验」，不硬训。过不了的版本就地销毁，<code>songe undo</code> 一条命令回滚到任意旧版本。</p>
+<h3>5. 让路：人一回来，训练子进程几秒内撤场</h3>
+<p>训练跑在独立子进程里，靠 <code>caffeinate</code> 占住系统空闲睡眠。用户开始活动、电量吃紧、或有新的代理请求到达，子进程立即 checkpoint 退出，代理本身永远不被拖慢。下次闲时窗口从已提交的样本游标续跑。首次训练前先实测你这台机器的生成、打分、优化器步进耗时和内存峰值，用测量值决定切片大小——没有写死的机型表。</p>
+<h2>技术亮点</h2>
+<h3>1. hindsight 是唯一的新信息</h3>
+<p>设计文档第一节就把方法论钉死：模型无法从自己的输出中学到新东西，那只会强化它已有的判断；本地模型唯一没见过的信息，就是「动作之后发生了什么」。教师和学生的分工由此而来——同一个模型，教师看得见后果块，学生只看上下文，教师用一次前向传播逐 token 给学生的采样打分。两者分布的差，恰恰就是模型没预判到的部分。训练目标用前向 KL 散度、全词表、逐词截断，超参直接抄论文结论：LoRA rank 64、缩放 2.0（即 alpha 128）、学习率 5e-6、AdamW、梯度范数裁剪 1——这些常数我在 <code>config.py</code> 第 45–46 与 91 行逐一核对过。</p>
+<p>为什么不用普通 SFT？设计文档引的三篇工作（OPSD、SDFT 与 Thinking Machines 的 On-Policy Distillation 博文）给出了一致答案：拿模型不会写的话训它（off-policy），会把它推离当前位置并触发遗忘；只在自己会写的样本上、按教师的评分挪动，改动只落在错的地方。保留旧技能的方式也一并借来：留一部分无后果的通用样本，用原始基座当教师蒸馏——Thinking Machines 用这招把 IF-eval 从 79% 拉回 83%。</p>
+<h3>2. 长上下文的省内存反传</h3>
+<p>agent 的上下文动辄几万 token（系统提示加工具 schema），全量反传在笔记本上放不下。Songe 的做法是：只对「放得下的最长尾部上下文 + 答案」回传梯度，更早的上下文分块无梯度地读过去、只保留 KV 或循环状态。文档自测了 Qwen3.5-0.8B 在 400 token 下的等价性：argmax 与 loss 与全量前向完全一致，显存峰值 0.85GB 对 4.34GB，耗时 0.44 秒对 5.6 秒（项目自述）。这是全仓库里最见工程功力的一处，先例可以追溯到 Transformer-XL 的分段记忆。</p>
+<h3>3. 经验日志是资产，权重是缓存</h3>
+<p>每个学习周期在当前适配器上续训，外加重放旧样本；万一基座要换，可以对同一份经验日志从头重教一遍。删权重不心疼，删日志才是真损失。隐私设计顺着这条思路走：无账号、无遥测，<code>songe forget</code> 一键删除录音记录（已学成的版本保留）；想借云端大模型的判断力可以 <code>songe cloud on</code> 显式打开，密钥脱敏、按晚设预算，且 Songe 从不代跑你的工具。</p>
+<h2>适用人群</h2>
+<ul>
+  <li><strong>重度本地 agent 用户</strong>：每天在 opencode、pi 或任意 OpenAI 兼容客户端里跟本地模型干活的人。纠正过十次的问题，第九次就该不再出现——这是 Songe 的核心承诺，代价只是夜间电费。</li>
+  <li><strong>Apple Silicon 用户</strong>：MLX 后端是实测最完整的路径（NVIDIA/AMD 走 PyTorch 后端，NVIDIA 已端到端实测）。LM Studio 的模型库和 UI 原样保留，模型列表里多出一个 <code>songe/</code> 前缀。</li>
+  <li><strong>对数据隐私敏感的团队</strong>：代码、错误栈、业务对话一概不出机器；相比把日志传给云端做微调服务，这条边界清晰得多。</li>
+  <li><strong>想研究 on-policy 蒸馏落地的人</strong>：DESIGN.md 是一份罕见的诚实规格书——每个「照抄论文」的决策都标了出处，每个自创的补丁都标了「ours」和理由，连同「验证」清单一起写成。</li>
+</ul>
+<h2>快速上手</h2>
+<p>前置：Python 3.11+；一个本地模型服务器（LM Studio、vLLM、Ollama、llama.cpp、mlx-lm 均在支持列表，其中 LM Studio (macOS) 与 vLLM (Linux) 经端到端实测）；一个 agent（opencode、pi 会被自动配置，其余任意 OpenAI 兼容工具手动填 base URL）；训练需要 Apple Silicon 或 NVIDIA/AMD GPU，无 GPU 时只记录不训练。</p>
+<pre><code>uv tool install songe        # 或 pipx install songe；macOS 也可 brew install songe
+songe init                   # 自动发现模型服务器与 agent，展示将改动的内容，确认一次
+# 然后在你的 agent 里选 songe/ 前缀的模型，照常干活
+songe open                   # 浏览器仪表盘：学习进度、前后对比、为何没被采纳
+songe sleep                  # 立即触发一次 Deep Dream（仍会让路给真实使用）
+songe undo                   # 回滚上一个版本
+</code></pre>
+<p>常见坑：LM Studio 无法直接加载 LoRA 适配器（mlx-engine issue #51），所以每个被采纳的版本都会融合成完整模型文件夹写进 LM Studio 的模型目录，磁盘会多占几份模型体积；Ollama 在支持列表里但融合导入未实测；关盖的 MacBook 不接外接屏仍会系统级休眠，Dream 只能在开盖闲时跑。</p>
+<h2>对比分析</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>维度</th><th>Songe</th><th>LM Studio / Ollama</th><th>记忆类方案（mem0 等）</th><th>云端微调服务</th></tr></thead>
+<tbody>
+<tr><td>学习什么</td><td>行为后果（工具结果、报错、纠正）</td><td>不学习</td><td>对话事实与偏好</td><td>你上传的数据集</td></tr>
+<tr><td>改动层级</td><td>模型权重（LoRA→融合）</td><td>无</td><td>system prompt / 检索</td><td>模型权重</td></tr>
+<tr><td>数据去向</td><td>全程本机</td><td>本机</td><td>多为本机</td><td>上传到云</td></tr>
+<tr><td>新版本准入</td><td>bootstrap 门控 + 一键回滚</td><td>—</td><td>—</td><td>人工评测</td></tr>
+<tr><td>训练成本</td><td>闲时算力，零额外花费</td><td>—</td><td>—</td><td>按量计费</td></tr>
+<tr><td>局限/风险</td><td>alpha 阶段、增益无公开数字、无 GPU 只能记录</td><td>—</td><td>权重不变，换任务就忘</td><td>数据出机器、按次重训</td></tr>
+</tbody></table></div>
+<p>一句话点评：记忆类方案解决「模型不知道你说过什么」，Songe 解决「模型做不到你期望的事」——两者正交，可以叠加。如果你根本没有本地模型，或者只用 GPT-5 这类云端旗舰，这个项目暂时与你无关。</p>
+<h2>局限</h2>
+<ol>
+  <li><strong>增益没有公开数字。</strong> 到本文发稿，官方未说明一次 Deep Dream 平均能把任务成功率提升多少；仓库的诚实之处在于内置了 <code>teacher_gain</code> 诊断——如果某个模型根本利用不了 hindsight（SDFT 论文发现 3B 模型的上下文学习能力弱到不如 SFT），它会明说「这个模型学不动」，而不是假装进步。</li>
+  <li><strong>明显的 alpha 状态。</strong> GitHub 无 release，PyPI 最新为 0.1.0a15；端到端实测只有 LM Studio (macOS) 与 vLLM (Linux) 两条路径；issue #15 是跨平台验证的追踪清单，还开着。</li>
+  <li><strong>训练窗口的截断。</strong> open issue #262 指出 Deep Dream 目前只训练答案的前 128 个 token，邮件落款、长答案的结尾部分学不到；另一条 issue 反馈手动触发的 Dream 在预估的闲时窗口耗尽后失败。</li>
+  <li><strong>磁盘与数据维护成本。</strong> 每个采纳版本都是融合后的完整模型副本；对话记录持续累积，需要定期 <code>songe forget</code>。</li>
+  <li><strong>热度仍早期。</strong> 8 天 927 星、13 位贡献者（前两位合计 157 次提交），星标从 11-25 的 686 涨到今天的 927，日均约 80——热度真实但社区尚薄，踩坑基本靠自己提 issue。</li>
+</ol>
+<h2>写在最后</h2>
+<p>Songe 真正改变的，是把「本地模型会越来越好用」从一句口号变成了一个可以挂机等待的进程：学习的原料不再需要标注，只需要你照常工作；学习的门槛不再需要云预算，只需要一台能训练的机器；学习的风险被一扇只有「明确变好」才打开的门控拦住。它验证了一个朴素判断——对个人 agent 而言，最值钱的训练数据就是你自己的翻车记录。</p>
+<p>具体建议：Apple Silicon + LM Studio + opencode 的组合今天就可以试，先只开 Quick Dream 观察偏好写入的质量，攒够两周会话再放手让 Deep Dream 训练；把 <code>songe open</code> 的「为何没被采纳」页面当连续剧看，比看任何 benchmark 都直观。用 NVIDIA 卡的可以等 0.1.0 正式版再上生产。</p>
+<blockquote>
+  <p>项目地址：<a href="https://github.com/sous-labs/songe" target="_blank" rel="noopener">https://github.com/sous-labs/songe</a></p>
+  <p>官方文档：仓库 DESIGN.md · 官网 <a href="https://souslabs.ai" target="_blank" rel="noopener">https://souslabs.ai</a></p>
+  <p>第三方参考：<a href="https://www.aiboss88.com/en/news/project-songe" target="_blank" rel="noopener">AiBoss88 中文介绍</a> · <a href="https://www.memedata.com/post/160810" target="_blank" rel="noopener">MemeData（转述 HN 讨论）</a> · <a href="https://wpnews.pro/news/a-training-engine-for-your-local-model-using-your-idle-compute" target="_blank" rel="noopener">Web Pulse 报道</a></p>
+</blockquote>
+<footer>👤 fly的AI学习 | 每日更新 AI 大模型最新动态</footer>
+</div>
+</body>
+</html>

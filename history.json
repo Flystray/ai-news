@@ -76,7 +76,8 @@
         "JuneYaooo/rea-video",
         "pierridotite/mobile-agent-testers",
         "robosimstudio/robosimstudio",
-        "alesha-pro/llm.asm"
+        "alesha-pro/llm.asm",
+        "sous-labs/songe"
     ],
     "meta": [
         {
@@ -204,6 +205,13 @@
             "org": "alesha-pro",
             "topic": "assembly-inference",
             "title": "不写一行 C，llm.asm 让 Qwen3 开机即聊"
+        },
+        {
+            "repo": "sous-labs/songe",
+            "date": "2026-11-28",
+            "org": "sous-labs",
+            "topic": "local-finetuning",
+            "title": "翻过的车不白翻，Songe 让本地模型睡觉时长记性"
         }
     ]
 }
